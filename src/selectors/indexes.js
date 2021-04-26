@@ -1,7 +1,7 @@
 import { isArray, values } from 'lodash';
 import { createSelector } from 'reselect';
 import { getProtocol } from './protocol';
-import collectPaths, { PathCollector, collectMappedPaths } from '../utils/collectPaths';
+import collectPath, { collectPaths, collectMappedPaths } from '../utils/collectPaths';
 
 /**
  * Returns index of used edges (entities)
@@ -14,15 +14,15 @@ import collectPaths, { PathCollector, collectMappedPaths } from '../utils/collec
 const getEdgeIndex = createSelector(
   getProtocol,
   (protocol) => {
-    const createEdges = collectPaths('stages[].prompts[].edges.create', protocol);
+    const createEdges = collectPath('stages[].prompts[].edges.create', protocol);
 
-    const displayEdges = collectPaths('stages[].prompts[].edges.display[]', protocol);
+    const displayEdges = collectPath('stages[].prompts[].edges.display[]', protocol);
 
-    const narrativeEdges = collectPaths('stages[].presets[].edges.display[]', protocol);
+    const narrativeEdges = collectPath('stages[].presets[].edges.display[]', protocol);
 
-    const dyadCensusEdges = collectPaths('stages[].prompts[].createEdge', protocol);
+    const dyadCensusEdges = collectPath('stages[].prompts[].createEdge', protocol);
 
-    // TODO: This reducer shouldn't be necessary, look at updating collectPaths
+    // TODO: This reducer shouldn't be necessary, look at updating collectPath
     const mapEdges = ({ type, entity }, path) => {
       if (entity !== 'edge') { return undefined; }
       return [type, `${path}.type`];
@@ -58,32 +58,6 @@ const getNodeIndex = createSelector(
   },
 );
 
-const variablePathCollector = new PathCollector();
-
-variablePathCollector.add('stages[].quickAdd');
-variablePathCollector.add('stages[].form.fields[].variable');
-variablePathCollector.add('stages[].panels.filter.rules[].options.attribute');
-variablePathCollector.add('stages[].searchOptions.matchProperties[]');
-variablePathCollector.add('stages[].cardOptions.additionalProperties[].variable');
-variablePathCollector.add('stages[].prompts[].variable');
-variablePathCollector.add('stages[].prompts[].edgeVariable');
-variablePathCollector.add('stages[].prompts[].otherVariable');
-variablePathCollector.add('stages[].prompts[].additionalAttributes[].variable');
-variablePathCollector.add('stages[].prompts[].highlight.variable');
-variablePathCollector.add('stages[].prompts[].layout.layoutVariable');
-variablePathCollector.add('stages[].prompts[].presets[].layoutVariable');
-variablePathCollector.add('stages[].prompts[].presets[].groupVariable');
-variablePathCollector.add('stages[].prompts[].presets[].edges.display[]');
-variablePathCollector.add('stages[].prompts[].presets[].highlight[]');
-variablePathCollector.add('stages[].prompts[].bucketSortOrder[].property');
-variablePathCollector.add('stages[].prompts[].binSortOrder[].property');
-variablePathCollector.add('stages[].skipLogic.filter.rules[].options.attribute');
-variablePathCollector.add('stages[].filter.rules[].options.attribute');
-variablePathCollector.add('stages[].presets[].layoutVariable');
-variablePathCollector.add('stages[].presets[].groupVariable');
-variablePathCollector.add('stages[].presets[].edges.display[]');
-variablePathCollector.add('stages[].presets[].highlight[]');
-
 const variablePaths = [
   'stages[].quickAdd',
   'stages[].form.fields[].variable',
@@ -117,7 +91,6 @@ const variablePaths = [
 const getVariableIndex = createSelector(
   getProtocol,
   (protocol) => collectPaths(variablePaths, protocol),
-  // variablePathCollector.collect(protocol),
 );
 
 /**
@@ -138,9 +111,9 @@ const getAssetIndex = createSelector(
     };
 
     const informationAssets = collectMappedPaths('stages[].items[]', protocol, mapAssets);
-    const nameGeneratorPanels = collectPaths('stages[].panels[].dataSource', protocol);
-    const nameGeneratorDataSources = collectPaths('stages[].dataSource', protocol);
-    const sociogramBackground = collectPaths('stages[].background.image', protocol);
+    const nameGeneratorPanels = collectPath('stages[].panels[].dataSource', protocol);
+    const nameGeneratorDataSources = collectPath('stages[].dataSource', protocol);
+    const sociogramBackground = collectPath('stages[].background.image', protocol);
 
     return {
       ...informationAssets,
@@ -158,9 +131,9 @@ const combineLists = (lists) => lists
 /**
  * Creates a Set of items from arrays or path objects
  * @param {Array[paths|Array]} include array of path object
- * e.g. from `collectPaths()` or array of ids
+ * e.g. from `collectPath()` or array of ids
  * @param {Array[paths|Array]} excluded array of path object
- * e.g. from `collectPaths()` or array of ids
+ * e.g. from `collectPath()` or array of ids
  * @returns {Set} of ids
  */
 const buildSearch = (include = [], exclude = []) => {
@@ -175,7 +148,7 @@ const buildSearch = (include = [], exclude = []) => {
 
 const utils = {
   buildSearch,
-  collectPaths,
+  collectPath,
 };
 
 export {

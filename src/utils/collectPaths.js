@@ -35,12 +35,12 @@ import { get, reduce, isArray } from 'lodash';
  *
  * @returns {object} in format: { [path]: value }
  */
-const collectPaths = (paths, obj, memoPath) => {
-  // We expect a string notation for paths, but it's actually converted to array automatically:
+const collectPath = (objPath, obj, memoPath) => {
+  // We expect a string notation for objPath, but it's actually converted to array automatically:
   // 'stages[].prompts[].subject.type' => ['stages', 'prompts', 'subject.type']
-  const parsedPath = isArray(paths)
-    ? paths
-    : paths.split('[].');
+  const parsedPath = isArray(objPath)
+    ? objPath
+    : objPath.split('[].');
   const [, ...rest] = parsedPath;
   let [next] = parsedPath;
   let scanArray = false;
@@ -61,7 +61,7 @@ const collectPaths = (paths, obj, memoPath) => {
       nextObj || [],
       (memo, item, index) => ({
         ...memo,
-        ...collectPaths(rest, item, `${path}[${index}]`),
+        ...collectPath(rest, item, `${path}[${index}]`),
       }),
       {},
     );
@@ -89,6 +89,11 @@ const collectPaths = (paths, obj, memoPath) => {
 
   return {};
 };
+
+export const collectPaths = (objPaths, object) => objPaths.reduce((acc, objPath) => ({
+  ...acc,
+  ...collectPath(objPath, object),
+}), {});
 
 /**
  *  This applies a function to the value of each mapped function,
@@ -120,7 +125,7 @@ const collectPaths = (paths, obj, memoPath) => {
  * ```
  */
 export const collectMappedPaths = (paths, obj, mapFunc) => {
-  const collectedPaths = collectPaths(paths, obj);
+  const collectedPaths = collectPath(paths, obj);
 
   return reduce(collectedPaths, (acc, value, path) => {
     const result = mapFunc(value, path);
@@ -133,25 +138,4 @@ export const collectMappedPaths = (paths, obj, mapFunc) => {
   }, {});
 };
 
-// Helper object for collecting paths
-export class PathCollector {
-  constructor() {
-    this.attributePaths = new Set([]);
-  }
-
-  add(attributePath) {
-    this.attributePaths.add(attributePath);
-  }
-
-  collect(obj) {
-    return Array.from(this.attributePaths).reduce(
-      (acc, attributePath) => ({
-        ...acc,
-        ...collectPaths(attributePath, obj),
-      }),
-      {},
-    );
-  }
-}
-
-export default collectPaths;
+export default collectPath;

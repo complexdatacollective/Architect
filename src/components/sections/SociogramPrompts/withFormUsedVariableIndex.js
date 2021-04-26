@@ -5,7 +5,7 @@ import { utils } from '../../../selectors/indexes';
 const mapStateToProps = (state, props) => {
   const getFormValues = formValueSelector(props.form);
   const prompts = getFormValues(state, 'prompts');
-  const formUsedVariableIndex = utils.collectPaths('prompts[].highlight.variable', { prompts });
+  const formUsedVariableIndex = utils.collectPath('prompts[].highlight.variable', { prompts });
 
   return {
     formUsedVariableIndex,
