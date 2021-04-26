@@ -61,20 +61,18 @@ const NativeSelect = ({
     input.onChange(option.target.value);
   };
 
-  const handleCreateOption = () => {
-    const result = onCreateOption(newOptionValue);
-
-    if (result && result.then) {
-      return result
-        .then((value) => {
-          setShowCreateOptionForm(false);
-
-          return value;
-        });
-    }
-
+  const resetForm = () => {
     setShowCreateOptionForm(false);
-    return result;
+    setNewOptionValue(null);
+    setNewOptionError(false);
+  };
+
+  const handleCreateOption = () => {
+    const newValue = newOptionValue;
+
+    resetForm();
+
+    return onCreateOption(newValue);
   };
 
   const isValidCreateOption = () => {
@@ -124,10 +122,14 @@ const NativeSelect = ({
    *   - newOptionError: error message from Text field variable validation
    *   - error: parent select error message. Will usually be "Required"
    */
+
   const calculateMeta = useMemo(() => ({
     touched: touched || (newOptionValue !== null && !isValidCreateOption(newOptionValue)),
-    invalid: !isValidCreateOption(newOptionValue)
-      || valueButNotSubmitted || (newOptionValue === null && invalid),
+    invalid: (
+      !isValidCreateOption(newOptionValue)
+      || valueButNotSubmitted
+      || (newOptionValue === null && invalid)
+    ),
     localInvalid: !isValidCreateOption(newOptionValue),
     error: newOptionError || notSubmittedError || error,
   }), [
