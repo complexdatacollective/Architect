@@ -3,13 +3,8 @@ import { createSelector } from 'reselect';
 import { getProtocol } from './protocol';
 import collectPath, { collectPaths } from '../utils/collectPaths';
 
-const mapEdges = ({ type, entity }, path) => {
-  if (entity !== 'edge') { return undefined; }
-  return [type, `${path}.type`];
-};
-
-const mapNodes = ({ type, entity }, path) => {
-  if (entity !== 'node') { return undefined; }
+const mapSubject = (entityType) => ({ type, entity }, path) => {
+  if (entity !== entityType) { return undefined; }
   return [type, `${path}.type`];
 };
 
@@ -20,10 +15,6 @@ const mapAssetItems = ({ type, content }, path) => {
 
 /**
  * Returns index of used edges (entities)
- * Checks for usage in the following:
- * - `stages[].prompts[].edges.create`
- * - `stages[].prompts[].edges.display[]`
- * - `stages[].presets[].edges.display[]`
  * @returns {object} in format: { [path]: variable }
  */
 const getEdgeIndex = createSelector(
@@ -34,7 +25,7 @@ const getEdgeIndex = createSelector(
       'stages[].prompts[].edges.display[]',
       'stages[].presets[].edges.display[]',
       'stages[].prompts[].createEdge',
-      ['stages[].subject', mapEdges],
+      ['stages[].subject', mapSubject('edge')],
     ];
 
     return collectPaths(edgePaths, protocol);
@@ -43,14 +34,12 @@ const getEdgeIndex = createSelector(
 
 /**
  * Returns index of used nodes (entities)
- * Checks for usage in the following:
- * - `stages[].subject`
  * @returns {object} in format: { [path]: variable }
  */
 const getNodeIndex = createSelector(
   getProtocol,
   (protocol) => collectPaths([
-    ['stages[].subject', mapNodes],
+    ['stages[].subject', mapSubject('node')],
   ], protocol),
 );
 
@@ -93,11 +82,6 @@ const getVariableIndex = createSelector(
 
 /**
  * Returns index of used assets
- * Checks for usage in the following:
- * - `stages[].prompts[].items[].content`
- * - `stages[].prompts[].panels[].dataSource`
- * - `stages[].prompts[].dataSource`
- * - `stages[].background.image`
  * @returns {object} in format: { [path]: variable }
  */
 const getAssetIndex = createSelector(
