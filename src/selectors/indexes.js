@@ -16,13 +16,13 @@ const getEdgeIndex = createSelector(
   (protocol) => {
     const createEdges = collectPaths('stages[].prompts[].edges.create', protocol);
 
-    // TODO: This reducer shouldn't be necessary, look at updating collectPaths
     const displayEdges = collectPaths('stages[].prompts[].edges.display[]', protocol);
 
     const narrativeEdges = collectPaths('stages[].presets[].edges.display[]', protocol);
 
     const dyadCensusEdges = collectPaths('stages[].prompts[].createEdge', protocol);
 
+    // TODO: This reducer shouldn't be necessary, look at updating collectPaths
     const mapEdges = ({ type, entity }, path) => {
       if (entity !== 'edge') { return undefined; }
       return [`${path}.type`, type];
