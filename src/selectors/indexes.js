@@ -1,7 +1,7 @@
 import { isArray, values } from 'lodash';
 import { createSelector } from 'reselect';
 import { getProtocol } from './protocol';
-import collectPath, { collectPaths, collectMappedPaths } from '../utils/collectPaths';
+import collectPath, { collectPaths, collectMappedPath } from '../utils/collectPaths';
 
 /**
  * Returns index of used edges (entities)
@@ -28,7 +28,7 @@ const getEdgeIndex = createSelector(
       return [type, `${path}.type`];
     };
 
-    const alterEdgeFormEdges = collectMappedPaths('stages[].subject', protocol, mapEdges);
+    const alterEdgeFormEdges = collectMappedPath('stages[].subject', protocol, mapEdges);
 
     return {
       ...createEdges,
@@ -54,7 +54,7 @@ const getNodeIndex = createSelector(
       return [type, `${path}.type`];
     };
 
-    return collectMappedPaths('stages[].subject', protocol, mapNodes);
+    return collectMappedPath('stages[].subject', protocol, mapNodes);
   },
 );
 
@@ -110,7 +110,7 @@ const getAssetIndex = createSelector(
       return [content, `${path}.content`];
     };
 
-    const informationAssets = collectMappedPaths('stages[].items[]', protocol, mapAssets);
+    const informationAssets = collectMappedPath('stages[].items[]', protocol, mapAssets);
     const nameGeneratorPanels = collectPath('stages[].panels[].dataSource', protocol);
     const nameGeneratorDataSources = collectPath('stages[].dataSource', protocol);
     const sociogramBackground = collectPath('stages[].background.image', protocol);

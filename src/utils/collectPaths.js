@@ -90,11 +90,6 @@ const collectPath = (objPath, obj, memoPath) => {
   return {};
 };
 
-export const collectPaths = (objPaths, object) => objPaths.reduce((acc, objPath) => ({
-  ...acc,
-  ...collectPath(objPath, object),
-}), {});
-
 /**
  *  This applies a function to the value of each mapped function,
  * for the case where we need to apply additional logic to the
@@ -124,7 +119,7 @@ export const collectPaths = (objPaths, object) => objPaths.reduce((acc, objPath)
  * // };
  * ```
  */
-export const collectMappedPaths = (paths, obj, mapFunc) => {
+export const collectMappedPath = (paths, obj, mapFunc) => {
   const collectedPaths = collectPath(paths, obj);
 
   return reduce(collectedPaths, (acc, value, path) => {
@@ -137,5 +132,16 @@ export const collectMappedPaths = (paths, obj, mapFunc) => {
     };
   }, {});
 };
+
+export const collectPaths = (objPaths, object) => objPaths.reduce((acc, objPath) => {
+  const next = Array.isArray(objPath)
+    ? collectMappedPath(objPath[0], object, objPath[1])
+    : collectPath(objPath, object);
+
+  return {
+    ...acc,
+    ...next,
+  };
+}, {});
 
 export default collectPath;

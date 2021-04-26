@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import collectPaths, { collectMappedPaths } from '../collectPaths';
+import collectPath, { collectMappedPath } from '../collectPaths';
 
 const testObject = {
   stages: [
@@ -24,14 +24,14 @@ const testObject = {
   ],
 };
 
-describe('collectPaths', () => {
+describe('collectPath', () => {
   it('can extract attributes', () => {
     const expectedResult = {
       'stages[0].prompts[0].variable': 'foo',
       'stages[0].prompts[1].variable': 'bar',
       'stages[1].prompts[0].variable': 'bazz',
     };
-    const paths = collectPaths('stages[].prompts[].variable', testObject);
+    const paths = collectPath('stages[].prompts[].variable', testObject);
 
     expect(paths).toEqual(expectedResult);
   });
@@ -41,13 +41,13 @@ describe('collectPaths', () => {
       'stages[1].list[0]': 'fizz',
       'stages[1].list[1]': 'buzz',
     };
-    const paths = collectPaths('stages[].list[]', testObject);
+    const paths = collectPath('stages[].list[]', testObject);
 
     expect(paths).toEqual(expectedResult);
   });
 });
 
-describe('collectMappedPaths', () => {
+describe('collectMappedPath', () => {
   it('a noop mapping function does nothing', () => {
     const expectedResult = {
       'stages[0].subject': { entity: 'node', type: 'node1' },
@@ -56,7 +56,7 @@ describe('collectMappedPaths', () => {
 
     const mappingFunction = (value, path) => [value, path];
 
-    const paths = collectMappedPaths('stages[].subject', testObject, mappingFunction);
+    const paths = collectMappedPath('stages[].subject', testObject, mappingFunction);
 
     expect(paths).toEqual(expectedResult);
   });
@@ -71,7 +71,7 @@ describe('collectMappedPaths', () => {
       return [value, path];
     };
 
-    const paths = collectMappedPaths('stages[].subject', testObject, mappingFunction);
+    const paths = collectMappedPath('stages[].subject', testObject, mappingFunction);
 
     expect(paths).toEqual(expectedResult);
   });
@@ -86,7 +86,7 @@ describe('collectMappedPaths', () => {
       return [value.type, path];
     };
 
-    const paths = collectMappedPaths('stages[].subject', testObject, mappingFunction);
+    const paths = collectMappedPath('stages[].subject', testObject, mappingFunction);
 
     expect(paths).toEqual(expectedResult);
   });
@@ -101,7 +101,7 @@ describe('collectMappedPaths', () => {
       return [value.type, `${path}.fictional.path`];
     };
 
-    const paths = collectMappedPaths('stages[].subject', testObject, mappingFunction);
+    const paths = collectMappedPath('stages[].subject', testObject, mappingFunction);
 
     expect(paths).toEqual(expectedResult);
   });
