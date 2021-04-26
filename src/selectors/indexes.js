@@ -1,7 +1,22 @@
 import { isArray, values } from 'lodash';
 import { createSelector } from 'reselect';
 import { getProtocol } from './protocol';
-import collectPath, { collectPaths, collectMappedPath } from '../utils/collectPaths';
+import collectPath, { collectPaths } from '../utils/collectPaths';
+
+const mapEdges = ({ type, entity }, path) => {
+  if (entity !== 'edge') { return undefined; }
+  return [type, `${path}.type`];
+};
+
+const mapNodes = ({ type, entity }, path) => {
+  if (entity !== 'node') { return undefined; }
+  return [type, `${path}.type`];
+};
+
+const mapAssetItems = ({ type, content }, path) => {
+  if (type === 'text') { return undefined; }
+  return [content, `${path}.content`];
+};
 
 /**
  * Returns index of used edges (entities)
@@ -14,29 +29,15 @@ import collectPath, { collectPaths, collectMappedPath } from '../utils/collectPa
 const getEdgeIndex = createSelector(
   getProtocol,
   (protocol) => {
-    const createEdges = collectPath('stages[].prompts[].edges.create', protocol);
+    const edgePaths = [
+      'stages[].prompts[].edges.create',
+      'stages[].prompts[].edges.display[]',
+      'stages[].presets[].edges.display[]',
+      'stages[].prompts[].createEdge',
+      ['stages[].subject', mapEdges],
+    ];
 
-    const displayEdges = collectPath('stages[].prompts[].edges.display[]', protocol);
-
-    const narrativeEdges = collectPath('stages[].presets[].edges.display[]', protocol);
-
-    const dyadCensusEdges = collectPath('stages[].prompts[].createEdge', protocol);
-
-    // TODO: This reducer shouldn't be necessary, look at updating collectPath
-    const mapEdges = ({ type, entity }, path) => {
-      if (entity !== 'edge') { return undefined; }
-      return [type, `${path}.type`];
-    };
-
-    const alterEdgeFormEdges = collectMappedPath('stages[].subject', protocol, mapEdges);
-
-    return {
-      ...createEdges,
-      ...displayEdges,
-      ...narrativeEdges,
-      ...dyadCensusEdges,
-      ...alterEdgeFormEdges,
-    };
+    return collectPaths(edgePaths, protocol);
   },
 );
 
@@ -48,41 +49,10 @@ const getEdgeIndex = createSelector(
  */
 const getNodeIndex = createSelector(
   getProtocol,
-  (protocol) => {
-    const mapNodes = ({ type, entity }, path) => {
-      if (entity !== 'node') { return undefined; }
-      return [type, `${path}.type`];
-    };
-
-    return collectMappedPath('stages[].subject', protocol, mapNodes);
-  },
+  (protocol) => collectPaths([
+    ['stages[].subject', mapNodes],
+  ], protocol),
 );
-
-const variablePaths = [
-  'stages[].quickAdd',
-  'stages[].form.fields[].variable',
-  'stages[].panels.filter.rules[].options.attribute',
-  'stages[].searchOptions.matchProperties[]',
-  'stages[].cardOptions.additionalProperties[].variable',
-  'stages[].prompts[].variable',
-  'stages[].prompts[].edgeVariable',
-  'stages[].prompts[].otherVariable',
-  'stages[].prompts[].additionalAttributes[].variable',
-  'stages[].prompts[].highlight.variable',
-  'stages[].prompts[].layout.layoutVariable',
-  'stages[].prompts[].presets[].layoutVariable',
-  'stages[].prompts[].presets[].groupVariable',
-  'stages[].prompts[].presets[].edges.display[]',
-  'stages[].prompts[].presets[].highlight[]',
-  'stages[].prompts[].bucketSortOrder[].property',
-  'stages[].prompts[].binSortOrder[].property',
-  'stages[].skipLogic.filter.rules[].options.attribute',
-  'stages[].filter.rules[].options.attribute',
-  'stages[].presets[].layoutVariable',
-  'stages[].presets[].groupVariable',
-  'stages[].presets[].edges.display[]',
-  'stages[].presets[].highlight[]',
-];
 
 /**
  * Returns index of used variables
@@ -90,7 +60,35 @@ const variablePaths = [
  */
 const getVariableIndex = createSelector(
   getProtocol,
-  (protocol) => collectPaths(variablePaths, protocol),
+  (protocol) => {
+    const variablePaths = [
+      'stages[].quickAdd',
+      'stages[].form.fields[].variable',
+      'stages[].panels.filter.rules[].options.attribute',
+      'stages[].searchOptions.matchProperties[]',
+      'stages[].cardOptions.additionalProperties[].variable',
+      'stages[].prompts[].variable',
+      'stages[].prompts[].edgeVariable',
+      'stages[].prompts[].otherVariable',
+      'stages[].prompts[].additionalAttributes[].variable',
+      'stages[].prompts[].highlight.variable',
+      'stages[].prompts[].layout.layoutVariable',
+      'stages[].prompts[].presets[].layoutVariable',
+      'stages[].prompts[].presets[].groupVariable',
+      'stages[].prompts[].presets[].edges.display[]',
+      'stages[].prompts[].presets[].highlight[]',
+      'stages[].prompts[].bucketSortOrder[].property',
+      'stages[].prompts[].binSortOrder[].property',
+      'stages[].skipLogic.filter.rules[].options.attribute',
+      'stages[].filter.rules[].options.attribute',
+      'stages[].presets[].layoutVariable',
+      'stages[].presets[].groupVariable',
+      'stages[].presets[].edges.display[]',
+      'stages[].presets[].highlight[]',
+    ];
+
+    return collectPaths(variablePaths, protocol);
+  },
 );
 
 /**
@@ -105,22 +103,14 @@ const getVariableIndex = createSelector(
 const getAssetIndex = createSelector(
   getProtocol,
   (protocol) => {
-    const mapAssets = ({ type, content }, path) => {
-      if (type === 'text') { return undefined; }
-      return [content, `${path}.content`];
-    };
+    const assetPaths = [
+      'stages[].panels[].dataSource',
+      'stages[].dataSource',
+      'stages[].background.image',
+      ['stages[].items[]', mapAssetItems],
+    ];
 
-    const informationAssets = collectMappedPath('stages[].items[]', protocol, mapAssets);
-    const nameGeneratorPanels = collectPath('stages[].panels[].dataSource', protocol);
-    const nameGeneratorDataSources = collectPath('stages[].dataSource', protocol);
-    const sociogramBackground = collectPath('stages[].background.image', protocol);
-
-    return {
-      ...informationAssets,
-      ...nameGeneratorPanels,
-      ...nameGeneratorDataSources,
-      ...sociogramBackground,
-    };
+    return collectPaths(assetPaths, protocol);
   },
 );
 
