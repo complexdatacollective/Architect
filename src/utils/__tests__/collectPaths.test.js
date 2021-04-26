@@ -1,16 +1,18 @@
 /* eslint-env jest */
 
-import collectPaths from '../collectPaths';
+import collectPaths, { collectMappedPaths } from '../collectPaths';
 
 const testObject = {
   stages: [
     {
+      subject: { entity: 'node', type: 'node1' },
       prompts: [
         { variable: 'foo' },
         { variable: 'bar' },
       ],
     },
     {
+      subject: { entity: 'edge', type: 'edge1' },
       prompts: [
         { variable: 'bazz' },
       ],
@@ -40,6 +42,66 @@ describe('collectPaths', () => {
       'stages[1].list[1]': 'buzz',
     };
     const paths = collectPaths('stages[].list[]', testObject);
+
+    expect(paths).toEqual(expectedResult);
+  });
+});
+
+describe('collectMappedPaths', () => {
+  it('a noop mapping function does nothing', () => {
+    const expectedResult = {
+      'stages[0].subject': { entity: 'node', type: 'node1' },
+      'stages[1].subject': { entity: 'edge', type: 'edge1' },
+    };
+
+    const mappingFunction = (value, path) => [value, path];
+
+    const paths = collectMappedPaths('stages[].subject', testObject, mappingFunction);
+
+    expect(paths).toEqual(expectedResult);
+  });
+
+  it('if the mapping function returns undefined it filters it from results', () => {
+    const expectedResult = {
+      'stages[0].subject': { entity: 'node', type: 'node1' },
+    };
+
+    const mappingFunction = (value, path) => {
+      if (value.entity === 'edge') { return undefined; }
+      return [value, path];
+    };
+
+    const paths = collectMappedPaths('stages[].subject', testObject, mappingFunction);
+
+    expect(paths).toEqual(expectedResult);
+  });
+
+  it('it uses the value from the mapping function in the results', () => {
+    const expectedResult = {
+      'stages[0].subject': 'node1',
+    };
+
+    const mappingFunction = (value, path) => {
+      if (value.entity === 'edge') { return undefined; }
+      return [value.type, path];
+    };
+
+    const paths = collectMappedPaths('stages[].subject', testObject, mappingFunction);
+
+    expect(paths).toEqual(expectedResult);
+  });
+
+  it('it uses the path from the mapping function in the results', () => {
+    const expectedResult = {
+      'stages[0].subject.fictional.path': 'node1',
+    };
+
+    const mappingFunction = (value, path) => {
+      if (value.entity === 'edge') { return undefined; }
+      return [value.type, `${path}.fictional.path`];
+    };
+
+    const paths = collectMappedPaths('stages[].subject', testObject, mappingFunction);
 
     expect(paths).toEqual(expectedResult);
   });

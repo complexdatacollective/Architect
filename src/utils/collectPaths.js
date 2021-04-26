@@ -124,10 +124,11 @@ export const collectMappedPaths = (paths, obj, mapFunc) => {
 
   return reduce(collectedPaths, (acc, value, path) => {
     const result = mapFunc(value, path);
+
     if (result === undefined) { return acc; }
     return {
       ...acc,
-      [result[0]]: result[1],
+      [result[1]]: result[0],
     };
   }, {});
 };

@@ -25,7 +25,7 @@ const getEdgeIndex = createSelector(
     // TODO: This reducer shouldn't be necessary, look at updating collectPaths
     const mapEdges = ({ type, entity }, path) => {
       if (entity !== 'edge') { return undefined; }
-      return [`${path}.type`, type];
+      return [type, `${path}.type`];
     };
 
     const alterEdgeFormEdges = collectMappedPaths('stages[].subject', protocol, mapEdges);
@@ -51,7 +51,7 @@ const getNodeIndex = createSelector(
   (protocol) => {
     const mapNodes = ({ type, entity }, path) => {
       if (entity !== 'node') { return undefined; }
-      return [`${path}.type`, type];
+      return [type, `${path}.type`];
     };
 
     return collectMappedPaths('stages[].subject', protocol, mapNodes);
@@ -107,7 +107,7 @@ const getAssetIndex = createSelector(
   (protocol) => {
     const mapAssets = ({ type, content }, path) => {
       if (type === 'text') { return undefined; }
-      return [`${path}.content`, content];
+      return [content, `${path}.content`];
     };
 
     const informationAssets = collectMappedPaths('stages[].items[]', protocol, mapAssets);
