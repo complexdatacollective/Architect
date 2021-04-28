@@ -11,8 +11,6 @@ import {
   getComponentsForType,
   VARIABLE_TYPES_WITH_COMPONENTS,
   INPUT_OPTIONS,
-  isOrdinalOrCategoricalType,
-  isVariableTypeWithParameters,
 } from '@app/config/variables';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 import { getVariablesForSubject, getVariableOptionsForSubject } from '@selectors/codebook';
@@ -75,16 +73,14 @@ const fieldsHandlers = withHandlers({
     // applicable.
     if (variableType !== typeForComponent) {
       changeField(form, 'validation', {});
-    }
-
-    // Options and parameters should be reset, since they depend on the component
-    if (isVariableTypeWithParameters(variableType)) {
-      changeField(form, 'parameters', null);
-    }
-
-    if (isOrdinalOrCategoricalType(variableType) || variableType === 'boolean') {
+      changeField(form, 'options', null);
+    // Special case for boolean, where BooleanChoice has options but Toggle doesn't
+    } else if (variableType === 'boolean') {
       changeField(form, 'options', null);
     }
+
+    // Always reset parameters since they depend on the component
+    changeField(form, 'parameters', null);
   },
   handleChangeVariable: ({ existingVariables, changeField, form }) => (_, value) => {
     // Either load settings from codebook, or reset

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Markdown from 'react-markdown';
 import { Field } from 'redux-form';
 import Preview from '../../EditableList/Preview';
 
@@ -11,7 +10,11 @@ class PresetPreview extends Preview {
     return (
       <Field
         name={`${fieldId}.label`}
-        component={(field) => <Markdown source={field.input.value} />}
+        component={(field) => (
+          <div>
+            {field.input.value}
+          </div>
+        )}
       />
     );
   }

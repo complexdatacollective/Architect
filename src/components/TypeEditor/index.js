@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
-import { formValueSelector } from 'redux-form';
-import { compact, map, get } from 'lodash';
+import { get } from 'lodash';
 import { compose, withProps, withHandlers } from 'recompose';
 import Editor from '../Editor';
 import { getProtocol } from '../../selectors/protocol';
@@ -14,7 +13,6 @@ const formName = 'TYPE_EDITOR';
 function mapStateToProps(state, props) {
   const { entity } = props;
   const { type } = props;
-  const getFormValue = formValueSelector(formName);
   const protocol = getProtocol(state);
 
   const initialValues = format(
@@ -28,15 +26,8 @@ function mapStateToProps(state, props) {
 
   const isNew = !type;
 
-  const variables = getFormValue(state, 'variables') || {};
-  const displayVariables = compact(map(variables, (variable) => ({
-    label: variable.name,
-    value: variable.id,
-  })));
-
   return {
     initialValues,
-    displayVariables,
     isNew,
   };
 }

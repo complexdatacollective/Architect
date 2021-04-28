@@ -2,7 +2,8 @@ import uuid from 'uuid';
 import {
   omit, get, has, isEmpty,
 } from 'lodash';
-import { getCodebook, getVariablesForSubject } from '../../../selectors/codebook';
+import prune from '@app/utils/prune';
+import { getVariablesForSubject } from '../../../selectors/codebook';
 import { makeGetUsageForType } from '../../../selectors/usage';
 import { makeGetIsUsed } from '../../../selectors/codebook/isUsed';
 import { getNextCategoryColor } from './utils/helpers';
@@ -56,7 +57,7 @@ const deleteType = (entity, type) => ({
   },
 });
 
-const createVariable = (entity, type, variable, configuration) => ({
+const createVariable = (entity, type, variable, configuration) => prune({
   type: CREATE_VARIABLE,
   meta: {
     type,
@@ -66,7 +67,7 @@ const createVariable = (entity, type, variable, configuration) => ({
   configuration,
 });
 
-const updateVariable = (entity, type, variable, configuration, merge = false) => ({
+const updateVariable = (entity, type, variable, configuration, merge = false) => prune({
   type: UPDATE_VARIABLE,
   meta: {
     entity,
@@ -178,19 +179,6 @@ const deleteVariableThunk = (entity, type, variable) => (dispatch, getState) => 
   if (get(isUsed, variable, false)) { return false; }
   dispatch(saveableChange(deleteVariable)(entity, type, variable));
   return true;
-};
-
-const updateDisplayVariableThunk = (entity, type, variable) => (dispatch, getState) => {
-  const codebook = getCodebook(getState());
-
-  const previousConfiguration = get(codebook, [entity, type], {});
-
-  const updatedConfiguration = {
-    ...previousConfiguration,
-    displayVariable: variable,
-  };
-
-  dispatch(saveableChange(updateType)(entity, type, updatedConfiguration));
 };
 
 const getDeleteAction = ({ type, ...owner }) => {
@@ -328,7 +316,6 @@ const actionCreators = {
   createVariable: createVariableThunk,
   deleteVariable: deleteVariableThunk,
   updateVariable: updateVariableThunk,
-  updateDisplayVariable: updateDisplayVariableThunk,
 };
 
 const actionTypes = {

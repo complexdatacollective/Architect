@@ -7,7 +7,7 @@ import ValidatedField from '../../Form/ValidatedField';
 import withOptions from './withOptions';
 import withCreateVariableHandler from '../../enhancers/withCreateVariableHandler';
 import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
-import withDefaultToDisplayVariable from './withDefaultToDisplayVariable';
+import withQuickAddVariable from './withQuickAddVariable';
 import withSubject from '../../enhancers/withSubject';
 import Tip from '../../Tip';
 
@@ -70,7 +70,7 @@ export { QuickAdd };
 export default compose(
   withSubject,
   withDisabledSubjectRequired,
-  withDefaultToDisplayVariable,
+  withQuickAddVariable,
   withOptions,
   withCreateVariableHandler,
 )(QuickAdd);

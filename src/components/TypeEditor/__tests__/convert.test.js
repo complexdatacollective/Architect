@@ -5,7 +5,6 @@ import { parse, format } from '../convert';
 const mockConfiguration = {
   label: 'Person',
   color: 'coral',
-  displayVariable: 'nickname',
   iconVariant: 'add-a-person',
   variables: {
     1234: {
@@ -32,7 +31,6 @@ const mockConfiguration = {
 const mockFormConfiguration = {
   label: 'Person',
   color: 'coral',
-  displayVariable: 'nickname',
   iconVariant: 'add-a-person',
   variables: [
     {

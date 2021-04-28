@@ -43,11 +43,11 @@ const EditEdgeRule = ({
           For help with constructing rules, see our documentation articles
           on
           {' '}
-          <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/skip-logic/">skip logic</ExternalLink>
+          <ExternalLink href="https://documentation.networkcanvas.com/reference/key-concepts/skip-logic/">skip logic</ExternalLink>
           {' '}
           and
           {' '}
-          <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/filtering/">network filtering</ExternalLink>
+          <ExternalLink href="https://documentation.networkcanvas.com/reference/key-concepts/network-filtering/">network filtering</ExternalLink>
           .
         </p>
         <motion.div

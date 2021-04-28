@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import { capitalize, toPairs } from 'lodash';
 import * as Fields from '@codaco/ui/lib/components/Fields';
@@ -22,7 +21,6 @@ const TypeEditor = ({
   form,
   entity,
   type,
-  displayVariables,
   existingTypes,
   isNew,
   metaOnly,
@@ -76,7 +74,6 @@ const TypeEditor = ({
 
       { entity === 'node'
         && (
-        <>
           <Section>
             <h2 id={getFieldId('iconVariant')}>Icon</h2>
             <p>
@@ -93,27 +90,6 @@ const TypeEditor = ({
               validation={{ required: true }}
             />
           </Section>
-
-          {!isNew
-            && (
-            <Section>
-              <h2>Display Variable</h2>
-              <p>
-                Select a variable to use as a label when displaying this
-                {' '}
-                {entity}
-                .
-              </p>
-              <Field
-                component={ArchitectFields.Select}
-                name="displayVariable"
-                options={displayVariables}
-              >
-                <option value="">&mdash; Select display variable &mdash;</option>
-              </Field>
-            </Section>
-            )}
-        </>
         )}
 
       {(!isNew && !metaOnly)
@@ -138,8 +114,6 @@ TypeEditor.propTypes = {
   type: PropTypes.string,
   entity: PropTypes.string.isRequired,
   form: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  displayVariables: PropTypes.array.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   existingTypes: PropTypes.array.isRequired,
   isNew: PropTypes.bool,

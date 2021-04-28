@@ -333,7 +333,6 @@ describe('protocol.codebook', () => {
             type: actionTypes.CREATE_VARIABLE,
             meta: {
               entity: 'ego',
-              type: null,
               variable: uuid(),
             },
             configuration: {

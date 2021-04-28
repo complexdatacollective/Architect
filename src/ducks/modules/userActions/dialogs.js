@@ -171,7 +171,7 @@ const appUpgradeRequiredDialog = (protocolSchemaVersion) => {
       <p>
         Please see our
         {' '}
-        <ExternalLink href="https://documentation.networkcanvas.com/docs/technical-documentation/protocol-schema-information/">documentation on protocol schemas</ExternalLink>
+        <ExternalLink href="https://documentation.networkcanvas.com/reference/protocol-schema-information/">documentation on protocol schemas</ExternalLink>
         {' '}
         to locate an appropriate version, and for further information on this topic.
       </p>
@@ -240,7 +240,7 @@ const mayUpgradeProtocolDialog = (
         and can still be opened and modified using an older version of Architect. Please
         see our
         {' '}
-        <ExternalLink href="https://documentation.networkcanvas.com/docs/technical-documentation/protocol-schema-information/">documentation on protocol schemas</ExternalLink>
+        <ExternalLink href="https://documentation.networkcanvas.com/reference/protocol-schema-information/">documentation on protocol schemas</ExternalLink>
         {' '}
         for
         more information on this topic.

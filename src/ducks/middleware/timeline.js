@@ -37,6 +37,11 @@ const createTimelineReducer = (reducer, customOptions) => {
       if (!action.payload.locus) { return state; }
       const locusIndex = timeline.indexOf(action.payload.locus);
 
+      // If point in timeline cannot be found do nothing
+      if (locusIndex === -1) {
+        return state;
+      }
+
       // no events in timeline yet
       if (timeline.length === 1) {
         return state;
