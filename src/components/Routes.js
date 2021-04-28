@@ -4,6 +4,7 @@ import Home from '@components/Home/Home';
 import Protocol from '@components/Protocol';
 import Loading from '@components/Loading';
 import Screens from '@components/Screens';
+import ProtocolSummary from '@components/ProtocolSummary';
 import { getActiveProtocol } from '@selectors/session';
 
 const Routes = () => {
@@ -13,6 +14,7 @@ const Routes = () => {
 
   return (
     <>
+      <ProtocolSummary />
       <Screens />
       {route}
       <Loading />
