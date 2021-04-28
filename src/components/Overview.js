@@ -45,6 +45,7 @@ const Overview = ({
     </div>
     <div className="overview__footer">
       <Icon name="protocol-card" />
+      <Button onClick={printSummary} color="neon-coral">Print Summary</Button>
       <Button onClick={() => openScreen('assets')} color="neon-coral">Resource Library</Button>
       <Button onClick={() => openScreen('codebook')} color="sea-serpent">Manage Codebook</Button>
     </div>
