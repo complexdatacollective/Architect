@@ -7,14 +7,7 @@ const windowParameters = {
   center: true,
   enableLargerThanScreen: true,
   height: 768,
-  // resizeable:
-  // This doesn't work as expected. It stops the user from
-  // manually resizing the window, but also seems to prevent
-  // setSize from *reducing* the window size. Currently
-  // setContentSize doesn't seem to have this limitation and
-  // is a better fit for purpose.
-  resizable: false,
-  show: false,
+  show: true,
   useContentSize: true,
   webPreferences: { nodeIntegration: true },
   width: 1024,
@@ -72,10 +65,6 @@ function createPrintableSummaryWindow() {
 
       return true;
     });
-
-    if (process.env.SHOW_PREVIEW_DEV_TOOLS) {
-      global.previewWindow.openDevTools();
-    }
 
     global.previewWindow.showIndex = () => {
       global.previewWindow.loadURL(getAppUrl());

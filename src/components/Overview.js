@@ -1,10 +1,9 @@
 import path from 'path';
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { remote } from 'electron';
 import { Icon, Button } from '@codaco/ui';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getActiveProtocol } from '@selectors/session';
@@ -17,12 +16,14 @@ const panelVariants = {
   show: { opacity: 1, y: 0, transition: { type: 'spring', damping: 20, when: 'beforeChildren' } },
 };
 
-const printSummary = () => {
-  const win = new remote.BrowserWindow({ width: 800, height: 600 });
-  const url = remote.BrowserWindow.getFocusedWindow().webContents.getURL();
-  console.log({ url });
-  // Load a remote URL
-  win.loadURL(url);
+const PrintSummaryButton = () => {
+  const dispatch = useDispatch();
+
+  const printSummary = () => {
+    dispatch({ ipc: true, type: 'PRINT_SUMMARY' });
+  };
+
+  return (<Button onClick={printSummary} color="neon-coral">Print Summary</Button>);
 };
 
 const Overview = ({
@@ -54,7 +55,7 @@ const Overview = ({
     </div>
     <div className="overview__footer">
       <Icon name="protocol-card" />
-      <Button onClick={printSummary} color="neon-coral">Print Summary</Button>
+      <PrintSummaryButton />
       <Button onClick={() => openScreen('assets')} color="neon-coral">Resource Library</Button>
       <Button onClick={() => openScreen('codebook')} color="sea-serpent">Manage Codebook</Button>
     </div>
