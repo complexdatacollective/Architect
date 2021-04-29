@@ -5,8 +5,8 @@ import { isMacOS } from '@app/utils/platform';
 import { AppErrorBoundary } from '@components/Errors';
 import DialogManager from '@components/DialogManager';
 import Routes from '@components/Routes';
-import ToastManager from './ToastManager';
-import useUpdater from '../hooks/useUpdater';
+import ToastManager from '@components/ToastManager';
+import useUpdater from '@hooks/useUpdater';
 
 const appVariants = {
   show: {
@@ -20,7 +20,7 @@ const appVariants = {
   },
 };
 
-const App = () => {
+const MainView = () => {
   const appClasses = cx(
     'app',
     {
@@ -50,4 +50,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default MainView;
