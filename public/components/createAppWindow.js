@@ -14,6 +14,7 @@ function getAppUrl() {
     const appUrl = url.format({
       host: `localhost:${process.env.WEBPACK_DEV_SERVER_PORT}/`,
       protocol: 'http',
+      // hash: '/summary',
     });
 
     log.info('appUrl [host]', appUrl);
@@ -24,6 +25,7 @@ function getAppUrl() {
   const appUrl = url.format({
     pathname: path.join(__dirname, '../', 'index.html'),
     protocol: 'file:',
+    hash: '/summary',
   });
 
   log.info('appUrl [path]', appUrl);
