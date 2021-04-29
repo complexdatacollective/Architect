@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import { remote } from 'electron';
 import { Icon, Button } from '@codaco/ui';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getActiveProtocol } from '@selectors/session';
@@ -14,6 +15,14 @@ import { actionCreators as uiActions } from '@modules/ui';
 const panelVariants = {
   hide: { opacity: 0, y: -200 },
   show: { opacity: 1, y: 0, transition: { type: 'spring', damping: 20, when: 'beforeChildren' } },
+};
+
+const printSummary = () => {
+  const win = new remote.BrowserWindow({ width: 800, height: 600 });
+  const url = remote.BrowserWindow.getFocusedWindow().webContents.getURL();
+  console.log({ url });
+  // Load a remote URL
+  win.loadURL(url);
 };
 
 const Overview = ({
