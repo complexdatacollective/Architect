@@ -1,6 +1,10 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import {
+  Route,
+  Switch,
+} from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './ducks/store';
 import App from './components/App';
@@ -20,7 +24,9 @@ const startApp = () => {
       <ClipPaths />
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <App />
+          <Switch>
+            <Route path="/" component={App} />
+          </Switch>
         </PersistGate>
       </Provider>
     </>,
