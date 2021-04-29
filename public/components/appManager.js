@@ -1,6 +1,7 @@
 const { ipcMain, app, Menu } = require('electron');
 const log = require('./log');
 const path = require('path');
+const createPrintableSummaryWindow = require('./createPrintableSummaryWindow');
 const { clearStorageDataDialog } = require('./dialogs');
 const mainMenu = require('./mainMenu');
 
@@ -138,6 +139,9 @@ class AppManager {
           this.hasChanges = true;
           this.isProtocolValid = action.protocolIsValid;
           this.updateMenu();
+          break;
+        case 'PRINT_SUMMARY':
+          createPrintableSummaryWindow();
           break;
         default:
           log.info(JSON.stringify(action, null, 2));
