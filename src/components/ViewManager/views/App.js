@@ -20,7 +20,7 @@ const appVariants = {
   },
 };
 
-const MainView = () => {
+const AppView = () => {
   const appClasses = cx(
     'app',
     {
@@ -50,4 +50,4 @@ const MainView = () => {
   );
 };
 
-export default MainView;
+export default AppView;

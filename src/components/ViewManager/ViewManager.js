@@ -4,16 +4,16 @@ import {
   Switch,
   HashRouter as Router,
 } from 'react-router-dom';
-import Main from './views/Main';
+import App from './views/App';
 import ProtocolSummary from './views/ProtocolSummary';
 
-const App = () => (
+const ViewManager = () => (
   <Router>
     <Switch>
       <Route path="/summary" component={ProtocolSummary} />
-      <Route path="/" component={Main} />
+      <Route path="/" component={App} />
     </Switch>
   </Router>
 );
 
-export default App;
+export default ViewManager;
