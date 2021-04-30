@@ -21,8 +21,12 @@ const print = () => {
 
 const ProtocolSummaryView = () => {
   useEffect(() => {
-    print();
-  }, []);
+    document.body.classList.add('print');
+
+    return () => {
+      document.body.classList.remove('print');
+    };
+  });
 
   return (
     <div>
