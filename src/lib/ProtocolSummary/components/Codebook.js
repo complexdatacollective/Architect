@@ -1,12 +1,39 @@
 import React from 'react';
+import { toPairs } from 'lodash';
+import Entity from './Entity';
 
-import { useSelector } from 'react-redux';
-import { getActiveProtocol } from '@selectors/session';
-
-const Codebook = () => {
-  const activeProtocol = useSelector(getActiveProtocol);
+const Codebook = ({ stages, codebook }) => {
+  const nodes = toPairs(codebook.node);
+  const edges = toPairs(codebook.edge);
 
   return (
-    <h2>Codebook</h2>
+    <div>
+      <h2>Codebook</h2>
+      <Entity isEgo entity={codebook.ego} stages={stages} />
+      {nodes.map(
+        (node) => (
+          <Entity
+            isNode
+            stages={stages}
+            color={node.color}
+            iconVariant={node.iconVariant}
+            name={node.name}
+            variables={node.variables}
+          />
+        ),
+      )}
+      {edges.map(
+        (edge) => (
+          <Entity
+            isNode
+            stages={stages}
+            color={edge.color}
+            iconVariant={edge.iconVariant}
+            name={edge.name}
+            variables={edge.variables}
+          />
+        ),
+      )}
+    </div>
   );
 };
