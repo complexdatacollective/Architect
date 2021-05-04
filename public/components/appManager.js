@@ -141,7 +141,7 @@ class AppManager {
           this.updateMenu();
           break;
         case 'PRINT_SUMMARY':
-          createPrintableSummaryWindow();
+          createPrintableSummaryWindow(action.payload);
           break;
         default:
           log.info(JSON.stringify(action, null, 2));

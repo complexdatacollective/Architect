@@ -1,8 +1,10 @@
 import React from 'react';
 
-const ProtocolSummary = () => (
+const ProtocolSummary = ({ protocol }) => (
   <div style={{ position: 'absolute', zIndex: 1000000, top: 0, left: 0, height: 2000, width: '100%', background: '#ffffff' }}>
     <h1>Protocol Summary</h1>
+
+    {JSON.stringify({ protocol })};
 
     <p>Unfortunately, that is wrong; on the contrary, the brick is a soccer. The literature would have us believe that a messier cat is not but a marimba. The kales could be said to resemble stagnant sentences. Their lunchroom was, in this moment, a frowzy adapter. This is not to discredit the idea that a leopard is a temper from the right perspective. They were lost without the splashy hair that composed their vibraphone. Before otters, protests were only farmers.</p>
 

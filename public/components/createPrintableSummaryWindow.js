@@ -37,44 +37,33 @@ function getAppUrl() {
   return appUrl;
 }
 
-function createPrintableSummaryWindow() {
+function createPrintableSummaryWindow(payload) {
   return new Promise((resolve) => {
-    if (global.previewWindow) { Promise.resolve(global.previewWindow); }
+    if (global.summaryWindow) { Promise.resolve(global.summaryWindow); }
 
     // Create the browser window.
-    global.previewWindow = new BrowserWindow(windowParameters);
+    global.summaryWindow = new BrowserWindow(windowParameters);
 
-    global.previewWindow.webContents.on('new-window', (evt) => {
+    global.summaryWindow.webContents.on('new-window', (evt) => {
       // A user may have tried to open a new window (shift|cmd-click); ignore action
       evt.preventDefault();
     });
 
     // For now, any navigation off the SPA is unneeded
-    global.previewWindow.webContents.on('will-navigate', (evt) => {
+    global.summaryWindow.webContents.on('will-navigate', (evt) => {
       evt.preventDefault();
     });
 
-    global.previewWindow.on('close', (e) => {
-      if (!global.quit) {
-        e.preventDefault();
-
-        global.previewWindow.hide();
-
-        return false;
-      }
-
-      return true;
-    });
-
-    global.previewWindow.showIndex = () => {
-      global.previewWindow.loadURL(getAppUrl());
+    global.summaryWindow.showIndex = () => {
+      global.summaryWindow.loadURL(getAppUrl());
     };
 
-    global.previewWindow.webContents.on('did-finish-load', () =>
-      resolve(global.previewWindow),
-    );
+    global.summaryWindow.webContents.on('did-finish-load', () => {
+      global.summaryWindow.webContents.send('SUMMARY_DATA', payload);
+      resolve(global.summaryWindow);
+    });
 
-    global.previewWindow.loadURL(getAppUrl());
+    global.summaryWindow.loadURL(getAppUrl());
   });
 }
 

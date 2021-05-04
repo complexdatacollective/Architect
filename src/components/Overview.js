@@ -1,6 +1,6 @@
 import path from 'path';
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
@@ -18,9 +18,12 @@ const panelVariants = {
 
 const PrintSummaryButton = () => {
   const dispatch = useDispatch();
+  const protocol = useSelector((state) => ({
+    protocol: state.protocol.present,
+  }));
 
   const printSummary = () => {
-    dispatch({ ipc: true, type: 'PRINT_SUMMARY' });
+    dispatch({ ipc: true, type: 'PRINT_SUMMARY', payload: { protocol } });
   };
 
   return (<Button onClick={printSummary} color="neon-coral">Print Summary</Button>);

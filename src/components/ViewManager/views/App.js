@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import cx from 'classnames';
 import { isMacOS } from '@app/utils/platform';
