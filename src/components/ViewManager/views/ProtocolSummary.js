@@ -20,6 +20,7 @@ const print = () => {
 };
 
 const ProtocolSummaryView = () => {
+  const [protocol, setProtocol] = useState();
   // useEffect(() => {
   //   print();
   // }, []);
@@ -41,7 +42,7 @@ const ProtocolSummaryView = () => {
 
   return (
     <div>
-      <ProtocolSummary />
+      <ProtocolSummary protocol={protocol} />
     </div>
   );
 };
