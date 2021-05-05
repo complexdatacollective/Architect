@@ -18,9 +18,7 @@ const panelVariants = {
 
 const PrintSummaryButton = () => {
   const dispatch = useDispatch();
-  const protocol = useSelector((state) => ({
-    protocol: state.protocol.present,
-  }));
+  const protocol = useSelector((state) => state.protocol.present);
 
   const printSummary = () => {
     dispatch({ ipc: true, type: 'PRINT_SUMMARY', payload: { protocol } });
