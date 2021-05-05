@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import SummaryContext from './SummaryContext';
 
-const stageVariables = (codebook, stageId) => codebook
+const stageVariables = (index) => (stageId) => index
   .reduce(
     (memo, variable) => {
       if (!variable.stages.includes(stageId)) { return memo; }
@@ -37,7 +38,7 @@ const Stage = ({
 
         <div>
           <h2>Variables</h2>
-          { stageVariables(index, id) }
+          { stageVariables(index)(id) }
         </div>
       </div>
 
@@ -60,6 +61,15 @@ const Stage = ({
       )}
     </div>
   );
+};
+
+Stage.propTypes = {
+  stageNumber: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  configuration: PropTypes.object.isRequired,
 };
 
 export default Stage;

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { toPairs, get } from 'lodash';
 import SummaryContext from './SummaryContext';
 
@@ -48,6 +49,11 @@ const Variables = ({ variables }) => {
       </table>
     </div>
   );
+};
+
+Variables.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  variables: PropTypes.object.isRequired,
 };
 
 export default Variables;
