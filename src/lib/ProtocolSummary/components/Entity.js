@@ -10,6 +10,7 @@ const Entity = ({
   name,
   variables,
   codebook,
+  index,
 }) => (
   <div>
     {!isEgo && (
@@ -29,7 +30,11 @@ const Entity = ({
     { isEgo && 'EGO' }
     { isEdge && 'EDGE' }
 
-    <Variables variables={variables} codebook={codebook} />
+    <Variables
+      codebook={codebook}
+      variables={variables}
+      index={index}
+    />
   </div>
 );
 

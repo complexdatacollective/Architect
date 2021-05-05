@@ -13,16 +13,14 @@ const Codebook = ({ codebook, index }) => {
         <Entity
           isEgo
           entity={codebook.ego}
-          stages={stages}
-          codebook={codebook}
           index={index}
         />
       )}
       {nodes.map(
-        (node) => (
+        ([id, node]) => (
           <Entity
             isNode
-            stages={stages}
+            id={id}
             color={node.color}
             iconVariant={node.iconVariant}
             name={node.name}
@@ -33,10 +31,10 @@ const Codebook = ({ codebook, index }) => {
         ),
       )}
       {edges.map(
-        (edge) => (
+        ([id, edge]) => (
           <Entity
             isNode
-            stages={stages}
+            id={id}
             color={edge.color}
             iconVariant={edge.iconVariant}
             name={edge.name}

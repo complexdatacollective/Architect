@@ -1,11 +1,30 @@
 import React from 'react';
 import { toPairs, get } from 'lodash';
 
-const Variables = ({ variables, codebook }) => (
+const usedIn = (protocol, index) => (variableId) => {
+  const stages = get(
+    index.find(({ id }) => id === variableId),
+    'stages',
+  );
+
+  return stages;
+};
+
+const Variables = ({
+  variables,
+  index,
+  codebook,
+}) => (
   <div>
-    Variables
+    <h2>Variables</h2>
 
     <table>
+      <thead>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Input Component</th>
+        <th>Usage</th>
+      </thead>
       <tbody>
         {toPairs(variables).map(([variableId, variableConfiguration]) => {
           const {
@@ -14,17 +33,12 @@ const Variables = ({ variables, codebook }) => (
             type,
           } = variableConfiguration;
 
-          const stages = get(
-            codebook.find(({ id }) => id === variableId),
-            'stages',
-          ).join(',');
-
           return (
             <tr>
               <td>{name}</td>
               <td>{type}</td>
               <td>{component}</td>
-              <td>Usage</td>
+              <td>{usedIn(null, index)(variableId)}</td>
             </tr>
           );
         })}
