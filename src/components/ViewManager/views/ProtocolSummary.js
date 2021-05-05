@@ -21,14 +21,14 @@ const print = () => {
 
 const ProtocolSummaryView = () => {
   const [protocol, setProtocol] = useState(null);
-  // useEffect(() => {
-  //   print();
-  // }, []);
+  useEffect(() => {
+    if (!protocol) { return; }
+    print();
+  }, [protocol]);
 
   useEffect(() => {
     ipcRenderer.on('SUMMARY_DATA', (event, data) => {
       setProtocol(data.protocol);
-      console.log('got data');
     });
   }, []);
 
