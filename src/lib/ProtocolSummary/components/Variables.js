@@ -29,10 +29,12 @@ const Variables = ({ variables }) => {
 
       <table>
         <thead>
-          <td>Name</td>
-          <td>Type</td>
-          <td>Input Component</td>
-          <td>Usage</td>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Input Component</th>
+            <th>Usage</th>
+          </tr>
         </thead>
         <tbody>
           {toPairs(variables).map(([variableId, variableConfiguration]) => {
@@ -43,7 +45,7 @@ const Variables = ({ variables }) => {
             } = variableConfiguration;
 
             return (
-              <tr>
+              <tr key={variableId}>
                 <td>{name}</td>
                 <td>{type}</td>
                 <td>{component}</td>

@@ -18,6 +18,7 @@ const Stages = () => {
         ...configuration
       }, i) => (
         <Stage
+          key={id}
           type={type}
           label={label}
           id={id}

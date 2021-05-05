@@ -10,6 +10,8 @@ const ProtocolSummary = ({ protocol }) => {
 
   const index = getCodebookIndex(protocol);
 
+  console.log({ protocol });
+
   return (
     <SummaryContext.Provider value={{ protocol, index }}>
       <div

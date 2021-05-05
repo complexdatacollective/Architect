@@ -23,6 +23,7 @@ const Codebook = () => {
       {nodes.map(
         ([id, node]) => (
           <Entity
+            key={id}
             isNode
             id={id}
             color={node.color}
@@ -35,6 +36,7 @@ const Codebook = () => {
       {edges.map(
         ([id, edge]) => (
           <Entity
+            key={id}
             isEdge
             id={id}
             color={edge.color}

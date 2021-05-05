@@ -54,7 +54,7 @@ const Stage = ({
           <h2>Prompts</h2>
           <ol>
             {configuration.prompts.map((prompt) => (
-              <li>{prompt.text}</li>
+              <li key={prompt.id}>{prompt.text}</li>
             ))}
           </ol>
         </div>
