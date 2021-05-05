@@ -9,8 +9,6 @@ const Entity = ({
   iconVariant,
   name,
   variables,
-  codebook,
-  index,
 }) => (
   <div>
     {!isEgo && (
@@ -30,11 +28,7 @@ const Entity = ({
     { isEgo && 'EGO' }
     { isEdge && 'EDGE' }
 
-    <Variables
-      codebook={codebook}
-      variables={variables}
-      index={index}
-    />
+    <Variables variables={variables} />
   </div>
 );
 

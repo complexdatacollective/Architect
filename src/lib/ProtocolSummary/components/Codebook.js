@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { toPairs } from 'lodash';
+import SummaryContext from './SummaryContext';
 import Entity from './Entity';
 
-const Codebook = ({ codebook, index }) => {
+const Codebook = () => {
+  const {
+    protocol: { codebook },
+  } = useContext(SummaryContext);
+
   const nodes = toPairs(codebook.node);
   const edges = toPairs(codebook.edge);
 
@@ -13,7 +18,6 @@ const Codebook = ({ codebook, index }) => {
         <Entity
           isEgo
           entity={codebook.ego}
-          index={index}
         />
       )}
       {nodes.map(
@@ -25,8 +29,6 @@ const Codebook = ({ codebook, index }) => {
             iconVariant={node.iconVariant}
             name={node.name}
             variables={node.variables}
-            codebook={codebook}
-            index={index}
           />
         ),
       )}
@@ -39,8 +41,6 @@ const Codebook = ({ codebook, index }) => {
             iconVariant={edge.iconVariant}
             name={edge.name}
             variables={edge.variables}
-            codebook={codebook}
-            index={index}
           />
         ),
       )}

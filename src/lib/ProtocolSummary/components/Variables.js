@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { toPairs, get } from 'lodash';
+import SummaryContext from './SummaryContext';
 
 const usedIn = (protocol, index) => (variableId) => {
   const stages = get(
@@ -10,41 +11,43 @@ const usedIn = (protocol, index) => (variableId) => {
   return stages;
 };
 
-const Variables = ({
-  variables,
-  index,
-  codebook,
-}) => (
-  <div>
-    <h2>Variables</h2>
+const Variables = ({ variables }) => {
+  const {
+    index,
+  } = useContext(SummaryContext);
 
-    <table>
-      <thead>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Input Component</th>
-        <th>Usage</th>
-      </thead>
-      <tbody>
-        {toPairs(variables).map(([variableId, variableConfiguration]) => {
-          const {
-            name,
-            component,
-            type,
-          } = variableConfiguration;
+  return (
+    <div>
+      <h2>Variables</h2>
 
-          return (
-            <tr>
-              <td>{name}</td>
-              <td>{type}</td>
-              <td>{component}</td>
-              <td>{usedIn(null, index)(variableId)}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  </div>
-);
+      <table>
+        <thead>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Input Component</th>
+          <th>Usage</th>
+        </thead>
+        <tbody>
+          {toPairs(variables).map(([variableId, variableConfiguration]) => {
+            const {
+              name,
+              component,
+              type,
+            } = variableConfiguration;
+
+            return (
+              <tr>
+                <td>{name}</td>
+                <td>{type}</td>
+                <td>{component}</td>
+                <td>{usedIn(null, index)(variableId)}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
 export default Variables;

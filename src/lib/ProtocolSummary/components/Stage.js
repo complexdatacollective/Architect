@@ -1,11 +1,5 @@
-import React from 'react';
-
-// form: {title: "An example ego form", fields: Array(11)}
-// id: "ego-form-1"
-// interviewScript: "This is a **markdown field** that contains notes for the interviewer that are printed with the codebook, and can be reviewed during the interview.↵↵For now it will only support rich text, but not images or audio."
-// introductionPanel: {title: "Introduction to the ego form", text: "# There are multiple ways to describe **you**.↵"}
-// label: "Ego Form"
-// type: "EgoForm"
+import React, { useContext } from 'react';
+import SummaryContext from './SummaryContext';
 
 const stageVariables = (codebook, stageId) => codebook
   .reduce(
@@ -18,49 +12,54 @@ const stageVariables = (codebook, stageId) => codebook
   .join(', ');
 
 const Stage = ({
-  index,
   stageNumber,
   type,
   label,
   id,
   configuration,
-}) => (
-  <div>
+}) => {
+  const {
+    index,
+  } = useContext(SummaryContext);
+
+  return (
     <div>
-      <h1>
-        {stageNumber}
-        {'. '}
-        {label}
-      </h1>
-
       <div>
-        {type}
+        <h1>
+          {stageNumber}
+          {'. '}
+          {label}
+        </h1>
+
+        <div>
+          {type}
+        </div>
+
+        <div>
+          <h2>Variables</h2>
+          { stageVariables(index, id) }
+        </div>
       </div>
 
-      <div>
-        <h2>Variables</h2>
-        { stageVariables(index, id) }
-      </div>
+      { configuration.interviewScript && (
+        <div>
+          <h2>Script</h2>
+          {configuration.interviewScript}
+        </div>
+      )}
+
+      { configuration.prompts && (
+        <div>
+          <h2>Prompts</h2>
+          <ol>
+            {configuration.prompts.map((prompt) => (
+              <li>{prompt.text}</li>
+            ))}
+          </ol>
+        </div>
+      )}
     </div>
-
-    { configuration.interviewScript && (
-      <div>
-        <h2>Script</h2>
-        {configuration.interviewScript}
-      </div>
-    )}
-
-    { configuration.prompts && (
-      <div>
-        <h2>Prompts</h2>
-        <ol>
-          {configuration.prompts.map((prompt) => (
-            <li>{prompt.text}</li>
-          ))}
-        </ol>
-      </div>
-    )}
-  </div>
-);
+  );
+};
 
 export default Stage;
