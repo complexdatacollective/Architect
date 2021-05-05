@@ -1,11 +1,24 @@
 import React from 'react';
+import { map } from 'lodash';
 import Stage from './Stage';
 
 const Stages = ({ stages, codebook }) => (
   <div>
     Stages
-    {stages && stages.map((stage) => (
-      <Stage stage={stage} codebook={codebook} />
+    {stages && map(stages, ({
+      type,
+      label,
+      id,
+      ...configuration
+    }, index) => (
+      <Stage
+        type={type}
+        label={label}
+        id={id}
+        index={index + 1}
+        configuration={configuration}
+        codebook={codebook}
+      />
     ))}
   </div>
 );
