@@ -1,4 +1,5 @@
 import React from 'react';
+import Variables from './Variables';
 
 const Entity = ({
   isNode,
@@ -10,11 +11,24 @@ const Entity = ({
   variables,
 }) => (
   <div>
-    Entity
+    {!isEgo && (
+      <div>
+        <div>{color}</div>
+        <div>{name}</div>
+      </div>
+    )}
+
+    {isEgo && (
+      <div>
+        Ego
+      </div>
+    )}
 
     { isNode && 'NODE' }
     { isEgo && 'EGO' }
     { isEdge && 'EDGE' }
+
+    <Variables variables={variables} />
   </div>
 );
 

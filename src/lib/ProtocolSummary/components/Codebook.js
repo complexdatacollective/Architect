@@ -9,7 +9,9 @@ const Codebook = ({ stages, codebook }) => {
   return (
     <div>
       <h2>Codebook</h2>
-      <Entity isEgo entity={codebook.ego} stages={stages} />
+      { codebook.ego && (
+        <Entity isEgo entity={codebook.ego} stages={stages} />
+      )}
       {nodes.map(
         (node) => (
           <Entity
@@ -37,3 +39,5 @@ const Codebook = ({ stages, codebook }) => {
     </div>
   );
 };
+
+export default Codebook;
