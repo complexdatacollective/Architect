@@ -2,7 +2,7 @@ import React from 'react';
 import { map } from 'lodash';
 import Stage from './Stage';
 
-const Stages = ({ stages, codebook }) => (
+const Stages = ({ stages, index }) => (
   <div>
     Stages
     {stages && map(stages, ({
@@ -10,14 +10,14 @@ const Stages = ({ stages, codebook }) => (
       label,
       id,
       ...configuration
-    }, index) => (
+    }, i) => (
       <Stage
         type={type}
         label={label}
         id={id}
-        index={index + 1}
+        stageNumber={i + 1}
         configuration={configuration}
-        codebook={codebook}
+        index={index}
       />
     ))}
   </div>

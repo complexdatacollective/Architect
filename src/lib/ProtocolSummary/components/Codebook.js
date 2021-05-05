@@ -2,7 +2,7 @@ import React from 'react';
 import { toPairs } from 'lodash';
 import Entity from './Entity';
 
-const Codebook = ({ codebook }) => {
+const Codebook = ({ codebook, index }) => {
   const nodes = toPairs(codebook.node);
   const edges = toPairs(codebook.edge);
 
@@ -15,6 +15,7 @@ const Codebook = ({ codebook }) => {
           entity={codebook.ego}
           stages={stages}
           codebook={codebook}
+          index={index}
         />
       )}
       {nodes.map(
@@ -27,6 +28,7 @@ const Codebook = ({ codebook }) => {
             name={node.name}
             variables={node.variables}
             codebook={codebook}
+            index={index}
           />
         ),
       )}
@@ -40,6 +42,7 @@ const Codebook = ({ codebook }) => {
             name={edge.name}
             variables={edge.variables}
             codebook={codebook}
+            index={index}
           />
         ),
       )}

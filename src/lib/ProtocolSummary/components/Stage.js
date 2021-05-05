@@ -19,16 +19,16 @@ const stageVariables = (codebook, stageId) => codebook
 
 const Stage = ({
   index,
+  stageNumber,
   type,
   label,
   id,
   configuration,
-  codebook,
 }) => (
   <div>
     <div>
       <h1>
-        {index}
+        {stageNumber}
         {'. '}
         {label}
       </h1>
@@ -39,7 +39,7 @@ const Stage = ({
 
       <div>
         <h2>Variables</h2>
-        { stageVariables(codebook, id) }
+        { stageVariables(index, id) }
       </div>
     </div>
 
