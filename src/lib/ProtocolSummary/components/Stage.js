@@ -7,6 +7,16 @@ import React from 'react';
 // label: "Ego Form"
 // type: "EgoForm"
 
+const stageVariables = (codebook, stageId) => codebook
+  .reduce(
+    (memo, variable) => {
+      if (!variable.stages.includes(stageId)) { return memo; }
+      return [...memo, variable.name];
+    },
+    [],
+  )
+  .join(', ');
+
 const Stage = ({
   index,
   type,
@@ -29,6 +39,7 @@ const Stage = ({
 
       <div>
         <h2>Variables</h2>
+        { stageVariables(codebook, id) }
       </div>
     </div>
 
