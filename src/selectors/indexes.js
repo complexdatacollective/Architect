@@ -18,7 +18,7 @@ const mapAssetItems = ({ type, content }, path) => {
  *
  * This is generally used to find which entities are used where.
  */
-const paths = {
+export const paths = {
   edges: [
     'stages[].prompts[].edges.create',
     'stages[].prompts[].edges.display[]',
@@ -123,6 +123,7 @@ const buildSearch = (include = [], exclude = []) => {
 const utils = {
   buildSearch,
   collectPath,
+  collectPaths,
 };
 
 export {
