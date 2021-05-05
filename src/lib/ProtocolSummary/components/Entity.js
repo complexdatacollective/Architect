@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import Variables from './Variables';
 
 const Entity = ({
-  isNode,
-  isEgo,
-  isEdge,
   color,
   iconVariant,
+  isEdge,
+  isEgo,
+  isNode,
   name,
   variables,
 }) => (
@@ -30,27 +30,28 @@ const Entity = ({
       </div>
     )}
 
-    {iconVariant}
-
     <Variables variables={variables} />
   </div>
 );
 
 Entity.propTypes = {
-  isNode: PropTypes.bool,
-  isEgo: PropTypes.bool,
+  color: PropTypes.string,
+  iconVariant: PropTypes.string,
   isEdge: PropTypes.bool,
-  color: PropTypes.string.isRequired,
-  iconVariant: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  isEgo: PropTypes.bool,
+  isNode: PropTypes.bool,
+  name: PropTypes.string,
   // eslint-disable-next-line react/forbid-prop-types
   variables: PropTypes.object.isRequired,
 };
 
 Entity.defaultProps = {
-  isNode: false,
+  color: null,
+  iconVariant: null,
   isEdge: false,
   isEgo: false,
+  isNode: false,
+  name: null,
 };
 
 export default Entity;

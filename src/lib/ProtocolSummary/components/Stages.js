@@ -30,9 +30,4 @@ const Stages = () => {
   );
 };
 
-Stages.defaultProps = {
-  stages: [],
-  codebook: {},
-};
-
 export default Stages;

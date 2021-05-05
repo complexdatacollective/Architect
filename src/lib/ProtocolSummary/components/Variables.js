@@ -12,6 +12,7 @@ const usedIn = (protocol, index) => (variableId) => {
   const stages = get(
     index.find(({ id }) => id === variableId),
     'stages',
+    [],
   );
 
   return stages.map((stageId) => getStageName(protocol)(stageId));

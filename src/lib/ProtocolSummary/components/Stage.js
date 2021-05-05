@@ -13,11 +13,11 @@ const stageVariables = (index) => (stageId) => index
   .join(', ');
 
 const Stage = ({
+  configuration,
+  id,
+  label,
   stageNumber,
   type,
-  label,
-  id,
-  configuration,
 }) => {
   const {
     index,
@@ -64,12 +64,12 @@ const Stage = ({
 };
 
 Stage.propTypes = {
-  stageNumber: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   configuration: PropTypes.object.isRequired,
+  label: PropTypes.string.isRequired,
+  stageNumber: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default Stage;

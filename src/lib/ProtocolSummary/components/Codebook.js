@@ -17,7 +17,7 @@ const Codebook = () => {
       { codebook.ego && (
         <Entity
           isEgo
-          entity={codebook.ego}
+          variables={codebook.ego.variables}
         />
       )}
       {nodes.map(
