@@ -35,7 +35,7 @@ const Codebook = () => {
       {edges.map(
         ([id, edge]) => (
           <Entity
-            isNode
+            isEdge
             id={id}
             color={edge.color}
             iconVariant={edge.iconVariant}
