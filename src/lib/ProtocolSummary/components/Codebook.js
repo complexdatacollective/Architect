@@ -2,7 +2,7 @@ import React from 'react';
 import { toPairs } from 'lodash';
 import Entity from './Entity';
 
-const Codebook = ({ stages, codebook }) => {
+const Codebook = ({ codebook }) => {
   const nodes = toPairs(codebook.node);
   const edges = toPairs(codebook.edge);
 
@@ -10,7 +10,12 @@ const Codebook = ({ stages, codebook }) => {
     <div>
       <h2>Codebook</h2>
       { codebook.ego && (
-        <Entity isEgo entity={codebook.ego} stages={stages} />
+        <Entity
+          isEgo
+          entity={codebook.ego}
+          stages={stages}
+          codebook={codebook}
+        />
       )}
       {nodes.map(
         (node) => (
@@ -21,6 +26,7 @@ const Codebook = ({ stages, codebook }) => {
             iconVariant={node.iconVariant}
             name={node.name}
             variables={node.variables}
+            codebook={codebook}
           />
         ),
       )}
@@ -33,6 +39,7 @@ const Codebook = ({ stages, codebook }) => {
             iconVariant={edge.iconVariant}
             name={edge.name}
             variables={edge.variables}
+            codebook={codebook}
           />
         ),
       )}

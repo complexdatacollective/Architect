@@ -10,17 +10,18 @@ const ProtocolSummary = ({ protocol }) => {
 
   const {
     stages = [],
+    codebook = [],
   } = protocol;
 
-  const codebook = getCodebookIndex(protocol);
+  const codebookIndex = getCodebookIndex(protocol);
 
   return (
     <div style={{ position: 'absolute', zIndex: 1000000, top: 0, left: 0, height: 2000, width: '100%', background: '#ffffff' }}>
       <h1>Protocol Summary</h1>
 
-      <Stages stages={stages} codebook={codebook} />
+      <Stages stages={stages} codebook={codebookIndex} />
 
-      <Codebook codebook={codebook} />
+      <Codebook codebook={codebook} index={codebookIndex} />
 
     </div>
   );
