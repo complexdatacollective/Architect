@@ -29,9 +29,18 @@ body {
 }
 
 .print {
+  overflow: visible;
+  height: auto;
+  width: auto;
+
   #root {
-    overflow: auto;
-    height: 100%;
+    overflow: visible;
+    height: auto;
+    width: auto;
+  }
+
+  #preload {
+    display: none;
   }
 }
 

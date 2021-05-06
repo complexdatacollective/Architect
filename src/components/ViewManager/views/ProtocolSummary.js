@@ -21,16 +21,6 @@ const print = () => {
 
 const ProtocolSummaryView = () => {
   const [protocol, setProtocol] = useState(null);
-  useEffect(() => {
-    if (!protocol) { return; }
-    print();
-  }, [protocol]);
-
-  useEffect(() => {
-    ipcRenderer.on('SUMMARY_DATA', (event, data) => {
-      setProtocol(data.protocol);
-    });
-  }, []);
 
   useEffect(() => {
     document.body.classList.add('print');
@@ -40,8 +30,15 @@ const ProtocolSummaryView = () => {
     };
   });
 
+  useEffect(() => {
+    ipcRenderer.once('SUMMARY_DATA', (event, data) => {
+      setProtocol(data.protocol);
+    });
+  }, []);
+
   return (
     <div>
+      <button type="button" onClick={() => print()}>Print</button>
       <ProtocolSummary protocol={protocol} />
     </div>
   );
