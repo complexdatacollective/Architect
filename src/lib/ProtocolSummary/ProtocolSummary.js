@@ -12,12 +12,20 @@ const ProtocolSummary = ({ protocol }) => {
 
   return (
     <SummaryContext.Provider value={{ protocol, index }}>
-      <div className="printable-summary">
-        <h1>Protocol Summary</h1>
+      <div className="protocol-summary">
 
-        <Stages />
+        <div className="protocol-summary__heading">
+          <h1>Protocol Summary</h1>
+          <h2>{protocol.description}</h2>
+        </div>
 
-        <Codebook />
+        <div className="protocol-summary__stages">
+          <Stages />
+        </div>
+
+        <div className="protocol-summary__codebook">
+          <Codebook />
+        </div>
 
       </div>
     </SummaryContext.Provider>

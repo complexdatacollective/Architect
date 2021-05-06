@@ -1,0 +1,17 @@
+.protocol-summary {
+  padding: 2rem;
+
+  &__heading,
+  &__stages,
+  &__codebook {
+    margin-top: 4rem;
+    page-break-before: always;
+  }
+
+  &__heading {
+    padding: 2rem;
+    background: silver;
+    color: white;
+    margin-top: 0;
+  }
+}

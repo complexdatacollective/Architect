@@ -1,0 +1,40 @@
+.protocol-summary-stage {
+  margin-top: 8rem;
+
+  &__heading {
+    background: pink;
+    padding: 1rem 2rem;
+  }
+
+  &__meta {
+    th,
+    td {
+      padding: 0.5rem 0;
+    }
+
+    th {
+      vertical-align: top;
+      padding-right: 1rem;
+    }
+  }
+
+  &__script,
+  &__prompts {
+    margin: 2rem;
+  }
+
+  &__prompts {
+    li {
+      margin: 1rem 0 0;
+    }
+  }
+
+  &__script {
+    &-content {
+      background: silver;
+      padding: 0.5rem;
+      margin: 1rem -0.5rem 0;
+      min-height: 10rem;
+    }
+  }
+}

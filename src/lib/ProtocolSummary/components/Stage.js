@@ -2,15 +2,14 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import SummaryContext from './SummaryContext';
 
-const stageVariables = (index) => (stageId) => index
+const variablesOnStage = (index) => (stageId) => index
   .reduce(
     (memo, variable) => {
       if (!variable.stages.includes(stageId)) { return memo; }
       return [...memo, variable.name];
     },
     [],
-  )
-  .join(', ');
+  );
 
 const Stage = ({
   configuration,
@@ -23,42 +22,62 @@ const Stage = ({
     index,
   } = useContext(SummaryContext);
 
+  const stageVariables = variablesOnStage(index)(id);
+
   return (
-    <div>
-      <div>
+    <div className="protocol-summary-stage">
+      <div className="protocol-summary-stage__heading">
         <h1>
           {stageNumber}
           {'. '}
           {label}
         </h1>
 
-        <div>
-          {type}
-        </div>
-
-        <div>
-          <h2>Variables</h2>
-          { stageVariables(index)(id) }
-        </div>
+        <table className="protocol-summary-stage__meta">
+          <tr>
+            <th>Type</th>
+            <td>{type}</td>
+          </tr>
+          <tr>
+            <th>Subject</th>
+            <td></td>
+          </tr>
+          {stageVariables.length > 0 && (
+            <tr>
+              <th>Variables</th>
+              <td>
+                { stageVariables.map((variable) => (
+                  <>
+                    {variable}
+                    <br />
+                  </>
+                )) }
+              </td>
+            </tr>
+          )}
+        </table>
       </div>
 
-      { configuration.interviewScript && (
-        <div>
-          <h2>Script</h2>
-          {configuration.interviewScript}
-        </div>
-      )}
+      <div className="protocol-summary-stage__content">
 
-      { configuration.prompts && (
-        <div>
-          <h2>Prompts</h2>
-          <ol>
-            {configuration.prompts.map((prompt) => (
-              <li key={prompt.id}>{prompt.text}</li>
-            ))}
-          </ol>
+        { configuration.prompts && (
+          <div className="protocol-summary-stage__prompts">
+            <h2>Prompts</h2>
+            <ol>
+              {configuration.prompts.map((prompt) => (
+                <li key={prompt.id}>{prompt.text}</li>
+              ))}
+            </ol>
+          </div>
+        )}
+
+        <div className="protocol-summary-stage__script">
+          <h2>Script</h2>
+          <div className="protocol-summary-stage__script-content">
+            {configuration.interviewScript}
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };
