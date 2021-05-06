@@ -19,9 +19,9 @@ const ProtocolSummary = ({ protocol }) => {
           <h2>{protocol.description}</h2>
         </div>
 
-        <div className="protocol-summary__stages">
+        {/* <div className="protocol-summary__stages">
           <Stages />
-        </div>
+        </div> */}
 
         <div className="protocol-summary__codebook">
           <Codebook />

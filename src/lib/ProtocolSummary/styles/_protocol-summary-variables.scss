@@ -1,0 +1,15 @@
+.protocol-summary-variables {
+  &__data {
+    width: 100%;
+
+    th,
+    td {
+      padding: 0.5rem 0;
+      vertical-align: top;
+    }
+
+    th {
+      padding-right: 1rem;
+    }
+  }
+}

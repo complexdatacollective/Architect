@@ -25,10 +25,10 @@ const Variables = ({ variables }) => {
   } = useContext(SummaryContext);
 
   return (
-    <div>
+    <div className="protocol-summary-variables">
       <h2>Variables</h2>
 
-      <table>
+      <table className="protocol-summary-variables__data">
         <thead>
           <tr>
             <th>Name</th>
@@ -50,7 +50,14 @@ const Variables = ({ variables }) => {
                 <td>{name}</td>
                 <td>{type}</td>
                 <td>{component}</td>
-                <td>{usedIn(protocol, index)(variableId).join(', ')}</td>
+                <td>
+                  {usedIn(protocol, index)(variableId).map((stageName) => (
+                    <>
+                      {stageName}
+                      <br />
+                    </>
+                  ))}
+                </td>
               </tr>
             );
           })}

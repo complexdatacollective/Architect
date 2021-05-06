@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import EntityIcon from '@components/Codebook/EntityIcon';
 import Variables from './Variables';
 
 const Entity = ({
@@ -11,26 +12,27 @@ const Entity = ({
   name,
   variables,
 }) => (
-  <div>
+  <div className="protocol-summary-entity">
     {!isEgo && (
-      <div>
+      <div className="protocol-summary-entity__meta">
         <div>
-          {isEdge}
-          {isNode}
-          {iconVariant}
-          {color}
+          <EntityIcon color={color} entity={(isEdge ? 'edge' : 'node')} />
         </div>
-        <div>{name}</div>
+        <div><h1>{name}</h1></div>
       </div>
     )}
 
     {isEgo && (
-      <div>
-        Ego
+      <div className="protocol-summary-entity__meta">
+        <h1>
+          Ego
+        </h1>
       </div>
     )}
 
-    <Variables variables={variables} />
+    <div className="protocol-summary-entity__variables">
+      <Variables variables={variables} />
+    </div>
   </div>
 );
 
