@@ -13,7 +13,6 @@ const Codebook = () => {
 
   return (
     <div>
-      <h2>Codebook</h2>
       { codebook.ego && (
         <Entity
           isEgo

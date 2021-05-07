@@ -8,7 +8,7 @@ import ProtocolSummary from '@app/lib/ProtocolSummary/ProtocolSummary';
 const print = () => {
   const win = remote.BrowserWindow.getFocusedWindow();
 
-  win.webContents.printToPDF({}).then((data) => {
+  win.webContents.printToPDF({ printBackground: true }).then((data) => {
     const pdfPath = path.join(os.homedir(), 'Desktop', 'temp.pdf');
     fse.writeFile(pdfPath, data, (error) => {
       if (error) { throw error; }
@@ -23,10 +23,10 @@ const ProtocolSummaryView = () => {
   const [protocol, setProtocol] = useState(null);
 
   useEffect(() => {
-    document.body.classList.add('print');
+    document.documentElement.classList.add('print');
 
     return () => {
-      document.body.classList.remove('print');
+      document.documentElement.classList.remove('print');
     };
   });
 

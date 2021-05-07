@@ -10,7 +10,6 @@ const Stages = () => {
 
   return (
     <div>
-      Stages
       {stages && map(stages, ({
         type,
         label,
