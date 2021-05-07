@@ -12,7 +12,7 @@ const Contents = () => {
   const edges = toPairs(codebook.edge);
 
   return (
-    <div>
+    <div className="protocol-summary-contents">
       <h1>Contents</h1>
       <h2>Stages</h2>
       <ol>

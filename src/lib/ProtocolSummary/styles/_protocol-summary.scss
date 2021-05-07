@@ -41,6 +41,11 @@
       display: none;
     }
   }
+
+  @media print {
+    font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-size: 10pt;
+  }
 }
 
 .protocol-summary-controls {
