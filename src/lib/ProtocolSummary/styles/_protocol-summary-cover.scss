@@ -1,3 +1,15 @@
 .protocol-summary-cover {
   margin-bottom: 8rem;
+
+  &__brand {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    img {
+      width: 5rem;
+      height: 5rem;
+    }
+  }
 }

@@ -31,15 +31,15 @@ const print = () => {
   });
 };
 
-const ProtocolSummary = ({ protocol }) => {
-  if (!protocol) { return null; }
+const ProtocolSummary = ({ data }) => {
+  if (!data) { return null; }
+
+  const { protocol, filePath } = data;
 
   const index = getCodebookIndex(protocol);
 
-  console.log({ protocol });
-
   return (
-    <SummaryContext.Provider value={{ protocol, index }}>
+    <SummaryContext.Provider value={{ protocol, filePath, index }}>
       <div className="protocol-summary-controls">
         <Button onClick={print}>Print</Button>
       </div>
@@ -67,11 +67,11 @@ const ProtocolSummary = ({ protocol }) => {
 
 ProtocolSummary.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  protocol: PropTypes.object,
+  data: PropTypes.object,
 };
 
 ProtocolSummary.defaultProps = {
-  protocol: {},
+  data: {},
 };
 
 export default ProtocolSummary;

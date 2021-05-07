@@ -3,7 +3,7 @@ import { ipcRenderer } from 'electron';
 import ProtocolSummary from '@app/lib/ProtocolSummary/ProtocolSummary';
 
 const ProtocolSummaryView = () => {
-  const [protocol, setProtocol] = useState(null);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     document.documentElement.classList.add('print');
@@ -14,14 +14,14 @@ const ProtocolSummaryView = () => {
   });
 
   useEffect(() => {
-    ipcRenderer.once('SUMMARY_DATA', (event, data) => {
-      setProtocol(data.protocol);
+    ipcRenderer.once('SUMMARY_DATA', (event, _data) => {
+      setData(_data);
     });
   }, []);
 
   return (
     <div>
-      <ProtocolSummary protocol={protocol} />
+      <ProtocolSummary data={data} />
     </div>
   );
 };

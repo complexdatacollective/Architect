@@ -18,10 +18,13 @@ const panelVariants = {
 
 const PrintSummaryButton = () => {
   const dispatch = useDispatch();
-  const protocol = useSelector((state) => state.protocol.present);
+  const payload = useSelector((state) => ({
+    filePath: state.session.filePath,
+    protocol: state.protocol.present,
+  }));
 
   const printSummary = () => {
-    dispatch({ ipc: true, type: 'PRINT_SUMMARY', payload: { protocol } });
+    dispatch({ ipc: true, type: 'PRINT_SUMMARY', payload });
   };
 
   return (<Button onClick={printSummary} color="neon-coral">Print Summary</Button>);
