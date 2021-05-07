@@ -5,6 +5,8 @@ import path from 'path';
 import fse from 'fs-extra';
 import os from 'os';
 import Button from '@codaco/ui/lib/components/Button';
+import Cover from './components/Cover';
+import Contents from './components/Contents';
 import Codebook from './components/Codebook';
 import Stages from './components/Stages';
 import SummaryContext from './components/SummaryContext';
@@ -18,7 +20,7 @@ const print = () => {
     printBackground: true,
   };
 
-  win.webContents.print(options).then((data) => {
+  win.webContents.printToPDF(options).then((data) => {
     const pdfPath = path.join(os.homedir(), 'Desktop', 'temp.pdf');
     fse.writeFile(pdfPath, data, (error) => {
       if (error) { throw error; }
@@ -42,9 +44,12 @@ const ProtocolSummary = ({ protocol }) => {
         <Button onClick={print}>Print</Button>
       </div>
       <div className="protocol-summary">
-        <div className="protocol-summary__heading">
-          <h1>Protocol Summary</h1>
-          <h2>{protocol.description}</h2>
+        <div className="protocol-summary__cover">
+          <Cover />
+        </div>
+
+        <div className="protocol-summary__contents">
+          <Contents />
         </div>
 
         <div className="protocol-summary__stages">

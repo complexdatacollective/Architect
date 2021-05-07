@@ -26,7 +26,7 @@ const Stage = ({
   const stageVariables = variablesOnStage(index)(id);
 
   return (
-    <div className="protocol-summary-stage">
+    <div className="protocol-summary-stage" id={`stage-${id}`}>
       <div className="protocol-summary-stage__heading">
         <h1>
           {stageNumber}

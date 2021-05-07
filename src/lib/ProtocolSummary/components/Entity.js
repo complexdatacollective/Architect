@@ -4,15 +4,18 @@ import EntityIcon from '@components/Codebook/EntityIcon';
 import Variables from './Variables';
 
 const Entity = ({
+  id,
   color,
-  iconVariant,
   isEdge,
   isEgo,
   isNode,
   name,
   variables,
 }) => (
-  <div className="protocol-summary-entity">
+  <div
+    className="protocol-summary-entity"
+    id={isEgo ? 'ego' : `entity-${id}`}
+  >
     {!isEgo && (
       <div className="protocol-summary-entity__meta">
         <div className="protocol-summary-entity__meta-icon">
@@ -41,8 +44,8 @@ const Entity = ({
 );
 
 Entity.propTypes = {
+  id: PropTypes.string,
   color: PropTypes.string,
-  iconVariant: PropTypes.string,
   isEdge: PropTypes.bool,
   isEgo: PropTypes.bool,
   isNode: PropTypes.bool,
@@ -52,8 +55,8 @@ Entity.propTypes = {
 };
 
 Entity.defaultProps = {
+  id: null,
   color: null,
-  iconVariant: null,
   isEdge: false,
   isEgo: false,
   isNode: false,

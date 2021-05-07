@@ -3,8 +3,6 @@
   background: white;
   color: var(--color-rich-black);
 
-
-
   h1,
   h2,
   h3,
@@ -13,7 +11,8 @@
     color: var(--color-cyber-grape);
   }
 
-  &__heading,
+  &__cover,
+  &__contents,
   &__stages,
   &__codebook {
     margin-bottom: 8rem;
@@ -28,6 +27,18 @@
     h1,
     h2 {
       color: white;
+    }
+  }
+
+  [data-print=no] {
+    @media print {
+      display: none;
+    }
+  }
+
+  [data-print=only] {
+    @media screen {
+      display: none;
     }
   }
 }
