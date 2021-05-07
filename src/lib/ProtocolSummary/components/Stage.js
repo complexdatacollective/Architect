@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import Markdown from 'react-markdown';
 import SummaryContext from './SummaryContext';
 
 const variablesOnStage = (index) => (stageId) => index
@@ -65,7 +66,7 @@ const Stage = ({
             <h2>Prompts</h2>
             <ol>
               {configuration.prompts.map((prompt) => (
-                <li key={prompt.id}>{prompt.text}</li>
+                <li key={prompt.id}><Markdown source={prompt.text} /></li>
               ))}
             </ol>
           </div>
