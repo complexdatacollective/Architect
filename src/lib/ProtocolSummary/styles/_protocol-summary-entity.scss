@@ -1,0 +1,32 @@
+.protocol-summary-entity {
+  margin-bottom: 8rem;
+  page-break-before: always;
+
+  &__meta {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    &-icon {
+      margin-right: 2rem;
+
+      .node {
+        width: 5rem;
+        height: 5rem;
+      }
+
+      .icon[name='links'] {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+
+    &-name {
+    }
+  }
+
+  &__variables {
+    margin-top: 2rem;
+  }
+}

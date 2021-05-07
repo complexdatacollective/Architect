@@ -15,18 +15,22 @@ const Entity = ({
   <div className="protocol-summary-entity">
     {!isEgo && (
       <div className="protocol-summary-entity__meta">
-        <div>
+        <div className="protocol-summary-entity__meta-icon">
           <EntityIcon color={color} entity={(isEdge ? 'edge' : 'node')} />
         </div>
-        <div><h1>{name}</h1></div>
+        <div className="protocol-summary-entity__meta-name">
+          <h1>{name}</h1>
+        </div>
       </div>
     )}
 
     {isEgo && (
       <div className="protocol-summary-entity__meta">
-        <h1>
-          Ego
-        </h1>
+        <div className="protocol-summary-entity__meta-name">
+          <h1>
+            Ego
+          </h1>
+        </div>
       </div>
     )}
 

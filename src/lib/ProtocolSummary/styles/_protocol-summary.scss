@@ -1,17 +1,46 @@
 .protocol-summary {
   padding: 2rem;
+  background: white;
+  color: var(--color-rich-black);
+
+
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    color: var(--color-cyber-grape);
+  }
 
   &__heading,
   &__stages,
   &__codebook {
-    margin-top: 4rem;
+    margin-bottom: 8rem;
     page-break-before: always;
   }
 
   &__heading {
     padding: 2rem;
-    background: silver;
-    color: white;
-    margin-top: 0;
+    background: var(--color-slate-blue--dark);
+    border-radius: 1rem;
+
+    h1,
+    h2 {
+      color: white;
+    }
+  }
+}
+
+.protocol-summary-controls {
+  background: var(--color-cyber-grape);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000000;
+  text-align: right;
+
+  @media print {
+    display: none;
   }
 }

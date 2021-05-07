@@ -4,12 +4,25 @@
 
     th,
     td {
-      padding: 0.5rem 0;
+      padding: 1rem;
       vertical-align: top;
+      // padding: 1rem 0;
+    }
+
+    td {
+      border-top: var(--color-charcoal) 1px solid;
     }
 
     th {
       padding-right: 1rem;
+      // background: var(--color-sea-green);
+      background: var(--color-platinum);
     }
+
+    // tr {
+    //   &:nth-child(2n) {
+    //     background: var(--color-platinum);
+    //   }
+    // }
   }
 }
