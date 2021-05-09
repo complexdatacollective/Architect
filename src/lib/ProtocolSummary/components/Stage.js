@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
+import { get } from 'lodash';
+import DualLink from './DualLink';
 import SummaryContext from './SummaryContext';
 
 const variablesOnStage = (index) => (stageId) => index
@@ -12,6 +14,11 @@ const variablesOnStage = (index) => (stageId) => index
     [],
   );
 
+const getEntityName = (codebook, subject) => get(
+  codebook,
+  [subject.entity, subject.type, 'name'],
+);
+
 const Stage = ({
   configuration,
   id,
@@ -21,6 +28,7 @@ const Stage = ({
 }) => {
   const {
     index,
+    protocol,
   } = useContext(SummaryContext);
 
   const stageVariables = variablesOnStage(index)(id);
@@ -39,10 +47,18 @@ const Stage = ({
             <th>Type</th>
             <td>{type}</td>
           </tr>
-          <tr>
-            <th>Subject</th>
-            <td></td>
-          </tr>
+          { configuration.subject && (
+            <tr>
+              <th>Subject</th>
+              <td>
+                <DualLink to={`#entity-${configuration.subject.type}`}>
+                  {getEntityName(protocol.codebook, configuration.subject)}
+                  {' '}
+                  {configuration.subject.entity}
+                </DualLink>
+              </td>
+            </tr>
+          )}
           {stageVariables.length > 0 && (
             <tr>
               <th>Variables</th>

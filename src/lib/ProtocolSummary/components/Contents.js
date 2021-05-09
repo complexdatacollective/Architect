@@ -14,48 +14,52 @@ const Contents = () => {
   return (
     <div className="protocol-summary-contents">
       <h1>Contents</h1>
+      <div className="protocol-summary-contents__section">
       <h2>Stages</h2>
-      <ol>
-        {stages && map(stages, ({
-          label,
-          id,
-        }) => (
-          <li>
-            <HashLink smooth to={`#stage-${id}`} data-print="no">{label}</HashLink>
-            <a href={`#stage-${id}`} data-print="only">{label}</a>
-          </li>
-        ))}
-      </ol>
-      <h2>Entities</h2>
-      {codebook.ego && (
-        <div>
-          <h3>Ego</h3>
-          <ul>
+        <ol>
+          {stages && map(stages, ({
+            label,
+            id,
+          }) => (
             <li>
-              <HashLink smooth to="#ego" data-print="no">ego</HashLink>
-              <a href="#ego" data-print="only">ego</a>
+              <HashLink smooth to={`#stage-${id}`} data-print="no">{label}</HashLink>
+              <a href={`#stage-${id}`} data-print="only">{label}</a>
             </li>
-          </ul>
-        </div>
-      )}
-      <h3>Nodes</h3>
-      <ul>
-        {nodes.map(([id, node]) => (
-          <li>
-            <HashLink smooth to={`#entity-${id}`} data-print="no">{node.name}</HashLink>
-            <a href={`#entity-${id}`} data-print="only">{node.name}</a>
-          </li>
-        ))}
-      </ul>
-      <h3>Edges</h3>
-      <ul>
-        {edges.map(([id, edge]) => (
-          <li>
-            <HashLink smooth to={`#entity-${id}`} data-print="no">{edge.name}</HashLink>
-            <a href={`#entity-${id}`} data-print="only">{edge.name}</a>
-          </li>
-        ))}
-      </ul>
+          ))}
+        </ol>
+      </div>
+      <div className="protocol-summary-contents__section">
+        <h2>Codebook</h2>
+        {codebook.ego && (
+          <div>
+            <h3>Ego</h3>
+            <ul>
+              <li>
+                <HashLink smooth to="#ego" data-print="no">ego</HashLink>
+                <a href="#ego" data-print="only">ego</a>
+              </li>
+            </ul>
+          </div>
+        )}
+        <h3>Nodes</h3>
+        <ul>
+          {nodes.map(([id, node]) => (
+            <li>
+              <HashLink smooth to={`#entity-${id}`} data-print="no">{node.name}</HashLink>
+              <a href={`#entity-${id}`} data-print="only">{node.name}</a>
+            </li>
+          ))}
+        </ul>
+        <h3>Edges</h3>
+        <ul>
+          {edges.map(([id, edge]) => (
+            <li>
+              <HashLink smooth to={`#entity-${id}`} data-print="no">{edge.name}</HashLink>
+              <a href={`#entity-${id}`} data-print="only">{edge.name}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
