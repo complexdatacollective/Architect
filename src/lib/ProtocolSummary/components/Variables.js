@@ -2,20 +2,24 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { toPairs, get, find } from 'lodash';
 import SummaryContext from './SummaryContext';
+import DualLink from './DualLink';
 
 const getStageName = (protocol) => (stageId) => {
   const stageConfiguration = find(protocol.stages, ['id', stageId]);
   return get(stageConfiguration, 'label');
 };
 
-const usedIn = (protocol, index) => (variableId) => {
+const makeGetUsedIn = (protocol, index) => (variableId) => {
   const stages = get(
     index.find(({ id }) => id === variableId),
     'stages',
     [],
   );
 
-  return stages.map((stageId) => getStageName(protocol)(stageId));
+  return stages.map((stageId) => ([
+    stageId,
+    getStageName(protocol)(stageId),
+  ]));
 };
 
 const Variables = ({ variables }) => {
@@ -23,6 +27,8 @@ const Variables = ({ variables }) => {
     protocol,
     index,
   } = useContext(SummaryContext);
+
+  const getUsedIn = makeGetUsedIn(protocol, index);
 
   return (
     <div className="protocol-summary-variables">
@@ -51,9 +57,9 @@ const Variables = ({ variables }) => {
                 <td>{type}</td>
                 <td>{component}</td>
                 <td>
-                  {usedIn(protocol, index)(variableId).map((stageName) => (
+                  {getUsedIn(variableId).map(([stageId, stageName]) => (
                     <>
-                      {stageName}
+                      <DualLink to={`#stage-${stageId}`}>{stageName}</DualLink>
                       <br />
                     </>
                   ))}
