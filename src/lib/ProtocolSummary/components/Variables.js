@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { toPairs, get, find } from 'lodash';
+import Markdown from 'react-markdown';
+import { ALLOWED_MARKDOWN_LABEL_TAGS } from '@codaco/ui/src/utils/config';
 import SummaryContext from './SummaryContext';
 import DualLink from './DualLink';
 
@@ -40,6 +42,7 @@ const Variables = ({ variables }) => {
             <th>Name</th>
             <th>Type</th>
             <th>Input Component</th>
+            <th>Values</th>
             <th>Usage</th>
           </tr>
         </thead>
@@ -49,6 +52,7 @@ const Variables = ({ variables }) => {
               name,
               component,
               type,
+              options,
             } = variableConfiguration;
 
             return (
@@ -56,6 +60,25 @@ const Variables = ({ variables }) => {
                 <td>{name}</td>
                 <td>{type}</td>
                 <td>{component}</td>
+                <td>
+                  {options && (
+                    <table className="protocol-summary-variables__options">
+                      {options.map((option) => (
+                        <tr key={option.value}>
+                          <td>
+                            <strong>{option.value}</strong>
+                          </td>
+                          <td>
+                            <Markdown
+                              source={option.label}
+                              allowedTypes={ALLOWED_MARKDOWN_LABEL_TAGS}
+                            />
+                          </td>
+                        </tr>
+                      ))}
+                    </table>
+                  )}
+                </td>
                 <td>
                   {getUsedIn(variableId).map(([stageId, stageName]) => (
                     <>
