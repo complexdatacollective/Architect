@@ -23,6 +23,12 @@ const MenuTemplate = (options) => {
       enabled: options.isProtocolValid,
       click: options.saveCopy,
     });
+    fileMenu.submenu.push({
+      label: 'Print protocol summary',
+      accelerator: process.platform === 'darwin' ? 'cmd+shift+p' : 'ctrl+shift+p',
+      enabled: options.isProtocolValid,
+      click: options.printSummary,
+    });
   }
 
   const menu = [

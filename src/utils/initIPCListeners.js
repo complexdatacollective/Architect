@@ -20,6 +20,14 @@ const initIPCListeners = () => {
     store.dispatch(userActions.saveNetcanvas());
   });
 
+  ipcRenderer.on('PRINT_SUMMARY', () => {
+    const payload = ((state) => ({
+      filePath: state.session.filePath,
+      protocol: state.protocol.present,
+    }))(store.getState());
+    store.dispatch({ ipc: true, type: 'PRINT_SUMMARY_DATA', payload });
+  });
+
   ipcRenderer.on('CONFIRM_CLOSE', () => {
     const state = store.getState();
     const hasUnsavedChanges = getHasUnsavedChanges(state);

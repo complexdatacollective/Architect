@@ -1,6 +1,6 @@
 import path from 'path';
 import React from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
@@ -14,20 +14,6 @@ import { actionCreators as uiActions } from '@modules/ui';
 const panelVariants = {
   hide: { opacity: 0, y: -200 },
   show: { opacity: 1, y: 0, transition: { type: 'spring', damping: 20, when: 'beforeChildren' } },
-};
-
-const PrintSummaryButton = () => {
-  const dispatch = useDispatch();
-  const payload = useSelector((state) => ({
-    filePath: state.session.filePath,
-    protocol: state.protocol.present,
-  }));
-
-  const printSummary = () => {
-    dispatch({ ipc: true, type: 'PRINT_SUMMARY', payload });
-  };
-
-  return (<Button onClick={printSummary} color="neon-coral">Print Summary</Button>);
 };
 
 const Overview = ({
@@ -59,7 +45,6 @@ const Overview = ({
     </div>
     <div className="overview__footer">
       <Icon name="protocol-card" />
-      <PrintSummaryButton />
       <Button onClick={() => openScreen('assets')} color="neon-coral">Resource Library</Button>
       <Button onClick={() => openScreen('codebook')} color="sea-serpent">Manage Codebook</Button>
     </div>

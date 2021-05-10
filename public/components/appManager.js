@@ -82,6 +82,10 @@ class AppManager {
     AppManager.send('SAVE');
   }
 
+  static printSummary() {
+    AppManager.send('PRINT_SUMMARY');
+  }
+
   static quit() {
     global.quit = true;
 
@@ -140,7 +144,7 @@ class AppManager {
           this.isProtocolValid = action.protocolIsValid;
           this.updateMenu();
           break;
-        case 'PRINT_SUMMARY':
+        case 'PRINT_SUMMARY_DATA':
           createPrintableSummaryWindow(action.payload);
           break;
         default:
@@ -188,6 +192,7 @@ class AppManager {
       open: () => AppManager.open(),
       saveCopy: () => AppManager.saveCopy(),
       save: () => AppManager.save(),
+      printSummary: () => AppManager.printSummary(),
       clearStorageData: () =>
         clearStorageDataDialog()
           .then((shouldClearStorage) => {
