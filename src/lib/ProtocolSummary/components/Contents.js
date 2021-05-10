@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { map, toPairs } from 'lodash';
-import { HashLink } from 'react-router-hash-link';
 import SummaryContext from './SummaryContext';
+import DualLink from './DualLink';
 
 const Contents = () => {
   const {
@@ -15,15 +15,14 @@ const Contents = () => {
     <div className="protocol-summary-contents">
       <h1>Contents</h1>
       <div className="protocol-summary-contents__section">
-      <h2>Stages</h2>
+        <h2>Stages</h2>
         <ol>
           {stages && map(stages, ({
             label,
             id,
           }) => (
             <li>
-              <HashLink smooth to={`#stage-${id}`} data-print="no">{label}</HashLink>
-              <a href={`#stage-${id}`} data-print="only">{label}</a>
+              <DualLink to={`#stage-${id}`}>{label}</DualLink>
             </li>
           ))}
         </ol>
@@ -35,8 +34,7 @@ const Contents = () => {
             <h3>Ego</h3>
             <ul>
               <li>
-                <HashLink smooth to="#ego" data-print="no">ego</HashLink>
-                <a href="#ego" data-print="only">ego</a>
+                <DualLink to="#ego">ego</DualLink>
               </li>
             </ul>
           </div>
@@ -45,8 +43,7 @@ const Contents = () => {
         <ul>
           {nodes.map(([id, node]) => (
             <li>
-              <HashLink smooth to={`#entity-${id}`} data-print="no">{node.name}</HashLink>
-              <a href={`#entity-${id}`} data-print="only">{node.name}</a>
+              <DualLink to={`#entity-${id}`}>{node.name}</DualLink>
             </li>
           ))}
         </ul>
@@ -54,8 +51,7 @@ const Contents = () => {
         <ul>
           {edges.map(([id, edge]) => (
             <li>
-              <HashLink smooth to={`#entity-${id}`} data-print="no">{edge.name}</HashLink>
-              <a href={`#entity-${id}`} data-print="only">{edge.name}</a>
+              <DualLink to={`#entity-${id}`}>{edge.name}</DualLink>
             </li>
           ))}
         </ul>

@@ -91,7 +91,7 @@ const Stage = ({
         <div className="protocol-summary-stage__script">
           <h2>Script</h2>
           <div className="protocol-summary-stage__script-content">
-            {configuration.interviewScript}
+            <Markdown source={configuration.interviewScript} />
           </div>
         </div>
       </div>
