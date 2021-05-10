@@ -5,6 +5,15 @@ import { utils, paths } from '../../selectors/indexes';
 export const getCodebookIndex = (protocol) => {
   const variablePaths = utils.collectPaths(paths.variables, protocol);
 
+  const fields = flatMap(
+    protocol.stages,
+    (stage) => {
+      if (!stage.form) { return []; }
+
+      return stage.form.fields;
+    },
+  );
+
   const index = flatMap(
     protocol.codebook,
     (entityConfigurations, entity) => flatMap(
@@ -22,10 +31,13 @@ export const getCodebookIndex = (protocol) => {
             return get(protocol, `${stagePath}.id`);
           });
 
+          const field = fields.find((f) => f.variable === variableId);
+
           return {
             id: variableId,
             name: variableConfiguration.name,
             type: variableConfiguration.type,
+            prompt: field && field.prompt,
             subject: { entity, type: entityType },
             stages,
             usage,
@@ -34,8 +46,6 @@ export const getCodebookIndex = (protocol) => {
       ),
     ),
   );
-
-  // console.log({ index });
 
   return index;
 };

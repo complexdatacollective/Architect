@@ -18,15 +18,10 @@
       // background: var(--color-sea-green);
       background: var(--color-platinum);
     }
-
-    // tr {
-    //   &:nth-child(2n) {
-    //     background: var(--color-platinum);
-    //   }
-    // }
   }
 
-  &__options {
+  &__options,
+  &__prompt {
     td {
       border: none;
       padding: 0;

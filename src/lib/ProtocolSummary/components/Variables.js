@@ -11,12 +11,9 @@ const getStageName = (protocol) => (stageId) => {
   return get(stageConfiguration, 'label');
 };
 
-const makeGetUsedIn = (protocol, index) => (variableId) => {
-  const stages = get(
-    index.find(({ id }) => id === variableId),
-    'stages',
-    [],
-  );
+// TODO: Make this part of the index?
+const makeGetUsedIn = (protocol) => (indexEntry) => {
+  const stages = get(indexEntry, 'stages', []);
 
   return stages.map((stageId) => ([
     stageId,
@@ -41,7 +38,7 @@ const Variables = ({ variables }) => {
           <tr>
             <th>Name</th>
             <th>Type</th>
-            <th>Input Component</th>
+            <th>Label</th>
             <th>Values</th>
             <th>Usage</th>
           </tr>
@@ -50,16 +47,19 @@ const Variables = ({ variables }) => {
           {toPairs(variables).map(([variableId, variableConfiguration]) => {
             const {
               name,
-              component,
               type,
               options,
             } = variableConfiguration;
+
+            const indexEntry = index.find(({ id }) => id === variableId);
 
             return (
               <tr key={variableId}>
                 <td>{name}</td>
                 <td>{type}</td>
-                <td>{component}</td>
+                <td className="protocol-summary-variables__prompt">
+                  {indexEntry && <Markdown source={indexEntry.prompt} />}
+                </td>
                 <td>
                   {options && (
                     <table className="protocol-summary-variables__options">
@@ -80,7 +80,7 @@ const Variables = ({ variables }) => {
                   )}
                 </td>
                 <td>
-                  {getUsedIn(variableId).map(([stageId, stageName]) => (
+                  {getUsedIn(indexEntry).map(([stageId, stageName]) => (
                     <>
                       <DualLink to={`#stage-${stageId}`}>{stageName}</DualLink>
                       <br />
