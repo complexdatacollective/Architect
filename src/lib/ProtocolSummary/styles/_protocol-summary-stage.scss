@@ -1,5 +1,5 @@
 .protocol-summary-stage {
-  margin-bottom: 8rem;
+  margin-bottom: 4rem;
   page-break-before: always;
 
   &__heading {
@@ -36,8 +36,13 @@
   }
 
   &__prompts {
+    ol {
+      margin: 1rem 0;
+      padding: 0 0 0 2.5rem;
+    }
     li {
       margin: 1rem 0 0;
+      padding: 0 0 0 0.5rem;
     }
   }
 
@@ -47,7 +52,7 @@
       border-radius: 1rem;
       padding: 1rem;
       margin: 1rem -1rem 0;
-      min-height: 10rem;
+      min-height: 16rem;
     }
   }
 }

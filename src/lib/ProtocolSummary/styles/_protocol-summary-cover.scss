@@ -12,4 +12,10 @@
       height: 5rem;
     }
   }
+
+  @media print {
+    &__heading {
+      margin-top: 16rem;
+    }
+  }
 }

@@ -18,6 +18,7 @@ const print = () => {
 
   const options = {
     printBackground: true,
+    pageSize: 'A4',
   };
 
   win.webContents.printToPDF(options).then((data) => {
