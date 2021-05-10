@@ -7,6 +7,7 @@ const windowParameters = {
   center: true,
   enableLargerThanScreen: true,
   height: 768,
+  menuBarVisible: false,
   show: true,
   useContentSize: true,
   webPreferences: { nodeIntegration: true },
@@ -37,12 +38,15 @@ function getAppUrl() {
   return appUrl;
 }
 
-function createPrintableSummaryWindow(payload) {
+function openPrintableSummaryWindow(payload) {
   return new Promise((resolve) => {
-    if (global.summaryWindow) { Promise.resolve(global.summaryWindow); }
+    if (global.summaryWindow) {
+      global.summaryWindow.close();
+    }
 
     // Create the browser window.
     global.summaryWindow = new BrowserWindow(windowParameters);
+    global.summaryWindow.setMenuBarVisibility(false);
 
     global.summaryWindow.webContents.on('new-window', (evt) => {
       // A user may have tried to open a new window (shift|cmd-click); ignore action
@@ -54,9 +58,9 @@ function createPrintableSummaryWindow(payload) {
       evt.preventDefault();
     });
 
-    global.summaryWindow.showIndex = () => {
-      global.summaryWindow.loadURL(getAppUrl());
-    };
+    global.summaryWindow.on('close', () => {
+      delete global.summaryWindow;
+    });
 
     global.summaryWindow.webContents.on('did-finish-load', () => {
       global.summaryWindow.webContents.send('SUMMARY_DATA', payload);
@@ -67,4 +71,4 @@ function createPrintableSummaryWindow(payload) {
   });
 }
 
-module.exports = createPrintableSummaryWindow;
+module.exports = openPrintableSummaryWindow;
