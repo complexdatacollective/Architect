@@ -1,33 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import EntityIcon from '@components/Codebook/EntityIcon';
 import Variables from './Variables';
+import EntityBadge from './EntityBadge';
 
 const Entity = ({
-  id,
-  color,
-  isEdge,
-  isEgo,
-  isNode,
-  name,
+  type,
+  entity,
   variables,
 }) => (
   <div
     className="protocol-summary-entity"
-    id={isEgo ? 'ego' : `entity-${id}`}
+    id={entity === 'ego' ? 'ego' : `entity-${type}`}
   >
-    {!isEgo && (
+    {entity !== 'ego' && (
       <div className="protocol-summary-entity__meta">
-        <div className="protocol-summary-entity__meta-icon">
-          <EntityIcon color={color} entity={(isEdge ? 'edge' : 'node')} />
-        </div>
-        <div className="protocol-summary-entity__meta-name">
-          <h1>{name}</h1>
-        </div>
+        <EntityBadge type={type} entity={entity} />
       </div>
     )}
 
-    {isEgo && (
+    {entity === 'ego' && (
       <div className="protocol-summary-entity__meta">
         <div className="protocol-summary-entity__meta-name">
           <h1>
@@ -44,23 +35,15 @@ const Entity = ({
 );
 
 Entity.propTypes = {
-  id: PropTypes.string,
-  color: PropTypes.string,
-  isEdge: PropTypes.bool,
-  isEgo: PropTypes.bool,
-  isNode: PropTypes.bool,
-  name: PropTypes.string,
+  type: PropTypes.string,
+  entity: PropTypes.string,
   // eslint-disable-next-line react/forbid-prop-types
   variables: PropTypes.object.isRequired,
 };
 
 Entity.defaultProps = {
-  id: null,
-  color: null,
-  isEdge: false,
-  isEgo: false,
-  isNode: false,
-  name: null,
+  type: null,
+  entity: null,
 };
 
 export default Entity;

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { map, toPairs } from 'lodash';
 import SummaryContext from './SummaryContext';
 import DualLink from './DualLink';
+import EntityBadge from './EntityBadge';
 
 const Contents = () => {
   const {
@@ -40,17 +41,17 @@ const Contents = () => {
         )}
         <h4>Node types</h4>
         <ul>
-          {nodes.map(([id, node]) => (
+          {nodes.map(([id]) => (
             <li>
-              <DualLink to={`#entity-${id}`}>{node.name}</DualLink>
+              <EntityBadge type={id} entity="node" showLink />
             </li>
           ))}
         </ul>
         <h4>Edge types</h4>
         <ul>
-          {edges.map(([id, edge]) => (
+          {edges.map(([id]) => (
             <li>
-              <DualLink to={`#entity-${id}`}>{edge.name}</DualLink>
+              <EntityBadge type={id} entity="edge" showLink />
             </li>
           ))}
         </ul>

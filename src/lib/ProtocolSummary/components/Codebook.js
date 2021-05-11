@@ -15,7 +15,7 @@ const Codebook = () => {
     <div>
       { codebook.ego && (
         <Entity
-          isEgo
+          entity="ego"
           variables={codebook.ego.variables}
         />
       )}
@@ -23,8 +23,8 @@ const Codebook = () => {
         ([id, node]) => (
           <Entity
             key={id}
-            isNode
-            id={id}
+            entity="node"
+            type={id}
             color={node.color}
             iconVariant={node.iconVariant}
             name={node.name}
@@ -36,8 +36,8 @@ const Codebook = () => {
         ([id, edge]) => (
           <Entity
             key={id}
-            isEdge
-            id={id}
+            entity="edge"
+            type={id}
             color={edge.color}
             iconVariant={edge.iconVariant}
             name={edge.name}
