@@ -1,4 +1,5 @@
 name: Dist
+
 on:
   push:
     branches:
@@ -19,8 +20,10 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12.14.1'
+
       - name: Set NPM 7
         run: npm install -g npm@7.6.3
+
       # Cache node_modules
       - uses: actions/cache@v2
         env:
@@ -36,7 +39,7 @@ jobs:
         run: npm install
 
       - name: Delete current release assets
-      - uses: Kellojo/delete-release-assets-action@v1.9
+        uses: Kellojo/delete-release-assets-action@v1.9
         with:
           delete-only-drafts: true
           github-access-token: ${{ secrets.GITHUB_TOKEN }}
