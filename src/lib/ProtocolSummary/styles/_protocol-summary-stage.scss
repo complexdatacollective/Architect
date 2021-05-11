@@ -14,19 +14,20 @@
 
     th,
     td {
-      padding: 1rem;
-      border-top: var(--color-charcoal) 1px solid;
+      padding: 0 0 .5rem;
     }
 
     th {
       vertical-align: top;
       padding-right: 1rem;
-      // font-weight: normal;
-      // color: var(--color-charcoal);
     }
 
     td {
       width: 100%;
+    }
+
+    &-subject-title {
+      vertical-align: middle !important;
     }
   }
 
