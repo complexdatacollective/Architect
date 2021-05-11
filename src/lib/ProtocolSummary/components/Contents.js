@@ -31,7 +31,6 @@ const Contents = () => {
         <h2>Codebook</h2>
         {codebook.ego && (
           <div>
-            <h3>Ego</h3>
             <ul>
               <li>
                 <DualLink to="#ego">ego</DualLink>
@@ -39,7 +38,7 @@ const Contents = () => {
             </ul>
           </div>
         )}
-        <h3>Nodes</h3>
+        <h4>Node types</h4>
         <ul>
           {nodes.map(([id, node]) => (
             <li>
@@ -47,7 +46,7 @@ const Contents = () => {
             </li>
           ))}
         </ul>
-        <h3>Edges</h3>
+        <h4>Edge types</h4>
         <ul>
           {edges.map(([id, edge]) => (
             <li>
