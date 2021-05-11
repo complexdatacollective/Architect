@@ -21,8 +21,8 @@ const Cover = () => {
       <div className="protocol-summary-cover__heading">
         <h1>{path.basename(filePath)}</h1>
         <h2>{protocol.description}</h2>
-        <p>{`${lastModified}`}</p>
-        <p>{`Protocol schema v${protocol.schemaVersion}`}</p>
+        <p>{`Last Modified: ${lastModified}`}</p>
+        <p>{`Protocol schema: v${protocol.schemaVersion}`}</p>
       </div>
     </div>
   );
