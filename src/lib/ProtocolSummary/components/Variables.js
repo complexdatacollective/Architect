@@ -21,6 +21,24 @@ const makeGetUsedIn = (protocol) => (indexEntry) => {
   ]));
 };
 
+const OptionsTable = ({ options }) => (
+  <table className="protocol-summary-variables__options">
+    {options.map((option) => (
+      <tr key={option.value}>
+        <td>
+          <strong>{option.value}</strong>
+        </td>
+        <td>
+          <Markdown
+            source={option.label}
+            allowedTypes={ALLOWED_MARKDOWN_LABEL_TAGS}
+          />
+        </td>
+      </tr>
+    ))}
+  </table>
+);
+
 const Variables = ({ variables }) => {
   const {
     protocol,
@@ -38,8 +56,7 @@ const Variables = ({ variables }) => {
           <tr>
             <th>Name</th>
             <th>Type</th>
-            <th>Label</th>
-            <th>Values</th>
+            <th>Detail</th>
             <th>Usage</th>
           </tr>
         </thead>
@@ -57,27 +74,21 @@ const Variables = ({ variables }) => {
               <tr key={variableId}>
                 <td>{name}</td>
                 <td>{type}</td>
-                <td className="protocol-summary-variables__prompt">
-                  {indexEntry && <Markdown source={indexEntry.prompt} />}
-                </td>
                 <td>
-                  {options && (
-                    <table className="protocol-summary-variables__options">
-                      {options.map((option) => (
-                        <tr key={option.value}>
-                          <td>
-                            <strong>{option.value}</strong>
-                          </td>
-                          <td>
-                            <Markdown
-                              source={option.label}
-                              allowedTypes={ALLOWED_MARKDOWN_LABEL_TAGS}
-                            />
-                          </td>
-                        </tr>
-                      ))}
-                    </table>
-                  )}
+                  <table className="protocol-summary-variables__details">
+                    {indexEntry && indexEntry.prompt && (
+                      <tr>
+                        <th>Label</th>
+                        <td><Markdown source={indexEntry.prompt} /></td>
+                      </tr>
+                    )}
+                    {options && (
+                      <tr>
+                        <th>Values</th>
+                        <td><OptionsTable options={options} /></td>
+                      </tr>
+                    )}
+                  </table>
                 </td>
                 <td>
                   {getUsedIn(indexEntry).map(([stageId, stageName]) => (
