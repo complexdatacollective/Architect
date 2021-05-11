@@ -32,29 +32,23 @@ const Contents = () => {
         <h2>Codebook</h2>
         {codebook.ego && (
           <div>
-            <ul>
-              <li>
-                <DualLink to="#ego">ego</DualLink>
-              </li>
-            </ul>
+            <p>
+              <DualLink to="#ego">ego</DualLink>
+            </p>
           </div>
         )}
         <h4>Node types</h4>
-        <ul>
-          {nodes.map(([id]) => (
-            <li>
-              <EntityBadge type={id} entity="node" showLink />
-            </li>
-          ))}
-        </ul>
+        {nodes.map(([id]) => (
+          <p>
+            <EntityBadge type={id} entity="node" link small />
+          </p>
+        ))}
         <h4>Edge types</h4>
-        <ul>
-          {edges.map(([id]) => (
-            <li>
-              <EntityBadge type={id} entity="edge" showLink />
-            </li>
-          ))}
-        </ul>
+        {edges.map(([id]) => (
+          <p>
+            <EntityBadge type={id} entity="edge" link small />
+          </p>
+        ))}
       </div>
     </div>
   );

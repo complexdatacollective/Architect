@@ -46,7 +46,7 @@ function openPrintableSummaryWindow(payload) {
 
     // Create the browser window.
     global.summaryWindow = new BrowserWindow(windowParameters);
-    global.summaryWindow.setMenuBarVisibility(false);
+    // global.summaryWindow.setMenuBarVisibility(false);
 
     global.summaryWindow.webContents.on('new-window', (evt) => {
       // A user may have tried to open a new window (shift|cmd-click); ignore action

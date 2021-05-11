@@ -51,7 +51,7 @@ const Stage = ({
             <tr>
               <th>Subject</th>
               <td>
-                <EntityBadge type={subject.type} entity={subject.entity} showLink />
+                <EntityBadge type={subject.type} entity={subject.entity} link small />
               </td>
             </tr>
           )}

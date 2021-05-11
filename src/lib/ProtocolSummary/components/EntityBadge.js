@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { get } from 'lodash';
+import cx from 'classnames';
 import EntityIcon from '@components/Codebook/EntityIcon';
 import SummaryContext from './SummaryContext';
 import DualLink from './DualLink';
@@ -7,29 +8,37 @@ import DualLink from './DualLink';
 const EntityBadge = ({
   type,
   entity,
-  showLink
+  link,
+  small
 }) => {
   const {
     protocol: { codebook },
   } = useContext(SummaryContext);
 
+  const classes = cx(
+    'protocol-summary-entity-badge',
+    {
+      'protocol-summary-entity-badge--small': small,
+    },
+  );
+
   const color = get(codebook, [entity, type, 'color']);
-  const name = get(codebook, [entity, type, 'name']);
+  const label = get(codebook, [entity, type, 'name']);
 
   const badge = (
     <>
       <div className="protocol-summary-entity-badge__icon">
         <EntityIcon color={color} entity={entity} />
       </div>
-      <div className="protocol-summary-entity-badge__name">
-        <h1>{name}</h1>
+      <div className="protocol-summary-entity-badge__label">
+        {label}
       </div>
     </>
   );
 
-  if (!showLink) {
+  if (!link) {
     return (
-      <div className="protocol-summary-entity-badge">
+      <div className={classes}>
         {badge}
       </div>
     );
@@ -38,7 +47,7 @@ const EntityBadge = ({
   return (
     <DualLink
       to={`#entity-${type}`}
-      className="protocol-summary-entity-badge"
+      className={classes}
     >
       {badge}
     </DualLink>
