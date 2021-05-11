@@ -3,7 +3,7 @@
   page-break-before: always;
 
   &__heading {
-    background: var(--color-platinum--dark);
+    background: var(--color-platinum);
     border-radius: 1rem;
     padding: 1rem 2rem;
   }
@@ -32,7 +32,7 @@
 
   &__script,
   &__prompts {
-    margin: 2rem;
+    margin: 2rem 0;
   }
 
   &__prompts {
@@ -48,10 +48,9 @@
 
   &__script {
     &-content {
-      background: var(--color-platinum);
+      border: 2px solid var(--color-platinum);
       border-radius: 1rem;
-      padding: 1rem;
-      margin: 1rem -1rem 0;
+      padding: 2rem;
       min-height: 16rem;
     }
   }
