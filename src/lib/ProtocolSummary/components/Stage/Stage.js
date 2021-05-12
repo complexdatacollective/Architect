@@ -39,31 +39,33 @@ const Stage = ({
         </h1>
 
         <table className="protocol-summary-stage__meta">
-          <tr>
-            <th>Type</th>
-            <td>{type}</td>
-          </tr>
-          { configuration.subject && (
+          <tbody>
             <tr>
-              <th className="protocol-summary-stage__meta-subject-title">Subject</th>
-              <td>
-                <EntityBadge type={subject.type} entity={subject.entity} link small />
-              </td>
+              <th>Type</th>
+              <td>{type}</td>
             </tr>
-          )}
-          {stageVariables.length > 0 && (
-            <tr>
-              <th>Variables</th>
-              <td>
-                { stageVariables.map(([variableId, variable]) => (
-                  <>
-                    <DualLink to={`#variable-${variableId}`}>{variable}</DualLink>
-                    <br />
-                  </>
-                )) }
-              </td>
-            </tr>
-          )}
+            { configuration.subject && (
+              <tr>
+                <th className="protocol-summary-stage__meta-subject-title">Subject</th>
+                <td>
+                  <EntityBadge type={subject.type} entity={subject.entity} link small />
+                </td>
+              </tr>
+            )}
+            {stageVariables.length > 0 && (
+              <tr>
+                <th>Variables</th>
+                <td>
+                  { stageVariables.map(([variableId, variable]) => (
+                    <>
+                      <DualLink to={`#variable-${variableId}`} key={variableId}>{variable}</DualLink>
+                      <br key={`br-${variableId}`} />
+                    </>
+                  )) }
+                </td>
+              </tr>
+            )}
+          </tbody>
         </table>
       </div>
 

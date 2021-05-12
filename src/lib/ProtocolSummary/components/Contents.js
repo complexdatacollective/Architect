@@ -22,7 +22,7 @@ const Contents = () => {
             label,
             id,
           }) => (
-            <li>
+            <li key={id}>
               <DualLink to={`#stage-${id}`}>{label}</DualLink>
             </li>
           ))}
@@ -39,13 +39,13 @@ const Contents = () => {
         )}
         <h4>Node types</h4>
         {nodes.map(([id]) => (
-          <p>
+          <p key={id}>
             <EntityBadge type={id} entity="node" link small />
           </p>
         ))}
         <h4>Edge types</h4>
         {edges.map(([id]) => (
-          <p>
+          <p key={id}>
             <EntityBadge type={id} entity="edge" link small />
           </p>
         ))}

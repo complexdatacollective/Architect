@@ -39,32 +39,36 @@
   }
 
   &__details {
-    & > tr {
-      & > th, & > td {
-        vertical-align: top;
-        padding: 1rem 1rem 0 0;
+    & > tbody {
+      & > tr {
+        & > th, & > td {
+          vertical-align: top;
+          padding: 1rem 1rem 0 0;
+        }
       }
-    }
 
-    & > tr:first-child {
-      & > th, & > td {
-        padding: 0 1rem 0 0;
+      & > tr:first-child {
+        & > th, & > td {
+          padding: 0 1rem 0 0;
+        }
       }
     }
   }
 
   &__options {
-    & > tr {
-      & > td {
-        vertical-align: top;
-        padding: .25rem 1rem;
-        background-color: var(--color-platinum);
+    & > tbody {
+      & > tr {
+        & > td {
+          vertical-align: top;
+          padding: .25rem 1rem;
+          background-color: var(--color-platinum);
+        }
       }
-    }
 
-    & > tr:nth-child(2n) {
-      & > td {
-        background-color: var(--color-platinum--dark);
+      & > tr:nth-child(2n) {
+        & > td {
+          background-color: var(--color-platinum--dark);
+        }
       }
     }
   }

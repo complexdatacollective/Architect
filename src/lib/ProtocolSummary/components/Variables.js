@@ -31,19 +31,21 @@ const renderValue = (value) => {
 
 const OptionsTable = ({ options }) => (
   <table className="protocol-summary-variables__options">
-    {options.map((option) => (
-      <tr key={option.value}>
-        <td>
-          <em>{renderValue(option.value)}</em>
-        </td>
-        <td>
-          <Markdown
-            source={option.label}
-            allowedTypes={ALLOWED_MARKDOWN_LABEL_TAGS}
-          />
-        </td>
-      </tr>
-    ))}
+    <tbody>
+      {options.map((option) => (
+        <tr key={option.value}>
+          <td>
+            <em>{renderValue(option.value)}</em>
+          </td>
+          <td>
+            <Markdown
+              source={option.label}
+              allowedTypes={ALLOWED_MARKDOWN_LABEL_TAGS}
+            />
+          </td>
+        </tr>
+      ))}
+    </tbody>
   </table>
 );
 
@@ -97,18 +99,20 @@ const Variables = ({ variables }) => {
                 <td>{type}</td>
                 <td>
                   <table className="protocol-summary-variables__details">
-                    {indexEntry && indexEntry.prompt && (
-                      <tr>
-                        <th>Label</th>
-                        <td><Markdown source={indexEntry.prompt} /></td>
-                      </tr>
-                    )}
-                    {options && (
-                      <tr>
-                        <th>Values</th>
-                        <td><OptionsTable options={options} /></td>
-                      </tr>
-                    )}
+                    <tbody>
+                      {indexEntry && indexEntry.prompt && (
+                        <tr>
+                          <th>Label</th>
+                          <td><Markdown source={indexEntry.prompt} /></td>
+                        </tr>
+                      )}
+                      {options && (
+                        <tr>
+                          <th>Values</th>
+                          <td><OptionsTable options={options} /></td>
+                        </tr>
+                      )}
+                    </tbody>
                   </table>
                 </td>
                 <td>
