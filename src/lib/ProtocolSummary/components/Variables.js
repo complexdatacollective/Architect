@@ -21,12 +21,20 @@ const makeGetUsedIn = (protocol) => (indexEntry) => {
   ]));
 };
 
+const renderValue = (value) => {
+  if (typeof value === 'boolean') {
+    return value ? 'TRUE' : 'FALSE';
+  }
+
+  return value;
+};
+
 const OptionsTable = ({ options }) => (
   <table className="protocol-summary-variables__options">
     {options.map((option) => (
       <tr key={option.value}>
         <td>
-          <em>{option.value}</em>
+          <em>{renderValue(option.value)}</em>
         </td>
         <td>
           <Markdown
@@ -41,7 +49,11 @@ const OptionsTable = ({ options }) => (
 
 const OptionType = PropTypes.shape({
   label: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+  ]),
 });
 
 OptionsTable.propTypes = {
