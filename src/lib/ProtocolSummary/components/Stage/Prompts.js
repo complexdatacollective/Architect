@@ -5,24 +5,38 @@ import { getVariableName } from '../../helpers';
 import SummaryContext from '../SummaryContext';
 import DualLink from '../DualLink';
 
-const Prompts = ({
-  prompts,
+const Prompt = ({
+  id,
+  text,
+  additionalAttributes,
+  edges,
+  variable,
+  layout,
+  createEdge,
+  edgeVariable,
 }) => {
   const {
     index,
   } = useContext(SummaryContext);
 
-  if (!prompts) { return null; }
-
   return (
-    <div className="protocol-summary-stage__prompts">
-      <h2>Prompts</h2>
-      {prompts.map((prompt) => (
-        <div key={prompt.id} className="protocol-summary-stage__prompts-prompt">
-          <Markdown source={prompt.text} />
+    <div key={id} className="protocol-summary-stage__prompts-prompt">
+      <Markdown source={text} />
+      <table>
+        <tbody>
+          { edges && edges.create && <tr><td>Create edge {edges.create}</td></tr> }
+          { variable && <tr><td>Variable {variable}</td></tr> }
+          { layout && layout.layoutVariable && <tr><td>Layout variable {layout.layoutVariable}</td></tr> }
+          { createEdge && <tr><td>Create edge {createEdge}</td></tr> }
+          { edgeVariable && <tr><td>Edge variable {edgeVariable}</td></tr> }
+        </tbody>
+      </table>
+      { additionalAttributes && (
+        <>
+          <h4>AdditionalAttributes</h4>
           <table>
             <tbody>
-              {prompt.additionalAttributes && prompt.additionalAttributes.map(
+              {additionalAttributes.map(
                 ({ variable, value }) => (
                   <tr>
                     <td>{`${getVariableName(index, variable)} ${value}`}</td>
@@ -31,7 +45,23 @@ const Prompts = ({
               )}
             </tbody>
           </table>
-        </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+const Prompts = ({
+  prompts,
+}) => {
+  if (!prompts) { return null; }
+
+  return (
+    <div className="protocol-summary-stage__prompts">
+      <h2>Prompts</h2>
+      {prompts.map((prompt) => (
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        <Prompt {...prompt} />
       ))}
     </div>
   );
