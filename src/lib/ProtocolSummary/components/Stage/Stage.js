@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import Markdown from 'react-markdown';
-import { get } from 'lodash';
-import EntityBadge from './EntityBadge';
-import SummaryContext from './SummaryContext';
-import DualLink from './DualLink';
+import EntityBadge from '../EntityBadge';
+import SummaryContext from '../SummaryContext';
+import DualLink from '../DualLink';
+import Prompts from './Prompts';
+import InterviewScript from './InterviewScript';
 
 const variablesOnStage = (index) => (stageId) => index
   .reduce(
@@ -14,11 +14,6 @@ const variablesOnStage = (index) => (stageId) => index
     },
     [],
   );
-
-const getEntityName = (codebook, subject) => get(
-  codebook,
-  [subject.entity, subject.type, 'name'],
-);
 
 const Stage = ({
   configuration,
@@ -73,24 +68,8 @@ const Stage = ({
       </div>
 
       <div className="protocol-summary-stage__content">
-
-        { configuration.prompts && (
-          <div className="protocol-summary-stage__prompts">
-            <h2>Prompts</h2>
-            <ol>
-              {configuration.prompts.map((prompt) => (
-                <li key={prompt.id}><Markdown source={prompt.text} /></li>
-              ))}
-            </ol>
-          </div>
-        )}
-
-        <div className="protocol-summary-stage__script">
-          <h2>Script</h2>
-          <div className="protocol-summary-stage__script-content">
-            <Markdown source={configuration.interviewScript} />
-          </div>
-        </div>
+        <Prompts prompts={configuration.prompts} />
+        <InterviewScript interviewScript={configuration.interviewScript} />
       </div>
     </div>
   );

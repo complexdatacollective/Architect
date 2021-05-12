@@ -39,6 +39,15 @@ const OptionsTable = ({ options }) => (
   </table>
 );
 
+const OptionType = PropTypes.shape({
+  label: PropTypes.string,
+  value: PropTypes.string,
+});
+
+OptionsTable.propTypes = {
+  options: PropTypes.arrayOf(OptionType).isRequired,
+};
+
 const Variables = ({ variables }) => {
   const {
     protocol,
