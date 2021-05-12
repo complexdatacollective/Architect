@@ -26,7 +26,7 @@ const OptionsTable = ({ options }) => (
     {options.map((option) => (
       <tr key={option.value}>
         <td>
-          <strong>{option.value}</strong>
+          <em>{option.value}</em>
         </td>
         <td>
           <Markdown
