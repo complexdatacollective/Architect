@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import EntityBadge from '../EntityBadge';
 import SummaryContext from '../SummaryContext';
 import DualLink from '../DualLink';
+import IntroductionPanel from './IntroductionPanel';
 import Prompts from './Prompts';
 import InterviewScript from './InterviewScript';
+import Form from './Form';
 
 const variablesOnStage = (index) => (stageId) => index
   .reduce(
@@ -70,7 +72,9 @@ const Stage = ({
       </div>
 
       <div className="protocol-summary-stage__content">
+        <IntroductionPanel introductionPanel={configuration.introductionPanel} />
         <Prompts prompts={configuration.prompts} />
+        <Form form={configuration.form} />
         <InterviewScript interviewScript={configuration.interviewScript} />
       </div>
     </div>

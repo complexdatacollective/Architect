@@ -2,7 +2,13 @@
 import { flatMap, reduce, get } from 'lodash';
 import { utils, paths } from '../../selectors/indexes';
 
-const getVariableEntry = (
+export const getVariableName = (index, variableId) => {
+  const entry = index.find(({ id }) => id === variableId);
+
+  return entry && entry.name;
+};
+
+const buildVariableEntry = (
   protocol,
   variablePaths,
   fields,
@@ -57,7 +63,7 @@ export const getCodebookIndex = (protocol) => {
         entityConfigurations,
         (entityConfiguration, entityType) => flatMap(
           entityConfiguration.variables,
-          getVariableEntry(protocol, variablePaths, fields, entity, entityType),
+          buildVariableEntry(protocol, variablePaths, fields, entity, entityType),
         ),
       );
     },

@@ -39,6 +39,8 @@ const ProtocolSummary = ({ data }) => {
 
   const index = getCodebookIndex(protocol);
 
+  console.log({ protocol });
+
   return (
     <SummaryContext.Provider value={{ protocol, filePath, index }}>
       <div className="protocol-summary-controls">
