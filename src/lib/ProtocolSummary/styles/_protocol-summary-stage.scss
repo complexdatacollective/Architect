@@ -32,8 +32,7 @@
     }
   }
 
-  &__script,
-  &__prompts {
+  &__content-section {
     margin: 2rem 0;
   }
 
@@ -48,12 +47,20 @@
     }
   }
 
-  &__script {
+  &__interview-script {
     &-content {
       border: 2px solid var(--color-platinum);
       border-radius: 1rem;
       padding: 2rem;
       min-height: 16rem;
+    }
+  }
+
+  &__introduction-panel {
+    &-content {
+      border: 2px solid var(--color-platinum);
+      border-radius: 1rem;
+      padding: 2rem;
     }
   }
 }

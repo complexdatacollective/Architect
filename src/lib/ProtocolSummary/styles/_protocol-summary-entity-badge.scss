@@ -35,4 +35,14 @@ $default-size: 5rem;
       }
     }
   }
+
+  &--tiny {
+    .protocol-summary-entity-badge__icon {
+      font-size: 1rem;
+      margin-right: 0.3rem;
+      .icon[name='links'] {
+        font-size: 1rem;
+      }
+    }
+  }
 }

@@ -9,7 +9,8 @@ const EntityBadge = ({
   type,
   entity,
   link,
-  small
+  small,
+  tiny
 }) => {
   const {
     protocol: { codebook },
@@ -19,6 +20,7 @@ const EntityBadge = ({
     'protocol-summary-entity-badge',
     {
       'protocol-summary-entity-badge--small': small,
+      'protocol-summary-entity-badge--tiny': tiny,
     },
   );
 

@@ -2,12 +2,6 @@
 import { flatMap, reduce, get } from 'lodash';
 import { utils, paths } from '../../selectors/indexes';
 
-export const getVariableName = (index, variableId) => {
-  const entry = index.find(({ id }) => id === variableId);
-
-  return entry && entry.name;
-};
-
 const buildVariableEntry = (
   protocol,
   variablePaths,

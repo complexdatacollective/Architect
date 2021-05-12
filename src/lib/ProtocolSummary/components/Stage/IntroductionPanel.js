@@ -9,7 +9,9 @@ const IntroductionPanel = ({ introductionPanel }) => {
     <div className="protocol-summary-stage__introduction-panel">
       <h2>Introduction Panel</h2>
       <h4>{introductionPanel.title}</h4>
-      <Markdown source={introductionPanel.text} />
+      <div className="protocol-summary-stage__introduction-panel-content">
+        <Markdown source={introductionPanel.text} />
+      </div>
     </div>
   );
 };

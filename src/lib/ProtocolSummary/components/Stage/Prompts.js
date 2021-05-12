@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
-import { getVariableName } from '../../helpers';
+import { compact } from 'lodash';
+import { renderValue } from '../helpers';
 import SummaryContext from '../SummaryContext';
-import DualLink from '../DualLink';
+import MiniTable from '../MiniTable';
+import Variable from '../Variable';
+import EntityBadge from '../EntityBadge';
 
 const Prompt = ({
   id,
@@ -19,35 +22,31 @@ const Prompt = ({
     index,
   } = useContext(SummaryContext);
 
+  const attributeRows = compact([
+    edges && edges.create && ['Create edge', <EntityBadge entity="edge" type={edges.create} tiny link />],
+    variable && ['Variable', <Variable id={variable} />],
+    layout && layout.layoutVariable && ['Layout variable', <Variable id={layout.layoutVariable} />],
+    createEdge && ['Create edge', <EntityBadge entity="edge" type={createEdge} tiny link />],
+    edgeVariable && ['Edge variable', <Variable id={edgeVariable} />],
+  ]);
+
+  const additionalAttributeRows = additionalAttributes && additionalAttributes.map(
+    ({ variable, value }) => ([
+      <Variable id={variable} />,
+      renderValue(value),
+    ]),
+  );
+
   return (
-    <div key={id} className="protocol-summary-stage__prompts-prompt">
-      <Markdown source={text} />
-      <table>
-        <tbody>
-          { edges && edges.create && <tr><td>Create edge {edges.create}</td></tr> }
-          { variable && <tr><td>Variable {variable}</td></tr> }
-          { layout && layout.layoutVariable && <tr><td>Layout variable {layout.layoutVariable}</td></tr> }
-          { createEdge && <tr><td>Create edge {createEdge}</td></tr> }
-          { edgeVariable && <tr><td>Edge variable {edgeVariable}</td></tr> }
-        </tbody>
-      </table>
-      { additionalAttributes && (
-        <>
-          <h4>AdditionalAttributes</h4>
-          <table>
-            <tbody>
-              {additionalAttributes.map(
-                ({ variable, value }) => (
-                  <tr>
-                    <td>{`${getVariableName(index, variable)} ${value}`}</td>
-                  </tr>
-                ),
-              )}
-            </tbody>
-          </table>
-        </>
-      )}
-    </div>
+    <li key={id}>
+      <div className="protocol-summary-stage__prompts-prompt">
+        <Markdown source={text} />
+        <MiniTable rows={attributeRows} />
+        { additionalAttributes && (
+          <MiniTable rows={additionalAttributeRows} />
+        )}
+      </div>
+    </li>
   );
 };
 
@@ -59,10 +58,12 @@ const Prompts = ({
   return (
     <div className="protocol-summary-stage__prompts">
       <h2>Prompts</h2>
-      {prompts.map((prompt) => (
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        <Prompt {...prompt} />
-      ))}
+      <ol>
+        {prompts.map((prompt) => (
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          <Prompt {...prompt} />
+        ))}
+      </ol>
     </div>
   );
 };
@@ -77,7 +78,7 @@ Prompts.propTypes = {
 };
 
 Prompts.defaultProps = {
-  prompts: [],
+  prompts: null,
 };
 
 export default Prompts;

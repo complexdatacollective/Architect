@@ -1,30 +1,22 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
-import { getVariableName } from '../../helpers';
-import SummaryContext from '../SummaryContext';
+import MiniTable from '../MiniTable';
+import Variable from '../Variable';
 
 const Form = ({ form }) => {
-  const {
-    index,
-  } = useContext(SummaryContext);
-
   if (!form) { return null; }
+
+  const fieldRows = form.fields && form.fields.map(({ prompt, variable }) => ([
+    <Variable id={variable} />,
+    <Markdown source={prompt} />,
+  ]));
 
   return (
     <div className="protocol-summary-stage__form">
       <h2>Form</h2>
       <h4>{form.title}</h4>
-      <table>
-        <tbody>
-          {form.fields.map(({ prompt, variable }) => (
-            <tr>
-              <td>{getVariableName(index, variable)}</td>
-              <td><Markdown source={prompt} /></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <MiniTable rows={fieldRows} />
     </div>
   );
 };

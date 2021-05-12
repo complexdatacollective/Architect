@@ -5,6 +5,8 @@ import Markdown from 'react-markdown';
 import { ALLOWED_MARKDOWN_LABEL_TAGS } from '@codaco/ui/src/utils/config';
 import SummaryContext from './SummaryContext';
 import DualLink from './DualLink';
+import MiniTable from './MiniTable';
+import { renderValue } from './helpers';
 
 const getStageName = (protocol) => (stageId) => {
   const stageConfiguration = find(protocol.stages, ['id', stageId]);
@@ -19,47 +21,6 @@ const makeGetUsedIn = (protocol) => (indexEntry) => {
     stageId,
     getStageName(protocol)(stageId),
   ]));
-};
-
-const renderValue = (value) => {
-  if (typeof value === 'boolean') {
-    return value ? 'TRUE' : 'FALSE';
-  }
-
-  return value;
-};
-
-const OptionsTable = ({ options }) => (
-  <table className="protocol-summary-variables__options">
-    <tbody>
-      {options.map((option) => (
-        <tr key={option.value}>
-          <td>
-            <em>{renderValue(option.value)}</em>
-          </td>
-          <td>
-            <Markdown
-              source={option.label}
-              allowedTypes={ALLOWED_MARKDOWN_LABEL_TAGS}
-            />
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-);
-
-const OptionType = PropTypes.shape({
-  label: PropTypes.string,
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.bool,
-  ]),
-});
-
-OptionsTable.propTypes = {
-  options: PropTypes.arrayOf(OptionType).isRequired,
 };
 
 const Variables = ({ variables }) => {
@@ -93,6 +54,14 @@ const Variables = ({ variables }) => {
 
             const indexEntry = index.find(({ id }) => id === variableId);
 
+            const optionsRows = options && options.map(({ value, label }) => ([
+              <em>{renderValue(value)}</em>,
+              <Markdown
+                source={label}
+                allowedTypes={ALLOWED_MARKDOWN_LABEL_TAGS}
+              />,
+            ]));
+
             return (
               <tr key={variableId} id={`variable-${variableId}`}>
                 <td>{name}</td>
@@ -109,7 +78,7 @@ const Variables = ({ variables }) => {
                       {options && (
                         <tr>
                           <th>Values</th>
-                          <td><OptionsTable options={options} /></td>
+                          <td><MiniTable rows={optionsRows} /></td>
                         </tr>
                       )}
                     </tbody>

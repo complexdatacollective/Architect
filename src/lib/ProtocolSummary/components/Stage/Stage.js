@@ -75,13 +75,27 @@ const Stage = ({
       </div>
 
       <div className="protocol-summary-stage__content">
-        <IntroductionPanel introductionPanel={configuration.introductionPanel} />
-        <Prompts prompts={configuration.prompts} />
-        <QuickAdd prompts={configuration.quickAdd} />
-        <Form form={configuration.form} />
-        <DataSource prompts={configuration.dataSource} />
-        <Presets prompts={configuration.presets} />
-        <InterviewScript interviewScript={configuration.interviewScript} />
+        <div className="protocol-summary-stage__content-section">
+          <IntroductionPanel introductionPanel={configuration.introductionPanel} />
+        </div>
+        <div className="protocol-summary-stage__content-section">
+          <Prompts prompts={configuration.prompts} />
+        </div>
+        <div className="protocol-summary-stage__content-section">
+          <QuickAdd prompts={configuration.quickAdd} />
+        </div>
+        <div className="protocol-summary-stage__content-section">
+          <Form form={configuration.form} />
+        </div>
+        <div className="protocol-summary-stage__content-section">
+          <DataSource prompts={configuration.dataSource} />
+        </div>
+        <div className="protocol-summary-stage__content-section">
+          <Presets prompts={configuration.presets} />
+        </div>
+        <div className="protocol-summary-stage__content-section">
+          <InterviewScript interviewScript={configuration.interviewScript} />
+        </div>
       </div>
     </div>
   );

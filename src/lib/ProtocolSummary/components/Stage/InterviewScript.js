@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
 
 const InterviewScript = ({ interviewScript }) => (
-  <div className="protocol-summary-stage__script">
+  <div className="protocol-summary-stage__interview-script">
     <h2>Script</h2>
-    <div className="protocol-summary-stage__script-content">
+    <div className="protocol-summary-stage__interview-script-content">
       <Markdown source={interviewScript} />
     </div>
   </div>
