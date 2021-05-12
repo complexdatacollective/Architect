@@ -45,22 +45,32 @@
       margin: 1rem 0 0;
       padding: 0 0 0 0.5rem;
     }
+
+    &-prompt {
+      @include content-box;
+    }
+  }
+
+  &__form {
+    &-content {
+      @include content-box;
+    }
   }
 
   &__interview-script {
     &-content {
-      border: 2px solid var(--color-platinum);
-      border-radius: 1rem;
-      padding: 2rem;
+      @include content-box;
       min-height: 16rem;
+      padding-top: 0;
+      padding-bottom: 0;
     }
   }
 
   &__introduction-panel {
     &-content {
-      border: 2px solid var(--color-platinum);
-      border-radius: 1rem;
-      padding: 2rem;
+      @include content-box;
+      padding-bottom: 0;
+      padding-top: 0;
     }
   }
 }

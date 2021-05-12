@@ -8,8 +8,8 @@ const IntroductionPanel = ({ introductionPanel }) => {
   return (
     <div className="protocol-summary-stage__introduction-panel">
       <h2>Introduction Panel</h2>
-      <h4>{introductionPanel.title}</h4>
       <div className="protocol-summary-stage__introduction-panel-content">
+        <h1>{introductionPanel.title}</h1>
         <Markdown source={introductionPanel.text} />
       </div>
     </div>

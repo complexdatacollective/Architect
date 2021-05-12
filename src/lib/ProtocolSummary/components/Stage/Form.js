@@ -15,8 +15,10 @@ const Form = ({ form }) => {
   return (
     <div className="protocol-summary-stage__form">
       <h2>Form</h2>
-      <h4>{form.title}</h4>
-      <MiniTable rows={fieldRows} />
+      <div className="protocol-summary-stage__form-content">
+        <h4>{form.title}</h4>
+        <MiniTable rows={fieldRows} />
+      </div>
     </div>
   );
 };
