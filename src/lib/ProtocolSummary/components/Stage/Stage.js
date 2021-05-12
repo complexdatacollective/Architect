@@ -7,6 +7,9 @@ import IntroductionPanel from './IntroductionPanel';
 import Prompts from './Prompts';
 import InterviewScript from './InterviewScript';
 import Form from './Form';
+import QuickAdd from './QuickAdd';
+import DataSource from './DataSource';
+import Presets from './Presets';
 
 const variablesOnStage = (index) => (stageId) => index
   .reduce(
@@ -74,7 +77,10 @@ const Stage = ({
       <div className="protocol-summary-stage__content">
         <IntroductionPanel introductionPanel={configuration.introductionPanel} />
         <Prompts prompts={configuration.prompts} />
+        <QuickAdd prompts={configuration.quickAdd} />
         <Form form={configuration.form} />
+        <DataSource prompts={configuration.dataSource} />
+        <Presets prompts={configuration.presets} />
         <InterviewScript interviewScript={configuration.interviewScript} />
       </div>
     </div>
