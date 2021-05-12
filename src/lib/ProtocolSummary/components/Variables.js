@@ -71,7 +71,7 @@ const Variables = ({ variables }) => {
             const indexEntry = index.find(({ id }) => id === variableId);
 
             return (
-              <tr key={variableId}>
+              <tr key={variableId} id={`variable-${variableId}`}>
                 <td>{name}</td>
                 <td>{type}</td>
                 <td>

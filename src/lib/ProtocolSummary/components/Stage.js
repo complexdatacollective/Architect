@@ -4,12 +4,13 @@ import Markdown from 'react-markdown';
 import { get } from 'lodash';
 import EntityBadge from './EntityBadge';
 import SummaryContext from './SummaryContext';
+import DualLink from './DualLink';
 
 const variablesOnStage = (index) => (stageId) => index
   .reduce(
     (memo, variable) => {
       if (!variable.stages.includes(stageId)) { return memo; }
-      return [...memo, variable.name];
+      return [...memo, [variable.id, variable.name]];
     },
     [],
   );
@@ -59,9 +60,9 @@ const Stage = ({
             <tr>
               <th>Variables</th>
               <td>
-                { stageVariables.map((variable) => (
+                { stageVariables.map(([variableId, variable]) => (
                   <>
-                    {variable}
+                    <DualLink to={`#variable-${variableId}`}>{variable}</DualLink>
                     <br />
                   </>
                 )) }
