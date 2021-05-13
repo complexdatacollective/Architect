@@ -49,10 +49,12 @@
 
   &__content-section {
     margin: 2rem 0;
+    page-break-inside: avoid;
   }
 
   &__prompts,
-  &__presets {
+  &__presets,
+  &__panels {
     @include list-content-box
   }
 

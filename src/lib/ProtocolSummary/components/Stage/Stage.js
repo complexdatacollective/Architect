@@ -10,6 +10,9 @@ import Form from './Form';
 import QuickAdd from './QuickAdd';
 import DataSource from './DataSource';
 import Presets from './Presets';
+import Panels from './Panels';
+
+// TODO: add skip logic
 
 const variablesOnStage = (index) => (stageId) => index
   .reduce(
@@ -77,6 +80,9 @@ const Stage = ({
       <div className="protocol-summary-stage__content">
         <div className="protocol-summary-stage__content-section">
           <IntroductionPanel introductionPanel={configuration.introductionPanel} />
+        </div>
+        <div className="protocol-summary-stage__content-section">
+          <Panels panels={configuration.panels} />
         </div>
         <div className="protocol-summary-stage__content-section">
           <Prompts prompts={configuration.prompts} />

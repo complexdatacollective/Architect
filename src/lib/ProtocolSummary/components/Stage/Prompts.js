@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
@@ -16,6 +18,7 @@ const Prompt = ({
   layout,
   createEdge,
   edgeVariable,
+  ...prompt
 }) => {
   const attributeRows = compact([
     edges && edges.create
@@ -37,20 +40,18 @@ const Prompt = ({
     ]));
 
   return (
-    <li key={id}>
-      <div className="protocol-summary-stage__prompts-item">
-        <Markdown source={text} />
-        { attributeRows.length > 0 && <MiniTable rows={attributeRows} /> }
-        { additionalAttributes.length > 0 && (
-          <MiniTable
-            rows={[
-              [<strong>Variable</strong>, <strong>Value</strong>],
-              ...additionalAttributeRows,
-            ]}
-          />
-        )}
-      </div>
-    </li>
+    <div className="protocol-summary-stage__prompts-item">
+      <Markdown source={text} />
+      { attributeRows.length > 0 && <MiniTable rows={attributeRows} /> }
+      { additionalAttributes.length > 0 && (
+        <MiniTable
+          rows={[
+            [<strong>Variable</strong>, <strong>Value</strong>],
+            ...additionalAttributeRows,
+          ]}
+        />
+      )}
+    </div>
   );
 };
 
@@ -68,8 +69,9 @@ const Prompts = ({
       <h2>Prompts</h2>
       <ol>
         {prompts.map((prompt) => (
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          <Prompt {...prompt} />
+          <li key={prompt.id}>
+            <Prompt {...prompt} />
+          </li>
         ))}
       </ol>
     </div>

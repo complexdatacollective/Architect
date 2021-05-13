@@ -12,18 +12,17 @@ const Asset = ({
     protocol: { assetManifest },
   } = useContext(SummaryContext);
 
-  const {
-    name,
-    type,
-  } = get(assetManifest, id);
+  const data = get(assetManifest, id);
+
+  if (!data) { return `Asset ${id} not found`; }
 
   const asset = (
     <>
       <div className="protocol-summary-asset__icon">
         <MiniTable
           rows={[
-            [<strong>Type</strong>, type],
-            [<strong>Name</strong>, name],
+            [<strong>Type</strong>, data.type],
+            [<strong>Name</strong>, data.name],
           ]}
         />
       </div>
