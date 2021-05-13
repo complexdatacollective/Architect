@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
 import { compact } from 'lodash';
 import { renderValue } from '../helpers';
-import SummaryContext from '../SummaryContext';
 import MiniTable from '../MiniTable';
 import Variable from '../Variable';
 import EntityBadge from '../EntityBadge';
@@ -18,32 +17,37 @@ const Prompt = ({
   createEdge,
   edgeVariable,
 }) => {
-  const {
-    index,
-  } = useContext(SummaryContext);
-
   const attributeRows = compact([
-    edges && edges.create && ['Create edge', <EntityBadge entity="edge" type={edges.create} tiny link />],
-    variable && ['Variable', <Variable id={variable} />],
-    layout && layout.layoutVariable && ['Layout variable', <Variable id={layout.layoutVariable} />],
-    createEdge && ['Create edge', <EntityBadge entity="edge" type={createEdge} tiny link />],
-    edgeVariable && ['Edge variable', <Variable id={edgeVariable} />],
+    edges && edges.create
+      && [<strong>Create edge</strong>, <EntityBadge entity="edge" type={edges.create} tiny link />],
+    variable
+      && [<strong>Variable</strong>, <Variable id={variable} />],
+    layout && layout.layoutVariable
+      && [<strong>Layout variable</strong>, <Variable id={layout.layoutVariable} />],
+    createEdge
+      && [<strong>Create edge</strong>, <EntityBadge entity="edge" type={createEdge} tiny link />],
+    edgeVariable
+      && [<strong>Edge variable</strong>, <Variable id={edgeVariable} />],
   ]);
 
-  const additionalAttributeRows = additionalAttributes.map(
-    ({ variable, value }) => ([
+  const additionalAttributeRows = additionalAttributes
+    .map(({ variable, value }) => ([
       <Variable id={variable} />,
       renderValue(value),
-    ]),
-  );
+    ]));
 
   return (
     <li key={id}>
-      <div className="protocol-summary-stage__prompts-prompt">
+      <div className="protocol-summary-stage__prompts-item">
         <Markdown source={text} />
         { attributeRows.length > 0 && <MiniTable rows={attributeRows} /> }
-        { additionalAttributeRows.length > 0 && (
-          <MiniTable rows={additionalAttributeRows} />
+        { additionalAttributes.length > 0 && (
+          <MiniTable
+            rows={[
+              [<strong>Variable</strong>, <strong>Value</strong>],
+              ...additionalAttributeRows,
+            ]}
+          />
         )}
       </div>
     </li>

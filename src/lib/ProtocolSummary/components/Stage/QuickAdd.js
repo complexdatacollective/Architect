@@ -10,7 +10,7 @@ const QuickAdd = ({ quickAdd }) => {
     <div className="protocol-summary-stage__quick-add">
       <h2>Quick Add</h2>
       <div className="protocol-summary-stage__quick-add-content">
-        <MiniTable rows={[['Quick variable', <Variable id={quickAdd} />]]} />
+        <MiniTable rows={[[<strong>Quick variable</strong>, <Variable id={quickAdd} />]]} />
       </div>
     </div>
   );

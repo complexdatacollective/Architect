@@ -1,3 +1,18 @@
+@mixin list-content-box {
+  ol {
+    margin: 1rem 0;
+    padding: 0 0 0 2.5rem;
+  }
+  li {
+    margin: 1rem 0 0;
+    padding: 0 0 0 0.5rem;
+  }
+
+  &-item {
+    @include content-box;
+  }
+}
+
 .protocol-summary-stage {
   margin-bottom: 4rem;
   page-break-before: always;
@@ -36,24 +51,15 @@
     margin: 2rem 0;
   }
 
-  &__prompts {
-    ol {
-      margin: 1rem 0;
-      padding: 0 0 0 2.5rem;
-    }
-    li {
-      margin: 1rem 0 0;
-      padding: 0 0 0 0.5rem;
-    }
-
-    &-prompt {
-      @include content-box;
-    }
+  &__prompts,
+  &__presets {
+    @include list-content-box
   }
 
   &__form,
   &__quick-add,
-  &__interview-script
+  &__data-source,
+  &__interview-script,
   &__introduction-panel {
     &-content {
       @include content-box;
