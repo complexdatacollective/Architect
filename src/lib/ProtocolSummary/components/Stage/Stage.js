@@ -82,16 +82,16 @@ const Stage = ({
           <Prompts prompts={configuration.prompts} />
         </div>
         <div className="protocol-summary-stage__content-section">
-          <QuickAdd prompts={configuration.quickAdd} />
+          <QuickAdd quickAdd={configuration.quickAdd} />
         </div>
         <div className="protocol-summary-stage__content-section">
           <Form form={configuration.form} />
         </div>
         <div className="protocol-summary-stage__content-section">
-          <DataSource prompts={configuration.dataSource} />
+          <DataSource dataSource={configuration.dataSource} />
         </div>
         <div className="protocol-summary-stage__content-section">
-          <Presets prompts={configuration.presets} />
+          <Presets presets={configuration.presets} />
         </div>
         <div className="protocol-summary-stage__content-section">
           <InterviewScript interviewScript={configuration.interviewScript} />

@@ -51,7 +51,10 @@
     }
   }
 
-  &__form {
+  &__form,
+  &__quick-add,
+  &__interview-script
+  &__introduction-panel {
     &-content {
       @include content-box;
     }
@@ -59,18 +62,7 @@
 
   &__interview-script {
     &-content {
-      @include content-box;
       min-height: 16rem;
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-  }
-
-  &__introduction-panel {
-    &-content {
-      @include content-box;
-      padding-bottom: 0;
-      padding-top: 0;
     }
   }
 }

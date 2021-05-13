@@ -30,7 +30,7 @@ const Prompt = ({
     edgeVariable && ['Edge variable', <Variable id={edgeVariable} />],
   ]);
 
-  const additionalAttributeRows = additionalAttributes && additionalAttributes.map(
+  const additionalAttributeRows = additionalAttributes.map(
     ({ variable, value }) => ([
       <Variable id={variable} />,
       renderValue(value),
@@ -41,13 +41,17 @@ const Prompt = ({
     <li key={id}>
       <div className="protocol-summary-stage__prompts-prompt">
         <Markdown source={text} />
-        <MiniTable rows={attributeRows} />
-        { additionalAttributes && (
+        { attributeRows.length > 0 && <MiniTable rows={attributeRows} /> }
+        { additionalAttributeRows.length > 0 && (
           <MiniTable rows={additionalAttributeRows} />
         )}
       </div>
     </li>
   );
+};
+
+Prompt.defaultProps = {
+  additionalAttributes: [],
 };
 
 const Prompts = ({
