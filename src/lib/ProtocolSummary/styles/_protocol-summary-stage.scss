@@ -53,8 +53,7 @@
   }
 
   &__prompts,
-  &__presets,
-  &__panels {
+  &__presets {
     @include list-content-box
   }
 
@@ -71,6 +70,17 @@
   &__interview-script {
     &-content {
       min-height: 16rem;
+    }
+  }
+
+  &__panels {
+    &-panel {
+      @include content-box;
+      margin-top: 1rem;
+
+      &:first-child {
+        margin-top: 0;
+      }
     }
   }
 }

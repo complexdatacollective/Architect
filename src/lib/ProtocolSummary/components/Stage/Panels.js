@@ -13,20 +13,16 @@ const Panels = ({
   return (
     <div className="protocol-summary-stage__panels">
       <h2>Panels</h2>
-      <ul>
-        {panels.map((panel) => (
-          <li key={panel.id}>
-            <div className="protocol-summary-stage__panels-item">
-              <h4>{panel.title}</h4>
-              {
-                panel.dataSource === 'existing'
-                  ? <p>Existing network</p>
-                  : <Asset id={panel.dataSource} />
-              }
-            </div>
-          </li>
-        ))}
-      </ul>
+      {panels.map((panel) => (
+        <div className="protocol-summary-stage__panels-panel" key={panel.id}>
+          <h4>{panel.title}</h4>
+          {
+            panel.dataSource === 'existing'
+              ? <p>Existing network</p>
+              : <Asset id={panel.dataSource} />
+          }
+        </div>
+      ))}
     </div>
   );
 };
