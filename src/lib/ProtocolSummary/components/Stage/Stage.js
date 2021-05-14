@@ -82,19 +82,19 @@ const Stage = ({
           <IntroductionPanel introductionPanel={configuration.introductionPanel} />
         </div>
         <div className="protocol-summary-stage__content-section">
+          <DataSource dataSource={configuration.dataSource} />
+        </div>
+        <div className="protocol-summary-stage__content-section">
+          <QuickAdd quickAdd={configuration.quickAdd} />
+        </div>
+        <div className="protocol-summary-stage__content-section">
           <Panels panels={configuration.panels} />
         </div>
         <div className="protocol-summary-stage__content-section">
           <Prompts prompts={configuration.prompts} />
         </div>
         <div className="protocol-summary-stage__content-section">
-          <QuickAdd quickAdd={configuration.quickAdd} />
-        </div>
-        <div className="protocol-summary-stage__content-section">
           <Form form={configuration.form} />
-        </div>
-        <div className="protocol-summary-stage__content-section">
-          <DataSource dataSource={configuration.dataSource} />
         </div>
         <div className="protocol-summary-stage__content-section">
           <Presets presets={configuration.presets} />
