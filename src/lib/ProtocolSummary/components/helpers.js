@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import React from 'react';
+import { get } from 'lodash';
 
 export const renderValue = (value) => {
   if (typeof value === 'boolean') {
@@ -14,3 +15,7 @@ export const getVariableName = (index, variableId) => {
 
   return entry && entry.name;
 };
+
+export const getEntityName = (codebook, entity, type) => (
+  get(codebook, [entity, type, 'name'])
+);

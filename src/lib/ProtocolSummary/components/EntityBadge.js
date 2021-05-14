@@ -25,7 +25,11 @@ const EntityBadge = ({
   );
 
   const color = get(codebook, [entity, type, 'color']);
-  const label = get(codebook, [entity, type, 'name']);
+  const name = get(codebook, [entity, type, 'name']);
+
+  const label = (small || tiny)
+    ? name
+    : <h2>{name}</h2>;
 
   const badge = (
     <>

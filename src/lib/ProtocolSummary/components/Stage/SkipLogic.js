@@ -1,17 +1,26 @@
 import React from 'react';
+import Rules from '../Rules';
+import MiniTable from '../MiniTable';
 
-// filter:
-// skipLogic
-//
-// {join: "AND", rules: Array(1)}
-// rules:
-// options: {type: "4aebf73e-95e3-4fd1-95e7-237dcc4a4466", operator: "NOT", attribute: "6be95f85-c2d9-4daf-9de1-3939418af888", value: "William"}
-// type: "alter"
+const SkipLogic = ({ skipLogic }) => {
+  if (!skipLogic) { return null; }
 
-const SkipLogic = ({ prompt }) => (
-  <div className="protocol-summary-stage__skip-logic">
+  const {
+    filter,
+    action,
+  } = skipLogic;
 
-  </div>
-);
+  return (
+    <div className="protocol-summary-stage__skip-logic">
+      <MiniTable
+        rows={[
+          [<strong>Action</strong>, action],
+          [<strong>Rules</strong>, <Rules filter={filter} />],
+        ]}
+        wide
+      />
+    </div>
+  );
+};
 
 export default SkipLogic;

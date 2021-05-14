@@ -28,18 +28,20 @@
     width: 100%;
     margin-top: 2rem;
 
-    th,
-    td {
-      padding: 0 0 .5rem;
-    }
+    & > tbody {
+      & > th,
+      & > td {
+        padding: 0 0 .5rem;
+      }
 
-    th {
-      vertical-align: top;
-      padding-right: 1rem;
-    }
+      & > th {
+        vertical-align: top;
+        padding-right: 1rem;
+      }
 
-    td {
-      width: 100%;
+      & > td {
+        width: 100%;
+      }
     }
 
     &-subject-title {
@@ -61,9 +63,17 @@
   &__quick-add,
   &__data-source,
   &__introduction-panel,
+  &__subject,
   &__behaviours {
     &-content {
       @include content-box;
+    }
+  }
+
+  &__subject {
+    &-content {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
     }
   }
 

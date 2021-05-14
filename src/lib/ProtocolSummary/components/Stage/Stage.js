@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import EntityBadge from '../EntityBadge';
 import SummaryContext from '../SummaryContext';
 import DualLink from '../DualLink';
+import SkipLogic from './SkipLogic';
+import Subject from './Subject';
 import IntroductionPanel from './IntroductionPanel';
 import Prompts from './Prompts';
 import InterviewScript from './InterviewScript';
@@ -36,7 +37,6 @@ const Stage = ({
   } = useContext(SummaryContext);
 
   const stageVariables = variablesOnStage(index)(id);
-  const { subject } = configuration;
 
   return (
     <div className="protocol-summary-stage" id={`stage-${id}`}>
@@ -53,15 +53,15 @@ const Stage = ({
               <th>Type</th>
               <td>{type}</td>
             </tr>
-            { configuration.subject && (
+            { configuration.skipLogic && (
               <tr>
-                <th className="protocol-summary-stage__meta-subject-title">Subject</th>
+                <th>Skip Logic</th>
                 <td>
-                  <EntityBadge type={subject.type} entity={subject.entity} link small />
+                  <SkipLogic skipLogic={configuration.skipLogic} />
                 </td>
               </tr>
             )}
-            {stageVariables.length > 0 && (
+            { stageVariables.length > 0 && (
               <tr>
                 <th>Variables</th>
                 <td>
@@ -79,6 +79,12 @@ const Stage = ({
       </div>
 
       <div className="protocol-summary-stage__content">
+        <div className="protocol-summary-stage__content-section">
+          <Subject
+            subject={configuration.subject}
+            filter={configuration.filter}
+          />
+        </div>
         <div className="protocol-summary-stage__content-section">
           <IntroductionPanel introductionPanel={configuration.introductionPanel} />
         </div>
