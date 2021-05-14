@@ -60,8 +60,8 @@
   &__form,
   &__quick-add,
   &__data-source,
-  &__interview-script,
-  &__introduction-panel {
+  &__introduction-panel,
+  &__behaviours {
     &-content {
       @include content-box;
     }
@@ -69,6 +69,7 @@
 
   &__interview-script {
     &-content {
+      @include content-box;
       min-height: 16rem;
     }
   }

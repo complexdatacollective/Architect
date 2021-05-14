@@ -9,6 +9,7 @@ import InterviewScript from './InterviewScript';
 import Form from './Form';
 import QuickAdd from './QuickAdd';
 import DataSource from './DataSource';
+import Behaviours from './Behaviours';
 import Presets from './Presets';
 import Panels from './Panels';
 
@@ -95,6 +96,9 @@ const Stage = ({
         </div>
         <div className="protocol-summary-stage__content-section">
           <Form form={configuration.form} />
+        </div>
+        <div className="protocol-summary-stage__content-section">
+          <Behaviours behaviours={configuration.behaviours} />
         </div>
         <div className="protocol-summary-stage__content-section">
           <Presets presets={configuration.presets} />

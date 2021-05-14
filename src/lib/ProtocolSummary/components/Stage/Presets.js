@@ -7,6 +7,8 @@ import Variable from '../Variable';
 const Presets = ({ presets }) => {
   if (!presets) { return null; }
 
+  console.log({ presets });
+
   return (
     <div className="protocol-summary-stage__presets">
       <h2>Presets</h2>
@@ -28,7 +30,7 @@ const Presets = ({ presets }) => {
                       </>
                     )),
                   ],
-                  [<strong>Group by variable</strong>, <Variable id={preset.groupVariable} link />],
+                  [<strong>Group variable</strong>, <Variable id={preset.groupVariable} link />],
                   [
                     <strong>Highlight attributes</strong>,
                     preset.highlight.map((id) => (
