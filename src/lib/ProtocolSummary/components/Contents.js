@@ -30,25 +30,31 @@ const Contents = () => {
       </div>
       <div className="protocol-summary-contents__section">
         <h2>Codebook</h2>
-        {codebook.ego && (
-          <div>
-            <p>
-              <DualLink to="#ego">ego</DualLink>
-            </p>
+        <div className="protocol-summary-contents__subsection">
+          {codebook.ego && (
+            <div>
+              <p>
+                <DualLink to="#ego">ego</DualLink>
+              </p>
+            </div>
+          )}
+          <h4>Node types</h4>
+          <div className="protocol-summary-contents__subsection">
+            {nodes.map(([id]) => (
+              <p key={id}>
+                <EntityBadge type={id} entity="node" link small />
+              </p>
+            ))}
           </div>
-        )}
-        <h4>Node types</h4>
-        {nodes.map(([id]) => (
-          <p key={id}>
-            <EntityBadge type={id} entity="node" link small />
-          </p>
-        ))}
-        <h4>Edge types</h4>
-        {edges.map(([id]) => (
-          <p key={id}>
-            <EntityBadge type={id} entity="edge" link small />
-          </p>
-        ))}
+          <h4>Edge types</h4>
+          <div className="protocol-summary-contents__subsection">
+            {edges.map(([id]) => (
+              <p key={id}>
+                <EntityBadge type={id} entity="edge" link small />
+              </p>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
