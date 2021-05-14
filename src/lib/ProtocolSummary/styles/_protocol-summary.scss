@@ -50,9 +50,10 @@
 
 .protocol-summary-controls {
   background: var(--color-cyber-grape);
+  height: 80px;
   padding: 1rem 2rem;
   position: sticky;
-  top: 0;
+  top: calc(100% - 79px);
   z-index: 1000000;
   text-align: right;
 
