@@ -59,7 +59,7 @@ const Asset = ({
 
   return (
     <div className="protocol-summary-asset-manifest__asset" id={`asset-${id}`}>
-      <h4>{`${name} (${type})`}</h4>
+      <h4>{name}</h4>
 
       { type === 'image' && (
         <div className="protocol-summary-asset-manifest__asset-image">
