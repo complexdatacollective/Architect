@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import Button from '@codaco/ui/lib/components/Button';
 import Cover from './components/Cover';
 import Contents from './components/Contents';
-import Codebook from './components/Codebook';
 import Stages from './components/Stages';
+import Codebook from './components/Codebook';
+import AssetManifest from './components/AssetManifest';
 import SummaryContext from './components/SummaryContext';
 import { getCodebookIndex } from './helpers';
 
@@ -15,12 +16,12 @@ const print = () => {
 const ProtocolSummary = ({ data }) => {
   if (!data) { return null; }
 
-  const { protocol, filePath } = data;
+  const { protocol, ...rest } = data;
 
   const index = getCodebookIndex(protocol);
 
   return (
-    <SummaryContext.Provider value={{ protocol, filePath, index }}>
+    <SummaryContext.Provider value={{ protocol, index, ...rest }}>
       <div className="protocol-summary-controls">
         <Button onClick={print}>Print</Button>
       </div>
@@ -39,6 +40,10 @@ const ProtocolSummary = ({ data }) => {
 
         <div className="protocol-summary__codebook">
           <Codebook />
+        </div>
+
+        <div className="protocol-summary__manifest">
+          <AssetManifest />
         </div>
 
       </div>

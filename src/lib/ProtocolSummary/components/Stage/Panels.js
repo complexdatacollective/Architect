@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MiniTable from '../MiniTable';
-import Asset from '../Asset';
+import AssetBadge from '../AssetBadge';
 
 // TODO: add filter
 
@@ -18,8 +17,8 @@ const Panels = ({
           <h4>{panel.title}</h4>
           {
             panel.dataSource === 'existing'
-              ? <p>Existing network</p>
-              : <Asset id={panel.dataSource} />
+              ? <p><em>Existing network</em></p>
+              : <AssetBadge id={panel.dataSource} link />
           }
         </div>
       ))}

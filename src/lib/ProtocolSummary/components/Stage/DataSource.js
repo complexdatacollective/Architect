@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Asset from '../Asset';
+import AssetBadge from '../AssetBadge';
 
 const DataSource = ({ dataSource }) => {
   if (!dataSource) { return null; }
@@ -9,7 +9,7 @@ const DataSource = ({ dataSource }) => {
     <div className="protocol-summary-stage__data-source">
       <h2>DataSource</h2>
       <div className="protocol-summary-stage__data-source-content">
-        <Asset id={dataSource} />
+        <AssetBadge id={dataSource} link />
       </div>
     </div>
   );

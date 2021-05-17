@@ -23,8 +23,10 @@ const initIPCListeners = () => {
   ipcRenderer.on('PRINT_SUMMARY', () => {
     const payload = ((state) => ({
       filePath: state.session.filePath,
+      workingPath: state.session.workingPath,
       protocol: state.protocol.present,
     }))(store.getState());
+
     store.dispatch({ ipc: true, type: 'PRINT_SUMMARY_DATA', payload });
   });
 

@@ -1,7 +1,9 @@
 .protocol-summary {
+  -webkit-print-color-adjust: exact !important;
   padding: 2rem;
   background: white;
   color: var(--color-rich-black);
+  padding-bottom: calc(2rem + 80px);
 
   h1,
   h2,

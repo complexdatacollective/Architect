@@ -1,49 +1,85 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { get } from 'lodash';
+import { makeGetNetworkAssetVariables, getAssetPath } from '@selectors/assets';
 import SummaryContext from './SummaryContext';
-import DualLink from './DualLink';
 import MiniTable from './MiniTable';
 
-const Asset = ({
-  id,
-  link,
-}) => {
+const stubState = (assetManifest, workingPath) => ({
+  session: { workingPath },
+  protocol: { present: { assetManifest } },
+});
+
+const useAssetData = (id) => {
   const {
     protocol: { assetManifest },
+    workingPath,
   } = useContext(SummaryContext);
 
   const data = get(assetManifest, id);
 
-  if (!data) { return `Asset ${id} not found`; }
+  if (!data) { return {}; }
 
-  const asset = (
-    <>
-      <div className="protocol-summary-asset__icon">
-        <MiniTable
-          rows={[
-            [<strong>Type</strong>, data.type],
-            [<strong>Name</strong>, data.name],
-          ]}
-        />
-      </div>
-    </>
-  );
+  const [variables, setVariables] = useState(null);
 
-  if (!link) {
-    return (
-      <div className="protocol-summary-asset">
-        {asset}
-      </div>
-    );
-  }
+  const stubbedState = stubState(assetManifest, workingPath);
+
+  const getNetworkAssetVariables = makeGetNetworkAssetVariables(stubbedState);
+  const assetPath = getAssetPath(stubbedState, id);
+
+  useEffect(() => {
+    if (data.type !== 'network') { return; }
+
+    getNetworkAssetVariables(id)
+      .then((v) => {
+        if (!v) { return; }
+        setVariables(v.map((name) => [name]));
+      });
+  }, []);
+
+  return {
+    name: data.name,
+    type: data.type,
+    variables,
+    assetPath,
+  };
+};
+
+const Asset = ({
+  id,
+}) => {
+  const {
+    variables,
+    assetPath,
+    name,
+    type,
+  } = useAssetData(id);
+
+  const encodedURI = encodeURIComponent(assetPath);
+  const url = `asset://${encodedURI}`;
 
   return (
-    <DualLink
-      to={`#asset-${id}`}
-      className="protocol-summary-asset"
-    >
-      {asset}
-    </DualLink>
+    <div className="protocol-summary-asset" id={`asset-${id}`}>
+      <h4>{`${name} (${type})`}</h4>
+
+      { type === 'image' && (
+        <div className="protocol-summary-asset__image">
+          <img src={url} alt="preview" />
+        </div>
+      )}
+
+      {variables && (
+        <MiniTable
+          wide
+          lite
+          rows={
+            [
+              [<strong>Variables</strong>],
+              ...variables,
+            ]
+          }
+        />
+      )}
+    </div>
   );
 };
 

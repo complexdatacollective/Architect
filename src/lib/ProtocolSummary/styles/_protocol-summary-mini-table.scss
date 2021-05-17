@@ -26,4 +26,28 @@
   &--wide {
     width: 100%;
   }
+
+  &--lite {
+    border-radius: .5rem .5rem 0 0;
+    & > tbody {
+      & > tr {
+        & > td {
+          border-bottom: 1px solid var(--color-platinum--dark);
+          background-color: transparent;
+        }
+      }
+
+      & > tr:nth-child(2n) {
+        & > td {
+          background-color: transparent;
+        }
+      }
+
+      & > tr:nth-child(1) {
+        & > td {
+          background-color: var(--color-platinum);
+        }
+      }
+    }
+  }
 }
