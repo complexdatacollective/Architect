@@ -12,7 +12,7 @@ const AssetManifest = () => {
   const assets = Object.keys(assetManifest);
 
   return (
-    <div>
+    <div className="protocol-summary-asset-manifest">
       <h1>Asset Manifest</h1>
       {assets.map((id) => (
         <Asset id={id} />

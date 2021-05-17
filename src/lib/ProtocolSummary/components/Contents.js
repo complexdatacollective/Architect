@@ -1,16 +1,20 @@
 import React, { useContext } from 'react';
-import { map, toPairs } from 'lodash';
+import { map, toPairs, groupBy } from 'lodash';
 import SummaryContext from './SummaryContext';
 import DualLink from './DualLink';
 import EntityBadge from './EntityBadge';
 
 const Contents = () => {
   const {
-    protocol: { stages, codebook },
+    protocol: { stages, codebook, assetManifest },
   } = useContext(SummaryContext);
 
   const nodes = toPairs(codebook.node);
   const edges = toPairs(codebook.edge);
+  const assets = groupBy(
+    toPairs(assetManifest),
+    ([, asset]) => asset.type,
+  );
 
   return (
     <div className="protocol-summary-contents">
@@ -54,6 +58,23 @@ const Contents = () => {
               </p>
             ))}
           </div>
+        </div>
+      </div>
+      <div className="protocol-summary-contents__section">
+        <h2>Assets</h2>
+        <div className="protocol-summary-contents__subsection">
+          {assets && map(assets, (typeAssets, type) => (
+            <>
+              <h4>{type}</h4>
+              <div className="protocol-summary-contents__subsection">
+                {typeAssets.map(([id, asset]) => (
+                  <p>
+                    <DualLink to={`#asset-${id}`}>{asset.name}</DualLink>
+                  </p>
+                ))}
+              </div>
+            </>
+          ))}
         </div>
       </div>
     </div>

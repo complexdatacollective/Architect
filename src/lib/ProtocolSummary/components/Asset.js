@@ -58,11 +58,11 @@ const Asset = ({
   const url = `asset://${encodedURI}`;
 
   return (
-    <div className="protocol-summary-asset" id={`asset-${id}`}>
+    <div className="protocol-summary-asset-manifest__asset" id={`asset-${id}`}>
       <h4>{`${name} (${type})`}</h4>
 
       { type === 'image' && (
-        <div className="protocol-summary-asset__image">
+        <div className="protocol-summary-asset-manifest__asset-image">
           <img src={url} alt="preview" />
         </div>
       )}

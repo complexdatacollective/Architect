@@ -1,0 +1,17 @@
+.protocol-summary-asset-manifest {
+  page-break-before: always;
+
+  &__asset {
+    @include content-box;
+    margin-bottom: 1rem;
+
+    &-image {
+      background: #808080;
+      margin: 1rem 0;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
