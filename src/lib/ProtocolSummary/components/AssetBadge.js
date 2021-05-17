@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import SummaryContext from './SummaryContext';
 import DualLink from './DualLink';
@@ -32,6 +33,15 @@ const AssetBadge = ({
       </div>
     </div>
   );
+};
+
+AssetBadge.propTypes = {
+  id: PropTypes.string.isRequired,
+  link: PropTypes.bool,
+};
+
+AssetBadge.defaultProps = {
+  link: false,
 };
 
 export default AssetBadge;

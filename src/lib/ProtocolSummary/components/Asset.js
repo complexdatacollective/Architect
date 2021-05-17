@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { makeGetNetworkAssetVariables, getAssetPath } from '@selectors/assets';
 import SummaryContext from './SummaryContext';
@@ -81,6 +82,10 @@ const Asset = ({
       )}
     </div>
   );
+};
+
+Asset.propTypes = {
+  id: PropTypes.string.isRequired,
 };
 
 export default Asset;

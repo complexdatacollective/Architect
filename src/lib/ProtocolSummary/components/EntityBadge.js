@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import cx from 'classnames';
 import EntityIcon from '@components/Codebook/EntityIcon';
@@ -10,7 +11,7 @@ const EntityBadge = ({
   entity,
   link,
   small,
-  tiny
+  tiny,
 }) => {
   const {
     protocol: { codebook },
@@ -58,6 +59,20 @@ const EntityBadge = ({
       {badge}
     </DualLink>
   );
+};
+
+EntityBadge.propTypes = {
+  type: PropTypes.string.isRequired,
+  entity: PropTypes.string.isRequired,
+  link: PropTypes.bool,
+  small: PropTypes.bool,
+  tiny: PropTypes.bool,
+};
+
+EntityBadge.defaultProps = {
+  link: false,
+  small: false,
+  tiny: false,
 };
 
 export default EntityBadge;

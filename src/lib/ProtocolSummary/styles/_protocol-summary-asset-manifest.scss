@@ -1,6 +1,10 @@
 .protocol-summary-asset-manifest {
   page-break-before: always;
 
+  &__group {
+    margin-top: 2rem;
+  }
+
   &__asset {
     @include content-box;
     margin-bottom: 1rem;

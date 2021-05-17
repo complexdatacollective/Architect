@@ -5,7 +5,7 @@ import Asset from './Asset';
 
 const AssetManifest = () => {
   const {
-    protocol: { assetManifest, },
+    protocol: { assetManifest },
   } = useContext(SummaryContext);
 
   if (!assetManifest) { return null; }

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import RuleText, { Join } from '@components/Query/Rules/PreviewText';
 import SummaryContext from './SummaryContext';
 import { getVariableName, getEntityName } from './helpers';
@@ -47,6 +48,18 @@ const Rules = ({ filter }) => {
       ))}
     </div>
   );
+};
+
+Rules.propTypes = {
+  filter: PropTypes.shape({
+    join: PropTypes.string,
+    // eslint-disable-next-line react/forbid-prop-types
+    rules: PropTypes.array,
+  }),
+};
+
+Rules.defaultProps = {
+  filter: null,
 };
 
 export default Rules;
