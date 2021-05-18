@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
+import interfaceImage from '@app/images/timeline';
 import SummaryContext from '../SummaryContext';
 import DualLink from '../DualLink';
 import SkipLogic from './SkipLogic';
@@ -14,6 +16,8 @@ import Behaviours from './Behaviours';
 import Presets from './Presets';
 import Panels from './Panels';
 import Items from './Items';
+
+const getInterfaceImage = (type) => get(interfaceImage, type);
 
 const variablesOnStage = (index) => (stageId) => index
   .reduce(
@@ -45,6 +49,10 @@ const Stage = ({
           {'. '}
           {label}
         </h1>
+
+        <div className="protocol-summary-stage__preview">
+          <img src={getInterfaceImage(type)} />
+        </div>
 
         <table className="protocol-summary-stage__meta">
           <tbody>
