@@ -10,7 +10,7 @@ const InterviewerScript = () => (
     <Details
       className="interviewer-script__details"
       summary={(
-        <h2 id={getFieldId('interviewerScript')}>Interviewer Script</h2>
+        <h2 id={getFieldId('interviewScript')}>Interviewer Script</h2>
       )}
     >
       <p>
@@ -18,7 +18,7 @@ const InterviewerScript = () => (
         This copy will not be shown in Interviewer.
       </p>
       <Field
-        name="interviewerScript"
+        name="interviewScript"
         component={RichText}
         placeholder="Enter text for the interviewer here."
       />
