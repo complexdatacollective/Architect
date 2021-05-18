@@ -13,8 +13,7 @@ import DataSource from './DataSource';
 import Behaviours from './Behaviours';
 import Presets from './Presets';
 import Panels from './Panels';
-
-// TODO: add skip logic
+import Items from './Items';
 
 const variablesOnStage = (index) => (stageId) => index
   .reduce(
@@ -108,6 +107,9 @@ const Stage = ({
         </div>
         <div className="protocol-summary-stage__content-section">
           <Presets presets={configuration.presets} />
+        </div>
+        <div className="protocol-summary-stage__content-section">
+          <Items items={configuration.items} />
         </div>
         <div className="protocol-summary-stage__content-section">
           <InterviewScript interviewScript={configuration.interviewScript} />

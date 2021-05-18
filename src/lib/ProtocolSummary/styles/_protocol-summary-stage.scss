@@ -94,4 +94,32 @@
       }
     }
   }
+
+  &__items {
+    &-content {
+    }
+
+    &-item {
+      @include content-box;
+      margin-top: 1rem;
+
+      video,
+      img {
+        width: 50%;
+      }
+
+      img {
+        margin: 1rem 0;
+      }
+
+      video {
+        margin: 1rem 0 0;
+      }
+
+      &--text {
+        @include content-box;
+        margin: 1rem 0;
+      }
+    }
+  }
 }
