@@ -3,6 +3,7 @@ import {
   Form,
   NameGeneratorPrompts,
   NodePanels,
+  InterviewerScript,
 } from '@components/sections';
 
 const NameGenerator = {
@@ -13,6 +14,7 @@ const NameGenerator = {
     Form,
     NameGeneratorPrompts,
     NodePanels,
+    InterviewerScript,
   ],
   name: 'Name Generator (using forms)',
 };

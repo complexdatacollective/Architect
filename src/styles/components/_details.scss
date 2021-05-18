@@ -1,0 +1,35 @@
+.details {
+  $icon-size: 1rem;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__summary {
+    flex-grow: 1;
+    margin: 0 0 0 1rem;
+  }
+
+  &__indicator {
+    display: inline-flex;
+    height: $icon-size;
+    width: $icon-size;
+    justify-content: center;
+    align-items: center;
+
+    .icon {
+      height: $icon-size;
+      width: $icon-size;
+
+      .cls-2 {
+        fill: var(--color-charcoal);
+      }
+    }
+  }
+
+  &__content {
+    overflow: hidden;
+  }
+}
