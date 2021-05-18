@@ -25,3 +25,4 @@ export { default as SearchOptionsForExternalData } from './SearchOptionsForExter
 export { default as SociogramPrompts } from './SociogramPrompts';
 export { default as SortOptionsForExternalData } from './SortOptionsForExternalData';
 export { default as Title } from './Title';
+export { default as InterviewerScript } from './InterviewerScript';
