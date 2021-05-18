@@ -10,17 +10,14 @@ import Variable from '../Variable';
 import EntityBadge from '../EntityBadge';
 
 const directionLabel = (direction) => (
-  direction === 'desc'
-    ? 'DESCENDING'
-    : 'ASCENDING'
+  direction === 'desc' ? 'descending' : 'ascending'
 );
 
 const SortOrder = ({ rules }) => {
   const result = rules
     .map(({ property, direction }) => (
-      <div>
+      <div className="protocol-summary-stage__prompts-sort">
         <Variable id={property} />
-        {' '}
         <em>{directionLabel(direction)}</em>
       </div>
     ));

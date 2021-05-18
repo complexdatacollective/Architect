@@ -81,6 +81,16 @@
     @include list-content-box
   }
 
+  &__prompts {
+    &-sort {
+      em {
+        opacity: 0.5;
+        float: right;
+        padding-left: 1rem;
+      }
+    }
+  }
+
   &__form,
   &__quick-add,
   &__data-source,
