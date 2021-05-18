@@ -7,8 +7,6 @@ import Variable from '../Variable';
 const Presets = ({ presets }) => {
   if (!presets) { return null; }
 
-  console.log({ presets });
-
   return (
     <div className="protocol-summary-stage__presets">
       <h2>Presets</h2>

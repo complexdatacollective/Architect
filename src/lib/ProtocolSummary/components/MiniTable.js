@@ -13,10 +13,10 @@ const MiniTable = ({ rows, wide, lite }) => {
   return (
     <table className={classes}>
       <tbody>
-        {rows.map((row, index) => (
-          <tr key={index}>
-            {row.map((column) => (
-              <td>
+        {rows.map((row, n) => (
+          <tr key={n}>
+            {row.map((column, m) => (
+              <td key={m}>
                 {column}
               </td>
             ))}

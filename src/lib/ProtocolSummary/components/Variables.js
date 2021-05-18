@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { toPairs, get, find } from 'lodash';
@@ -85,11 +87,11 @@ const Variables = ({ variables }) => {
                   </table>
                 </td>
                 <td>
-                  {getUsedIn(indexEntry).map(([stageId, stageName]) => (
-                    <>
+                  {getUsedIn(indexEntry).map(([stageId, stageName], n) => (
+                    <React.Fragment key={n}>
                       <DualLink to={`#stage-${stageId}`}>{stageName}</DualLink>
                       <br />
-                    </>
+                    </React.Fragment>
                   ))}
                 </td>
               </tr>
