@@ -1,6 +1,10 @@
 .protocol-summary-asset-manifest {
   page-break-before: always;
 
+  h2 {
+    text-transform: capitalize;
+  }
+
   &__group {
     margin-top: 2rem;
   }
