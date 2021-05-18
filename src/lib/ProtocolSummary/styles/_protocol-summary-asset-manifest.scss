@@ -9,12 +9,21 @@
     @include content-box;
     margin-bottom: 1rem;
 
-    &-image {
+    &-media {
       background: #808080;
-      margin: 1rem 0;
+      margin: 0 0 1rem;
+      display: inline-block;
+      width: auto;
+      font-size: 0;
+      width: 50%;
 
-      img {
+      img,
+      video {
         width: 100%;
+      }
+
+      & + .protocol-summary-mini-table {
+        margin-top: 0;
       }
     }
   }
