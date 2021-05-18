@@ -48,6 +48,7 @@ const Details = ({
         layout
         className="details__content"
         variants={animations}
+        initial="collapsed"
         animate={(isOpen ? 'open' : 'collapsed')}
       >
         {children}
