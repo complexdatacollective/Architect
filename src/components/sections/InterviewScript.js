@@ -6,9 +6,9 @@ import { Field } from 'redux-form';
 import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
 
 const InterviewerScript = () => (
-  <Section className="interviewer-script">
+  <Section className="interview-script">
     <Details
-      className="interviewer-script__details"
+      className="interview-script__details"
       summary={(
         <h2 id={getFieldId('interviewScript')}>Interviewer Script</h2>
       )}
