@@ -25,11 +25,11 @@ const Radio = ({
   );
 
   return (
-    <label className={componentClasses} htmlFor={id}>
+    <label className={componentClasses} htmlFor={id.current}>
       <input
         type="radio"
         className="form-field-radio__input"
-        id={id}
+        id={id.current}
         // input.checked is only provided by redux form if type="checkbox" or type="radio" is
         // provided to <Field />, so for the case that it isn't we can rely on the more reliable
         // input.value
