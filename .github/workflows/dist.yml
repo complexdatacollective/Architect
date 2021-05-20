@@ -35,7 +35,13 @@ jobs:
       - name: Install node modules
         run: npm install
 
-      - name: Dist
+      - name: Delete current release assets
+        uses: Kellojo/delete-release-assets-action@v1.9
+        with:
+          delete-only-drafts: true
+          github-access-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Linux build
         run: npm run dist:linux -- --publish always
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
