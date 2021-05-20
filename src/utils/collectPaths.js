@@ -35,12 +35,12 @@ import { get, reduce, isArray } from 'lodash';
  *
  * @returns {object} in format: { [path]: value }
  */
-const collectPaths = (paths, obj, memoPath) => {
-  // We expect a string notation for paths, but it's actually converted to array automatically:
+const collectPath = (objPath, obj, memoPath) => {
+  // We expect a string notation for objPath, but it's actually converted to array automatically:
   // 'stages[].prompts[].subject.type' => ['stages', 'prompts', 'subject.type']
-  const parsedPath = isArray(paths)
-    ? paths
-    : paths.split('[].');
+  const parsedPath = isArray(objPath)
+    ? objPath
+    : objPath.split('[].');
   const [, ...rest] = parsedPath;
   let [next] = parsedPath;
   let scanArray = false;
@@ -61,7 +61,7 @@ const collectPaths = (paths, obj, memoPath) => {
       nextObj || [],
       (memo, item, index) => ({
         ...memo,
-        ...collectPaths(rest, item, `${path}[${index}]`),
+        ...collectPath(rest, item, `${path}[${index}]`),
       }),
       {},
     );
@@ -119,38 +119,29 @@ const collectPaths = (paths, obj, memoPath) => {
  * // };
  * ```
  */
-export const collectMappedPaths = (paths, obj, mapFunc) => {
-  const collectedPaths = collectPaths(paths, obj);
+export const collectMappedPath = (paths, obj, mapFunc) => {
+  const collectedPaths = collectPath(paths, obj);
 
   return reduce(collectedPaths, (acc, value, path) => {
     const result = mapFunc(value, path);
+
     if (result === undefined) { return acc; }
     return {
       ...acc,
-      [result[0]]: result[1],
+      [result[1]]: result[0],
     };
   }, {});
 };
 
-// Helper object for collecting paths
-export class PathCollector {
-  constructor() {
-    this.attributePaths = new Set([]);
-  }
+export const collectPaths = (objPaths, object) => objPaths.reduce((acc, objPath) => {
+  const next = Array.isArray(objPath)
+    ? collectMappedPath(objPath[0], object, objPath[1])
+    : collectPath(objPath, object);
 
-  add(attributePath) {
-    this.attributePaths.add(attributePath);
-  }
+  return {
+    ...acc,
+    ...next,
+  };
+}, {});
 
-  collect(obj) {
-    return Array.from(this.attributePaths).reduce(
-      (acc, attributePath) => ({
-        ...acc,
-        ...collectPaths(attributePath, obj),
-      }),
-      {},
-    );
-  }
-}
-
-export default collectPaths;
+export default collectPath;

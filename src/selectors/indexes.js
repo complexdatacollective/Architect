@@ -1,88 +1,84 @@
 import { isArray, values } from 'lodash';
 import { createSelector } from 'reselect';
 import { getProtocol } from './protocol';
-import collectPaths, { PathCollector, collectMappedPaths } from '../utils/collectPaths';
+import collectPath, { collectPaths } from '../utils/collectPaths';
+
+const mapSubject = (entityType) => ({ type, entity }, path) => {
+  if (entity !== entityType) { return undefined; }
+  return [type, `${path}.type`];
+};
+
+const mapAssetItems = ({ type, content }, path) => {
+  if (type === 'text') { return undefined; }
+  return [content, `${path}.content`];
+};
+
+/**
+ * Locations of referenceable entities in a standard protocol.
+ *
+ * This is generally used to find which entities are used where.
+ */
+const paths = {
+  edges: [
+    'stages[].prompts[].edges.create',
+    'stages[].prompts[].edges.display[]',
+    'stages[].presets[].edges.display[]',
+    'stages[].prompts[].createEdge',
+    ['stages[].subject', mapSubject('edge')],
+  ],
+  nodes: [
+    ['stages[].subject', mapSubject('node')],
+  ],
+  variables: [
+    'stages[].quickAdd',
+    'stages[].form.fields[].variable',
+    'stages[].panels.filter.rules[].options.attribute',
+    'stages[].searchOptions.matchProperties[]',
+    'stages[].cardOptions.additionalProperties[].variable',
+    'stages[].prompts[].variable',
+    'stages[].prompts[].edgeVariable',
+    'stages[].prompts[].otherVariable',
+    'stages[].prompts[].additionalAttributes[].variable',
+    'stages[].prompts[].highlight.variable',
+    'stages[].prompts[].layout.layoutVariable',
+    'stages[].prompts[].presets[].layoutVariable',
+    'stages[].prompts[].presets[].groupVariable',
+    'stages[].prompts[].presets[].edges.display[]',
+    'stages[].prompts[].presets[].highlight[]',
+    'stages[].prompts[].bucketSortOrder[].property',
+    'stages[].prompts[].binSortOrder[].property',
+    'stages[].skipLogic.filter.rules[].options.attribute',
+    'stages[].filter.rules[].options.attribute',
+    'stages[].presets[].layoutVariable',
+    'stages[].presets[].groupVariable',
+    'stages[].presets[].edges.display[]',
+    'stages[].presets[].highlight[]',
+  ],
+  assets: [
+    'stages[].panels[].dataSource',
+    'stages[].dataSource',
+    'stages[].background.image',
+    ['stages[].items[]', mapAssetItems],
+  ],
+};
 
 /**
  * Returns index of used edges (entities)
- * Checks for usage in the following:
- * - `stages[].prompts[].edges.create`
- * - `stages[].prompts[].edges.display[]`
- * - `stages[].presets[].edges.display[]`
  * @returns {object} in format: { [path]: variable }
  */
 const getEdgeIndex = createSelector(
   getProtocol,
-  (protocol) => {
-    const createEdges = collectPaths('stages[].prompts[].edges.create', protocol);
-
-    const displayEdges = collectPaths('stages[].prompts[].edges.display[]', protocol);
-
-    const narrativeEdges = collectPaths('stages[].presets[].edges.display[]', protocol);
-
-    const dyadCensusEdges = collectPaths('stages[].prompts[].createEdge', protocol);
-
-    // TODO: This reducer shouldn't be necessary, look at updating collectPaths
-    const mapEdges = ({ type, entity }, path) => {
-      if (entity !== 'edge') { return undefined; }
-      return [`${path}.type`, type];
-    };
-
-    const alterEdgeFormEdges = collectMappedPaths('stages[].subject', protocol, mapEdges);
-
-    return {
-      ...createEdges,
-      ...displayEdges,
-      ...narrativeEdges,
-      ...dyadCensusEdges,
-      ...alterEdgeFormEdges,
-    };
-  },
+  (protocol) => collectPaths(paths.edges, protocol),
 );
 
 /**
  * Returns index of used nodes (entities)
- * Checks for usage in the following:
- * - `stages[].subject`
  * @returns {object} in format: { [path]: variable }
  */
 const getNodeIndex = createSelector(
   getProtocol,
-  (protocol) => {
-    const mapNodes = ({ type, entity }, path) => {
-      if (entity !== 'node') { return undefined; }
-      return [`${path}.type`, type];
-    };
-
-    return collectMappedPaths('stages[].subject', protocol, mapNodes);
-  },
+  (protocol) => collectPaths(paths.nodes, protocol),
 );
-
-const variablePathCollector = new PathCollector();
-
-variablePathCollector.add('stages[].quickAdd');
-variablePathCollector.add('stages[].form.fields[].variable');
-variablePathCollector.add('stages[].panels.filter.rules[].options.attribute');
-variablePathCollector.add('stages[].searchOptions.matchProperties[]');
-variablePathCollector.add('stages[].cardOptions.additionalProperties[].variable');
-variablePathCollector.add('stages[].prompts[].variable');
-variablePathCollector.add('stages[].prompts[].edgeVariable');
-variablePathCollector.add('stages[].prompts[].otherVariable');
-variablePathCollector.add('stages[].prompts[].additionalAttributes[].variable');
-variablePathCollector.add('stages[].prompts[].highlight.variable');
-variablePathCollector.add('stages[].prompts[].layout.layoutVariable');
-variablePathCollector.add('stages[].prompts[].presets[].layoutVariable');
-variablePathCollector.add('stages[].prompts[].presets[].groupVariable');
-variablePathCollector.add('stages[].prompts[].presets[].edges.display[]');
-variablePathCollector.add('stages[].prompts[].presets[].highlight[]');
-variablePathCollector.add('stages[].prompts[].bucketSortOrder[].property');
-variablePathCollector.add('stages[].prompts[].binSortOrder[].property');
-variablePathCollector.add('stages[].skipLogic.filter.rules[].options.attribute');
-variablePathCollector.add('stages[].filter.rules[].options.attribute');
-variablePathCollector.add('stages[].presets[].layoutVariable');
-variablePathCollector.add('stages[].presets[].groupVariable');
-variablePathCollector.add('stages[].presets[].edges.display[]');
-variablePathCollector.add('stages[].presets[].highlight[]');
 
 /**
  * Returns index of used variables
@@ -90,38 +86,16 @@ variablePathCollector.add('stages[].presets[].highlight[]');
  */
 const getVariableIndex = createSelector(
   getProtocol,
-  (protocol) => variablePathCollector.collect(protocol),
+  (protocol) => collectPaths(paths.variables, protocol),
 );
 
 /**
  * Returns index of used assets
- * Checks for usage in the following:
- * - `stages[].prompts[].items[].content`
- * - `stages[].prompts[].panels[].dataSource`
- * - `stages[].prompts[].dataSource`
- * - `stages[].background.image`
  * @returns {object} in format: { [path]: variable }
  */
 const getAssetIndex = createSelector(
   getProtocol,
-  (protocol) => {
-    const mapAssets = ({ type, content }, path) => {
-      if (type === 'text') { return undefined; }
-      return [`${path}.content`, content];
-    };
-
-    const informationAssets = collectMappedPaths('stages[].items[]', protocol, mapAssets);
-    const nameGeneratorPanels = collectPaths('stages[].panels[].dataSource', protocol);
-    const nameGeneratorDataSources = collectPaths('stages[].dataSource', protocol);
-    const sociogramBackground = collectPaths('stages[].background.image', protocol);
-
-    return {
-      ...informationAssets,
-      ...nameGeneratorPanels,
-      ...nameGeneratorDataSources,
-      ...sociogramBackground,
-    };
-  },
+  (protocol) => collectPaths(paths.assets, protocol),
 );
 
 const combineLists = (lists) => lists
@@ -131,9 +105,9 @@ const combineLists = (lists) => lists
 /**
  * Creates a Set of items from arrays or path objects
  * @param {Array[paths|Array]} include array of path object
- * e.g. from `collectPaths()` or array of ids
+ * e.g. from `collectPath()` or array of ids
  * @param {Array[paths|Array]} excluded array of path object
- * e.g. from `collectPaths()` or array of ids
+ * e.g. from `collectPath()` or array of ids
  * @returns {Set} of ids
  */
 const buildSearch = (include = [], exclude = []) => {
@@ -148,7 +122,7 @@ const buildSearch = (include = [], exclude = []) => {
 
 const utils = {
   buildSearch,
-  collectPaths,
+  collectPath,
 };
 
 export {
