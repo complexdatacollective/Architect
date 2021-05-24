@@ -9,7 +9,7 @@ const Entity = ({
   variables,
 }) => (
   <div
-    className="protocol-summary-entity"
+    className="protocol-summary-entity page-break-marker"
     id={entity === 'ego' ? 'ego' : `entity-${type}`}
   >
     {entity !== 'ego' && (

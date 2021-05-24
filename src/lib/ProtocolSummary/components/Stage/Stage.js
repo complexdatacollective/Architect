@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { get } from 'lodash';
+import { get, isEmpty, sortBy } from 'lodash';
 import interfaceImage from '@app/images/timeline';
 import SummaryContext from '../SummaryContext';
 import DualLink from '../DualLink';
 import SkipLogic from './SkipLogic';
-import Subject from './Subject';
 import IntroductionPanel from './IntroductionPanel';
 import Prompts from './Prompts';
 import InterviewScript from './InterviewScript';
@@ -16,6 +15,10 @@ import Behaviours from './Behaviours';
 import Presets from './Presets';
 import Panels from './Panels';
 import Items from './Items';
+import PageHeading from './PageHeading';
+import EntityBadge from '../EntityBadge';
+import MiniTable from '../MiniTable';
+import Filter from './Filter';
 
 const getInterfaceImage = (type) => get(interfaceImage, type);
 
@@ -39,87 +42,91 @@ const Stage = ({
     index,
   } = useContext(SummaryContext);
 
-  const stageVariables = variablesOnStage(index)(id);
+  const stageVariables = sortBy(
+    variablesOnStage(index)(id),
+    [(variable) => variable[1].toLowerCase()],
+  );
 
   return (
-    <div className="protocol-summary-stage" id={`stage-${id}`}>
+    <div className="protocol-summary-stage page-break-marker" id={`stage-${id}`}>
       <div className="protocol-summary-stage__heading">
-        <h1>
-          {stageNumber}
-          {'. '}
-          {label}
-        </h1>
-
-        <div className="protocol-summary-stage__preview">
-          <img src={getInterfaceImage(type)} />
-        </div>
-
-        <table className="protocol-summary-stage__meta">
-          <tbody>
-            <tr>
-              <th>Type</th>
-              <td>{type}</td>
-            </tr>
-            { configuration.skipLogic && (
-              <tr>
-                <th>Skip Logic</th>
-                <td>
-                  <SkipLogic skipLogic={configuration.skipLogic} />
-                </td>
-              </tr>
+        <div className="protocol-summary-stage__wrapper">
+          <div className="protocol-summary-stage__summary">
+            <div className="stage-label" data-number={stageNumber}><h1>{label}</h1></div>
+            {configuration.subject && !isEmpty(stageVariables) && (
+              <table className="protocol-summary-mini-table protocol-summary-mini-table--rotated">
+                <tbody>
+                  { configuration.subject && (
+                    <tr>
+                      <td>Subject</td>
+                      <td>
+                        <EntityBadge
+                          small
+                          type={configuration.subject.type}
+                          entity={configuration.subject.entity}
+                          link
+                        />
+                      </td>
+                    </tr>
+                  )}
+                  { !isEmpty(stageVariables) && (
+                    <tr>
+                      <td>Variables</td>
+                      <td>
+                        { stageVariables.map(([variableId, variable], i) => (
+                          <>
+                            <DualLink to={`#variable-${variableId}`} key={variableId}>{variable}</DualLink>
+                            { i !== stageVariables.length - 1 && ', '}
+                          </>
+                        )) }
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
             )}
-            { stageVariables.length > 0 && (
-              <tr>
-                <th>Variables</th>
-                <td>
-                  { stageVariables.map(([variableId, variable]) => (
-                    <>
-                      <DualLink to={`#variable-${variableId}`} key={variableId}>{variable}</DualLink>
-                      <br key={`br-${variableId}`} />
-                    </>
-                  )) }
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="protocol-summary-stage__content">
-        <div className="protocol-summary-stage__content-section">
-          <Subject
-            subject={configuration.subject}
-            filter={configuration.filter}
-          />
+          </div>
+          <div className="protocol-summary-stage__preview">
+            <div className="stage-image">
+              <img src={getInterfaceImage(type)} alt="" />
+            </div>
+            {/* <h4>
+              {type}
+            </h4> */}
+          </div>
         </div>
-        <div className="protocol-summary-stage__content-section">
+        { configuration.filter && (
+          <div className="protocol-summary-stage__heading-section">
+            <div className="protocol-summary-stage__heading-section-content">
+              <h2 className="section-heading">Network Filtering</h2>
+              <MiniTable
+                rotated
+                rows={[
+                  ['Rules', <Filter filter={configuration.filter} />],
+                ]}
+              />
+            </div>
+          </div>
+        )}
+        { configuration.skipLogic && (
+          <div className="protocol-summary-stage__heading-section">
+            <div className="protocol-summary-stage__heading-section-content">
+              <h2 className="section-heading">Skip Logic</h2>
+              <SkipLogic skipLogic={configuration.skipLogic} />
+            </div>
+          </div>
+        )}
+        <div className="protocol-summary-stage__content">
           <IntroductionPanel introductionPanel={configuration.introductionPanel} />
-        </div>
-        <div className="protocol-summary-stage__content-section">
           <DataSource dataSource={configuration.dataSource} />
-        </div>
-        <div className="protocol-summary-stage__content-section">
           <QuickAdd quickAdd={configuration.quickAdd} />
-        </div>
-        <div className="protocol-summary-stage__content-section">
           <Panels panels={configuration.panels} />
-        </div>
-        <div className="protocol-summary-stage__content-section">
           <Prompts prompts={configuration.prompts} />
-        </div>
-        <div className="protocol-summary-stage__content-section">
           <Form form={configuration.form} />
-        </div>
-        <div className="protocol-summary-stage__content-section">
           <Behaviours behaviours={configuration.behaviours} />
-        </div>
-        <div className="protocol-summary-stage__content-section">
           <Presets presets={configuration.presets} />
-        </div>
-        <div className="protocol-summary-stage__content-section">
+          <PageHeading heading={configuration.title} />
           <Items items={configuration.items} />
-        </div>
-        <div className="protocol-summary-stage__content-section">
           <InterviewScript interviewScript={configuration.interviewScript} />
         </div>
       </div>

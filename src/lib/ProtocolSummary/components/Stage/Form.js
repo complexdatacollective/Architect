@@ -21,22 +21,28 @@ const Form = ({ form }) => {
 
     return ([
       <Variable id={variable} />,
-      meta.type,
+      meta.component,
       <Markdown source={prompt} />,
     ]);
   });
 
   return (
     <div className="protocol-summary-stage__form">
-      <h2>Form</h2>
       <div className="protocol-summary-stage__form-content">
-        <h4>{form.title}</h4>
+        <h2 className="section-heading">Form</h2>
+        { form.title && (
+          <h4>
+            Title:
+            {' '}
+            {form.title}
+          </h4>
+        )}
         <MiniTable
+          wide
           rows={[
-            [<strong>Variable</strong>, <strong>Type</strong>, <strong>Label</strong>],
+            ['Variable', 'Component', 'Prompt'],
             ...fieldRows,
           ]}
-          wide
         />
       </div>
     </div>

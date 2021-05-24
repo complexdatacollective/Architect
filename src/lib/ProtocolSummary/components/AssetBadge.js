@@ -26,8 +26,8 @@ const AssetBadge = ({
       <div className="protocol-summary-asset-badge__content">
         <MiniTable
           rows={[
-            [<strong>Type</strong>, data.type],
-            [<strong>Name</strong>, name],
+            ['Type', data.type],
+            ['Name', name],
           ]}
         />
       </div>

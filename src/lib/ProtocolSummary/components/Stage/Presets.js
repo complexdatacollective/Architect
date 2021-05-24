@@ -9,49 +9,63 @@ const Presets = ({ presets }) => {
 
   return (
     <div className="protocol-summary-stage__presets">
-      <h2>Presets</h2>
-
-      <ol>
-        {presets.map((preset) => (
-          <li>
-            <div className="protocol-summary-stage__presets-item">
-              <h4>{preset.label}</h4>
-              <MiniTable
-                rows={[
-                  [<strong>Layout variable</strong>, <Variable id={preset.layoutVariable} link />],
-                  [
-                    <strong>Show edges</strong>,
-                    preset.edges.display.map((edge) => (
-                      <>
-                        <EntityBadge entity="edge" type={edge} tiny link />
-                        <br />
-                      </>
-                    )),
-                  ],
-                  [<strong>Group variable</strong>, <Variable id={preset.groupVariable} link />],
-                  [
-                    <strong>Highlight attributes</strong>,
-                    preset.highlight.map((id) => (
-                      <>
-                        <Variable id={id} link />
-                        <br />
-                      </>
-                    )),
-                  ],
-                ]}
-              />
-            </div>
-          </li>
-        ))}
-      </ol>
+      <div className="protocol-summary-stage__presets-content">
+        <h2 className="section-heading">Presets</h2>
+        <ol>
+          {presets.map((preset) => (
+            <li>
+              <div className="protocol-summary-stage__presets-item">
+                <h2 className="section-heading">{preset.label}</h2>
+                <MiniTable
+                  rotated
+                  rows={[
+                    [
+                      'Layout variable',
+                      <Variable id={preset.layoutVariable} link />],
+                    [
+                      'Show edges',
+                      <ul>
+                        {
+                          preset.edges.display.map((edge) => (
+                            <li>
+                              <EntityBadge entity="edge" type={edge} tiny link />
+                            </li>
+                          ))
+                        }
+                      </ul>,
+                    ],
+                    ['Group variable', <Variable id={preset.groupVariable} link />],
+                    [
+                      'Highlight attributes',
+                      <ul>
+                        {
+                          preset.highlight.map((id) => (
+                            <li>
+                              <Variable id={id} link />
+                              <br />
+                            </li>
+                          ))
+                        }
+                      </ul>,
+                    ],
+                  ]}
+                />
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
   );
 };
 
 Presets.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  presets: PropTypes.object,
 };
 
 Presets.defaultProps = {
+  presets: null,
 };
 
 export default Presets;

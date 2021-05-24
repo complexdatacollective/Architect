@@ -1,4 +1,6 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import Rules from '../Rules';
 
 const Filter = ({ filter }) => {
@@ -9,6 +11,10 @@ const Filter = ({ filter }) => {
       <Rules filter={filter} />
     </div>
   );
+};
+
+Filter.propTypes = {
+  filter: PropTypes.object.isRequired,
 };
 
 export default Filter;

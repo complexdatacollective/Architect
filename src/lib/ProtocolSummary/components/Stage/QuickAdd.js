@@ -15,16 +15,17 @@ const QuickAdd = ({ quickAdd }) => {
 
   return (
     <div className="protocol-summary-stage__quick-add">
-      <h2>Quick Add</h2>
       <div className="protocol-summary-stage__quick-add-content">
+        <h2 className="section-heading">Quick Add</h2>
         <MiniTable
+          rotated
           rows={[
             [
-              <strong>Variable</strong>,
+              'Variable',
               <Variable id={quickAdd} />,
             ],
             [
-              <strong>Type</strong>,
+              'Type',
               variableMeta.type,
             ],
           ]}

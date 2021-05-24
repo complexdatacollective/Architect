@@ -7,8 +7,8 @@ const DataSource = ({ dataSource }) => {
 
   return (
     <div className="protocol-summary-stage__data-source">
-      <h2>DataSource</h2>
       <div className="protocol-summary-stage__data-source-content">
+        <h2 className="section-heading">DataSource</h2>
         <AssetBadge id={dataSource} link />
       </div>
     </div>
@@ -16,7 +16,8 @@ const DataSource = ({ dataSource }) => {
 };
 
 DataSource.propTypes = {
-  // dataSource:
+  // eslint-disable-next-line react/forbid-prop-types
+  dataSource: PropTypes.object,
 };
 
 DataSource.defaultProps = {

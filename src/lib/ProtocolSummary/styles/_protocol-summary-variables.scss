@@ -17,6 +17,7 @@
     }
 
     & > tbody {
+
       & > tr {
         & > td {
           padding: .75rem;
@@ -75,5 +76,6 @@
 
   .protocol-summary-mini-table {
     margin: 0;
+    max-width: 7cm;
   }
 }

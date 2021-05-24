@@ -4,8 +4,8 @@ import Markdown from 'react-markdown';
 
 const InterviewScript = ({ interviewScript }) => (
   <div className="protocol-summary-stage__interview-script">
-    <h2>Script</h2>
     <div className="protocol-summary-stage__interview-script-content">
+      <h2 className="section-heading">Interview Script</h2>
       <Markdown source={interviewScript} />
     </div>
   </div>

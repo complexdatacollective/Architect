@@ -34,8 +34,6 @@ const Rules = ({ filter }) => {
     join,
   } = filter;
 
-  // console.log({ rules: filter.rules });
-
   const rules = labelRules(protocol.codebook, index, filter.rules);
 
   return (

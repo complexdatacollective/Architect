@@ -1,10 +1,3 @@
-@mixin content-box {
-  page-break-inside: avoid;
-  border: 2px solid var(--color-platinum);
-  border-radius: 1rem;
-  padding: 0 1rem; // margin specified on contained elements
-}
-
 @import './_protocol-summary';
 @import './_protocol-summary-asset-manifest';
 @import './_protocol-summary-cover';

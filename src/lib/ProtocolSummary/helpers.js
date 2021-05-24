@@ -25,6 +25,7 @@ const buildVariableEntry = (
     id: variableId,
     name: variableConfiguration.name,
     type: variableConfiguration.type,
+    component: variableConfiguration.component,
     prompt: field && field.prompt,
     subject: { entity, type: entityType !== 'ego' && entityType },
     stages,

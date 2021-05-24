@@ -12,7 +12,7 @@ const Codebook = () => {
   const edges = toPairs(codebook.edge);
 
   return (
-    <div>
+    <div className="landscape">
       { codebook.ego && (
         <Entity
           entity="ego"

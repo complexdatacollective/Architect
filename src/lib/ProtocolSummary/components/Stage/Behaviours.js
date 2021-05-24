@@ -8,17 +8,17 @@ const Behaviours = ({ behaviours }) => {
 
   return (
     <div className="protocol-summary-stage__behaviours">
-      <h2>Behaviours</h2>
-
       <div className="protocol-summary-stage__behaviours-content">
+        <h2 className="section-heading">Behaviours</h2>
         <MiniTable
+          rotated
           rows={[
             [
-              <strong>Repositioning enabled</strong>,
+              'Repositioning enabled',
               renderValue(behaviours.allowRepositioning),
             ],
             [
-              <strong>Freedraw enabled</strong>,
+              'Freedraw enabled',
               renderValue(behaviours.freeDraw),
             ],
           ]}

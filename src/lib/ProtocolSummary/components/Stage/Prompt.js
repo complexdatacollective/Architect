@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-props-no-spreading, react/forbid-prop-types */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
@@ -16,23 +15,32 @@ const directionLabel = (direction) => (
 const SortOrder = ({ rules }) => {
   const result = rules
     .map(({ property, direction }) => (
-      <div className="protocol-summary-stage__prompts-sort">
+      <li>
         <Variable id={property} />
-        <em>{directionLabel(direction)}</em>
-      </div>
+        {' '}
+        <small>
+          (
+          {directionLabel(direction)}
+          )
+        </small>
+      </li>
     ));
-  return <div>{result}</div>;
+  return <ol className="protocol-summary-stage__prompts-sort">{result}</ol>;
+};
+
+SortOrder.propTypes = {
+  rules: PropTypes.object.isRequired,
 };
 
 const attributes = [
-  ['layout.layoutVariable', 'Layout', (id) => <Variable id={id} />],
+  ['layout.layoutVariable', 'Layout variable', (id) => <Variable id={id} />],
   ['variable', 'Variable', (id) => <Variable id={id} />],
-  ['edges.create', 'Create edge', (type) => <EntityBadge entity="edge" type={type} tiny link />],
-  ['createEdge', 'Create edge', (type) => <EntityBadge entity="edge" type={type} tiny link />],
-  ['edgeVariable', 'Edge variable', (id) => <Variable id={id} />],
+  ['edges.create', 'Creates edge', (type) => <EntityBadge entity="edge" type={type} tiny link />],
+  ['createEdge', 'Creates edge', (type) => <EntityBadge entity="edge" type={type} tiny link />],
+  ['edgeVariable', 'Edge Strength Variable', (id) => <Variable id={id} />],
   ['highlight.allowHighlighting', 'Allow highlighting', (allow) => renderValue(allow)],
   ['highlight.variable', 'Highlight variable', (id) => <Variable id={id} />],
-  ['negativeLabel', 'Negative label', (text) => text],
+  ['negativeLabel', 'Negative Option Label', (text) => text],
   ['sortOrder.property', 'Sort by property', (rules) => <SortOrder rules={rules} />],
   ['binSortOrder', 'Bin sort order', (rules) => <SortOrder rules={rules} />],
   ['bucketSortOrder', 'Bucket sort order', (rules) => <SortOrder rules={rules} />],
@@ -45,7 +53,7 @@ const reduceAttribute = (prompt) => (acc, [path, label, renderer]) => {
   if (isNull(value)) { return acc; }
   return [
     ...acc,
-    [<strong>{label}</strong>, renderer(value)],
+    [label, renderer(value)],
   ];
 };
 
@@ -66,12 +74,12 @@ const Prompt = ({
     <div className="protocol-summary-stage__prompts-item">
       <Markdown source={text} />
       { attributeRows.length > 0 && (
-        <MiniTable rows={attributeRows} />
+        <MiniTable rotated rows={attributeRows} />
       )}
       { additionalAttributes.length > 0 && (
         <MiniTable
           rows={[
-            [<strong>Variable</strong>, <strong>Value</strong>],
+            ['Variable', 'Value'],
             ...additionalAttributeRows,
           ]}
         />

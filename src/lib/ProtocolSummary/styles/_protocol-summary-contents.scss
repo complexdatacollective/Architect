@@ -1,26 +1,37 @@
 .protocol-summary-contents {
-  margin-bottom: 8rem;
 
-  ol,
-  ul {
-    margin: 1rem 0;
-    padding: 0 0 0 2.5rem;
-  }
-
-  li {
-    margin: 0.5rem 0 0;
-    padding: 0 0 0 0.5rem;
+  .heading {
+    @extend .small-heading;
+    margin: unit(2) 0;
   }
 
   &__section {
-    margin-top: 2rem;
-  }
+    > ol {
+      padding-inline-start: 0;
+      // Top level
+      > li {
+        list-style: none;
+        @extend .small-heading;
+        font-size: 14px !important;
+        margin: unit(2) 0;
+        > ol {
+          > li {
 
-  &__subsection {
-    margin-left: 1rem;
-  }
+          }
+        }
+      }
+    }
 
-  h4 {
-    text-transform: capitalize;
+    ul {
+      li {
+        padding-inline-start: 0;
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    li {
+      margin: unit(1) 0;
+    }
   }
 }

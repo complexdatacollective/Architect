@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AssetBadge from '../AssetBadge';
+import MiniTable from '../MiniTable';
 
 // TODO: add filter
 
@@ -11,23 +12,31 @@ const Panels = ({
 
   return (
     <div className="protocol-summary-stage__panels">
-      <h2>Panels</h2>
-      {panels.map((panel) => (
-        <div className="protocol-summary-stage__panels-panel" key={panel.id}>
-          <h4>{panel.title}</h4>
-          {
-            panel.dataSource === 'existing'
-              ? <p><em>Existing network</em></p>
-              : <AssetBadge id={panel.dataSource} link />
-          }
-        </div>
-      ))}
+      <div className="protocol-summary-stage__panels-content">
+        <h2 className="section-heading">Panels</h2>
+        <ol>
+          {panels.map((panel) => (
+            <li className="protocol-summary-stage__panels-panel" key={panel.id}>
+              <MiniTable
+                rotated
+                rows={[
+                  ['Title', panel.title],
+                  ['Data Source', panel.dataSource === 'existing'
+                    ? <p><em>Existing network</em></p>
+                    : <AssetBadge id={panel.dataSource} link />],
+                ]}
+              />
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
   );
 };
 
 Panels.propTypes = {
-  // panels: ,
+  // eslint-disable-next-line react/forbid-prop-types
+  panels: PropTypes.array,
 };
 
 Panels.defaultProps = {

@@ -14,7 +14,7 @@ const Subject = ({ subject, filter }) => {
         { filter && (
           <MiniTable
             rows={[
-              [<strong>Filter</strong>],
+              ['Filter'],
               [<Filter filter={filter} />],
             ]}
             wide

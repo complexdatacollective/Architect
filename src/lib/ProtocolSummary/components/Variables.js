@@ -2,7 +2,9 @@
 
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { toPairs, get, find } from 'lodash';
+import {
+  toPairs, get, find, isEmpty, sortBy,
+} from 'lodash';
 import Markdown from 'react-markdown';
 import { ALLOWED_MARKDOWN_LABEL_TAGS } from '@codaco/ui/src/utils/config';
 import SummaryContext from './SummaryContext';
@@ -33,21 +35,28 @@ const Variables = ({ variables }) => {
 
   const getUsedIn = makeGetUsedIn(protocol, index);
 
+  const sortedVariables = sortBy(
+    toPairs(variables),
+    [(variable) => variable[1].name.toLowerCase()],
+  );
+
   return (
     <div className="protocol-summary-variables">
-      <h2>Variables</h2>
-
       <table className="protocol-summary-variables__data">
         <thead>
           <tr>
             <th>Name</th>
             <th>Type</th>
-            <th>Detail</th>
-            <th>Usage</th>
+            <th>Used In</th>
           </tr>
         </thead>
         <tbody>
-          {toPairs(variables).map(([variableId, variableConfiguration]) => {
+          { isEmpty(variables) && (
+            <tr className="empty">
+              <td colSpan={3}>No variables to display.</td>
+            </tr>
+          )}
+          {sortedVariables.map(([variableId, variableConfiguration]) => {
             const {
               name,
               type,
@@ -57,7 +66,7 @@ const Variables = ({ variables }) => {
             const indexEntry = index.find(({ id }) => id === variableId);
 
             const optionsRows = options && options.map(({ value, label }) => ([
-              <em>{renderValue(value)}</em>,
+              renderValue(value),
               <Markdown
                 source={label}
                 allowedTypes={ALLOWED_MARKDOWN_LABEL_TAGS}
@@ -67,24 +76,11 @@ const Variables = ({ variables }) => {
             return (
               <tr key={variableId} id={`variable-${variableId}`}>
                 <td>{name}</td>
-                <td>{type}</td>
                 <td>
-                  <table className="protocol-summary-variables__details">
-                    <tbody>
-                      {indexEntry && indexEntry.prompt && (
-                        <tr>
-                          <th>Label</th>
-                          <td><Markdown source={indexEntry.prompt} /></td>
-                        </tr>
-                      )}
-                      {options && (
-                        <tr>
-                          <th>Values</th>
-                          <td><MiniTable rows={optionsRows} /></td>
-                        </tr>
-                      )}
-                    </tbody>
-                  </table>
+                  {type}
+                  <br />
+                  <br />
+                  {options && (<MiniTable rows={[['Value', 'Label'], ...optionsRows]} />)}
                 </td>
                 <td>
                   {getUsedIn(indexEntry).map(([stageId, stageName], n) => (

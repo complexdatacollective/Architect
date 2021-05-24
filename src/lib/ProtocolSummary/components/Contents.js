@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
-import { map, toPairs, groupBy } from 'lodash';
+import {
+  map, toPairs, groupBy, isEmpty,
+} from 'lodash';
 import SummaryContext from './SummaryContext';
 import DualLink from './DualLink';
 import EntityBadge from './EntityBadge';
@@ -20,62 +22,68 @@ const Contents = () => {
     <div className="protocol-summary-contents">
       <h1>Contents</h1>
       <div className="protocol-summary-contents__section">
-        <h2>Stages</h2>
         <ol>
-          {stages && map(stages, ({
-            label,
-            id,
-          }) => (
-            <li key={id}>
-              <DualLink to={`#stage-${id}`}>{label}</DualLink>
-            </li>
-          ))}
-        </ol>
-      </div>
-      <div className="protocol-summary-contents__section">
-        <h2>Codebook</h2>
-        <div className="protocol-summary-contents__subsection">
-          {codebook.ego && (
-            <div>
-              <p>
-                <DualLink to="#ego">ego</DualLink>
-              </p>
-            </div>
-          )}
-          <h4>Node types</h4>
-          <div className="protocol-summary-contents__subsection">
-            {nodes.map(([id]) => (
-              <p key={id}>
-                <EntityBadge type={id} entity="node" link small />
-              </p>
+          <li>Stages</li>
+          <ol>
+            {stages && map(stages, ({
+              label,
+              id,
+            }) => (
+              <li key={id}>
+                <DualLink to={`#stage-${id}`}>{label}</DualLink>
+              </li>
             ))}
-          </div>
-          <h4>Edge types</h4>
-          <div className="protocol-summary-contents__subsection">
-            {edges.map(([id]) => (
-              <p key={id}>
-                <EntityBadge type={id} entity="edge" link small />
-              </p>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="protocol-summary-contents__section">
-        <h2>Assets</h2>
-        <div className="protocol-summary-contents__subsection">
-          {assets && map(assets, (typeAssets, type) => (
+          </ol>
+          <li>Codebook</li>
+          <ul>
+            {codebook.ego && (
+              <li>
+                <DualLink to="#ego">Ego</DualLink>
+              </li>
+            )}
+            <li className="heading">Node types</li>
+            <ul>
+              {nodes.map(([id]) => (
+                <li key={id}>
+                  <EntityBadge type={id} entity="node" link small />
+                </li>
+              ))}
+            </ul>
+            { !isEmpty(edges) && (
+              <>
+                <li className="heading">Edge types</li>
+                <ul>
+                  {edges.map(([id]) => (
+                    <li key={id}>
+                      <EntityBadge type={id} entity="edge" link small />
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </ul>
+          { !isEmpty(assets) && (
             <>
-              <h4>{type}</h4>
-              <div className="protocol-summary-contents__subsection">
-                {typeAssets.map(([id, asset]) => (
-                  <p>
-                    <DualLink to={`#asset-${id}`}>{asset.name}</DualLink>
-                  </p>
+              <li>Assets</li>
+              <ul>
+                {assets && map(assets, (typeAssets, type) => (
+                  <>
+                    <li className="heading">
+                      {type}
+                    </li>
+                    <ul>
+                      {typeAssets.map(([id, asset]) => (
+                        <li>
+                          <DualLink to={`#asset-${id}`}>{asset.name}</DualLink>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
                 ))}
-              </div>
+              </ul>
             </>
-          ))}
-        </div>
+          )}
+        </ol>
       </div>
     </div>
   );

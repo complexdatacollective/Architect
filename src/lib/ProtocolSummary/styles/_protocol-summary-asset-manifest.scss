@@ -10,12 +10,8 @@
   }
 
   &__asset {
-    @include content-box;
-    margin-bottom: 1rem;
-
     &-media {
       background: #808080;
-      margin: 0 0 1rem;
       display: inline-block;
       width: auto;
       font-size: 0;

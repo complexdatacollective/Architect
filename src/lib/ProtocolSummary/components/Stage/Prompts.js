@@ -11,14 +11,16 @@ const Prompts = ({
 
   return (
     <div className="protocol-summary-stage__prompts">
-      <h2>Prompts</h2>
-      <ol>
-        {prompts.map((prompt) => (
-          <li key={prompt.id}>
-            <Prompt {...prompt} />
-          </li>
-        ))}
-      </ol>
+      <div className="protocol-summary-stage__prompts-content">
+        <h2 className="section-heading">Prompts</h2>
+        <ol>
+          {prompts.map((prompt) => (
+            <li key={prompt.id}>
+              <Prompt {...prompt} />
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
   );
 };

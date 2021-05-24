@@ -1,36 +1,129 @@
-.protocol-summary {
-  -webkit-print-color-adjust: exact !important;
-  padding: 2rem;
-  background: white;
-  color: var(--color-rich-black);
-  padding-bottom: calc(2rem + 80px);
+@page {
+  margin: 2cm;
+}
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5 {
-    color: var(--color-cyber-grape);
+.print {
+  --base-font-size: 12px;
+  --page-size-height: 29.7cm;
+  --page-size-width: 21cm;
+
+  font-size: var(--base-font-size) !important;
+
+  overflow: visible;
+  height: auto;
+  width: auto;
+
+  @media print {
+    body {
+      overflow: visible;
+      height: auto;
+      width: auto;
+      background: white;
+    }
+
+    #preload {
+      display: none;
+    }
+
   }
 
-  &__cover,
-  &__contents,
-  &__stages,
-  &__codebook {
-    margin-bottom: 8rem;
+  @media screen {
+    body {
+      overflow: visible;
+      height: auto;
+      width: auto;
+      background: var(--color-platinum);
+    }
+  }
+
+  #preload {
+    display: none;
+  }
+}
+
+.protocol-summary-rules {
+  &__rule:not(:last-child) {
+    margin-bottom: unit(1);
+  }
+}
+
+
+
+.section {
+  border: 2px solid var(--color-platinum);
+  padding: unit(1) unit(2);
+  border-radius: var(--border-radius);
+  position: relative;
+  padding-top: unit(4);
+
+  h2.section-heading {
+    @extend .small-heading;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: unit(1) unit(2);
+    background: var(--color-platinum);
+  }
+}
+
+// table {
+//   word-wrap: break-word;
+//   word-break: break-word;
+//   /* table-layout: fixed; */
+//   hyphens: auto;
+// }
+
+/* This will show only on screen (always) */
+.page-break-marker {
+
+  @media print {
     page-break-before: always;
   }
 
-  &__heading {
-    padding: 2rem;
-    background: var(--color-slate-blue--dark);
-    border-radius: 1rem;
-
-    h1,
-    h2 {
-      color: white;
-    }
+  @media screen {
+    background: white;
+    padding: 2cm;
+    display: block;
+    overflow: visible;
+    position: relative;
+    width: var(--page-size-width);
+    min-height: var(--page-size-height);
+    margin: 1cm auto;
+    border: 1px var(--color-platinum--dark) solid;
+    border-radius: 5px;
+    // box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 5px rgba(75, 75, 75, 0.2);
   }
+}
+
+@page rotated {
+  size: A4 landscape;
+}
+
+.landscape {
+  page: rotated;
+}
+
+.protocol-summary {
+  @media screen {
+    // Emulate the look of an A4 page
+    zoom: 90%;
+  }
+
+  @media print {
+    -webkit-print-color-adjust: exact !important;
+    color: #000;
+  }
+
+  // h1,
+  // h2,
+  // h3,
+  // h4,
+  // h5 {
+  //   color: var(--color-cyber-grape);
+  // }
 
   [data-print=no] {
     @media print {
@@ -55,7 +148,7 @@
   height: 80px;
   padding: 1rem 2rem;
   position: sticky;
-  top: calc(100% - 79px);
+  bottom: 0;
   z-index: 1000000;
   text-align: right;
 

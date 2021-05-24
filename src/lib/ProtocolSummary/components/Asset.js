@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import useAssetData from './useAssetData';
 import MiniTable from './MiniTable';
 
-const Asset = ({ id }) => {
+const Asset = ({ id, size }) => {
   const {
     url,
     type,
@@ -29,23 +31,40 @@ const Asset = ({ id }) => {
 
   return (
     <div className="protocol-summary-asset-manifest__asset" id={`asset-${id}`}>
-      <h4>{name}</h4>
-
       {type === 'image' && (
-        <div className="protocol-summary-asset-manifest__asset-media">
-          <img src={url} alt={name} />
-        </div>
+        <MiniTable
+          rotated
+          rows={[
+            ['Name', name],
+            ...(size ? [['Block Size', size]] : []),
+            ['Type', 'Image'],
+            // eslint-disable-next-line jsx-a11y/media-has-caption
+            ['Preview',
+              <div className="protocol-summary-asset-manifest__asset-media">
+                <img src={url} alt={name} />
+              </div>,
+            ],
+          ]}
+        />
+
       )}
 
       {type === 'video' && (
         <>
-          <div className="protocol-summary-asset-manifest__asset-media">
-            <video src={url} ref={ref} />
-          </div>
           <MiniTable
+            rotated
             rows={[
-              [<strong>Name</strong>, name],
-              [<strong>Duration</strong>, state.duration],
+              ['Name', name],
+              ...(size ? [['Block Size', size]] : []),
+              ['Type', 'Video'],
+              ['Duration', state.duration],
+              ['Preview',
+                <div className="protocol-summary-asset-manifest__asset-media">
+                  <video src={url} ref={ref} preload="auto">
+                    <source src={`${url}#t=1`} type="video/mp4" />
+                  </video>
+                </div>,
+              ],
             ]}
           />
         </>
@@ -53,11 +72,14 @@ const Asset = ({ id }) => {
 
       {type === 'audio' && (
         <>
-          <audio src={url} ref={ref} />
           <MiniTable
+            rotated
             rows={[
-              [<strong>Name</strong>, name],
-              [<strong>Duration</strong>, state.duration],
+              ['Name', name],
+              ...(size ? [['Block Size', size]] : []),
+              ['Type', 'Audio'],
+              ['Duration', state.duration],
+              ['Preview', <audio src={url} ref={ref} />],
             ]}
           />
         </>
@@ -65,18 +87,26 @@ const Asset = ({ id }) => {
 
       {type === 'network' && variables && (
         <MiniTable
-          wide
-          lite
-          rows={
-            [
-              [<strong>Variables</strong>],
-              ...variables,
-            ]
-          }
+          rotated
+          rows={[
+            ['Name', name],
+            ['Type', 'Network'],
+            ['Variables', variables],
+          ]}
         />
+
       )}
     </div>
   );
+};
+
+Asset.propTypes = {
+  id: PropTypes.string.isRequired,
+  size: PropTypes.string,
+};
+
+Asset.defaultProps = {
+  size: null,
 };
 
 export default Asset;

@@ -31,7 +31,7 @@ const useAssetData = (id) => {
     getNetworkAssetVariables(id)
       .then((v) => {
         if (!v) { return; }
-        setVariables(v.map((name) => [name]));
+        setVariables(v.join(', '));
       });
   }, []);
 

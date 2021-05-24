@@ -1,4 +1,6 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import Rules from '../Rules';
 import MiniTable from '../MiniTable';
 
@@ -13,14 +15,18 @@ const SkipLogic = ({ skipLogic }) => {
   return (
     <div className="protocol-summary-stage__skip-logic">
       <MiniTable
+        rotated
         rows={[
-          [<strong>Action</strong>, action],
-          [<strong>Rules</strong>, <Rules filter={filter} />],
+          ['Action', action],
+          ['Rules', <Rules filter={filter} />],
         ]}
-        wide
       />
     </div>
   );
+};
+
+SkipLogic.propTypes = {
+  skipLogic: PropTypes.object.isRequired,
 };
 
 export default SkipLogic;
