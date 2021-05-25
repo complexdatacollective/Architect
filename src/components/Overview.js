@@ -10,6 +10,8 @@ import { getActiveProtocol } from '@selectors/session';
 import { getProtocol } from '@selectors/protocol';
 import { actionCreators as protocolActions } from '@modules/protocol';
 import { actionCreators as uiActions } from '@modules/ui';
+import { actionCreators as userActions } from '@modules/userActions';
+import PrintIcon from '@material-ui/icons/Print';
 
 const panelVariants = {
   hide: { opacity: 0, y: -200 },
@@ -21,6 +23,7 @@ const Overview = ({
   description,
   updateOptions,
   openScreen,
+  printOverview,
 }) => (
   <motion.div
     className="overview"
@@ -44,9 +47,14 @@ const Overview = ({
       </div>
     </div>
     <div className="overview__footer">
-      <Icon name="protocol-card" />
-      <Button onClick={() => openScreen('assets')} color="neon-coral">Resource Library</Button>
-      <Button onClick={() => openScreen('codebook')} color="sea-serpent">Manage Codebook</Button>
+      <div className="icon">
+        <Icon name="protocol-card" />
+      </div>
+      <div className="action-buttons">
+        <Button onClick={printOverview} color="slate-blue" icon={<PrintIcon />}>Printable Summary</Button>
+        <Button onClick={() => openScreen('assets')} color="neon-coral">Resource Library</Button>
+        <Button onClick={() => openScreen('codebook')} color="sea-serpent">Manage Codebook</Button>
+      </div>
     </div>
   </motion.div>
 );
@@ -56,6 +64,7 @@ Overview.propTypes = {
   description: PropTypes.string,
   updateOptions: PropTypes.func,
   openScreen: PropTypes.func.isRequired,
+  printOverview: PropTypes.func.isRequired,
 };
 
 Overview.defaultProps = {
@@ -66,6 +75,7 @@ Overview.defaultProps = {
 
 const mapDispatchToProps = {
   updateOptions: protocolActions.updateOptions,
+  printOverview: userActions.printOverview,
   openScreen: uiActions.openScreen,
 };
 

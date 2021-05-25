@@ -2,6 +2,7 @@ const { BrowserWindow, Menu, MenuItem } = require('electron');
 const url = require('url');
 const path = require('path');
 const log = require('./log');
+const { getFormInitialValues } = require('redux-form');
 
 const isMacOS = () => process.platform === 'darwin';
 
@@ -91,11 +92,9 @@ function createAppWindow() {
       global.appWindow = null;
     });
 
-    // global.appWindow.once('ready-to-show', () => {
-    //   global.appWindow.show();
-    // });
-
-    global.appWindow.webContents.on('did-finish-load', () => resolve(global.appWindow));
+    global.appWindow.webContents.on('did-finish-load', () => {
+      resolve(global.appWindow);
+    });
 
     global.appWindow.loadURL(getAppUrl());
 

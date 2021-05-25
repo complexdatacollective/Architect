@@ -3,17 +3,6 @@ const url = require('url');
 const path = require('path');
 const log = require('./log');
 
-const windowParameters = {
-  center: true,
-  enableLargerThanScreen: true,
-  height: 768,
-  menuBarVisible: false,
-  show: true,
-  useContentSize: true,
-  webPreferences: { nodeIntegration: true },
-  width: 1024,
-};
-
 function getAppUrl() {
   if (process.env.NODE_ENV === 'development' && process.env.WEBPACK_DEV_SERVER_PORT) {
     const appUrl = url.format({
@@ -40,13 +29,16 @@ function getAppUrl() {
 
 function openPrintableSummaryWindow(payload) {
   return new Promise((resolve) => {
-    if (global.summaryWindow) {
-      global.summaryWindow.close();
-    }
-
     // Create the browser window.
-    global.summaryWindow = new BrowserWindow(windowParameters);
-    // global.summaryWindow.setMenuBarVisibility(false);
+    global.summaryWindow = new BrowserWindow({
+      parent: global.appWindow,
+      modal: true,
+      show: true,
+      webPreferences: { nodeIntegration: true },
+      height: 900,
+      width: 1024,
+      menuBarVisible: false,
+    });
 
     global.summaryWindow.webContents.on('new-window', (evt) => {
       // A user may have tried to open a new window (shift|cmd-click); ignore action
@@ -64,6 +56,7 @@ function openPrintableSummaryWindow(payload) {
 
     global.summaryWindow.webContents.on('did-finish-load', () => {
       global.summaryWindow.webContents.send('SUMMARY_DATA', payload);
+      global.summaryWindow.show();
       resolve(global.summaryWindow);
     });
 

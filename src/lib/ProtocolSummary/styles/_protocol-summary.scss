@@ -47,6 +47,8 @@
   }
 }
 
+
+
 .section {
   border: 2px solid var(--color-platinum);
   padding: unit(1) unit(2);
@@ -111,16 +113,28 @@
       display: none;
     }
   }
+
+  @media print {
+    font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-size: 10pt;
+  }
 }
 
 .protocol-summary-controls {
   background: var(--color-cyber-grape);
-  height: 80px;
   padding: 1rem 2rem;
   position: sticky;
   bottom: 0;
-  z-index: 1000000;
-  text-align: right;
+  z-index: var(--z-global-ui);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__print-buttons {
+    > :first-child {
+      margin-right: unit(2);
+    }
+  }
 
   @media print {
     display: none;

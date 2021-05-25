@@ -19,13 +19,13 @@ const MenuTemplate = (options) => {
     });
     fileMenu.submenu.push({
       label: 'Save as...',
-      accelerator: process.platform === 'darwin' ? 'cmd+shift+s' : 'ctrl+shift+s',
+      accelerator: 'CommandOrControl+Shift+S',
       enabled: options.isProtocolValid,
       click: options.saveCopy,
     });
     fileMenu.submenu.push({
-      label: 'Print protocol summary',
-      accelerator: process.platform === 'darwin' ? 'cmd+shift+p' : 'ctrl+shift+p',
+      label: 'Print protocol summary...',
+      accelerator: 'CommandOrControl+P',
       enabled: options.isProtocolValid,
       click: options.printSummary,
     });

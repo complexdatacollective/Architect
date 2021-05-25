@@ -13,11 +13,10 @@ import AssetManifest from './components/AssetManifest';
 import SummaryContext from './components/SummaryContext';
 import { getCodebookIndex } from './helpers';
 
+const closeWindow = () => remote.getCurrentWindow().hide();
+
 // Create a formatted date string that can be used in a filename (no illegal chars)
-const formattedNow = () => {
-  const now = new Date();
-  return `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`.replace(/[^a-zA-Z\d\s]/gi, '-').toLowerCase();
-};
+const dateWithSafeChars = (date, replaceWith = '-') => date.replace(/[^a-zA-Z\d\s]/gi, replaceWith).toLowerCase();
 
 const ProtocolSummary = ({ data }) => {
   if (!data) { return null; }
@@ -25,8 +24,9 @@ const ProtocolSummary = ({ data }) => {
   const { protocol, filePath, ...rest } = data;
 
   const index = getCodebookIndex(protocol);
-
-  const fileName = `${path.basename(filePath, '.netcanvas')} Protocol Summary (Created ${formattedNow()}).pdf`;
+  const now = new Date();
+  const dateString = `${dateWithSafeChars(now.toLocaleDateString(), '-')} ${dateWithSafeChars(now.toLocaleTimeString(), '.')}`;
+  const fileName = `${path.basename(filePath, '.netcanvas')} Protocol Summary (Created ${dateString}).pdf`;
 
   const printPDF = async () => {
     const options = {
@@ -89,9 +89,13 @@ const ProtocolSummary = ({ data }) => {
         </div>
       </div>
       <div className="protocol-summary-controls">
-        <Button color="platinum" onClick={printPDF}>Save PDF</Button>
-        &nbsp;
-        <Button onClick={print}>Print</Button>
+        <div>
+          <Button color="platinum" onClick={closeWindow}>Close Window</Button>
+        </div>
+        <div className="protocol-summary-controls__print-buttons">
+          <Button color="neon-coral" onClick={printPDF}>Save PDF</Button>
+          <Button onClick={print}>Print</Button>
+        </div>
       </div>
     </SummaryContext.Provider>
   );
