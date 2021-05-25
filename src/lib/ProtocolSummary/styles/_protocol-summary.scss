@@ -47,8 +47,6 @@
   }
 }
 
-
-
 .section {
   border: 2px solid var(--color-platinum);
   padding: unit(1) unit(2);
@@ -67,13 +65,6 @@
     background: var(--color-platinum);
   }
 }
-
-// table {
-//   word-wrap: break-word;
-//   word-break: break-word;
-//   /* table-layout: fixed; */
-//   hyphens: auto;
-// }
 
 /* This will show only on screen (always) */
 .page-break-marker {
@@ -98,14 +89,6 @@
   }
 }
 
-@page rotated {
-  size: A4 landscape;
-}
-
-.landscape {
-  page: rotated;
-}
-
 .protocol-summary {
   @media screen {
     // Emulate the look of an A4 page
@@ -117,14 +100,6 @@
     color: #000;
   }
 
-  // h1,
-  // h2,
-  // h3,
-  // h4,
-  // h5 {
-  //   color: var(--color-cyber-grape);
-  // }
-
   [data-print=no] {
     @media print {
       display: none;
@@ -135,11 +110,6 @@
     @media screen {
       display: none;
     }
-  }
-
-  @media print {
-    font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-    font-size: 10pt;
   }
 }
 

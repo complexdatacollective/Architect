@@ -13,18 +13,18 @@ import AssetManifest from './components/AssetManifest';
 import SummaryContext from './components/SummaryContext';
 import { getCodebookIndex } from './helpers';
 
+// Create a formatted date string that can be used in a filename (no illegal chars)
+const formattedNow = () => {
+  const now = new Date();
+  return `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`.replace(/[^a-zA-Z\d\s]/gi, '-').toLowerCase();
+};
+
 const ProtocolSummary = ({ data }) => {
   if (!data) { return null; }
 
   const { protocol, filePath, ...rest } = data;
 
   const index = getCodebookIndex(protocol);
-
-  const formattedNow = () => {
-    const now = new Date();
-
-    return `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`.replace(/[^a-zA-Z\d\s]/gi, '-').toLowerCase();
-  };
 
   const fileName = `${path.basename(filePath, '.netcanvas')} Protocol Summary (Created ${formattedNow()}).pdf`;
 
