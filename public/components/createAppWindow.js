@@ -2,7 +2,6 @@ const { BrowserWindow, Menu, MenuItem } = require('electron');
 const url = require('url');
 const path = require('path');
 const log = require('./log');
-const { getFormInitialValues } = require('redux-form');
 
 const isMacOS = () => process.platform === 'darwin';
 
