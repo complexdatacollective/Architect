@@ -45,8 +45,14 @@ export const getCodebookIndex = (protocol) => {
     },
   );
 
+  const protocolEntities = [
+    ...(protocol.codebook.node ? ['node'] : []),
+    ...(protocol.codebook.edge ? ['edge'] : []),
+    ...(protocol.codebook.ego ? ['ego'] : []),
+  ];
+
   const index = flatMap(
-    ['node', 'edge', 'ego'],
+    protocolEntities,
     (entity) => {
       const entityConfigurations = (
         entity === 'ego'

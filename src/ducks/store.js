@@ -7,7 +7,7 @@ import ipc from './ipc';
 import { rootReducer } from './modules/root';
 
 const persistConfig = {
-  key: 'architect6.1',
+  key: 'architect',
   storage,
   whitelist: [
     'recentProtocols',

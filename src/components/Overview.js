@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { Icon, Button } from '@codaco/ui';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import { getActiveProtocol } from '@selectors/session';
+import { getActiveProtocol, getHasUnsavedChanges, getIsProtocolValid } from '@selectors/session';
 import { getProtocol } from '@selectors/protocol';
 import { actionCreators as protocolActions } from '@modules/protocol';
 import { actionCreators as uiActions } from '@modules/ui';
@@ -24,6 +24,8 @@ const Overview = ({
   updateOptions,
   openScreen,
   printOverview,
+  protocolIsValid,
+  hasUnsavedChanges,
 }) => (
   <motion.div
     className="overview"
@@ -51,7 +53,7 @@ const Overview = ({
         <Icon name="protocol-card" />
       </div>
       <div className="action-buttons">
-        <Button onClick={printOverview} color="slate-blue" icon={<PrintIcon />}>Printable Summary</Button>
+        <Button onClick={printOverview} color="slate-blue" icon={<PrintIcon />} disabled={!protocolIsValid || hasUnsavedChanges}>Printable Summary</Button>
         <Button onClick={() => openScreen('assets')} color="neon-coral">Resource Library</Button>
         <Button onClick={() => openScreen('codebook')} color="sea-serpent">Manage Codebook</Button>
       </div>
@@ -65,6 +67,8 @@ Overview.propTypes = {
   updateOptions: PropTypes.func,
   openScreen: PropTypes.func.isRequired,
   printOverview: PropTypes.func.isRequired,
+  protocolIsValid: PropTypes.bool.isRequired,
+  hasUnsavedChanges: PropTypes.bool.isRequired,
 };
 
 Overview.defaultProps = {
@@ -83,11 +87,15 @@ const mapStateToProps = (state) => {
   const protocol = getProtocol(state);
   const filePath = getActiveProtocol(state);
   const fileName = filePath && path.basename(filePath);
+  const protocolIsValid = getIsProtocolValid(state);
+  const hasUnsavedChanges = getHasUnsavedChanges(state);
 
   return {
     name: fileName,
     description: protocol && protocol.description,
     codebook: protocol && protocol.codebook,
+    protocolIsValid,
+    hasUnsavedChanges,
   };
 };
 
