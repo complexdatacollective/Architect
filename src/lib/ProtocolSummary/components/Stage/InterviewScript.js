@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Markdown from 'react-markdown';
+import Markdown from '@codaco/ui/lib/components/Fields/Markdown';
 
 const InterviewScript = ({ interviewScript }) => (
   <div className="protocol-summary-stage__interview-script">
     <div className="protocol-summary-stage__interview-script-content">
-      <h2 className="section-heading">Interview Script</h2>
-      <Markdown source={interviewScript} />
+      <h2 className="section-heading">Interviewer Script</h2>
+      {interviewScript && (
+        <Markdown label={interviewScript} />
+      )}
     </div>
   </div>
 );

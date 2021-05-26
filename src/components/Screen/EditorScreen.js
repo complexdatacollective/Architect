@@ -50,7 +50,7 @@ class EditorScreen extends Component {
         icon="arrow-right"
         disabled={submitting}
       >
-        Save and Return
+        Finished Editing
       </Button>
     );
 

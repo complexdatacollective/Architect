@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactMarkdown from 'react-markdown';
+import Markdown from '@codaco/ui/lib/components/Fields/Markdown';
 import Asset from '../Asset';
 import MiniTable from '../MiniTable';
 
@@ -30,7 +30,7 @@ const Items = ({ items }) => {
                       ['Block Size', size],
                       ['Type', 'Text'],
                       // eslint-disable-next-line jsx-a11y/media-has-caption
-                      ['Content', <ReactMarkdown source={content} />],
+                      ['Content', <Markdown label={content} />],
                     ]}
                   />
                 </div>

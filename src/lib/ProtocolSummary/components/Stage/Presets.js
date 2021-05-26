@@ -13,7 +13,7 @@ const Presets = ({ presets }) => {
         <h2 className="section-heading">Presets</h2>
         <ol>
           {presets.map((preset) => (
-            <li key={preset}>
+            <li key={preset.label}>
               <div className="protocol-summary-stage__presets-item">
                 <h2 className="section-heading">{preset.label}</h2>
                 <MiniTable

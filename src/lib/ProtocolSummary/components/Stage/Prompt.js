@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading, react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
-import Markdown from 'react-markdown';
+import Markdown from '@codaco/ui/lib/components/Fields/Markdown';
 import { get, isNull } from 'lodash';
 import { renderValue } from '../helpers';
 import MiniTable from '../MiniTable';
@@ -15,7 +15,7 @@ const directionLabel = (direction) => (
 const SortOrder = ({ rules }) => {
   const result = rules
     .map(({ property, direction }) => (
-      <li>
+      <li key={property}>
         <Variable id={property} />
         {' '}
         <small>
@@ -29,7 +29,7 @@ const SortOrder = ({ rules }) => {
 };
 
 SortOrder.propTypes = {
-  rules: PropTypes.object.isRequired,
+  rules: PropTypes.array.isRequired,
 };
 
 const attributes = [
@@ -72,7 +72,7 @@ const Prompt = ({
 
   return (
     <div className="protocol-summary-stage__prompts-item">
-      <Markdown source={text} />
+      <Markdown label={text} />
       { attributeRows.length > 0 && (
         <MiniTable rotated rows={attributeRows} />
       )}

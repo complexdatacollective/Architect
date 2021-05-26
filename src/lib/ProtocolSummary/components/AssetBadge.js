@@ -25,6 +25,7 @@ const AssetBadge = ({
     <div className="protocol-summary-asset-badge">
       <div className="protocol-summary-asset-badge__content">
         <MiniTable
+          rotated
           rows={[
             ['Type', data.type],
             ['Name', name],
