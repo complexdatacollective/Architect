@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import Markdown from 'react-markdown';
+import Markdown from '@codaco/ui/lib/components/Fields/Markdown';
 import SummaryContext from '../SummaryContext';
 import MiniTable from '../MiniTable';
 import Variable from '../Variable';
@@ -22,7 +22,7 @@ const Form = ({ form }) => {
     return ([
       <Variable id={variable} />,
       meta.component,
-      <Markdown source={prompt} />,
+      <Markdown label={prompt} />,
     ]);
   });
 

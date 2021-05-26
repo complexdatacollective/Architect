@@ -19,8 +19,9 @@ const Details = ({
   children,
   className,
   summary,
+  startExpanded,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(startExpanded);
 
   const toggleOpen = useCallback(
     () => setIsOpen((s) => !s),
@@ -61,12 +62,14 @@ Details.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   summary: PropTypes.node,
+  startExpanded: PropTypes.bool,
 };
 
 Details.defaultProps = {
   children: null,
   className: null,
   summary: 'Open',
+  startExpanded: false,
 };
 
 export default Details;
