@@ -1,6 +1,13 @@
 // Remove touch and focus outlines
 // sass-lint:disable no-vendor-prefixes, no-ids
 
+$base-font-size: 14px;
+
+:root {
+  --base-font-size: #{$base-font-size};
+  --body-font-family:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
 * {
   outline-style: none;
   -webkit-touch-callout: none;
@@ -13,8 +20,8 @@
 html,
 body {
   margin: 0;
-  overflow: hidden;
   padding: 0;
+  overflow: hidden;
   user-select: none;
   width: 100%;
   height: 100%;

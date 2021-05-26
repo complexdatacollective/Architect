@@ -44,7 +44,9 @@ function getAppUrl() {
 
 function createPreviewWindow() {
   return new Promise((resolve) => {
-    if (global.previewWindow) { Promise.resolve(global.previewWindow); }
+    if (global.previewWindow) {
+      return resolve(global.previewWindow);
+    }
 
     // Create the browser window.
     global.previewWindow = new BrowserWindow(windowParameters);
@@ -79,8 +81,9 @@ function createPreviewWindow() {
       global.previewWindow.loadURL(getAppUrl());
     };
 
-    global.previewWindow.webContents.on('did-finish-load', () =>
-      resolve(global.previewWindow),
+    global.previewWindow.webContents.on(
+      'did-finish-load',
+      () => resolve(global.previewWindow),
     );
 
     global.previewWindow.loadURL(getAppUrl());

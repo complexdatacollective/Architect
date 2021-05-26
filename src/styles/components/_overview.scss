@@ -33,39 +33,23 @@
     background: var(--color-slate-blue--dark);
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     flex: 0 0 auto;
     padding: unit(2) unit(6);
+
+    .action-buttons {
+      display: flex;
+
+      :not(:last-child) {
+        margin-right: unit(2);
+      }
+    }
 
     .icon {
       height: 100%;
       width: 3rem;
-      margin-right: 25rem; // Lazy - sorry!
     }
 
-    .button {
-      flex: 1 auto;
-      height: 3rem;
 
-      &__label {
-
-        h2,
-        h3 {
-          text-shadow: 1px 1px 0 #000, 0 0 .5rem #00000073; // sass-lint:disable-line no-color-literals no-invalid-hex
-        }
-
-        h2 {
-          font-size: 1.53rem;
-        }
-
-        h3 {
-          font-size: .8rem;
-        }
-      }
-
-      &:first-of-type {
-        margin-right: unit(2);
-      }
-    }
   }
 }

@@ -174,6 +174,16 @@ const saveNetcanvas = () => (dispatch, getState) => {
     .catch((e) => dispatch(netcanvasFileErrorHandler(e, { filePath })));
 };
 
+const printOverview = () => (dispatch, getState) => {
+  const payload = ((state) => ({
+    filePath: state.session.filePath,
+    workingPath: state.session.workingPath,
+    protocol: state.protocol.present,
+  }))(getState());
+
+  dispatch({ ipc: true, type: 'PRINT_SUMMARY_DATA', payload });
+};
+
 export const actionLocks = {
   loading: loadingLock,
   protocols: protocolsLock,
@@ -185,4 +195,5 @@ export const actionCreators = {
   createNetcanvas: protocolsLock(createNetcanvas),
   saveAsNetcanvas: protocolsLock(saveAsNetcanvas), // savingLock
   saveNetcanvas: protocolsLock(savingLock(saveNetcanvas)), // savingLock
+  printOverview,
 };
