@@ -31,6 +31,7 @@ const Entity = ({
     <div className="protocol-summary-entity__variables">
       <Variables variables={variables} />
     </div>
+
   </div>
 );
 
@@ -38,12 +39,13 @@ Entity.propTypes = {
   type: PropTypes.string,
   entity: PropTypes.string,
   // eslint-disable-next-line react/forbid-prop-types
-  variables: PropTypes.object.isRequired,
+  variables: PropTypes.object,
 };
 
 Entity.defaultProps = {
   type: null,
   entity: null,
+  variables: null,
 };
 
 export default Entity;

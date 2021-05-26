@@ -39,7 +39,8 @@ const Rules = ({ filter }) => {
   return (
     <div className="protocol-summary-rules">
       { rules.map(({ type, options }, n) => (
-        <div className="protocol-summary-rules__rule">
+        // eslint-disable-next-line react/no-array-index-key
+        <div className="protocol-summary-rules__rule" key={n}>
           <RuleText type={type} options={options} />
           { n !== rules.length - 1 && join && <Join value={join} /> }
         </div>

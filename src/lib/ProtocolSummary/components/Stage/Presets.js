@@ -13,7 +13,7 @@ const Presets = ({ presets }) => {
         <h2 className="section-heading">Presets</h2>
         <ol>
           {presets.map((preset) => (
-            <li>
+            <li key={preset}>
               <div className="protocol-summary-stage__presets-item">
                 <h2 className="section-heading">{preset.label}</h2>
                 <MiniTable
@@ -27,7 +27,7 @@ const Presets = ({ presets }) => {
                       <ul>
                         {
                           preset.edges.display.map((edge) => (
-                            <li>
+                            <li key={edge}>
                               <EntityBadge entity="edge" type={edge} tiny link />
                             </li>
                           ))
@@ -40,7 +40,7 @@ const Presets = ({ presets }) => {
                       <ul>
                         {
                           preset.highlight.map((id) => (
-                            <li>
+                            <li key={id}>
                               <Variable id={id} link />
                               <br />
                             </li>
@@ -61,7 +61,7 @@ const Presets = ({ presets }) => {
 
 Presets.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  presets: PropTypes.object,
+  presets: PropTypes.array,
 };
 
 Presets.defaultProps = {

@@ -11,17 +11,19 @@ const Items = ({ items }) => {
     <div className="protocol-summary-stage__items">
       <div className="protocol-summary-stage__items-content">
         <h2 className="section-heading">Items</h2>
-        {items.map(({ type, content, size }) => {
+        {items.map(({
+          type, content, size, id,
+        }) => {
           switch (type) {
             case 'asset':
               return (
-                <div className="protocol-summary-stage__items-item">
+                <div className="protocol-summary-stage__items-item" key={id}>
                   <Asset id={content} size={size} />
                 </div>
               );
             default:
               return (
-                <div className="protocol-summary-stage__items-item--text">
+                <div className="protocol-summary-stage__items-item--text" key={id}>
                   <MiniTable
                     rotated
                     rows={[

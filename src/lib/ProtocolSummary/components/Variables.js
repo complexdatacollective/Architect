@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 import {
   toPairs, get, find, isEmpty, sortBy,
 } from 'lodash';
-import Markdown from 'react-markdown';
-import { ALLOWED_MARKDOWN_LABEL_TAGS } from '@codaco/ui/src/utils/config';
+import Markdown from '@codaco/ui/lib/components/Fields/Markdown';
 import SummaryContext from './SummaryContext';
 import DualLink from './DualLink';
 import MiniTable from './MiniTable';
@@ -68,8 +67,7 @@ const Variables = ({ variables }) => {
             const optionsRows = options && options.map(({ value, label }) => ([
               renderValue(value),
               <Markdown
-                source={label}
-                allowedTypes={ALLOWED_MARKDOWN_LABEL_TAGS}
+                label={label}
               />,
             ]));
 
@@ -101,7 +99,11 @@ const Variables = ({ variables }) => {
 
 Variables.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  variables: PropTypes.object.isRequired,
+  variables: PropTypes.object,
+};
+
+Variables.defaultProps = {
+  variables: null,
 };
 
 export default Variables;

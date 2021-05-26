@@ -74,10 +74,10 @@ const Stage = ({
                       <td>Variables</td>
                       <td>
                         { stageVariables.map(([variableId, variable], i) => (
-                          <>
-                            <DualLink to={`#variable-${variableId}`} key={variableId}>{variable}</DualLink>
+                          <React.Fragment key={variableId}>
+                            <DualLink to={`#variable-${variableId}`}>{variable}</DualLink>
                             { i !== stageVariables.length - 1 && ', '}
-                          </>
+                          </React.Fragment>
                         )) }
                       </td>
                     </tr>

@@ -56,7 +56,7 @@ const FieldType = PropTypes.shape({
 
 Form.propTypes = {
   form: PropTypes.shape({
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
     fields: PropTypes.arrayOf(FieldType).isRequired,
   }),
 };

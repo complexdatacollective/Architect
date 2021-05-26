@@ -22,6 +22,8 @@
         & > td {
           padding: .75rem;
           vertical-align: top;
+          word-break: break-word;
+          hyphens: auto;
         }
 
         & > td {

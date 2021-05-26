@@ -15,7 +15,11 @@ const PageHeading = ({ heading }) => {
 };
 
 PageHeading.propTypes = {
-  heading: PropTypes.string.isRequired,
+  heading: PropTypes.string,
+};
+
+PageHeading.defaultProps = {
+  heading: null,
 };
 
 export default PageHeading;

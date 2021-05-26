@@ -16,8 +16,7 @@ const DataSource = ({ dataSource }) => {
 };
 
 DataSource.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  dataSource: PropTypes.object,
+  dataSource: PropTypes.string,
 };
 
 DataSource.defaultProps = {

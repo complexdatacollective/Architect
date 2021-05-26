@@ -67,18 +67,18 @@ const Contents = () => {
               <li>Assets</li>
               <ul>
                 {assets && map(assets, (typeAssets, type) => (
-                  <>
+                  <React.Fragment key={type}>
                     <li className="heading">
                       {type}
                     </li>
                     <ul>
                       {typeAssets.map(([id, asset]) => (
-                        <li>
+                        <li key={id}>
                           <DualLink to={`#asset-${id}`}>{asset.name}</DualLink>
                         </li>
                       ))}
                     </ul>
-                  </>
+                  </React.Fragment>
                 ))}
               </ul>
             </>
