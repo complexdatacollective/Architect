@@ -1,24 +1,29 @@
 .error {
-  background-color: var(--architect-error-background);
+  background-color: var(--modal-overlay);
   color: var(--text-light);
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &__layout {
-    padding: unit(16) unit(4);
+    padding: unit(6);
     width: 80vw;
-    margin: 0 auto;
+    border-radius: var(--border-radius);
+    background: var(--color-cyber-grape);
   }
 
   &__stack {
     display: block;
     overflow: scroll;
-    margin-top: unit(4);
-    padding: unit(4);
-    max-height: 40vh;
-    border-radius: unit(2);
+    margin-top: unit(2);
+    padding: unit(2);
+    max-height: unit(15);
+    border-radius: var(--border-radius);
     background-color: var(--architect-error-code-background);
-    color: var(--text-dark);
   }
 }

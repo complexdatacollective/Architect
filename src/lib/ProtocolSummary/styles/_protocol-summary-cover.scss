@@ -1,0 +1,51 @@
+.protocol-summary-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
+
+  @media print {
+    height: 100vh;
+  }
+
+  @media screen {
+    height: var(--page-size-height);
+  }
+
+  .exported-date {
+    @extend .small-heading;
+  }
+
+  .protocol-card {
+    background: var(--color-platinum);
+    max-width: 12cm;
+    zoom: 120%;
+
+    .protocol-name {
+      display: block
+    }
+  }
+
+  &__header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 2px solid var(--color-platinum);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__brand {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    img {
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+}

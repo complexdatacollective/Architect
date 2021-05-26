@@ -91,11 +91,9 @@ function createAppWindow() {
       global.appWindow = null;
     });
 
-    // global.appWindow.once('ready-to-show', () => {
-    //   global.appWindow.show();
-    // });
-
-    global.appWindow.webContents.on('did-finish-load', () => resolve(global.appWindow));
+    global.appWindow.webContents.on('did-finish-load', () => {
+      resolve(global.appWindow);
+    });
 
     global.appWindow.loadURL(getAppUrl());
 

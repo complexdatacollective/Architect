@@ -20,6 +20,10 @@ const initIPCListeners = () => {
     store.dispatch(userActions.saveNetcanvas());
   });
 
+  ipcRenderer.on('PRINT_SUMMARY', () => {
+    store.dispatch(userActions.printOverview());
+  });
+
   ipcRenderer.on('CONFIRM_CLOSE', () => {
     const state = store.getState();
     const hasUnsavedChanges = getHasUnsavedChanges(state);

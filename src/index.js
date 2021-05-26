@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './ducks/store';
-import App from './components/App';
-import ClipPaths from './components/ClipPaths';
+import ViewManager from './components/ViewManager/ViewManager';
 import initPreventFileDrop from './utils/initPreventFileDrop';
 import initIPCListeners from './utils/initIPCListeners';
 import initFileOpener from './utils/initFileOpener';
@@ -17,10 +16,9 @@ initPreventFileDrop();
 const startApp = () => {
   ReactDOM.render(
     <>
-      <ClipPaths />
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <App />
+          <ViewManager />
         </PersistGate>
       </Provider>
     </>,

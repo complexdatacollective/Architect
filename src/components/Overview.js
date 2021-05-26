@@ -6,10 +6,12 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { Icon, Button } from '@codaco/ui';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import { getActiveProtocol } from '@selectors/session';
+import { getActiveProtocol, getHasUnsavedChanges, getIsProtocolValid } from '@selectors/session';
 import { getProtocol } from '@selectors/protocol';
 import { actionCreators as protocolActions } from '@modules/protocol';
 import { actionCreators as uiActions } from '@modules/ui';
+import { actionCreators as userActions } from '@modules/userActions';
+import PrintIcon from '@material-ui/icons/Print';
 
 const panelVariants = {
   hide: { opacity: 0, y: -200 },
@@ -21,6 +23,9 @@ const Overview = ({
   description,
   updateOptions,
   openScreen,
+  printOverview,
+  protocolIsValid,
+  hasUnsavedChanges,
 }) => (
   <motion.div
     className="overview"
@@ -44,9 +49,14 @@ const Overview = ({
       </div>
     </div>
     <div className="overview__footer">
-      <Icon name="protocol-card" />
-      <Button onClick={() => openScreen('assets')} color="neon-coral">Resource Library</Button>
-      <Button onClick={() => openScreen('codebook')} color="sea-serpent">Manage Codebook</Button>
+      <div className="icon">
+        <Icon name="protocol-card" />
+      </div>
+      <div className="action-buttons">
+        <Button onClick={printOverview} color="slate-blue" icon={<PrintIcon />} disabled={!protocolIsValid || hasUnsavedChanges}>Printable Summary</Button>
+        <Button onClick={() => openScreen('assets')} color="neon-coral">Resource Library</Button>
+        <Button onClick={() => openScreen('codebook')} color="sea-serpent">Manage Codebook</Button>
+      </div>
     </div>
   </motion.div>
 );
@@ -56,6 +66,9 @@ Overview.propTypes = {
   description: PropTypes.string,
   updateOptions: PropTypes.func,
   openScreen: PropTypes.func.isRequired,
+  printOverview: PropTypes.func.isRequired,
+  protocolIsValid: PropTypes.bool.isRequired,
+  hasUnsavedChanges: PropTypes.bool.isRequired,
 };
 
 Overview.defaultProps = {
@@ -66,6 +79,7 @@ Overview.defaultProps = {
 
 const mapDispatchToProps = {
   updateOptions: protocolActions.updateOptions,
+  printOverview: userActions.printOverview,
   openScreen: uiActions.openScreen,
 };
 
@@ -73,11 +87,15 @@ const mapStateToProps = (state) => {
   const protocol = getProtocol(state);
   const filePath = getActiveProtocol(state);
   const fileName = filePath && path.basename(filePath);
+  const protocolIsValid = getIsProtocolValid(state);
+  const hasUnsavedChanges = getHasUnsavedChanges(state);
 
   return {
     name: fileName,
     description: protocol && protocol.description,
     codebook: protocol && protocol.codebook,
+    protocolIsValid,
+    hasUnsavedChanges,
   };
 };
 

@@ -68,5 +68,6 @@ app.on('window-all-closed', () => {
   PreviewManager.quit();
   global.appWindow = null;
   global.previewWindow = null;
+  global.summaryWindow = null;
   app.quit();
 });

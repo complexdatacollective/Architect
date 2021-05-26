@@ -2,7 +2,6 @@ $font-path: '~@codaco/ui/lib/assets/fonts';
 @import '~react-grid-layout/css/styles.css';
 @import '~react-resizable/css/styles.css';
 @import '~@codaco/ui/lib/styles/all';
-@import './settings';
 @import './hotfix';
 @import './ui';
 @import './theme';
@@ -10,6 +9,7 @@ $font-path: '~@codaco/ui/lib/assets/fonts';
 @import './mixins';
 @import './reset';
 @import './app';
+@import '../lib/ProtocolSummary/styles/all';
 
 // CSS modules
 // TBC
