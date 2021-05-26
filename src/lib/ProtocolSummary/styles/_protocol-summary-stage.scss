@@ -84,6 +84,10 @@
     }
   }
 
+  &__form {
+    page-break-inside: avoid;
+  }
+
   // Sections!
   &__heading,
   &__heading-section,
