@@ -2,6 +2,14 @@
   &__data {
     width: 100%;
 
+    & > thead, > tbody {
+      & > tr {
+        & > th, > td {
+          max-width: 7cm;
+        }
+      }
+    }
+
     & > thead {
       & > tr {
         & > th {
@@ -22,8 +30,13 @@
         & > td {
           padding: .75rem;
           vertical-align: top;
-          word-break: break-word;
-          hyphens: auto;
+
+          // Variable name column can contain long and hard to break strings
+          &:first-of-type {
+            word-break: break-word;
+            hyphens: auto;
+          }
+
         }
 
         & > td {
