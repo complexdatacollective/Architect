@@ -1,6 +1,6 @@
 import React from 'react';
 import path from 'path';
-import Markdown from 'react-markdown';
+import { Markdown } from '@codaco/ui/lib/components/Fields';
 import { errors as netcanvasFileErrors } from '@app/utils/netcanvasFile';
 import ExternalLink from '@components/ExternalLink';
 import { actionCreators as dialogActions } from '@modules/dialogs';
@@ -228,7 +228,7 @@ const mayUpgradeProtocolDialog = (
                   {' '}
                   will:
                 </h4>
-                <Markdown label={notes} renderers={{ link: ExternalLink }} />
+                <Markdown label={notes} markdownRenderers={{ a: ExternalLink }} />
               </React.Fragment>
             ))}
           </div>
