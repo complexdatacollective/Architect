@@ -3,7 +3,7 @@ import { Section } from '@components/EditorLayout';
 import Details from '@components/Details';
 import { getFieldId } from '@app/utils/issues';
 import { Field, formValueSelector } from 'redux-form';
-import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
+import { Field as RichText, RichText as RichTextRaw } from '@codaco/ui/lib/components/Fields/RichText';
 import { useSelector } from 'react-redux';
 
 const InterviewerScript = () => {
@@ -22,6 +22,7 @@ const InterviewerScript = () => {
         <p>
           Use this section to create notes or a guide for the interviewer.
         </p>
+        <RichTextRaw />
         <Field
           name="interviewScript"
           component={RichText}

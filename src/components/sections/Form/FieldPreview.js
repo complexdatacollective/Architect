@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { Field } from 'redux-form';
-import Markdown from 'react-markdown';
+import { Markdown } from '@codaco/ui/lib/components/Fields';
 import { getColorForType } from '@app/config/variables';
 import { getVariablesForSubject } from '@selectors/codebook';
 import withSubject from '@components/enhancers/withSubject';
@@ -21,7 +21,7 @@ const PreviewFieldComponent = ({
   return (
     <div className="field-preview">
       <Markdown
-        source={value.prompt}
+        label={value.prompt}
         className="field-preview__rich-content"
       />
       <div className="field-preview__badges">
