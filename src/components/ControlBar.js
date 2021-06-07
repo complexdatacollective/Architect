@@ -5,7 +5,7 @@ import cx from 'classnames';
 
 const panelVariants = {
   show: { opacity: 1, y: 0, transition: { ease: 'easeOut', when: 'beforeChildren', staggerChildren: 0.3 } },
-  hide: { opacity: 0, y: -100 },
+  hide: { opacity: 0, y: 100 },
 };
 
 const buttonVariants = {
