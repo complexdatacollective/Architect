@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Markdown from 'react-markdown';
 import { connect } from 'react-redux';
+import { Markdown } from '@codaco/ui/lib/components/Fields';
 import { get } from 'lodash';
 import { BackgroundImage, Video, Audio } from '../../Assets';
 import { getAssetManifest } from '../../../selectors/protocol';
@@ -25,7 +25,7 @@ const ItemPreview = ({ content, assetType }) => {
     case 'audio':
       return <Audio id={content} controls />;
     default:
-      return <Markdown source={content} />;
+      return <Markdown label={content} />;
   }
 };
 

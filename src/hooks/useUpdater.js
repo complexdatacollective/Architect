@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Button } from '@codaco/ui';
 import { find } from 'lodash';
 import compareVersions from 'compare-versions';
-import ReactMarkdown from 'react-markdown';
+import { Markdown } from '@codaco/ui/lib/components/Fields';
 import { isMacOS, isWindows, isLinux } from '@app/utils/platform';
 import { remote } from 'electron';
 import { actionCreators as toastActions } from '../ducks/modules/toasts';
@@ -13,9 +13,9 @@ import ExternalLink, { openExternalLink } from '../components/ExternalLink';
 import useAppState from '../components/Home/useAppState';
 
 // Custom renderer for links so that they open correctly in an external browser
-const renderers = {
+const markdownComponents = {
   // eslint-disable-next-line react/prop-types
-  link: ({ children, href }) => <ExternalLink href={href}>{children}</ExternalLink>,
+  a: ({ children, href }) => <ExternalLink href={href}>{children}</ExternalLink>,
 };
 
 export const getPlatformSpecificContent = (assets) => {
@@ -99,9 +99,9 @@ const useUpdater = (updateEndpoint, timeout = 0) => {
             Please read the following release notes carefully, as changes in the software
             may impact which protocols you are able to open in Architect.
           </p>
-          <ReactMarkdown
+          <Markdown
             className="dialog-release-notes__notes"
-            renderers={renderers}
+            markdownRenderers={markdownComponents}
             source={releaseNotes}
           />
         </div>

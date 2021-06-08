@@ -111,6 +111,7 @@ class Timeline extends Component {
         <motion.div
           className="timeline__stages"
           initial={sorting ? false : 'hide'}
+          animate="show"
           variants={variants.outer}
         >
           { this.renderStages() }

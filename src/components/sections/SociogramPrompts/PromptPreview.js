@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Markdown from 'react-markdown';
+import { Markdown } from '@codaco/ui/lib/components/Fields';
 import { Field } from 'redux-form';
 import Preview from '../../EditableList/Preview';
 
@@ -14,7 +14,7 @@ class PromptPreview extends Preview {
       <>
         <Field
           name={`${fieldId}.text`}
-          component={(field) => <Markdown source={field.input.value} />}
+          component={(field) => <Markdown label={field.input.value} />}
         />
       </>
     );
