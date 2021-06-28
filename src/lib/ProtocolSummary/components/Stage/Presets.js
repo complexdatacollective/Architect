@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
 import MiniTable from '../MiniTable';
 import EntityBadge from '../EntityBadge';
 import Variable from '../Variable';
-import { get } from 'lodash';
 
 const Presets = ({ presets }) => {
   if (!presets) { return null; }
-  console.log('presets', presets);
+
   return (
     <div className="protocol-summary-stage__presets">
       <div className="protocol-summary-stage__presets-content">
