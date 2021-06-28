@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import MiniTable from '../MiniTable';
 import EntityBadge from '../EntityBadge';
 import Variable from '../Variable';
+import { get } from 'lodash';
 
 const Presets = ({ presets }) => {
   if (!presets) { return null; }
-
+  console.log('presets', presets);
   return (
     <div className="protocol-summary-stage__presets">
       <div className="protocol-summary-stage__presets-content">
@@ -26,7 +27,7 @@ const Presets = ({ presets }) => {
                       'Show edges',
                       <ul>
                         {
-                          preset.edges.display.map((edge) => (
+                          get(preset, 'edges.display', []).map((edge) => (
                             <li key={edge}>
                               <EntityBadge entity="edge" type={edge} tiny link />
                             </li>
@@ -39,7 +40,7 @@ const Presets = ({ presets }) => {
                       'Highlight attributes',
                       <ul>
                         {
-                          preset.highlight.map((id) => (
+                          get(preset, 'preset.highlight', []).map((id) => (
                             <li key={id}>
                               <Variable id={id} link />
                               <br />
