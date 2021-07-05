@@ -102,7 +102,7 @@ const useUpdater = (updateEndpoint, timeout = 0) => {
           <Markdown
             className="dialog-release-notes__notes"
             markdownRenderers={markdownComponents}
-            source={releaseNotes}
+            label={releaseNotes}
           />
         </div>
       ),
