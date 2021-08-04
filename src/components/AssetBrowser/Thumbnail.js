@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Icon from '@codaco/ui/lib/components/Icon';
+import PreviewIcon from '@material-ui/icons/Visibility';
 import * as Thumbnails from '@components/Thumbnail';
 
 const FallBackAssetComponent = () => (
@@ -32,10 +33,18 @@ class Asset extends Component {
     onDelete(id, isUsed);
   };
 
+  handlePreview = (e) => {
+    const { onPreview, id } = this.props;
+    e.stopPropagation();
+
+    onPreview(id);
+  };
+
   render() {
     const {
       id,
       onDelete,
+      onPreview,
       type,
       isUsed,
     } = this.props;
@@ -55,8 +64,16 @@ class Asset extends Component {
           <PreviewComponent id={id} />
         </div>
 
-        { onDelete
-          && (
+        { onPreview && (
+          <div
+            className="asset-browser-asset__preview-control"
+            onClick={this.handlePreview}
+          >
+            <PreviewIcon />
+          </div>
+        )}
+
+        { onDelete && (
           <div
             className="asset-browser-asset__delete"
             onClick={this.handleDelete}
@@ -64,7 +81,7 @@ class Asset extends Component {
           >
             <Icon name="delete" />
           </div>
-          )}
+        )}
       </div>
     );
   }

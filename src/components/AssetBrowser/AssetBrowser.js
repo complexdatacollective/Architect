@@ -1,9 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { Section } from '@components/EditorLayout';
 import Assets from './Assets';
 import NewAsset from './NewAsset';
+import Preview from './Preview';
 import withAssetActions from './withAssetActions';
 
 const AssetBrowser = ({
@@ -18,6 +19,13 @@ const AssetBrowser = ({
     if (!assetIds[0]) { return; } // if a single invalid file was uploaded
     onSelect(assetIds[0]);
   }, [onSelect]);
+
+  const [showPreview, setShowPreview] = useState(null);
+
+  const handleShowPreview = (id) => {
+    console.log('handle show preview', id);
+    setShowPreview(id);
+  };
 
   return (
     <>
@@ -40,12 +48,18 @@ const AssetBrowser = ({
         </h3>
         <Assets
           onSelect={onSelect}
+          onPreview={handleShowPreview}
           onDelete={onDelete}
           disableDelete={disableDelete}
           selected={selected}
           type={type}
         />
       </Section>
+      { showPreview && (
+        <Preview
+          id={showPreview}
+        />
+      )}
     </>
   );
 };

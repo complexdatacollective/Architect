@@ -31,6 +31,22 @@
     0 0 10px var(--color-white);
   }
 
+  &__preview-control {
+    position: absolute;
+    top: unit(1);
+    left: unit(1);
+    width: unit(3);
+    height: unit(3);
+    border-radius: unit(3);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-cyber-grape);
+    transition-property: background-color;
+    transition-duration: var(--animation-duration-fast);
+  }
+
   &__delete {
     position: absolute;
     top: unit(1);

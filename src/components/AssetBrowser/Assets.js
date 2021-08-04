@@ -20,6 +20,7 @@ const Assets = ({
   onUpdateAssetFilter,
   onSelect,
   onDelete,
+  onPreview,
   disableDelete,
 }) => {
   const handleDelete = !disableDelete && onDelete;
@@ -39,6 +40,7 @@ const Assets = ({
         type={thumbnailType}
         isUsed={isUsed}
         onClick={onSelect}
+        onPreview={onPreview}
         onDelete={handleDelete}
       />
     </div>
