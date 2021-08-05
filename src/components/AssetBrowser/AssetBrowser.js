@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { Section } from '@components/EditorLayout';
 import Assets from './Assets';
 import NewAsset from './NewAsset';
-import Preview from './Preview';
+import PreviewContents from './PreviewContents';
 import withAssetActions from './withAssetActions';
 
 const AssetBrowser = ({
@@ -22,10 +22,11 @@ const AssetBrowser = ({
 
   const [showPreview, setShowPreview] = useState(null);
 
-  const handleShowPreview = (id) => {
-    console.log('handle show preview', id);
-    setShowPreview(id);
-  };
+  const handleShowPreview = (id) => setShowPreview(id);
+
+  const handleClosePreview = () => setShowPreview(null);
+
+  const handleDownloadAsset = () => {};
 
   return (
     <>
@@ -56,8 +57,10 @@ const AssetBrowser = ({
         />
       </Section>
       { showPreview && (
-        <Preview
+        <PreviewContents
           id={showPreview}
+          onClose={handleClosePreview}
+          onDownload={handleDownloadAsset}
         />
       )}
     </>

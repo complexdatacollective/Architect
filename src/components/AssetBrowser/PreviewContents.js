@@ -1,8 +1,13 @@
 import React from 'react';
+import { compose } from 'redux';
+import cx from 'classnames';
+import fse from 'fs-extra';
+import { remote } from 'electron';
 import window from '@codaco/ui/lib/components/window';
 import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
 import Stackable from '../Stackable';
 import withAssetMeta from '../Assets/withAssetMeta';
+import withAssetPath from '../Assets/withAssetPath';
 import * as Assets from '../Assets';
 
 const getRenderer = (meta) => {
@@ -19,23 +24,55 @@ const getRenderer = (meta) => {
 const Preview = ({
   id,
   meta,
+  assetPath,
+  onClose,
 }) => {
   const AssetRenderer = getRenderer(meta);
   const dialogZIndex = getCSSVariableAsNumber('--z-dialog');
+
+  const handleDownload = () => {
+    remote.dialog.showSaveDialog(
+      {
+        buttonLabel: 'Save Asset',
+        nameFieldLabel: 'Save As:',
+        properties: ['saveFile'],
+        defaultPath: meta.source,
+      },
+      remote.getCurrentWindow(),
+    )
+      .then(({ canceled, filePath }) => {
+        if (canceled) { return; }
+        fse.copy(assetPath, filePath);
+      });
+  };
 
   return (
     <Stackable stackKey>
       {({ stackIndex }) => (
         <div
-          className="asset-browser-preview"
+          className={cx(
+            'asset-browser-preview',
+            `asset-browser-preview--type-${meta.type}`,
+          )}
           style={{
             zIndex: dialogZIndex + stackIndex,
           }}
         >
           <div className="asset-browser-preview__container">
             <div className="asset-browser-preview__title">
-              <h3>{meta.source}</h3>
-              <button>close</button>
+              <h3>{meta.name}</h3>
+              <div className="asset-browser-preview__title-controls">
+                <button
+                  onClick={onClose}
+                >
+                  close
+                </button>
+                <button
+                  onClick={handleDownload}
+                >
+                  download
+                </button>
+              </div>
             </div>
             <div className="asset-browser-preview__content">
               <AssetRenderer id={id} meta={meta} />
@@ -52,4 +89,8 @@ Preview.defaultProps = {
   id: null,
 };
 
-export default window(withAssetMeta(Preview));
+export default compose(
+  window,
+  withAssetMeta,
+  withAssetPath,
+)(Preview);
