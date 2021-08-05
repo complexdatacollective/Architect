@@ -1,0 +1,30 @@
+.asset-browser-preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: auto;
+
+  &__container {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    width: calc(100% - 4rem);
+    height: calc(100% - 4rem);
+    background-color: #FFFFFF;
+    border-radius: 1rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+  }
+
+  &__content {
+    flex: 1;
+    overflow: auto;
+  }
+}
