@@ -1,25 +1,50 @@
-import React from 'react';
-import Stackable from '../Stackable';
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import withAssetMeta from '../Assets/withAssetMeta';
 
-const Preview = ({ id, meta }) => (
-  <Stackable stackKey={id}>
-    {({ stackIndex }) => (
+const Preview = ({
+  id,
+  meta,
+}) => {
+  const [root, setRoot] = useState(null);
+
+  useEffect(() => {
+    const el = document.createElement('div');
+    el.setAttribute('id', 'test');
+    document.body.appendChild(el);
+
+    setRoot(el);
+
+    return () => {
+      setRoot(null);
+      document.body.removeChild(el);
+    };
+  }, []);
+
+  if (!root) { return null; }
+
+  // console.log(root.current);
+
+  return ReactDOM.createPortal(
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    (
       <div
         style={{
-          width: '100%',
-          height: '100%',
-          zIndex: stackIndex,
-          position: 'absolute',
-          top: 0,
-          left: 0,
+          position: 'fixed',
+          top: '1rem',
+          left: '1rem',
+          bottom: '1rem',
+          right: '1rem',
+          background: 'red',
+          zIndex: 1000,
         }}
       >
-        Hello { JSON.stringify(meta) }
+        Test { JSON.stringify({ meta }) }
       </div>
-    )}
-  </Stackable>
-);
+    ),
+    root,
+  );
+};
 
 Preview.defaultProps = {
   show: false,
