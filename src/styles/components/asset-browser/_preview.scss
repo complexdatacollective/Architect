@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--transparent-dark);
   overflow: auto;
 
   &__container {
@@ -13,7 +13,7 @@
     left: 2rem;
     width: calc(100% - 4rem);
     height: calc(100% - 4rem);
-    background-color: #FFFFFF;
+    background-color: var(--color-white);
     border-radius: 1rem;
     padding: 1rem 2rem;
     display: flex;
@@ -23,13 +23,20 @@
   &__title {
     position: relative;
     text-align: center;
-    background: pink;
 
-    &-controls {
+    &-download {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &-close {
       position: absolute;
       right: 0;
       top: 50%;
       transform: translateY(-50%);
+      cursor: pointer;
     }
   }
 

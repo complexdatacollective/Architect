@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
 import { compose } from 'redux';
 import cx from 'classnames';
-import fse from 'fs-extra';
-import { remote } from 'electron';
 import window from '@codaco/ui/lib/components/window';
 import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
+import { Button } from '@codaco/ui';
 import Stackable from '@components/Stackable';
+import CloseIcon from '@material-ui/icons/Close';
 import withAssetMeta from '@components/Assets/withAssetMeta';
 import withAssetPath from '@components/Assets/withAssetPath';
 import * as Assets from '@components/Assets';
@@ -31,9 +31,9 @@ const Preview = ({
   const AssetRenderer = getRenderer(meta);
   const dialogZIndex = getCSSVariableAsNumber('--z-dialog');
 
-  const handleDownload = () => {
+  const handleDownload = useCallback(() => {
     onDownload(assetPath, meta);
-  };
+  }, [onDownload, assetPath, meta]);
 
   return (
     <Stackable stackKey>
@@ -50,17 +50,19 @@ const Preview = ({
           <div className="asset-browser-preview__container">
             <div className="asset-browser-preview__title">
               <h3>{meta.name}</h3>
-              <div className="asset-browser-preview__title-controls">
-                <button
-                  onClick={onClose}
-                >
-                  close
-                </button>
-                <button
+              <div className="asset-browser-preview__title-download">
+                <Button
                   onClick={handleDownload}
+                  size="small"
                 >
-                  download
-                </button>
+                  Download asset
+                </Button>
+              </div>
+              <div
+                className="asset-browser-preview__title-close"
+                onClick={onClose}
+              >
+                <CloseIcon />
               </div>
             </div>
             <div className="asset-browser-preview__content">
