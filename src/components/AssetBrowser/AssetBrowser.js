@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import fse from 'fs-extra';
+import { remote } from 'electron';
 import { Section } from '@components/EditorLayout';
 import Assets from './Assets';
 import NewAsset from './NewAsset';
@@ -22,11 +24,31 @@ const AssetBrowser = ({
 
   const [showPreview, setShowPreview] = useState(null);
 
-  const handleShowPreview = (id) => setShowPreview(id);
+  const handleShowPreview = setShowPreview;
 
-  const handleClosePreview = () => setShowPreview(null);
+  const handleClosePreview = useCallback(
+    () => setShowPreview(null),
+    [setShowPreview],
+  );
 
-  const handleDownloadAsset = () => {};
+  const handleDownload = useCallback(
+    (assetPath, meta) => {
+      remote.dialog.showSaveDialog(
+        {
+          buttonLabel: 'Save Asset',
+          nameFieldLabel: 'Save As:',
+          properties: ['saveFile'],
+          defaultPath: meta.source,
+        },
+        remote.getCurrentWindow(),
+      )
+        .then(({ canceled, filePath }) => {
+          if (canceled) { return; }
+          fse.copy(assetPath, filePath);
+        });
+    },
+    [],
+  );
 
   return (
     <>
@@ -50,6 +72,7 @@ const AssetBrowser = ({
         <Assets
           onSelect={onSelect}
           onPreview={handleShowPreview}
+          onDownload={handleDownload}
           onDelete={onDelete}
           disableDelete={disableDelete}
           selected={selected}
@@ -59,8 +82,8 @@ const AssetBrowser = ({
       { showPreview && (
         <PreviewContents
           id={showPreview}
+          onDownload={handleDownload}
           onClose={handleClosePreview}
-          onDownload={handleDownloadAsset}
         />
       )}
     </>

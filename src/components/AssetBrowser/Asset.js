@@ -1,10 +1,13 @@
 import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
 import cx from 'classnames';
 import PreviewIcon from '@material-ui/icons/Visibility';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DownloadIcon from '@material-ui/icons/GetApp';
 import * as Thumbnails from '@components/Thumbnail';
+import withAssetMeta from '@components/Assets/withAssetMeta';
+import withAssetPath from '@components/Assets/withAssetPath';
 
 const FallBackAssetComponent = () => (
   <div>No preview component available for this asset type.</div>
@@ -23,6 +26,8 @@ const Asset = ({
   onClick,
   onDelete,
   onDownload,
+  assetPath,
+  meta,
   onPreview,
   type,
 }) => {
@@ -43,8 +48,8 @@ const Asset = ({
 
   const handleDownload = useCallback((e) => {
     e.stopPropagation();
-    onDownload(id);
-  }, [onDownload, id]);
+    onDownload(assetPath, meta);
+  }, [onDownload, assetPath, meta]);
 
   const PreviewComponent = useMemo(
     () => ASSET_COMPONENTS[type] || FallBackAssetComponent,
@@ -103,7 +108,6 @@ Asset.propTypes = {
   isUsed: PropTypes.bool,
   onClick: PropTypes.func,
   onDelete: PropTypes.func,
-  onDownload: PropTypes.func,
   onPreview: PropTypes.func,
   type: PropTypes.string.isRequired,
 };
@@ -112,8 +116,10 @@ Asset.defaultProps = {
   isUsed: false,
   onClick: () => {},
   onDelete: null,
-  onDownload: () => {},
   onPreview: () => {},
 };
 
-export default Asset;
+export default compose(
+  withAssetMeta,
+  withAssetPath,
+)(Asset);

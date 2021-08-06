@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { compose } from 'redux';
 import cx from 'classnames';
 import fse from 'fs-extra';
 import { remote } from 'electron';
 import window from '@codaco/ui/lib/components/window';
 import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
-import Stackable from '../Stackable';
-import withAssetMeta from '../Assets/withAssetMeta';
-import withAssetPath from '../Assets/withAssetPath';
-import * as Assets from '../Assets';
+import Stackable from '@components/Stackable';
+import withAssetMeta from '@components/Assets/withAssetMeta';
+import withAssetPath from '@components/Assets/withAssetPath';
+import * as Assets from '@components/Assets';
 
 const getRenderer = (meta) => {
   switch (meta.type) {
@@ -25,25 +25,14 @@ const Preview = ({
   id,
   meta,
   assetPath,
+  onDownload,
   onClose,
 }) => {
   const AssetRenderer = getRenderer(meta);
   const dialogZIndex = getCSSVariableAsNumber('--z-dialog');
 
   const handleDownload = () => {
-    remote.dialog.showSaveDialog(
-      {
-        buttonLabel: 'Save Asset',
-        nameFieldLabel: 'Save As:',
-        properties: ['saveFile'],
-        defaultPath: meta.source,
-      },
-      remote.getCurrentWindow(),
-    )
-      .then(({ canceled, filePath }) => {
-        if (canceled) { return; }
-        fse.copy(assetPath, filePath);
-      });
+    onDownload(assetPath, meta);
   };
 
   return (
