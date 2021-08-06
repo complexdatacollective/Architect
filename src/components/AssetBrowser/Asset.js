@@ -73,7 +73,7 @@ const Asset = ({
       <div className="asset-browser-asset__controls">
         { onPreview && (
           <div
-            className="asset-browser-asset__preview"
+            className="asset-browser-asset__control"
             onClick={handlePreview}
           >
             <PreviewIcon />
@@ -82,7 +82,7 @@ const Asset = ({
 
         { onDownload && (
           <div
-            className="asset-browser-asset__download"
+            className="asset-browser-asset__control"
             onClick={handleDownload}
           >
             <DownloadIcon />
@@ -91,7 +91,7 @@ const Asset = ({
 
         { onDelete && (
           <div
-            className="asset-browser-asset__delete"
+            className="asset-browser-asset__control asset-browser-asset__control--delete"
             onClick={handleDelete}
             title={isUsed ? 'This asset is in use by the protocol and cannot be deleted' : ''}
           >

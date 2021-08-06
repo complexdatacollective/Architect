@@ -32,69 +32,27 @@
   }
 
   &__controls {
+    transition: opacity var(--animation-easing) var(--animation-duration-standard);
     position: absolute;
+    opacity: 0;
     top: unit(1);
     right: unit(1);
+    padding: .5rem .75rem .25rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 1rem;
+    background: var(--color-rich-black);
   }
 
-  // &__preview-control {
-  //   position: absolute;
-  //   top: unit(1);
-  //   left: unit(1);
-  //   width: unit(3);
-  //   height: unit(3);
-  //   border-radius: unit(3);
-  //   cursor: pointer;
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   background-color: var(--color-cyber-grape);
-  //   transition-property: background-color;
-  //   transition-duration: var(--animation-duration-fast);
-  // }
-
-  // &__delete {
-  //   position: absolute;
-  //   top: unit(1);
-  //   right: unit(1);
-  //   width: unit(3);
-  //   height: unit(3);
-  //   border-radius: unit(3);
-  //   cursor: pointer;
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   background-color: var(--color-cyber-grape);
-  //   transition-property: background-color;
-  //   transition-duration: var(--animation-duration-fast);
-
-  //   .icon {
-  //     width: unit(1.2);
-  //     height: unit(1.2);
-
-  //     .cls-1,
-  //     .cls-2 {
-  //       fill: var(--text-light);
-  //       background-color: transparent;
-  //       transition-property: fill;
-  //       transition-duration: var(--animation-duration-fast);
-  //     }
-  //   }
-
-  //   &:hover {
-  //     background-color: var(--background-light);
-
-  //     .icon {
-  //       .cls-1,
-  //       .cls-2 {
-  //         fill: var(--text-dark);
-  //       }
-  //     }
-  //   }
-  // }
+  &__control {
+    color:  var(--color-white);
+    margin-left: .75rem;
+    cursor: pointer;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
 
   &::after {
     display: inline;
@@ -111,12 +69,18 @@
   }
 
   &--is-used {
-    .asset-browser-asset__delete {
+    .asset-browser-asset__control--delete {
       cursor: not-allowed;
     }
 
     &::after {
       display: none;
+    }
+  }
+
+  &:hover {
+    .asset-browser-asset__controls {
+      opacity: 1;
     }
   }
 }
