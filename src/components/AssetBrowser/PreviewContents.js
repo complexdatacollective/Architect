@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import cx from 'classnames';
 import window from '@codaco/ui/lib/components/window';
@@ -15,8 +16,10 @@ const getRenderer = (meta) => {
     case 'image':
       return Assets.BackgroundImage;
     case 'audio':
+      // eslint-disable-next-line
       return ({ id }) => <Assets.Audio id={id} controls />;
     case 'video':
+      // eslint-disable-next-line
       return ({ id }) => <Assets.Video id={id} controls />;
     case 'network':
       return Assets.Network;
@@ -70,7 +73,7 @@ const Preview = ({
               </div>
             </div>
             <div className="asset-browser-preview__content">
-              <AssetRenderer id={id} meta={meta} />
+              <AssetRenderer id={id} />
             </div>
           </div>
         </div>
@@ -79,9 +82,17 @@ const Preview = ({
   );
 };
 
+Preview.propTypes = {
+  id: PropTypes.string.isRequired,
+  meta: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  assetPath: PropTypes.string.isRequired,
+  onDownload: PropTypes.func,
+  onClose: PropTypes.func,
+};
+
 Preview.defaultProps = {
-  show: false,
-  id: null,
+  onDownload: () => {},
+  onClose: () => {},
 };
 
 export default compose(

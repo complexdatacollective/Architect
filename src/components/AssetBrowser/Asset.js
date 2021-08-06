@@ -108,6 +108,9 @@ Asset.propTypes = {
   isUsed: PropTypes.bool,
   onClick: PropTypes.func,
   onDelete: PropTypes.func,
+  onDownload: PropTypes.func,
+  meta: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  assetPath: PropTypes.string.isRequired,
   onPreview: PropTypes.func,
   type: PropTypes.string.isRequired,
 };
@@ -117,6 +120,7 @@ Asset.defaultProps = {
   onClick: () => {},
   onDelete: null,
   onPreview: () => {},
+  onDownload: () => {},
 };
 
 export default compose(

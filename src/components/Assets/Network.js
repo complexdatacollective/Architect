@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import fse from 'fs-extra';
 import withAssetPath from './withAssetPath';
+import withAssetMeta from './withAssetMeta';
 
 const Network = ({ assetPath, meta }) => {
   const [content, setContent] = useState();
@@ -34,13 +36,13 @@ const Network = ({ assetPath, meta }) => {
 };
 
 Network.propTypes = {
-  assetPath: PropTypes.string,
-};
-
-Network.defaultProps = {
-  assetPath: null,
+  assetPath: PropTypes.string.isRequired,
+  meta: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export { Network };
 
-export default withAssetPath(Network);
+export default compose(
+  withAssetPath,
+  withAssetMeta,
+)(Network);
