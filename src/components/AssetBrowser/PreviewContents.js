@@ -13,11 +13,15 @@ import * as Assets from '@components/Assets';
 const getRenderer = (meta) => {
   switch (meta.type) {
     case 'image':
-      return Assets.Image;
+      return Assets.BackgroundImage;
+    case 'audio':
+      return ({ id }) => <Assets.Audio id={id} controls />;
+    case 'video':
+      return ({ id }) => <Assets.Video id={id} controls />;
     case 'network':
       return Assets.Network;
     default:
-      return () => JSON.stringify(meta);
+      return () => <p>No preview available.</p>;
   }
 };
 

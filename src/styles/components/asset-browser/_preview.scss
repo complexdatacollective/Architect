@@ -42,14 +42,22 @@
 
   &__content {
     flex: 1;
-    overflow: auto;
     padding: 1rem 0;
+    overflow: hidden;
+
+    div,
+    audio,
+    video {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   &--type-network {
     .asset-browser-preview {
       &__content {
         padding: 1rem 0 10rem;
+        overflow: auto;
       }
     }
   }
