@@ -31,61 +31,70 @@
     0 0 10px var(--color-white);
   }
 
-  &__preview-control {
-    position: absolute;
-    top: unit(1);
-    left: unit(1);
-    width: unit(3);
-    height: unit(3);
-    border-radius: unit(3);
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--color-cyber-grape);
-    transition-property: background-color;
-    transition-duration: var(--animation-duration-fast);
-  }
-
-  &__delete {
+  &__controls {
     position: absolute;
     top: unit(1);
     right: unit(1);
-    width: unit(3);
-    height: unit(3);
-    border-radius: unit(3);
-    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--color-cyber-grape);
-    transition-property: background-color;
-    transition-duration: var(--animation-duration-fast);
-
-    .icon {
-      width: unit(1.2);
-      height: unit(1.2);
-
-      .cls-1,
-      .cls-2 {
-        fill: var(--text-light);
-        background-color: transparent;
-        transition-property: fill;
-        transition-duration: var(--animation-duration-fast);
-      }
-    }
-
-    &:hover {
-      background-color: var(--background-light);
-
-      .icon {
-        .cls-1,
-        .cls-2 {
-          fill: var(--text-dark);
-        }
-      }
-    }
   }
+
+  // &__preview-control {
+  //   position: absolute;
+  //   top: unit(1);
+  //   left: unit(1);
+  //   width: unit(3);
+  //   height: unit(3);
+  //   border-radius: unit(3);
+  //   cursor: pointer;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   background-color: var(--color-cyber-grape);
+  //   transition-property: background-color;
+  //   transition-duration: var(--animation-duration-fast);
+  // }
+
+  // &__delete {
+  //   position: absolute;
+  //   top: unit(1);
+  //   right: unit(1);
+  //   width: unit(3);
+  //   height: unit(3);
+  //   border-radius: unit(3);
+  //   cursor: pointer;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   background-color: var(--color-cyber-grape);
+  //   transition-property: background-color;
+  //   transition-duration: var(--animation-duration-fast);
+
+  //   .icon {
+  //     width: unit(1.2);
+  //     height: unit(1.2);
+
+  //     .cls-1,
+  //     .cls-2 {
+  //       fill: var(--text-light);
+  //       background-color: transparent;
+  //       transition-property: fill;
+  //       transition-duration: var(--animation-duration-fast);
+  //     }
+  //   }
+
+  //   &:hover {
+  //     background-color: var(--background-light);
+
+  //     .icon {
+  //       .cls-1,
+  //       .cls-2 {
+  //         fill: var(--text-dark);
+  //       }
+  //     }
+  //   }
+  // }
 
   &::after {
     display: inline;

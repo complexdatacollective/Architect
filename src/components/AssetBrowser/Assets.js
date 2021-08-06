@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { RadioGroup } from '@codaco/ui/lib/components/Fields';
 import withAssets from './withAssets';
-import Thumbnail from './Thumbnail';
+import Asset from './Asset';
 
 const ASSET_TYPES = [
   { label: 'All Types', value: null },
@@ -20,6 +20,7 @@ const Assets = ({
   onUpdateAssetFilter,
   onSelect,
   onDelete,
+  onDownload,
   onPreview,
   disableDelete,
 }) => {
@@ -33,7 +34,7 @@ const Assets = ({
     isUsed,
   }) => (
     <div className="asset-browser-assets__asset" key={id}>
-      <Thumbnail
+      <Asset
         id={id}
         name={name}
         source={source}
@@ -41,6 +42,7 @@ const Assets = ({
         isUsed={isUsed}
         onClick={onSelect}
         onPreview={onPreview}
+        onDownload={onDownload}
         onDelete={handleDelete}
       />
     </div>
@@ -82,22 +84,26 @@ const asset = PropTypes.shape({
 });
 
 Assets.propTypes = {
-  type: PropTypes.string,
-  onSelect: PropTypes.func,
-  onDelete: PropTypes.func,
   assets: PropTypes.arrayOf(asset),
   assetType: PropTypes.string,
-  onUpdateAssetFilter: PropTypes.func.isRequired,
   disableDelete: PropTypes.bool,
+  onDelete: PropTypes.func,
+  onDownload: PropTypes.func,
+  onPreview: PropTypes.func,
+  onSelect: PropTypes.func,
+  onUpdateAssetFilter: PropTypes.func.isRequired,
+  type: PropTypes.string,
 };
 
 Assets.defaultProps = {
-  type: null,
-  onSelect: () => {},
-  onDelete: null,
   assets: [],
   assetType: null,
   disableDelete: false,
+  onDelete: null,
+  onDownload: () => {},
+  onPreview: () => {},
+  onSelect: () => {},
+  type: null,
 };
 
 export default compose(
