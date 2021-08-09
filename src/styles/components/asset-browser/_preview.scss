@@ -1,49 +1,6 @@
 .asset-browser-preview {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--transparent-dark);
-  overflow: auto;
-
-  &__container {
-    position: absolute;
-    top: 2rem;
-    left: 2rem;
-    width: calc(100% - 4rem);
-    height: calc(100% - 4rem);
-    background-color: var(--color-white);
-    border-radius: 1rem;
-    padding: 1rem 2rem;
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__title {
-    position: relative;
-    text-align: center;
-
-    &-download {
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    &-close {
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-    }
-  }
-
-  &__content {
-    flex: 1;
-    padding: 1rem 0;
-    overflow: hidden;
+  .window__content {
+    height: 100%;
 
     div,
     audio,
@@ -54,11 +11,9 @@
   }
 
   &--type-network {
-    .asset-browser-preview {
-      &__content {
-        padding: 1rem 0 10rem;
-        overflow: auto;
-      }
+    .window__content {
+      height: auto;
+      padding: 1rem 2rem 10rem;
     }
   }
 }

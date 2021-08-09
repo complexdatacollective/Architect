@@ -2,11 +2,9 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import cx from 'classnames';
-import window from '@codaco/ui/lib/components/window';
-import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
 import { Button } from '@codaco/ui';
-import Stackable from '@components/Stackable';
-import CloseIcon from '@material-ui/icons/Close';
+import Window from '@components/Window2';
+import DownloadIcon from '@material-ui/icons/GetApp';
 import withAssetMeta from '@components/Assets/withAssetMeta';
 import withAssetPath from '@components/Assets/withAssetPath';
 import * as Assets from '@components/Assets';
@@ -36,49 +34,44 @@ const Preview = ({
   onClose,
 }) => {
   const AssetRenderer = getRenderer(meta);
-  const dialogZIndex = getCSSVariableAsNumber('--z-dialog');
 
   const handleDownload = useCallback(() => {
     onDownload(assetPath, meta);
   }, [onDownload, assetPath, meta]);
 
+  const leftControls = [
+    <Button
+      onClick={onClose}
+      color="white"
+    >
+      Close preview
+    </Button>,
+  ];
+
+  const rightControls = [
+    <Button
+      onClick={handleDownload}
+      icon={<DownloadIcon />}
+    >
+      Download asset
+    </Button>,
+  ];
+
+  const className = cx(
+    'asset-browser-preview',
+    `asset-browser-preview--type-${meta.type}`,
+  );
+
   return (
-    <Stackable stackKey>
-      {({ stackIndex }) => (
-        <div
-          className={cx(
-            'asset-browser-preview',
-            `asset-browser-preview--type-${meta.type}`,
-          )}
-          style={{
-            zIndex: dialogZIndex + stackIndex,
-          }}
-        >
-          <div className="asset-browser-preview__container">
-            <div className="asset-browser-preview__title">
-              <h3>{meta.name}</h3>
-              <div className="asset-browser-preview__title-download">
-                <Button
-                  onClick={handleDownload}
-                  size="small"
-                >
-                  Download asset
-                </Button>
-              </div>
-              <div
-                className="asset-browser-preview__title-close"
-                onClick={onClose}
-              >
-                <CloseIcon />
-              </div>
-            </div>
-            <div className="asset-browser-preview__content">
-              <AssetRenderer id={id} />
-            </div>
-          </div>
-        </div>
-      )}
-    </Stackable>
+    <Window
+      title={meta.name}
+      className={className}
+      leftControls={leftControls}
+      rightControls={rightControls}
+      windowRoot={document.body}
+    >
+      <AssetRenderer id={id} />
+    </Window>
   );
 };
 
@@ -96,7 +89,6 @@ Preview.defaultProps = {
 };
 
 export default compose(
-  window,
   withAssetMeta,
   withAssetPath,
 )(Preview);
