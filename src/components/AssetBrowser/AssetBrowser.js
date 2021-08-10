@@ -6,7 +6,7 @@ import { remote } from 'electron';
 import { Section } from '@components/EditorLayout';
 import Assets from './Assets';
 import NewAsset from './NewAsset';
-import PreviewContents from './PreviewContents';
+import Preview from './Preview';
 import withAssetActions from './withAssetActions';
 
 const AssetBrowser = ({
@@ -80,7 +80,7 @@ const AssetBrowser = ({
         />
       </Section>
       { showPreview && (
-        <PreviewContents
+        <Preview
           id={showPreview}
           onDownload={handleDownload}
           onClose={handleClosePreview}

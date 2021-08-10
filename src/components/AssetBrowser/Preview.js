@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import cx from 'classnames';
 import { Button } from '@codaco/ui';
-import Window from '@components/Window2';
+import Window from '@components/Window';
 import DownloadIcon from '@material-ui/icons/GetApp';
 import withAssetMeta from '@components/Assets/withAssetMeta';
 import withAssetPath from '@components/Assets/withAssetPath';

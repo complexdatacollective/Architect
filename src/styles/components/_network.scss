@@ -1,14 +1,12 @@
 .network {
-  --table-color: rgba(58, 106, 117, 0.05);
+  --table-color: rgba(58, 106, 117, .05); // sass-lint:disable-line no-color-literals
   --alternate-row-color: var(--table-color);
   border-radius: var(--border-radius);
   background: var(--table-color);
 
-  table {
-    // width: 100%;
-  }
-
   th {
+    @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
+    word-break: keep-all;
     padding: unit(1) unit(2);
     line-height: unit(4);
 
@@ -18,32 +16,25 @@
       vertical-align: middle;
       color: var(--color-sea-green--dark);
     }
+
+    &:not(:last-child) {
+      border-right: 3px solid var(--color-white);
+    }
   }
 
   td {
     padding: unit(2);
-  }
-
-  th {
-    // background: red;
-    // text-transform: capitalize;
-    @extend .small-heading;
-    word-break: keep-all;
 
     &:not(:last-child) {
       border-right: 3px solid var(--color-white);
     }
   }
 
-  td {
-    &:not(:last-child) {
-      border-right: 3px solid var(--color-white);
-    }
-  }
-
-  tr:nth-child(2n + 1) {
-    & > td {
-      background-color: var(--alternate-row-color);
+  tr {
+    &:nth-child(2n + 1) {
+      & > td {
+        background-color: var(--alternate-row-color);
+      }
     }
   }
 }

@@ -8,7 +8,6 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import { getVariableNamesFromNetwork } from '@app/protocol-validation/validation/validateExternalData';
 import withAssetPath from './withAssetPath';
-import withAssetMeta from './withAssetMeta';
 import { networkReader } from '../../utils/protocols/assetTools';
 
 const initialContent = {
@@ -36,7 +35,7 @@ const getSortIcon = (column) => {
   );
 };
 
-const Network = ({ assetPath, meta }) => {
+const Network = ({ assetPath }) => {
   const [content, setContent] = useState({ ...initialContent });
 
   useEffect(() => {
@@ -109,12 +108,10 @@ const Network = ({ assetPath, meta }) => {
 
 Network.propTypes = {
   assetPath: PropTypes.string.isRequired,
-  meta: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export { Network };
 
 export default compose(
   withAssetPath,
-  withAssetMeta,
 )(Network);

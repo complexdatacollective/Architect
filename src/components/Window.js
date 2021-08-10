@@ -1,27 +1,81 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Fade from '@codaco/ui/lib/components/Transitions/Fade';
-import window from '@codaco/ui/lib/components/window';
+import { compose } from 'redux';
+import cx from 'classnames';
+import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
+import Stackable from '@components/Stackable';
+import window from '@app/behaviours/window';
 
 const Window = ({
   show,
+  title,
   children,
-}) => (
-  <Fade in={show}>
-    <div className="editable-list-window" onClick={(e) => e.stopPropagation()}>
-      {show && children}
-    </div>
-  </Fade>
-);
+  leftControls,
+  rightControls,
+  className,
+}) => {
+  if (!show) { return null; }
+
+  const dialogZIndex = getCSSVariableAsNumber('--z-dialog');
+
+  return (
+    <Stackable stackKey>
+      {({ stackIndex }) => (
+        <div
+          className={cx('window', className)}
+          style={{
+            zIndex: dialogZIndex + stackIndex,
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="window__container">
+            { title && (
+              <div className="window__heading">
+                <h3>{title}</h3>
+              </div>
+            )}
+            <div className="window__main">
+              <div className="window__content">
+                {children}
+              </div>
+            </div>
+            <div className="window__controls">
+              { leftControls && (
+                <div className="window__controls-left">
+                  {leftControls}
+                </div>
+              )}
+              { rightControls && (
+                <div className="window__controls-right">
+                  {rightControls}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </Stackable>
+  );
+};
 
 Window.propTypes = {
-  show: PropTypes.bool,
   children: PropTypes.node,
+  className: PropTypes.string,
+  leftControls: PropTypes.arrayOf(PropTypes.node),
+  rightControls: PropTypes.arrayOf(PropTypes.node),
+  show: PropTypes.bool,
+  title: PropTypes.string,
 };
 
 Window.defaultProps = {
-  show: false,
   children: null,
+  className: null,
+  leftControls: [],
+  rightControls: [],
+  show: true,
+  title: null,
 };
 
-export default window(Window);
+export default compose(
+  window(document.body),
+)(Window);
