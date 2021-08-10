@@ -1,6 +1,11 @@
 .asset-browser-preview {
+  .window__main {
+    overflow-y: hidden;
+  }
+
   .window__content {
     height: 100%;
+    width: 100%;
 
     div,
     audio,
@@ -11,9 +16,14 @@
   }
 
   &--type-network {
+    .window__main {
+      overflow-x: auto;
+      overflow-y: auto;
+    }
+
     .window__content {
+      width: auto;
       height: auto;
-      padding: 1rem 2rem 10rem;
     }
   }
 }

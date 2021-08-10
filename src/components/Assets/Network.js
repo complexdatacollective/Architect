@@ -1,8 +1,11 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect, useMemo } from 'react';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
-import { useTable } from 'react-table';
+import { useTable, useSortBy } from 'react-table';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import { getVariableNamesFromNetwork } from '@app/protocol-validation/validation/validateExternalData';
 import withAssetPath from './withAssetPath';
 import withAssetMeta from './withAssetMeta';
@@ -23,6 +26,15 @@ const getColumns = (network) => getVariableNamesFromNetwork(network).map(
     accessor: col,
   }),
 );
+
+const getSortIcon = (column) => {
+  if (!column.isSorted) { return null; }
+  return (
+    column.isSortedDesc
+      ? <ArrowDropDownIcon />
+      : <ArrowDropUpIcon />
+  );
+};
 
 const Network = ({ assetPath, meta }) => {
   const [content, setContent] = useState({ ...initialContent });
@@ -46,24 +58,29 @@ const Network = ({ assetPath, meta }) => {
     headerGroups,
     rows,
     prepareRow,
-  } = useTable({ data, columns });
+  } = useTable(
+    { data, columns },
+    useSortBy,
+  );
 
   return (
-    <table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
+    <table {...getTableProps()} className="network">
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
               <th
-                {...column.getHeaderProps()}
-                style={{
-                  borderBottom: 'solid 3px red',
-                  background: 'aliceblue',
-                  color: 'black',
-                  fontWeight: 'bold',
-                }}
+                {...column.getHeaderProps(column.getSortByToggleProps())}
               >
                 {column.render('Header')}
+                {getSortIcon(column)}
+                {/* <span>
+                  {(
+                    column.isSorted
+                      ? (column.isSortedDesc ? 'desc' : 'asc')
+                      : ''
+                  )}
+                </span> */}
               </th>
             ))}
           </tr>
@@ -78,11 +95,6 @@ const Network = ({ assetPath, meta }) => {
               {row.cells.map((cell) => (
                 <td
                   {...cell.getCellProps()}
-                  style={{
-                    padding: '10px',
-                    border: 'solid 1px gray',
-                    background: 'papayawhip',
-                  }}
                 >
                   {cell.render('Cell')}
                 </td>
@@ -93,14 +105,6 @@ const Network = ({ assetPath, meta }) => {
       </tbody>
     </table>
   );
-
-  // return (
-  //   <div>
-  //     <pre>
-  //       {JSON.stringify(content, null, 2)}
-  //     </pre>
-  //   </div>
-  // );
 };
 
 Network.propTypes = {

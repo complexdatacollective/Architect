@@ -40,7 +40,8 @@
   }
 
   &__content {
-    padding: 1rem 2rem;
+    padding: unit(2);
+    display: inline-block;
   }
 
   &__controls {
