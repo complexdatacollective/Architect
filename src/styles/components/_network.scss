@@ -7,14 +7,17 @@
   th {
     @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
     word-break: keep-all;
+    white-space: nowrap;
     padding: unit(1) unit(2);
     line-height: unit(4);
 
     svg {
       height: unit(4);
-      width: unit(3);
+      width: unit(4);
+      position: relative;
+      top: -.1rem;
       vertical-align: middle;
-      color: var(--color-sea-green--dark);
+      color: var(--primary);
     }
 
     &:not(:last-child) {

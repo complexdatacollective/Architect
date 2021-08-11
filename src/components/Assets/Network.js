@@ -73,13 +73,6 @@ const Network = ({ assetPath }) => {
               >
                 {column.render('Header')}
                 {getSortIcon(column)}
-                {/* <span>
-                  {(
-                    column.isSorted
-                      ? (column.isSortedDesc ? 'desc' : 'asc')
-                      : ''
-                  )}
-                </span> */}
               </th>
             ))}
           </tr>
