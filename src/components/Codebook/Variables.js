@@ -12,6 +12,7 @@ import { get, isString } from 'lodash';
 import cx from 'classnames';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
+import RenameVariable from '@components/RenameVariable';
 import UsageColumn from './UsageColumn';
 import ControlsColumn from './ControlsColumn';
 
@@ -117,7 +118,10 @@ const Variables = ({
             id, name, component, type, inUse, usage,
           }, index) => (
             <tr className={rowClassName(index)} key={id}>
-              <td className="codebook__variables-column">{name}</td>
+              <td className="codebook__variables-column">
+                {name}
+                <RenameVariable id={id} />
+              </td>
               <td className="codebook__variables-column">{type}</td>
               <td className="codebook__variables-column">{component}</td>
               <td className="codebook__variables-column codebook__variables-column--usage">
