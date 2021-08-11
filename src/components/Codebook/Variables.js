@@ -12,7 +12,7 @@ import { get, isString } from 'lodash';
 import cx from 'classnames';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
-import RenameVariable from '@components/RenameVariable';
+import RenameVariableButton from '@components/RenameVariableButton';
 import UsageColumn from './UsageColumn';
 import ControlsColumn from './ControlsColumn';
 
@@ -69,7 +69,13 @@ Heading.propTypes = {
 };
 
 const Variables = ({
-  variables, onDelete, sortBy, sortDirection, sort,
+  variables,
+  onDelete,
+  sortBy,
+  sortDirection,
+  sort,
+  entity,
+  type: entityType,
 }) => {
   const headingProps = {
     sortBy,
@@ -115,12 +121,17 @@ const Variables = ({
         </thead>
         <tbody>
           {variables.map(({
-            id, name, component, type, inUse, usage,
+            id,
+            name,
+            component,
+            type,
+            inUse,
+            usage,
           }, index) => (
             <tr className={rowClassName(index)} key={id}>
               <td className="codebook__variables-column">
                 {name}
-                <RenameVariable id={id} />
+                <RenameVariableButton entity={entity} type={entityType} id={id} />
               </td>
               <td className="codebook__variables-column">{type}</td>
               <td className="codebook__variables-column">{component}</td>

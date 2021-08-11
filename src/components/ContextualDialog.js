@@ -6,6 +6,20 @@ import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
 import Stackable from '@components/Stackable';
 import window from '@app/behaviours/window';
 
+export const Controls = ({ children }) => (
+  <div className="contextual-dialog__controls">
+    {children}
+  </div>
+);
+
+Controls.propTypes = {
+  children: PropTypes.node,
+};
+
+Controls.defaultProps = {
+  children: null,
+};
+
 const Dialog = ({
   show,
   children,
