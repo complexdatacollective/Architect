@@ -6,6 +6,7 @@ import { get } from 'lodash';
 import { Button } from '@codaco/ui';
 import TextField from '@codaco/ui/lib/components/Fields/Text';
 import { getType } from '@selectors/codebook';
+import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 import ContextualDialog, { Controls } from '@components/ContextualDialog';
 
 const BasicForm = reduxForm()(({ form, handleSubmit, children }) => (
@@ -17,6 +18,9 @@ const BasicForm = reduxForm()(({ form, handleSubmit, children }) => (
 const RenameVariableButton = ({
   id,
   name,
+  entity,
+  type,
+  updateVariable,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -26,7 +30,7 @@ const RenameVariableButton = ({
 
   const handleSubmit = useCallback((values) => {
     const { name: newName } = values;
-    console.log({ newName });
+    updateVariable(entity, type, id, { name: newName }, true);
     setIsOpen(false);
   }, []);
 
@@ -69,6 +73,7 @@ const RenameVariableButton = ({
             onSubmit={handleSubmit}
             initialValues={initialValues}
           >
+            <h3>Rename Variable</h3>
             <Field component={TextField} name="name" />
 
             <Controls>
@@ -96,4 +101,10 @@ const mapStateToProps = (state, { entity, type, id }) => {
   return { name };
 };
 
-export default connect(mapStateToProps)(RenameVariableButton);
+const mapDispatchToProps = {
+  updateVariable: codebookActions.updateVariable,
+};
+
+const withState = connect(mapStateToProps, mapDispatchToProps);
+
+export default withState(RenameVariableButton);
