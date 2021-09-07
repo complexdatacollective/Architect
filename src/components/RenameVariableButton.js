@@ -18,6 +18,7 @@ const BasicForm = reduxForm()(({ form, handleSubmit, children }) => (
 const RenameVariableButton = ({
   id,
   name,
+  children,
   entity,
   type,
   updateVariable,
@@ -36,12 +37,16 @@ const RenameVariableButton = ({
 
   const controls = [
     <Button
+      key="close"
       onClick={handleClose}
       color="white"
     >
       Close
     </Button>,
-    <Button type="submit">
+    <Button
+      key="save"
+      ype="submit"
+    >
       Save
     </Button>,
   ];
@@ -55,13 +60,8 @@ const RenameVariableButton = ({
   }), [name]);
 
   return (
-    <div className="rename-variable">
-      <button
-        type="button"
-        onClick={handleOpen}
-      >
-        Rename
-      </button>
+    <>
+      {children({ onClick: handleOpen })}
       { isOpen && (
         <ContextualDialog
           className="rename-variable__dialog"
@@ -82,13 +82,17 @@ const RenameVariableButton = ({
           </BasicForm>
         </ContextualDialog>
       )}
-    </div>
+    </>
   );
 };
 
 RenameVariableButton.propTypes = {
   id: PropTypes.string.isRequired,
+  entity: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  updateVariable: PropTypes.func.isRequired,
   name: PropTypes.string,
+  children: PropTypes.func.isRequired,
 };
 
 RenameVariableButton.defaultProps = {

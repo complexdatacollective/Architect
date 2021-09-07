@@ -12,7 +12,8 @@ import { get, isString } from 'lodash';
 import cx from 'classnames';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
-import RenameVariableButton from '@components/RenameVariableButton';
+import RenameVariableControl from '@components/RenameVariableButton';
+import Link from '@components/Link';
 import UsageColumn from './UsageColumn';
 import ControlsColumn from './ControlsColumn';
 
@@ -131,15 +132,33 @@ const Variables = ({
             <tr className={rowClassName(index)} key={id}>
               <td className="codebook__variables-column">
                 {name}
-                <RenameVariableButton entity={entity} type={entityType} id={id} />
+                {' '}
+                <RenameVariableControl
+                  entity={entity}
+                  type={entityType}
+                  id={id}
+                >
+                  {({ onClick }) => (
+                    <>
+                      <Link onClick={onClick}>(rename)</Link>
+                    </>
+                  )}
+                </RenameVariableControl>
               </td>
               <td className="codebook__variables-column">{type}</td>
               <td className="codebook__variables-column">{component}</td>
               <td className="codebook__variables-column codebook__variables-column--usage">
-                <UsageColumn inUse={inUse} usage={usage} />
+                <UsageColumn
+                  inUse={inUse}
+                  usage={usage}
+                />
               </td>
               <td className="codebook__variables-column codebook__variables-column--controls">
-                <ControlsColumn onDelete={onDelete} inUse={inUse} id={id} />
+                <ControlsColumn
+                  onDelete={onDelete}
+                  inUse={inUse}
+                  id={id}
+                />
               </td>
             </tr>
           ))}
