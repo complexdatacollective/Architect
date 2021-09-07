@@ -99,6 +99,7 @@ PresetFields.propTypes = {
   handleCreateLayoutVariable: PropTypes.func.isRequired,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  layoutVariable: PropTypes.string,
 };
 
 PresetFields.defaultProps = {
@@ -106,6 +107,7 @@ PresetFields.defaultProps = {
   groupVariablesForSubject: [],
   edgesForSubject: [],
   highlightVariablesForSubject: [],
+  layoutVariable: null,
 };
 
 export default compose(

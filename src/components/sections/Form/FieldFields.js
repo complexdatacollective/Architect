@@ -12,8 +12,6 @@ import Options from '@components/Options';
 import Parameters from '@components/Parameters';
 import Validations from '@components/Validations';
 import { Section, Row } from '@components/EditorLayout';
-import { Button } from '@codaco/ui';
-import RenameVariableControl from '@components/RenameVariableButton';
 import withFieldsHandlers from './withFieldsHandlers';
 import Tip from '../../Tip';
 import ExternalLink from '../../ExternalLink';
