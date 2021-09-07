@@ -19,6 +19,7 @@ const QuickAdd = ({
   handleCreateVariable,
   options,
   type,
+  quickAdd,
 }) => (
   type
   && (
@@ -44,6 +45,7 @@ const QuickAdd = ({
         validation={{ required: true }}
         type={type}
         entity={entity}
+        variable={quickAdd}
       />
     </div>
   </Section>
