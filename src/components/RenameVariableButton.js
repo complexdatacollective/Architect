@@ -33,7 +33,7 @@ const RenameVariableButton = ({
     const { name: newName } = values;
     updateVariable(entity, type, id, { name: newName }, true);
     setIsOpen(false);
-  }, []);
+  }, [id]);
 
   const controls = [
     <Button
@@ -45,7 +45,7 @@ const RenameVariableButton = ({
     </Button>,
     <Button
       key="save"
-      ype="submit"
+      type="submit"
     >
       Save
     </Button>,
