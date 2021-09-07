@@ -12,6 +12,8 @@ import Options from '@components/Options';
 import Parameters from '@components/Parameters';
 import Validations from '@components/Validations';
 import { Section, Row } from '@components/EditorLayout';
+import { Button } from '@codaco/ui';
+import RenameVariableControl from '@components/RenameVariableButton';
 import withFieldsHandlers from './withFieldsHandlers';
 import Tip from '../../Tip';
 import ExternalLink from '../../ExternalLink';
@@ -53,13 +55,13 @@ const PromptFields = ({
         <ValidatedField
           name="variable"
           component={VariableSelect}
+          variable={variable}
           entity={entity}
           type={type}
           options={variableOptions} // from variables
           onCreateOption={handleNewVariable} // reset later fields, create variable of no type?
           onChange={handleChangeVariable} // read/reset component options validation
           validation={{ required: true }}
-
         />
       </Row>
     </Section>
