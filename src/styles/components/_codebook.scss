@@ -141,8 +141,16 @@
       width: 20%;
 
       &--controls {
-        max-width: 200px;
-        text-align: right;
+        // max-width: 200px;
+        white-space: nowrap;
+        text-align: left;
+        button {
+          margin-left: .5rem;
+
+          &:first-child {
+            margin: 0;
+          }
+        }
       }
     }
 
