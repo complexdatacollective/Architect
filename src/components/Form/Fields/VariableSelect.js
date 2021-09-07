@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { compose, withProps } from 'recompose';
 import { getVariableOptionsForSubject } from '@selectors/codebook';
-import NativeSelect from './NativeSelect';
 import { Button } from '@codaco/ui';
 import RenameVariableControl from '@components/RenameVariableButton';
+import NativeSelect from './NativeSelect';
 
 const withVariableValidator = withProps(({ validation }) => ({
   validation: { ...validation, allowedVariableName: 'variable name' },

@@ -63,6 +63,7 @@ const PromptFields = ({
             options={ordinalVariableOptions}
             onCreateOption={handleNewVariable}
             validation={{ required: true }}
+            variable={variable}
           />
         </Row>
       </Section>

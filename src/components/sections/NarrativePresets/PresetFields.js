@@ -20,6 +20,7 @@ const PresetFields = ({
   handleCreateLayoutVariable,
   entity,
   type,
+  layoutVariable,
 }) => (
   <>
     <Section>
@@ -45,6 +46,7 @@ const PresetFields = ({
           validation={{ required: true }}
           options={layoutVariablesForSubject}
           onCreateOption={handleCreateLayoutVariable}
+          variable={layoutVariable}
         />
       </Row>
     </Section>

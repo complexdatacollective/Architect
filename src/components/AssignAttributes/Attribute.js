@@ -29,6 +29,7 @@ const Attribute = ({
           onCreateOption={(value) => handleCreateVariable(value, 'boolean', `${field}.variable`)}
           entity={entity}
           type={type}
+          variable={variable}
         />
       </div>
       { variable

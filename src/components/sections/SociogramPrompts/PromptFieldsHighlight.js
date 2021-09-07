@@ -18,6 +18,7 @@ const HighlightFields = ({
   handleCreateVariable,
   handleEdgeHighlightChange,
   highlightVariablesForSubject,
+  highlightVariable,
   setCanCreateEdge,
   type,
 }) => {
@@ -61,6 +62,7 @@ const HighlightFields = ({
           onCreateOption={(value) => handleCreateVariable(value, 'boolean', 'highlight.variable')}
           validation={{ required: true }}
           options={highlightVariablesForSubject}
+          variable={highlightVariable}
         />
       </Row>
       )}

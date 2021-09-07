@@ -16,6 +16,7 @@ const PromptFields = ({
   entity,
   handleCreateVariable,
   layoutVariablesForSubject,
+  layoutVariable,
   type,
   variablesForSubject,
 }) => (
@@ -38,6 +39,7 @@ const PromptFields = ({
         validation={{ required: true }}
         options={layoutVariablesForSubject}
         onCreateOption={(value) => handleCreateVariable(value, 'layout', 'layout.layoutVariable')}
+        variable={layoutVariable}
       />
     </Row>
     { allowPositioning
