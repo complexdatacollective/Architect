@@ -14,7 +14,6 @@ import { Button } from '@codaco/ui';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import RenameVariableControl from '@components/RenameVariableButton';
-import Link from '@components/Link';
 import UsageColumn from './UsageColumn';
 import ControlsColumn from './ControlsColumn';
 
@@ -176,12 +175,14 @@ const Variables = ({
 };
 
 Variables.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  variables: PropTypes.array,
+  entity: PropTypes.string.isRequired,
   onDelete: PropTypes.func,
+  sort: PropTypes.func.isRequired,
   sortBy: PropTypes.string.isRequired,
   sortDirection: PropTypes.oneOf([SortDirection.ASC, SortDirection.DESC]).isRequired,
-  sort: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  variables: PropTypes.array,
 };
 
 Variables.defaultProps = {
