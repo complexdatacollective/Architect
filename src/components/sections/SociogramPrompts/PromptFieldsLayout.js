@@ -76,6 +76,7 @@ PromptFields.propTypes = {
   allowPositioning: PropTypes.bool,
   entity: PropTypes.string.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
+  layoutVariable: PropTypes.string,
   layoutVariablesForSubject: PropTypes.arrayOf(layoutVariablesForSubjectShape).isRequired,
   type: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
@@ -84,6 +85,7 @@ PromptFields.propTypes = {
 
 PromptFields.defaultProps = {
   allowPositioning: true,
+  layoutVariable: null,
 };
 
 export { PromptFields };

@@ -76,6 +76,7 @@ HighlightFields.propTypes = {
   entity: PropTypes.string.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
   handleEdgeHighlightChange: PropTypes.func.isRequired,
+  highlightVariable: PropTypes.string,
   // eslint-disable-next-line react/forbid-prop-types
   highlightVariablesForSubject: PropTypes.array.isRequired,
   setCanCreateEdge: PropTypes.func.isRequired,
@@ -84,6 +85,7 @@ HighlightFields.propTypes = {
 
 HighlightFields.defaultProps = {
   allowHighlighting: false,
+  highlightVariable: null,
 };
 
 export { HighlightFields };
