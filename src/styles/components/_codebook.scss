@@ -140,17 +140,10 @@
       vertical-align: middle;
       width: 20%;
 
-      &--controls {
-        // max-width: 200px;
+      &--control {
         white-space: nowrap;
         text-align: left;
-        button {
-          margin-left: .5rem;
-
-          &:first-child {
-            margin: 0;
-          }
-        }
+        width: 0;
       }
     }
 
