@@ -10,6 +10,7 @@ import {
 } from 'recompose';
 import { get, isString } from 'lodash';
 import cx from 'classnames';
+import { Button } from '@codaco/ui';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import RenameVariableControl from '@components/RenameVariableButton';
@@ -118,6 +119,7 @@ const Variables = ({
               Used In
             </Heading>
             <th />
+            <th />
           </tr>
         </thead>
         <tbody>
@@ -132,18 +134,6 @@ const Variables = ({
             <tr className={rowClassName(index)} key={id}>
               <td className="codebook__variables-column">
                 {name}
-                {' '}
-                <RenameVariableControl
-                  entity={entity}
-                  type={entityType}
-                  id={id}
-                >
-                  {({ onClick }) => (
-                    <>
-                      <Link onClick={onClick}>(rename)</Link>
-                    </>
-                  )}
-                </RenameVariableControl>
               </td>
               <td className="codebook__variables-column">{type}</td>
               <td className="codebook__variables-column">{component}</td>
@@ -153,7 +143,24 @@ const Variables = ({
                   usage={usage}
                 />
               </td>
-              <td className="codebook__variables-column codebook__variables-column--controls">
+              <td className="codebook__variables-column codebook__variables-column--control">
+                <RenameVariableControl
+                  entity={entity}
+                  type={entityType}
+                  id={id}
+                >
+                  {({ onClick }) => (
+                    <Button
+                      onClick={onClick}
+                      size="small"
+                      color="white"
+                    >
+                      Rename
+                    </Button>
+                  )}
+                </RenameVariableControl>
+              </td>
+              <td className="codebook__variables-column codebook__variables-column--control">
                 <ControlsColumn
                   onDelete={onDelete}
                   inUse={inUse}
