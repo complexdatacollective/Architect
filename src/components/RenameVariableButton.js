@@ -1,7 +1,8 @@
 import React, { useCallback, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, submit } from 'redux-form';
+import { compose } from 'redux';
 import { get } from 'lodash';
 import { Button } from '@codaco/ui';
 import TextField from '@codaco/ui/lib/components/Fields/Text';
@@ -9,13 +10,25 @@ import { getType } from '@selectors/codebook';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 import ContextualDialog, { Controls } from '@components/ContextualDialog';
 
-const BasicForm = reduxForm()(({ form, handleSubmit, children }) => (
-  <form onSubmit={handleSubmit}>
-    {children}
-  </form>
-));
+const BasicForm = compose(
+  reduxForm(),
+  connect(null, { submit }),
+)(({ form, children, submit: submitForm }) => {
+  // Custom submit handler to prevent propagation to any parent redux-form forms.
+  const onSubmit = useCallback((e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    submitForm(form);
+  }, [form]);
 
-const RenameVariableButton = ({
+  return (
+    <form onSubmit={onSubmit}>
+      {children}
+    </form>
+  );
+});
+
+const RenameVariableControl = ({
   id,
   name,
   children,
@@ -23,6 +36,7 @@ const RenameVariableButton = ({
   type,
   updateVariable,
 }) => {
+  const formName = `rename-variable-${id}`;
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = useCallback(() => {
@@ -69,7 +83,7 @@ const RenameVariableButton = ({
           controls={controls}
         >
           <BasicForm
-            form={`rename-variable-${id}`}
+            form={formName}
             onSubmit={handleSubmit}
             initialValues={initialValues}
           >
@@ -86,7 +100,7 @@ const RenameVariableButton = ({
   );
 };
 
-RenameVariableButton.propTypes = {
+RenameVariableControl.propTypes = {
   id: PropTypes.string.isRequired,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
@@ -95,7 +109,7 @@ RenameVariableButton.propTypes = {
   children: PropTypes.func.isRequired,
 };
 
-RenameVariableButton.defaultProps = {
+RenameVariableControl.defaultProps = {
   name: null,
 };
 
@@ -111,4 +125,4 @@ const mapDispatchToProps = {
 
 const withState = connect(mapStateToProps, mapDispatchToProps);
 
-export default withState(RenameVariableButton);
+export default withState(RenameVariableControl);
