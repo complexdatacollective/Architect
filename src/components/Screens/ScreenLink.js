@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actionCreators as screenActions } from '@modules/ui/screens';
+import Link from '@components/Link';
 
 const ScreenLink = ({
   children,
@@ -16,9 +18,9 @@ const ScreenLink = ({
   }, ['openScreen', 'onClick']);
 
   return (
-    <div className="screen-link" onClick={handleOpenStage}>
+    <Link onClick={handleOpenStage}>
       {children}
-    </div>
+    </Link>
   );
 };
 
