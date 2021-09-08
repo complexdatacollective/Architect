@@ -27,10 +27,16 @@
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
+    padding: unit(4) unit(4);
+  }
+
+  &__title {
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: unit(2);
   }
 
   &__content {
-    padding: unit(2);
     display: block;
   }
 
@@ -38,6 +44,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    padding-top: unit(2);
 
     button {
       margin-left: 1rem;

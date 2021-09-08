@@ -8,7 +8,7 @@ import TextField from '@codaco/ui/lib/components/Fields/Text';
 import { getType, getVariablesForSubject } from '@selectors/codebook';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 import BasicForm from '@components/BasicForm';
-import ContextualDialog, { Controls } from '@components/ContextualDialog';
+import ContextualDialog, { Controls, Title } from '@components/ContextualDialog';
 import { required, uniqueByList, allowedVariableName } from '@app/utils/validations';
 import safeName from '@app/utils/safeName';
 
@@ -49,13 +49,14 @@ const RenameVariableControl = ({
     <Button
       key="close"
       onClick={handleClose}
-      color="white"
+      color="navy-taupe"
     >
       Close
     </Button>,
     <Button
       key="save"
       type="submit"
+      color="mustard"
     >
       Save
     </Button>,
@@ -83,7 +84,12 @@ const RenameVariableControl = ({
             onSubmit={handleSubmit}
             initialValues={initialValues}
           >
-            <h3>Rename Variable</h3>
+            <Title>Rename Variable</Title>
+            <p>
+              Choose a new name for the &quot;
+              <em>{name}</em>
+              &quot; variable.
+            </p>
             <Field
               component={TextField}
               name="name"

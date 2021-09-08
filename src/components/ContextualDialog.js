@@ -20,6 +20,20 @@ Controls.defaultProps = {
   children: null,
 };
 
+export const Title = ({ children }) => (
+  <h2 className="contextual-dialog__title">
+    {children}
+  </h2>
+);
+
+Title.propTypes = {
+  children: PropTypes.node,
+};
+
+Title.defaultProps = {
+  children: null,
+};
+
 const Dialog = ({
   show,
   children,
