@@ -1,32 +1,20 @@
 import React, { useCallback, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { reduxForm, Field, submit } from 'redux-form';
-import { compose } from 'redux';
-import { get } from 'lodash';
+import { Field } from 'redux-form';
+import { get, values } from 'lodash';
 import { Button } from '@codaco/ui';
 import TextField from '@codaco/ui/lib/components/Fields/Text';
-import { getType } from '@selectors/codebook';
+import { getType, getVariablesForSubject } from '@selectors/codebook';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
+import BasicForm from '@components/BasicForm';
 import ContextualDialog, { Controls } from '@components/ContextualDialog';
+import { required, uniqueByList, allowedVariableName } from '@app/utils/validations';
+import safeName from '@app/utils/safeName';
 
-const BasicForm = compose(
-  reduxForm(),
-  connect(null, { submit }),
-)(({ form, children, submit: submitForm }) => {
-  // Custom submit handler to prevent propagation to any parent redux-form forms.
-  const onSubmit = useCallback((e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    submitForm(form);
-  }, [form]);
+const isRequired = required();
 
-  return (
-    <form onSubmit={onSubmit}>
-      {children}
-    </form>
-  );
-});
+const isAllowedVariableName = allowedVariableName();
 
 const RenameVariableControl = ({
   id,
@@ -35,16 +23,24 @@ const RenameVariableControl = ({
   entity,
   type,
   updateVariable,
+  existingVariableNames,
 }) => {
   const formName = `rename-variable-${id}`;
+
   const [isOpen, setIsOpen] = useState(false);
+
+  const validate = useMemo(() => ([
+    isRequired,
+    uniqueByList(existingVariableNames),
+    isAllowedVariableName,
+  ]), [existingVariableNames.join()]);
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
   }, []);
 
-  const handleSubmit = useCallback((values) => {
-    const { name: newName } = values;
+  const handleSubmit = useCallback((formValues) => {
+    const { name: newName } = formValues;
     updateVariable(entity, type, id, { name: newName }, true);
     setIsOpen(false);
   }, [id]);
@@ -88,7 +84,13 @@ const RenameVariableControl = ({
             initialValues={initialValues}
           >
             <h3>Rename Variable</h3>
-            <Field component={TextField} name="name" />
+            <Field
+              component={TextField}
+              name="name"
+              placeholder="e.g. Nickname"
+              validate={validate}
+              normalize={safeName}
+            />
 
             <Controls>
               {controls}
@@ -106,17 +108,26 @@ RenameVariableControl.propTypes = {
   type: PropTypes.string.isRequired,
   updateVariable: PropTypes.func.isRequired,
   name: PropTypes.string,
+  existingVariableNames: PropTypes.arrayOf(PropTypes.string),
   children: PropTypes.func.isRequired,
 };
 
 RenameVariableControl.defaultProps = {
   name: null,
+  existingVariableNames: [],
 };
 
 const mapStateToProps = (state, { entity, type, id }) => {
   const entityDefinition = getType(state, { entity, type });
   const name = get(entityDefinition, ['variables', id, 'name'], '');
-  return { name };
+  const existingVariables = getVariablesForSubject(state, { entity, type });
+  const existingVariableNames = values(existingVariables)
+    .map((variable) => variable.name);
+
+  return {
+    existingVariableNames,
+    name,
+  };
 };
 
 const mapDispatchToProps = {
