@@ -144,6 +144,15 @@
         white-space: nowrap;
         text-align: left;
         width: 0;
+
+        // Ultimately this should probably live in codaco/ui Button as an option
+        button {
+          margin-left: unit(1);
+          .button__content {
+            padding: 0;
+            margin-left: 0 !important;
+          }
+        }
       }
     }
 

@@ -10,10 +10,8 @@ import {
 } from 'recompose';
 import { get, isString } from 'lodash';
 import cx from 'classnames';
-import { Button } from '@codaco/ui';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
-import RenameVariableControl from '@components/RenameVariableControl';
 import UsageColumn from './UsageColumn';
 import ControlsColumn from './ControlsColumn';
 
@@ -143,26 +141,11 @@ const Variables = ({
                 />
               </td>
               <td className="codebook__variables-column codebook__variables-column--control">
-                <RenameVariableControl
-                  entity={entity}
-                  type={entityType}
-                  id={id}
-                >
-                  {({ onClick }) => (
-                    <Button
-                      onClick={onClick}
-                      size="small"
-                      color="white"
-                    >
-                      Rename
-                    </Button>
-                  )}
-                </RenameVariableControl>
-              </td>
-              <td className="codebook__variables-column codebook__variables-column--control">
                 <ControlsColumn
                   onDelete={onDelete}
                   inUse={inUse}
+                  entity={entity}
+                  type={entityType}
                   id={id}
                 />
               </td>
