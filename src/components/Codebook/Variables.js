@@ -13,7 +13,7 @@ import cx from 'classnames';
 import { Button } from '@codaco/ui';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
-import RenameVariableControl from '@components/RenameVariableButton';
+import RenameVariableControl from '@components/RenameVariableControl';
 import UsageColumn from './UsageColumn';
 import ControlsColumn from './ControlsColumn';
 
