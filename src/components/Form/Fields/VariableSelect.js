@@ -25,13 +25,14 @@ const VariableSelect = ({
   variable,
   ...props
 }) => (
-  <>
+  <div className="form-fields-variable-select">
     <NativeSelect
       placeholder="Select or create a variable"
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
       reserved={reserved}
     />
+
     { variable && (
       <RenameVariableControl
         entity={entity}
@@ -39,17 +40,19 @@ const VariableSelect = ({
         id={variable}
       >
         {({ onClick }) => (
-          <Button
-            onClick={onClick}
-            size="small"
-            color="white"
-          >
-            Rename variable
-          </Button>
+          <div className="form-fields-variable-select__rename">
+            <Button
+              onClick={onClick}
+              size="small"
+              color="sea-serpent"
+            >
+              Rename variable
+            </Button>
+          </div>
         )}
       </RenameVariableControl>
     )}
-  </>
+  </div>
 );
 
 VariableSelect.propTypes = {
