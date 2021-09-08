@@ -44,6 +44,8 @@ ControlsColumn.propTypes = {
   id: PropTypes.string.isRequired,
   onDelete: PropTypes.func.isRequired,
   inUse: PropTypes.bool.isRequired,
+  entity: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default ControlsColumn;

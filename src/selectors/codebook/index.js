@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 
-import { get, values } from 'lodash';
+import { get } from 'lodash';
 import { getCodebook } from '../protocol';
 import { asOptions } from '../utils';
 import { makeOptionsWithIsUsed } from './isUsed';
