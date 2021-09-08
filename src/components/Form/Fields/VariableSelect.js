@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { compose, withProps } from 'recompose';
 import { getVariableOptionsForSubject } from '@selectors/codebook';
 import { Button } from '@codaco/ui';
-import RenameVariableControl from '@components/RenameVariableButton';
+import RenameVariableControl from '@components/RenameVariableControl';
 import NativeSelect from './NativeSelect';
 
 const withVariableValidator = withProps(({ validation }) => ({
