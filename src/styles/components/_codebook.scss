@@ -148,9 +148,10 @@
         // Ultimately this should probably live in codaco/ui Button as an option
         button {
           margin-left: unit(1);
+
           .button__content {
             padding: 0;
-            margin-left: 0 !important;
+            margin-left: 0 !important; // sass-lint:disable-line no-important
           }
         }
       }
