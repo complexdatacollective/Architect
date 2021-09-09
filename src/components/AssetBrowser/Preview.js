@@ -43,6 +43,7 @@ const Preview = ({
     <Button
       onClick={onClose}
       color="white"
+      key="close"
     >
       Close preview
     </Button>,
@@ -52,6 +53,7 @@ const Preview = ({
     <Button
       onClick={handleDownload}
       icon={<DownloadIcon />}
+      key="download"
     >
       Download asset
     </Button>,

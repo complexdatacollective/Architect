@@ -24,7 +24,7 @@ const Assets = ({
   onPreview,
   disableDelete,
 }) => {
-  const handleDelete = !disableDelete && onDelete;
+  const handleDelete = disableDelete ? null : onDelete;
 
   const renderedAssets = assets.map(({
     id,
