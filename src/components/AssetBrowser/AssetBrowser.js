@@ -1,12 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import fse from 'fs-extra';
-import { remote } from 'electron';
 import { Section } from '@components/EditorLayout';
+import useExternalDataPreview from '@components/AssetBrowser/useExternalDataPreview';
 import Assets from './Assets';
 import NewAsset from './NewAsset';
-import Preview from './Preview';
 import withAssetActions from './withAssetActions';
 
 const AssetBrowser = ({
@@ -22,33 +20,7 @@ const AssetBrowser = ({
     onSelect(assetIds[0]);
   }, [onSelect]);
 
-  const [showPreview, setShowPreview] = useState(null);
-
-  const handleShowPreview = setShowPreview;
-
-  const handleClosePreview = useCallback(
-    () => setShowPreview(null),
-    [setShowPreview],
-  );
-
-  const handleDownload = useCallback(
-    (assetPath, meta) => {
-      remote.dialog.showSaveDialog(
-        {
-          buttonLabel: 'Save Asset',
-          nameFieldLabel: 'Save As:',
-          properties: ['saveFile'],
-          defaultPath: meta.source,
-        },
-        remote.getCurrentWindow(),
-      )
-        .then(({ canceled, filePath }) => {
-          if (canceled) { return; }
-          fse.copy(assetPath, filePath);
-        });
-    },
-    [],
-  );
+  const [preview, handleShowPreview, , handleDownload] = useExternalDataPreview();
 
   return (
     <>
@@ -79,13 +51,7 @@ const AssetBrowser = ({
           type={type}
         />
       </Section>
-      { showPreview && (
-        <Preview
-          id={showPreview}
-          onDownload={handleDownload}
-          onClose={handleClosePreview}
-        />
-      )}
+      { preview }
     </>
   );
 };
