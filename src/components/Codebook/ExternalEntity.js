@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from '@codaco/ui';
 import useVariablesFromExternalData from '@hooks/useVariablesFromExternalData';
 import useExternalDataPreview from '@components/AssetBrowser/useExternalDataPreview';
+import useExternalDataDownload from '@components/AssetBrowser/useExternalDataDownload';
 import VariableList from './VariableList';
 import EntityIcon from './EntityIcon';
 
@@ -13,6 +14,7 @@ const ExternalEntity = ({
   const { variables } = useVariablesFromExternalData(id);
 
   const [preview, handleShowPreview] = useExternalDataPreview();
+  const handleDownloadAsset = useExternalDataDownload();
 
   return (
     <>
@@ -32,7 +34,13 @@ const ExternalEntity = ({
               size="small"
               onClick={() => handleShowPreview(id)}
             >
-              Preview asset
+              Preview
+            </Button>
+            <Button
+              size="small"
+              onClick={() => handleDownloadAsset(id)}
+            >
+              Download
             </Button>
           </div>
         </div>

@@ -1,10 +1,10 @@
 import React, { useState, useCallback, useMemo } from 'react';
-import fse from 'fs-extra';
-import { remote } from 'electron';
 import Preview from '@components/AssetBrowser/Preview';
+import useExternalDataDownload from './useExternalDataDownload';
 
 const useExternalDataPreview = () => {
   const [showPreview, setShowPreview] = useState(null);
+  const handleDownload = useExternalDataDownload();
 
   const handleShowPreview = setShowPreview;
 
@@ -13,31 +13,12 @@ const useExternalDataPreview = () => {
     [setShowPreview],
   );
 
-  const handleDownload = useCallback(
-    (assetPath, meta) => {
-      remote.dialog.showSaveDialog(
-        {
-          buttonLabel: 'Save Asset',
-          nameFieldLabel: 'Save As:',
-          properties: ['saveFile'],
-          defaultPath: meta.source,
-        },
-        remote.getCurrentWindow(),
-      )
-        .then(({ canceled, filePath }) => {
-          if (canceled) { return; }
-          fse.copy(assetPath, filePath);
-        });
-    },
-    [],
-  );
-
   const preview = useMemo(
     () => (
       showPreview && (
         <Preview
           id={showPreview}
-          onDownload={handleDownload}
+          onDownload={() => handleDownload(showPreview)}
           onClose={handleClosePreview}
         />
       )
@@ -45,7 +26,7 @@ const useExternalDataPreview = () => {
     [showPreview],
   );
 
-  return [preview, handleShowPreview, handleClosePreview, handleDownload];
+  return [preview, handleShowPreview, handleClosePreview];
 };
 
 export default useExternalDataPreview;

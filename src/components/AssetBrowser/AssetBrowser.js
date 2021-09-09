@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { Section } from '@components/EditorLayout';
 import useExternalDataPreview from '@components/AssetBrowser/useExternalDataPreview';
+import useExternalDataDownload from '@components/AssetBrowser/useExternalDataDownload';
 import Assets from './Assets';
 import NewAsset from './NewAsset';
 import withAssetActions from './withAssetActions';
@@ -20,7 +21,8 @@ const AssetBrowser = ({
     onSelect(assetIds[0]);
   }, [onSelect]);
 
-  const [preview, handleShowPreview, , handleDownload] = useExternalDataPreview();
+  const [preview, handleShowPreview] = useExternalDataPreview();
+  const handleDownload = useExternalDataDownload();
 
   return (
     <>
