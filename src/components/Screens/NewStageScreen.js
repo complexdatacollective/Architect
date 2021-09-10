@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@codaco/ui/lib/components/Button';
-import Screen from '../Screen/Screen';
-import NewStage from '../NewStage';
+import Screen from '@components/Screen/Screen';
+import StageTypeSelector from '@components/StageTypeSelector';
 
 const NewStageScreen = ({
   show,
@@ -27,7 +27,7 @@ const NewStageScreen = ({
       transitionState={transitionState}
       buttons={buttons}
     >
-      <NewStage
+      <StageTypeSelector
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...rest}
       />
