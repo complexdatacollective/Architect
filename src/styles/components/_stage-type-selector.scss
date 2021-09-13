@@ -1,17 +1,49 @@
 .stage-type-selector {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
   &__search {
   }
 
+  &__categorized {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+  }
+
   &__menu {
+    flex: 1;
+    background: lime;
+  }
+
+  &__interfaces {
+    flex: 2;
+    background: yellow;
+    overflow-y: scroll;
+  }
+
+  &__results {
+    display: none;
   }
 
   &__interface {
-    width: 33%;
-    height: 0;
-    &::after {
-      content: '';
-      display: block;
-      height: 60%;
+    &-container {
+      width: 33%;
+      display: inline-block;
+      margin: 2rem;
     }
+
+    background: red;
+    width: 100%;
+    padding-top: 50%;
+    position: relative;
+  }
+}
+
+// TODO: where should this live?
+.screen--new-stage {
+  .screen__content {
+    overflow: hidden;
   }
 }

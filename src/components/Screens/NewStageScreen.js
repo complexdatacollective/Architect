@@ -26,6 +26,7 @@ const NewStageScreen = ({
       show={show}
       transitionState={transitionState}
       buttons={buttons}
+      type="new-stage"
     >
       <StageTypeSelector
         // eslint-disable-next-line react/jsx-props-no-spreading
