@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import cx from 'classnames';
 import Interface, { interfaces } from './Interface';
 
 const animations = {
@@ -13,11 +14,33 @@ const isSelectable = (selectedCategory, category) => {
   return false;
 };
 
-const StageTypeSelector = ({
+const MenuItem = ({ category, children, selected, onClick }) => {
+  const classes = cx(
+    'stage-type-selector__menu-item',
+    {
+      'stage-type-selector__menu-item--selected': selected,
+    },
+  );
 
-}) => {
+  return (
+    <li className={classes}>
+      <div onClick={onClick} data-category={category}>
+        {children}
+      </div>
+    </li>
+  );
+};
+
+const StageTypeSelector = () => {
   const [query, setQuery] = useState();
   const [selectedCategory, setSelectedCategory] = useState();
+  const handleSelectCategory = useCallback((e) => {
+    const { target } = e;
+    const category = target.getAttribute('data-category');
+    if (category === 'all') { return setSelectedCategory(); }
+    setSelectedCategory(category);
+  });
+
 
   return (
     <motion.div className="stage-type-selector">
@@ -27,10 +50,40 @@ const StageTypeSelector = ({
       <motion.div className="stage-type-selector__categorized">
         <motion.div className="stage-type-selector__menu">
           <motion.ul className="stage-type-selector__menu-items">
-            <li onClick={() => setSelectedCategory('generator')}>Generators</li>
-            <li onClick={() => setSelectedCategory('sociogram')}>Sociograms</li>
-            <li onClick={() => setSelectedCategory('interpreter')}>Interpreters</li>
-            <li onClick={() => setSelectedCategory('utility')}>Utilities</li>
+            <MenuItem
+              onClick={handleSelectCategory}
+              category="all"
+            >
+              All
+            </MenuItem>
+            <MenuItem
+              onClick={handleSelectCategory}
+              category="name-generator"
+              selected={selectedCategory === 'name-generator'}
+            >
+              Name Generators
+            </MenuItem>
+            <MenuItem
+              onClick={handleSelectCategory}
+              category="sociogram"
+              selected={selectedCategory === 'sociogram'}
+            >
+              Sociograms
+            </MenuItem>
+            <MenuItem
+              onClick={handleSelectCategory}
+              category="interpreter"
+              selected={selectedCategory === 'interpreter'}
+            >
+              Interpreters
+            </MenuItem>
+            <MenuItem
+              onClick={handleSelectCategory}
+              category="utility"
+              selected={selectedCategory === 'utility'}
+            >
+              Utilities
+            </MenuItem>
           </motion.ul>
           <p>Need help?</p>
         </motion.div>
@@ -40,6 +93,10 @@ const StageTypeSelector = ({
               isSelectable(selectedCategory, category) && (
                 <motion.div
                   className="stage-type-selector__interface-container"
+                  variants={animations}
+                  initial="hide"
+                  exit="hide"
+                  animate="show"
                 >
                   <Interface id={id} />
                 </motion.div>

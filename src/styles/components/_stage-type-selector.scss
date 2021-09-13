@@ -10,11 +10,22 @@
     display: flex;
     flex-direction: row;
     flex: 1;
+    overflow-y: scroll;
   }
 
   &__menu {
     flex: 1;
     background: lime;
+
+    &-item {
+      &:hover {
+        background: grey;
+      }
+
+      &--selected {
+        background: green;
+      }
+    }
   }
 
   &__interfaces {
