@@ -29,6 +29,7 @@ const MenuItem = ({ category, children, selected, onClick }) => {
 
 const CategorizedInterfaceList = ({
   onSelect,
+  onHelp,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState();
 
@@ -85,7 +86,7 @@ const CategorizedInterfaceList = ({
             Utilities
           </MenuItem>
         </motion.ul>
-        <p>Need help?</p>
+        <div onClick={onHelp}>Need help?</div>
       </motion.div>
       <InterfaceList items={selectableInterfaces} />
     </motion.div>
