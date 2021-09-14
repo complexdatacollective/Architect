@@ -1,1 +1,1 @@
-export { default } from './StageTypeSelector';
+export { default } from './NewStageScreen';
