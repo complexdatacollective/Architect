@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding-top: 50px;
 
   &__search {
   }
@@ -10,7 +11,6 @@
     display: flex;
     flex-direction: row;
     flex: 1;
-    overflow-y: scroll;
   }
 
   &__menu {
@@ -31,11 +31,21 @@
   &__interfaces {
     flex: 2;
     background: yellow;
-    overflow-y: scroll;
+    overflow-y: auto;
+  }
+
+  &__container {
+    flex: 1;
+    position: relative;
   }
 
   &__results {
-    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
   }
 
   &__interface {
