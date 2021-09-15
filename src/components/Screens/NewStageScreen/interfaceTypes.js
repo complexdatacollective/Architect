@@ -1,8 +1,4 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { find } from 'lodash';
-
-export const interfaces = [
+const interfaceTypes = [
   {
     id: 'NameGenerator',
     category: 'generator',
@@ -40,20 +36,4 @@ export const interfaces = [
   },
 ];
 
-const Interface = ({
-  id,
-}) => {
-  if (!id) { return null; }
-  const meta = find(interfaces, ['id', id]);
-  console.log({ interfaces, meta, id });
-  // if (meta) { throw Error(`${id} definition not found`); }
-
-  return (
-    <motion.div className="stage-type-selector__interface">
-      <h1>{ meta.name }</h1>
-      { meta.category }
-    </motion.div>
-  );
-};
-
-export default Interface;
+export default interfaceTypes;

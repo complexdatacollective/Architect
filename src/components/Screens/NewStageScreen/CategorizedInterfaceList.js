@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import cx from 'classnames';
-import { interfaces } from './Interface';
+import interfaceTypes from './interfaceTypes';
 import InterfaceList from './InterfaceList';
 
 const isSelectable = (selectedCategory, category) => {
@@ -10,7 +10,12 @@ const isSelectable = (selectedCategory, category) => {
   return false;
 };
 
-const MenuItem = ({ category, children, selected, onClick }) => {
+const MenuItem = ({
+  category,
+  children,
+  selected,
+  onClick,
+}) => {
   const classes = cx(
     'stage-type-selector__menu-item',
     {
@@ -41,7 +46,7 @@ const CategorizedInterfaceList = ({
   }, [setSelectedCategory]);
 
   const selectableInterfaces = useMemo(
-    () => interfaces.filter(
+    () => interfaceTypes.filter(
       ({ category }) => isSelectable(selectedCategory, category),
     ),
     [selectedCategory],

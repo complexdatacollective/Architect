@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Interface from './Interface';
+import InterfaceThumbnail from './InterfaceThumbnail';
 
 const animations = {
   show: { opacity: 1 },
@@ -23,7 +23,7 @@ const InterfaceList = ({
           key={id}
           onClick={onClick}
         >
-          <Interface id={id} />
+          <InterfaceThumbnail id={id} />
         </motion.div>
       ))}
     </AnimatePresence>
