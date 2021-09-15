@@ -55,25 +55,25 @@ const NewStageScreen = ({
       buttons={buttons}
       type="new-stage"
     >
-      <motion.div className="stage-type-selector">
+      <motion.div className="new-stage-screen">
         { mode === MODES.wizard && <Wizard onQuit={() => setMode(MODES.standard)} /> }
         { mode !== MODES.wizard && (
           <>
-            <motion.div className="stage-type-selector__search">
+            <motion.div className="new-stage-screen__search">
               <input
                 type="text"
                 value={query}
                 onChange={handleUpdateQuery}
               />
             </motion.div>
-            <motion.div className="stage-type-selector__container">
+            <motion.div className="new-stage-screen__container">
               <CategorizedInterfaceList
                 onHelp={() => setMode(MODES.wizard)}
               />
               <AnimatePresence>
                 { query !== '' && (
                   <motion.div
-                    className="stage-type-selector__results"
+                    className="new-stage-screen__results"
                     variants={animations}
                     initial="hide"
                     exit="hide"

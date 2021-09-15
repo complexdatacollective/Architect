@@ -1,4 +1,4 @@
-.stage-type-selector {
+.new-stage-screen {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -46,6 +46,7 @@
     width: 100%;
     height: 100%;
     overflow-y: auto;
+    background: blue;
   }
 
   &__interface {

@@ -15,7 +15,7 @@ const Interface = ({
   }
 
   return (
-    <motion.div className="stage-type-selector__interface">
+    <motion.div className="new-stage-screen__interface">
       <h1>{ meta.name }</h1>
       { meta.category }
     </motion.div>

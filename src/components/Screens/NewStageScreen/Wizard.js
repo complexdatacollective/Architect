@@ -10,7 +10,7 @@ const Steps = ({ children, step }) => {
 };
 
 const Step = ({ children, onBack, actions }) => (
-  <motion.div className="stage-type-selector__wizard-step">
+  <motion.div className="new-stage-screen__wizard-step">
     <div onClick={onBack}>&lt; back</div>
     {children}
     {actions && actions.map(({ label, onClick }) => (
@@ -33,7 +33,7 @@ const Wizard = ({
   const step = useMemo(() => steps[steps.length - 1], [steps]);
 
   return (
-    <motion.div className="stage-type-selector__wizard">
+    <motion.div className="new-stage-screen__wizard">
       <div onClick={onQuit}>Quit</div>
       <Steps step={step}>
         <Step

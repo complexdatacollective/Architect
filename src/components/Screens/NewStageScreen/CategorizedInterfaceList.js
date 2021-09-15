@@ -17,9 +17,9 @@ const MenuItem = ({
   onClick,
 }) => {
   const classes = cx(
-    'stage-type-selector__menu-item',
+    'new-stage-screen__menu-item',
     {
-      'stage-type-selector__menu-item--selected': selected,
+      'new-stage-screen__menu-item--selected': selected,
     },
   );
 
@@ -53,9 +53,9 @@ const CategorizedInterfaceList = ({
   );
 
   return (
-    <motion.div className="stage-type-selector__categorized">
-      <motion.div className="stage-type-selector__menu">
-        <motion.ul className="stage-type-selector__menu-items">
+    <motion.div className="new-stage-screen__categorized">
+      <motion.div className="new-stage-screen__menu">
+        <motion.ul className="new-stage-screen__menu-items">
           <MenuItem
             onClick={handleSelectCategory}
             category="all"

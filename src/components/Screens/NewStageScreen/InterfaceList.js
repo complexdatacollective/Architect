@@ -11,11 +11,11 @@ const InterfaceList = ({
   items,
   onClick,
 }) => (
-  <motion.div className="stage-type-selector__interfaces">
+  <motion.div className="new-stage-screen__interfaces">
     <AnimatePresence>
       {items.map(({ id }) => (
         <motion.div
-          className="stage-type-selector__interface-container"
+          className="new-stage-screen__interface-container"
           variants={animations}
           initial="hide"
           exit="hide"
