@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import cx from 'classnames';
 import interfaceTypes from './interfaceTypes';
 import InterfaceList from './InterfaceList';
+import ScreenLink from '../ScreenLink';
 
 const isSelectable = (selectedCategory, category) => {
   if (!selectedCategory) { return true; }
@@ -91,9 +92,11 @@ const CategorizedInterfaceList = ({
             Utilities
           </MenuItem>
         </motion.ul>
-        <div onClick={onHelp}>Need help?</div>
+        <ScreenLink screen="guidedNewStage">Need help?</ScreenLink>
       </motion.div>
-      <InterfaceList items={selectableInterfaces} />
+      <motion.div className="new-stage-screen__categorized-list">
+        <InterfaceList items={selectableInterfaces} />
+      </motion.div>
     </motion.div>
   );
 };

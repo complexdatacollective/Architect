@@ -5,6 +5,7 @@ import Codebook from './CodebookScreen';
 import TypeEditorScreen from './TypeEditorScreen';
 import VariableEditorScreen from './VariableEditorScreen';
 import NewStageScreen from './NewStageScreen';
+import GuidedNewStageScreen from './GuidedNewStageScreen';
 import AssetsScreen from './AssetsScreen';
 
 const NotFound = () => (<div> Screen not found </div>);
@@ -15,6 +16,7 @@ const SCREEN_INDEX = {
   type: TypeEditorScreen,
   variable: VariableEditorScreen,
   newStage: NewStageScreen,
+  guidedNewStage: GuidedNewStageScreen,
   assets: AssetsScreen,
 };
 

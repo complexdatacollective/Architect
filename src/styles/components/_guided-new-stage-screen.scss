@@ -1,0 +1,19 @@
+.guided-new-stage-screen {
+  flex: 1;
+
+  &__section,
+  &__step-content,
+  &__step-actions {
+    max-height: auto;
+    max-width: 80rem;
+    margin: unit(4) auto;
+    padding: unit(4);
+  }
+}
+
+// .screen--guided-new-stage {
+//   .screen__content {
+//     overflow: hidden;
+//   }
+// }
+

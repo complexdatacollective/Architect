@@ -2,20 +2,27 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding-top: 50px;
+  max-height: auto;
+  max-width: 80rem;
+  margin: 0 auto;
+
+  &__section {
+    max-height: auto;
+    max-width: 80rem;
+    margin: unit(4) auto;
+    padding: unit(4);
+  }
 
   &__search {
   }
 
   &__categorized {
     display: flex;
-    // flex-direction: row;
     flex: 1;
     height: 100%;
   }
 
   &__menu {
-    flex: 1;
     background: lime;
 
     &-item {
@@ -29,15 +36,19 @@
     }
   }
 
-  &__interfaces {
-    flex: 2;
-    background: yellow;
+  &__categorized-list {
+    flex: 1;
     overflow-y: auto;
+  }
+
+  &__interfaces {
+    background: yellow;
   }
 
   &__container {
     flex: 1;
     position: relative;
+    overflow: hidden;
   }
 
   &__results {
