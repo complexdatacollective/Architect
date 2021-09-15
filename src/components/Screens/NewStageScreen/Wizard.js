@@ -11,17 +11,16 @@ const Steps = ({ children, step }) => {
 
 const Step = ({ children, onBack, actions }) => (
   <motion.div className="new-stage-screen__wizard-step">
-    <div onClick={onBack}>&lt; back</div>
     {children}
-    {actions && actions.map(({ label, onClick }) => (
-      <Button onClick={onClick}>{label}</Button>
+    {actions && actions.map(({ label, onClick, color }) => (
+      <Button onClick={onClick} color={color}>{label}</Button>
     ))}
   </motion.div>
 );
 
 const Wizard = ({
   onSelect,
-  onQuit,
+  onQuit: onExit,
 }) => {
   const [steps, setSteps] = useState(['start']);
   const previousStep = () => setSteps((s) => {
@@ -34,7 +33,15 @@ const Wizard = ({
 
   return (
     <motion.div className="new-stage-screen__wizard">
-      <div onClick={onQuit}>Quit</div>
+      <div className>
+        <h1>Guided Stage Chooser</h1>
+        <Button size="small" onClick={onExit} color="white">Exit guide</Button>
+      </div>
+      { steps.length > 1 && (
+        <div className>
+          <Button size="small" onClick={previousStep} color="charcoal">Previous step</Button>
+        </div>
+      )}
       <Steps step={step}>
         <Step
           id="start"
@@ -46,49 +53,43 @@ const Wizard = ({
         </Step>
         <Step
           id="ask-create-alters"
-          onBack={previousStep}
           actions={[
             { label: 'Yes', onClick: () => nextStep('generator') },
-            { label: 'No', onClick: () => nextStep('ask-create-edges') },
+            { label: 'No', onClick: () => nextStep('ask-create-edges'), color: 'white' },
           ]}
         >
           <p>Do you want to create alters?</p>
         </Step>
         <Step
           id="ask-create-edges"
-          onBack={previousStep}
           actions={[
             { label: 'Yes', onClick: () => nextStep('sociogram') },
-            { label: 'No', onClick: () => nextStep('ask-layout') }
+            { label: 'No', onClick: () => nextStep('ask-layout'), color: 'white' },
           ]}
         >
           <p>Do you want to create edges?</p>
         </Step>
         <Step
           id="ask-layout"
-          onBack={previousStep}
           actions={[
             { label: 'Yes', onClick: () => nextStep('sociogram') },
-            { label: 'No', onClick: () => nextStep('other') }
+            { label: 'No', onClick: () => nextStep('other'), color: 'white' },
           ]}
         >
           <p>Do you want to create a layout of existing nodes?</p>
         </Step>
         <Step
           id="generator"
-          onBack={previousStep}
         >
           <h1>Generator</h1>
         </Step>
         <Step
           id="sociogram"
-          onBack={previousStep}
         >
           <h1>Sociogram</h1>
         </Step>
         <Step
           id="other"
-          onBack={previousStep}
         >
           <h1>Other</h1>
         </Step>
