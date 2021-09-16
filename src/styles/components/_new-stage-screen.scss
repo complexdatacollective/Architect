@@ -14,6 +14,15 @@
   }
 
   &__search {
+    background: var(--architect-control-bar-background);
+    padding: unit(2);
+    border-radius: unit(2);
+    margin-bottom: unit(4);
+
+    .form-field-container,
+    .form-field {
+      margin: 0;
+    }
   }
 
   &__categorized {
@@ -23,15 +32,35 @@
   }
 
   &__menu {
-    background: lime;
+    background: var(--architect-panel-grey);
+    border-radius: unit(2);
+    overflow: hidden;
+    padding: unit(2) 0;
+
+    &-items {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
 
     &-item {
+      cursor: pointer;
+      margin: 0;
+      padding: unit(2) unit(4);
+      transition-property: background, color;
+      transition-duration: var(--animation-duration-fast-ms);
+
       &:hover {
-        background: grey;
+        background: var(--architect-shadow);
       }
 
       &--selected {
-        background: green;
+        background: var(--architect-active);
+        color: var(--text-light);
+
+        &:hover {
+          background: var(--architect-active);
+        }
       }
     }
   }

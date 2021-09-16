@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
+import Text from '@codaco/ui/lib/components/Fields/Text';
 import Button from '@codaco/ui/lib/components/Button';
 import Screen from '@components/Screen/Screen';
 import interfaceTypes from './interfaceTypes';
@@ -50,10 +51,11 @@ const NewStageScreen = ({
     >
       <motion.div className="new-stage-screen">
         <motion.div className="new-stage-screen__search">
-          <input
-            type="text"
-            value={query}
-            onChange={handleUpdateQuery}
+          <Text
+            input={{
+              value: query,
+              onChange: handleUpdateQuery,
+            }}
           />
         </motion.div>
         <motion.div className="new-stage-screen__container">
