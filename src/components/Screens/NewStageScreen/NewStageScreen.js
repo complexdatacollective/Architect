@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import Text from '@codaco/ui/lib/components/Fields/Text';
 import Button from '@codaco/ui/lib/components/Button';
 import Screen from '@components/Screen/Screen';
@@ -43,13 +44,22 @@ const NewStageScreen = ({
     setQuery(newQuery);
   }, [setQuery]);
 
+  const hasQuery = query !== '';
+
+  const componentClasses = cx(
+    'new-stage-screen',
+    {
+      'new-stage-screen--has-query': hasQuery,
+    },
+  );
+
   return (
     <Screen
       show={show}
       buttons={buttons}
       type="new-stage"
     >
-      <motion.div className="new-stage-screen">
+      <motion.div className={componentClasses}>
         <motion.div className="new-stage-screen__search">
           <Text
             input={{
@@ -61,7 +71,7 @@ const NewStageScreen = ({
         <motion.div className="new-stage-screen__container">
           <CategorizedInterfaceList />
           <AnimatePresence>
-            { query !== '' && (
+            { hasQuery && (
               <motion.div
                 className="new-stage-screen__results"
                 variants={animations}

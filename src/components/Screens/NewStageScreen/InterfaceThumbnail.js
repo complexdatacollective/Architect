@@ -1,7 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { find } from 'lodash';
+import { find, get } from 'lodash';
+import timelineImages from '@app/images/timeline';
 import interfaceTypes from './interfaceTypes';
+
+const getTimelineImage = (type) => get(timelineImages, type);
 
 const Interface = ({
   id,
@@ -9,6 +12,8 @@ const Interface = ({
   if (!id) { return null; }
 
   const meta = find(interfaceTypes, ['id', id]);
+  const image = getTimelineImage(id);
+  const title = meta.name;
 
   if (!meta) {
     throw Error(`${id} definition not found`);
@@ -16,8 +21,8 @@ const Interface = ({
 
   return (
     <motion.div className="new-stage-screen__interface">
-      <h1>{ meta.name }</h1>
-      { meta.category }
+      { image && <img className="new-stage-screen__interface-preview" src={image} alt={title} /> }
+      <h3>{ title }</h3>
     </motion.div>
   );
 };

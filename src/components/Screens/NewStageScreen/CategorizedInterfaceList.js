@@ -92,7 +92,9 @@ const CategorizedInterfaceList = ({
             Utilities
           </MenuItem>
         </motion.ul>
-        <ScreenLink screen="guidedNewStage">Need help?</ScreenLink>
+        <div className="new-stage-screen__menu-other">
+          <ScreenLink screen="guidedNewStage">Need help?</ScreenLink>
+        </div>
       </motion.div>
       <motion.div className="new-stage-screen__categorized-list">
         <InterfaceList items={selectableInterfaces} />
