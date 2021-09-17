@@ -25,9 +25,13 @@ const MenuItem = ({
     },
   );
 
+  const handleClick = useCallback(() => {
+    onClick(category);
+  }, [onClick, category]);
+
   return (
     <li className={classes}>
-      <div onClick={onClick} data-category={category}>
+      <div onClick={handleClick} data-category={category}>
         {children}
       </div>
     </li>
@@ -50,10 +54,8 @@ const CategorizedInterfaceList = ({
 }) => {
   const [selectedCategory, setSelectedCategory] = useState();
 
-  const handleSelectCategory = useCallback((e) => {
-    const { target } = e;
-    const category = target.getAttribute('data-category');
-    if (category === 'all') { return setSelectedCategory(); }
+  const handleChangeCategory = useCallback((category) => {
+    if (category === 'all') { return setSelectedCategory(undefined); }
     return setSelectedCategory(category);
   }, [setSelectedCategory]);
 
@@ -69,7 +71,7 @@ const CategorizedInterfaceList = ({
       <motion.div className="new-stage-screen__menu">
         <motion.ul className="new-stage-screen__menu-items">
           <MenuItem
-            onClick={handleSelectCategory}
+            onClick={handleChangeCategory}
             category="all"
           >
             All
@@ -77,7 +79,7 @@ const CategorizedInterfaceList = ({
           { Object.keys(CATEGORIES).map((category) => (
             <MenuItem
               key={CATEGORIES[category]}
-              onClick={handleSelectCategory}
+              onClick={handleChangeCategory}
               category={CATEGORIES[category]}
               selected={selectedCategory === category}
             >
