@@ -1,10 +1,12 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 import cx from 'classnames';
 import Text from '@codaco/ui/lib/components/Fields/Text';
 import Button from '@codaco/ui/lib/components/Button';
 import Screen from '@components/Screen/Screen';
+import { actionCreators as uiActions } from '@modules/ui';
 import interfaceTypes from './interfaceTypes';
 import CategorizedInterfaceList from './CategorizedInterfaceList';
 import InterfaceList from './InterfaceList';
@@ -15,8 +17,9 @@ const animations = {
 };
 
 const NewStageScreen = ({
-  show,
+  insertAtIndex,
   onComplete,
+  show,
 }) => {
   const [query, setQuery] = useState('');
 
@@ -44,6 +47,17 @@ const NewStageScreen = ({
     setQuery(newQuery);
   }, [setQuery]);
 
+  const locus = useSelector(
+    (state) => state.protocol.timeline[state.protocol.timeline.length - 1],
+  );
+
+  const dispatch = useDispatch();
+
+  const handleSelectInterface = useCallback((interfaceType) => {
+    dispatch(uiActions.closeScreen('newStage'));
+    dispatch(uiActions.openScreen('stage', { type: interfaceType, locus, insertAtIndex }));
+  }, [insertAtIndex, locus, dispatch]);
+
   const hasQuery = query !== '';
 
   const componentClasses = cx(
@@ -69,7 +83,7 @@ const NewStageScreen = ({
           />
         </motion.div>
         <motion.div className="new-stage-screen__container">
-          <CategorizedInterfaceList />
+          <CategorizedInterfaceList onSelect={handleSelectInterface} />
           <AnimatePresence>
             { hasQuery && (
               <motion.div
@@ -80,7 +94,7 @@ const NewStageScreen = ({
                 animate="show"
                 key="results"
               >
-                <InterfaceList items={filteredInterfaces} />
+                <InterfaceList items={filteredInterfaces} onSelect={handleSelectInterface} />
               </motion.div>
             )}
           </AnimatePresence>
@@ -91,8 +105,9 @@ const NewStageScreen = ({
 };
 
 NewStageScreen.propTypes = {
-  show: PropTypes.bool,
+  insertAtIndex: PropTypes.number.isRequired,
   onComplete: PropTypes.func.isRequired,
+  show: PropTypes.bool,
 };
 
 NewStageScreen.defaultProps = {

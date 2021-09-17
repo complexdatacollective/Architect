@@ -109,12 +109,24 @@
 
     &-preview {
       width: 100%;
+      border-width: .25rem;
+      border-style: solid;
+      border-color: transparent;
+      transition-property: border-color;
+      transition-duration: var(--animation-duration-standard);
+      transition-timing-function: var(--animation-easing);
     }
 
     &-container {
       width: calc(33% - #{unit(4)});
       display: inline-block;
       margin: unit(4) 0 0 unit(4);
+    }
+
+    &:hover {
+      .new-stage-screen__interface-preview {
+        border-color: var(--architect-active);
+      }
     }
   }
 

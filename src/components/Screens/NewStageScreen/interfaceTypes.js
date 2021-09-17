@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const interfaceTypes = [
   {
     id: 'NameGenerator',
@@ -35,5 +37,11 @@ const interfaceTypes = [
     name: 'Information',
   },
 ];
+
+export const interfaceShape = PropTypes.shape({
+  id: PropTypes.string,
+  category: PropTypes.string,
+  name: PropTypes.string,
+});
 
 export default interfaceTypes;

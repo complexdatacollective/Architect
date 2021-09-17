@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import cx from 'classnames';
 import interfaceTypes from './interfaceTypes';
@@ -14,8 +15,8 @@ const isSelectable = (selectedCategory, category) => {
 const MenuItem = ({
   category,
   children,
-  selected,
   onClick,
+  selected,
 }) => {
   const classes = cx(
     'new-stage-screen__menu-item',
@@ -33,9 +34,19 @@ const MenuItem = ({
   );
 };
 
+MenuItem.propTypes = {
+  category: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired,
+  selected: PropTypes.bool,
+};
+
+MenuItem.defaultProps = {
+  selected: false,
+};
+
 const CategorizedInterfaceList = ({
   onSelect,
-  onHelp,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState();
 
@@ -97,10 +108,14 @@ const CategorizedInterfaceList = ({
         </div>
       </motion.div>
       <motion.div className="new-stage-screen__categorized-list">
-        <InterfaceList items={selectableInterfaces} />
+        <InterfaceList items={selectableInterfaces} onSelect={onSelect} />
       </motion.div>
     </motion.div>
   );
+};
+
+CategorizedInterfaceList.propTypes = {
+  onSelect: PropTypes.func.isRequired,
 };
 
 export default CategorizedInterfaceList;
