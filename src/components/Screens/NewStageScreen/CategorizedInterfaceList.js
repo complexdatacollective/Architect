@@ -2,7 +2,7 @@ import React, { useState, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import cx from 'classnames';
-import interfaceTypes from './interfaceTypes';
+import { INTERFACE_TYPES, CATEGORIES } from './interfaceOptions';
 import InterfaceList from './InterfaceList';
 import ScreenLink from '../ScreenLink';
 
@@ -58,7 +58,7 @@ const CategorizedInterfaceList = ({
   }, [setSelectedCategory]);
 
   const selectableInterfaces = useMemo(
-    () => interfaceTypes.filter(
+    () => INTERFACE_TYPES.filter(
       ({ category }) => isSelectable(selectedCategory, category),
     ),
     [selectedCategory],
@@ -74,34 +74,16 @@ const CategorizedInterfaceList = ({
           >
             All
           </MenuItem>
-          <MenuItem
-            onClick={handleSelectCategory}
-            category="name-generator"
-            selected={selectedCategory === 'name-generator'}
-          >
-            Name Generators
-          </MenuItem>
-          <MenuItem
-            onClick={handleSelectCategory}
-            category="sociogram"
-            selected={selectedCategory === 'sociogram'}
-          >
-            Sociograms
-          </MenuItem>
-          <MenuItem
-            onClick={handleSelectCategory}
-            category="interpreter"
-            selected={selectedCategory === 'interpreter'}
-          >
-            Interpreters
-          </MenuItem>
-          <MenuItem
-            onClick={handleSelectCategory}
-            category="utility"
-            selected={selectedCategory === 'utility'}
-          >
-            Utilities
-          </MenuItem>
+          { Object.keys(CATEGORIES).map((category) => (
+            <MenuItem
+              key={CATEGORIES[category]}
+              onClick={handleSelectCategory}
+              category={CATEGORIES[category]}
+              selected={selectedCategory === category}
+            >
+              {CATEGORIES[category]}
+            </MenuItem>
+          )) }
         </motion.ul>
         <div className="new-stage-screen__menu-other">
           <ScreenLink screen="guidedNewStage">Need help?</ScreenLink>

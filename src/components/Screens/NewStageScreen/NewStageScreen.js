@@ -7,7 +7,7 @@ import Text from '@codaco/ui/lib/components/Fields/Text';
 import Button from '@codaco/ui/lib/components/Button';
 import Screen from '@components/Screen/Screen';
 import { actionCreators as uiActions } from '@modules/ui';
-import interfaceTypes from './interfaceTypes';
+import { INTERFACE_TYPES } from './interfaceOptions';
 import CategorizedInterfaceList from './CategorizedInterfaceList';
 import InterfaceList from './InterfaceList';
 
@@ -35,8 +35,8 @@ const NewStageScreen = ({
   ], [onComplete]);
 
   const filteredInterfaces = useMemo(
-    () => interfaceTypes.filter(
-      ({ name }) => name.toLowerCase().includes(query.toLowerCase()),
+    () => INTERFACE_TYPES.filter(
+      ({ title }) => title.toLowerCase().includes(query.toLowerCase()),
     ),
     [query],
   );

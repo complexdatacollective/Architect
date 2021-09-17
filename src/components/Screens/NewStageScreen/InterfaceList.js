@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import InterfaceThumbnail from './InterfaceThumbnail';
-import { interfaceShape } from './interfaceTypes';
+import { PropTypes as InterfacePropTypes } from './interfaceOptions';
 
 const animations = {
   show: { opacity: 1 },
@@ -15,7 +15,7 @@ const InterfaceList = ({
 }) => (
   <motion.div className="new-stage-screen__interfaces">
     <AnimatePresence>
-      {items.map(({ id: interfaceType }) => (
+      {items.map(({ type: interfaceType }) => (
         <motion.div
           className="new-stage-screen__interface-container"
           variants={animations}
@@ -25,7 +25,7 @@ const InterfaceList = ({
           key={interfaceType}
         >
           <InterfaceThumbnail
-            interfaceType={interfaceType}
+            type={interfaceType}
             onClick={onSelect}
           />
         </motion.div>
@@ -35,7 +35,7 @@ const InterfaceList = ({
 );
 
 InterfaceList.propTypes = {
-  items: PropTypes.arrayOf(interfaceShape),
+  items: PropTypes.arrayOf(InterfacePropTypes.interface),
   onSelect: PropTypes.func.isRequired,
 };
 

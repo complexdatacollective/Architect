@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { find, get } from 'lodash';
 import timelineImages from '@app/images/timeline';
-import interfaceTypes from './interfaceTypes';
+import { INTERFACE_TYPES } from './interfaceOptions';
 
 const getTimelineImage = (type) => get(timelineImages, type);
 
 const InterfaceThumbnail = ({
-  interfaceType,
+  type: interfaceType,
   onClick,
 }) => {
-  const meta = find(interfaceTypes, ['id', interfaceType]);
+  const meta = find(INTERFACE_TYPES, ['type', interfaceType]);
   const image = getTimelineImage(interfaceType);
-  const title = meta.name;
+  const { title } = meta;
 
   if (!meta) {
     throw Error(`${interfaceType} definition not found`);
@@ -38,7 +38,7 @@ const InterfaceThumbnail = ({
 };
 
 InterfaceThumbnail.propTypes = {
-  interfaceType: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
