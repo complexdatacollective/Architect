@@ -6,7 +6,7 @@ import { INTERFACE_TYPES, CATEGORIES } from './interfaceOptions';
 import InterfaceList from './InterfaceList';
 import ScreenLink from '../ScreenLink';
 
-const isSelectable = (selectedCategory, category) => {
+const isCategorySelected = (selectedCategory, category) => {
   if (!selectedCategory) { return true; }
   if (category === selectedCategory) { return true; }
   return false;
@@ -31,7 +31,7 @@ const MenuItem = ({
 
   return (
     <li className={classes}>
-      <div onClick={handleClick} data-category={category}>
+      <div onClick={handleClick}>
         {children}
       </div>
     </li>
@@ -61,7 +61,10 @@ const CategorizedInterfaceList = ({
 
   const selectableInterfaces = useMemo(
     () => INTERFACE_TYPES.filter(
-      ({ category }) => isSelectable(selectedCategory, category),
+      ({ category }) => {
+        console.log({ category, selectedCategory });
+        return isCategorySelected(selectedCategory, category);
+      },
     ),
     [selectedCategory],
   );
@@ -76,14 +79,14 @@ const CategorizedInterfaceList = ({
           >
             All
           </MenuItem>
-          { Object.keys(CATEGORIES).map((category) => (
+          { Object.values(CATEGORIES).map((category) => (
             <MenuItem
-              key={CATEGORIES[category]}
+              key={category}
               onClick={handleChangeCategory}
-              category={CATEGORIES[category]}
+              category={category}
               selected={selectedCategory === category}
             >
-              {CATEGORIES[category]}
+              {category}
             </MenuItem>
           )) }
         </motion.ul>

@@ -60,11 +60,12 @@
       margin: 0;
       padding: 0;
       cursor: pointer;
-      transition-property: background, color;
-      transition-duration: var(--animation-duration-fast-ms);
+      transition-property: background-color, color;
+      transition-duration: var(--animation-duration-standard);
+      transition-timing-function: var(--animation-easing);
 
       &:hover {
-        background: var(--architect-shadow);
+        background-color: var(--architect-shadow);
       }
 
       div {
@@ -72,11 +73,11 @@
       }
 
       &--selected {
-        background: var(--architect-active);
+        background-color: var(--architect-active);
         color: var(--text-light);
 
         &:hover {
-          background: var(--architect-active);
+          background-color: var(--architect-active);
         }
       }
     }
