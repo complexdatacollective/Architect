@@ -2,8 +2,9 @@ import React, { useState, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
+import { get } from 'lodash';
 import cx from 'classnames';
-import Text from '@codaco/ui/lib/components/Fields/Text';
+import Search from '@codaco/ui/lib/components/Fields/Search';
 import Button from '@codaco/ui/lib/components/Button';
 import Screen from '@components/Screen/Screen';
 import { actionCreators as uiActions } from '@modules/ui';
@@ -41,9 +42,8 @@ const NewStageScreen = ({
     [query],
   );
 
-  const handleUpdateQuery = useCallback((e) => {
-    const { target } = e;
-    const newQuery = target.value;
+  const handleUpdateQuery = useCallback((eventOrValue) => {
+    const newQuery = get(eventOrValue, ['target', 'value'], eventOrValue);
     setQuery(newQuery);
   }, [setQuery]);
 
@@ -75,7 +75,8 @@ const NewStageScreen = ({
     >
       <motion.div className={componentClasses}>
         <motion.div className="new-stage-screen__search">
-          <Text
+          <Search
+            placeholder="Enter a search term..."
             input={{
               value: query,
               onChange: handleUpdateQuery,
