@@ -13,7 +13,7 @@ const InterfaceList = ({
   items,
   onSelect,
 }) => (
-  <motion.div className="new-stage-screen__interfaces">
+  <motion.div className="new-stage-screen__interfaces" layout>
     <AnimatePresence>
       {items.map(({ type: interfaceType }) => (
         <motion.div
@@ -23,6 +23,7 @@ const InterfaceList = ({
           exit="hide"
           animate="show"
           key={interfaceType}
+          layout
         >
           <InterfaceThumbnail
             type={interfaceType}

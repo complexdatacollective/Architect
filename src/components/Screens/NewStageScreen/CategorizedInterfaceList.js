@@ -76,6 +76,7 @@ const CategorizedInterfaceList = ({
           <MenuItem
             onClick={handleChangeCategory}
             category="all"
+            selected={selectedCategory === undefined}
           >
             All
           </MenuItem>
