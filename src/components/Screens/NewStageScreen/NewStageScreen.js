@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { get } from 'lodash';
 import cx from 'classnames';
+import Fuse from 'fuse.js';
 import Search from '@codaco/ui/lib/components/Fields/Search';
 import Button from '@codaco/ui/lib/components/Button';
 import Screen from '@components/Screen/Screen';
@@ -11,6 +12,23 @@ import { actionCreators as uiActions } from '@modules/ui';
 import { INTERFACE_TYPES } from './interfaceOptions';
 import CategorizedInterfaceList from './CategorizedInterfaceList';
 import InterfaceList from './InterfaceList';
+
+const fuseOptions = {
+  shouldSort: true,
+  threshold: 0.6,
+  // location: 0,
+  // distance: 10,
+  // maxPatternLength: 32,
+  minMatchCharLength: 2,
+  keys: [
+    'title',
+    'keywords',
+  ],
+};
+
+const fuse = new Fuse(INTERFACE_TYPES, fuseOptions);
+
+const search = (query) => fuse.search(query);
 
 const animations = {
   show: { opacity: 1 },
@@ -35,12 +53,7 @@ const NewStageScreen = ({
     </Button>,
   ], [onComplete]);
 
-  const filteredInterfaces = useMemo(
-    () => INTERFACE_TYPES.filter(
-      ({ title }) => title.toLowerCase().includes(query.toLowerCase()),
-    ),
-    [query],
-  );
+  const filteredInterfaces = useMemo(() => search(query), [query]);
 
   const handleUpdateQuery = useCallback((eventOrValue) => {
     const newQuery = get(eventOrValue, ['target', 'value'], eventOrValue);

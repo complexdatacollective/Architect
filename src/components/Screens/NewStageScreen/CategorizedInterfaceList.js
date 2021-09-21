@@ -60,12 +60,8 @@ const CategorizedInterfaceList = ({
   }, [setSelectedCategory]);
 
   const selectableInterfaces = useMemo(
-    () => INTERFACE_TYPES.filter(
-      ({ category }) => {
-        console.log({ category, selectedCategory });
-        return isCategorySelected(selectedCategory, category);
-      },
-    ),
+    () => INTERFACE_TYPES
+      .filter(({ category }) => isCategorySelected(selectedCategory, category)),
     [selectedCategory],
   );
 
