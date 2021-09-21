@@ -3,30 +3,125 @@ import { motion } from 'framer-motion';
 import { Button } from '@codaco/ui';
 import Screen from '@components/Screen/Screen';
 
-const Steps = ({ children, step }) => {
-  const renderStep = children.find(({ props }) => props.id === step);
+const Steps = ({
+  steps,
+  initialStep,
+}) => {
+  const [history, setHistory] = useState([initialStep]);
 
-  if (!renderStep) { return null; }
+  const previousStep = () => setHistory((s) => {
+    const nextS = s.slice(0, -1);
+    if (nextS.length === 0) { return [initialStep]; }
+    return nextS;
+  });
+
+  const goToStep = (e) => {
+    const step = e.target && e.target.getAttribute('data-step');
+    if (!step) { return; }
+    setHistory((s) => [...s, step]);
+  };
+
+  const currentStepId = useMemo(
+    () => history[history.length - 1],
+    [history],
+  );
+
+  const currentStep = steps.find(({ id }) => id === currentStepId);
+
+  if (!currentStep) { return null; }
+
+  const { actions, content } = currentStep;
 
   return (
     <motion.div className="guided-new-stage-screen__steps">
-      {renderStep}
+      <motion.div className="guided-new-stage-screen__step">
+        <motion.div className="guided-new-stage-screen__step-content">
+          {content}
+        </motion.div>
+        <motion.div className="guided-new-stage-screen__step-controls">
+          <motion.div className="guided-new-stage-screen__step-back">
+            { history.length > 1 && (
+              <Button onClick={previousStep} color="charcoal">Previous step</Button>
+            )}
+          </motion.div>
+          <motion.div className="guided-new-stage-screen__step-actions">
+            { actions && actions.map(({
+              label,
+              step,
+              color,
+              onClick,
+            }) => {
+              const handleClick = step ? goToStep : onClick;
+              return (
+                <Button
+                  onClick={handleClick}
+                  data-step={step}
+                  color={color}
+                >
+                  {label}
+                </Button>
+              );
+            })}
+          </motion.div>
+        </motion.div>
+      </motion.div>
     </motion.div>
   );
 };
 
-const Step = ({ children, onBack, actions }) => (
-  <motion.div className="guided-new-stage-screen__step">
-    <motion.div className="guided-new-stage-screen__step-content">
-      {children}
-    </motion.div>
-    <motion.div className="guided-new-stage-screen__step-actions">
-      {actions && actions.map(({ label, onClick, color }) => (
-        <Button onClick={onClick} color={color}>{label}</Button>
-      ))}
-    </motion.div>
-  </motion.div>
-);
+const steps = [
+  {
+    id: 'start',
+    actions: [
+      { label: 'Continue', step: 'ask-create-alters' },
+    ],
+    content: (
+      <p>This wizard will ask you a series of questions.</p>
+    ),
+  },
+  {
+    id: 'ask-create-alters',
+    actions: [
+      { label: 'No', step: 'ask-create-edges', color: 'white' },
+      { label: 'Yes', step: 'generator' },
+    ],
+    content: (
+      <p>Do you want to create alters?</p>
+    ),
+  },
+  {
+    id: 'ask-create-edges',
+    actions: [
+      { label: 'No', step: 'ask-layout', color: 'white' },
+      { label: 'Yes', step: 'sociogram' },
+    ],
+    content: (
+      <p>Do you want to create edges?</p>
+    ),
+  },
+  {
+    id: 'ask-layout',
+    actions: [
+      { label: 'No', step: 'other', color: 'white' },
+      { label: 'Yes', step: 'sociogram' },
+    ],
+    content: (
+      <p>Do you want to create a layout of existing nodes?</p>
+    ),
+  },
+  {
+    id: 'generator',
+    content: (<h1>Generator</h1>),
+  },
+  {
+    id: 'sociogram',
+    content: (<h1>Sociogram</h1>),
+  },
+  {
+    id: 'other',
+    content: (<h1>Other</h1>),
+  }
+];
 
 const GuidedNewStageScreen = ({
   show,
@@ -35,23 +130,13 @@ const GuidedNewStageScreen = ({
 }) => {
   const buttons = useMemo(() => [
     <Button
-      key="done"
+      key="cancel"
       onClick={onComplete}
-      iconPosition="right"
       color="platinum"
     >
       Cancel
     </Button>,
   ], [onComplete]);
-
-  const [steps, setSteps] = useState(['start']);
-  const previousStep = () => setSteps((s) => {
-    const nextS = s.slice(0, -1);
-    if (nextS.length === 0) { return ['start']; }
-    return nextS;
-  });
-  const nextStep = (step) => setSteps((s) => [...s, step]);
-  const step = useMemo(() => steps[steps.length - 1], [steps]);
 
   return (
     <Screen
@@ -63,63 +148,10 @@ const GuidedNewStageScreen = ({
         <div className="guided-new-stage-screen__section">
           <h1>Guided Stage Chooser</h1>
         </div>
-        { steps.length > 1 && (
-          <div className="guided-new-stage-screen__section">
-            <Button size="small" onClick={previousStep} color="charcoal">Previous step</Button>
-          </div>
-        )}
-        <Steps step={step}>
-          <Step
-            id="start"
-            actions={[
-              { label: 'Continue', onClick: () => nextStep('ask-create-alters') },
-            ]}
-          >
-            <p>This wizard will ask you a series of questions.</p>
-          </Step>
-          <Step
-            id="ask-create-alters"
-            actions={[
-              { label: 'Yes', onClick: () => nextStep('generator') },
-              { label: 'No', onClick: () => nextStep('ask-create-edges'), color: 'white' },
-            ]}
-          >
-            <p>Do you want to create alters?</p>
-          </Step>
-          <Step
-            id="ask-create-edges"
-            actions={[
-              { label: 'Yes', onClick: () => nextStep('sociogram') },
-              { label: 'No', onClick: () => nextStep('ask-layout'), color: 'white' },
-            ]}
-          >
-            <p>Do you want to create edges?</p>
-          </Step>
-          <Step
-            id="ask-layout"
-            actions={[
-              { label: 'Yes', onClick: () => nextStep('sociogram') },
-              { label: 'No', onClick: () => nextStep('other'), color: 'white' },
-            ]}
-          >
-            <p>Do you want to create a layout of existing nodes?</p>
-          </Step>
-          <Step
-            id="generator"
-          >
-            <h1>Generator</h1>
-          </Step>
-          <Step
-            id="sociogram"
-          >
-            <h1>Sociogram</h1>
-          </Step>
-          <Step
-            id="other"
-          >
-            <h1>Other</h1>
-          </Step>
-        </Steps>
+        <Steps
+          steps={steps}
+          initialStep="start"
+        />
       </motion.div>
     </Screen>
   );

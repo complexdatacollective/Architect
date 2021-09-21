@@ -3,11 +3,38 @@
 
   &__section,
   &__step-content,
-  &__step-actions {
+  &__step-controls {
     max-height: auto;
     max-width: 80rem;
     margin: unit(4) auto;
-    padding: unit(4);
+  }
+
+  &__step {
+    &-content {
+      padding: unit(4) 0;
+    }
+
+    &-controls {
+      display: flex;
+    }
+
+    &-back {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    &-actions {
+      display: flex;
+      justify-content: flex-end;
+      flex: 1;
+      .button {
+        margin-left: unit(2);
+
+        &:first-child {
+          margin: 0;
+        }
+      }
+    }
   }
 }
 
