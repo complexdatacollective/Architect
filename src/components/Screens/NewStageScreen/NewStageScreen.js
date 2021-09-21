@@ -8,6 +8,7 @@ import Fuse from 'fuse.js';
 import Search from '@codaco/ui/lib/components/Fields/Search';
 import Button from '@codaco/ui/lib/components/Button';
 import Screen from '@components/Screen/Screen';
+import ScreenLink from '@components/Screens/ScreenLink';
 import { actionCreators as uiActions } from '@modules/ui';
 import { INTERFACE_TYPES } from './interfaceOptions';
 import CategorizedInterfaceList from './CategorizedInterfaceList';
@@ -71,6 +72,16 @@ const NewStageScreen = ({
     dispatch(uiActions.openScreen('stage', { type: interfaceType, locus, insertAtIndex }));
   }, [insertAtIndex, locus, dispatch]);
 
+  const menuOther = (
+    <ScreenLink
+      screen="guidedNewStage"
+      closeExisting="newStage"
+      insertAtIndex={insertAtIndex}
+    >
+      Need help?
+    </ScreenLink>
+  );
+
   const hasQuery = query !== '';
 
   const componentClasses = cx(
@@ -97,7 +108,10 @@ const NewStageScreen = ({
           />
         </motion.div>
         <motion.div className="new-stage-screen__container">
-          <CategorizedInterfaceList onSelect={handleSelectInterface} />
+          <CategorizedInterfaceList
+            onSelect={handleSelectInterface}
+            menuOther={menuOther}
+          />
           <AnimatePresence>
             { hasQuery && (
               <motion.div

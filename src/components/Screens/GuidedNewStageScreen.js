@@ -1,7 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 import { Button } from '@codaco/ui';
 import Screen from '@components/Screen/Screen';
+import { actionCreators as uiActions } from '@modules/ui';
 
 const Steps = ({
   steps,
@@ -9,6 +11,7 @@ const Steps = ({
 }) => {
   const [history, setHistory] = useState([initialStep]);
 
+  console.log({ history });
   const previousStep = () => setHistory((s) => {
     const nextS = s.slice(0, -1);
     if (nextS.length === 0) { return [initialStep]; }
@@ -17,6 +20,7 @@ const Steps = ({
 
   const goToStep = (e) => {
     const step = e.target && e.target.getAttribute('data-step');
+    console.log('step', step);
     if (!step) { return; }
     setHistory((s) => [...s, step]);
   };
@@ -34,7 +38,7 @@ const Steps = ({
 
   return (
     <motion.div className="guided-new-stage-screen__steps">
-      <motion.div className="guided-new-stage-screen__step">
+      <motion.div className="guided-new-stage-screen__step" key={currentStep}>
         <motion.div className="guided-new-stage-screen__step-content">
           {content}
         </motion.div>
@@ -57,6 +61,7 @@ const Steps = ({
                   onClick={handleClick}
                   data-step={step}
                   color={color}
+                  key={label}
                 >
                   {label}
                 </Button>
@@ -69,64 +74,11 @@ const Steps = ({
   );
 };
 
-const steps = [
-  {
-    id: 'start',
-    actions: [
-      { label: 'Continue', step: 'ask-create-alters' },
-    ],
-    content: (
-      <p>This wizard will ask you a series of questions.</p>
-    ),
-  },
-  {
-    id: 'ask-create-alters',
-    actions: [
-      { label: 'No', step: 'ask-create-edges', color: 'white' },
-      { label: 'Yes', step: 'generator' },
-    ],
-    content: (
-      <p>Do you want to create alters?</p>
-    ),
-  },
-  {
-    id: 'ask-create-edges',
-    actions: [
-      { label: 'No', step: 'ask-layout', color: 'white' },
-      { label: 'Yes', step: 'sociogram' },
-    ],
-    content: (
-      <p>Do you want to create edges?</p>
-    ),
-  },
-  {
-    id: 'ask-layout',
-    actions: [
-      { label: 'No', step: 'other', color: 'white' },
-      { label: 'Yes', step: 'sociogram' },
-    ],
-    content: (
-      <p>Do you want to create a layout of existing nodes?</p>
-    ),
-  },
-  {
-    id: 'generator',
-    content: (<h1>Generator</h1>),
-  },
-  {
-    id: 'sociogram',
-    content: (<h1>Sociogram</h1>),
-  },
-  {
-    id: 'other',
-    content: (<h1>Other</h1>),
-  }
-];
-
 const GuidedNewStageScreen = ({
   show,
   onSelect,
   onComplete,
+  insertAtIndex,
 }) => {
   const buttons = useMemo(() => [
     <Button
@@ -137,6 +89,80 @@ const GuidedNewStageScreen = ({
       Cancel
     </Button>,
   ], [onComplete]);
+
+  const locus = useSelector(
+    (state) => state.protocol.timeline[state.protocol.timeline.length - 1],
+  );
+
+  const dispatch = useDispatch();
+
+  const handleSelectInterface = useCallback((interfaceType) => {
+    dispatch(uiActions.closeScreen('guidedNewStage'));
+    dispatch(uiActions.openScreen('stage', { type: interfaceType, locus, insertAtIndex }));
+  }, [insertAtIndex, locus, dispatch]);
+
+  const steps = useMemo(() => [
+    {
+      id: 'start',
+      actions: [
+        { label: 'Continue', step: 'ask-create-alters' },
+      ],
+      content: (
+        <p>This wizard will ask you a series of questions.</p>
+      ),
+    },
+    {
+      id: 'ask-create-alters',
+      actions: [
+        { label: 'No', step: 'ask-create-edges', color: 'white' },
+        { label: 'Yes', step: 'generator' },
+      ],
+      content: (
+        <p>Do you want to create alters?</p>
+      ),
+    },
+    {
+      id: 'ask-create-edges',
+      actions: [
+        { label: 'No', step: 'ask-layout', color: 'white' },
+        { label: 'Yes', step: 'sociogram' },
+      ],
+      content: (
+        <p>Do you want to create edges?</p>
+      ),
+    },
+    {
+      id: 'ask-layout',
+      actions: [
+        { label: 'No', step: 'other', color: 'white' },
+        { label: 'Yes', step: 'sociogram' },
+      ],
+      content: (
+        <p>Do you want to create a layout of existing nodes?</p>
+      ),
+    },
+    {
+      id: 'generator',
+      content: (
+        <>
+          <h1>Generator</h1>
+          <div
+            onClick={() => handleSelectInterface('Information')}
+          >
+            info
+          </div>
+        </>
+      ),
+    },
+    {
+      id: 'sociogram',
+      content: (<h1>Sociogram</h1>),
+    },
+    {
+      id: 'other',
+      content: (<h1>Other</h1>),
+    },
+  ], [handleSelectInterface]);
 
   return (
     <Screen

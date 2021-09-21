@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import cx from 'classnames';
 import { INTERFACE_TYPES, CATEGORIES } from './interfaceOptions';
 import InterfaceList from './InterfaceList';
-import ScreenLink from '../ScreenLink';
 
 const isCategorySelected = (selectedCategory, category) => {
   if (!selectedCategory) { return true; }
@@ -51,6 +50,7 @@ MenuItem.defaultProps = {
 
 const CategorizedInterfaceList = ({
   onSelect,
+  menuOther,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState();
 
@@ -88,7 +88,7 @@ const CategorizedInterfaceList = ({
           )) }
         </motion.ul>
         <div className="new-stage-screen__menu-other">
-          <ScreenLink screen="guidedNewStage">Need help?</ScreenLink>
+          {menuOther}
         </div>
       </motion.div>
       <motion.div className="new-stage-screen__categorized-list">
