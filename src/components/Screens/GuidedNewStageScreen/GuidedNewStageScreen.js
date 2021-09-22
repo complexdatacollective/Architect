@@ -6,6 +6,7 @@ import { Button } from '@codaco/ui';
 import { actionCreators as uiActions } from '@modules/ui';
 import Screen from '@components/Screen/Screen';
 import Section from '@components/EditorLayout/Section';
+import InterfaceThumbnail from '@components/Screens/NewStageScreen/InterfaceThumbnail';
 import Steps from './Steps';
 
 const GuidedNewStageScreen = ({
@@ -80,12 +81,17 @@ const GuidedNewStageScreen = ({
       id: 'generator',
       content: (
         <>
-          <h1>Generator</h1>
           <div
             onClick={() => handleSelectInterface('Information')}
+            style={{ width: '300px' }}
           >
-            info
+            <InterfaceThumbnail type="NameGenerator" />
           </div>
+          <p>
+            The name generator interface allows you to create nodes using a form
+            to collect attribute data about each node.
+          </p>
+          <p><Button>Create Name Generator</Button></p>
         </>
       ),
     },
