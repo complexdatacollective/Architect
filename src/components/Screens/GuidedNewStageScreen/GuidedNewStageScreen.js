@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 import { Button } from '@codaco/ui';
-import Screen from '@components/Screen/Screen';
 import { actionCreators as uiActions } from '@modules/ui';
+import Screen from '@components/Screen/Screen';
+import Section from '@components/EditorLayout/Section';
 import Steps from './Steps';
 
 const GuidedNewStageScreen = ({
@@ -40,7 +41,9 @@ const GuidedNewStageScreen = ({
         { label: 'Continue', step: 'ask-create-alters' },
       ],
       content: (
-        <p>This wizard will ask you a series of questions.</p>
+        <p>
+          This wizard will ask you a series of questions in order to help you choose a stage type.
+        </p>
       ),
     },
     {
@@ -103,9 +106,10 @@ const GuidedNewStageScreen = ({
       type="guided-new-stage"
     >
       <motion.div className="guided-new-stage-screen">
-        <div className="guided-new-stage-screen__section">
+        <Section>
           <h1>Guided Stage Chooser</h1>
-        </div>
+          <p>Find an appropriate stage type for your Protocol.</p>
+        </Section>
         <Steps
           steps={steps}
           initialStep="start"

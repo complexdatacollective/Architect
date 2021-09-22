@@ -1,20 +1,7 @@
 .guided-new-stage-screen {
-  flex: 1;
-
-  &__section,
-  &__step-content,
-  &__step-controls {
-    max-height: auto;
-    max-width: 80rem;
-    margin: unit(4) auto;
-  }
-
   &__step {
-    &-content {
-      padding: unit(4) 0;
-    }
-
     &-controls {
+      margin-top: unit(4);
       display: flex;
     }
 
