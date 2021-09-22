@@ -100,6 +100,11 @@ const CategorizedInterfaceList = ({
 
 CategorizedInterfaceList.propTypes = {
   onSelect: PropTypes.func.isRequired,
+  menuOther: PropTypes.node,
+};
+
+CategorizedInterfaceList.defaultProps = {
+  menuOther: null,
 };
 
 export default CategorizedInterfaceList;
