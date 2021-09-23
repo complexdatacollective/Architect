@@ -1,0 +1,30 @@
+.tag {
+  position: relative;
+  display: inline-block;
+  padding: .15em .5em;
+  border-radius: 1em;
+  background: white;
+  // display: flex;
+  width: auto;
+
+  &__reset {
+    position: absolute;
+    right: .5em;
+    top: .15em;
+    background: white;
+    border-radius: 1em;
+    height: 1em;
+    width: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &--selected {
+    background: var(--architect-active);
+  }
+
+  &--can-reset {
+    padding-right: 2em;
+  }
+}

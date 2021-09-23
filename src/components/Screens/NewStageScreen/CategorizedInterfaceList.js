@@ -2,7 +2,8 @@ import React, { useState, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import cx from 'classnames';
-import { INTERFACE_TYPES, CATEGORIES } from './interfaceOptions';
+import Tag from '@components/Tag';
+import { INTERFACE_TYPES, CATEGORIES, TAGS } from './interfaceOptions';
 import InterfaceList from './InterfaceList';
 
 const isCategorySelected = (selectedCategory, category) => {
@@ -53,17 +54,36 @@ const CategorizedInterfaceList = ({
   menuOther,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState();
+  const [selectedTags, setSelectedTags] = useState([]);
 
   const handleChangeCategory = useCallback((category) => {
     if (category === 'all') { return setSelectedCategory(undefined); }
     return setSelectedCategory(category);
   }, [setSelectedCategory]);
 
+  const handleAddTag = useCallback((newTag) => {
+    setSelectedTags((tags) => [...tags, newTag]);
+  }, [setSelectedTags]);
+
+  const handleRemoveTag = useCallback((existingTag) => {
+    setSelectedTags(
+      (tags) => tags.filter(
+        (tag) => tag !== existingTag,
+      ),
+    );
+  }, [setSelectedTags]);
+
   const selectableInterfaces = useMemo(
     () => INTERFACE_TYPES
-      .filter(({ category }) => isCategorySelected(selectedCategory, category)),
+      .filter(({ category, tags }) => isCategorySelected(selectedCategory, category)),
     [selectedCategory],
   );
+
+  const tags = Object.keys(TAGS).map((id) => ({
+    label: TAGS[id],
+    id,
+    selected: selectedTags.includes(id),
+  }));
 
   return (
     <motion.div className="new-stage-screen__categorized">
@@ -87,6 +107,19 @@ const CategorizedInterfaceList = ({
             </MenuItem>
           )) }
         </motion.ul>
+        <div className="new-stage-screen__menu-tags">
+          {tags.map(({ id, selected, label }) => (
+            <Tag
+              key={id}
+              id={id}
+              selected={selected}
+              onClick={handleAddTag}
+              onReset={handleRemoveTag}
+            >
+              {label}
+            </Tag>
+          ))}
+        </div>
         <div className="new-stage-screen__menu-other">
           {menuOther}
         </div>
