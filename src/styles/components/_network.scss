@@ -1,0 +1,43 @@
+.network {
+  --table-color: rgba(58, 106, 117, .05); // sass-lint:disable-line no-color-literals
+  --alternate-row-color: var(--table-color);
+  border-radius: var(--border-radius);
+  background: var(--table-color);
+
+  th {
+    @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
+    word-break: keep-all;
+    white-space: nowrap;
+    padding: unit(1) unit(2);
+    line-height: unit(4);
+
+    svg {
+      height: unit(4);
+      width: unit(4);
+      position: relative;
+      top: -.1rem;
+      vertical-align: middle;
+      color: var(--primary);
+    }
+
+    &:not(:last-child) {
+      border-right: 3px solid var(--color-white);
+    }
+  }
+
+  td {
+    padding: unit(2);
+
+    &:not(:last-child) {
+      border-right: 3px solid var(--color-white);
+    }
+  }
+
+  tr {
+    &:nth-child(2n + 1) {
+      & > td {
+        background-color: var(--alternate-row-color);
+      }
+    }
+  }
+}

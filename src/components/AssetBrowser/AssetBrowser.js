@@ -2,6 +2,8 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { Section } from '@components/EditorLayout';
+import useExternalDataPreview from '@components/AssetBrowser/useExternalDataPreview';
+import useExternalDataDownload from '@components/AssetBrowser/useExternalDataDownload';
 import Assets from './Assets';
 import NewAsset from './NewAsset';
 import withAssetActions from './withAssetActions';
@@ -18,6 +20,9 @@ const AssetBrowser = ({
     if (!assetIds[0]) { return; } // if a single invalid file was uploaded
     onSelect(assetIds[0]);
   }, [onSelect]);
+
+  const [preview, handleShowPreview] = useExternalDataPreview();
+  const handleDownload = useExternalDataDownload();
 
   return (
     <>
@@ -40,12 +45,15 @@ const AssetBrowser = ({
         </h3>
         <Assets
           onSelect={onSelect}
+          onPreview={handleShowPreview}
+          onDownload={handleDownload}
           onDelete={onDelete}
           disableDelete={disableDelete}
           selected={selected}
           type={type}
         />
       </Section>
+      { preview }
     </>
   );
 };

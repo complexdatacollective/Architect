@@ -1,0 +1,29 @@
+.asset-browser-preview {
+  .window__main {
+    overflow-y: hidden;
+  }
+
+  .window__content {
+    height: 100%;
+    width: 100%;
+
+    div,
+    audio,
+    video {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &--type-network {
+    .window__main {
+      overflow-x: auto;
+      overflow-y: auto;
+    }
+
+    .window__content {
+      width: auto;
+      height: auto;
+    }
+  }
+}

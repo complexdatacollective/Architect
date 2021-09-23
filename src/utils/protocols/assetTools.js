@@ -47,7 +47,7 @@ const readCsvNetwork = async (assetPath) => {
 * @param {string} filepath - The filename of the network asset
 * @returns {string} - Returns a function that returns a promise.
 */
-const networkReader = withExtensionSwitch({
+export const networkReader = withExtensionSwitch({
   csv: readCsvNetwork,
   json: readJsonNetwork,
 });
