@@ -33,7 +33,7 @@ $vertical-padding: .2em;
     cursor: default;
   }
 
-  &.tag--can-reset.tag--selected {
+  &.tag--can-reset.tag--selected { // sass-lint:disable-line force-element-nesting
     padding-right: 1.75em;
   }
 
