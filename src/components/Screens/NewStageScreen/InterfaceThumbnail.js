@@ -40,6 +40,7 @@ const InterfaceThumbnail = ({
       <div className="new-stage-screen__interface-tags">
         {tags.map((tag) => (
           <Tag
+            key={tag}
             id={tag}
             color={get(TAG_COLORS, tag)}
             selected
