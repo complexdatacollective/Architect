@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { motion } from 'framer-motion';
+import CancelIcon from '@material-ui/icons/CancelRounded';
 
 const Tag = ({
   id,
@@ -33,23 +35,24 @@ const Tag = ({
   }, []);
 
   return (
-    <div
+    <motion.div
       className={componentClasses}
       onClick={handleClick}
+      layout
     >
       <div className="tag__label">
         {children}
       </div>
 
-      { onReset && (
+      { onReset && selected && (
         <div
           className="tag__reset"
           onClick={handleReset}
         >
-          x
+          <CancelIcon />
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

@@ -44,10 +44,16 @@
     flex-direction: column;
     flex: 1;
 
+    &-section {
+      padding: unit(2) unit(4);
+      margin-bottom: unit(2);
+    }
+
     &-items {
       list-style: none;
       margin: 0;
       padding: 0;
+      margin: unit(-2) unit(-4);
     }
 
     &-tags {

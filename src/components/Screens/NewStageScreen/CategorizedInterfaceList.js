@@ -8,8 +8,12 @@ import InterfaceList from './InterfaceList';
 
 const isCategorySelected = (selectedCategory, category) => {
   if (!selectedCategory) { return true; }
-  if (category === selectedCategory) { return true; }
-  return false;
+  return category === selectedCategory;
+};
+
+const anyTagsSelected = (selectedTags, tags) => {
+  if (selectedTags.length === 0) { return true; }
+  return tags.some((tag) => selectedTags.includes(tag));
 };
 
 const MenuItem = ({
@@ -75,59 +79,75 @@ const CategorizedInterfaceList = ({
 
   const selectableInterfaces = useMemo(
     () => INTERFACE_TYPES
-      .filter(({ category, tags }) => isCategorySelected(selectedCategory, category)),
-    [selectedCategory],
+      .filter(
+        ({ category, tags }) => (
+          isCategorySelected(selectedCategory, category)
+          && anyTagsSelected(selectedTags, tags)
+        ),
+      ),
+    [selectedCategory, selectedTags],
   );
 
-  const tags = Object.keys(TAGS).map((id) => ({
-    label: TAGS[id],
-    id,
-    selected: selectedTags.includes(id),
-  }));
+  const tags = useMemo(
+    () => Object.values(TAGS).map((value) => ({
+      value,
+      selected: selectedTags.includes(value),
+    })).sort((a, b) => {
+      if (a.selected && b.selected) { return 0; }
+      if (a.selected && !b.selected) { return -1; }
+      return 1;
+    }),
+    [selectedTags],
+  );
 
   return (
-    <motion.div className="new-stage-screen__categorized">
-      <motion.div className="new-stage-screen__menu">
-        <motion.ul className="new-stage-screen__menu-items">
-          <MenuItem
-            onClick={handleChangeCategory}
-            category="all"
-            selected={selectedCategory === undefined}
-          >
-            All
-          </MenuItem>
-          { Object.values(CATEGORIES).map((category) => (
+    <div className="new-stage-screen__categorized">
+      <div className="new-stage-screen__menu">
+        <div className="new-stage-screen__menu-section">
+          <motion.ul className="new-stage-screen__menu-items">
             <MenuItem
-              key={category}
               onClick={handleChangeCategory}
-              category={category}
-              selected={selectedCategory === category}
+              category="all"
+              selected={selectedCategory === undefined}
             >
-              {category}
+              All
             </MenuItem>
-          )) }
-        </motion.ul>
-        <div className="new-stage-screen__menu-tags">
-          {tags.map(({ id, selected, label }) => (
-            <Tag
-              key={id}
-              id={id}
-              selected={selected}
-              onClick={handleAddTag}
-              onReset={handleRemoveTag}
-            >
-              {label}
-            </Tag>
-          ))}
+            { Object.values(CATEGORIES).map((category) => (
+              <MenuItem
+                key={category}
+                onClick={handleChangeCategory}
+                category={category}
+                selected={selectedCategory === category}
+              >
+                {category}
+              </MenuItem>
+            )) }
+          </motion.ul>
+        </div>
+        <div className="new-stage-screen__menu-section">
+          <p><strong>Filters:</strong></p>
+          <motion.div className="new-stage-screen__menu-tags" layout>
+            {tags.map(({ value, selected }) => (
+              <Tag
+                key={value}
+                id={value}
+                selected={selected}
+                onClick={handleAddTag}
+                onReset={handleRemoveTag}
+              >
+                {value}
+              </Tag>
+            ))}
+          </motion.div>
         </div>
         <div className="new-stage-screen__menu-other">
           {menuOther}
         </div>
-      </motion.div>
+      </div>
       <motion.div className="new-stage-screen__categorized-list">
         <InterfaceList items={selectableInterfaces} onSelect={onSelect} />
       </motion.div>
-    </motion.div>
+    </div>
   );
 };
 
