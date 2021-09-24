@@ -5,20 +5,19 @@ $vertical-padding: .2em;
   display: inline-block;
   padding: $vertical-padding .5em;
   border-radius: 1em;
-  background: white;
-  // display: flex;
   width: auto;
   line-height: 1em;
   margin: 0 unit(.5) unit(.5) 0;
+  cursor: pointer;
 
   &__reset {
     cursor: pointer;
     position: absolute;
-    right: .5em;
+    right: $vertical-padding;
     top: 0;
     border-radius: 1em;
     height: #{1em + $vertical-padding * 2};
-    widht: #{1em + $vertical-padding * 2};
+    width: #{1em + $vertical-padding * 2};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,9 +30,16 @@ $vertical-padding: .2em;
   &--selected {
     background: var(--architect-selected);
     color: var(--text-light);
+    cursor: default;
   }
 
   &.tag--can-reset.tag--selected {
-    padding-right: 2em;
+    padding-right: 1.75em;
+  }
+
+  @include color-modifiers($include-hover: false);
+
+  &:not(.tag--selected) {
+    background-color: var(--color-white);
   }
 }

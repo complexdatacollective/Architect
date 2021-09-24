@@ -2,8 +2,14 @@ import React, { useState, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import cx from 'classnames';
+import { get } from 'lodash';
 import Tag from '@components/Tag';
-import { INTERFACE_TYPES, CATEGORIES, TAGS } from './interfaceOptions';
+import {
+  INTERFACE_TYPES,
+  CATEGORIES,
+  TAGS,
+  TAG_COLORS,
+} from './interfaceOptions';
 import InterfaceList from './InterfaceList';
 
 const isCategorySelected = (selectedCategory, category) => {
@@ -134,6 +140,7 @@ const CategorizedInterfaceList = ({
                 selected={selected}
                 onClick={handleAddTag}
                 onReset={handleRemoveTag}
+                color={get(TAG_COLORS, value)}
               >
                 {value}
               </Tag>

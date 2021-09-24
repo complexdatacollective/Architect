@@ -125,9 +125,12 @@
     flex-direction: column;
 
     h3 {
-      height: 2.6em;
       line-height: 1.3em;
-      margin: 0 .25rem;
+      margin: 0 .25rem unit(1);
+    }
+
+    &-description {
+      margin: 0 0 unit(1);
     }
 
     &-preview {

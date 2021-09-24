@@ -17,6 +17,7 @@ const Tag = ({
     {
       'tag--selected': selected,
       'tag--can-reset': !!onReset,
+      [`tag--${color}`]: color,
     },
   );
 
