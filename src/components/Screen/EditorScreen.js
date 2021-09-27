@@ -77,6 +77,9 @@ class EditorScreen extends Component {
       ...rest
     } = this.props;
 
+    const { locus, timeline } = this.props;
+    console.log({ locus, timeline });
+
     return (
       <Screen
         buttons={this.buttons()}
@@ -119,8 +122,13 @@ EditorScreen.defaultProps = {
   transitionState: null,
 };
 
-const mapStateToProps = (state, { form }) => ({
-  hasUnsavedChanges: isDirty(form)(state),
+const timelineHasChanges = (state, locus) => {
+  const { timeline } = state.protocol;
+  return timeline.findIndex((id) => id === locus) < timeline.length - 1;
+};
+
+const mapStateToProps = (state, { form, locus }) => ({
+  hasUnsavedChanges: isDirty(form)(state) || timelineHasChanges(state, locus),
   submitting: isSubmitting(form)(state),
 });
 
