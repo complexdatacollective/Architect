@@ -1,45 +1,50 @@
-$vertical-padding: .2em;
+$vertical-padding: .25rem;
+$font-size: .8rem;
 
 .tag {
   position: relative;
-  display: inline-block;
-  padding: $vertical-padding .5em;
-  border-radius: 1em;
+  display: inline-flex;
+  padding: $vertical-padding 0;
+  border-radius: 1rem;
   width: auto;
-  line-height: 1em;
   margin: 0 unit(.5) unit(.5) 0;
   cursor: pointer;
+  align-items: center;
+  justify-content: flex-start;
+  color: var(--text-light);
+  background: var(--architect-selected);
+  opacity: .6;
+  transition-property: opacity, filter;
+  transition-property: var(--animation-duration-fast);
+  transition-timing-function: var(--animation-easing);
+  filter: saturate(.3);
+
+  &__label {
+    line-height: $font-size;
+    font-size: $font-size;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    padding: 0 0.75rem;
+  }
 
   &__reset {
     cursor: pointer;
-    position: absolute;
-    right: $vertical-padding;
-    top: 0;
     border-radius: 1em;
-    height: #{1em + $vertical-padding * 2};
-    width: #{1em + $vertical-padding * 2};
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0 #{$vertical-padding} 0 #{-$vertical-padding};
 
     svg {
-      font-size: 1.2em;
+      font-size: 1rem;
     }
   }
 
   &--selected {
-    background: var(--architect-selected);
-    color: var(--text-light);
     cursor: default;
-  }
-
-  &.tag--can-reset.tag--selected { // sass-lint:disable-line force-element-nesting
-    padding-right: 1.75em;
+    opacity: 1;
+    filter: saturate(1);
   }
 
   @include color-modifiers($include-hover: false);
-
-  &:not(.tag--selected) {
-    background-color: var(--color-white);
-  }
 }
