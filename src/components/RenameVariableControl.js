@@ -111,7 +111,7 @@ const RenameVariableControl = ({
 RenameVariableControl.propTypes = {
   id: PropTypes.string.isRequired,
   entity: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   updateVariable: PropTypes.func.isRequired,
   name: PropTypes.string,
   existingVariableNames: PropTypes.arrayOf(PropTypes.string),
@@ -120,6 +120,7 @@ RenameVariableControl.propTypes = {
 
 RenameVariableControl.defaultProps = {
   name: null,
+  type: null,
   existingVariableNames: [],
 };
 

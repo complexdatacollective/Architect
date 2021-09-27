@@ -45,7 +45,11 @@ ControlsColumn.propTypes = {
   onDelete: PropTypes.func.isRequired,
   inUse: PropTypes.bool.isRequired,
   entity: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
+};
+
+ControlsColumn.defaultProps = {
+  type: null,
 };
 
 export default ControlsColumn;
