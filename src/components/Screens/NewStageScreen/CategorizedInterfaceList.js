@@ -17,9 +17,9 @@ const isCategorySelected = (selectedCategory, category) => {
   return category === selectedCategory;
 };
 
-const anyTagsSelected = (selectedTags, tags) => {
+const allTagsSelected = (selectedTags, tags) => {
   if (selectedTags.length === 0) { return true; }
-  return tags.some((tag) => selectedTags.includes(tag));
+  return selectedTags.every((tag) => tags.includes(tag));
 };
 
 const MenuItem = ({
@@ -88,7 +88,7 @@ const CategorizedInterfaceList = ({
       .filter(
         ({ category, tags }) => (
           isCategorySelected(selectedCategory, category)
-          && anyTagsSelected(selectedTags, tags)
+          && allTagsSelected(selectedTags, tags)
         ),
       ),
     [selectedCategory, selectedTags],
