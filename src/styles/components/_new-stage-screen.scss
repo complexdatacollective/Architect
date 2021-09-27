@@ -52,43 +52,11 @@ $opaque-background: rgba(255, 255, 255, .7);
       margin-bottom: unit(2);
     }
 
-    &-items {
-      list-style: none;
-      padding: 0;
-      margin: unit(-2) unit(-4);
-    }
-
     &-other {
       padding: unit(2) unit(4);
       flex: 1;
       align-items: flex-end;
       display: flex;
-    }
-
-    &-item {
-      margin: 0;
-      padding: 0;
-      cursor: pointer;
-      transition-property: background-color, color;
-      transition-duration: var(--animation-duration-standard);
-      transition-timing-function: var(--animation-easing);
-
-      &:hover {
-        background-color: var(--architect-shadow);
-      }
-
-      div {
-        padding: unit(2) unit(4);
-      }
-
-      &--selected {
-        background-color: var(--architect-active);
-        color: var(--text-light);
-
-        &:hover {
-          background-color: var(--architect-active);
-        }
-      }
     }
   }
 
