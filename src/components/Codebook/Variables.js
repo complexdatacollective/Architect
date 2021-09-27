@@ -163,13 +163,14 @@ Variables.propTypes = {
   sort: PropTypes.func.isRequired,
   sortBy: PropTypes.string.isRequired,
   sortDirection: PropTypes.oneOf([SortDirection.ASC, SortDirection.DESC]).isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   // eslint-disable-next-line react/forbid-prop-types
   variables: PropTypes.array,
 };
 
 Variables.defaultProps = {
   variables: [],
+  type: null,
   onDelete: () => {},
 };
 
