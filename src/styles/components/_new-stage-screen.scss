@@ -32,9 +32,6 @@ $opaque-background: rgba(255, 255, 255, .7);
     display: flex;
     flex: 1;
     height: 100%;
-    transition-property: filter;
-    transition-timing-function: var(--animation-easing);
-    transition-duration: var(--animation-duration-fast);
   }
 
   &__menu {
@@ -120,12 +117,6 @@ $opaque-background: rgba(255, 255, 255, .7);
       .new-stage-screen__interface-preview {
         border-color: var(--architect-active);
       }
-    }
-  }
-
-  &--has-query {
-    .new-stage-screen__categorized {
-      filter: blur(#{unit(1)});
     }
   }
 }

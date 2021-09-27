@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { get } from 'lodash';
@@ -9,13 +9,14 @@ import Search from '@codaco/ui/lib/components/Fields/Search';
 import Button from '@codaco/ui/lib/components/Button';
 import Screen from '@components/Screen/Screen';
 import { actionCreators as uiActions } from '@modules/ui';
-import { INTERFACE_TYPES } from './interfaceOptions';
-import CategorizedInterfaceList from './CategorizedInterfaceList';
+import Tag from '@components/Tag';
+import { INTERFACE_TYPES, TAGS, TAG_COLORS } from './interfaceOptions';
+import useTagList from './useTagList';
 import InterfaceList from './InterfaceList';
 
 const fuseOptions = {
   shouldSort: true,
-  threshold: 0.6,
+  threshold: 0.25,
   minMatchCharLength: 2,
   keys: [
     'title',
@@ -25,11 +26,14 @@ const fuseOptions = {
 
 const fuse = new Fuse(INTERFACE_TYPES, fuseOptions);
 
-const search = (query) => fuse.search(query);
+const allTagsSelected = (selectedTags, interfaceTags) => {
+  if (selectedTags.length === 0) { return true; }
+  return selectedTags.every((tag) => interfaceTags.includes(tag));
+};
 
-const animations = {
-  show: { opacity: 1 },
-  hide: { opacity: 0 },
+const search = (query, selectedTags) => {
+  if (query.length === 0) { return INTERFACE_TYPES; }
+  return fuse.search(query)
 };
 
 const NewStageScreen = ({
@@ -37,6 +41,7 @@ const NewStageScreen = ({
   onComplete,
   show,
 }) => {
+  const [tags, selectedTags, selectTag, deselectTag] = useTagList(TAGS);
   const [query, setQuery] = useState('');
 
   const buttons = useMemo(() => [
@@ -49,8 +54,6 @@ const NewStageScreen = ({
       Cancel
     </Button>,
   ], [onComplete]);
-
-  const filteredInterfaces = useMemo(() => search(query), [query]);
 
   const handleUpdateQuery = useCallback((eventOrValue) => {
     const newQuery = get(eventOrValue, ['target', 'value'], eventOrValue);
@@ -67,6 +70,14 @@ const NewStageScreen = ({
     dispatch(uiActions.closeScreen('newStage'));
     dispatch(uiActions.openScreen('stage', { type: interfaceType, locus, insertAtIndex }));
   }, [insertAtIndex, locus, dispatch]);
+
+  const filteredInterfaces = useMemo(
+    () => search(query, selectedTags)
+      .filter(
+        ({ tags: interfaceTags }) => allTagsSelected(selectedTags, interfaceTags),
+      ),
+    [query, selectedTags],
+  );
 
   const hasQuery = query !== '';
 
@@ -94,23 +105,30 @@ const NewStageScreen = ({
           />
         </motion.div>
         <motion.div className="new-stage-screen__container">
-          <CategorizedInterfaceList
-            onSelect={handleSelectInterface}
-          />
-          <AnimatePresence>
-            { hasQuery && (
-              <motion.div
-                className="new-stage-screen__results"
-                variants={animations}
-                initial="hide"
-                exit="hide"
-                animate="show"
-                key="results"
-              >
-                <InterfaceList items={filteredInterfaces} onSelect={handleSelectInterface} />
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <div className="new-stage-screen__categorized">
+            <div className="new-stage-screen__menu">
+              <div className="new-stage-screen__menu-section">
+                <p><strong>Filters:</strong></p>
+                <motion.div className="new-stage-screen__menu-tags" layout>
+                  {tags.map(({ value, selected }) => (
+                    <Tag
+                      key={value}
+                      id={value}
+                      selected={selected}
+                      onClick={selectTag}
+                      onReset={deselectTag}
+                      color={get(TAG_COLORS, value)}
+                    >
+                      {value}
+                    </Tag>
+                  ))}
+                </motion.div>
+              </div>
+            </div>
+            <motion.div className="new-stage-screen__categorized-list">
+              <InterfaceList items={filteredInterfaces} onSelect={handleSelectInterface} />
+            </motion.div>
+          </div>
         </motion.div>
       </motion.div>
     </Screen>
