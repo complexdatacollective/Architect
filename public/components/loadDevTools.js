@@ -2,9 +2,13 @@ const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = req
 const log = require('./log');
 
 const loadDevTools = () => {
+  console.log('loadDevTool');
   if (process.env.NODE_ENV !== 'development' || process.env.DISABLE_DEV_TOOLS === 'true') {
+    console.log('  abort');
     return Promise.resolve(null);
   }
+
+  console.log('  install extensions');
 
   return Promise.all([
     installExtension(REACT_DEVELOPER_TOOLS),
