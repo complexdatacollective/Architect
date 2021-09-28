@@ -15,7 +15,7 @@ $font-size: .8rem;
   background: var(--architect-selected);
   opacity: .6;
   transition-property: opacity, filter;
-  transition-property: var(--animation-duration-fast);
+  transition-duration: var(--animation-duration-fast);
   transition-timing-function: var(--animation-easing);
   filter: saturate(.3);
 
@@ -24,7 +24,7 @@ $font-size: .8rem;
     font-size: $font-size;
     text-transform: uppercase;
     letter-spacing: .15em;
-    padding: 0 0.75rem;
+    padding: 0 .75rem;
   }
 
   &__reset {
