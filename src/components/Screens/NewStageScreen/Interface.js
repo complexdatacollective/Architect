@@ -27,10 +27,18 @@ const InterfaceThumbnail = ({
     onClick(interfaceType);
   }, [onClick, interfaceType]);
 
+  const handleKeyUp = useCallback((e) => {
+    if (e.key === 'Enter') {
+      onClick(interfaceType);
+    }
+  });
+
   return (
     <motion.div
       className="new-stage-screen__interface"
       onClick={handleSelect}
+      onKeyUp={handleKeyUp}
+      tabIndex={0}
     >
       <h3>{ title }</h3>
       { image && <img className="new-stage-screen__interface-preview" src={image} alt={title} /> }

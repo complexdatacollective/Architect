@@ -51,7 +51,7 @@ $opaque-background: rgba(255, 255, 255, .7);
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    background: var(--color-platinum--dark);
+    background-color: var(--color-platinum--dark);
     border-radius: unit(2);
     padding: unit(4) unit(2);
 
@@ -76,6 +76,10 @@ $opaque-background: rgba(255, 255, 255, .7);
       width: calc(50% - #{unit(4)});
       display: inline-block;
       margin: 0 0 unit(4) unit(4);
+    }
+
+    &:focus {
+      background-color: var(--architect-active);
     }
   }
 }

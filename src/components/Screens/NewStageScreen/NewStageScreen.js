@@ -126,6 +126,7 @@ const NewStageScreen = ({
                   value: query,
                   onChange: handleUpdateQuery,
                 }}
+                autoFocus
               />
             </motion.div>
             <motion.div className="new-stage-screen__list">
