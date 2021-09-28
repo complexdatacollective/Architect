@@ -3,32 +3,31 @@ $opaque-background: rgba(255, 255, 255, .7);
 .new-stage-screen {
   flex: 1;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 100%;
   max-height: auto;
   max-width: 80rem;
   margin: 0 auto;
 
+  &__heading {
+    padding: unit(2) 0;
+  }
+
+  &__picker {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+  }
+
   &__menu {
-    // background: var(--architect-panel-grey);
-    // border-radius: unit(2);
     overflow: hidden;
-    // padding: unit(2) 0;
-    // margin-bottom: unit(4);
     display: flex;
     flex-direction: column;
     flex: unit(30) 0 0;
 
     &-section {
-      padding: unit(2);
+      padding: unit(2) 0;
       margin-bottom: unit(2);
-    }
-
-    &-other {
-      padding: unit(2) unit(4);
-      flex: 1;
-      align-items: flex-end;
-      display: flex;
     }
   }
 
@@ -48,19 +47,13 @@ $opaque-background: rgba(255, 255, 255, .7);
     overflow-y: scroll;
   }
 
-  // &__categorized-list {
-  //   flex: 3;
-  //   overflow-y: scroll;
-  // }
-
-  // &__interfaces {
-  //   margin-right: unit(4);
-  // }
-
   &__interface {
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    background: var(--color-platinum--dark);
+    border-radius: unit(2);
+    padding: unit(4) unit(2);
 
     h3 {
       line-height: 1.3em;
@@ -76,9 +69,6 @@ $opaque-background: rgba(255, 255, 255, .7);
       border-width: .25rem;
       border-style: solid;
       border-color: transparent;
-      transition-property: border-color;
-      transition-duration: var(--animation-duration-standard);
-      transition-timing-function: var(--animation-easing);
       margin-bottom: unit(1);
     }
 
@@ -86,12 +76,6 @@ $opaque-background: rgba(255, 255, 255, .7);
       width: calc(50% - #{unit(4)});
       display: inline-block;
       margin: 0 0 unit(4) unit(4);
-    }
-
-    &:hover {
-      .new-stage-screen__interface-preview {
-        border-color: var(--architect-active);
-      }
     }
   }
 }

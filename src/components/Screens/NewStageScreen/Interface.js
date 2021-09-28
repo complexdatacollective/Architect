@@ -32,8 +32,8 @@ const InterfaceThumbnail = ({
       className="new-stage-screen__interface"
       onClick={handleSelect}
     >
-      { image && <img className="new-stage-screen__interface-preview" src={image} alt={title} /> }
       <h3>{ title }</h3>
+      { image && <img className="new-stage-screen__interface-preview" src={image} alt={title} /> }
       <div className="new-stage-screen__interface-description">
         {description}
       </div>

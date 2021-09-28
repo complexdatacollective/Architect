@@ -95,38 +95,43 @@ const NewStageScreen = ({
       type="new-stage"
     >
       <motion.div className={componentClasses}>
-        <div className="new-stage-screen__menu">
-          <div className="new-stage-screen__menu-section">
-            <p><strong>Filters:</strong></p>
-            <motion.div className="new-stage-screen__menu-tags" layout>
-              {tags.map(({ value, selected }) => (
-                <Tag
-                  key={value}
-                  id={value}
-                  selected={selected}
-                  onClick={selectTag}
-                  onReset={deselectTag}
-                  color={get(TAG_COLORS, value)}
-                >
-                  {value}
-                </Tag>
-              ))}
+        <div className="new-stage-screen__heading">
+          <h1>Add new screen</h1>
+          <p>Select an interface type from below to add it to your protocol.</p>
+        </div>
+        <div className="new-stage-screen__picker">
+          <div className="new-stage-screen__menu">
+            <div className="new-stage-screen__menu-section">
+              <motion.div className="new-stage-screen__menu-tags" layout>
+                {tags.map(({ value, selected }) => (
+                  <Tag
+                    key={value}
+                    id={value}
+                    selected={selected}
+                    onClick={selectTag}
+                    onReset={deselectTag}
+                    color={get(TAG_COLORS, value)}
+                  >
+                    {value}
+                  </Tag>
+                ))}
+              </motion.div>
+            </div>
+          </div>
+          <div className="new-stage-screen__main">
+            <motion.div className="new-stage-screen__search">
+              <Search
+                placeholder="Enter a search term..."
+                input={{
+                  value: query,
+                  onChange: handleUpdateQuery,
+                }}
+              />
+            </motion.div>
+            <motion.div className="new-stage-screen__list">
+              <InterfaceList items={filteredInterfaces} onSelect={handleSelectInterface} />
             </motion.div>
           </div>
-        </div>
-        <div className="new-stage-screen__main">
-          <motion.div className="new-stage-screen__search">
-            <Search
-              placeholder="Enter a search term..."
-              input={{
-                value: query,
-                onChange: handleUpdateQuery,
-              }}
-            />
-          </motion.div>
-          <motion.div className="new-stage-screen__list">
-            <InterfaceList items={filteredInterfaces} onSelect={handleSelectInterface} />
-          </motion.div>
         </div>
       </motion.div>
     </Screen>

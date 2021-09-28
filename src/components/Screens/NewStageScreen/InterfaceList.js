@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
-import InterfaceThumbnail from './InterfaceThumbnail';
+import Interface from './Interface';
 import { PropTypes as InterfacePropTypes } from './interfaceOptions';
 
 const animations = {
@@ -25,7 +25,7 @@ const InterfaceList = ({
           key={interfaceType}
           layout
         >
-          <InterfaceThumbnail
+          <Interface
             type={interfaceType}
             onClick={onSelect}
           />
