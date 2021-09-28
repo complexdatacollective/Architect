@@ -6,8 +6,9 @@ import {
   submit, isDirty, startSubmit, isSubmitting,
 } from 'redux-form';
 import { Button } from '@codaco/ui';
-import { actionCreators as timelineActions } from '../../ducks/middleware/timeline';
-import { actionCreators as dialogActions } from '../../ducks/modules/dialogs';
+import { actionCreators as timelineActions } from '@app/ducks/middleware/timeline';
+import { actionCreators as dialogActions } from '@modules/dialogs';
+import { hasChanges as timelineHasChanges } from '@selectors/timeline';
 import Screen from './Screen';
 
 class EditorScreen extends Component {
@@ -117,11 +118,6 @@ EditorScreen.defaultProps = {
   secondaryButtons: null,
   show: true,
   transitionState: null,
-};
-
-const timelineHasChanges = (state, locus) => {
-  const { timeline } = state.protocol;
-  return timeline.findIndex((id) => id === locus) < timeline.length - 1;
 };
 
 const mapStateToProps = (state, { form, locus }) => ({
