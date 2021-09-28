@@ -31,9 +31,9 @@ const allTagsSelected = (selectedTags, interfaceTags) => {
   return selectedTags.every((tag) => interfaceTags.includes(tag));
 };
 
-const search = (query, selectedTags) => {
+const search = (query) => {
   if (query.length === 0) { return INTERFACE_TYPES; }
-  return fuse.search(query)
+  return fuse.search(query);
 };
 
 const NewStageScreen = ({
@@ -95,41 +95,39 @@ const NewStageScreen = ({
       type="new-stage"
     >
       <motion.div className={componentClasses}>
-        <motion.div className="new-stage-screen__search">
-          <Search
-            placeholder="Enter a search term..."
-            input={{
-              value: query,
-              onChange: handleUpdateQuery,
-            }}
-          />
-        </motion.div>
-        <motion.div className="new-stage-screen__container">
-          <div className="new-stage-screen__categorized">
-            <div className="new-stage-screen__menu">
-              <div className="new-stage-screen__menu-section">
-                <p><strong>Filters:</strong></p>
-                <motion.div className="new-stage-screen__menu-tags" layout>
-                  {tags.map(({ value, selected }) => (
-                    <Tag
-                      key={value}
-                      id={value}
-                      selected={selected}
-                      onClick={selectTag}
-                      onReset={deselectTag}
-                      color={get(TAG_COLORS, value)}
-                    >
-                      {value}
-                    </Tag>
-                  ))}
-                </motion.div>
-              </div>
-            </div>
-            <motion.div className="new-stage-screen__categorized-list">
-              <InterfaceList items={filteredInterfaces} onSelect={handleSelectInterface} />
+        <div className="new-stage-screen__menu">
+          <div className="new-stage-screen__menu-section">
+            <p><strong>Filters:</strong></p>
+            <motion.div className="new-stage-screen__menu-tags" layout>
+              {tags.map(({ value, selected }) => (
+                <Tag
+                  key={value}
+                  id={value}
+                  selected={selected}
+                  onClick={selectTag}
+                  onReset={deselectTag}
+                  color={get(TAG_COLORS, value)}
+                >
+                  {value}
+                </Tag>
+              ))}
             </motion.div>
           </div>
-        </motion.div>
+        </div>
+        <div className="new-stage-screen__main">
+          <motion.div className="new-stage-screen__search">
+            <Search
+              placeholder="Enter a search term..."
+              input={{
+                value: query,
+                onChange: handleUpdateQuery,
+              }}
+            />
+          </motion.div>
+          <motion.div className="new-stage-screen__list">
+            <InterfaceList items={filteredInterfaces} onSelect={handleSelectInterface} />
+          </motion.div>
+        </div>
       </motion.div>
     </Screen>
   );

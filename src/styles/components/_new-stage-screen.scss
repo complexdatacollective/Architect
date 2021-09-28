@@ -1,51 +1,26 @@
 $opaque-background: rgba(255, 255, 255, .7);
 
 .new-stage-screen {
+  flex: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 100%;
   max-height: auto;
   max-width: 80rem;
   margin: 0 auto;
 
-  &__section {
-    max-height: auto;
-    max-width: 80rem;
-    margin: unit(4) auto;
-    padding: unit(4);
-  }
-
-  &__search {
-    background: var(--architect-control-bar-background);
-    padding: unit(2);
-    border-radius: unit(2);
-    margin-bottom: unit(4);
-    margin-top: unit(2);
-
-    .form-field-container,
-    .form-field {
-      margin: 0;
-    }
-  }
-
-  &__categorized {
-    display: flex;
-    flex: 1;
-    height: 100%;
-  }
-
   &__menu {
-    background: var(--architect-panel-grey);
-    border-radius: unit(2);
+    // background: var(--architect-panel-grey);
+    // border-radius: unit(2);
     overflow: hidden;
-    padding: unit(2) 0;
-    margin-bottom: unit(4);
+    // padding: unit(2) 0;
+    // margin-bottom: unit(4);
     display: flex;
     flex-direction: column;
-    flex: 1;
+    flex: unit(30) 0 0;
 
     &-section {
-      padding: unit(2) unit(4);
+      padding: unit(2);
       margin-bottom: unit(2);
     }
 
@@ -57,30 +32,30 @@ $opaque-background: rgba(255, 255, 255, .7);
     }
   }
 
-  &__categorized-list {
-    flex: 3;
-    overflow-y: scroll;
-  }
-
-  &__interfaces {
-    margin-right: unit(4);
-  }
-
-  &__container {
+  &__main {
     flex: 1;
-    position: relative;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
-  &__results {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow-y: scroll;
-    background: $opaque-background;
+  &__search {
+    flex: 50px 0 0;
+    padding: unit(2) unit(2) 0 unit(4);
   }
+
+  &__list {
+    flex: 1;
+    overflow-y: scroll;
+  }
+
+  // &__categorized-list {
+  //   flex: 3;
+  //   overflow-y: scroll;
+  // }
+
+  // &__interfaces {
+  //   margin-right: unit(4);
+  // }
 
   &__interface {
     cursor: pointer;
@@ -108,9 +83,9 @@ $opaque-background: rgba(255, 255, 255, .7);
     }
 
     &-container {
-      width: calc(33% - #{unit(4)});
+      width: calc(50% - #{unit(4)});
       display: inline-block;
-      margin: unit(4) 0 0 unit(4);
+      margin: 0 0 unit(4) unit(4);
     }
 
     &:hover {
