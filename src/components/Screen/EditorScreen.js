@@ -77,9 +77,6 @@ class EditorScreen extends Component {
       ...rest
     } = this.props;
 
-    const { locus, timeline } = this.props;
-    console.log({ locus, timeline });
-
     return (
       <Screen
         buttons={this.buttons()}
