@@ -11,11 +11,13 @@ const mapStateToProps = (state, { entity, type, form }) => {
   const narrativeVariables = getNarrativeVariables(state, { entity, type });
   const edgesForSubject = getEdgesForSubject(state, { entity, type });
   const layoutVariable = formValueSelector(form)(state, 'layoutVariable');
+  const groupVariable = formValueSelector(form)(state, 'groupVariable');
 
   return {
     ...narrativeVariables,
-    layoutVariable,
     edgesForSubject,
+    groupVariable,
+    layoutVariable,
   };
 };
 
