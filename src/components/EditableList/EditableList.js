@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { useMemo } from 'react';
 import {
   compose,
   defaultProps,
 } from 'recompose';
-import { Flipper, Flipped } from 'react-flip-toolkit';
+import { motion, AnimateSharedLayout } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { startCase } from 'lodash';
 import { Button } from '@codaco/ui';
@@ -34,89 +34,80 @@ const withDefaultFieldName = defaultProps({
   fieldName: 'prompts',
 });
 
-class EditableList extends PureComponent {
-  render() {
-    const {
-      editField,
-      handleEditField,
-      handleCancelEditField,
-      handleCompleteEditField,
-      handleUpdate,
-      disabled,
-      sortMode,
-      handleAddNew,
-      fieldName,
-      contentId,
-      children,
-      upsert,
-      title,
-      validation,
-      itemCount,
-      setEditField,
-      initialValues,
-      editComponent: EditComponent,
-      previewComponent: PreviewComponent,
-      editProps,
-      ...rest
-    } = this.props;
+const EditableList = ({
+  editField,
+  handleEditField,
+  handleCancelEditField,
+  handleCompleteEditField,
+  handleUpdate,
+  disabled,
+  sortMode,
+  handleAddNew,
+  fieldName,
+  contentId,
+  children,
+  upsert,
+  title,
+  validation,
+  itemCount,
+  setEditField,
+  initialValues,
+  editComponent: EditComponent,
+  previewComponent: PreviewComponent,
+  editProps,
+  ...rest
+}) => {
+  const ListComponent = useMemo(() => (sortMode !== 'manual' ? UnorderedList : OrderedList), [sortMode]);
 
-    const isEditing = !!editField;
-
-    const ListComponent = sortMode !== 'manual' ? UnorderedList : OrderedList;
-
-    return (
-      <Section disabled={disabled} contentId={contentId}>
-        <Flipper
-          flipKey={isEditing}
-          portalKey="editable-list"
-        >
-          <div id={getFieldId(`${fieldName}._error`)} data-name={startCase(fieldName)} />
-          {children}
-          <div className="editable-list">
-            <div className="editable-list__items">
-              <ValidatedFieldArray
-                name={fieldName}
-                component={ListComponent}
-                item={PreviewComponent}
-                validation={validation}
-                onClickPrompt={handleEditField}
-                editField={editField}
-                form={formName}
-                // eslint-disable-next-line react/jsx-props-no-spreading
-                {...rest}
-              />
-            </div>
-            <Flipped flipId={null}>
-              <Button onClick={handleAddNew} size="small" icon="add">Create new</Button>
-            </Flipped>
+  return (
+    <Section disabled={disabled} contentId={contentId}>
+      <AnimateSharedLayout>
+        <div id={getFieldId(`${fieldName}._error`)} data-name={startCase(fieldName)} />
+        {children}
+        <div className="editable-list">
+          <div className="editable-list__items">
+            <ValidatedFieldArray
+              name={fieldName}
+              component={ListComponent}
+              item={PreviewComponent}
+              // validation={validation}
+              onClickPrompt={handleEditField}
+              editField={editField}
+              form={formName}
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              // {...rest}
+            />
           </div>
-          <InlineEditScreen
-            show={!!editField}
-            initialValues={initialValues}
-            flipId={editField}
-            title={title}
-            onSubmit={handleUpdate}
-            onSubmitFail={handleSubmitFail}
-            onCancel={handleCancelEditField}
-            form={formName}
+          <motion.div layoutId="new">
+            <Button onClick={handleAddNew} size="small" icon="add">Create new</Button>
+          </motion.div>
+        </div>
+        <InlineEditScreen
+          show={!!editField}
+          initialValues={initialValues}
+          layoutId={editField}
+          title={title}
+          onSubmit={handleUpdate}
+          onSubmitFail={handleSubmitFail}
+          onCancel={handleCancelEditField}
+          form={formName}
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...editProps}
+        >
+          <EditComponent
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...rest}
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...editProps}
-          >
-            <EditComponent
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              {...rest}
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              {...editProps}
-              form={formName}
-              initialValues={initialValues}
-              fieldId={editField}
-            />
-          </InlineEditScreen>
-        </Flipper>
-      </Section>
-    );
-  }
-}
+            form={formName}
+            initialValues={initialValues}
+            fieldId={editField}
+          />
+        </InlineEditScreen>
+      </AnimateSharedLayout>
+    </Section>
+  );
+};
 
 EditableList.propTypes = {
   form: PropTypes.string.isRequired,

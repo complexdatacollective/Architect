@@ -2,8 +2,8 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { submit } from 'redux-form';
-import { Flipped } from 'react-flip-toolkit';
-import Fade from '@codaco/ui/lib/components/Transitions/Fade';
+import { motion } from 'framer-motion';
+// import Fade from '@codaco/ui/lib/components/Transitions/Fade';
 import window from '@codaco/ui/lib/components/window';
 import { compose } from 'recompose';
 import Button from '@codaco/ui/lib/components/Button';
@@ -15,7 +15,7 @@ const InlineEditScreen = ({
   form,
   submitForm,
   title,
-  flipId,
+  layoutId,
   onSubmit,
   onCancel,
   children,
@@ -25,41 +25,39 @@ const InlineEditScreen = ({
     submitForm(form);
   }, [form, submitForm]);
 
+  if (!show) { return null; }
+
   return (
-    <Fade in={show}>
-      <div className="inline-edit-screen" onClick={(e) => e.stopPropagation()}>
-        <Flipped flipId={flipId}>
-          <div className="inline-edit-screen__container">
-            <div className="inline-edit-screen__header">
-              <h1>{title}</h1>
-            </div>
-            <div className="inline-edit-screen__content">
-              <Layout>
-                <Form
-                  form={form}
-                  onSubmit={onSubmit}
-                  // eslint-disable-next-line react/jsx-props-no-spreading
-                  {...rest}
-                >
-                  {children}
-                </Form>
-              </Layout>
-            </div>
-            <div className="inline-edit-screen__controls">
-              <Button onClick={onCancel} color="platinum">Cancel</Button>
-              <Button onClick={handleSubmit} type="submit" icon="arrow-right" iconPosition="right">Save and Close</Button>
-            </div>
-          </div>
-        </Flipped>
-      </div>
-    </Fade>
+    <div className="inline-edit-screen" onClick={(e) => e.stopPropagation()}>
+      <motion.div layoutId={layoutId} className="inline-edit-screen__container">
+        <div className="inline-edit-screen__header">
+          <h1>{title}</h1>
+        </div>
+        <div className="inline-edit-screen__content">
+          <Layout>
+            <Form
+              form={form}
+              onSubmit={onSubmit}
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...rest}
+            >
+              {children}
+            </Form>
+          </Layout>
+        </div>
+        <div className="inline-edit-screen__controls">
+          <Button onClick={onCancel} color="platinum">Cancel</Button>
+          <Button onClick={handleSubmit} type="submit" icon="arrow-right" iconPosition="right">Save and Close</Button>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 
 InlineEditScreen.propTypes = {
   show: PropTypes.bool,
   form: PropTypes.string.isRequired,
-  flipId: PropTypes.string,
+  layoutId: PropTypes.string,
   title: PropTypes.string,
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
@@ -70,7 +68,7 @@ InlineEditScreen.propTypes = {
 InlineEditScreen.defaultProps = {
   title: null,
   show: false,
-  flipId: null,
+  layoutId: null,
   children: null,
 };
 

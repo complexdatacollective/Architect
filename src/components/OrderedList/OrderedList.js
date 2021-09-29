@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import {
   compose,
@@ -23,28 +23,32 @@ const OrderedList = ({
   disabled: sortable,
   form,
   ...rest
-}) => (
-  <div className="list">
-    { (dirty || submitFailed) && error && <p className="list__error">{error}</p> }
-    { fields.map((fieldId, index) => (
-      <SortableItem
-        index={index}
-        key={fieldId}
-      >
-        <Item
-          fieldId={fieldId}
-          index={index}
-          fields={fields}
-          onDelete={() => { fields.remove(index); }}
-          sortable={sortable}
-          form={form}
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          {...rest}
-        />
-      </SortableItem>
-    )) }
-  </div>
-);
+}) => {
+
+  const onDelete = useCallback((index) => {
+    fields.remove(index);
+  }, []);
+
+  return (
+    <div className="list">
+      { (dirty || submitFailed) && error && <p className="list__error">{error}</p> }
+      { fields.map((fieldId, index) => (
+        <div className="items__item" key={fieldId}>
+          <Item
+            fieldId={fieldId}
+            // index={index}
+            // fields={fields}
+            // onDelete={onDelete}
+            // sortable={sortable}
+            form={form}
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            // {...rest}
+          />
+        </div>
+      )) }
+    </div>
+  );
+};
 
 OrderedList.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
@@ -68,5 +72,5 @@ export default compose(
   withHandlers({
     onSortEnd: (props) => ({ oldIndex, newIndex }) => props.fields.move(oldIndex, newIndex),
   }),
-  SortableContainer,
+  // SortableContainer,
 )(OrderedList);
