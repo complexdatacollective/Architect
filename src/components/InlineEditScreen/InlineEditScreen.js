@@ -25,34 +25,32 @@ const InlineEditScreen = ({
     submitForm(form);
   }, [form, submitForm]);
 
+  if (!show) { return null; }
+
   return (
-    <Fade in={show}>
-      <div className="inline-edit-screen" onClick={(e) => e.stopPropagation()}>
-        <Flipped flipId={flipId}>
-          <div className="inline-edit-screen__container">
-            <div className="inline-edit-screen__header">
-              <h1>{title}</h1>
-            </div>
-            <div className="inline-edit-screen__content">
-              <Layout>
-                <Form
-                  form={form}
-                  onSubmit={onSubmit}
-                  // eslint-disable-next-line react/jsx-props-no-spreading
-                  {...rest}
-                >
-                  {children}
-                </Form>
-              </Layout>
-            </div>
-            <div className="inline-edit-screen__controls">
-              <Button onClick={onCancel} color="platinum">Cancel</Button>
-              <Button onClick={handleSubmit} type="submit" icon="arrow-right" iconPosition="right">Save and Close</Button>
-            </div>
-          </div>
-        </Flipped>
+    <div className="inline-edit-screen" onClick={(e) => e.stopPropagation()}>
+      <div className="inline-edit-screen__container">
+        <div className="inline-edit-screen__header">
+          <h1>{title}</h1>
+        </div>
+        <div className="inline-edit-screen__content">
+          <Layout>
+            <Form
+              form={form}
+              onSubmit={onSubmit}
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...rest}
+            >
+              {children}
+            </Form>
+          </Layout>
+        </div>
+        <div className="inline-edit-screen__controls">
+          <Button onClick={onCancel} color="platinum">Cancel</Button>
+          <Button onClick={handleSubmit} type="submit" icon="arrow-right" iconPosition="right">Save and Close</Button>
+        </div>
       </div>
-    </Fade>
+    </div>
   );
 };
 

@@ -34,12 +34,12 @@ const OrderedList = ({
         <Item
           fieldId={fieldId}
           index={index}
-          fields={fields}
-          onDelete={() => { fields.remove(index); }}
+          // fields={fields}
+          // onDelete={() => { fields.remove(index); }}
           sortable={sortable}
           form={form}
           // eslint-disable-next-line react/jsx-props-no-spreading
-          {...rest}
+          // {...rest}
         />
       </SortableItem>
     )) }
