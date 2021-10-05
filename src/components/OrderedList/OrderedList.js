@@ -22,7 +22,7 @@ const OrderedList = ({
   item: Item,
   disabled: sortable,
   form,
-  ...rest
+  // ...rest
 }) => (
   <div className="list">
     { (dirty || submitFailed) && error && <p className="list__error">{error}</p> }

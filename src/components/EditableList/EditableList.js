@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { compose, defaultProps } from 'recompose';
-import { Flipper, Flipped } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import { startCase } from 'lodash';
 import { Button } from '@codaco/ui';
@@ -54,14 +53,10 @@ const EditableList = ({
   editProps,
   ...rest
 }) => {
-  const isEditing = !!editField;
-
   const ListComponent = useMemo(
     () => (sortMode !== 'manual' ? UnorderedList : OrderedList),
     [sortMode],
   );
-
-  return null;
 
   return (
     <Section disabled={disabled} contentId={contentId}>
