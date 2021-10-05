@@ -2,8 +2,6 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { submit } from 'redux-form';
-import { Flipped } from 'react-flip-toolkit';
-import Fade from '@codaco/ui/lib/components/Transitions/Fade';
 import window from '@codaco/ui/lib/components/window';
 import { compose } from 'recompose';
 import Button from '@codaco/ui/lib/components/Button';

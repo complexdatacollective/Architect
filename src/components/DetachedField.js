@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
 import { compose, defaultProps } from 'recompose';
-import withValidation from './Form/withValidation';
+import { getValidations } from '@app/utils/validations';
 
 const getValue = (eventOrValue) => {
   if (!eventOrValue || !eventOrValue.target) {
@@ -52,7 +52,9 @@ class DetachedField extends Component {
   }
 
   validate(value) {
-    const { validate } = this.props;
+    const { validation } = this.props;
+
+    const validate = getValidations(validation);
 
     const errors = validate.reduce(
       (memo, rule) => {
@@ -80,7 +82,7 @@ class DetachedField extends Component {
     const {
       component: FieldComponent,
       onChange,
-      validate,
+      validation,
       value,
       name,
       meta,
@@ -114,7 +116,7 @@ DetachedField.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   name: PropTypes.any,
   // eslint-disable-next-line react/forbid-prop-types
-  validate: PropTypes.array.isRequired,
+  validation: PropTypes.object.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   component: PropTypes.any.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
@@ -129,5 +131,4 @@ DetachedField.defaultProps = {
 
 export default compose(
   defaultProps({ validation: {} }),
-  withValidation,
 )(DetachedField);

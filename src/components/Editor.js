@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { connect } from 'react-redux';
-import { reduxForm, Form, getFormSyncErrors } from 'redux-form';
+import React, { useState, useCallback } from 'react';
+import { reduxForm, Form } from 'redux-form';
 import PropTypes from 'prop-types';
 import { compose, withStateHandlers } from 'recompose';
 import CodeView from './CodeView';
@@ -63,14 +62,6 @@ const Editor = ({
   const [showCodeView, setCodeView] = useState(false);
   const toggleCodeView = useCallback(() => setCodeView((value) => !value));
 
-  const hasOutstandingIssues = Object.keys(issues).length !== 0;
-
-  useEffect(() => {
-    if (!hasOutstandingIssues) {
-      hideIssues();
-    }
-  }, [hasOutstandingIssues]);
-
   return (
     <>
       <CodeView toggleCodeView={toggleCodeView} form={form} show={showCodeView} />
@@ -90,8 +81,9 @@ const Editor = ({
         )}
       </Form>
       <Issues
-        issues={issues}
+        form={form}
         show={isIssuesVisible}
+        hideIssues={hideIssues}
       />
     </>
   );
@@ -116,14 +108,6 @@ Editor.defaultProps = {
   title: '',
 };
 
-const mapStateToProps = (state, props) => {
-  const issues = getFormSyncErrors(props.form)(state);
-
-  return {
-    issues,
-  };
-};
-
 export default compose(
   withStateHandlers(
     { isIssuesVisible: false },
@@ -137,5 +121,4 @@ export default compose(
     touchOnChange: true,
     enableReinitialize: true,
   }),
-  connect(mapStateToProps),
 )(Editor);
