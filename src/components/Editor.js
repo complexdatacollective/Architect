@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm, Form, getFormSyncErrors } from 'redux-form';
 import PropTypes from 'prop-types';
 import { compose, withStateHandlers } from 'recompose';
-import { FormCodeView } from './CodeView';
+import CodeView from './CodeView';
 import Issues from './Issues';
 
 /**
@@ -11,7 +11,7 @@ import Issues from './Issues';
  *
  * It includes:
  * - `<Issues />` component, which provides interactive form errors
- * - `<FormCodeView />` component, which reveals the form's working copy of the configuration
+ * - `<CodeView />` component, which reveals the form's working copy of the configuration
  * - A redux-form `<Form />` component, which allows us to dispatch submit from outside
  *   the editor (necessary for our button footers).
  *
@@ -73,7 +73,7 @@ const Editor = ({
 
   return (
     <>
-      <FormCodeView toggleCodeView={toggleCodeView} form={form} show={showCodeView} />
+      <CodeView toggleCodeView={toggleCodeView} form={form} show={showCodeView} />
       <Form onSubmit={handleSubmit}>
         { typeof children === 'function'
           && children({

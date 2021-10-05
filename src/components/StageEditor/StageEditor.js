@@ -4,7 +4,7 @@ import { ipcRenderer } from 'electron';
 import { compose, defaultProps } from 'recompose';
 import Editor from '@components/Editor';
 import { Layout } from '@components/EditorLayout';
-import FormCodeView from '@components/CodeView/FormCodeView';
+import CodeView from '@components/CodeView';
 import { getInterface } from './Interfaces';
 import withStageEditorHandlers from './withStageEditorHandlers';
 import withStageEditorMeta from './withStageEditorMeta';
@@ -68,7 +68,7 @@ const StageEditor = (props) => {
       {
         ({ submitFailed, windowRoot }) => (
           <Layout>
-            <FormCodeView
+            <CodeView
               form={formName}
               show={showCodeView}
               toggleCodeView={toggleShowCodeView}
