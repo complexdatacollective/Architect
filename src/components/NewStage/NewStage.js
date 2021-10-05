@@ -23,7 +23,7 @@ const NewStage = ({
         grouped by type. For further details about each of these interfaces, please visit
         our
         {' '}
-        <ExternalLink href="https://documentation.networkcanvas.com/reference/interface-documentation/">documentation</ExternalLink>
+        <ExternalLink href="https://documentation.networkcanvas.com/key-concepts/interfaces/">documentation</ExternalLink>
         .
       </p>
     </Section>
