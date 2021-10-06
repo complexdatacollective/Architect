@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { compose, defaultProps } from 'recompose';
 import PropTypes from 'prop-types';
 import { startCase } from 'lodash';
+import { AnimateSharedLayout } from 'framer-motion';
 import { Button } from '@codaco/ui';
 import { Section } from '@components/EditorLayout';
 import InlineEditScreen from '@components/InlineEditScreen';
@@ -60,45 +61,48 @@ const EditableList = ({
 
   return (
     <Section disabled={disabled} contentId={contentId}>
-      <div id={getFieldId(`${fieldName}._error`)} data-name={startCase(fieldName)} />
-      {children}
-      <div className="editable-list">
-        <div className="editable-list__items">
-          <ValidatedFieldArray
-            name={fieldName}
-            component={ListComponent}
-            item={PreviewComponent}
-            // validation={validation}
-            onClickPrompt={handleEditField}
-            editField={editField}
-            form={formName}
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...rest}
-          />
+      <AnimateSharedLayout>
+        <div id={getFieldId(`${fieldName}._error`)} data-name={startCase(fieldName)} />
+        {children}
+        <div className="editable-list">
+          <div className="editable-list__items">
+            <ValidatedFieldArray
+              name={fieldName}
+              component={ListComponent}
+              item={PreviewComponent}
+              validation={validation}
+              onClickItem={handleEditField}
+              editField={editField}
+              form={formName}
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              // {...rest}
+            />
+          </div>
+          <Button onClick={handleAddNew} size="small" icon="add">Create new</Button>
         </div>
-        <Button onClick={handleAddNew} size="small" icon="add">Create new</Button>
-      </div>
-      <InlineEditScreen
-        show={!!editField}
-        initialValues={initialValues}
-        title={title}
-        onSubmit={handleUpdate}
-        onSubmitFail={handleSubmitFail}
-        onCancel={handleCancelEditField}
-        form={formName}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...editProps}
-      >
-        <EditComponent
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          {...rest}
+        <InlineEditScreen
+          show={!!editField}
+          initialValues={initialValues}
+          title={title}
+          onSubmit={handleUpdate}
+          onSubmitFail={handleSubmitFail}
+          onCancel={handleCancelEditField}
+          layoutId={editField}
+          form={formName}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...editProps}
-          form={formName}
-          initialValues={initialValues}
-          fieldId={editField}
-        />
-      </InlineEditScreen>
+        >
+          <EditComponent
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...rest}
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...editProps}
+            form={formName}
+            initialValues={initialValues}
+            fieldId={editField}
+          />
+        </InlineEditScreen>
+      </AnimateSharedLayout>
     </Section>
   );
 };

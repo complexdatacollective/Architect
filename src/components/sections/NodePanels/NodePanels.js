@@ -7,8 +7,8 @@ import uuid from 'uuid';
 import { has } from 'lodash';
 import { Button } from '@codaco/ui';
 import { Section } from '@components/EditorLayout';
-import OrderedList from '../../OrderedList';
-import { getFieldId } from '../../../utils/issues';
+import OrderedList from '@components/OrderedList';
+import { getFieldId } from '@app/utils/issues';
 import NodePanel from './NodePanel';
 
 const NodePanels = ({

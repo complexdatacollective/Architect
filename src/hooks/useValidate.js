@@ -3,7 +3,8 @@ import { getValidations } from '@app/utils/validations';
 
 const useValidate = (validation) => {
   const validate = useMemo(() => getValidations(validation), []);
-  return [validate];
+
+  return validate;
 };
 
 export default useValidate;

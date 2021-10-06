@@ -6,43 +6,44 @@ import {
   defaultProps,
   renameProp,
 } from 'recompose';
-import { SortableContainer, SortableElement } from 'react-sortable-hoc';
-
-const SortableItem = SortableElement(
-  ({ children }) => (
-    <div className="items__item">
-      { children }
-    </div>
-  ),
-);
+import { isPlainObject } from 'lodash';
+import { SortableContainer } from 'react-sortable-hoc';
+import ListItem from './ListItem';
 
 const OrderedList = ({
   fields,
   meta: { error, dirty, submitFailed },
   item: Item,
   disabled: sortable,
+  onClickItem,
   form,
-  // ...rest
 }) => (
   <div className="list">
     { (dirty || submitFailed) && error && <p className="list__error">{error}</p> }
-    { fields.map((fieldId, index) => (
-      <SortableItem
-        index={index}
-        key={fieldId}
-      >
-        <Item
-          fieldId={fieldId}
+    { fields.map((fieldId, index) => {
+      const value = fields.get(index);
+      const previewValue = isPlainObject(value) ? value : { value };
+      const onClick = onClickItem && (
+        () => onClickItem(fieldId)
+      );
+
+      return (
+        <ListItem
           index={index}
-          // fields={fields}
-          // onDelete={() => { fields.remove(index); }}
           sortable={sortable}
-          form={form}
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          // {...rest}
-        />
-      </SortableItem>
-    )) }
+          key={fieldId}
+          layoutId={onClickItem && fieldId}
+          onClick={onClick}
+          onDelete={() => fields.remove(index)}
+        >
+          <Item
+            {...previewValue} // eslint-disable-line react/jsx-props-no-spreading
+            fieldId={fieldId}
+            form={form}
+          />
+        </ListItem>
+      );
+    }) }
   </div>
 );
 
@@ -53,7 +54,12 @@ OrderedList.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object.isRequired,
   item: PropTypes.func.isRequired,
+  onClickItem: PropTypes.func,
   disabled: PropTypes.bool.isRequired,
+};
+
+OrderedList.defaultProps = {
+  onClickItem: null,
 };
 
 export { OrderedList };
@@ -66,7 +72,7 @@ export default compose(
   }),
   renameProp('sortable', 'disabled'),
   withHandlers({
-    onSortEnd: (props) => ({ oldIndex, newIndex }) => props.fields.move(oldIndex, newIndex),
+    onSortEnd: ({ fields }) => ({ oldIndex, newIndex }) => fields.move(oldIndex, newIndex),
   }),
   SortableContainer,
 )(OrderedList);

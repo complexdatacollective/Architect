@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { submit } from 'redux-form';
+import { motion } from 'framer-motion';
 import window from '@codaco/ui/lib/components/window';
 import { compose } from 'recompose';
 import Button from '@codaco/ui/lib/components/Button';
@@ -13,7 +14,7 @@ const InlineEditScreen = ({
   form,
   submitForm,
   title,
-  flipId,
+  layoutId,
   onSubmit,
   onCancel,
   children,
@@ -27,7 +28,7 @@ const InlineEditScreen = ({
 
   return (
     <div className="inline-edit-screen" onClick={(e) => e.stopPropagation()}>
-      <div className="inline-edit-screen__container">
+      <motion.div layoutId={layoutId} className="inline-edit-screen__container">
         <div className="inline-edit-screen__header">
           <h1>{title}</h1>
         </div>
@@ -47,27 +48,27 @@ const InlineEditScreen = ({
           <Button onClick={onCancel} color="platinum">Cancel</Button>
           <Button onClick={handleSubmit} type="submit" icon="arrow-right" iconPosition="right">Save and Close</Button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
 
 InlineEditScreen.propTypes = {
-  show: PropTypes.bool,
-  form: PropTypes.string.isRequired,
-  flipId: PropTypes.string,
-  title: PropTypes.string,
-  onSubmit: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  submitForm: PropTypes.func.isRequired,
   children: PropTypes.node,
+  form: PropTypes.string.isRequired,
+  layoutId: PropTypes.string,
+  onCancel: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  show: PropTypes.bool,
+  submitForm: PropTypes.func.isRequired,
+  title: PropTypes.string,
 };
 
 InlineEditScreen.defaultProps = {
-  title: null,
-  show: false,
-  flipId: null,
   children: null,
+  layoutId: null,
+  show: false,
+  title: null,
 };
 
 const mapDispatchToProps = {

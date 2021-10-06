@@ -9,6 +9,8 @@ $component-name: list-item;
   flex-direction: row;
   align-items: stretch;
   border-radius: unit(1.5);
+  margin: unit(2) 0 0;
+  z-index: var(--z-fx);
 
   &--clickable {
     box-shadow: 0 .4rem rgba(17, 21, 27, .664); // sass-lint:disable-line no-color-literals

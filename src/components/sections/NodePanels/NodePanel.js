@@ -3,16 +3,12 @@ import PropTypes from 'prop-types';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import DataSource from '@components/Form/Fields/DataSource';
 import ValidatedField from '@components/Form/ValidatedField';
-import { Item, Row } from '@components/OrderedList';
+import { Row } from '@components/OrderedList';
 import { getFieldId } from '@app/utils/issues';
 import NetworkFilter from '@components/sections/fields/NetworkFilter';
 
-const NodePanel = ({ fieldId, form, ...rest }) => (
-  <Item
-    form={form}
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    {...rest}
-  >
+const NodePanel = ({ fieldId, form }) => (
+  <>
     <Row>
       <h3 id={getFieldId(`${fieldId}.title`)}>Panel title</h3>
       <p>The panel title will be shown above the list of nodes within the panel.</p>
@@ -48,7 +44,7 @@ const NodePanel = ({ fieldId, form, ...rest }) => (
       name={`${fieldId}.filter`}
       title="Filter nodes displayed in this panel"
     />
-  </Item>
+  </>
 );
 
 NodePanel.propTypes = {
