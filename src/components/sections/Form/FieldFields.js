@@ -85,7 +85,7 @@ const PromptFields = ({
             Choose an input control that should be used to collect the answer. For
             detailed information about these options, see our
             {' '}
-            <ExternalLink href="https://documentation.networkcanvas.com/reference/key-concepts/input-controls/">documentation</ExternalLink>
+            <ExternalLink href="https://documentation.networkcanvas.com/key-concepts/input-controls/">documentation</ExternalLink>
             .
           </p>
           <ValidatedField
