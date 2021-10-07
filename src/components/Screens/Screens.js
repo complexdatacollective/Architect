@@ -30,6 +30,8 @@ const Screens = (props) => {
 
     const zIndex = getCSSVariableAsNumber('--z-panel') + index;
 
+    console.log({ params });
+
     return (
       <ScreenComponent
         // eslint-disable-next-line react/jsx-props-no-spreading

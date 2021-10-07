@@ -14,6 +14,7 @@ const CodebookScreen = (props) => {
     show,
     transitionState,
     onComplete,
+    layoutId,
   } = props;
 
   const buttons = [
@@ -33,6 +34,7 @@ const CodebookScreen = (props) => {
       buttons={buttons}
       transitionState={transitionState}
       onAcknowledgeError={onComplete}
+      layoutId={layoutId}
     >
       <Layout>
         <Section>

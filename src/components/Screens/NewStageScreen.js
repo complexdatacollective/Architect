@@ -8,6 +8,7 @@ const NewStageScreen = ({
   show,
   transitionState,
   onComplete,
+  layoutId,
   ...rest
 }) => {
   const buttons = [
@@ -26,6 +27,7 @@ const NewStageScreen = ({
       show={show}
       transitionState={transitionState}
       buttons={buttons}
+      layoutId={layoutId}
     >
       <NewStage
         // eslint-disable-next-line react/jsx-props-no-spreading

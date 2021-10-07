@@ -10,6 +10,7 @@ const AssetBrowserScreen = ({
   show,
   transitionState,
   onComplete,
+  layoutId,
 }) => {
   const buttons = [
     <Button
@@ -28,6 +29,7 @@ const AssetBrowserScreen = ({
       buttons={buttons}
       transitionState={transitionState}
       onAcknowledgeError={onComplete}
+      layoutId={layoutId}
     >
       <Layout>
         <Section>
