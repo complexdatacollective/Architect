@@ -9,12 +9,12 @@ import skipLogicIcon from '@app/images/timeline/skip-logic-icon.svg';
 const getTimelineImage = (type) => get(timelineImages, type, timelineImages.Default);
 
 const EditStageButton = React.forwardRef(({
+  hasFilter,
+  hasSkipLogic,
+  label,
   layoutId,
   onEditStage,
   type,
-  label,
-  hasSkipLogic,
-  hasFilter,
 }, ref) => (
   <div
     className="timeline-stage__edit-stage"
@@ -65,17 +65,19 @@ const EditStageButton = React.forwardRef(({
 ));
 
 EditStageButton.propTypes = {
+  hasFilter: PropTypes.bool,
+  hasSkipLogic: PropTypes.bool,
+  label: PropTypes.string,
+  layoutId: PropTypes.string,
   onEditStage: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
-  label: PropTypes.string,
-  hasSkipLogic: PropTypes.bool,
-  hasFilter: PropTypes.bool,
 };
 
 EditStageButton.defaultProps = {
-  label: null,
-  hasSkipLogic: false,
   hasFilter: false,
+  hasSkipLogic: false,
+  label: null,
+  layoutId: null,
 };
 
 export default EditStageButton;

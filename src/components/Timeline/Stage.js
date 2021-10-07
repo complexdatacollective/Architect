@@ -61,8 +61,6 @@ const Stage = ({
     });
   };
 
-  console.log({ id });
-
   return (
     <motion.div
       className={componentClasses}

@@ -26,8 +26,6 @@ const openScreen = (screen, params = {}, root = false) => (dispatch, getState) =
   const latestLocus = state.protocol.timeline[state.protocol.timeline.length - 1];
   const locus = params.locus || latestLocus;
 
-  console.log({ params });
-
   dispatch({
     type: OPEN_SCREEN,
     payload: {

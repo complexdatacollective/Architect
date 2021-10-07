@@ -4,18 +4,18 @@ import cx from 'classnames';
 import { compose } from 'recompose';
 import { motion } from 'framer-motion';
 import windowRootProvider from '@codaco/ui/lib/components/windowRootProvider';
-import ControlBar from '../ControlBar';
-import { ScreenErrorBoundary } from '../Errors';
+import ControlBar from '@components/ControlBar';
+import { ScreenErrorBoundary } from '@components/Errors';
 
 const Screen = ({
   buttons,
-  secondaryButtons,
-  onAcknowledgeError,
   children,
-  type,
-  setWindowRoot,
-  windowRoot,
   layoutId,
+  onAcknowledgeError,
+  secondaryButtons,
+  setWindowRoot,
+  type,
+  windowRoot,
   zIndex,
 }) => {
   const classes = cx('screen', `screen--${type}`);
@@ -48,23 +48,25 @@ const Screen = ({
 };
 
 Screen.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  children: PropTypes.any,
   buttons: PropTypes.arrayOf(PropTypes.node),
-  secondaryButtons: PropTypes.arrayOf(PropTypes.node),
-  type: PropTypes.string,
+  children: PropTypes.any, // eslint-disable-line react/forbid-prop-types
+  layoutId: PropTypes.string,
   onAcknowledgeError: PropTypes.func,
-  // eslint-disable-next-line react/forbid-prop-types
-  windowRoot: PropTypes.any.isRequired,
+  secondaryButtons: PropTypes.arrayOf(PropTypes.node),
   setWindowRoot: PropTypes.func.isRequired,
+  type: PropTypes.string,
+  windowRoot: PropTypes.any.isRequired, // eslint-disable-line react/forbid-prop-types
+  zIndex: PropTypes.string,
 };
 
 Screen.defaultProps = {
-  type: 'default',
-  children: null,
   buttons: [],
-  secondaryButtons: [],
+  children: null,
+  layoutId: null,
   onAcknowledgeError: () => {},
+  secondaryButtons: [],
+  type: 'default',
+  zIndex: null,
 };
 
 export default compose(
