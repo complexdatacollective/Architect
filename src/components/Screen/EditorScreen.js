@@ -75,6 +75,8 @@ class EditorScreen extends Component {
       secondaryButtons,
       transitionState,
       editor: EditorComponent,
+      layoutId,
+      zIndex,
       ...rest
     } = this.props;
 
@@ -84,6 +86,8 @@ class EditorScreen extends Component {
         secondaryButtons={secondaryButtons}
         show={show}
         transitionState={transitionState}
+        layoutId={layoutId}
+        zIndex={zIndex}
       >
         {({ windowRoot }) => (
           <EditorComponent

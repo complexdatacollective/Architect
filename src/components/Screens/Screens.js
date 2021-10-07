@@ -28,71 +28,16 @@ const Screens = (props) => {
     const ScreenComponent = getScreenComponent(screen);
     const onComplete = (result) => props.closeScreen(screen, result);
 
-    // Default animation from center?
-    const getOrigin = () => ({
-      width: get(params, 'origin.width', 1),
-      height: get(params, 'origin.height', 1),
-      top: get(params, 'origin.top', window.innerWidth / 2),
-      left: get(params, 'origin.left', window.innerHeight / 2),
-    });
-
-    const variants = {
-      hidden: {
-        opacity: 0.5,
-      },
-      in: () => {
-        const origin = getOrigin();
-        const scaleY = origin.width / window.innerWidth;
-        const scaleX = origin.height / window.innerHeight;
-
-        return {
-          opacity: [0.5, 1],
-          translateY: [origin.top, 0],
-          translateX: [origin.left, 0],
-          scaleY: [scaleY, 1],
-          scaleX: [scaleX, 1],
-          transition: {
-            duration: getCSSVariableAsNumber('--animation-duration-fast-ms') * 0.001,
-            when: 'beforeChildren',
-          },
-        };
-      },
-    };
-
-    const style = {
-      position: 'absolute',
-      transformOrigin: 'top left',
-      zIndex: getCSSVariableAsNumber('--z-panel') + index,
-      width: '100vw',
-      height: '100vh',
-      top: 0,
-      left: 0,
-      background: 'var(--background)',
-    };
+    const zIndex = getCSSVariableAsNumber('--z-panel') + index;
 
     return (
-      <motion.div
-        key={screen}
-        style={style}
-        animate="in"
-        initial="hidden"
-        variants={variants}
-      >
-        <motion.div
-          key={`${screen}_content`}
-          variants={{
-            in: { opacity: 1 },
-            hidden: { opacity: 0 },
-            transition: { duration: 0.1 },
-          }}
-        >
-          <ScreenComponent
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...params}
-            onComplete={onComplete}
-          />
-        </motion.div>
-      </motion.div>
+      <ScreenComponent
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...params}
+        zIndex={zIndex}
+        layoutId={params.id}
+        onComplete={onComplete}
+      />
     );
   });
 
@@ -100,17 +45,17 @@ const Screens = (props) => {
 };
 
 Screens.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  screens: PropTypes.array.isRequired,
-  closeScreen: PropTypes.func.isRequired,
+// eslint-disable-next-line react/forbid-prop-types
+screens: PropTypes.array.isRequired,
+closeScreen: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  screens: getScreensStack(state),
+screens: getScreensStack(state),
 });
 
 const mapDispatchToProps = {
-  closeScreen: uiActions.closeScreen,
+closeScreen: uiActions.closeScreen,
 };
 
 export { Screens };

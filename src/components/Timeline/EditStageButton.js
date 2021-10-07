@@ -8,17 +8,8 @@ import skipLogicIcon from '@app/images/timeline/skip-logic-icon.svg';
 
 const getTimelineImage = (type) => get(timelineImages, type, timelineImages.Default);
 
-const variants = {
-  edit: () => ({
-    top: 0,
-    left: 0,
-    width: '100vw',
-    height: '100vh',
-    transition: { duration: 5 },
-  }),
-};
-
 const EditStageButton = React.forwardRef(({
+  layoutId,
   onEditStage,
   type,
   label,
@@ -31,9 +22,9 @@ const EditStageButton = React.forwardRef(({
   >
     <motion.div
       className="timeline-stage__screen"
+      layoutId={layoutId}
       role="button"
       tabIndex="0"
-      variants={variants}
       ref={ref}
     >
       <div className="timeline-stage__screen-preview">

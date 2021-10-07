@@ -61,6 +61,8 @@ const Stage = ({
     });
   };
 
+  console.log({ id });
+
   return (
     <motion.div
       className={componentClasses}
@@ -73,6 +75,7 @@ const Stage = ({
         {stageNumber}
       </div>
       <EditStageButton
+        layoutId={id}
         ref={previewRef}
         onEditStage={handleEditStage}
         type={type}

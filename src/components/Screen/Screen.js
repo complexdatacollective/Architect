@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { compose } from 'recompose';
+import { motion } from 'framer-motion';
 import windowRootProvider from '@codaco/ui/lib/components/windowRootProvider';
 import ControlBar from '../ControlBar';
 import { ScreenErrorBoundary } from '../Errors';
@@ -14,18 +15,28 @@ const Screen = ({
   type,
   setWindowRoot,
   windowRoot,
+  layoutId,
+  zIndex,
 }) => {
   const classes = cx('screen', `screen--${type}`);
+  const styles = zIndex ? { zIndex } : {};
+
   return (
-    <div className={classes}>
+    <div
+      className={classes}
+      styles={styles}
+    >
       <div className="screen__container" ref={setWindowRoot}>
-        <div className="screen__content">
+        <motion.div
+          className="screen__content"
+          layoutId={layoutId}
+        >
           <ScreenErrorBoundary onAcknowledge={onAcknowledgeError}>
             { typeof children === 'function'
               && children({ windowRoot })}
             { children && typeof children !== 'function' && children }
           </ScreenErrorBoundary>
-        </div>
+        </motion.div>
       </div>
       <ControlBar
         className="screen__controls"

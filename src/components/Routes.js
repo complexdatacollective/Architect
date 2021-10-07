@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { AnimateSharedLayout } from 'framer-motion';
 import Home from '@components/Home/Home';
 import Protocol from '@components/Protocol';
 import Loading from '@components/Loading';
@@ -22,11 +23,11 @@ const Routes = () => {
   const route = getRoute({ activeProtocol, screens });
 
   return (
-    <>
+    <AnimateSharedLayout>
       <Screens />
       {route}
       <Loading />
-    </>
+    </AnimateSharedLayout>
   );
 };
 
