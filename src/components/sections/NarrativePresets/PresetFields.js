@@ -52,7 +52,7 @@ const PresetFields = ({
     </Section>
     <Section>
       <Row>
-        <ValidatedField
+        <Field
           name="groupVariable"
           component={VariableSelect}
           allowPlaceholderSelect

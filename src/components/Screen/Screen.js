@@ -56,7 +56,7 @@ Screen.propTypes = {
   setWindowRoot: PropTypes.func.isRequired,
   type: PropTypes.string,
   windowRoot: PropTypes.any.isRequired, // eslint-disable-line react/forbid-prop-types
-  zIndex: PropTypes.string,
+  zIndex: PropTypes.number,
 };
 
 Screen.defaultProps = {

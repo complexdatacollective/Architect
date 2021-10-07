@@ -53,7 +53,6 @@ const Editor = ({
   isIssuesVisible,
   form,
   children,
-  issues,
   title,
   submitFailed,
   component: Component,
@@ -93,8 +92,6 @@ Editor.propTypes = {
   hideIssues: PropTypes.func.isRequired,
   isIssuesVisible: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  issues: PropTypes.object.isRequired,
   submitFailed: PropTypes.bool.isRequired,
   form: PropTypes.string.isRequired,
   title: PropTypes.string,

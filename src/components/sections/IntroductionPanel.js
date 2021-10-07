@@ -22,7 +22,7 @@ const Name = () => (
         label="Title"
         component={TextField}
         maxLength="50"
-        // validation={{ required: true }}
+        validation={{ required: true }}
       />
     </Row>
     <Row>
@@ -34,7 +34,7 @@ const Name = () => (
         name="introductionPanel.text"
         label="Introduction text"
         component={RichText}
-        // validation={{ required: true }}
+        validation={{ required: true }}
       />
     </Row>
   </Section>

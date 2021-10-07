@@ -53,7 +53,10 @@ OrderedList.propTypes = {
   form: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object.isRequired,
-  item: PropTypes.func.isRequired,
+  item: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+  ]).isRequired,
   onClickItem: PropTypes.func,
   disabled: PropTypes.bool.isRequired,
 };

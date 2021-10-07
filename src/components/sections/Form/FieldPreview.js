@@ -39,7 +39,12 @@ FieldPreview.propTypes = {
   variable: PropTypes.string.isRequired,
   prompt: PropTypes.string.isRequired,
   entity: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
+};
+
+FieldPreview.defaultProps = {
+  // type can be null because entity can be 'ego' which has no types
+  type: null,
 };
 
 export default withSubject(FieldPreview);

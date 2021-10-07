@@ -36,6 +36,7 @@ const Screens = (props) => {
         {...params}
         zIndex={zIndex}
         layoutId={params.id}
+        key={params.id || index}
         onComplete={onComplete}
       />
     );

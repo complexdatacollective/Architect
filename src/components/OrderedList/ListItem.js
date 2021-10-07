@@ -49,7 +49,7 @@ const ListItem = ({
       <div className="list-item__control list-item__control--right" key="controls">
         <div
           className="list-delete-button"
-          onDelete={onDelete}
+          onClick={onDelete}
         >
           <Icon name="delete" />
         </div>

@@ -114,7 +114,7 @@ EditorScreen.propTypes = {
   submitForm: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
   transitionState: PropTypes.string,
-  zIndex: PropTypes.string,
+  zIndex: PropTypes.number,
 };
 
 EditorScreen.defaultProps = {
