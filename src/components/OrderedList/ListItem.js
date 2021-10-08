@@ -30,31 +30,40 @@ const ListItem = ({
     whileTap: onClick && interactionVariants.whileTap,
   }), [onClick]);
 
+  const componentClasses = cx(
+    'list-item',
+    { 'list-item--clickable': onClick },
+    className,
+  );
+
   return (
-    <motion.div
-      whileHover={whileHover}
-      whileTap={whileTap}
-      className={cx('list-item', { 'list-item--clickable': onClick }, className)}
-      layoutId={layoutId}
-    >
-      { sortable
-        && (
-        <div className="list-item__control list-item__control--left" key="handle">
-          <Handle />
+    <div className={componentClasses}>
+      <motion.div
+        whileHover={whileHover}
+        whileTap={whileTap}
+        layoutId={layoutId}
+        className="list-item__container"
+        key="container"
+      >
+        { sortable
+          && (
+          <div className="list-item__control list-item__control--left" key="handle">
+            <Handle />
+          </div>
+          )}
+        <div className="list-item__content" onClick={onClick} key="content">
+          {children}
         </div>
-        )}
-      <div className="list-item__content" onClick={onClick} key="content">
-        {children}
-      </div>
-      <div className="list-item__control list-item__control--right" key="controls">
-        <div
-          className="list-delete-button"
-          onClick={onDelete}
-        >
-          <Icon name="delete" />
+        <div className="list-item__control list-item__control--right" key="controls">
+          <div
+            className="list-delete-button"
+            onClick={onDelete}
+          >
+            <Icon name="delete" />
+          </div>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 };
 

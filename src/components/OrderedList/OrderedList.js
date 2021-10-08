@@ -40,6 +40,7 @@ const OrderedList = ({
             {...previewValue} // eslint-disable-line react/jsx-props-no-spreading
             fieldId={fieldId}
             form={form}
+            key={fieldId}
           />
         </ListItem>
       );
