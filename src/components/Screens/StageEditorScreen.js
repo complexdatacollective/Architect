@@ -54,6 +54,11 @@ const stageEditorProps = withProps(({
     >
       Preview
     </Button>,
+    <Button
+      key="codebook-btn"
+    >
+      View Codebook
+    </Button>,
     ...invalidStageMessage(invalid),
   ],
 }));

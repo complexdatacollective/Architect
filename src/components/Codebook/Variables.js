@@ -35,6 +35,27 @@ const rowClassName = (index) => {
   );
 };
 
+const EditableVariable = (props) => {
+  const {
+    content,
+    onChange,
+  } = props;
+
+  return (
+    <div
+      className="editable-variable"
+      contentEditable
+      style={{
+        border: '3px dashed var(--primary)',
+        borderRadius: '0.5rem',
+        padding: '0.5rem',
+      }}
+    >
+      {content}
+    </div>
+  );
+};
+
 const Heading = ({
   children, name, sortBy, sortDirection, onSort,
 }) => {
@@ -130,7 +151,7 @@ const Variables = ({
           }, index) => (
             <tr className={rowClassName(index)} key={id}>
               <td className="codebook__variables-column">
-                {name}
+                <EditableVariable content={name} />
               </td>
               <td className="codebook__variables-column">{type}</td>
               <td className="codebook__variables-column">{component}</td>

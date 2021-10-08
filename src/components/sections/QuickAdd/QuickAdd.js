@@ -10,6 +10,7 @@ import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequ
 import withQuickAddVariable from './withQuickAddVariable';
 import withSubject from '../../enhancers/withSubject';
 import Tip from '../../Tip';
+import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
 
 /* select from text, or creat text, default to display */
 
@@ -37,6 +38,17 @@ const QuickAdd = ({
     </Tip>
 
     <div className="stage-editor-section-form">
+      <ValidatedField
+        name="quickAdd"
+        component={VariablePicker}
+        options={options}
+        onCreateOption={(value) => handleCreateVariable(value, 'text', 'quickAdd')}
+        validation={{ required: true }}
+        type={type}
+        entity={entity}
+        variable={quickAdd}
+      />
+
       <ValidatedField
         name="quickAdd"
         component={VariableSelect}
