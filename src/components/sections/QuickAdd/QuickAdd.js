@@ -46,17 +46,7 @@ const QuickAdd = ({
         validation={{ required: true }}
         type={type}
         entity={entity}
-        variable={quickAdd}
-      />
-
-      <ValidatedField
-        name="quickAdd"
-        component={VariableSelect}
-        options={options}
-        onCreateOption={(value) => handleCreateVariable(value, 'text', 'quickAdd')}
-        validation={{ required: true }}
-        type={type}
-        entity={entity}
+        label="Quick Add Variable"
         variable={quickAdd}
       />
     </div>

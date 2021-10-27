@@ -78,6 +78,7 @@ const Issues = ({
             </span>
             {' '}
             -
+            {' '}
             {issue}
           </a>
         </li>

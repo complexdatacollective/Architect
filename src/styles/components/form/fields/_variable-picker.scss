@@ -16,6 +16,11 @@ $component-name: form-fields-variable-picker;
       padding: 0 unit(2);
     }
   }
+
+  &__error {
+    color: var(--error);
+    margin-bottom: 0;
+  }
 }
 
 .variable-pill {
@@ -27,11 +32,17 @@ $component-name: form-fields-variable-picker;
     opacity: .5;
   }
 
+  &__editor {
+    background: var(--transparent-dark);
+    padding: unit(1);
+    border-radius: var(--border-radius);
+  }
+
   &__icon {
+    background-color: var(--color-sea-serpent);
     flex: 0 0 unit(4);
     border-top-left-radius: unit(4);
     border-bottom-left-radius: unit(4);
-    margin-right: 2px;
 
     .icon {
       width: unit(2.5);
@@ -41,28 +52,27 @@ $component-name: form-fields-variable-picker;
 
   &__icon,
   &__container {
-    background-color: var(--color-sea-serpent);
-    padding: unit(.75) unit(1);
+    padding: unit(1.5) unit(2);
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--color-sea-serpent--dark);
   }
 
   &__container {
+    background-color: var(--color-platinum--dark);
     border-top-right-radius: unit(4);
     border-bottom-right-radius: unit(4);
 
     h6 {
       @extend .small-heading;
       margin: 0;
-      color: white;
+      color: var(--text-dark);
     }
   }
 }
 
 .variable-spotlight {
-  width: 60rem;
+  width: 40rem;
   display: flex;
   flex-direction: column;
   background: var(--modal-background);
@@ -71,12 +81,20 @@ $component-name: form-fields-variable-picker;
 
   &__header {
     flex: 0 0 unit(5);
-    background: var(--transparent-dark);
   }
 
   &__list {
     display: flex;
     flex: 1 auto;
     max-height: 60vh;
+    min-height: unit(5);
+
+    .variable-pill {
+      margin-bottom: unit(1);
+
+      &__container {
+        flex: 1 auto;
+      }
+    }
   }
 }
