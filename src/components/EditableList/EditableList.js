@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import { startCase } from 'lodash';
 import { AnimateSharedLayout } from 'framer-motion';
 import { Button } from '@codaco/ui';
+import { getFieldId, scrollToFirstIssue } from '@app/utils/issues';
 import { Section } from '@components/EditorLayout';
 import InlineEditScreen from '@components/InlineEditScreen';
-import { getFieldId, scrollToFirstIssue } from '../../utils/issues';
-import OrderedList from '../OrderedList';
-import UnorderedList from '../UnorderedList';
-import ValidatedFieldArray from '../Form/ValidatedFieldArray';
+import OrderedList from '@components/OrderedList';
+import UnorderedList from '@components/UnorderedList';
+// import ValidatedFieldArray from '@components/Form/ValidatedFieldArray';
+import ValidatedField from '@components/Form/ValidatedField';
 import withEditHandlers from './withEditHandlers';
 
 const formName = 'editable-list-form';
@@ -66,7 +67,7 @@ const EditableList = ({
         {children}
         <div className="editable-list">
           <div className="editable-list__items">
-            <ValidatedFieldArray
+            <ValidatedField
               name={fieldName}
               component={ListComponent}
               item={PreviewComponent}
@@ -80,6 +81,7 @@ const EditableList = ({
           </div>
           <Button onClick={handleAddNew} size="small" icon="add">Create new</Button>
         </div>
+
         <InlineEditScreen
           show={!!editField}
           initialValues={initialValues}
