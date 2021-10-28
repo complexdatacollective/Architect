@@ -5,7 +5,7 @@ import {
   defaultProps,
   renameProp,
 } from 'recompose';
-import { isPlainObject, isEqual } from 'lodash';
+import { isPlainObject, isEqual, isArray } from 'lodash';
 import { connect } from 'react-redux';
 import { arrayMove, arrayRemove } from 'redux-form';
 import { SortableContainer } from 'react-sortable-hoc';
@@ -32,10 +32,10 @@ class OrderedList extends Component {
 
     return (
       <div className="list">
-        { (dirty || submitFailed) && error && <p className="list__error">{error}</p> }
+        { (dirty || submitFailed) && error && !isArray(error) && <p className="list__error">{error}</p> }
         { values.map((value, index) => {
-          const fieldId = `${name}[${index}]`;
           const previewValue = isPlainObject(value) ? value : { value };
+          const fieldId = `${name}[${index}]`;
           const onClick = onClickItem && (
             () => onClickItem(fieldId)
           );

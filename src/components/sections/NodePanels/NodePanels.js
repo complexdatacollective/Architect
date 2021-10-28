@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { formValueSelector, FieldArray, arrayPush } from 'redux-form';
+import { formValueSelector, arrayPush, Field } from 'redux-form';
 import uuid from 'uuid';
 import { has } from 'lodash';
 import { Button } from '@codaco/ui';
@@ -24,7 +24,7 @@ const NodePanels = ({
       <div className="stage-editor-section-content-items">
         <h2 id={getFieldId('panels')}>Side Panels</h2>
         <p>Use this section to configure up to two side panels on this name generator.</p>
-        <FieldArray
+        <Field
           name="panels"
           component={OrderedList}
           item={NodePanel}
