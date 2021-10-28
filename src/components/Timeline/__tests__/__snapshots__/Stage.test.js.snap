@@ -30,6 +30,7 @@ exports[`<Stage /> can render 1`] = `
     hasFilter={false}
     hasSkipLogic={false}
     label=""
+    layoutId="809895df-bbd7-4c76-ac58-e6ada2625f9b"
     onEditStage={[Function]}
     type="Foo"
   />
