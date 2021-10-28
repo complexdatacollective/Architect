@@ -33,7 +33,7 @@ class OrderedList extends Component {
     return (
       <div className="list">
         { (dirty || submitFailed) && error && !isArray(error) && <p className="list__error">{error}</p> }
-        { values.map((value, index) => {
+        { values && values.map((value, index) => {
           const previewValue = isPlainObject(value) ? value : { value };
           const fieldId = `${name}[${index}]`;
           const onClick = onClickItem && (
