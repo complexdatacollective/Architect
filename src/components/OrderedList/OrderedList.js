@@ -2,17 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   compose,
-  withHandlers,
   defaultProps,
   renameProp,
 } from 'recompose';
 import { isPlainObject, isEqual } from 'lodash';
+import { connect } from 'react-redux';
+import { arrayMove, arrayRemove } from 'redux-form';
 import { SortableContainer } from 'react-sortable-hoc';
+import { actionCreators as dialogActions } from '@modules/dialogs';
 import ListItem from './ListItem';
 
 class OrderedList extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    return !isEqual(nextProps.input.value, this.props.input.value);
+  shouldComponentUpdate(nextProps) {
+    const { input: { value: oldValue } } = this.props;
+    const { input: { value: newValue } } = nextProps;
+    return !isEqual(newValue, oldValue);
   }
 
   render() {
@@ -22,6 +26,7 @@ class OrderedList extends Component {
       item: Item,
       disabled: sortable,
       onClickItem,
+      removeItem,
       meta: { form },
     } = this.props;
 
@@ -34,7 +39,8 @@ class OrderedList extends Component {
           const onClick = onClickItem && (
             () => onClickItem(fieldId)
           );
-          const onDelete = () => {}; // () => fields.remove(index);
+
+          const onDelete = () => removeItem(index);
 
           return (
             <ListItem
@@ -60,9 +66,11 @@ class OrderedList extends Component {
 }
 
 OrderedList.propTypes = {
+  // // eslint-disable-next-line react/forbid-prop-types
+  // fields: PropTypes.object.isRequired,
+  // form: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  fields: PropTypes.object.isRequired,
-  form: PropTypes.string.isRequired,
+  input: PropTypes.object.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object.isRequired,
   item: PropTypes.oneOfType([
@@ -70,12 +78,32 @@ OrderedList.propTypes = {
     PropTypes.object,
   ]).isRequired,
   onClickItem: PropTypes.func,
+  removeItem: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
 };
 
 OrderedList.defaultProps = {
   onClickItem: null,
 };
+
+const mapDispatchToProps = (dispatch, { input: { name }, meta: { form } }) => ({
+  removeItem: (index) => {
+    dispatch(
+      dialogActions.openDialog({
+        type: 'Confirm',
+        title: 'Remove this item?',
+        confirmLabel: 'Remove item',
+      }),
+    )
+      .then((confirm) => {
+        if (!confirm) { return; }
+        dispatch(arrayRemove(form, name, index));
+      });
+  },
+  onSortEnd: ({ oldIndex, newIndex }) => {
+    dispatch(arrayMove(form, name, oldIndex, newIndex));
+  },
+});
 
 export { OrderedList };
 
@@ -86,8 +114,6 @@ export default compose(
     sortable: true,
   }),
   renameProp('sortable', 'disabled'),
-  withHandlers({
-    onSortEnd: ({ fields }) => ({ oldIndex, newIndex }) => fields.move(oldIndex, newIndex),
-  }),
+  connect(null, mapDispatchToProps),
   SortableContainer,
 )(OrderedList);
