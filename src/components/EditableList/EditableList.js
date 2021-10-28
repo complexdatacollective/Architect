@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { compose, defaultProps } from 'recompose';
 import PropTypes from 'prop-types';
 import { startCase } from 'lodash';
@@ -8,15 +8,12 @@ import { getFieldId, scrollToFirstIssue } from '@app/utils/issues';
 import { Section } from '@components/EditorLayout';
 import InlineEditScreen from '@components/InlineEditScreen';
 import OrderedList from '@components/OrderedList';
-import UnorderedList from '@components/UnorderedList';
-// import ValidatedFieldArray from '@components/Form/ValidatedFieldArray';
 import ValidatedField from '@components/Form/ValidatedField';
 import withEditHandlers from './withEditHandlers';
 
 const formName = 'editable-list-form';
 
 const sortModes = [
-  'auto',
   'manual',
 ];
 
@@ -54,60 +51,53 @@ const EditableList = ({
   previewComponent: PreviewComponent,
   editProps,
   ...rest
-}) => {
-  const ListComponent = useMemo(
-    () => (sortMode !== 'manual' ? UnorderedList : OrderedList),
-    [sortMode],
-  );
-
-  return (
-    <Section disabled={disabled} contentId={contentId}>
-      <AnimateSharedLayout>
-        <div id={getFieldId(`${fieldName}._error`)} data-name={startCase(fieldName)} />
-        {children}
-        <div className="editable-list">
-          <div className="editable-list__items">
-            <ValidatedField
-              name={fieldName}
-              component={ListComponent}
-              item={PreviewComponent}
-              validation={validation}
-              onClickItem={handleEditField}
-              editField={editField}
-              form={formName}
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              // {...rest}
-            />
-          </div>
-          <Button onClick={handleAddNew} size="small" icon="add">Create new</Button>
+}) => (
+  <Section disabled={disabled} contentId={contentId}>
+    <AnimateSharedLayout>
+      <div id={getFieldId(`${fieldName}._error`)} data-name={startCase(fieldName)} />
+      {children}
+      <div className="editable-list">
+        <div className="editable-list__items">
+          <ValidatedField
+            name={fieldName}
+            component={OrderedList}
+            item={PreviewComponent}
+            validation={validation}
+            onClickItem={handleEditField}
+            editField={editField}
+            form={formName}
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            // {...rest}
+          />
         </div>
+        <Button onClick={handleAddNew} size="small" icon="add">Create new</Button>
+      </div>
 
-        <InlineEditScreen
-          show={!!editField}
-          initialValues={initialValues}
-          title={title}
-          onSubmit={handleUpdate}
-          onSubmitFail={handleSubmitFail}
-          onCancel={handleCancelEditField}
-          layoutId={editField}
-          form={formName}
+      <InlineEditScreen
+        show={!!editField}
+        initialValues={initialValues}
+        title={title}
+        onSubmit={handleUpdate}
+        onSubmitFail={handleSubmitFail}
+        onCancel={handleCancelEditField}
+        layoutId={editField}
+        form={formName}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...editProps}
+      >
+        <EditComponent
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...rest}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...editProps}
-        >
-          <EditComponent
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...rest}
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...editProps}
-            form={formName}
-            initialValues={initialValues}
-            fieldId={editField}
-          />
-        </InlineEditScreen>
-      </AnimateSharedLayout>
-    </Section>
-  );
-};
+          form={formName}
+          initialValues={initialValues}
+          fieldId={editField}
+        />
+      </InlineEditScreen>
+    </AnimateSharedLayout>
+  </Section>
+);
 
 EditableList.propTypes = {
   form: PropTypes.string.isRequired,
