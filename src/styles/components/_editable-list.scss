@@ -1,2 +1,9 @@
-@import './editable-list/editable-list';
-@import './editable-list/preview';
+.editable-list {
+  &__items {
+    margin: 0 0 unit(2);
+  }
+
+  .button {
+    margin-left: 0;
+  }
+}
