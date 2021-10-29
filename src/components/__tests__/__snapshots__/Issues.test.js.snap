@@ -1,53 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Issues /> will render 1`] = `
-<div
-  className="issues issues--open"
+<ContextProvider
+  value={
+    Object {
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "subscription": Subscription {
+        "handleChangeWrapper": [Function],
+        "listeners": Object {
+          "notify": [Function],
+        },
+        "onStateChange": [Function],
+        "parentSub": undefined,
+        "store": Object {
+          "dispatch": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+          Symbol(observable): [Function],
+        },
+        "unsubscribe": null,
+      },
+    }
+  }
 >
-  <div
-    className="issues__panel"
-  >
-    <div
-      className="issues__title-bar"
-      onClick={[Function]}
-    >
-      <div
-        className="issues__title-bar-icon"
-      >
-        <Icon
-          className=""
-          color="white"
-          name="info"
-          style={Object {}}
-        />
-      </div>
-      <div
-        className="issues__title-bar-text"
-      >
-        Issues (
-        0
-        )
-      </div>
-      <div
-        className="issues__title-bar-toggle"
-      >
-        <Icon
-          className="issues__toggle--open"
-          color="white"
-          name="chevron-down"
-          style={Object {}}
-        />
-        <Icon
-          className="issues__toggle--close"
-          color="white"
-          name="chevron-up"
-          style={Object {}}
-        />
-      </div>
-    </div>
-    <ol
-      className="issues__issues"
-    />
-  </div>
-</div>
+  <Issues
+    form="test"
+    hideIssues={[Function]}
+    show={true}
+  />
+</ContextProvider>
 `;

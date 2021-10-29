@@ -5,8 +5,8 @@ import { shallow } from 'enzyme';
 import { OrderedList } from '../OrderedList';
 
 const mockProps = {
-  fields: {
-    map: () => {},
+  input: {
+    value: '',
   },
   form: 'form',
   item: () => {},
