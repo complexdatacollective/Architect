@@ -10,6 +10,7 @@ import withCreateVariableHandlers from '@components/enhancers/withCreateVariable
 import Tip from '@components/Tip';
 import withHighlightOptions from './withHighlightOptions';
 import withEdgeHighlightChangeHandler from './withEdgeHighlightChangeHandler';
+import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
 
 const HighlightFields = ({
   allowHighlighting,
@@ -54,7 +55,7 @@ const HighlightFields = ({
       <Row disabled={!allowHighlighting}>
         <ValidatedField
           name="highlight.variable"
-          component={VariableSelect}
+          component={VariablePicker}
           entity={entity}
           type={type}
           label="Variable to be toggled"

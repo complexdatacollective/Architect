@@ -14,6 +14,7 @@ import { actionCreators as codebookActionCreators } from '@modules/protocol/code
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import UsageColumn from './UsageColumn';
 import ControlsColumn from './ControlsColumn';
+import { VariablePill } from '../Form/Fields/VariablePicker/VariablePicker';
 
 const SortDirection = {
   ASC: Symbol('ASC'),
@@ -32,27 +33,6 @@ const rowClassName = (index) => {
       'codebook__variables-row--even': isEven,
       'codebook__variables-row--odd': !isEven,
     },
-  );
-};
-
-const EditableVariable = (props) => {
-  const {
-    content,
-    onChange,
-  } = props;
-
-  return (
-    <div
-      className="editable-variable"
-      contentEditable
-      style={{
-        border: '3px dashed var(--primary)',
-        borderRadius: '0.5rem',
-        padding: '0.5rem',
-      }}
-    >
-      {content}
-    </div>
   );
 };
 
@@ -116,13 +96,6 @@ const Variables = ({
               Name
             </Heading>
             <Heading
-              name="type"
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              {...headingProps}
-            >
-              Type
-            </Heading>
-            <Heading
               name="component"
               // eslint-disable-next-line react/jsx-props-no-spreading
               {...headingProps}
@@ -143,17 +116,14 @@ const Variables = ({
         <tbody>
           {variables.map(({
             id,
-            name,
             component,
-            type,
             inUse,
             usage,
           }, index) => (
             <tr className={rowClassName(index)} key={id}>
               <td className="codebook__variables-column">
-                <EditableVariable content={name} />
+                <VariablePill uuid={id} />
               </td>
-              <td className="codebook__variables-column">{type}</td>
               <td className="codebook__variables-column">{component}</td>
               <td className="codebook__variables-column codebook__variables-column--usage">
                 <UsageColumn

@@ -1,31 +1,58 @@
+import NumberVariable from '../images/variables/number-variable.svg';
+import TextVariable from '../images/variables/text-variable.svg';
+import BooleanVariable from '../images/variables/boolean-variable.svg';
+import OrdinalVariable from '../images/variables/ordinal-variable.svg';
+import CategoricalVariable from '../images/variables/categorical-variable.svg';
+import ScalarVariable from '../images/variables/scalar-variable.svg';
+import DateVariable from '../images/variables/date-variable.svg';
+import LayoutVariable from '../images/variables/layout-variable.svg';
+import LocationVariable from '../images/variables/location-variable.svg';
+
 export const VARIABLE_TYPES = {
   number: {
     label: 'Number',
     value: 'number',
+    icon: NumberVariable,
   },
   text: {
     label: 'Text',
     value: 'text',
+    icon: TextVariable,
   },
   boolean: {
     label: 'Boolean',
     value: 'boolean',
+    icon: BooleanVariable,
   },
   ordinal: {
     label: 'Ordinal',
     value: 'ordinal',
+    icon: OrdinalVariable,
   },
   categorical: {
     label: 'Categorical',
     value: 'categorical',
+    icon: CategoricalVariable,
   },
   scalar: {
     label: 'Scalar',
     value: 'scalar',
+    icon: ScalarVariable,
   },
   datetime: {
     label: 'Date',
     value: 'datetime',
+    icon: DateVariable,
+  },
+  layout: {
+    label: 'Layout',
+    value: 'layout',
+    icon: LayoutVariable,
+  },
+  location: {
+    label: 'Location',
+    value: 'location',
+    icon: LocationVariable,
   },
 };
 

@@ -6,7 +6,6 @@ import ToggleField from '@codaco/ui/lib/components/Fields/Toggle';
 import RichTextField from '@codaco/ui/lib/components/Fields/RichText';
 import DetachedField from '@components/DetachedField';
 import { ValidatedField } from '@components/Form';
-import VariableSelect from '@components/Form/Fields/VariableSelect';
 import MultiSelect from '@components/Form/MultiSelect';
 import Options from '@components/Options';
 import { Section, Row } from '@components/EditorLayout';
@@ -16,6 +15,7 @@ import NewVariableWindow, { useNewVariableWindowState } from '@components/NewVar
 import { getSortOrderOptionGetter } from './optionGetters';
 import withVariableOptions from './withVariableOptions';
 import withVariableHandlers from './withVariableHandlers';
+import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
 
 const useToggle = (initialState) => {
   const [value, setValue] = useState(initialState);
@@ -86,7 +86,7 @@ const PromptFields = ({
           <h3 id={getFieldId('variable')}>Categorical Variable</h3>
           <ValidatedField
             name="variable"
-            component={VariableSelect}
+            component={VariablePicker}
             type={type}
             entity={entity}
             label=""
@@ -176,7 +176,7 @@ const PromptFields = ({
             <Row>
               <ValidatedField
                 name="otherVariable"
-                component={VariableSelect}
+                component={VariablePicker}
                 entity={entity}
                 label="Variable"
                 type={type}

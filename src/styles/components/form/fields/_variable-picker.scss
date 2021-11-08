@@ -15,6 +15,10 @@ $component-name: form-fields-variable-picker;
       @extend .small-heading;
       padding: 0 unit(2);
     }
+
+    .variable-pill {
+      max-width: 35rem;
+    }
   }
 
   &__error {
@@ -24,25 +28,35 @@ $component-name: form-fields-variable-picker;
 }
 
 .variable-pill {
-  flex: 0;
+  flex: 0 1 auto;
   display: flex;
   flex-wrap: nowrap;
+  background-color: var(--color-platinum--dark);
+  border-radius: unit(4);
+  overflow: hidden;
+
+  &--clickable {
+    // @include clickable;
+  }
 
   &--disabled {
-    opacity: .5;
+    opacity: .35;
   }
 
   &__editor {
-    background: var(--transparent-dark);
     padding: unit(1);
     border-radius: var(--border-radius);
+    display: flex;
+
+    .icon {
+      height: unit(2);
+      width: unit(2);
+    }
   }
 
   &__icon {
-    background-color: var(--color-sea-serpent);
-    flex: 0 0 unit(4);
-    border-top-left-radius: unit(4);
-    border-bottom-left-radius: unit(4);
+    background-color: var(--color-platinum);
+    flex: 0 0 unit(6);
 
     .icon {
       width: unit(2.5);
@@ -52,21 +66,62 @@ $component-name: form-fields-variable-picker;
 
   &__icon,
   &__container {
-    padding: unit(1.5) unit(2);
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   &__container {
-    background-color: var(--color-platinum--dark);
-    border-top-right-radius: unit(4);
-    border-bottom-right-radius: unit(4);
+    flex: 1;
+    height: unit(7);
+    display: flex;
+    justify-content: space-between;
 
-    h6 {
-      @extend .small-heading;
+    .form-field-container {
+      margin-bottom: 0;
+      flex: 1;
+
+      .form-field-text,
+      .form-field-text__input {
+        background: transparent;
+      }
+
+      .form-field-text__input {
+        padding-right: 4.25em;
+      }
+    }
+
+    h4 {
       margin: 0;
       color: var(--text-dark);
+      flex: 1 0 auto;
+      padding: unit(1.5) unit(2);
+      word-break: keep-all;
+    }
+
+    .edit-buttons {
+      flex: 0 0 auto;
+      display: flex;
+      position: relative;
+      right: 1rem;
+
+      &__button {
+        cursor: pointer;
+
+        &--disabled {
+          cursor: not-allowed;
+          filter: grayscale(1);
+        }
+
+        .icon {
+          width: unit(2.5);
+          height: unit(2.5);
+        }
+
+        &--cancel {
+          margin-left: unit(1);
+        }
+      }
     }
   }
 }
@@ -75,12 +130,19 @@ $component-name: form-fields-variable-picker;
   width: 40rem;
   display: flex;
   flex-direction: column;
-  background: var(--modal-background);
-  padding: unit(2);
-  border-radius: var(--border-radius);
+  overflow-x: visible;
 
   &__header {
     flex: 0 0 unit(5);
+    background: var(--modal-background);
+    padding: unit(2);
+    border-radius: var(--border-radius);
+    margin-bottom: 2.4rem;
+
+    .form-field,
+    .form-field-container {
+      margin-bottom: 0;
+    }
   }
 
   &__list {

@@ -10,6 +10,7 @@ import withCreateVariableHandlers from '@components/enhancers/withCreateVariable
 import { Section, Row } from '@components/EditorLayout';
 import withLayoutOptions from './withLayoutOptions';
 import withCanCreateEdgesState from './withCanCreateEdgesState';
+import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
 
 const PromptFields = ({
   allowPositioning,
@@ -35,7 +36,7 @@ const PromptFields = ({
         name="layout.layoutVariable"
         type={type}
         entity={entity}
-        component={VariableSelect}
+        component={VariablePicker}
         validation={{ required: true }}
         options={layoutVariablesForSubject}
         onCreateOption={(value) => handleCreateVariable(value, 'layout', 'layout.layoutVariable')}

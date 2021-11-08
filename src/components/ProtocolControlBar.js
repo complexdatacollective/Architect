@@ -49,7 +49,7 @@ const ProtocolControlBar = () => {
         <Button
           key="return-button"
           icon={<div><img src={logoutIcon} alt="Return to start screen" /></div>}
-          color="platinum"
+          className="button button--outline return-button"
           onClick={handleClickStart}
         >
           Return to start screen
