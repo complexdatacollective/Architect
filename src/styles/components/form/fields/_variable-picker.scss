@@ -18,6 +18,7 @@ $component-name: form-fields-variable-picker;
 
     .variable-pill {
       max-width: 35rem;
+      margin-bottom: unit(2);
     }
   }
 
@@ -35,15 +36,12 @@ $component-name: form-fields-variable-picker;
   border-radius: unit(4);
   overflow: hidden;
 
-  &--clickable {
-    // @include clickable;
-  }
-
   &--disabled {
     opacity: .35;
   }
 
-  &__editor {
+  &__edit-tooltip {
+    cursor: pointer;
     padding: unit(1);
     border-radius: var(--border-radius);
     display: flex;
@@ -127,17 +125,16 @@ $component-name: form-fields-variable-picker;
 }
 
 .variable-spotlight {
-  width: 40rem;
+  width: 45rem;
   display: flex;
   flex-direction: column;
-  overflow-x: visible;
+  overflow: hidden;
+  background: var(--modal-background);
+  border-radius: var(--border-radius);
 
   &__header {
     flex: 0 0 unit(5);
-    background: var(--modal-background);
     padding: unit(2);
-    border-radius: var(--border-radius);
-    margin-bottom: 2.4rem;
 
     .form-field,
     .form-field-container {
@@ -149,14 +146,66 @@ $component-name: form-fields-variable-picker;
     display: flex;
     flex: 1 auto;
     max-height: 60vh;
-    min-height: unit(5);
 
-    .variable-pill {
-      margin-bottom: unit(1);
-
-      &__container {
-        flex: 1 auto;
-      }
+    ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
+  }
+}
+
+
+.tippy-box {
+  --tip-color: var(--color-rich-black);
+  background: var(--tip-color);
+  color: var(--text-light);
+  border-radius: var(--border-radius);
+
+  > .tippy-arrow {
+    color: var(--tip-color);
+
+    &::before {
+      transform: scale(1.5);
+    }
+  }
+
+  .tippy-content {
+    padding: unit(1) unit(1.5);
+  }
+
+  // theme for validation error
+  &[data-theme~='error'] {
+    --tip-color: var(--error);
+  }
+}
+
+.spotlight-list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: unit(1) unit(2);
+  align-items: center;
+
+  &--clickable {
+    cursor: pointer;
+  }
+
+
+  .variable-pill {
+    flex: 0 0 35rem;
+  }
+
+  kbd {
+    background: var(--color-platinum);
+    padding: unit(.5) unit(1);
+    border: 1px solid var(--color-charcoal);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &--selected {
+    background: var(--primary);
   }
 }

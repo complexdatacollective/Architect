@@ -7,12 +7,12 @@ import { Section, Row } from '@components/EditorLayout';
 import { getFieldId } from '@app/utils/issues';
 import NewVariableWindow, { useNewVariableWindowState } from '@components/NewVariableWindow';
 import ValidatedField from '@components/Form/ValidatedField';
-import VariableSelect from '@components/Form/Fields/VariableSelect';
 import Tip from '@components/Tip';
 import Options from '@components/Options';
 import withVariableOptions from './withVariableOptions';
 import withCreateEdgeHandlers from './withCreateEdgeHandler';
 import withEdgesOptions from './withEdgesOptions';
+import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
 
 const PromptFields = ({
   form,
@@ -116,7 +116,7 @@ const PromptFields = ({
             <Row>
               <ValidatedField
                 name="edgeVariable"
-                component={VariableSelect}
+                component={VariablePicker}
                 entity="edge"
                 type={createEdge}
                 label="Select an ordinal variable for this edge type"

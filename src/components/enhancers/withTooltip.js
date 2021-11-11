@@ -1,15 +1,16 @@
-import React, { useRef } from "react";
-import Tippy from "@tippyjs/react";
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useRef } from 'react';
+import Tippy from '@tippyjs/react';
 
-const withTooltip = (WrappedComponent) => ({tooltip, tippyProps, ...props}) => {
+const withTooltip = (WrappedComponent) => ({ tooltip, tippyProps, ...props }) => {
   const ref = useRef();
   return (
     <>
       <span ref={ref}>
         <WrappedComponent {...props} />
       </span>
-      {tooltip &&
-      (
+      {tooltip && (
         <Tippy
           content={tooltip}
           reference={ref}
@@ -17,7 +18,7 @@ const withTooltip = (WrappedComponent) => ({tooltip, tippyProps, ...props}) => {
         />
       )}
     </>
-  )
-}
+  );
+};
 
 export default withTooltip;

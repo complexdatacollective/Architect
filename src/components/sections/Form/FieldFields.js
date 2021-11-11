@@ -7,7 +7,6 @@ import { isOrdinalOrCategoricalType, isVariableTypeWithParameters, isBooleanWith
 import { getFieldId } from '@app/utils/issues';
 import ValidatedField from '@components/Form/ValidatedField';
 import NativeSelect from '@components/Form/Fields/NativeSelect';
-import VariableSelect from '@components/Form/Fields/VariableSelect';
 import Options from '@components/Options';
 import Parameters from '@components/Parameters';
 import Validations from '@components/Validations';
@@ -17,6 +16,7 @@ import Tip from '../../Tip';
 import ExternalLink from '../../ExternalLink';
 import InputPreview from '../../Form/Fields/InputPreview';
 import BooleanChoice from '../../BooleanChoice';
+import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
 
 const PromptFields = ({
   form,
@@ -38,9 +38,6 @@ const PromptFields = ({
     <Section>
       <Row>
         <h3 id={getFieldId('variable')}>Variable</h3>
-        <p>
-          Create a variable below, or choose from existing variables in the drop-down list.
-        </p>
         { variable && !isNewVariable
           && (
           <Tip>
@@ -52,7 +49,7 @@ const PromptFields = ({
           )}
         <ValidatedField
           name="variable"
-          component={VariableSelect}
+          component={VariablePicker}
           variable={variable}
           entity={entity}
           type={type}

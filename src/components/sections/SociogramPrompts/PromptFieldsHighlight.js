@@ -4,7 +4,6 @@ import { Field } from 'redux-form';
 import { compose } from 'recompose';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
-import VariableSelect from '@components/Form/Fields/VariableSelect';
 import ValidatedField from '@components/Form/ValidatedField';
 import withCreateVariableHandlers from '@components/enhancers/withCreateVariableHandler';
 import Tip from '@components/Tip';

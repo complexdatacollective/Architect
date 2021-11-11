@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { Section } from '@components/EditorLayout';
-import VariableSelect from '../../Form/Fields/VariableSelect';
 import ValidatedField from '../../Form/ValidatedField';
 import withOptions from './withOptions';
 import withCreateVariableHandler from '../../enhancers/withCreateVariableHandler';

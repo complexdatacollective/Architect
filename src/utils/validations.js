@@ -39,6 +39,11 @@ export const required = (isRequired) => (value) => {
   return (hasValue(value) ? undefined : 'Required');
 };
 
+export const requiredWithMessage = (
+  message,
+  isRequired,
+) => (value) => (required(isRequired)(value) ? message : undefined);
+
 export const requiredAcceptsZero = () => (value) => (!isNil(value) ? undefined : 'Required');
 
 export const requiredAcceptsNull = () => (value) => (!isUndefined(value) ? undefined : 'Required');
@@ -83,7 +88,7 @@ export const uniqueByList = (list = []) => (value) => {
     .some((existingValue) => isRoughlyEqual(existingValue, value));
 
   if (existsAlready) {
-    return `"${value}" is already used elsewhere`;
+    return `"${value}" is already used elsewhere in your protocol`;
   }
 
   return undefined;

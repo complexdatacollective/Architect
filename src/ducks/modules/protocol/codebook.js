@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 import {
-  omit, get, has, isEmpty, cloneDeep, find, flow
+  omit, get, has, isEmpty, find,
 } from 'lodash';
 import prune from '@app/utils/prune';
 import { getAllVariableUUIDs, getVariablesForSubject } from '../../../selectors/codebook';
@@ -162,7 +162,6 @@ const updateVariableThunk = (
     throw new Error('No variable provided to updateVariable()!');
   }
 
-  console.log('UPDATE THUNK');
   const state = getState();
   const variableExists = has(getVariablesForSubject(state, { entity, type }), variable);
 
@@ -179,8 +178,6 @@ const updateVariableByUUIDThunk = (
   if (!variable) {
     throw new Error('No variable provided to updateVariable()!');
   }
-
-  console.log('UPDATE VARIABLE BY UUID THUNK');
 
   return dispatch(saveableChange(updateVariable)(variable, properties, merge));
 };
@@ -242,18 +239,17 @@ const getStateWithUpdatedType = (state, entity, type, configuration) => {
 
 const getStateWithUpdatedVariable = (
   state,
+  entity,
+  type,
   variable,
   configuration,
   merge = false,
 ) => {
-  const variables = getAllVariableUUIDs(state);
-  const { entity, entityType} = find(variables, ['uuid', variable]);
-
-  console.log ('getStateWithUpdatedVariable', { state, variables, entity, entityType });
+  if (entity !== 'ego' && !type) { throw Error('Type must be specified for non ego nodes'); }
 
   const entityPath = entity === 'ego'
     ? [entity]
-    : [entity, entityType];
+    : [entity, type];
 
   const variableConfiguration = merge
     ? {
@@ -269,7 +265,7 @@ const getStateWithUpdatedVariable = (
 
   const typeConfiguration = get(state, entityPath, {});
 
-  return getStateWithUpdatedType(state, entity, entityType, {
+  return getStateWithUpdatedType(state, entity, type, {
     ...typeConfiguration,
     variables: newVariables,
   });
@@ -294,13 +290,27 @@ export default function reducer(state = initialState, action = {}) {
         },
       };
     case CREATE_VARIABLE:
-    case UPDATE_VARIABLE:
       return getStateWithUpdatedVariable(
         state,
+        action.meta.entity,
+        action.meta.type,
         action.meta.variable,
         action.configuration,
         action.merge,
       );
+    case UPDATE_VARIABLE: {
+      const variables = getAllVariableUUIDs(state);
+      const { entity, entityType } = find(variables, ['uuid', action.meta.variable]);
+
+      return getStateWithUpdatedVariable(
+        state,
+        entity,
+        entityType,
+        action.meta.variable,
+        action.configuration,
+        action.merge,
+      );
+    }
     case DELETE_VARIABLE: {
       const variablePath = action.meta.entity !== 'ego'
         ? `${action.meta.type}.variables.${action.meta.variable}`

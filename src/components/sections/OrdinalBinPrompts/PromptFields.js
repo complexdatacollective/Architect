@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
-import VariableSelect from '@components/Form/Fields/VariableSelect';
 import ColorPicker from '@components/Form/Fields/ColorPicker';
 import MultiSelect from '@components/Form/MultiSelect';
 import { Section, Row } from '@components/EditorLayout';
@@ -14,6 +13,7 @@ import PromptText from '@components/sections/PromptText';
 import { getSortOrderOptionGetter } from '@components/sections/CategoricalBinPrompts/optionGetters';
 import withVariableOptions from '@components/sections/CategoricalBinPrompts/withVariableOptions';
 import withVariableHandlers from '@components/sections/CategoricalBinPrompts/withVariableHandlers';
+import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
 
 const PromptFields = ({
   changeForm,
@@ -56,7 +56,7 @@ const PromptFields = ({
           <h3 id={getFieldId('variable')}>Ordinal Variable</h3>
           <ValidatedField
             name="variable"
-            component={VariableSelect}
+            component={VariablePicker}
             entity={entity}
             type={type}
             label=""

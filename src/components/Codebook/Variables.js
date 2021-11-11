@@ -14,7 +14,7 @@ import { actionCreators as codebookActionCreators } from '@modules/protocol/code
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import UsageColumn from './UsageColumn';
 import ControlsColumn from './ControlsColumn';
-import { VariablePill } from '../Form/Fields/VariablePicker/VariablePicker';
+import VariablePill from '../Form/Fields/VariablePicker/VariablePill';
 
 const SortDirection = {
   ASC: Symbol('ASC'),
