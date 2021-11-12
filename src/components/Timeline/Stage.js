@@ -73,6 +73,7 @@ const Stage = ({
         {stageNumber}
       </div>
       <EditStageButton
+        layoutId={id}
         ref={previewRef}
         onEditStage={handleEditStage}
         type={type}

@@ -1,18 +1,30 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { useSelector } from 'react-redux';
+import { getFormSyncErrors } from 'redux-form';
 import { map, isEmpty } from 'lodash';
 import { Icon } from '@codaco/ui';
 import { flattenIssues, getFieldId } from '../utils/issues';
 import scrollTo from '../utils/scrollTo';
 
 const Issues = ({
-  issues,
   show,
+  form,
+  hideIssues,
 }) => {
+  const issues = useSelector(getFormSyncErrors(form));
   const [open, setOpen] = useState(true);
   const flatIssues = flattenIssues(issues);
   const issueRefs = useRef({});
+
+  const hasOutstandingIssues = Object.keys(issues).length !== 0;
+
+  useEffect(() => {
+    if (!hasOutstandingIssues) {
+      hideIssues();
+    }
+  }, [hasOutstandingIssues]);
 
   const setIssueRef = (el, fieldId) => {
     issueRefs.current[fieldId] = el;
@@ -130,15 +142,12 @@ const Issues = ({
 
 Issues.propTypes = {
   show: PropTypes.bool,
-  // eslint-disable-next-line react/forbid-prop-types
-  issues: PropTypes.object,
+  form: PropTypes.string.isRequired,
+  hideIssues: PropTypes.func.isRequired,
 };
 
 Issues.defaultProps = {
   show: true,
-  issues: {},
 };
-
-export { Issues as UnconnectedIssues };
 
 export default Issues;

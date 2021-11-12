@@ -4,12 +4,13 @@ import Button from '@codaco/ui/lib/components/Button';
 import Screen from '@components/Screen/Screen';
 import AssetBrowser from '@components/AssetBrowser';
 import { Layout, Section } from '@components/EditorLayout';
-import ExternalLink from '../ExternalLink';
+import ExternalLink from '@components/ExternalLink';
 
 const AssetBrowserScreen = ({
+  layoutId,
+  onComplete,
   show,
   transitionState,
-  onComplete,
 }) => {
   const buttons = [
     <Button
@@ -28,6 +29,7 @@ const AssetBrowserScreen = ({
       buttons={buttons}
       transitionState={transitionState}
       onAcknowledgeError={onComplete}
+      layoutId={layoutId}
     >
       <Layout>
         <Section>
@@ -51,12 +53,14 @@ const AssetBrowserScreen = ({
 };
 
 AssetBrowserScreen.propTypes = {
+  layoutId: PropTypes.string,
+  onComplete: PropTypes.func.isRequired,
   show: PropTypes.bool,
   transitionState: PropTypes.string,
-  onComplete: PropTypes.func.isRequired,
 };
 
 AssetBrowserScreen.defaultProps = {
+  layoutId: null,
   show: true,
   transitionState: null,
 };

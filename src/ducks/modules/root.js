@@ -12,8 +12,10 @@ import stacks from './stacks';
 import ui from './ui';
 import toasts from './toasts';
 
+const protocolPattern = /^PROTOCOL\//;
+
 const timelineOptions = {
-  filter: ({ type }) => /^PROTOCOL\//.test(type.toString()),
+  exclude: ({ type }) => !protocolPattern.test(type.toString()),
 };
 
 /*

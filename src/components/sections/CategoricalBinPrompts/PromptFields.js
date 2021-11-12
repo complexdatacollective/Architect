@@ -93,6 +93,7 @@ const PromptFields = ({
             options={categoricalVariableOptions}
             onCreateOption={handleNewVariable}
             validation={{ required: true }}
+            variable={variable}
           />
         </Row>
         { variable
@@ -182,6 +183,7 @@ const PromptFields = ({
                 options={otherVariableOptions}
                 onCreateOption={(value) => onCreateOtherVariable(value, 'otherVariable')}
                 validation={{ required: true }}
+                variable={otherVariable}
               />
             </Row>
           </Section>

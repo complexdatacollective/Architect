@@ -7,21 +7,14 @@ import {
   withStateHandlers,
   withHandlers,
 } from 'recompose';
-import {
-  formValueSelector,
-  change,
-} from 'redux-form';
-import {
-  makeGetLocus,
-} from '../../selectors/timemachine';
-import { actionCreators as timelineActions } from '../../ducks/middleware/timeline';
-
-const getProtocolLocus = makeGetLocus('protocol');
+import { formValueSelector, change } from 'redux-form';
+import { getLocus } from '@selectors/timeline';
+import { actionCreators as timelineActions } from '@app/ducks/middleware/timeline';
 
 const mapStateToProps = (state, { form, fieldName }) => {
   const items = formValueSelector(form)(state, fieldName);
   const itemCount = items ? items.length : 0;
-  const locus = getProtocolLocus(state);
+  const locus = getLocus(state);
 
   return {
     itemCount,

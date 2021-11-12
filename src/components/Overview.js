@@ -54,8 +54,16 @@ const Overview = ({
       </div>
       <div className="action-buttons">
         <Button onClick={printOverview} color="slate-blue" icon={<PrintIcon />} disabled={!protocolIsValid || hasUnsavedChanges}>Printable Summary</Button>
-        <Button onClick={() => openScreen('assets')} color="neon-coral">Resource Library</Button>
-        <Button onClick={() => openScreen('codebook')} color="sea-serpent">Manage Codebook</Button>
+        <motion.div
+          layoutId="resource-library"
+        >
+          <Button onClick={() => openScreen('assets', { id: 'resource-library' })} color="neon-coral">Resource Library</Button>
+        </motion.div>
+        <motion.div
+          layoutId="manage-codebook"
+        >
+          <Button onClick={() => openScreen('codebook', { id: 'manage-codebook' })} color="sea-serpent">Manage Codebook</Button>
+        </motion.div>
       </div>
     </div>
   </motion.div>

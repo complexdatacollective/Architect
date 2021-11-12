@@ -140,9 +140,20 @@
       vertical-align: middle;
       width: 20%;
 
-      &--controls {
-        max-width: 200px;
-        text-align: right;
+      &--control {
+        white-space: nowrap;
+        text-align: left;
+        width: 0;
+
+        // Ultimately this should probably live in codaco/ui Button as an option
+        button {
+          margin-left: unit(1);
+
+          .button__content {
+            padding: 0;
+            margin-left: 0 !important; // sass-lint:disable-line no-important
+          }
+        }
       }
     }
 

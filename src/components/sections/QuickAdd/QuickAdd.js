@@ -19,6 +19,7 @@ const QuickAdd = ({
   handleCreateVariable,
   options,
   type,
+  quickAdd,
 }) => (
   type
   && (
@@ -44,6 +45,7 @@ const QuickAdd = ({
         validation={{ required: true }}
         type={type}
         entity={entity}
+        variable={quickAdd}
       />
     </div>
   </Section>
@@ -53,6 +55,7 @@ const QuickAdd = ({
 QuickAdd.propTypes = {
   disabled: PropTypes.bool,
   entity: PropTypes.string.isRequired,
+  quickAdd: PropTypes.string,
   handleCreateVariable: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
@@ -61,6 +64,7 @@ QuickAdd.propTypes = {
 
 QuickAdd.defaultProps = {
   disabled: false,
+  quickAdd: null,
   type: null,
   options: [],
 };

@@ -53,13 +53,13 @@ const PromptFields = ({
         <ValidatedField
           name="variable"
           component={VariableSelect}
+          variable={variable}
           entity={entity}
           type={type}
           options={variableOptions} // from variables
           onCreateOption={handleNewVariable} // reset later fields, create variable of no type?
           onChange={handleChangeVariable} // read/reset component options validation
           validation={{ required: true }}
-
         />
       </Row>
     </Section>
