@@ -74,8 +74,6 @@ const Variables = ({
   sortBy,
   sortDirection,
   sort,
-  entity,
-  type: entityType,
 }) => {
   const headingProps = {
     sortBy,
@@ -110,7 +108,6 @@ const Variables = ({
               Used In
             </Heading>
             <th />
-            <th />
           </tr>
         </thead>
         <tbody>
@@ -122,7 +119,7 @@ const Variables = ({
           }, index) => (
             <tr className={rowClassName(index)} key={id}>
               <td className="codebook__variables-column">
-                <VariablePill uuid={id} />
+                <VariablePill uuid={id} editable />
               </td>
               <td className="codebook__variables-column">{component}</td>
               <td className="codebook__variables-column codebook__variables-column--usage">
@@ -135,8 +132,6 @@ const Variables = ({
                 <ControlsColumn
                   onDelete={onDelete}
                   inUse={inUse}
-                  entity={entity}
-                  type={entityType}
                   id={id}
                 />
               </td>

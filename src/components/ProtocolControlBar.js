@@ -48,8 +48,8 @@ const ProtocolControlBar = () => {
       secondaryButtons={[
         <Button
           key="return-button"
+          color="platinum"
           icon={<div><img src={logoutIcon} alt="Return to start screen" /></div>}
-          className="button button--outline return-button"
           onClick={handleClickStart}
         >
           Return to start screen

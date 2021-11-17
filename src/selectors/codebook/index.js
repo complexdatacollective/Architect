@@ -11,7 +11,6 @@ const getEdgeTypes = (state) => get(getCodebook(state), 'edge', {});
 
 const getType = (state, subject) => {
   if (!subject) { return {}; }
-
   const path = subject.type ? [subject.entity, subject.type] : [subject.entity];
 
   return get(getCodebook(state), path, {});
@@ -27,12 +26,10 @@ const getType = (state, subject) => {
 const getVariablesForSubject = (state, subject) => get(getType(state, subject), 'variables', {});
 
 // Get all variables for all subjects in the codebook
-const getAllVariableUUIDs = ({ node, edge, ego }) => {
+const getAllVariableUUIDs = ({ node: nodeTypes = {}, edge: edgeTypes = {}, ego = {} }) => {
   const variables = new Set();
 
   // Nodes
-  const nodeTypes = node;
-
   Object.keys(nodeTypes).forEach((nodeType) => {
     const nodeVariables = get(nodeTypes, [nodeType, 'variables'], {});
     Object.keys(nodeVariables).forEach((variable) => {
@@ -47,8 +44,6 @@ const getAllVariableUUIDs = ({ node, edge, ego }) => {
   });
 
   // Edges
-  const edgeTypes = edge;
-
   Object.keys(edgeTypes).forEach((edgeType) => {
     const edgeVariables = get(edgeTypes, [edgeType, 'variables'], {});
     Object.keys(edgeVariables).forEach((variable) => {
@@ -74,7 +69,7 @@ const getAllVariableUUIDs = ({ node, edge, ego }) => {
     });
   });
 
-  return [...variables];
+  return [...variables]; // Spread converts Set to Array
 };
 
 export const makeGetVariableFromUUID = (uuid) => (state) => {

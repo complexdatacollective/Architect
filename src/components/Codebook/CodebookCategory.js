@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Section } from '@components/EditorLayout';
 
 const CodebookCategory = ({ title, children }) => (
-  <Section>
+  <div className="codebook-category">
     <h1>{title}</h1>
     <div className="codebook__category-items">
       {children}
     </div>
-  </Section>
+  </div>
 );
 
 CodebookCategory.propTypes = {

@@ -30,6 +30,11 @@
 
   &__entity {
     margin-top: unit(8);
+    overflow: hidden;
+    margin: 2.4rem auto;
+    padding: 2.4rem;
+    background: var(--architect-panel-grey);
+    border-radius: var(--border-radius);
 
     &:first-child {
       margin-top: unit(4);
@@ -66,16 +71,6 @@
         &:not(:last-of-type) {
           margin-right: unit(1);
         }
-      }
-    }
-
-    &-variables {
-      margin-left: unit(12);
-      border-top: unit(.25) solid var(--architect-divider);
-      margin-top: unit(4);
-
-      &--no-border {
-        border-top: 0;
       }
     }
   }

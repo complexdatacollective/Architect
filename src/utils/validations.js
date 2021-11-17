@@ -109,7 +109,7 @@ export const ISODate = (dateFormat) => (value) => {
 // they are compatable with XML export formats
 export const allowedVariableName = (name = 'variable name') => (value) => {
   if (!/^[a-zA-Z0-9._\-:]+$/.test(value)) {
-    return `Not a valid ${name}. Only letters, numbers and the symbols ._-: are supported.`;
+    return `Not a valid ${name}. Only letters, numbers and the symbols ._-: are supported`;
   }
   return undefined;
 };

@@ -14,16 +14,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 import { requiredWithMessage, uniqueByList, allowedVariableName } from '@app/utils/validations';
 import TextInput from '@codaco/ui/lib/components/Fields/Text';
-import { getAllVariableUUIDs, makeGetVariableFromUUID, getCodebook } from '../../../../selectors/codebook';
-import { getColorForType, VARIABLE_TYPES } from '../../../../config/variables';
-import { createSelector } from 'reselect';
-
-const getIconFromType = (type) => get(VARIABLE_TYPES, `${type}.icon`, null);
-
-const selectExistingVariables = createSelector(
-  getCodebook,
-  (codebook) => getAllVariableUUIDs(codebook),
-);
+import { makeGetVariableFromUUID, getVariablesForSubject } from '../../../../selectors/codebook';
+import { getColorForType, getIconForType } from '../../../../config/variables';
 
 const VariablePill = (props) => {
   const {
@@ -32,7 +24,6 @@ const VariablePill = (props) => {
     onClick: clickHandler,
   } = props;
 
-  console.log('VariablePill', props);
   const animation = useAnimation();
   const dispatch = useDispatch();
   const ref = useRef();
@@ -41,9 +32,11 @@ const VariablePill = (props) => {
   const [canSubmit, setCanSubmit] = useState(false);
   const [validation, setValidation] = useState(null);
 
-  const { name, type } = useSelector(makeGetVariableFromUUID(uuid));
+  const {
+    name, type, entity, entityType,
+  } = useSelector(makeGetVariableFromUUID(uuid));
   const [newName, setNewName] = useState(name);
-  const icon = getIconFromType(type);
+  const icon = getIconForType(type);
 
   const handleCancel = () => {
     setIsEditing(false);
@@ -66,9 +59,11 @@ const VariablePill = (props) => {
     setValidation(null);
   };
 
-  const existingVariables = useSelector(selectExistingVariables);
+  const existingVariables = useSelector(
+    (state) => getVariablesForSubject(state, { entity, type: entityType }),
+  );
 
-  const existingVariableNames = useMemo(() => existingVariables.map((variable) => get(variable, 'name')));
+  const existingVariableNames = useMemo(() => Object.keys(existingVariables).map((variable) => get(existingVariables[variable], 'name')));
 
   const handleUpdateName = (event) => {
     const { target: { value } } = event;
@@ -130,7 +125,6 @@ const VariablePill = (props) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ }}
               >
                 <Tippy
                   theme="error"
@@ -151,10 +145,11 @@ const VariablePill = (props) => {
                       adornmentRight={(
                         <motion.div
                           className="edit-buttons"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1, transition: { delay: 0.5 } }}
                         >
-                          <div
+                          <motion.div
+                            initial={{ x: '100%', opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{ delay: 0.4 }}
                             role="button"
                             tabIndex="0" // Needed to allow focus
                             id="editCompleteButton"
@@ -162,15 +157,18 @@ const VariablePill = (props) => {
                             className={cx('edit-buttons__button', { 'edit-buttons__button--disabled': !canSubmit })}
                           >
                             <Icon name="tick" />
-                          </div>
-                          <div
+                          </motion.div>
+                          <motion.div
+                            initial={{ x: '100%', opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{ delay: 0.6 }}
                             role="button"
                             tabIndex="0" // Needed to allow focus
                             onClick={handleCancel}
                             className="edit-buttons__button edit-buttons__button--cancel"
                           >
                             <Icon name="cross" color="tomato" />
-                          </div>
+                          </motion.div>
                         </motion.div>
                       )}
                     />
@@ -208,4 +206,4 @@ const VariablePill = (props) => {
   );
 };
 
-export default VariablePill;
+export default React.memo(VariablePill);

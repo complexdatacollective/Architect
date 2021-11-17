@@ -12,6 +12,13 @@
   display: flex;
   flex-direction: column;
 
+  &--modal {
+    top: unit(6);
+    left: unit(6);
+    width: calc(100% - #{unit(12)});
+    height: calc(100% - #{unit(12)});
+  }
+
   &__container {
     flex: 1 1 auto;
     width: 100%;

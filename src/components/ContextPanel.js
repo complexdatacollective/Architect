@@ -62,7 +62,7 @@ const ContextPanel = ({
 
   return (
     <motion.div
-      initial="unactivated"
+      initial={isActive ? 'animate' : 'unactivated'}
       animate={animate}
       variants={variants.container}
       className={className}

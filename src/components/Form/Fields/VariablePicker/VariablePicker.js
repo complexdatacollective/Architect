@@ -8,6 +8,8 @@ const VariablePicker = (props) => {
   console.log('variable picker props', props);
   const {
     options,
+    entity,
+    type,
     label = 'Variable',
     // To create a new option, one or the other of the following:
     onCreateOption,
@@ -65,7 +67,10 @@ const VariablePicker = (props) => {
           }}
         >
           <VariableSpotlight
+            entity={entity}
+            type={type}
             onSelect={handleSelectVariable}
+            onCancel={hideModal}
             options={options}
             onCreateOption={handleCreateOption}
           />
