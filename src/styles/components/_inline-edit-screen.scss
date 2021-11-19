@@ -9,7 +9,6 @@
   align-items: center;
   justify-content: center;
   background-color: var(--modal-overlay);
-  backdrop-filter: blur(10px);
   z-index: var(--z-modal);
 
   &__header {

@@ -8,8 +8,9 @@ import Search from '@codaco/ui/lib/components/Fields/Search';
 import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { get } from 'lodash';
-import VariablePill from './VariablePill';
+import { SimpleVariablePill } from './VariablePill';
 import { getVariablesForSubject } from '../../../../selectors/codebook';
+import { sortByLabel } from '../../../Codebook/helpers';
 
 const ListItem = ({
   disabled,
@@ -83,11 +84,13 @@ const VariableSpotlight = (props) => {
   const [cursor, setCursor] = useState(-2);
   const [showCursor, setShowCursor] = useState(false);
 
-  const handleCreateOption = async () => {
+  const handleCreateOption = () => {
     onCreateOption(filterTerm);
   };
 
-  const filteredItems = useMemo(() => {
+  const sortedAndFilteredItems = useMemo(() => {
+    options.sort(sortByLabel);
+
     if (!filterTerm) { return options; }
     return options.filter((item) => item.label.includes(filterTerm));
   }, [filterTerm, options]);
@@ -143,20 +146,20 @@ const VariableSpotlight = (props) => {
             )}
           </>
         )}
-        { filteredItems.length > 0 && (
+        { sortedAndFilteredItems.length > 0 && (
           <Divider
             legend={filterTerm.length > 0 ? `Existing Variables Containing "${filterTerm}"` : 'Existing Variables'}
           />
         )}
-        { filteredItems.map(({ value, label }, index) => (
+        { sortedAndFilteredItems.map(({ value, label, type: optionType }, index) => (
           <ListItem
             key={value}
             onSelect={() => onSelect(value)}
             selected={showCursor && (cursor === index || label === filterTerm)}
-            setSelected={() => { setShowCursor(true); setCursor(-1); }}
+            setSelected={() => { setShowCursor(true); setCursor(index); }}
             removeSelected={() => setCursor(-1)}
           >
-            <VariablePill uuid={value} />
+            <SimpleVariablePill label={label} type={optionType} />
           </ListItem>
         ))}
       </ol>
@@ -165,15 +168,21 @@ const VariableSpotlight = (props) => {
 
   // Reset cursor position when list is filtered
   useEffect(() => {
-    if (cursor > filteredItems.length - 1) {
-      setCursor(filteredItems.length - 1);
+    // Set cursor to create if there are no other options
+    if (sortedAndFilteredItems.length === 0) {
+      console.log('no options', cursor, sortedAndFilteredItems);
+      setCursor(-1);
+      setShowCursor(true);
       return;
     }
 
-    if (cursor === 0 && !filterTerm.length > 0) {
-      setCursor(0);
+
+
+    // If we are beyond the end, wrap to the end of the list
+    if (cursor > sortedAndFilteredItems.length - 1) {
+      setCursor(sortedAndFilteredItems.length - 1);
     }
-  }, [filteredItems, filterTerm, cursor]);
+  }, [sortedAndFilteredItems, filterTerm, cursor]);
 
   const handleFilter = (e) => {
     const value = get(e, 'target.value', '');
@@ -218,48 +227,69 @@ const VariableSpotlight = (props) => {
       // If the cursor is not at the bottom
       // Or there are no items and the cursor is in the search input
       // move the cursor down
-      if ((cursor < filteredItems.length - 1) || (filterTerm.length === 0 && cursor === -2)) {
+      if (
+        (cursor < sortedAndFilteredItems.length - 1)
+        || (filterTerm.length === 0 && cursor === -2)
+      ) {
         setCursor(cursor + 1);
       }
     } else if (e.key === 'Enter') {
       // If the cursor is within the list of results, select the value
       if (cursor > -1) {
-        onSelect(filteredItems[cursor].value);
+        onSelect(sortedAndFilteredItems[cursor].value);
         return;
       }
 
       // If the cursor is in the create option,
       // and there is a filter term,
       // create a new variable with that value
-      if (filterTerm && cursor === -1) {
+      if (!invalidVariableName && filterTerm && cursor === -1) {
         handleCreateOption();
       }
     }
   };
 
+  const containerVariants = {
+    visible: {
+      y: 0,
+    },
+    hidden: {
+      y: -50,
+    },
+  };
+
+  const resultsVariants = {
+    visible: { height: 'auto' },
+    hidden: { height: 0 },
+  };
+
   return (
-    <>
-      <div className="variable-spotlight">
-        <header className="variable-spotlight__header">
-          <Search
-            autoFocus
-            placeholder="Find or create a variable..."
-            input={{
-              value: filterTerm,
-              onChange: handleFilter,
-              onKeyDown: handleKeyDown,
-            }}
-          />
-        </header>
-        <motion.main
-          className="variable-spotlight__list"
-          initial={{ height: 0 }}
-          animate={{ height: 'auto', transition: { delay: 0.5 } }}
-        >
-          { renderResults() }
-        </motion.main>
-      </div>
-    </>
+    <motion.div
+      className="variable-spotlight"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      transition={{ type: 'spring', stiffness: 300, damping: 30, when: 'beforeChildren' }}
+    >
+      <header className="variable-spotlight__header">
+        <Search
+          autoFocus
+          placeholder="Find or create a variable..."
+          input={{
+            value: filterTerm,
+            onChange: handleFilter,
+            onKeyDown: handleKeyDown,
+          }}
+        />
+      </header>
+      <motion.main
+        className="variable-spotlight__list"
+        variants={resultsVariants}
+        transition={{ duration: 0.2, ease: 'easeInOut' }}
+      >
+        { renderResults() }
+      </motion.main>
+    </motion.div>
   );
 };
 

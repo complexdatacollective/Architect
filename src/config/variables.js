@@ -8,12 +8,15 @@ import ScalarVariable from '../images/variables/scalar-variable.svg';
 import DateVariable from '../images/variables/date-variable.svg';
 import LayoutVariable from '../images/variables/layout-variable.svg';
 import LocationVariable from '../images/variables/location-variable.svg';
+import DefaultVariable from '../images/variables/default-variable.svg';
 
-// TODO: This should be a monilithic object that contains all variable types
+// TODO: This should be a monolithic object that contains all variable types
 // and properties. All other derivations/permutations of this data should be
 // merged into this object.
 //
-// For example: input components, if the variable has options or properties,etc.
+// For example: input components, if the variable has options or properties,
+// etc. Then the required properties can be picked from this object using
+// map/reduce/get etc.
 export const VARIABLE_TYPES = {
   number: {
     label: 'Number',
@@ -173,7 +176,7 @@ export const INPUT_OPTIONS = Object.values(COMPONENTS);
 
 const formattedInputOptions = VARIABLE_TYPES_COMPONENTS.reduce((accumulator, currentValue) => ([
   ...accumulator,
-  { label: currentValue[3], value: null, disabled: true },
+  { label: currentValue[2], value: null, disabled: true },
   ...currentValue[1],
 ]), []);
 
@@ -209,7 +212,7 @@ const getTypeForComponent = (component) => {
 
 const getColorForType = (type) => get(VARIABLE_TYPES, [type, 'color'], 'var(--color-charcoal)');
 
-const getIconForType = (type) => get(VARIABLE_TYPES, `${type}.icon`, null);
+const getIconForType = (type) => get(VARIABLE_TYPES, `${type}.icon`, DefaultVariable);
 
 export {
   INPUT_OPTIONS as inputOptions,

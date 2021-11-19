@@ -17,14 +17,39 @@ import TextInput from '@codaco/ui/lib/components/Fields/Text';
 import { makeGetVariableFromUUID, getVariablesForSubject } from '../../../../selectors/codebook';
 import { getColorForType, getIconForType } from '../../../../config/variables';
 
-const VariablePill = (props) => {
+const EDIT_COMPLETE_BUTTON_ID = 'editCompleteButton';
+
+export const BaseVariablePill = React.forwardRef((props, ref) => {
   const {
-    editable,
-    uuid,
-    onClick: clickHandler,
+    type,
+    children
   } = props;
 
-  const animation = useAnimation();
+  const icon = useMemo(() => getIconForType(type), [type]);
+  const backgroundColor = useMemo(() => getColorForType(type), [type]);
+
+  return (
+    <motion.div className="variable-pill" ref={ref}>
+      <div className="variable-pill__icon" style={{ backgroundColor }}>
+        <img className="icon" src={icon} alt={type} />
+      </div>
+      <div className="variable-pill__container">
+        {children}
+      </div>
+    </motion.div>
+  );
+});
+
+export const SimpleVariablePill = ({ label, ...props}) => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <BaseVariablePill {...props}>
+    <motion.h4>
+      {label}
+    </motion.h4>
+  </BaseVariablePill>
+);
+
+const EditableVariablePill = ({ uuid }) => {
   const dispatch = useDispatch();
   const ref = useRef();
 
@@ -35,8 +60,8 @@ const VariablePill = (props) => {
   const {
     name, type, entity, entityType,
   } = useSelector(makeGetVariableFromUUID(uuid));
+
   const [newName, setNewName] = useState(name);
-  const icon = getIconForType(type);
 
   const handleCancel = () => {
     setIsEditing(false);
@@ -49,7 +74,7 @@ const VariablePill = (props) => {
     const target = get(e, 'relatedTarget.id', null);
 
     // Don't cancel if the user clicked the submit button
-    if (target === 'editCompleteButton') { return; }
+    if (target === EDIT_COMPLETE_BUTTON_ID) { return; }
     handleCancel();
   };
 
@@ -57,6 +82,7 @@ const VariablePill = (props) => {
     const action = codebookActions.updateVariableByUUID(uuid, { name: newName }, true);
     dispatch(action);
     setValidation(null);
+    setIsEditing(false);
   };
 
   const existingVariables = useSelector(
@@ -73,115 +99,99 @@ const VariablePill = (props) => {
     const unique = uniqueByList(existingVariableNames)(value);
     const allowed = allowedVariableName()(value);
 
-    const validName = required || unique || allowed || undefined;
-    setValidation(validName);
-    setCanSubmit(!validName);
+    const validationResult = required || unique || allowed || undefined;
+    setValidation(validationResult);
+    setCanSubmit(!validationResult);
   };
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
+      e.preventDefault(); // Prevent any parent form from submitting
+
       if (canSubmit) {
         onEditComplete();
       }
     }
   };
 
-  useEffect(() => {
-    if (editing) {
-      setIsEditing(false);
-      animation.start({
-        boxShadow: [
-          '0 0 0 0 rgba(var(--color-sea-green---rgb), 0.8)',
-          '0 0 0 3rem rgba(var(--color-sea-green---rgb), 0)',
-          '0 0 0 0 rgba(var(--color-sea-green---rgb), 0)',
-        ],
-        transition: { duration: 1.5, times: [0, 0.7, 1] },
-      });
-    }
-  }, [name]);
-
-  const classes = cx(
-    'variable-pill',
-    { 'variable-pill--editable': editable },
-  );
-
   return (
     <>
-      <motion.div
-        className={classes}
-        ref={ref}
-        onClick={!editing ? clickHandler : undefined}
-        animate={animation}
-      >
-        <div className="variable-pill__icon" style={{ backgroundColor: getColorForType(type) }}>
-          <img className="icon" src={icon} alt={type} />
-        </div>
-        <div className="variable-pill__container">
-          <AnimatePresence initial={false} exitBeforeEnter>
-            { editable && editing ? (
-              <motion.div
-                key="edit"
-                style={{ flex: 1 }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+      <BaseVariablePill type={type} ref={ref}>
+        <AnimatePresence initial={false} exitBeforeEnter>
+          { editing ? (
+            <motion.div
+              key="edit"
+              style={{ flex: 1 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Tippy
+                theme="error"
+                content={validation}
+                visible={!!validation}
+                placement="bottom"
               >
-                <Tippy
-                  theme="error"
-                  content={validation}
-                  visible={!!validation}
-                  placement="bottom"
-                >
-                  <div style={{ width: '100%', flex: '1 auto' }}>
-                    <TextInput
-                      autoFocus
-                      placeholder="Enter a new variable name..."
-                      input={{
-                        value: newName,
-                        onChange: handleUpdateName,
-                        onBlur: handleBlur,
-                        onKeyDown: handleKeyDown,
-                      }}
-                      adornmentRight={(
+                <div style={{ width: '100%', flex: '1 auto' }}>
+                  <TextInput
+                    autoFocus
+                    placeholder="Enter a new variable name..."
+                    input={{
+                      value: newName,
+                      onChange: handleUpdateName,
+                      onBlur: handleBlur,
+                      onKeyDown: handleKeyDown,
+                    }}
+                    adornmentRight={(
+                      <motion.div
+                        className="edit-buttons"
+                      >
                         <motion.div
-                          className="edit-buttons"
+                          title="Finished"
+                          aria-label="Finished"
+                          initial={{ x: '100%', opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          transition={{ delay: 0.4 }}
+                          role="button"
+                          tabIndex="0" // Needed to allow focus
+                          id={EDIT_COMPLETE_BUTTON_ID}
+                          onClick={onEditComplete}
+                          className={cx('edit-buttons__button', { 'edit-buttons__button--disabled': !canSubmit })}
                         >
-                          <motion.div
-                            initial={{ x: '100%', opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            transition={{ delay: 0.4 }}
-                            role="button"
-                            tabIndex="0" // Needed to allow focus
-                            id="editCompleteButton"
-                            onClick={onEditComplete}
-                            className={cx('edit-buttons__button', { 'edit-buttons__button--disabled': !canSubmit })}
-                          >
-                            <Icon name="tick" />
-                          </motion.div>
-                          <motion.div
-                            initial={{ x: '100%', opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            transition={{ delay: 0.6 }}
-                            role="button"
-                            tabIndex="0" // Needed to allow focus
-                            onClick={handleCancel}
-                            className="edit-buttons__button edit-buttons__button--cancel"
-                          >
-                            <Icon name="cross" color="tomato" />
-                          </motion.div>
+                          <Icon name="tick" />
                         </motion.div>
-                      )}
-                    />
-                  </div>
-                </Tippy>
-              </motion.div>
-            ) : (
-              <motion.h4 key="label" transition={{ }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>{name}</motion.h4>
-            )}
-          </AnimatePresence>
-        </div>
-      </motion.div>
-      { editable && !editing && (
+                        <motion.div
+                          title="Cancel"
+                          aria-label="Cancel"
+                          initial={{ x: '100%', opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          transition={{ delay: 0.6 }}
+                          role="button"
+                          tabIndex="0" // Needed to allow focus
+                          onClick={handleCancel}
+                          className="edit-buttons__button edit-buttons__button--cancel"
+                        >
+                          <Icon name="cross" color="tomato" />
+                        </motion.div>
+                      </motion.div>
+                    )}
+                  />
+                </div>
+              </Tippy>
+            </motion.div>
+          ) : (
+            <motion.h4
+              key="label"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {name}
+            </motion.h4>
+          )}
+        </AnimatePresence>
+      </BaseVariablePill>
+      { !editing && (
         <Tippy
           reference={ref}
           interactive
@@ -206,4 +216,4 @@ const VariablePill = (props) => {
   );
 };
 
-export default React.memo(VariablePill);
+export default React.memo(EditableVariablePill);

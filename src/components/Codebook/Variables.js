@@ -14,7 +14,7 @@ import { actionCreators as codebookActionCreators } from '@modules/protocol/code
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import UsageColumn from './UsageColumn';
 import ControlsColumn from './ControlsColumn';
-import VariablePill from '../Form/Fields/VariablePicker/VariablePill';
+import EditableVariablePill from '../Form/Fields/VariablePicker/VariablePill';
 
 const SortDirection = {
   ASC: Symbol('ASC'),
@@ -119,7 +119,7 @@ const Variables = ({
           }, index) => (
             <tr className={rowClassName(index)} key={id}>
               <td className="codebook__variables-column">
-                <VariablePill uuid={id} editable />
+                <EditableVariablePill uuid={id} />
               </td>
               <td className="codebook__variables-column">{component}</td>
               <td className="codebook__variables-column codebook__variables-column--usage">

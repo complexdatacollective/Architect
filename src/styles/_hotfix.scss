@@ -88,11 +88,6 @@ a {
 .modal {
   height: 100vh;
 
-  &__background {
-    // Also update styles for .inline-edit-screen when changing this.
-    backdrop-filter: blur(10px);
-  }
-
   &__content {
     flex-direction: row;
   }
