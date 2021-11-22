@@ -26,12 +26,6 @@ a {
   &--platinum--dark {
     color: var(--text-dark);
   }
-
-  &--outline {
-
-  }
-
-
 }
 
 .form-fields-textarea__error {
@@ -100,7 +94,7 @@ a {
 // Matierial-UI icon doesn't resize according to input font-size
 .form-field-text {
   &--adornment {
-    .MuiSvgIcon-root {
+    .MuiSvgIcon-root { // sass-lint:disable-line class-name-format
       font-size: 1.5em;
     }
   }
