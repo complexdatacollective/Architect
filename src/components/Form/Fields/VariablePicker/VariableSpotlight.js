@@ -1,6 +1,7 @@
 import React, {
   useEffect, useState, useMemo, useRef,
 } from 'react';
+import PropTypes from 'prop-types';
 import { Icon, Scroller } from '@codaco/ui';
 import cx from 'classnames';
 import { uniqueByList, allowedVariableName } from '@app/utils/validations';
@@ -57,6 +58,24 @@ const ListItem = ({
   );
 };
 
+ListItem.propTypes = {
+  disabled: PropTypes.bool,
+  selected: PropTypes.bool,
+  onSelect: PropTypes.func,
+  children: PropTypes.node,
+  setSelected: PropTypes.func,
+  removeSelected: PropTypes.func,
+};
+
+ListItem.defaultProps = {
+  disabled: false,
+  selected: false,
+  onSelect: () => {},
+  children: null,
+  setSelected: () => {},
+  removeSelected: () => {},
+};
+
 const Divider = ({ legend }) => (
   <ListItem>
     <fieldset className="divider-header">
@@ -64,6 +83,10 @@ const Divider = ({ legend }) => (
     </fieldset>
   </ListItem>
 );
+
+Divider.propTypes = {
+  legend: PropTypes.string.isRequired,
+};
 
 const VariableSpotlight = (props) => {
   const {
@@ -170,13 +193,10 @@ const VariableSpotlight = (props) => {
   useEffect(() => {
     // Set cursor to create if there are no other options
     if (sortedAndFilteredItems.length === 0) {
-      console.log('no options', cursor, sortedAndFilteredItems);
       setCursor(-1);
       setShowCursor(true);
       return;
     }
-
-
 
     // If we are beyond the end, wrap to the end of the list
     if (cursor > sortedAndFilteredItems.length - 1) {
@@ -269,7 +289,9 @@ const VariableSpotlight = (props) => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      transition={{ type: 'spring', stiffness: 300, damping: 30, when: 'beforeChildren' }}
+      transition={{
+        type: 'spring', stiffness: 300, damping: 30, when: 'beforeChildren',
+      }}
     >
       <header className="variable-spotlight__header">
         <Search
@@ -291,6 +313,19 @@ const VariableSpotlight = (props) => {
       </motion.main>
     </motion.div>
   );
+};
+
+VariableSpotlight.propTypes = {
+  onSelect: PropTypes.func.isRequired,
+  entity: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  onCreateOption: PropTypes.func.isRequired,
+  options: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default VariableSpotlight;

@@ -106,4 +106,29 @@ a {
   }
 }
 
+// Tooltip system overrides
+.tippy-box {
+  --tip-color: var(--color-rich-black);
+  background: var(--tip-color);
+  color: var(--text-light);
+  border-radius: var(--border-radius);
+
+  > .tippy-arrow {
+    color: var(--tip-color);
+
+    &::before {
+      transform: scale(1.5);
+    }
+  }
+
+  .tippy-content {
+    padding: unit(1) unit(1.5);
+  }
+
+  // theme for validation error
+  &[data-theme~='error'] {
+    --tip-color: var(--error);
+  }
+}
+
 

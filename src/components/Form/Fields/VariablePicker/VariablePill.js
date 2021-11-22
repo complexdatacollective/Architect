@@ -1,12 +1,12 @@
 import React, {
-  useMemo, useEffect, useRef, useState,
+  useMemo, useRef, useState,
 } from 'react';
+import PropTypes from 'prop-types';
 import { Icon } from '@codaco/ui';
 import Tippy from '@tippyjs/react';
 import {
   AnimatePresence,
   motion,
-  useAnimation,
 } from 'framer-motion';
 import { get } from 'lodash';
 import cx from 'classnames';
@@ -22,7 +22,7 @@ const EDIT_COMPLETE_BUTTON_ID = 'editCompleteButton';
 export const BaseVariablePill = React.forwardRef((props, ref) => {
   const {
     type,
-    children
+    children,
   } = props;
 
   const icon = useMemo(() => getIconForType(type), [type]);
@@ -40,7 +40,12 @@ export const BaseVariablePill = React.forwardRef((props, ref) => {
   );
 });
 
-export const SimpleVariablePill = ({ label, ...props}) => (
+BaseVariablePill.propTypes = {
+  type: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
+export const SimpleVariablePill = ({ label, ...props }) => (
   // eslint-disable-next-line react/jsx-props-no-spreading
   <BaseVariablePill {...props}>
     <motion.h4>
@@ -48,6 +53,10 @@ export const SimpleVariablePill = ({ label, ...props}) => (
     </motion.h4>
   </BaseVariablePill>
 );
+
+SimpleVariablePill.propTypes = {
+  label: PropTypes.string.isRequired,
+};
 
 const EditableVariablePill = ({ uuid }) => {
   const dispatch = useDispatch();
@@ -214,6 +223,10 @@ const EditableVariablePill = ({ uuid }) => {
       )}
     </>
   );
+};
+
+EditableVariablePill.propTypes = {
+  uuid: PropTypes.string.isRequired,
 };
 
 export default React.memo(EditableVariablePill);

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '@codaco/ui';
-import { useDispatch } from 'react-redux';
-import { untouch } from 'redux-form';
+import PropTypes from 'prop-types';
 import { has, get } from 'lodash';
 import EditableVariablePill, { SimpleVariablePill } from './VariablePill';
 import VariableSpotlight from './VariableSpotlight';
@@ -9,13 +8,12 @@ import SpotlightModal from './SpotlightModal';
 
 const VariablePicker = (props) => {
   const [showPicker, setShowPicker] = useState(false);
-  console.log('variable picker props', props);
+
   const {
     options,
     entity,
     type,
     label = 'Create or Select a Variable',
-    // To create a new option, one or the other of the following:
     onCreateOption,
     meta: {
       error,
@@ -24,11 +22,9 @@ const VariablePicker = (props) => {
     },
     input: {
       value,
-      onChange
-    }
+      onChange,
+    },
   } = props;
-
-  const dispatch = useDispatch();
 
   const handleSelectVariable = (variable) => {
     onChange(variable);
@@ -37,11 +33,6 @@ const VariablePicker = (props) => {
 
   const handleCreateOption = async (variable) => {
     onChange(null);
-
-    // // Setting input to null above will 'touch' the select, triggering validation
-    // // which we don't want yet. We 'un-touch' the input to resolve this.
-    // dispatch(untouch(form, input.name));
-
     await onCreateOption(variable);
     setShowPicker(false);
   };
@@ -54,8 +45,6 @@ const VariablePicker = (props) => {
       label: variableLabel,
       value: variableValue,
     }) => value === variableValue || value === variableLabel);
-
-    console.log('found', found);
 
     if (has(found, 'type')) {
       return (
@@ -106,6 +95,44 @@ const VariablePicker = (props) => {
       </SpotlightModal>
     </>
   );
+};
+
+VariablePicker.propTypes = {
+  entity: PropTypes.string,
+  type: PropTypes.string,
+  label: PropTypes.string,
+  options: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string,
+    value: PropTypes.string,
+    type: PropTypes.string,
+  })),
+  meta: PropTypes.shape({
+    error: PropTypes.string,
+    invalid: PropTypes.bool,
+    touched: PropTypes.bool,
+  }),
+  input: PropTypes.shape({
+    value: PropTypes.string,
+    onChange: PropTypes.func,
+  }),
+  onCreateOption: PropTypes.func,
+};
+
+VariablePicker.defaultProps = {
+  entity: null,
+  type: null,
+  label: null,
+  options: [],
+  meta: {
+    error: null,
+    invalid: false,
+    touched: false,
+  },
+  input: {
+    value: null,
+    onChange: () => {},
+  },
+  onCreateOption: () => {},
 };
 
 export default VariablePicker;
