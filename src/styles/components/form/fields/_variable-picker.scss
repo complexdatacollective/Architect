@@ -12,7 +12,7 @@ $component-name: form-fields-variable-picker;
     border-radius: var(--border-radius);
 
     legend {
-      @extend %small-heading;
+      @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
       padding: 0 unit(2);
     }
 

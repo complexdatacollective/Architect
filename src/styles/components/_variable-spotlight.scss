@@ -15,7 +15,7 @@
     width: 100%;
 
     legend {
-      @extend %small-heading;
+      @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
       text-align: center;
       color: var(--text-light);
       padding: unit(1) unit(2);
