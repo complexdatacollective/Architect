@@ -68,7 +68,13 @@ Heading.propTypes = {
 };
 
 const Variables = ({
-  variables, onDelete, sortBy, sortDirection, sort,
+  variables,
+  onDelete,
+  sortBy,
+  sortDirection,
+  sort,
+  entity,
+  type: entityType,
 }) => {
   const headingProps = {
     sortBy,
@@ -110,21 +116,38 @@ const Variables = ({
               Used In
             </Heading>
             <th />
+            <th />
           </tr>
         </thead>
         <tbody>
           {variables.map(({
-            id, name, component, type, inUse, usage,
+            id,
+            name,
+            component,
+            type,
+            inUse,
+            usage,
           }, index) => (
             <tr className={rowClassName(index)} key={id}>
-              <td className="codebook__variables-column">{name}</td>
+              <td className="codebook__variables-column">
+                {name}
+              </td>
               <td className="codebook__variables-column">{type}</td>
               <td className="codebook__variables-column">{component}</td>
               <td className="codebook__variables-column codebook__variables-column--usage">
-                <UsageColumn inUse={inUse} usage={usage} />
+                <UsageColumn
+                  inUse={inUse}
+                  usage={usage}
+                />
               </td>
-              <td className="codebook__variables-column codebook__variables-column--controls">
-                <ControlsColumn onDelete={onDelete} inUse={inUse} id={id} />
+              <td className="codebook__variables-column codebook__variables-column--control">
+                <ControlsColumn
+                  onDelete={onDelete}
+                  inUse={inUse}
+                  entity={entity}
+                  type={entityType}
+                  id={id}
+                />
               </td>
             </tr>
           ))}
@@ -135,16 +158,19 @@ const Variables = ({
 };
 
 Variables.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  variables: PropTypes.array,
+  entity: PropTypes.string.isRequired,
   onDelete: PropTypes.func,
+  sort: PropTypes.func.isRequired,
   sortBy: PropTypes.string.isRequired,
   sortDirection: PropTypes.oneOf([SortDirection.ASC, SortDirection.DESC]).isRequired,
-  sort: PropTypes.func.isRequired,
+  type: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  variables: PropTypes.array,
 };
 
 Variables.defaultProps = {
   variables: [],
+  type: null,
   onDelete: () => {},
 };
 

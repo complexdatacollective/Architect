@@ -157,12 +157,12 @@ describe('timeline middleware', () => {
 
       beforeEach(() => {
         const options = {
-          filter: (action) => action.type === ignoredType,
+          exclude: (action) => action.type === ignoredType,
         };
         rewindableReducer = getRewindableReducer(undefined, options);
       });
 
-      it('actions that are filtered do not create points on the timeline', () => {
+      it('actions that are excluded do not create points on the timeline', () => {
         // Add some regular actions
         const nextState = times(3)
           .reduce(

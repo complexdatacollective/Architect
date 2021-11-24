@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { compose, withProps } from 'recompose';
 import { getVariableOptionsForSubject } from '@selectors/codebook';
+import { Button } from '@codaco/ui';
+import RenameVariableControl from '@components/RenameVariableControl';
 import NativeSelect from './NativeSelect';
 
 const withVariableValidator = withProps(({ validation }) => ({
@@ -16,13 +18,41 @@ const mapStateToProps = (state, { entity, type }) => {
 };
 
 // TODO: For now just map existing variables, but later could also append create handlers!
-const VariableSelect = ({ reserved, ...props }) => (
-  <NativeSelect
-    placeholder="Select or create a variable"
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    {...props}
-    reserved={reserved}
-  />
+const VariableSelect = ({
+  reserved,
+  entity,
+  type,
+  variable,
+  ...props
+}) => (
+  <div className="form-fields-variable-select">
+    <NativeSelect
+      placeholder="Select or create a variable"
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+      reserved={reserved}
+    />
+
+    { variable && (
+      <RenameVariableControl
+        entity={entity}
+        type={type}
+        id={variable}
+      >
+        {({ onClick }) => (
+          <div className="form-fields-variable-select__rename">
+            <Button
+              onClick={onClick}
+              size="small"
+              color="sea-serpent"
+            >
+              Rename variable
+            </Button>
+          </div>
+        )}
+      </RenameVariableControl>
+    )}
+  </div>
 );
 
 VariableSelect.propTypes = {
@@ -30,12 +60,14 @@ VariableSelect.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   reserved: PropTypes.array,
   type: PropTypes.string,
+  variable: PropTypes.string,
 };
 
 VariableSelect.defaultProps = {
   reserved: [],
   entity: null,
   type: null,
+  variable: null,
 };
 
 export default compose(

@@ -5,7 +5,6 @@ import { compose } from 'recompose';
 import { Field } from 'redux-form';
 import Text from '@codaco/ui/lib/components/Fields/Text';
 import CheckboxGroup from '@codaco/ui/lib/components/Fields/CheckboxGroup';
-import NativeSelect from '@components/Form/Fields/NativeSelect';
 import VariableSelect from '@components/Form/Fields/VariableSelect';
 import ValidatedField from '@components/Form/ValidatedField';
 import { getFieldId } from '@app/utils/issues';
@@ -13,12 +12,14 @@ import { Section, Row } from '@components/EditorLayout';
 import withPresetProps from './withPresetProps';
 
 const PresetFields = ({
-  layoutVariablesForSubject,
-  groupVariablesForSubject,
   edgesForSubject,
-  highlightVariablesForSubject,
-  handleCreateLayoutVariable,
   entity,
+  groupVariable,
+  groupVariablesForSubject,
+  handleCreateLayoutVariable,
+  highlightVariablesForSubject,
+  layoutVariable,
+  layoutVariablesForSubject,
   type,
 }) => (
   <>
@@ -45,17 +46,21 @@ const PresetFields = ({
           validation={{ required: true }}
           options={layoutVariablesForSubject}
           onCreateOption={handleCreateLayoutVariable}
+          variable={layoutVariable}
         />
       </Row>
     </Section>
     <Section>
       <Row>
-        <ValidatedField
+        <Field
           name="groupVariable"
-          component={NativeSelect}
+          component={VariableSelect}
           allowPlaceholderSelect
           placeholder="None"
           label="Group variable"
+          entity={entity}
+          type={type}
+          variable={groupVariable}
           options={groupVariablesForSubject}
         />
       </Row>
@@ -87,23 +92,27 @@ const PresetFields = ({
 
 PresetFields.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  layoutVariablesForSubject: PropTypes.array,
+  edgesForSubject: PropTypes.array,
+  entity: PropTypes.string.isRequired,
+  groupVariable: PropTypes.string,
   // eslint-disable-next-line react/forbid-prop-types
   groupVariablesForSubject: PropTypes.array,
-  // eslint-disable-next-line react/forbid-prop-types
-  edgesForSubject: PropTypes.array,
+  handleCreateLayoutVariable: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   highlightVariablesForSubject: PropTypes.array,
-  handleCreateLayoutVariable: PropTypes.func.isRequired,
-  entity: PropTypes.string.isRequired,
+  layoutVariable: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  layoutVariablesForSubject: PropTypes.array,
   type: PropTypes.string.isRequired,
 };
 
 PresetFields.defaultProps = {
-  layoutVariablesForSubject: [],
-  groupVariablesForSubject: [],
   edgesForSubject: [],
+  groupVariable: null,
+  groupVariablesForSubject: [],
   highlightVariablesForSubject: [],
+  layoutVariable: null,
+  layoutVariablesForSubject: [],
 };
 
 export default compose(

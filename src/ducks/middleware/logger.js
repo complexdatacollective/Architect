@@ -8,8 +8,8 @@ const logger = createLogger({
   collapsed: true,
   logger: console,
   predicate: (getState, action) => (
-    // !/^@@redux-form/.test(String(action.type)) &&
-    !/^GUIDANCE/.test(String(action.type))
+    !/^@@redux-form/.test(String(action.type))
+    && !/^GUIDANCE/.test(String(action.type))
   ),
 });
 

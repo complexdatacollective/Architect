@@ -11,9 +11,10 @@ import { Layout, Section } from '@components/EditorLayout';
  */
 const CodebookScreen = (props) => {
   const {
+    layoutId,
+    onComplete,
     show,
     transitionState,
-    onComplete,
   } = props;
 
   const buttons = [
@@ -33,6 +34,7 @@ const CodebookScreen = (props) => {
       buttons={buttons}
       transitionState={transitionState}
       onAcknowledgeError={onComplete}
+      layoutId={layoutId}
     >
       <Layout>
         <Section>
@@ -51,15 +53,17 @@ const CodebookScreen = (props) => {
 };
 
 CodebookScreen.propTypes = {
+  layoutId: PropTypes.string,
+  onComplete: PropTypes.func,
   show: PropTypes.bool,
   transitionState: PropTypes.string,
-  onComplete: PropTypes.func,
 };
 
 CodebookScreen.defaultProps = {
+  layoutId: null,
+  onComplete: () => {},
   show: true,
   transitionState: null,
-  onComplete: () => {},
 };
 
 export default CodebookScreen;

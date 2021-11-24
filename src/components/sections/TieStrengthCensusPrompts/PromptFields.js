@@ -117,11 +117,12 @@ const PromptFields = ({
                   name="edgeVariable"
                   component={VariableSelect}
                   entity="edge"
-                  type="ordinal"
+                  type={createEdge}
                   label="Select an ordinal variable for this edge type"
                   options={variableOptions}
                   onCreateOption={handleNewVariable}
                   validation={{ required: true }}
+                  variable={edgeVariable}
                 />
               </Row>
               { edgeVariable && (

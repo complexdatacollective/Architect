@@ -1,19 +1,23 @@
 import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
-import { change } from 'redux-form';
+import { change, formValueSelector } from 'redux-form';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 import {
   getNarrativeVariables,
   getEdgesForSubject,
 } from './selectors';
 
-const mapStateToProps = (state, { entity, type }) => {
+const mapStateToProps = (state, { entity, type, form }) => {
   const narrativeVariables = getNarrativeVariables(state, { entity, type });
   const edgesForSubject = getEdgesForSubject(state, { entity, type });
+  const layoutVariable = formValueSelector(form)(state, 'layoutVariable');
+  const groupVariable = formValueSelector(form)(state, 'groupVariable');
 
   return {
     ...narrativeVariables,
     edgesForSubject,
+    groupVariable,
+    layoutVariable,
   };
 };
 

@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { connect } from 'react-redux';
-import { reduxForm, Form, getFormSyncErrors } from 'redux-form';
+import React, { useState, useCallback } from 'react';
+import { reduxForm, Form } from 'redux-form';
 import PropTypes from 'prop-types';
 import { compose, withStateHandlers } from 'recompose';
-import { FormCodeView } from './CodeView';
+import CodeView from './CodeView';
 import Issues from './Issues';
 
 /**
@@ -11,7 +10,7 @@ import Issues from './Issues';
  *
  * It includes:
  * - `<Issues />` component, which provides interactive form errors
- * - `<FormCodeView />` component, which reveals the form's working copy of the configuration
+ * - `<CodeView />` component, which reveals the form's working copy of the configuration
  * - A redux-form `<Form />` component, which allows us to dispatch submit from outside
  *   the editor (necessary for our button footers).
  *
@@ -54,7 +53,6 @@ const Editor = ({
   isIssuesVisible,
   form,
   children,
-  issues,
   title,
   submitFailed,
   component: Component,
@@ -63,17 +61,9 @@ const Editor = ({
   const [showCodeView, setCodeView] = useState(false);
   const toggleCodeView = useCallback(() => setCodeView((value) => !value));
 
-  const hasOutstandingIssues = Object.keys(issues).length !== 0;
-
-  useEffect(() => {
-    if (!hasOutstandingIssues) {
-      hideIssues();
-    }
-  }, [hasOutstandingIssues]);
-
   return (
     <>
-      <FormCodeView toggleCodeView={toggleCodeView} form={form} show={showCodeView} />
+      <CodeView toggleCodeView={toggleCodeView} form={form} show={showCodeView} />
       <Form onSubmit={handleSubmit}>
         { typeof children === 'function'
           && children({
@@ -90,8 +80,9 @@ const Editor = ({
         )}
       </Form>
       <Issues
-        issues={issues}
+        form={form}
         show={isIssuesVisible}
+        hideIssues={hideIssues}
       />
     </>
   );
@@ -101,8 +92,6 @@ Editor.propTypes = {
   hideIssues: PropTypes.func.isRequired,
   isIssuesVisible: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  issues: PropTypes.object.isRequired,
   submitFailed: PropTypes.bool.isRequired,
   form: PropTypes.string.isRequired,
   title: PropTypes.string,
@@ -114,14 +103,6 @@ Editor.defaultProps = {
   component: null,
   children: null,
   title: '',
-};
-
-const mapStateToProps = (state, props) => {
-  const issues = getFormSyncErrors(props.form)(state);
-
-  return {
-    issues,
-  };
 };
 
 export default compose(
@@ -137,5 +118,4 @@ export default compose(
     touchOnChange: true,
     enableReinitialize: true,
   }),
-  connect(mapStateToProps),
 )(Editor);

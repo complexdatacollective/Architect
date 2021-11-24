@@ -1,43 +1,728 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CodeView /> can render 1`] = `
-<ForwardRef(MotionComponent)
-  animate="hide"
-  className="code-view"
-  initial="hide"
-  transition={
+<Provider
+  store={
     Object {
-      "duration": NaN,
-      "ease": "easeInOut",
-    }
-  }
-  variants={
-    Object {
-      "hide": Object {
-        "opacity": 0,
-        "translateY": "-100%",
-      },
-      "show": Object {
-        "opacity": 1,
-        "translateY": "0%",
-      },
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
     }
   }
 >
-  <div
-    className="code-view__content"
+  <CodeView
+    form="test"
+    show={false}
+    toggleCodeView={[Function]}
   >
-    <pre>
-      <code>
-        {}
-      </code>
-    </pre>
-  </div>
-  <div
-    className="code-view__controls"
-    onClick={[Function]}
+    <ForwardRef(MotionComponent)
+      animate="hide"
+      className="code-view"
+      initial="hide"
+      transition={
+        Object {
+          "duration": NaN,
+          "ease": "easeInOut",
+        }
+      }
+      variants={
+        Object {
+          "hide": Object {
+            "opacity": 0,
+            "translateY": "-100%",
+          },
+          "show": Object {
+            "opacity": 1,
+            "translateY": "0%",
+          },
+        }
+      }
+    >
+      <div
+        className="code-view"
+        style={
+          Object {
+            "opacity": 0,
+            "transform": "translateY(-100%) translateZ(0)",
+          }
+        }
+      >
+        <div
+          className="code-view__content"
+        >
+          <pre>
+            <code />
+          </pre>
+        </div>
+        <div
+          className="code-view__controls"
+          onClick={[Function]}
+        >
+          Close code view
+        </div>
+      </div>
+      <Component
+        animate="hide"
+        className="code-view"
+        inherit={false}
+        initial="hide"
+        key="animation"
+        transition={
+          Object {
+            "duration": NaN,
+            "ease": "easeInOut",
+          }
+        }
+        variants={
+          Object {
+            "hide": Object {
+              "opacity": 0,
+              "translateY": "-100%",
+            },
+            "show": Object {
+              "opacity": 1,
+              "translateY": "0%",
+            },
+          }
+        }
+        visualElement={
+          HTMLVisualElement {
+            "activeOverrides": Set {},
+            "axisProgress": Object {
+              "x": MotionValue {
+                "canTrackVelocity": true,
+                "current": 0,
+                "lastUpdated": 0,
+                "prev": undefined,
+                "renderSubscribers": SubscriptionManager {
+                  "subscriptions": Set {},
+                },
+                "scheduleVelocityCheck": [Function],
+                "timeDelta": 0,
+                "updateAndNotify": [Function],
+                "updateSubscribers": SubscriptionManager {
+                  "subscriptions": Set {},
+                },
+                "velocityCheck": [Function],
+              },
+              "y": MotionValue {
+                "canTrackVelocity": true,
+                "current": 0,
+                "lastUpdated": 0,
+                "prev": undefined,
+                "renderSubscribers": SubscriptionManager {
+                  "subscriptions": Set {},
+                },
+                "scheduleVelocityCheck": [Function],
+                "timeDelta": 0,
+                "updateAndNotify": [Function],
+                "updateSubscribers": SubscriptionManager {
+                  "subscriptions": Set {},
+                },
+                "velocityCheck": [Function],
+              },
+            },
+            "baseTarget": Object {
+              "opacity": 0,
+              "translateY": "-100%",
+            },
+            "children": Set {},
+            "config": Object {
+              "allowTransformNone": true,
+              "animate": "hide",
+              "children": Array [
+                <div
+                  className="code-view__content"
+                >
+                  <pre>
+                    <code />
+                  </pre>
+                </div>,
+                <div
+                  className="code-view__controls"
+                  onClick={[Function]}
+                >
+                  Close code view
+                </div>,
+              ],
+              "className": "code-view",
+              "enableHardwareAcceleration": true,
+              "initial": "hide",
+              "transition": Object {
+                "duration": NaN,
+                "ease": "easeInOut",
+              },
+              "variants": Object {
+                "hide": Object {
+                  "opacity": 0,
+                  "translateY": "-100%",
+                },
+                "show": Object {
+                  "opacity": 1,
+                  "translateY": "0%",
+                },
+              },
+            },
+            "current": <div
+              class="code-view"
+              style="opacity: 0; transform: translateY(-100%) translateZ(0);"
+            >
+              <div
+                class="code-view__content"
+              >
+                <pre>
+                  <code />
+                </pre>
+              </div>
+              <div
+                class="code-view__controls"
+              >
+                Close code view
+              </div>
+            </div>,
+            "defaultConfig": Object {
+              "allowTransformNone": true,
+              "enableHardwareAcceleration": true,
+            },
+            "delta": Object {
+              "x": Object {
+                "origin": 0,
+                "originPoint": 0,
+                "scale": 1,
+                "translate": 0,
+              },
+              "y": Object {
+                "origin": 0,
+                "originPoint": 0,
+                "scale": 1,
+                "translate": 0,
+              },
+            },
+            "deltaFinal": Object {
+              "x": Object {
+                "origin": 0,
+                "originPoint": 0,
+                "scale": 1,
+                "translate": 0,
+              },
+              "y": Object {
+                "origin": 0,
+                "originPoint": 0,
+                "scale": 1,
+                "translate": 0,
+              },
+            },
+            "deltaTransform": "translate3d(0px, 0px, 0) scale(1, 1)",
+            "depth": 0,
+            "element": <div
+              class="code-view"
+              style="opacity: 0; transform: translateY(-100%) translateZ(0);"
+            >
+              <div
+                class="code-view__content"
+              >
+                <pre>
+                  <code />
+                </pre>
+              </div>
+              <div
+                class="code-view__controls"
+              >
+                Close code view
+              </div>
+            </div>,
+            "externalRef": null,
+            "hasViewportBoxUpdated": false,
+            "isAnimating": Set {},
+            "isLayoutProjectionEnabled": false,
+            "isMounted": true,
+            "isPresenceRoot": true,
+            "isPresent": true,
+            "isTargetBoxLocked": false,
+            "latest": Object {
+              "opacity": 0,
+              "translateY": "-100%",
+            },
+            "layoutId": undefined,
+            "layoutMeasureListeners": SubscriptionManager {
+              "subscriptions": Set {},
+            },
+            "layoutUpdateListeners": SubscriptionManager {
+              "subscriptions": Set {},
+            },
+            "overrides": Array [],
+            "parent": undefined,
+            "prevTreeScale": Object {
+              "x": 1,
+              "y": 1,
+            },
+            "reactStyle": Object {},
+            "ref": [Function],
+            "resolvedOverrides": Array [],
+            "rootParent": [Circular],
+            "stopLayoutAxisAnimation": Object {
+              "x": [Function],
+              "y": [Function],
+            },
+            "style": Object {
+              "opacity": 0,
+              "transform": "translateY(-100%) translateZ(0)",
+            },
+            "targetBoxFinal": Object {
+              "x": Object {
+                "max": 1,
+                "min": 0,
+              },
+              "y": Object {
+                "max": 1,
+                "min": 0,
+              },
+            },
+            "transform": Object {
+              "translateY": "-100%",
+            },
+            "transformKeys": Array [
+              "translateY",
+            ],
+            "transformOrigin": Object {},
+            "treePath": Array [],
+            "treeScale": Object {
+              "x": 1,
+              "y": 1,
+            },
+            "triggerRender": [Function],
+            "update": [Function],
+            "updateLayoutDelta": [Function],
+            "valueSubscriptions": Map {
+              "opacity" => [Function],
+              "translateY" => [Function],
+            },
+            "values": Map {
+              "opacity" => MotionValue {
+                "canTrackVelocity": true,
+                "current": 0,
+                "lastUpdated": 0,
+                "prev": undefined,
+                "renderSubscribers": SubscriptionManager {
+                  "subscriptions": Set {
+                    [Function],
+                  },
+                },
+                "scheduleVelocityCheck": [Function],
+                "timeDelta": 0,
+                "updateAndNotify": [Function],
+                "updateSubscribers": SubscriptionManager {
+                  "subscriptions": Set {
+                    [Function],
+                  },
+                },
+                "velocityCheck": [Function],
+              },
+              "translateY" => MotionValue {
+                "canTrackVelocity": true,
+                "current": "-100%",
+                "lastUpdated": 0,
+                "prev": undefined,
+                "renderSubscribers": SubscriptionManager {
+                  "subscriptions": Set {
+                    [Function],
+                  },
+                },
+                "scheduleVelocityCheck": [Function],
+                "timeDelta": 0,
+                "updateAndNotify": [Function],
+                "updateSubscribers": SubscriptionManager {
+                  "subscriptions": Set {
+                    [Function],
+                  },
+                },
+                "velocityCheck": [Function],
+              },
+            },
+            "vars": Object {},
+            "viewportBoxUpdateListeners": SubscriptionManager {
+              "subscriptions": Set {},
+            },
+          }
+        }
+      />
+    </ForwardRef(MotionComponent)>
+  </CodeView>
+</Provider>
+`;
+
+exports[`<CodeView /> renders content only when show is true 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  <CodeView
+    form="test"
+    show={true}
+    toggleCodeView={[Function]}
   >
-    Close code view
-  </div>
-</ForwardRef(MotionComponent)>
+    <ForwardRef(MotionComponent)
+      animate="show"
+      className="code-view code-view--show"
+      initial="hide"
+      transition={
+        Object {
+          "duration": NaN,
+          "ease": "easeInOut",
+        }
+      }
+      variants={
+        Object {
+          "hide": Object {
+            "opacity": 0,
+            "translateY": "-100%",
+          },
+          "show": Object {
+            "opacity": 1,
+            "translateY": "0%",
+          },
+        }
+      }
+    >
+      <div
+        className="code-view code-view--show"
+        style={
+          Object {
+            "opacity": 0,
+            "transform": "translateY(-100%) translateZ(0)",
+          }
+        }
+      >
+        <div
+          className="code-view__content"
+        >
+          <pre>
+            <code>
+              {
+  "name": "example name"
+}
+            </code>
+          </pre>
+        </div>
+        <div
+          className="code-view__controls"
+          onClick={[Function]}
+        >
+          Close code view
+        </div>
+      </div>
+      <Component
+        animate="show"
+        className="code-view code-view--show"
+        inherit={false}
+        initial="hide"
+        key="animation"
+        transition={
+          Object {
+            "duration": NaN,
+            "ease": "easeInOut",
+          }
+        }
+        variants={
+          Object {
+            "hide": Object {
+              "opacity": 0,
+              "translateY": "-100%",
+            },
+            "show": Object {
+              "opacity": 1,
+              "translateY": "0%",
+            },
+          }
+        }
+        visualElement={
+          HTMLVisualElement {
+            "activeOverrides": Set {},
+            "axisProgress": Object {
+              "x": MotionValue {
+                "canTrackVelocity": true,
+                "current": 0,
+                "lastUpdated": 0,
+                "prev": undefined,
+                "renderSubscribers": SubscriptionManager {
+                  "subscriptions": Set {},
+                },
+                "scheduleVelocityCheck": [Function],
+                "timeDelta": 0,
+                "updateAndNotify": [Function],
+                "updateSubscribers": SubscriptionManager {
+                  "subscriptions": Set {},
+                },
+                "velocityCheck": [Function],
+              },
+              "y": MotionValue {
+                "canTrackVelocity": true,
+                "current": 0,
+                "lastUpdated": 0,
+                "prev": undefined,
+                "renderSubscribers": SubscriptionManager {
+                  "subscriptions": Set {},
+                },
+                "scheduleVelocityCheck": [Function],
+                "timeDelta": 0,
+                "updateAndNotify": [Function],
+                "updateSubscribers": SubscriptionManager {
+                  "subscriptions": Set {},
+                },
+                "velocityCheck": [Function],
+              },
+            },
+            "baseTarget": Object {
+              "opacity": 1,
+              "translateY": "0%",
+            },
+            "children": Set {},
+            "config": Object {
+              "allowTransformNone": true,
+              "animate": "show",
+              "children": Array [
+                <div
+                  className="code-view__content"
+                >
+                  <pre>
+                    <code>
+                      {
+  "name": "example name"
+}
+                    </code>
+                  </pre>
+                </div>,
+                <div
+                  className="code-view__controls"
+                  onClick={[Function]}
+                >
+                  Close code view
+                </div>,
+              ],
+              "className": "code-view code-view--show",
+              "enableHardwareAcceleration": true,
+              "initial": "hide",
+              "transition": Object {
+                "duration": NaN,
+                "ease": "easeInOut",
+              },
+              "variants": Object {
+                "hide": Object {
+                  "opacity": 0,
+                  "translateY": "-100%",
+                },
+                "show": Object {
+                  "opacity": 1,
+                  "translateY": "0%",
+                },
+              },
+            },
+            "current": <div
+              class="code-view code-view--show"
+              style="opacity: 0; transform: translateY(-100%) translateZ(0);"
+            >
+              <div
+                class="code-view__content"
+              >
+                <pre>
+                  <code>
+                    {
+  "name": "example name"
+}
+                  </code>
+                </pre>
+              </div>
+              <div
+                class="code-view__controls"
+              >
+                Close code view
+              </div>
+            </div>,
+            "defaultConfig": Object {
+              "allowTransformNone": true,
+              "enableHardwareAcceleration": true,
+            },
+            "delta": Object {
+              "x": Object {
+                "origin": 0,
+                "originPoint": 0,
+                "scale": 1,
+                "translate": 0,
+              },
+              "y": Object {
+                "origin": 0,
+                "originPoint": 0,
+                "scale": 1,
+                "translate": 0,
+              },
+            },
+            "deltaFinal": Object {
+              "x": Object {
+                "origin": 0,
+                "originPoint": 0,
+                "scale": 1,
+                "translate": 0,
+              },
+              "y": Object {
+                "origin": 0,
+                "originPoint": 0,
+                "scale": 1,
+                "translate": 0,
+              },
+            },
+            "deltaTransform": "translate3d(0px, 0px, 0) scale(1, 1)",
+            "depth": 0,
+            "element": <div
+              class="code-view code-view--show"
+              style="opacity: 0; transform: translateY(-100%) translateZ(0);"
+            >
+              <div
+                class="code-view__content"
+              >
+                <pre>
+                  <code>
+                    {
+  "name": "example name"
+}
+                  </code>
+                </pre>
+              </div>
+              <div
+                class="code-view__controls"
+              >
+                Close code view
+              </div>
+            </div>,
+            "externalRef": null,
+            "hasViewportBoxUpdated": false,
+            "isAnimating": Set {
+              "opacity",
+              "translateY",
+            },
+            "isLayoutProjectionEnabled": false,
+            "isMounted": true,
+            "isPresenceRoot": true,
+            "isPresent": true,
+            "isTargetBoxLocked": false,
+            "latest": Object {
+              "opacity": 0,
+              "translateY": "-100%",
+            },
+            "layoutId": undefined,
+            "layoutMeasureListeners": SubscriptionManager {
+              "subscriptions": Set {},
+            },
+            "layoutUpdateListeners": SubscriptionManager {
+              "subscriptions": Set {},
+            },
+            "overrides": Array [],
+            "parent": undefined,
+            "prevTreeScale": Object {
+              "x": 1,
+              "y": 1,
+            },
+            "reactStyle": Object {},
+            "ref": [Function],
+            "resolvedOverrides": Array [],
+            "rootParent": [Circular],
+            "stopLayoutAxisAnimation": Object {
+              "x": [Function],
+              "y": [Function],
+            },
+            "style": Object {
+              "opacity": 0,
+              "transform": "translateY(-100%) translateZ(0)",
+            },
+            "targetBoxFinal": Object {
+              "x": Object {
+                "max": 1,
+                "min": 0,
+              },
+              "y": Object {
+                "max": 1,
+                "min": 0,
+              },
+            },
+            "transform": Object {
+              "translateY": "-100%",
+            },
+            "transformKeys": Array [
+              "translateY",
+            ],
+            "transformOrigin": Object {},
+            "treePath": Array [],
+            "treeScale": Object {
+              "x": 1,
+              "y": 1,
+            },
+            "triggerRender": [Function],
+            "update": [Function],
+            "updateLayoutDelta": [Function],
+            "valueSubscriptions": Map {
+              "opacity" => [Function],
+              "translateY" => [Function],
+            },
+            "values": Map {
+              "opacity" => MotionValue {
+                "canTrackVelocity": true,
+                "current": 0,
+                "lastUpdated": 0,
+                "prev": undefined,
+                "renderSubscribers": SubscriptionManager {
+                  "subscriptions": Set {
+                    [Function],
+                  },
+                },
+                "scheduleVelocityCheck": [Function],
+                "stopAnimation": [Function],
+                "timeDelta": 0,
+                "updateAndNotify": [Function],
+                "updateSubscribers": SubscriptionManager {
+                  "subscriptions": Set {
+                    [Function],
+                  },
+                },
+                "velocityCheck": [Function],
+              },
+              "translateY" => MotionValue {
+                "canTrackVelocity": true,
+                "current": "-100%",
+                "lastUpdated": 0,
+                "prev": undefined,
+                "renderSubscribers": SubscriptionManager {
+                  "subscriptions": Set {
+                    [Function],
+                  },
+                },
+                "scheduleVelocityCheck": [Function],
+                "stopAnimation": [Function],
+                "timeDelta": 0,
+                "updateAndNotify": [Function],
+                "updateSubscribers": SubscriptionManager {
+                  "subscriptions": Set {
+                    [Function],
+                  },
+                },
+                "velocityCheck": [Function],
+              },
+            },
+            "vars": Object {},
+            "viewportBoxUpdateListeners": SubscriptionManager {
+              "subscriptions": Set {},
+            },
+          }
+        }
+      />
+    </ForwardRef(MotionComponent)>
+  </CodeView>
+</Provider>
 `;

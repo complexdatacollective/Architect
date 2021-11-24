@@ -18,6 +18,7 @@ const HighlightFields = ({
   handleCreateVariable,
   handleEdgeHighlightChange,
   highlightVariablesForSubject,
+  highlightVariable,
   setCanCreateEdge,
   type,
 }) => {
@@ -61,6 +62,7 @@ const HighlightFields = ({
           onCreateOption={(value) => handleCreateVariable(value, 'boolean', 'highlight.variable')}
           validation={{ required: true }}
           options={highlightVariablesForSubject}
+          variable={highlightVariable}
         />
       </Row>
       )}
@@ -74,6 +76,7 @@ HighlightFields.propTypes = {
   entity: PropTypes.string.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
   handleEdgeHighlightChange: PropTypes.func.isRequired,
+  highlightVariable: PropTypes.string,
   // eslint-disable-next-line react/forbid-prop-types
   highlightVariablesForSubject: PropTypes.array.isRequired,
   setCanCreateEdge: PropTypes.func.isRequired,
@@ -82,6 +85,7 @@ HighlightFields.propTypes = {
 
 HighlightFields.defaultProps = {
   allowHighlighting: false,
+  highlightVariable: null,
 };
 
 export { HighlightFields };

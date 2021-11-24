@@ -6,6 +6,8 @@ import { Field, formValueSelector } from 'redux-form';
 import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
 import { useSelector } from 'react-redux';
 
+const summary = (<h2 id={getFieldId('interviewScript')}>Interviewer Script</h2>);
+
 const InterviewerScript = () => {
   const getFormValue = formValueSelector('edit-stage');
   const currentValue = useSelector((state) => getFormValue(state, 'interviewScript'));
@@ -14,9 +16,7 @@ const InterviewerScript = () => {
     <Section className="interview-script">
       <Details
         className="interview-script__details"
-        summary={(
-          <h2 id={getFieldId('interviewScript')}>Interviewer Script</h2>
-        )}
+        summary={summary}
         startExpanded={!!currentValue}
       >
         <p>

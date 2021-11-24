@@ -1,27 +1,18 @@
 $component-name: list-item;
 
 .#{$component-name} {
-  --input-border: var(--architect-sortable-text);
-  width: 100%;
-  background-color: var(--architect-sortable-background);
-  color: var(--architect-sortable-text);
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  border-radius: unit(1.5);
+  z-index: var(--z-fx);
 
-  &--clickable {
-    box-shadow: 0 .4rem rgba(17, 21, 27, .664); // sass-lint:disable-line no-color-literals
-    cursor: pointer;
-    transition: box-shadow var(--animation-duration-very-fast) var(--animation-easing);
-
-    &:hover {
-      box-shadow: 0 .8rem .4rem 0 rgba(17, 21, 27, .35); // sass-lint:disable-line no-color-literals
-    }
-
-    &:active {
-      box-shadow: unset;
-    }
+  &__container {
+    --input-border: var(--architect-sortable-text);
+    width: 100%;
+    background-color: var(--architect-sortable-background);
+    color: var(--architect-sortable-text);
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    border-radius: unit(1.5);
+    margin: unit(2) 0 0;
   }
 
   &__control {
@@ -47,6 +38,22 @@ $component-name: list-item;
   .list-group {
     &:last-child {
       margin: 0;
+    }
+  }
+
+  &--clickable {
+    .list-item__container {
+      box-shadow: 0 .4rem rgba(17, 21, 27, .664); // sass-lint:disable-line no-color-literals
+      cursor: pointer;
+      transition: box-shadow var(--animation-duration-very-fast) var(--animation-easing);
+
+      &:hover {
+        box-shadow: 0 .8rem .4rem 0 rgba(17, 21, 27, .35); // sass-lint:disable-line no-color-literals
+      }
+
+      &:active {
+        box-shadow: unset;
+      }
     }
   }
 }

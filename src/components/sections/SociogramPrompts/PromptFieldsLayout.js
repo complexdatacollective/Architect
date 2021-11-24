@@ -16,6 +16,7 @@ const PromptFields = ({
   entity,
   handleCreateVariable,
   layoutVariablesForSubject,
+  layoutVariable,
   type,
   variablesForSubject,
 }) => (
@@ -38,6 +39,7 @@ const PromptFields = ({
         validation={{ required: true }}
         options={layoutVariablesForSubject}
         onCreateOption={(value) => handleCreateVariable(value, 'layout', 'layout.layoutVariable')}
+        variable={layoutVariable}
       />
     </Row>
     { allowPositioning
@@ -74,6 +76,7 @@ PromptFields.propTypes = {
   allowPositioning: PropTypes.bool,
   entity: PropTypes.string.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
+  layoutVariable: PropTypes.string,
   layoutVariablesForSubject: PropTypes.arrayOf(layoutVariablesForSubjectShape).isRequired,
   type: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
@@ -82,6 +85,7 @@ PromptFields.propTypes = {
 
 PromptFields.defaultProps = {
   allowPositioning: true,
+  layoutVariable: null,
 };
 
 export { PromptFields };

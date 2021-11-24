@@ -3,7 +3,7 @@ import { get } from 'lodash';
 
 const defaultOptions = {
   limit: 1000,
-  filter: () => false,
+  exclude: () => false,
 };
 
 const JUMP = 'TIMELINE/JUMP';
@@ -79,9 +79,9 @@ const createTimelineReducer = (reducer, customOptions) => {
       return state;
     }
 
-    // If filtered, we don't treat this as a new
+    // If excluded, we don't treat this as a new
     // point in the timeline, but we do update the state
-    if (options.filter(action)) {
+    if (options.exclude(action)) {
       return {
         past,
         present: newPresent,
