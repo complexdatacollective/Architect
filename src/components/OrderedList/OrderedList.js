@@ -1,60 +1,109 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   compose,
-  withHandlers,
   defaultProps,
   renameProp,
 } from 'recompose';
-import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+import { isPlainObject, isEqual, isArray } from 'lodash';
+import { connect } from 'react-redux';
+import { arrayMove, arrayRemove } from 'redux-form';
+import { SortableContainer } from 'react-sortable-hoc';
+import { actionCreators as dialogActions } from '@modules/dialogs';
+import ListItem from './ListItem';
 
-const SortableItem = SortableElement(
-  ({ children }) => (
-    <div className="items__item">
-      { children }
-    </div>
-  ),
-);
+class OrderedList extends Component {
+  shouldComponentUpdate(nextProps) {
+    const { input: { value: oldValue } } = this.props;
+    const { input: { value: newValue } } = nextProps;
+    return !isEqual(newValue, oldValue);
+  }
 
-const OrderedList = ({
-  fields,
-  meta: { error, dirty, submitFailed },
-  item: Item,
-  disabled: sortable,
-  form,
-  ...rest
-}) => (
-  <div className="list">
-    { (dirty || submitFailed) && error && <p className="list__error">{error}</p> }
-    { fields.map((fieldId, index) => (
-      <SortableItem
-        index={index}
-        key={fieldId}
-      >
-        <Item
-          fieldId={fieldId}
-          index={index}
-          fields={fields}
-          onDelete={() => { fields.remove(index); }}
-          sortable={sortable}
-          form={form}
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          {...rest}
-        />
-      </SortableItem>
-    )) }
-  </div>
-);
+  render() {
+    const {
+      input: { value: values, name },
+      meta: { error, dirty, submitFailed },
+      item: Item,
+      disabled: sortable,
+      onClickItem,
+      removeItem,
+      meta: { form },
+    } = this.props;
+
+    return (
+      <div className="list">
+        { (dirty || submitFailed) && error && !isArray(error) && <p className="list__error">{error}</p> }
+        { values && values.map((value, index) => {
+          const previewValue = isPlainObject(value) ? value : { value };
+          const fieldId = `${name}[${index}]`;
+          const onClick = onClickItem && (
+            () => onClickItem(fieldId)
+          );
+
+          const onDelete = () => removeItem(index);
+
+          return (
+            <ListItem
+              index={index}
+              sortable={sortable}
+              key={fieldId}
+              layoutId={onClickItem && fieldId}
+              onClick={onClick}
+              onDelete={onDelete}
+            >
+              <Item
+                {...previewValue} // eslint-disable-line react/jsx-props-no-spreading
+                fieldId={fieldId}
+                form={form}
+                key={fieldId}
+              />
+            </ListItem>
+          );
+        }) }
+      </div>
+    );
+  }
+}
 
 OrderedList.propTypes = {
+  // // eslint-disable-next-line react/forbid-prop-types
+  // fields: PropTypes.object.isRequired,
+  // form: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  fields: PropTypes.object.isRequired,
-  form: PropTypes.string.isRequired,
+  input: PropTypes.object.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object.isRequired,
-  item: PropTypes.func.isRequired,
+  item: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+  ]).isRequired,
+  onClickItem: PropTypes.func,
+  removeItem: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
 };
+
+OrderedList.defaultProps = {
+  onClickItem: null,
+};
+
+const mapDispatchToProps = (dispatch, { input: { name }, meta: { form } }) => ({
+  removeItem: (index) => {
+    dispatch(
+      dialogActions.openDialog({
+        type: 'Confirm',
+        title: 'Remove this item?',
+        confirmLabel: 'Remove item',
+      }),
+    )
+      .then((confirm) => {
+        if (!confirm) { return; }
+        dispatch(arrayRemove(form, name, index));
+      });
+  },
+  onSortEnd: ({ oldIndex, newIndex }) => {
+    dispatch(arrayMove(form, name, oldIndex, newIndex));
+  },
+});
 
 export { OrderedList };
 
@@ -65,8 +114,6 @@ export default compose(
     sortable: true,
   }),
   renameProp('sortable', 'disabled'),
-  withHandlers({
-    onSortEnd: (props) => ({ oldIndex, newIndex }) => props.fields.move(oldIndex, newIndex),
-  }),
+  connect(null, mapDispatchToProps),
   SortableContainer,
 )(OrderedList);

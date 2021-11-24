@@ -108,6 +108,7 @@ const Variables = ({
               Used In
             </Heading>
             <th />
+            <th />
           </tr>
         </thead>
         <tbody>

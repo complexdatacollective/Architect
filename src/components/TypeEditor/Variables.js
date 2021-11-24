@@ -46,7 +46,6 @@ const Variables = ({
     fieldName={name}
     title="Edit Variable"
     filter={filter}
-    sortMode="auto"
     validation={{}}
     // eslint-disable-next-line react/jsx-props-no-spreading
     {...rest}

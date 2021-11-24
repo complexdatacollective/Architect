@@ -35,7 +35,6 @@ const QuickAdd = ({
         the interview.
       </p>
     </Tip>
-
     <div className="stage-editor-section-form">
       <ValidatedField
         name="quickAdd"

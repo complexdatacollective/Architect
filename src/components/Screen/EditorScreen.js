@@ -75,6 +75,8 @@ class EditorScreen extends Component {
       secondaryButtons,
       transitionState,
       editor: EditorComponent,
+      layoutId,
+      zIndex,
       ...rest
     } = this.props;
 
@@ -84,6 +86,8 @@ class EditorScreen extends Component {
         secondaryButtons={secondaryButtons}
         show={show}
         transitionState={transitionState}
+        layoutId={layoutId}
+        zIndex={zIndex}
       >
         {({ windowRoot }) => (
           <EditorComponent
@@ -98,26 +102,27 @@ class EditorScreen extends Component {
 }
 
 EditorScreen.propTypes = {
-  submitting: PropTypes.bool.isRequired,
-  submitForm: PropTypes.func.isRequired,
-  jump: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  locus: PropTypes.any.isRequired,
-  onComplete: PropTypes.func.isRequired,
+  editor: PropTypes.any.isRequired, // eslint-disable-line react/forbid-prop-types
   hasUnsavedChanges: PropTypes.bool.isRequired,
+  jump: PropTypes.func.isRequired,
+  layoutId: PropTypes.string,
+  locus: PropTypes.any.isRequired, // eslint-disable-line react/forbid-prop-types
+  onComplete: PropTypes.func.isRequired,
   openDialog: PropTypes.func.isRequired,
+  secondaryButtons: PropTypes.array, // eslint-disable-line react/forbid-prop-types
   show: PropTypes.bool,
-  // eslint-disable-next-line react/forbid-prop-types
-  secondaryButtons: PropTypes.array,
+  submitForm: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
   transitionState: PropTypes.string,
-  // eslint-disable-next-line react/forbid-prop-types
-  editor: PropTypes.any.isRequired,
+  zIndex: PropTypes.number,
 };
 
 EditorScreen.defaultProps = {
+  layoutId: null,
   secondaryButtons: null,
   show: true,
   transitionState: null,
+  zIndex: null,
 };
 
 const mapStateToProps = (state, { form, locus }) => ({

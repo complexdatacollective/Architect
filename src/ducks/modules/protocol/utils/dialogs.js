@@ -9,7 +9,7 @@ const genericAssetMessage = (
       Please see our
       {' '}
       <ExternalLink
-        href="https://documentation.networkcanvas.com/reference/key-concepts/resources/#supported-file-types"
+        href="https://documentation.networkcanvas.com/key-concepts/resources/#supported-file-types"
       >
         documentation page
       </ExternalLink>
@@ -26,7 +26,7 @@ const genericAssetMessage = (
       .
     </p>
     <p>
-      <ExternalLink href="https://documentation.networkcanvas.com/reference/key-concepts/resources/#supported-file-types">
+      <ExternalLink href="https://documentation.networkcanvas.com/key-concepts/resources/#supported-file-types">
         <Button size="small">view documentation</Button>
       </ExternalLink>
     </p>
