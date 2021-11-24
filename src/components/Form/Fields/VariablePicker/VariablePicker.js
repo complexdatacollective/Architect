@@ -31,10 +31,10 @@ const VariablePicker = (props) => {
     setShowPicker(false);
   };
 
-  const handleCreateOption = async (variable) => {
+  const handleCreateOption = (variable) => {
     onChange(null);
-    await onCreateOption(variable);
     setShowPicker(false);
+    onCreateOption(variable);
   };
 
   const hideModal = () => setShowPicker(false);

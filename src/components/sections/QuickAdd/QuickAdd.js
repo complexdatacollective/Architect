@@ -28,9 +28,9 @@ const QuickAdd = ({
     <p>
       Choose which variable to use to store the value of the quick add form.
     </p>
-    <Tip type="warning">
+    <Tip type="info">
       <p>
-        Create a variable called &quot;name&quot; here, unless you have a good reason not to.
+        Use a variable called &quot;name&quot; here, unless you have a good reason not to.
         Interviewer will then automatically use this variable as the label for the node in
         the interview.
       </p>

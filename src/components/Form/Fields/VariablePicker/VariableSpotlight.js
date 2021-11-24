@@ -12,6 +12,7 @@ import { get } from 'lodash';
 import { SimpleVariablePill } from './VariablePill';
 import { getVariablesForSubject } from '../../../../selectors/codebook';
 import { sortByLabel } from '../../../Codebook/helpers';
+import ExternalLink from '../../../ExternalLink';
 
 const ListItem = ({
   disabled,
@@ -108,6 +109,7 @@ const VariableSpotlight = (props) => {
   const [showCursor, setShowCursor] = useState(false);
 
   const handleCreateOption = () => {
+    setFilterTerm(''); // Clear search term so the user doesn't see a flash of invalid text
     onCreateOption(filterTerm);
   };
 
@@ -296,7 +298,7 @@ const VariableSpotlight = (props) => {
       <header className="variable-spotlight__header">
         <Search
           autoFocus
-          placeholder="Find or create a variable..."
+          placeholder="Create or find a variable..."
           input={{
             value: filterTerm,
             onChange: handleFilter,
@@ -309,6 +311,19 @@ const VariableSpotlight = (props) => {
         variants={resultsVariants}
         transition={{ duration: 0.2, ease: 'easeInOut' }}
       >
+        { options.length === 0 && (
+          <div className="variable-spotlight__empty">
+            <Icon name="info" />
+            <div>
+              <p>
+                To create your first variable of this type, type a name above and press enter.
+                See our&nbsp;
+                <ExternalLink href="https://documentation.networkcanvas.com/reference/variable-naming/">documentation on variable naming</ExternalLink>
+                &nbsp;for more information.
+              </p>
+            </div>
+          </div>
+        )}
         { renderResults() }
       </motion.main>
     </motion.div>
