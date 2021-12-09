@@ -1,3 +1,4 @@
+export { default as ForceDirectedLayout } from './ForceDirectedLayout';
 export { default as Background } from './Background';
 export { default as CardDisplayOptions } from './CardDisplayOptions';
 export { default as CategoricalBinPrompts } from './CategoricalBinPrompts';
