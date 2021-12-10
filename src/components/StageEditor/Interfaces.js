@@ -19,142 +19,138 @@ import {
   NarrativePresets,
   NodePanels,
   NodeType,
+  EdgeType,
   OrdinalBinPrompts,
   QuickAdd,
   SearchOptionsForExternalData,
   SociogramPrompts,
   SortOptionsForExternalData,
+  SkipLogic,
   TieStrengthCensusPrompts,
   Title,
 } from '@components/sections';
 
 const AlterEdgeForm = {
-  headerSections: [
-    FilteredEdgeType,
-  ],
   sections: [
+    EdgeType,
+    FilteredEdgeType,
     IntroductionPanel,
     Form,
+    SkipLogic,
     InterviewScript,
   ],
   template: {},
 };
 
 const AlterForm = {
-  headerSections: [
-    FilteredNodeType,
-  ],
   sections: [
+    NodeType,
+    FilteredNodeType,
     IntroductionPanel,
     Form,
+    SkipLogic,
     InterviewScript,
   ],
 };
 
 const CategoricalBin = {
-  headerSections: [
-    FilteredNodeType,
-  ],
   sections: [
+    NodeType,
+    FilteredNodeType,
     CategoricalBinPrompts,
+    SkipLogic,
     InterviewScript,
   ],
 };
 
 const DyadCensus = {
-  headerSections: [
-    FilteredNodeType,
-  ],
   sections: [
+    NodeType,
+    FilteredNodeType,
     IntroductionPanel,
     DyadCensusPrompts,
+    SkipLogic,
     InterviewScript,
   ],
 };
 
 const EgoForm = {
-  headerSections: [
-  ],
   sections: [
     IntroductionPanel,
     Form,
+    SkipLogic,
     InterviewScript,
   ],
   template: {},
 };
 
 const Information = {
-  headerSections: [
-  ],
   sections: [
     Title,
     ContentGrid,
+    SkipLogic,
     InterviewScript,
   ],
 };
 
 const NameGenerator = {
-  headerSections: [
-    NodeType,
-  ],
   sections: [
+    NodeType,
     Form,
     NameGeneratorPrompts,
     NodePanels,
+    SkipLogic,
     InterviewScript,
   ],
   name: 'Name Generator (using forms)',
 };
 
 const NameGeneratorAutoComplete = {
-  headerSections: [
-    NodeType,
-  ],
   sections: [
+    NodeType,
     ExternalDataSource,
     CardDisplayOptions,
     SearchOptionsForExternalData,
     NameGeneratorAutoCompletePrompts,
+    SkipLogic,
     InterviewScript,
   ],
   name: 'Large Roster Name Generator',
 };
 
 const NameGeneratorList = {
-  headerSections: [
-    NodeType,
-  ],
   sections: [
+    NodeType,
     ExternalDataSource,
     CardDisplayOptions,
     SortOptionsForExternalData,
     NameGeneratorListPrompts,
+    SkipLogic,
     InterviewScript,
   ],
   name: 'Small Roster Name Generator',
 };
 
 const NameGeneratorQuickAdd = {
-  headerSections: [
-    NodeType,
-  ],
   sections: [
+    NodeType,
     QuickAdd,
     NameGeneratorPrompts,
     NodePanels,
+    SkipLogic,
     InterviewScript,
   ],
   name: 'Name Generator (quick add mode)',
 };
 
 const Narrative = {
-  headerSections: [
-    FilteredNodeType,
-  ],
   sections: [
+    NodeType,
+    FilteredNodeType,
     Background,
     NarrativePresets,
     NarrativeBehaviours,
+    SkipLogic,
     InterviewScript,
   ],
   template: {
@@ -165,33 +161,33 @@ const Narrative = {
 };
 
 const OrdinalBin = {
-  headerSections: [
-    FilteredNodeType,
-  ],
   sections: [
+    NodeType,
+    FilteredNodeType,
     OrdinalBinPrompts,
+    SkipLogic,
     InterviewScript,
   ],
 };
 
 const Sociogram = {
-  headerSections: [
-    FilteredNodeType,
-  ],
   sections: [
+    NodeType,
+    FilteredNodeType,
     Background,
     SociogramPrompts,
+    SkipLogic,
     InterviewScript,
   ],
 };
 
 const TieStrengthCensus = {
-  headerSections: [
-    FilteredNodeType,
-  ],
   sections: [
+    NodeType,
+    FilteredNodeType,
     IntroductionPanel,
     TieStrengthCensusPrompts,
+    SkipLogic,
     InterviewScript,
   ],
 };

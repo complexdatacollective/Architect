@@ -30,6 +30,7 @@ const withDefaultFieldName = defaultProps({
 });
 
 const EditableList = ({
+  sectionTitle,
   editField,
   handleEditField,
   handleCancelEditField,
@@ -52,7 +53,7 @@ const EditableList = ({
   editProps,
   ...rest
 }) => (
-  <Section disabled={disabled} contentId={contentId}>
+  <Section disabled={disabled} contentId={contentId} title={sectionTitle}>
     <AnimateSharedLayout>
       <div id={getFieldId(`${fieldName}._error`)} data-name={startCase(fieldName)} />
       {children}
@@ -100,6 +101,7 @@ const EditableList = ({
 );
 
 EditableList.propTypes = {
+  sectionTitle: PropTypes.string.isRequired,
   form: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   sortMode: PropTypes.oneOf(sortModes),

@@ -20,9 +20,8 @@ class Background extends PureComponent {
     } = this.props;
 
     return (
-      <Section>
+      <Section title="Background">
         <Row>
-          <h3>Background</h3>
           <p>
             This section determines the graphical background for this prompt. You can choose
             between a conventional series of concentric circles, or provide your own

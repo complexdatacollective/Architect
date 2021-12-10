@@ -24,5 +24,6 @@ export { default as QuickAdd } from './QuickAdd';
 export { default as SearchOptionsForExternalData } from './SearchOptionsForExternalData';
 export { default as SociogramPrompts } from './SociogramPrompts';
 export { default as SortOptionsForExternalData } from './SortOptionsForExternalData';
+export { default as SkipLogic } from './SkipLogic';
 export { default as Title } from './Title';
 export { default as InterviewScript } from './InterviewScript';

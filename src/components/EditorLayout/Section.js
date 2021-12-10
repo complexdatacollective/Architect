@@ -1,42 +1,83 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { AnimateSharedLayout, motion } from 'framer-motion';
+import { Icon } from '@codaco/ui';
 import cx from 'classnames';
 
+const animations = {
+  collapsed: {
+    height: 0,
+    opacity: 0,
+  },
+  open: {
+    height: 'auto',
+    opacity: 1,
+  },
+};
+
 const Section = ({
+  title,
   disabled,
   group,
-  compactNext,
   children,
   className,
+  toggleable,
+  startExpanded,
 }) => {
+  const [isOpen, setIsOpen] = useState(startExpanded);
+
+  const toggleOpen = useCallback(
+    () => setIsOpen((s) => !s),
+    [setIsOpen],
+  );
+
   const sectionClasses = cx(
     'stage-editor-section',
     { 'stage-editor-section--disabled': disabled },
     { 'stage-editor-section--group': group },
-    { 'stage-editor-section--compact-next': compactNext },
     className,
   );
 
   return (
-    <div className={sectionClasses}>
-      {children}
-    </div>
+    <fieldset className={sectionClasses}>
+      <legend
+        onClick={toggleOpen}
+        role="button"
+        className={toggleable ? 'toggleable' : ''}
+      >
+        { toggleable && (!isOpen ? (<Icon name="chevron-right" />) : (<Icon name="chevron-down" />)) }
+        {title}
+        {!toggleable && (
+          <span style={{ color: 'var(--error)' }}> *</span>
+        )}
+      </legend>
+      <motion.div
+        variants={animations}
+        initial={toggleable ? 'collapsed' : 'open'}
+        animate={(isOpen ? 'open' : 'collapsed')}
+      >
+        {children}
+      </motion.div>
+    </fieldset>
   );
 };
 
 Section.propTypes = {
+  toggleable: PropTypes.bool,
+  startExpanded: PropTypes.bool,
+  title: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   group: PropTypes.bool,
-  compactNext: PropTypes.bool,
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
 
 Section.defaultProps = {
+  toggleable: false,
+  startExpanded: true,
   disabled: false,
   group: false,
   className: '',
-  compactNext: false,
 };
 
 export default Section;

@@ -20,9 +20,8 @@ const PromptFields = ({
   type,
   variablesForSubject,
 }) => (
-  <Section group>
+  <Section title="Layout" group>
     <Row>
-      <h3>Layout</h3>
       <div id={getFieldId('layout.layoutVariable')} data-name="Layout Variable" />
       <p>
         This section controls the position of nodes on this sociogram prompt.
@@ -44,23 +43,20 @@ const PromptFields = ({
     </Row>
     { allowPositioning
       && (
-      <Row>
-        <h4>
-          Sort Unplaced Nodes
-          { ' ' }
-          <small>(optional)</small>
-        </h4>
-        <p>
-          Nodes without any coordinates are stacked in a bucket until your participant drags them
-          into position. You can control the order of this stack, which will determine the order
-          that your participant is able to position the nodes.
-        </p>
-        <Field
-          name="sortOrder"
-          component={OrderBy}
-          variables={variablesForSubject}
-        />
-      </Row>
+      <Section toggleable title="Sort Unplaced Nodes">
+        <Row>
+          <p>
+            Nodes without any coordinates are stacked in a bucket until your participant drags them
+            into position. You can control the order of this stack, which will determine the order
+            that your participant is able to position the nodes.
+          </p>
+          <Field
+            name="sortOrder"
+            component={OrderBy}
+            variables={variablesForSubject}
+          />
+        </Row>
+      </Section>
       )}
   </Section>
 );

@@ -20,9 +20,11 @@ const NodePanels = ({
     <Section
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...rest}
+      title="Side Panels"
+      toggleable
+      id={getFieldId('panels')}
     >
       <div className="stage-editor-section-content-items">
-        <h2 id={getFieldId('panels')}>Side Panels</h2>
         <p>Use this section to configure up to two side panels on this name generator.</p>
         <Field
           name="panels"

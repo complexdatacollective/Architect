@@ -42,18 +42,8 @@ $component-name: list-item;
   }
 
   &--clickable {
-    .list-item__container {
-      box-shadow: 0 .4rem rgba(17, 21, 27, .664); // sass-lint:disable-line no-color-literals
-      cursor: pointer;
-      transition: box-shadow var(--animation-duration-very-fast) var(--animation-easing);
-
-      &:hover {
-        box-shadow: 0 .8rem .4rem 0 rgba(17, 21, 27, .35); // sass-lint:disable-line no-color-literals
-      }
-
-      &:active {
-        box-shadow: unset;
-      }
+    .#{$component-name}__container {
+      @include clickable(2);
     }
   }
 }

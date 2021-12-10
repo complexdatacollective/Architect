@@ -121,7 +121,7 @@ VariablePicker.propTypes = {
 VariablePicker.defaultProps = {
   entity: null,
   type: null,
-  label: null,
+  label: 'Create or Select a Variable',
   options: [],
   meta: {
     error: null,

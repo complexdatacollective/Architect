@@ -81,62 +81,59 @@ const PromptFields = ({
   return (
     <>
       <PromptText />
-      <Section>
+      <Section title="Categorical Variable" id={getFieldId('variable')}>
         <Row>
-          <h3 id={getFieldId('variable')}>Categorical Variable</h3>
           <ValidatedField
             name="variable"
             component={VariablePicker}
             type={type}
             entity={entity}
-            label=""
             options={categoricalVariableOptions}
             onCreateOption={handleNewVariable}
             validation={{ required: true }}
             variable={variable}
           />
         </Row>
-        { variable
-          && (
-          <Row>
-            <h3 id={getFieldId('options')}>Variable Options</h3>
-            <p>
-              Create
-              {' '}
-              <strong>up to 8</strong>
-              {' '}
-              options for this variable.
-            </p>
-            { showVariableOptionsTip
-              && (
-              <Tip type="error">
-                <p>
-                  The categorical bin interface is designed to use
-                  {' '}
-                  <strong>
-                    up to 8 option values
-                  </strong>
-                  {' '}
-                  (
-                  including an &quot;other&quot; variable). Using more will create
-                  a sub-optimal experience for participants, and might reduce data quality.
-                  Consider grouping your variable options and capturing further detail with
-                  follow-up questions.
-                </p>
-              </Tip>
-              )}
-            <Options
-              name="variableOptions"
-              label="Options"
-            />
-          </Row>
+        { variable && (
+        <Row>
+          <h3 id={getFieldId('options')}>Variable Options</h3>
+          <p>
+            Create
+            {' '}
+            <strong>up to 8</strong>
+            {' '}
+            options for this variable.
+          </p>
+          { showVariableOptionsTip && (
+            <Tip type="error">
+              <p>
+                The categorical bin interface is designed to use
+                {' '}
+                <strong>
+                  up to 8 option values
+                </strong>
+                {' '}
+                (
+                including an &quot;other&quot; variable). Using more will create
+                a sub-optimal experience for participants, and might reduce data quality.
+                Consider grouping your variable options and capturing further detail with
+                follow-up questions.
+              </p>
+            </Tip>
           )}
-        { variable
-          && (
+          <Options
+            name="variableOptions"
+            label="Options"
+          />
+        </Row>
+        )}
+      </Section>
+      { variable && (
+        <Section title="Follow-up &quot;Other&quot; Option" id={getFieldId('toggleOtherVariable')} toggleable>
           <Row>
-            <h3 id={getFieldId('toggleOtherVariable')}>Follow-up &quot;Other&quot; Option</h3>
             <p>
-              You can optionally create an &quot;other&quot; option that triggers a follow-up dialog
+              You can optionally create an &quot;other&quot; option that triggers a
+              follow-up dialog
               when nodes are dropped within it, and stores the value the participant enters in a
               designated variable. This feature may be useful in order to collect values
               you might not have listed above.
@@ -149,10 +146,21 @@ const PromptFields = ({
               onChange={handleToggleOtherVariable}
             />
           </Row>
-          )}
-        { otherVariableToggle
-          && (
-          <Section>
+          { otherVariableToggle && (
+          <>
+            <Row>
+              <ValidatedField
+                name="otherVariable"
+                component={VariablePicker}
+                entity={entity}
+                label="Variable"
+                type={type}
+                options={otherVariableOptions}
+                onCreateOption={(value) => onCreateOtherVariable(value, 'otherVariable')}
+                validation={{ required: true }}
+                variable={otherVariable}
+              />
+            </Row>
             <Row>
               <ValidatedField
                 name="otherOptionLabel"
@@ -173,27 +181,12 @@ const PromptFields = ({
                 validation={{ required: true }}
               />
             </Row>
-            <Row>
-              <ValidatedField
-                name="otherVariable"
-                component={VariablePicker}
-                entity={entity}
-                label="Variable"
-                type={type}
-                options={otherVariableOptions}
-                onCreateOption={(value) => onCreateOtherVariable(value, 'otherVariable')}
-                validation={{ required: true }}
-                variable={otherVariable}
-              />
-            </Row>
-          </Section>
+          </>
           )}
+        </Section>
+      )}
+      <Section title="Bucket Sort Order" toggleable>
         <Row>
-          <h3>
-            Bucket Sort Order
-            { ' ' }
-            <small>(optional)</small>
-          </h3>
           <p>
             Nodes are stacked in the bucket before they are placed by the participant. You may
             optionally configure a list of rules to determine how nodes are sorted in the bucket
@@ -215,12 +208,9 @@ const PromptFields = ({
             options={getSortOrderOptionGetter(variableOptions)}
           />
         </Row>
+      </Section>
+      <Section title="Bin Sort Order" toggleable>
         <Row>
-          <h3>
-            Bin Sort Order
-            {' '}
-            <small>(optional)</small>
-          </h3>
           <p>
             You may also configure one or more sort rules that determine the order that nodes
             are listed after they have been placed into a bin.
@@ -236,7 +226,6 @@ const PromptFields = ({
           />
         </Row>
       </Section>
-
       <NewVariableWindow
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...newVariableWindowProps}

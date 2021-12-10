@@ -13,13 +13,13 @@ const template = () => ({ sortOrder: [] });
 // TODO no prop spreading
 const SociogramPrompts = (props) => (
   <EditableList
+    sectionTitle="Prompts"
     title="Edit Prompt"
     previewComponent={PromptPreview}
     editComponent={PromptFields}
     template={template}
     {...props}
   >
-    <h2>Prompts</h2>
     <p>Add prompts to your Sociogram:</p>
   </EditableList>
 );

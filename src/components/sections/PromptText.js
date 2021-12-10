@@ -6,9 +6,8 @@ import { Section, Row } from '@components/EditorLayout';
 import ValidatedField from '@components/Form/ValidatedField';
 
 const PromptText = ({ name }) => (
-  <Section>
+  <Section id={getFieldId(name)} title="Prompt Text">
     <Row>
-      <h3 id={getFieldId(name)}>Prompt Text</h3>
       <p>
         The prompt text instructs your participant about the task on this stage.
         Enter the text to use for your prompt below.

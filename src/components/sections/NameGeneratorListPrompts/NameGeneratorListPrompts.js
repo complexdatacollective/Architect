@@ -6,12 +6,13 @@ import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequ
 import withMapFormToProps from '../../enhancers/withMapFormToProps';
 import withDisabledAssetRequired from '../../enhancers/withDisabledAssetRequired';
 import { PromptPreview } from '../NameGeneratorPrompts';
-import PromptFields from './PromptFields';
+import PromptFields from '../NameGeneratorPrompts/PromptFields';
 
 const template = () => ({});
 
 const NameGeneratorListPrompts = (props) => (
   <EditableList
+    sectionTitle="Prompts"
     previewComponent={PromptPreview}
     editComponent={PromptFields}
     title="Edit Prompt"
@@ -19,7 +20,6 @@ const NameGeneratorListPrompts = (props) => (
     // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
-    <h2>Prompts</h2>
     <p>
       Add one or more prompts below to frame the task for the user. You can reorder
       the prompts using the draggable handles on the left hand side.

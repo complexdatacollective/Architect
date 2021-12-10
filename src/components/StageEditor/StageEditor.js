@@ -8,9 +8,8 @@ import CodeView from '@components/CodeView';
 import { getInterface } from './Interfaces';
 import withStageEditorHandlers from './withStageEditorHandlers';
 import withStageEditorMeta from './withStageEditorMeta';
-import StageHeading from './StageHeading';
-import SkipLogic from './SkipLogic';
 import { formName } from './configuration';
+import StageHeading from './StageHeading';
 
 const StageEditor = (props) => {
   const {
@@ -33,11 +32,6 @@ const StageEditor = (props) => {
 
   const sections = useMemo(
     () => getInterface(interfaceType).sections,
-    [interfaceType],
-  );
-
-  const headerSections = useMemo(
-    () => getInterface(interfaceType).headerSections,
     [interfaceType],
   );
 
@@ -67,18 +61,17 @@ const StageEditor = (props) => {
     >
       {
         ({ submitFailed, windowRoot }) => (
+        <>
+          <StageHeading id={id} toggleCodeView={toggleShowCodeView} />
           <Layout>
             <CodeView
               form={formName}
               show={showCodeView}
               toggleCodeView={toggleShowCodeView}
             />
-            <StageHeading id={id} toggleCodeView={toggleShowCodeView}>
-              { headerSections && renderSections(headerSections, { submitFailed, windowRoot })}
-              <SkipLogic />
-            </StageHeading>
             {renderSections(sections, { submitFailed, windowRoot })}
           </Layout>
+        </>
         )
       }
     </Editor>

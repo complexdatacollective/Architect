@@ -22,9 +22,8 @@ const Form = ({
   entity,
   disableFormTitle,
 }) => (
-  <Section disabled={disabled} group>
+  <Section disabled={disabled} group title="Form">
     <div id={getFieldId('form.title')} data-name="Form title" />
-    <h2>Form</h2>
     <p>
       Use this section to define the fields to collect when this form is shown.
     </p>
@@ -52,9 +51,9 @@ const Form = ({
       normalize={normalizeField}
       itemSelector={itemSelector(entity, type)}
       form={form}
+      sectionTitle="Fields"
     >
       <div id={getFieldId('form.title')} data-name="Form fields" />
-      <h4>Fields</h4>
       <p>
         Add one or more fields to your form to collect attributes about each
         node the participant creates.

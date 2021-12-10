@@ -1,18 +1,10 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { SortableElement } from 'react-sortable-hoc';
 import { Icon } from '@codaco/ui';
 import Handle from './Handle';
-
-const interactionVariants = {
-  whileHover: {
-    y: '-0.2rem',
-    // boxShadow: '0 0.8rem 0.4rem 0 rgba(0, 0, 0, 0.35)',
-  },
-  whileTap: { y: '0.2rem' },
-};
 
 const ListItem = ({
   children,
@@ -22,28 +14,19 @@ const ListItem = ({
   sortable,
   layoutId,
 }) => {
-  const {
-    whileHover,
-    whileTap,
-  } = useMemo(() => ({
-    whileHover: onClick && interactionVariants.whileHover,
-    whileTap: onClick && interactionVariants.whileTap,
-  }), [onClick]);
-
   const componentClasses = cx(
     'list-item',
     { 'list-item--clickable': onClick },
     className,
   );
 
+  console.log(layoutId);
+
   return (
     <div className={componentClasses}>
       <motion.div
-        whileHover={whileHover}
-        whileTap={whileTap}
         layoutId={layoutId}
         className="list-item__container"
-        key="container"
       >
         { sortable
           && (

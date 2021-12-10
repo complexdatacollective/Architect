@@ -1,13 +1,13 @@
 .variable-spotlight {
   position: relative;
-  margin-top: unit(6);
+  margin-top: unit(12);
   width: 45rem;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   background: var(--modal-background);
   border-radius: var(--border-radius);
-  box-shadow: 0 1rem 3rem 0 rgba(0, 0, 0, .25); // sass-lint:disable-line no-color-literals
+  box-shadow: 0 0 4rem var(--modal-window-box-shadow);
 
   &__empty {
     border: 3px dashed var(--primary);
@@ -30,7 +30,7 @@
     border-top: 2px solid var(--color-white);
     width: 100%;
 
-    legend {
+    > legend {
       @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
       text-align: center;
       color: var(--text-light);

@@ -1,33 +1,44 @@
 .stage-editor-section {
-  transition-property: opacity, transform, max-height, margin-top;
-  transition-duration: var(--animation-duration-standard);
-  transition-timing-function: var(--animation-easing);
-  opacity: 1;
-  max-height: auto;
-  max-width: 80rem;
-  transform: translateX(0);
+  --section-background-color: var(--architect-panel-grey);
   overflow: hidden;
-  margin: unit(4) auto;
-  padding: unit(4);
-  background: var(--architect-panel-grey);
+  margin: unit(4);
+  padding: unit(2) unit(4);
+  background: var(--section-background-color);
   border-radius: var(--border-radius);
+  position: relative;
 
-  >:first-child {
-    margin-top: 0;
+  > legend {
+    @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
+    font-size: 13px;
+    padding: unit(1) unit(2);
+    background: var(--section-background-color);
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.toggleable {
+      cursor: pointer;
+    }
+
+    .icon {
+      height: unit(1);
+      width: unit(1);
+      margin-right: unit(1);
+
+      .cls-2 {
+        fill: var(--color-charcoal);
+      }
+    }
   }
 
-  &:last-child {
+  &:first-child {
     margin-top: 0;
-    border: 0;
   }
 
   &--disabled {
-    opacity: 0;
-    max-height: 0;
-    transform: translateX(-100%);
-    margin-top: 0;
-    padding: 0;
-    margin: 0;
+    opacity: .5;
+    cursor: not-allowed;
   }
 
   > .form-field-container,
@@ -43,10 +54,10 @@
     }
   }
 
-  // &--group {
   .stage-editor-section {
+    --section-background-color: var(--color-panel-grey--dark);
     margin: unit(4) 0;
-    background: var(--color-panel-grey--dark);
+    background: var(--section-background-color);
     border-radius: unit(1);
   }
 

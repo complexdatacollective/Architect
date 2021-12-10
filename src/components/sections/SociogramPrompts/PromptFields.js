@@ -3,7 +3,6 @@ import React from 'react';
 import { compose } from 'recompose';
 import PromptText from '@components/sections/PromptText';
 import FieldsLayout from './PromptFieldsLayout';
-import FieldsHighlight from './PromptFieldsHighlight';
 import FieldsEdges from './PromptFieldsEdges';
 import withCanCreateEdgesState from './withCanCreateEdgesState';
 
@@ -13,7 +12,6 @@ const PromptFields = (props) => (
     <PromptText />
     <FieldsLayout {...props} />
     <FieldsEdges {...props} />
-    <FieldsHighlight {...props} />
   </div>
 );
 

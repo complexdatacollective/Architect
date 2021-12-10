@@ -16,7 +16,6 @@ const StageHeading = ({
   stageNumber,
   type,
   toggleCodeView,
-  children,
 }) => (
   <div className="stage-editor-section stage-heading">
     <div className="stage-meta">
@@ -47,9 +46,6 @@ const StageHeading = ({
         />
       </div>
     </div>
-    <div className="stage-header-sections">
-      {children}
-    </div>
   </div>
 );
 
@@ -57,15 +53,12 @@ StageHeading.propTypes = {
   stageNumber: PropTypes.number,
   type: PropTypes.string,
   toggleCodeView: PropTypes.func,
-  // eslint-disable-next-line react/forbid-prop-types
-  children: PropTypes.any,
 };
 
 StageHeading.defaultProps = {
   stageNumber: null,
   type: '',
   toggleCodeView: noop,
-  children: null,
 };
 
 const mapStateToProps = (state, { id }) => {

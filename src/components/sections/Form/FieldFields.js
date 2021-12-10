@@ -35,9 +35,8 @@ const PromptFields = ({
   type,
 }) => (
   <>
-    <Section>
+    <Section id={getFieldId('variable')} title="Variable">
       <Row>
-        <h3 id={getFieldId('variable')}>Variable</h3>
         { variable && !isNewVariable
           && (
           <Tip>
@@ -60,9 +59,8 @@ const PromptFields = ({
         />
       </Row>
     </Section>
-    <Section>
+    <Section title="Question Prompt" id={getFieldId('prompt')}>
       <Row>
-        <h3 id={getFieldId('prompt')}>Question prompt</h3>
         <p>Enter question for the participant. e.g. What is this person&apos;s name?</p>
         <ValidatedField
           name="prompt"
@@ -75,9 +73,8 @@ const PromptFields = ({
     </Section>
     { variable
       && (
-      <Section>
+      <Section title="Input Control" id={getFieldId('component')}>
         <Row>
-          <h3 id={getFieldId('component')}>Input control</h3>
           <p>
             Choose an input control that should be used to collect the answer. For
             detailed information about these options, see our
@@ -139,9 +136,8 @@ const PromptFields = ({
       )}
     { isOrdinalOrCategoricalType(variableType)
       && (
-      <Section>
+      <Section id={getFieldId('options')} title="Categorical/Ordinal options">
         <Row>
-          <h3 id={getFieldId('options')}>Categorical/Ordinal options</h3>
           <p>
             The input type you selected indicates that this is a categorical or ordinal variable.
             Next, please create a minimum of two possible values for the participant to choose
@@ -157,18 +153,16 @@ const PromptFields = ({
       )}
     { isBooleanWithOptions(component)
       && (
-        <Section>
+        <Section id={getFieldId('parameters')} title="BooleanChoice Options">
           <Row>
-            <h3 id={getFieldId('parameters')}>BooleanChoice Options</h3>
             <BooleanChoice form={form} />
           </Row>
         </Section>
       )}
     { isVariableTypeWithParameters(variableType)
       && (
-      <Section>
+      <Section title="Input Options" id={getFieldId('parameters')}>
         <Row>
-          <h3 id={getFieldId('parameters')}>Input Options</h3>
           <Parameters
             type={variableType}
             component={component}
@@ -180,9 +174,8 @@ const PromptFields = ({
       )}
     { variableType
       && (
-      <Section>
+      <Section id={getFieldId('validation')} title="Validation">
         <Row>
-          <h3 id={getFieldId('validation')}>Validation</h3>
           <p>
             Add one or more validation rules to require that participants complete
             this field in a specific way.

@@ -32,12 +32,7 @@ const TypeEditor = ({
       <Section>
         <h1>{ type ? `Edit ${entity}` : `Create ${entity}` }</h1>
       </Section>
-      <Section>
-        <h3 id={getFieldId('name')}>
-          {capitalize(entity)}
-          {' '}
-          Type
-        </h3>
+      <Section title={`${capitalize(entity)} Type`}>
         <p>
           What type of
           {' '}
@@ -54,8 +49,7 @@ const TypeEditor = ({
         />
       </Section>
 
-      <Section>
-        <h2 id={getFieldId('color')}>Color</h2>
+      <Section title="Color" id={getFieldId('color')}>
         <p>
           Choose a color for this
           {' '}
@@ -71,11 +65,9 @@ const TypeEditor = ({
           validation={{ required: true }}
         />
       </Section>
-
       { entity === 'node'
         && (
-          <Section>
-            <h2 id={getFieldId('iconVariant')}>Icon</h2>
+          <Section title="Icon" id={getFieldId('iconVariant')}>
             <p>
               Choose an icon to display on interfaces that create this
               {' '}

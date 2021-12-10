@@ -23,8 +23,7 @@ const QuickAdd = ({
 }) => (
   type
   && (
-  <Section disabled={disabled} group>
-    <h3 id="issue-form">Quick Add Variable</h3>
+  <Section disabled={disabled} group title="Quick Add Variable" id="issue-form">
     <p>
       Choose which variable to use to store the value of the quick add form.
     </p>

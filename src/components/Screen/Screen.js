@@ -18,31 +18,34 @@ const Screen = ({
   windowRoot,
   zIndex,
 }) => {
-  const classes = cx('screen', `screen--${type}`);
+  const classes = cx('screen', 'screen--modal', `screen--${type}`);
   const styles = zIndex ? { zIndex } : {};
 
   return (
-    <div
-      className={classes}
-      styles={styles}
-    >
-      <div className="screen__container" ref={setWindowRoot}>
-        <motion.div
-          className="screen__content"
-          layoutId={layoutId}
-        >
+    <div className="screen-wrapper" ref={setWindowRoot}>
+      <motion.div
+        className="modal__background"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      />
+      <motion.div
+        className={classes}
+        style={styles}
+        layoutId={layoutId}
+      >
+        <div className="screen__content">
           <ScreenErrorBoundary onAcknowledge={onAcknowledgeError}>
             { typeof children === 'function'
               && children({ windowRoot })}
             { children && typeof children !== 'function' && children }
           </ScreenErrorBoundary>
-        </motion.div>
-      </div>
-      <ControlBar
-        className="screen__controls"
-        buttons={buttons}
-        secondaryButtons={secondaryButtons}
-      />
+        </div>
+        <ControlBar
+          className="screen__controls"
+          buttons={buttons}
+          secondaryButtons={secondaryButtons}
+        />
+      </motion.div>
     </div>
   );
 };

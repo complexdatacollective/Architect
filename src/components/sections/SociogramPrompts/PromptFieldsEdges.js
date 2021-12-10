@@ -11,84 +11,83 @@ import { ValidatedField } from '@components/Form';
 import Tip from '@components/Tip';
 import withEdgesOptions from './withEdgesOptions';
 import withEdgeHighlightChangeHandler from './withEdgeHighlightChangeHandler';
+import PromptFieldsHighlight from './PromptFieldsHighlight';
 
-const EdgeFields = ({
-  edgesForSubject,
-  displayEdgesOptions,
-  handleEdgeHighlightChange,
-  handleCreateEdge,
-  handleChangeCreateEdge,
-  allowHighlighting,
-  canCreateEdge,
-  setCanCreateEdge,
-}) => {
+const EdgeFields = (props) => {
+  const {
+    edgesForSubject,
+    displayEdgesOptions,
+    handleEdgeHighlightChange,
+    handleCreateEdge,
+    handleChangeCreateEdge,
+    allowHighlighting,
+    canCreateEdge,
+    setCanCreateEdge,
+  } = props;
+
   const handleToggleCreateEdge = (value) => {
     setCanCreateEdge(!canCreateEdge);
     handleEdgeHighlightChange(value, 'edge');
   };
 
   return (
-    <Section group>
-      <Row>
-        <h3>Edge Display and Creation</h3>
-        <p>
-          This section controls edge display and creation. You can choose to display one or
-          more edge types, and also allow the participant to create an edge of a given type.
-        </p>
-      </Row>
-      <Row>
-        <h4>Enable Edge Creation</h4>
-        <p>
-          The sociogram can be configured to allow the participant to create edges by
-          consecutively tapping nodes.
-        </p>
-        <Tip>
+    <Section group title="Interaction">
+      <Section title="Edge Creation">
+        <Row>
+          <h4>Enable Edge Creation</h4>
           <p>
-            You cannot use this setting at the same time
-            as the &quot;Variable toggling&quot; option below. Enabling this setting will
-            disable that option.
+            The sociogram can be configured to allow the participant to create edges by
+            consecutively tapping nodes.
           </p>
-        </Tip>
-        <DetachedField
-          component={Fields.Toggle}
-          value={canCreateEdge}
-          onChange={handleToggleCreateEdge}
-          label="Create edges by tapping on a node"
-          disabled={allowHighlighting}
-          title={allowHighlighting ? 'Allow highlighting must be disabled to create edge' : ''}
-        />
-      </Row>
-      <Row disabled={!canCreateEdge}>
-        { canCreateEdge
-          && (
-          <ValidatedField
-            name="edges.create"
-            component={NativeSelect}
-            options={edgesForSubject}
-            onCreateOption={(option) => {
-              handleChangeCreateEdge(handleCreateEdge(option));
-            }}
-            onChange={handleChangeCreateEdge}
-            placeholder="Select or create an edge type"
-            createLabelText="✨ Create new edge type ✨"
-            createInputLabel="New edge type name"
-            createInputPlaceholder="Enter an edge type..."
-            label="Create edges of the following type"
-            validation={{ required: true, allowedNMToken: 'edge type name' }}
+          <Tip>
+            <p>
+              You cannot use this setting at the same time
+              as the &quot;Variable toggling&quot; option below. Enabling this setting will
+              disable that option.
+            </p>
+          </Tip>
+          <DetachedField
+            component={Fields.Toggle}
+            value={canCreateEdge}
+            onChange={handleToggleCreateEdge}
+            label="Create edges by tapping on a node"
+            disabled={allowHighlighting}
+            title={allowHighlighting ? 'Allow highlighting must be disabled to create edge' : ''}
           />
-          )}
-      </Row>
-      <Row disabled={edgesForSubject.length === 0}>
-        { edgesForSubject.length > 0
-          && (
-          <Field
-            name="edges.display"
-            component={Fields.CheckboxGroup}
-            options={displayEdgesOptions}
-            label="Display edges of the following type(s)"
-          />
-          )}
-      </Row>
+        </Row>
+        <Row disabled={!canCreateEdge}>
+          { canCreateEdge
+            && (
+            <ValidatedField
+              name="edges.create"
+              component={NativeSelect}
+              options={edgesForSubject}
+              onCreateOption={(option) => {
+                handleChangeCreateEdge(handleCreateEdge(option));
+              }}
+              onChange={handleChangeCreateEdge}
+              placeholder="Select or create an edge type"
+              createLabelText="✨ Create new edge type ✨"
+              createInputLabel="New edge type name"
+              createInputPlaceholder="Enter an edge type..."
+              label="Create edges of the following type"
+              validation={{ required: true, allowedNMToken: 'edge type name' }}
+            />
+            )}
+        </Row>
+        <Row disabled={edgesForSubject.length === 0}>
+          { edgesForSubject.length > 0
+            && (
+            <Field
+              name="edges.display"
+              component={Fields.CheckboxGroup}
+              options={displayEdgesOptions}
+              label="Display edges of the following type(s)"
+            />
+            )}
+        </Row>
+      </Section>
+      <PromptFieldsHighlight {...props} />
     </Section>
   );
 };

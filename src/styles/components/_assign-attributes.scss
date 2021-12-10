@@ -14,11 +14,14 @@
 }
 
 .assign-attributes-attribute {
+  --section-background-color: var(--color-panel-grey--dark);
+
   display: flex;
   margin-top: unit(2);
   padding: unit(2);
   border-radius: var(--border-radius);
-  background: var(--color-panel-grey--dark);
+  background: var(--section-background-color);
+
 
   .form-field {
     background: var(--color-panel-grey--light);
@@ -30,7 +33,6 @@
 
   &__wrapper {
     display: flex;
-    flex-direction: column;
     flex: 1 0 auto;
   }
 
@@ -40,6 +42,7 @@
 
   &__value {
     flex: 1 0 auto;
+    margin-left: unit(2);
   }
 
   &__delete {
@@ -50,7 +53,7 @@
     justify-content: center;
 
     .icon {
-      height: 1rem;
+      height: unit(2);
       cursor: pointer;
 
       .cls-1 {

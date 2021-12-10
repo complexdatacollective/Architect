@@ -1,21 +1,22 @@
 import React from 'react';
 import { Section, Row } from '@components/EditorLayout';
 import NetworkFilter from '@components/sections/fields/NetworkFilter';
-import NodeTypeFields from '@components/sections/fields/NodeTypeFields';
+import NodeType from './NodeType';
 
 const FilteredNodeType = (props) => (
-  <Section>
+  <Section title="Node Type">
     <Row>
-      <NodeTypeFields
+      <NodeType
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
       />
     </Row>
-    <NetworkFilter
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-      title="Enable stage-level network filtering"
-    />
+    <Section title="Filter" toggleable>
+      <NetworkFilter
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+      />
+    </Section>
   </Section>
 );
 

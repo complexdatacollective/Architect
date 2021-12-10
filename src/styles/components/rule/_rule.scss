@@ -16,6 +16,7 @@
     border-radius: $drag-button-size;
     width: $drag-button-size;
     height: $drag-button-size;
+    cursor: grab;
     font-size: 1em;
     font-weight: bold;
     cursor: pointer;

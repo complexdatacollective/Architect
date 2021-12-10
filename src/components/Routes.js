@@ -9,10 +9,8 @@ import { getActiveProtocol } from '@selectors/session';
 import { getScreensStack } from '@selectors/ui';
 
 const getRoute = ({
-  screens,
   activeProtocol,
 }) => {
-  if (screens.length > 0) { return null; }
   if (activeProtocol) { return <Protocol />; }
   return <Home />;
 };

@@ -62,14 +62,18 @@ $component-name: form-fields-order-by;
     justify-content: center;
 
     .icon {
-      width: unit(1.5);
-      height: unit(1.5);
+      width: unit(2);
+      height: unit(2);
 
       .cls-1,
       .cls-2 {
         fill: var(--color-white);
       }
     }
+  }
+
+  &__handle {
+    cursor: grab;
   }
 
   &__add {

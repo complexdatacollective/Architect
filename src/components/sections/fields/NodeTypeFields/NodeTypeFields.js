@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
-import cx from 'classnames';
 import Button from '@codaco/ui/lib/components/Button';
 import { getFieldId } from '@app/utils/issues';
 import NodeSelect from '@components/Form/Fields/NodeSelect';
@@ -12,6 +11,7 @@ import withDisableAndReset from './withDisableAndReset';
 import withCreateNewType from './withCreateNewType';
 import withNodeTypeOptions from './withNodeTypeOptions';
 import withSubjectVariables from './withSubjectHasNameVariable';
+import Section from '../../../EditorLayout/Section';
 
 const NodeType = ({
   disabled,
@@ -27,15 +27,11 @@ const NodeType = ({
     handleTypeScreenMessage(typeScreenMessage);
   });
 
-  const nodeTypeClasses = cx(
-    'stage-editor-section-node-type',
-    { 'stage-editor-section-node-type--disabled': disabled },
-  );
+  console.log('disa', disabled);
 
   return (
-    <div className={nodeTypeClasses}>
+    <Section title="Node Type" disabled={disabled}>
       <div id={getFieldId('subject')} data-name="Node type" />
-      <h2>Node Type</h2>
       <p>Select the type of node you wish to use with this stage.</p>
       <div
         className="stage-editor-section-node-type__edit"
@@ -78,7 +74,7 @@ const NodeType = ({
           )}
         </div>
       </div>
-    </div>
+    </Section>
   );
 };
 
