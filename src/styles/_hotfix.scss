@@ -125,4 +125,10 @@ a {
   }
 }
 
+// Make rich text toolbar background white within sections
+.stage-editor-section {
+  .rich-text__toolbar {
+    background: var(--input-background);
+  }
+}
 

@@ -147,7 +147,7 @@ const VariableSpotlight = (props) => {
                 removeSelected={() => setCursor(0)}
               >
                 <div className="create-new">
-                  <Icon name="add" />
+                  <Icon name="add" color="charcoal" />
                   <span>
                     Create new variable called &quot;
                     {filterTerm}
@@ -292,7 +292,7 @@ const VariableSpotlight = (props) => {
       initial="hidden"
       animate="visible"
       transition={{
-        type: 'spring', stiffness: 300, damping: 30, when: 'beforeChildren',
+        type: 'spring',
       }}
     >
       <header className="variable-spotlight__header">

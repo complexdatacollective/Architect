@@ -14,7 +14,7 @@
 }
 
 .assign-attributes-attribute {
-  --section-background-color: var(--color-panel-grey--dark);
+  --section-background-color: var(--architect-panel-grey--dark);
 
   display: flex;
   margin-top: unit(2);
@@ -24,7 +24,7 @@
 
 
   .form-field {
-    background: var(--color-panel-grey--light);
+    background: var(--architect-panel-grey);
   }
 
   &:first-child {
@@ -38,6 +38,12 @@
 
   &__variable {
     flex: 1 0 auto;
+
+    .form-fields-variable-picker {
+      fieldset {
+        border-color: var(--text);
+      }
+    }
   }
 
   &__value {

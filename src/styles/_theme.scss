@@ -2,11 +2,9 @@
 
 :root {
   --color-shadow: rgba(0, 0, 0, .15);
-  --modal-overlay: rgba(0,0,0, 0.644);
+  --modal-overlay: rgba(0, 0, 0, .35);
   --color-mid-grey: rgb(128, 128, 128);
   --text-light-muted: rgba(255, 255, 255, .5);
-  --color-panel-grey--light: #e2e2e2;
-  --color-panel-grey--dark: #d8d8d8;
 
   // UI overwrites
   --background: var(--color-platinum);
@@ -41,7 +39,8 @@
   --architect-divider: var(--color-platinum);
   --architect-selected: var(--color-sea-green);
   --architect-active: var(--color-sea-green);
-  --architect-panel-grey: #e9edef;
+  --architect-panel-grey: var(--color-platinum);
+  --architect-panel-grey--dark: var(--color-platinum--dark);
 
   // Control bar
   --architect-control-bar-background: var(--color-cyber-grape);

@@ -12,7 +12,7 @@
     // sass-lint:disable placeholder-in-extend
     @extend .list-row;
     padding: unit(2) unit(4);
-    background: var(--color-panel-grey--light);
+    background: var(--architect-panel-grey);
     border-radius: var(--border-radius);
 
     h4 {

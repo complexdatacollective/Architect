@@ -22,7 +22,6 @@ const Attribute = ({
       <div className="assign-attributes-attribute__variable">
         <ValidatedField
           name={`${field}.variable`}
-          label="Variable:"
           component={VariablePicker}
           validation={{ required: true }}
           options={variableOptions}
@@ -35,7 +34,7 @@ const Attribute = ({
       { variable
         && (
         <div className="assign-attributes-attribute__value">
-          <h4>Value:</h4>
+          <h4>Value</h4>
           <ValidatedField
             name={`${field}.value`}
             options={[

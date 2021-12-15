@@ -5,42 +5,43 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: var(--modal-background);
+  background: var(--architect-panel-grey);
+  color: var(--text);
   border-radius: var(--border-radius);
   box-shadow: 0 0 4rem var(--modal-window-box-shadow);
 
   &__empty {
-    border: 3px dashed var(--primary);
     border-radius: var(--border-radius);
     flex: 1 100%;
     display: flex;
     align-items: center;
-    padding: unit(2);
-    margin: unit(1) unit(2);
-    color: var(--text-light);
+    padding: unit(2) unit(4);
 
     .icon {
       margin-right: unit(1);
       flex: 0 0 auto;
+
+      .cls-3 {
+        fill: var(--color-platinum--dark);
+      }
     }
   }
 
   .divider-header {
-    opacity: .25;
-    border-top: 2px solid var(--color-white);
+    border-top: 2px solid var(--architect-panel-grey--dark);
     width: 100%;
 
     > legend {
       @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
       text-align: center;
-      color: var(--text-light);
+      color: var(--transparent--md);
       padding: unit(1) unit(2);
     }
   }
 
   &__header {
     flex: 0 0 unit(5);
-    padding: unit(2);
+    padding: unit(2) unit(4);
 
     .form-field,
     .form-field-container {
@@ -53,7 +54,12 @@
     flex-direction: column;
     flex: 1 auto;
     max-height: 60vh;
-    padding-bottom: unit(1);
+    overflow: hidden;
+
+    // Prevents layout recalculation as list height is animated
+    .scrollable {
+      overflow-y: scroll;
+    }
 
     ol {
       list-style: none;
@@ -66,7 +72,7 @@
 .spotlight-list-item {
   display: flex;
   justify-content: space-between;
-  padding: unit(1) unit(4);
+  padding: unit(2) unit(4);
   align-items: center;
 
   .variable-pill {
@@ -85,6 +91,7 @@
   }
 
   &--selected {
+    --text: var(--color-white);
     background: var(--primary);
   }
 
@@ -97,16 +104,34 @@
   }
 
   .create-new {
+    color: var(--text);
     display: flex;
     justify-content: center;
     align-items: center;
     padding: unit(1) unit(2);
     font-weight: 500;
-    color: var(--text-light);
 
     .icon {
       height: unit(3);
       margin-right: unit(2);
+      
+
+      .cls-1,
+      .cls-2 {
+        fill: var(--text);
+      }
+
+      &[name='warning'] {
+        .cls-1,
+        .cls-2 {
+          fill: var(--warning);
+        }
+
+        .cls-3,
+        .cls-4 {
+          fill: white;
+        }
+      }
     }
   }
 }
