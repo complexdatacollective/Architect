@@ -67,7 +67,7 @@ describe('VariableSpotlight', () => {
     expect(items.at(2).find('.icon').prop('src')).toEqual('text-variable.svg');
   });
 
-  it.only('is keyboard navigable', () => {
+  it.only('typing filters options', () => {
     const handleCancel = jest.fn();
     const handleSelect = jest.fn();
     const handleCreate = jest.fn();
@@ -82,13 +82,58 @@ describe('VariableSpotlight', () => {
           onCreateOption={handleCreate}
           options={[
             {
-              value: 'name',
-              label: 'Name',
+              value: 'b068931cc450442b63f5b3d276ea4297',
+              label: 'name',
               type: 'text',
             },
             {
-              value: 'age',
-              label: 'Just a number',
+              value: '7d637d275668ed6d41a9b97e6ad3a556',
+              label: 'just a number',
+              type: 'number',
+            },
+          ]}
+        />
+      </Provider>
+    ));
+
+    const Search = subject.find('Search input');
+
+    let items;
+
+    items = subject.find('.spotlight-list-item');
+    expect(items.length).toBe(3);
+
+    Search.simulate('change', { target: { value: 'nam' } });
+    items = subject.find('.spotlight-list-item');
+    expect(items.length).toBe(4);
+    expect(items.at(0).text()).toEqual('Create');
+    expect(items.at(1).find('span').text()).toEqual('Create new variable called "nam".');
+    expect(items.at(2).text()).toEqual('Existing Variables Containing "nam"');
+    expect(items.at(3).text()).toEqual('name');
+  });
+
+  it('is keyboard navigable', () => {
+    const handleCancel = jest.fn();
+    const handleSelect = jest.fn();
+    const handleCreate = jest.fn();
+
+    const subject = mount((
+      <Provider store={mockStore}>
+        <VariableSpotlight
+          onSelect={handleSelect}
+          entity=""
+          type=""
+          onCancel={handleCancel}
+          onCreateOption={handleCreate}
+          options={[
+            {
+              value: 'b068931cc450442b63f5b3d276ea4297',
+              label: 'name',
+              type: 'text',
+            },
+            {
+              value: '7d637d275668ed6d41a9b97e6ad3a556',
+              label: 'just a number',
               type: 'number',
             },
           ]}
@@ -117,7 +162,7 @@ describe('VariableSpotlight', () => {
 
     expect(handleSelect.mock.calls.length).toBe(0);
     Search.simulate('keydown', { key: 'Enter' });
-    expect(handleSelect.mock.calls).toEqual([['age']]);
+    expect(handleSelect.mock.calls).toEqual([['7d637d275668ed6d41a9b97e6ad3a556']]);
 
     Search.simulate('change', { target: { value: 'nam' } });
     // console.log(Search.html());
