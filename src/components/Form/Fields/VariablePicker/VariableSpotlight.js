@@ -71,7 +71,7 @@ ListItem.propTypes = {
 ListItem.defaultProps = {
   disabled: false,
   selected: false,
-  onSelect: () => {},
+  onSelect: null,
   children: null,
   setSelected: () => {},
   removeSelected: () => {},
@@ -207,6 +207,7 @@ const VariableSpotlight = (props) => {
   }, [sortedAndFilteredItems, filterTerm, cursor]);
 
   const handleFilter = (e) => {
+    // throw new Error();
     const value = get(e, 'target.value', '');
     setFilterTerm(value);
   };
