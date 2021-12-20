@@ -7,10 +7,22 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import VariablePicker from '../VariablePicker';
 
-jest.mock('../VariableSpotlight', () => () => (<div />));
-
 const mockStore = createStore(() => ({
-  protocol: { present: {} },
+  protocol: {
+    present: {
+      codebook: {
+        node: {
+          person: {
+            variables: {
+              age: {},
+            },
+          },
+        },
+        edge: {},
+        ego: {},
+      },
+    },
+  },
 }));
 
 describe('VariablePicker', () => {
@@ -66,7 +78,7 @@ describe('VariablePicker', () => {
     ));
 
     expect(subject.find('Button span').text()).toEqual('Change Variable');
-    expect(subject.exists('EditableVariablePill')).toBe(true);
+    expect(subject.exists('Memo(EditableVariablePill)')).toBe(true);
   });
 
   it('when selected has no type it renders the SimpleVariablePill', () => {
