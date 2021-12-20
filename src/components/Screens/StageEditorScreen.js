@@ -9,6 +9,7 @@ import { Button } from '@codaco/ui';
 import { actionCreators as previewActions } from '../../ducks/modules/preview';
 import EditorScreen from '../Screen/EditorScreen';
 import StageEditor, { formName } from '../StageEditor';
+import withTooltip from '../enhancers/withTooltip';
 
 const mapStateToProps = (state) => ({
   invalid: isFormInvalid(formName)(state),
@@ -38,6 +39,8 @@ const stageEditorHanders = withHandlers({
 
 const invalidStageMessage = (invalid) => (invalid ? ['Preview requires a valid stage configuration'] : []);
 
+const TooltipButton = withTooltip(Button);
+
 const stageEditorProps = withProps(({
   handlePreview,
   invalid,
@@ -45,16 +48,15 @@ const stageEditorProps = withProps(({
   editor: StageEditor,
   form: formName,
   secondaryButtons: [
-    <Button
+    <TooltipButton
       key="preview"
       onClick={handlePreview}
       color="paradise-pink"
       disabled={invalid}
-      title={invalid ? 'Preview requires a valid stage configuration' : ''}
+      tooltip={invalid ? invalidStageMessage(invalid) : null}
     >
       Preview
-    </Button>,
-    ...invalidStageMessage(invalid),
+    </TooltipButton>,
   ],
 }));
 

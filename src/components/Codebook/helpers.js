@@ -54,7 +54,9 @@ export const getUsageAsStageMeta = (state, usage) => {
   return stageIndexes.map((stageIndex) => get(stageMetaByIndex, stageIndex));
 };
 
-const sortByLabel = (a, b) => {
+// Function to be used with Array.sort. Sorts a collection of variable
+// definitions by the label property.
+export const sortByLabel = (a, b) => {
   if (a.label < b.label) { return -1; }
   if (a.label > b.label) { return 1; }
   return 0;
