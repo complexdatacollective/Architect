@@ -41,8 +41,12 @@ export const BaseVariablePill = React.forwardRef((props, ref) => {
 });
 
 BaseVariablePill.propTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   children: PropTypes.node.isRequired,
+};
+
+BaseVariablePill.defaultProps = {
+  type: null,
 };
 
 export const SimpleVariablePill = ({ label, ...props }) => (

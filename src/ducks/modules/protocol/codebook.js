@@ -155,6 +155,8 @@ const createVariableThunk = (entity, type, configuration) => (dispatch, getState
     }));
 };
 
+// TODO: This is defunct and can be substituted for `updateVariableByUUIDThunk`
+// wherever it is used.
 const updateVariableThunk = (
   entity, type, variable, configuration, merge = false,
 ) => (dispatch, getState) => {
