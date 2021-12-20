@@ -67,7 +67,7 @@ describe('VariableSpotlight', () => {
     expect(items.at(2).find('.icon').prop('src')).toEqual('text-variable.svg');
   });
 
-  it.only('typing filters options', () => {
+  it('typing filters options', () => {
     const handleCancel = jest.fn();
     const handleSelect = jest.fn();
     const handleCreate = jest.fn();
@@ -157,21 +157,26 @@ describe('VariableSpotlight', () => {
     expect(items.at(2).hasClass('spotlight-list-item--selected')).toBe(false);
 
     expect(handleCancel.mock.calls.length).toBe(0);
+    // This would close the window in actual use, but that's
+    // managed by handleCancel and in this case it does nothing.
     Search.simulate('keydown', { key: 'Escape' });
     expect(handleCancel.mock.calls.length).toBe(1);
 
     expect(handleSelect.mock.calls.length).toBe(0);
+    // Currently selected variable from keyboard navigation above
     Search.simulate('keydown', { key: 'Enter' });
     expect(handleSelect.mock.calls).toEqual([['7d637d275668ed6d41a9b97e6ad3a556']]);
 
+    expect(handleCreate.mock.calls.length).toBe(0);
     Search.simulate('change', { target: { value: 'nam' } });
-    // console.log(Search.html());
+    // 0: create divider
+    // 1: create new "nam" variable
+    // 2: filter divider
+    // 3: select "name" variable
+    Search.simulate('keydown', { key: 'ArrowUp' });
     items = subject.find('.spotlight-list-item');
-    // console.log(subject.html());
-    console.log(items.map((item) => item.html()));
-    // Search.simulate('keydown', { key: 'ArrowUp' });
-    // Search.simulate('keydown', { key: 'ArrowUp' });
-    // Search.simulate('keydown', { key: 'Enter' });
-    // expect(handleSelect.mock.calls).toBe(0);
+    expect(items.at(1).hasClass('spotlight-list-item--selected')).toBe(true);
+    Search.simulate('keydown', { key: 'Enter' });
+    expect(handleCreate.mock.calls).toEqual([['nam']]);
   });
 });
