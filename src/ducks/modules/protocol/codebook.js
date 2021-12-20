@@ -1,9 +1,9 @@
 import uuid from 'uuid';
 import {
-  omit, get, has, isEmpty,
+  omit, get, has, isEmpty, find,
 } from 'lodash';
 import prune from '@app/utils/prune';
-import { getVariablesForSubject } from '../../../selectors/codebook';
+import { getAllVariableUUIDs, getVariablesForSubject } from '../../../selectors/codebook';
 import { makeGetUsageForType } from '../../../selectors/usage';
 import { makeGetIsUsed } from '../../../selectors/codebook/isUsed';
 import { getNextCategoryColor } from './utils/helpers';
@@ -67,11 +67,9 @@ const createVariable = (entity, type, variable, configuration) => prune({
   configuration,
 });
 
-const updateVariable = (entity, type, variable, configuration, merge = false) => prune({
+const updateVariable = (variable, configuration, merge = false) => prune({
   type: UPDATE_VARIABLE,
   meta: {
-    entity,
-    type,
     variable,
   },
   configuration,
@@ -157,6 +155,8 @@ const createVariableThunk = (entity, type, configuration) => (dispatch, getState
     }));
 };
 
+// TODO: This is defunct and can be substituted for `updateVariableByUUIDThunk`
+// wherever it is used.
 const updateVariableThunk = (
   entity, type, variable, configuration, merge = false,
 ) => (dispatch, getState) => {
@@ -171,7 +171,17 @@ const updateVariableThunk = (
     throw new Error(`Variable "${variable}" does not exist`);
   }
 
-  return dispatch(saveableChange(updateVariable)(entity, type, variable, configuration, merge));
+  return dispatch(saveableChange(updateVariable)(variable, configuration, merge));
+};
+
+const updateVariableByUUIDThunk = (
+  variable, properties, merge = false,
+) => (dispatch) => {
+  if (!variable) {
+    throw new Error('No variable provided to updateVariable()!');
+  }
+
+  return dispatch(saveableChange(updateVariable)(variable, properties, merge));
 };
 
 const deleteVariableThunk = (entity, type, variable) => (dispatch, getState) => {
@@ -282,7 +292,6 @@ export default function reducer(state = initialState, action = {}) {
         },
       };
     case CREATE_VARIABLE:
-    case UPDATE_VARIABLE:
       return getStateWithUpdatedVariable(
         state,
         action.meta.entity,
@@ -291,6 +300,19 @@ export default function reducer(state = initialState, action = {}) {
         action.configuration,
         action.merge,
       );
+    case UPDATE_VARIABLE: {
+      const variables = getAllVariableUUIDs(state);
+      const { entity, entityType } = find(variables, ['uuid', action.meta.variable]);
+
+      return getStateWithUpdatedVariable(
+        state,
+        entity,
+        entityType,
+        action.meta.variable,
+        action.configuration,
+        action.merge,
+      );
+    }
     case DELETE_VARIABLE: {
       const variablePath = action.meta.entity !== 'ego'
         ? `${action.meta.type}.variables.${action.meta.variable}`
@@ -316,6 +338,7 @@ const actionCreators = {
   createVariable: createVariableThunk,
   deleteVariable: deleteVariableThunk,
   updateVariable: updateVariableThunk,
+  updateVariableByUUID: updateVariableByUUIDThunk,
 };
 
 const actionTypes = {

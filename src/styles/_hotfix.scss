@@ -81,8 +81,48 @@ a {
 
 .modal {
   height: 100vh;
+
+  &__content {
+    flex-direction: row;
+  }
 }
 
 .protocol-card {
   background: var(--color-white);
 }
+
+// Matierial-UI icon doesn't resize according to input font-size
+.form-field-text {
+  &--adornment {
+    .MuiSvgIcon-root { // sass-lint:disable-line class-name-format
+      font-size: 1.5em;
+    }
+  }
+}
+
+// Tooltip system overrides
+.tippy-box {
+  --tip-color: var(--color-rich-black);
+  background: var(--tip-color);
+  color: var(--text-light);
+  border-radius: var(--border-radius);
+
+  > .tippy-arrow {
+    color: var(--tip-color);
+
+    &::before {
+      transform: scale(1.5);
+    }
+  }
+
+  .tippy-content {
+    padding: unit(1) unit(1.5);
+  }
+
+  // theme for validation error
+  &[data-theme~='error'] {
+    --tip-color: var(--error);
+  }
+}
+
+

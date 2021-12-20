@@ -5,11 +5,11 @@ import { compose } from 'recompose';
 import { Field } from 'redux-form';
 import Text from '@codaco/ui/lib/components/Fields/Text';
 import CheckboxGroup from '@codaco/ui/lib/components/Fields/CheckboxGroup';
-import VariableSelect from '@components/Form/Fields/VariableSelect';
 import ValidatedField from '@components/Form/ValidatedField';
 import { getFieldId } from '@app/utils/issues';
 import { Section, Row } from '@components/EditorLayout';
 import withPresetProps from './withPresetProps';
+import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
 
 const PresetFields = ({
   edgesForSubject,
@@ -39,7 +39,7 @@ const PresetFields = ({
       <Row>
         <ValidatedField
           name="layoutVariable"
-          component={VariableSelect}
+          component={VariablePicker}
           entity={entity}
           type={type}
           label="Layout variable"
@@ -54,7 +54,7 @@ const PresetFields = ({
       <Row>
         <Field
           name="groupVariable"
-          component={VariableSelect}
+          component={VariablePicker}
           allowPlaceholderSelect
           placeholder="None"
           label="Group variable"

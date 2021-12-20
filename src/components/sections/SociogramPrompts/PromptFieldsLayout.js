@@ -4,12 +4,12 @@ import { Field } from 'redux-form';
 import { compose } from 'recompose';
 import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
-import VariableSelect from '@components/Form/Fields/VariableSelect';
 import OrderBy from '@components/Form/Fields/OrderBy';
 import withCreateVariableHandlers from '@components/enhancers/withCreateVariableHandler';
 import { Section, Row } from '@components/EditorLayout';
 import withLayoutOptions from './withLayoutOptions';
 import withCanCreateEdgesState from './withCanCreateEdgesState';
+import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
 
 const PromptFields = ({
   allowPositioning,
@@ -35,7 +35,7 @@ const PromptFields = ({
         name="layout.layoutVariable"
         type={type}
         entity={entity}
-        component={VariableSelect}
+        component={VariablePicker}
         validation={{ required: true }}
         options={layoutVariablesForSubject}
         onCreateOption={(value) => handleCreateVariable(value, 'layout', 'layout.layoutVariable')}

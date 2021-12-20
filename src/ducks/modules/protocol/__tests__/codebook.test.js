@@ -114,14 +114,16 @@ describe('protocol.codebook', () => {
       it('UPDATE_VARIABLE for node entity', () => {
         const result = reducer(
           {
-            node: { foo: { variables: { bar: { baz: 'buzz' } } } },
+            node: { foo: { variables: { bar: { name: 'a', type: 'string', baz: 'buzz' } } } },
             edge: {},
+            ego: {},
           },
-          test.updateVariable('node', 'foo', 'bar', { fizz: 'pop' }),
+          test.updateVariable('bar', { fizz: 'pop' }, false),
         );
 
         expect(result).toEqual({
           edge: {},
+          ego: {},
           node: {
             foo: {
               variables: {
@@ -137,9 +139,9 @@ describe('protocol.codebook', () => {
       it('UPDATE_VARIABLE for ego entity', () => {
         const result = reducer(
           {
-            ego: { variables: { bar: { baz: 'buzz' } } },
+            ego: { variables: { bar: { name: 'a', type: 'string', baz: 'buzz' } } },
           },
-          test.updateVariable('ego', undefined, 'bar', { fizz: 'pop' }),
+          test.updateVariable('bar', { fizz: 'pop' }),
         );
 
         expect(result).toEqual({
@@ -377,8 +379,6 @@ describe('protocol.codebook', () => {
         expect(dispatch).toHaveBeenCalledWith({
           type: actionTypes.UPDATE_VARIABLE,
           meta: {
-            entity: 'node',
-            type: 'bar',
             variable: 'alpha',
           },
           merge: false,
@@ -402,6 +402,35 @@ describe('protocol.codebook', () => {
         expect(() => {
           store.dispatch(createAction);
         }).toThrow(new Error('Variable "xenon" does not exist'));
+      });
+    });
+
+    describe('updateVariableByUUID()', () => {
+      it('dispatches the UPDATE_VARIABLE action', async () => {
+        const [dispatch, getState] = getThunkMocks(testState);
+
+        await actionCreators.updateVariableByUUID(
+          'alpha',
+          { fizz: 'buzz' },
+        )(dispatch, getState);
+
+        expect(dispatch).toHaveBeenCalledWith({
+          type: actionTypes.UPDATE_VARIABLE,
+          meta: {
+            variable: 'alpha',
+          },
+          merge: false,
+          configuration: { fizz: 'buzz' },
+        });
+
+        expect(dispatch).toHaveBeenNthCalledWith(
+          4,
+          {
+            type: 'SESSION/PROTOCOL_CHANGED',
+            protocolIsValid: true,
+            ipc: true,
+          },
+        );
       });
     });
 

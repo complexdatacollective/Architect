@@ -4,9 +4,9 @@ import Icon from '@codaco/ui/lib/components/Icon';
 import { compose } from 'recompose';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import ValidatedField from '@components/Form/ValidatedField';
-import VariableSelect from '@components/Form/Fields/VariableSelect';
 import withAttributeHandlers from './withAttributeHandlers';
 import withCreateVariableHandler from '../enhancers/withCreateVariableHandler';
+import VariablePicker from '../Form/Fields/VariablePicker/VariablePicker';
 
 const Attribute = ({
   field,
@@ -23,7 +23,7 @@ const Attribute = ({
         <ValidatedField
           name={`${field}.variable`}
           label="Variable:"
-          component={VariableSelect}
+          component={VariablePicker}
           validation={{ required: true }}
           options={variableOptions}
           onCreateOption={(value) => handleCreateVariable(value, 'boolean', `${field}.variable`)}

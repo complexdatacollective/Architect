@@ -1,0 +1,112 @@
+.variable-spotlight {
+  position: relative;
+  margin-top: unit(6);
+  width: 45rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--modal-background);
+  border-radius: var(--border-radius);
+  box-shadow: 0 1rem 3rem 0 rgba(0, 0, 0, .25); // sass-lint:disable-line no-color-literals
+
+  &__empty {
+    border: 3px dashed var(--primary);
+    border-radius: var(--border-radius);
+    flex: 1 100%;
+    display: flex;
+    align-items: center;
+    padding: unit(2);
+    margin: unit(1) unit(2);
+    color: var(--text-light);
+
+    .icon {
+      margin-right: unit(1);
+      flex: 0 0 auto;
+    }
+  }
+
+  .divider-header {
+    opacity: .25;
+    border-top: 2px solid var(--color-white);
+    width: 100%;
+
+    legend {
+      @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
+      text-align: center;
+      color: var(--text-light);
+      padding: unit(1) unit(2);
+    }
+  }
+
+  &__header {
+    flex: 0 0 unit(5);
+    padding: unit(2);
+
+    .form-field,
+    .form-field-container {
+      margin-bottom: 0;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    flex: 1 auto;
+    max-height: 60vh;
+    padding-bottom: unit(1);
+
+    ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+
+.spotlight-list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: unit(1) unit(4);
+  align-items: center;
+
+  .variable-pill {
+    flex: 1 auto;
+  }
+
+  kbd {
+    margin-left: unit(2);
+    background: var(--color-platinum);
+    padding: unit(.5) unit(1);
+    border: 1px solid var(--color-charcoal);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &--selected {
+    background: var(--primary);
+  }
+
+  &--clickable {
+    cursor: pointer;
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+  }
+
+  .create-new {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: unit(1) unit(2);
+    font-weight: 500;
+    color: var(--text-light);
+
+    .icon {
+      height: unit(3);
+      margin-right: unit(2);
+    }
+  }
+}

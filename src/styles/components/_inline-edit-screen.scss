@@ -23,7 +23,7 @@
 
   &__container {
     width: 100%;
-    height: 90%;
+    max-height: 90%;
     max-width: 85rem;
     background: var(--background);
     border-radius: var(--border-radius);

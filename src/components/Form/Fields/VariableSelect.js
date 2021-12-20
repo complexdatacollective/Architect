@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { compose, withProps } from 'recompose';
 import { getVariableOptionsForSubject } from '@selectors/codebook';
-import { Button } from '@codaco/ui';
-import RenameVariableControl from '@components/RenameVariableControl';
 import NativeSelect from './NativeSelect';
 
 const withVariableValidator = withProps(({ validation }) => ({
@@ -32,26 +30,6 @@ const VariableSelect = ({
       {...props}
       reserved={reserved}
     />
-
-    { variable && (
-      <RenameVariableControl
-        entity={entity}
-        type={type}
-        id={variable}
-      >
-        {({ onClick }) => (
-          <div className="form-fields-variable-select__rename">
-            <Button
-              onClick={onClick}
-              size="small"
-              color="sea-serpent"
-            >
-              Rename variable
-            </Button>
-          </div>
-        )}
-      </RenameVariableControl>
-    )}
   </div>
 );
 

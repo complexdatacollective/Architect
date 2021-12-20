@@ -4,12 +4,12 @@ import { Field } from 'redux-form';
 import { compose } from 'recompose';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
-import VariableSelect from '@components/Form/Fields/VariableSelect';
 import ValidatedField from '@components/Form/ValidatedField';
 import withCreateVariableHandlers from '@components/enhancers/withCreateVariableHandler';
 import Tip from '@components/Tip';
 import withHighlightOptions from './withHighlightOptions';
 import withEdgeHighlightChangeHandler from './withEdgeHighlightChangeHandler';
+import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
 
 const HighlightFields = ({
   allowHighlighting,
@@ -54,7 +54,7 @@ const HighlightFields = ({
       <Row disabled={!allowHighlighting}>
         <ValidatedField
           name="highlight.variable"
-          component={VariableSelect}
+          component={VariablePicker}
           entity={entity}
           type={type}
           label="Variable to be toggled"
