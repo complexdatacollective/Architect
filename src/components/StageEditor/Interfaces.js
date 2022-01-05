@@ -181,8 +181,8 @@ const Sociogram = {
   ],
   sections: [
     Background,
-    SociogramPrompts,
     AutomaticLayout,
+    SociogramPrompts,
     InterviewScript,
   ],
 };

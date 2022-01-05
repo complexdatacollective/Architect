@@ -1,33 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import { Field } from 'redux-form';
 import { Section, Row } from '@components/EditorLayout';
+import { change, formValueSelector } from 'redux-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { get } from 'lodash';
+import { getFieldId } from '../../utils/issues';
+import DetachedField from '../DetachedField';
 
-const AutomaticLayout = () => (
-  <Section>
-    <Row>
-      <h3>Automatic Force Directed Layout</h3>
-      <p>
-        When force directed layout is enabled alters are positioned automatically
-        by simulating forces in realtime that represent alter-ties and alter proximity.
-      </p>
-      <p>
-        Nodes can still be moved whilst this layout is enabled, but they will be
-        constrained by the simulated forces.
-      </p>
-    </Row>
-    <Row>
-      <div style={{ maxWidth: '55rem' }}>
-        <Field
+const FORM_PROPERTY = 'behaviours.automaticLayout.enabled';
+
+const AutomaticLayout = () => {
+  const dispatch = useDispatch();
+  const form = useSelector((state) => get(state, 'form', {}));
+  const formValue = useSelector((state) => !!formValueSelector(form)(state, FORM_PROPERTY));
+
+  const [useAutomaticLayout, setUseAutomaticLayout] = useState(formValue);
+
+  const handleChooseLayoutMode = () => {
+    if (useAutomaticLayout) {
+      dispatch(change('edit-stage', FORM_PROPERTY, false));
+    } else {
+      dispatch(change('edit-stage', FORM_PROPERTY, true));
+    }
+
+    setUseAutomaticLayout(!useAutomaticLayout);
+  };
+
+  return (
+    <Section>
+      <Row>
+        <div id={getFieldId('behaviours.automaticLayout.enabled')} data-name="Layout mode" />
+        <h3>Layout Mode</h3>
+        <p>
+          Interviewer offers two modes for positioning nodes on the
+          sociogram: &quot;Manual&quot;, and &quot;Automatic&quot;.
+        </p>
+        <p>
+          <strong>Automatic mode</strong>
+          {' '}
+          positions nodes when the stage is first shown
+          by simulating physical forces such as attraction and repulsion. This
+          simulation can be paused and resumed within the interview. When paused,
+          the position of nodes can be adjusted manually.
+        </p>
+        <p>
+          <strong>Manual mode</strong>
+          {' '}
+          first places all nodes into a &quot;bucket&quot; and the bottom
+          of the screen, from which the participant can drag nodes to their desired
+          position.
+        </p>
+      </Row>
+      <Row>
+        <DetachedField
           component={Fields.Boolean}
-          name="behaviours.automaticLayout.enabled"
+          onChange={handleChooseLayoutMode}
+          value={useAutomaticLayout}
+          validation={{ required: true }}
           options={[
             {
               value: false,
               label: () => (
                 <div>
-                  <h4>Manual layout only</h4>
-                  <p>Participants can position their alters manually.</p>
+                  <h4>Manual mode</h4>
+                  <p>Participants must position their alters manually.</p>
                 </div>
               ),
             },
@@ -35,21 +71,19 @@ const AutomaticLayout = () => (
               value: true,
               label: () => (
                 <div>
-                  <h4>Automatic layout enabled</h4>
+                  <h4>Automatic mode</h4>
                   <p>
-                    In addition to positioning alters manually, a force-directed
-                    layout can be activated during the interview.
+                    A force-directed layout positions nodes automatically.
                   </p>
                 </div>
               ),
             },
           ]}
-          label="Choose between manual and automatic layout"
           noReset
         />
-      </div>
-    </Row>
-  </Section>
-);
+      </Row>
+    </Section>
+  );
+};
 
 export default AutomaticLayout;
