@@ -46,7 +46,7 @@ const AutomaticLayout = () => {
         <p>
           <strong>Manual mode</strong>
           {' '}
-          first places all nodes into a &quot;bucket&quot; and the bottom
+          first places all nodes into a &quot;bucket&quot; at the bottom
           of the screen, from which the participant can drag nodes to their desired
           position.
         </p>
