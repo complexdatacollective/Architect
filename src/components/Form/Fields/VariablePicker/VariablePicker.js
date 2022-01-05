@@ -55,12 +55,11 @@ const VariablePicker = (props) => {
 
     const selectedLabel = get(found, 'label', null);
     const selectedValue = get(found, 'value', null);
-    const selectedType = get(found, 'type', null);
 
     const finalLabel = selectedLabel || selectedValue;
 
     return (
-      <SimpleVariablePill label={finalLabel} type={selectedType} />
+      <SimpleVariablePill label={finalLabel} />
     );
   };
 

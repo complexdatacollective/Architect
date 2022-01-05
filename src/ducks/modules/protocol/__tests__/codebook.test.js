@@ -405,6 +405,35 @@ describe('protocol.codebook', () => {
       });
     });
 
+    describe('updateVariableByUUID()', () => {
+      it('dispatches the UPDATE_VARIABLE action', async () => {
+        const [dispatch, getState] = getThunkMocks(testState);
+
+        await actionCreators.updateVariableByUUID(
+          'alpha',
+          { fizz: 'buzz' },
+        )(dispatch, getState);
+
+        expect(dispatch).toHaveBeenCalledWith({
+          type: actionTypes.UPDATE_VARIABLE,
+          meta: {
+            variable: 'alpha',
+          },
+          merge: false,
+          configuration: { fizz: 'buzz' },
+        });
+
+        expect(dispatch).toHaveBeenNthCalledWith(
+          4,
+          {
+            type: 'SESSION/PROTOCOL_CHANGED',
+            protocolIsValid: true,
+            ipc: true,
+          },
+        );
+      });
+    });
+
     describe('deleteType()', () => {
       it('Dispatches delete actions for all related objects', async () => {
         const mockStateWithProtocol = { ...testState };
