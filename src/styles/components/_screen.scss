@@ -12,7 +12,9 @@
 .screen {
   position: relative;
   z-index: var(--z-modal);
-  width: 90rem;
+  width: 80%;
+  max-width: 120rem;
+  margin: unit(6);
   height: calc(100% - #{unit(12)});
   overflow: hidden;
   display: flex;

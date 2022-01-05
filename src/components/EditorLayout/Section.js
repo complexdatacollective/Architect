@@ -41,7 +41,7 @@ const Section = ({
   return (
     <fieldset className={sectionClasses}>
       <legend
-        onClick={toggleOpen}
+        onClick={() => toggleable && toggleOpen()}
         role="button"
         className={toggleable ? 'toggleable' : ''}
       >
@@ -51,6 +51,9 @@ const Section = ({
           <span style={{ color: 'var(--error)' }}> *</span>
         )}
       </legend>
+      <p className="section-description">
+        Use this section to add content to your experiment.
+      </p>
       <motion.div
         variants={animations}
         initial={toggleable ? 'collapsed' : 'open'}

@@ -28,8 +28,7 @@ const HighlightFields = ({
   };
 
   return (
-    <Section group>
-      <h3>Variable Toggling</h3>
+    <Section group title="Variable Toggling">
       <p>
         The sociogram can be configured to allow the participant to toggle
         a node variable to true or false by tapping it.

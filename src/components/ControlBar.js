@@ -24,20 +24,16 @@ const animatedButton = (button, index) => (
 const ControlBar = ({ buttons, secondaryButtons, className }) => {
   const buttonLayout = [
     <motion.div layout className="control-bar__secondary-buttons" key="secondary">
-      <AnimateSharedLayout>
-        <AnimatePresence>
-          { secondaryButtons
-            && Array.from(secondaryButtons).map(animatedButton)}
-        </AnimatePresence>
-      </AnimateSharedLayout>
+      <AnimatePresence initial={false}>
+        { secondaryButtons
+          && Array.from(secondaryButtons).map(animatedButton)}
+      </AnimatePresence>
     </motion.div>,
     <motion.div layout className="control-bar__primary-buttons" key="primary">
-      <AnimateSharedLayout>
-        <AnimatePresence>
-          { buttons
-            && Array.from(buttons).map(animatedButton)}
-        </AnimatePresence>
-      </AnimateSharedLayout>
+      <AnimatePresence initial={false}>
+        { buttons
+          && Array.from(buttons).map(animatedButton)}
+      </AnimatePresence>
     </motion.div>,
   ];
 
@@ -48,7 +44,9 @@ const ControlBar = ({ buttons, secondaryButtons, className }) => {
         className,
       )}
     >
-      { buttonLayout }
+      <AnimateSharedLayout>
+        { buttonLayout }
+      </AnimateSharedLayout>
     </div>
   );
 };

@@ -43,7 +43,7 @@ $component-name: list-item;
 
   &--clickable {
     .#{$component-name}__container {
-      @include clickable(2);
+      // @include clickable(2);
     }
   }
 }

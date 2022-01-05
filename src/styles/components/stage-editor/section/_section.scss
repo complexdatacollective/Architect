@@ -7,6 +7,14 @@
   border-radius: var(--border-radius);
   position: relative;
 
+  .form-field-container {
+    margin-bottom: 0;
+  }
+
+  .section-description {
+    margin: 0;
+  }
+
   > legend {
     @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
     font-size: 13px;
@@ -39,19 +47,6 @@
   &--disabled {
     opacity: .5;
     cursor: not-allowed;
-  }
-
-  > .form-field-container,
-  .form-field-text,
-  .form-field-checkbox-group,
-  .form-field-radio-group {
-    &:last-child {
-      margin-bottom: 0;
-
-      .form-field {
-        margin-bottom: 0;
-      }
-    }
   }
 
   .stage-editor-section {

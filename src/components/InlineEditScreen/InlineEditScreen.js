@@ -27,8 +27,11 @@ const InlineEditScreen = ({
   return (
     <>
       { show && (
-        <div key={layoutId} className="inline-edit-screen" onClick={(e) => e.stopPropagation()}>
-          <motion.div layoutId={layoutId} className="inline-edit-screen__container">
+        <div className="inline-edit-screen" onClick={(e) => e.stopPropagation()}>
+          <motion.div
+            layoutId={layoutId}
+            className="inline-edit-screen__container"
+          >
             <div className="inline-edit-screen__header">
               <h1>{title}</h1>
             </div>

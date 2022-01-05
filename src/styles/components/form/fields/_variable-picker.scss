@@ -6,8 +6,9 @@ $component-name: form-fields-variable-picker;
   align-items: center;
 
   fieldset {
+    background: var(--section-background-color);
     flex: 1;
-    border: .3rem dotted var(--architect-border);
+    border: 1px solid var(--text);
     padding: unit(2);
     border-radius: var(--border-radius);
 
@@ -19,6 +20,7 @@ $component-name: form-fields-variable-picker;
     .variable-pill {
       max-width: 35rem;
       margin-bottom: unit(2);
+      background-color: var(--color-white);
     }
   }
 

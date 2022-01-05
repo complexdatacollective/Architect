@@ -281,7 +281,7 @@ const VariableSpotlight = (props) => {
   };
 
   const resultsVariants = {
-    visible: { height: 'auto' },
+    visible: { height: 'auto', transitionEnd: { display: 'flex' } },
     hidden: { height: 0 },
   };
 
@@ -333,7 +333,7 @@ const VariableSpotlight = (props) => {
 VariableSpotlight.propTypes = {
   onSelect: PropTypes.func.isRequired,
   entity: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   onCancel: PropTypes.func.isRequired,
   onCreateOption: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.shape({
@@ -341,6 +341,10 @@ VariableSpotlight.propTypes = {
     label: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   })).isRequired,
+};
+
+VariableSpotlight.defaultProps = {
+  type: null,
 };
 
 export default VariableSpotlight;

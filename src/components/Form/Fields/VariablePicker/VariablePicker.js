@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@codaco/ui';
 import PropTypes from 'prop-types';
 import { has, get } from 'lodash';
@@ -68,7 +69,19 @@ const VariablePicker = (props) => {
       <div className="form-fields-variable-picker">
         <fieldset>
           <legend>{label}</legend>
-          {value && variablePillComponent()}
+          <AnimatePresence exitBeforeEnter initial={false}>
+            { value && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                enter={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                key={value}
+              >
+                <h1>Hello!</h1>
+                {variablePillComponent()}
+              </motion.div>
+            )}
+          </AnimatePresence>
           <Button
             icon="add"
             onClick={() => setShowPicker(true)}

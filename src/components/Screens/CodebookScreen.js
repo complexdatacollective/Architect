@@ -37,10 +37,7 @@ const CodebookScreen = (props) => {
       layoutId={layoutId}
     >
       <Layout>
-        <Section>
-          <h1>
-            Codebook
-          </h1>
+        <Section title="Codebook">
           <p>
             Below you can find an overview of the node and edge types that you have
             defined while creating your interview. Entities that are unused may be deleted.

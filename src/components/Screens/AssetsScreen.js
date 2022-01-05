@@ -32,10 +32,7 @@ const AssetBrowserScreen = ({
       layoutId={layoutId}
     >
       <Layout>
-        <Section>
-          <h1>
-            Resource Library
-          </h1>
+        <Section title="Resource Library">
           <p>
             Welcome to the resource library. Here, you can import external data resources which
             can be used in building your protocol. These resources might include images,

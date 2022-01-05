@@ -50,16 +50,11 @@
   }
 
   &__list {
-    display: flex;
     flex-direction: column;
     flex: 1 auto;
     max-height: 60vh;
     overflow: hidden;
-
-    // Prevents layout recalculation as list height is animated
-    .scrollable {
-      overflow-y: scroll;
-    }
+    padding-bottom: unit(1);
 
     ol {
       list-style: none;
@@ -72,7 +67,7 @@
 .spotlight-list-item {
   display: flex;
   justify-content: space-between;
-  padding: unit(2) unit(4);
+  padding: unit(1) unit(4);
   align-items: center;
 
   .variable-pill {
