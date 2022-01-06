@@ -36,8 +36,9 @@ a {
 }
 
 .form-field-checkbox-group__error,
-.form-field-radio-group__error {
-  color: var(--text-light);
+.form-field-radio-group__error,
+.form-field-boolean__error {
+  --text: var(--text-light);
 }
 
 .form-field-checkbox--disabled {

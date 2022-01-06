@@ -1,3 +1,4 @@
+export { default as AutomaticLayout } from './AutomaticLayout';
 export { default as Background } from './Background';
 export { default as CardDisplayOptions } from './CardDisplayOptions';
 export { default as CategoricalBinPrompts } from './CategoricalBinPrompts';

@@ -29,35 +29,33 @@ class Background extends PureComponent {
           </p>
         </Row>
         <Row>
-          <div style={{ maxWidth: '55rem' }}>
-            <DetachedField
-              component={Fields.Boolean}
-              value={useImage}
-              options={[
-                {
-                  value: false,
-                  label: () => (
-                    <div>
-                      <h4>Concentric Circles</h4>
-                      <p>Use the conventional concentric circles sociogram background.</p>
-                    </div>
-                  ),
-                },
-                {
-                  value: true,
-                  label: () => (
-                    <div>
-                      <h4>Image</h4>
-                      <p>Use a custom image of your choosing as the background.</p>
-                    </div>
-                  ),
-                },
-              ]}
-              onChange={handleChooseBackgroundType}
-              label="Choose a background type"
-              noReset
-            />
-          </div>
+          <DetachedField
+            component={Fields.Boolean}
+            value={useImage}
+            options={[
+              {
+                value: false,
+                label: () => (
+                  <div>
+                    <h4>Concentric Circles</h4>
+                    <p>Use the conventional concentric circles sociogram background.</p>
+                  </div>
+                ),
+              },
+              {
+                value: true,
+                label: () => (
+                  <div>
+                    <h4>Image</h4>
+                    <p>Use a custom image of your choosing as the background.</p>
+                  </div>
+                ),
+              },
+            ]}
+            onChange={handleChooseBackgroundType}
+            label="Choose a background type"
+            noReset
+          />
         </Row>
         { (!useImage)
           && (

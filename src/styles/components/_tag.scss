@@ -1,0 +1,50 @@
+$vertical-padding: .25rem;
+$font-size: .8rem;
+
+.tag {
+  position: relative;
+  display: inline-flex;
+  padding: $vertical-padding 0;
+  border-radius: 1rem;
+  width: auto;
+  margin: 0 unit(.5) unit(.5) 0;
+  cursor: pointer;
+  align-items: center;
+  justify-content: flex-start;
+  color: var(--text-light);
+  background: var(--architect-selected);
+  opacity: .6;
+  transition-property: opacity, filter;
+  transition-duration: var(--animation-duration-fast);
+  transition-timing-function: var(--animation-easing);
+  filter: saturate(.3);
+
+  &__label {
+    line-height: $font-size;
+    font-size: $font-size;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    padding: 0 .75rem;
+  }
+
+  &__reset {
+    cursor: pointer;
+    border-radius: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 #{$vertical-padding} 0 #{-$vertical-padding};
+
+    svg {
+      font-size: 1rem;
+    }
+  }
+
+  &--selected {
+    cursor: default;
+    opacity: 1;
+    filter: saturate(1);
+  }
+
+  @include color-modifiers($include-hover: false);
+}
