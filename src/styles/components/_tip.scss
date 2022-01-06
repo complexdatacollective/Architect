@@ -2,17 +2,18 @@
 
 .tip {
   background-color: var(--color-mid-grey);
-  border-radius: unit(2);
-  padding: 0 unit(2);
+  border-radius: var(--border-radius);
+  padding: unit(.5) unit(4);
   margin: unit(2) 0;
   font-size: .9rem;
   display: flex;
   align-items: center;
 
   .icon {
+    flex: 0 0 unit(4);
     height: unit(4);
     width: unit(4);
-    margin-right: unit(1);
+    margin-right: unit(2);
   }
 
   &__info {

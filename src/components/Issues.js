@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import cx from 'classnames';
 import { useSelector } from 'react-redux';
 import { getFormSyncErrors } from 'redux-form';
 import { map, isEmpty } from 'lodash';
@@ -101,17 +100,9 @@ const Issues = ({
 
   const isVisible = show && flatIssues.length > 0;
 
-  const issuesClasses = cx(
-    'issues',
-    {
-      'issues--hide': !isVisible,
-      'issues--open': open,
-    },
-  );
-
   return (
     <motion.div
-      className={issuesClasses}
+      className="issues"
       initial={{ y: '100%' }}
       animate={{ y: isVisible ? '0%' : '100%' }}
       transition={{

@@ -38,7 +38,7 @@ const stageEditorHanders = withHandlers({
   },
 });
 
-const invalidStageMessage = (invalid) => (invalid ? ['Preview requires a valid stage configuration'] : []);
+const invalidStageMessage = (invalid) => (invalid ? ['Previewing this stage requires valid stage configuration. Fix the errors on this stage to enable previewing.'] : []);
 
 const TooltipButton = withTooltip(Button);
 

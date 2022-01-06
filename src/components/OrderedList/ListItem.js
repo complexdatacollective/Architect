@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { SortableElement } from 'react-sortable-hoc';
@@ -20,7 +21,7 @@ const ListItem = ({
   );
 
   return (
-    <div
+    <motion.div
       className={componentClasses}
       layoutId={layoutId}
     >
@@ -36,7 +37,7 @@ const ListItem = ({
       <div className="list-item__control list-item__control--right" key="controls">
         <DeleteButton onDelete={onDelete} />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

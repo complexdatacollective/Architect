@@ -9,6 +9,7 @@ import Group from './Group';
 import Switch from './Switch';
 import useAppState from './useAppState';
 import { openExternalLink } from '../ExternalLink';
+import Section from './Section';
 
 const WelcomeHeader = () => {
   const [isOpen, setIsOpen] = useAppState('showWelcome', true);
@@ -19,30 +20,17 @@ const WelcomeHeader = () => {
     { 'welcome-header--is-open': isOpen },
   );
 
-  const headerVariants = {
-    open: {
-      background: 'rgba(85,91,188,1)',
-      color: 'var(--color-white)',
-      boxShadow: '0 0.6rem .2rem 0 var(--architect-panel-shadow)',
-    },
-    closed: {
-      background: 'rgba(85,91,188,0)',
-      boxShadow: '0 0rem 0rem 0 var(--architect-panel-shadow)',
-      color: 'var(--text-dark)',
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
-
   const start = {
     show: {
+      opacity: 1,
       height: '100%',
       transition: {
-        type: 'spring',
+        stiffness: 100,
+        dampening: 10,
       },
     },
     hide: {
+      opacity: 0,
       height: '0px',
       transition: {
         duration: 0.5,
@@ -50,22 +38,9 @@ const WelcomeHeader = () => {
     },
   };
 
-  const expand = {
-    show: {
-      opacity: 1,
-      transition: { when: 'beforeChildren' },
-    },
-    hide: {
-      opacity: 0,
-    },
-  };
-
   return (
-    <motion.div
+    <Section
       className={classes}
-      variants={headerVariants}
-      initial="closed"
-      animate={isOpen ? 'open' : 'closed'}
     >
       <Group className="welcome-header__header">
         <img className="logo" src={headerGraphic} alt="Network Canvas Architect" />
@@ -87,9 +62,6 @@ const WelcomeHeader = () => {
       </Group>
       <motion.section
         className="welcome-header__panel"
-        variants={expand}
-        initial="hide"
-        animate="show"
       >
         <AnimatePresence initial={false}>
           { isOpen && (
@@ -135,7 +107,7 @@ const WelcomeHeader = () => {
           )}
         </AnimatePresence>
       </motion.section>
-    </motion.div>
+    </Section>
   );
 };
 

@@ -22,6 +22,7 @@
   max-height: 90%;
   border-radius: var(--border-radius);
   box-shadow: 0 0 4rem 0 var(--modal-window-box-shadow);
+  background: white;
 
   &__content {
     position: relative; // needed to constrain error boundary error

@@ -27,6 +27,9 @@
     padding: unit(2) unit(4);
     display: flex;
     align-items: center;
+    max-width: 75rem;
+    margin: 0 auto;
+    width: 100%;
 
     .stage-name-container {
       flex: 1;

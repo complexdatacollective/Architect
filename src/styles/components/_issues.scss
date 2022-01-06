@@ -9,10 +9,6 @@
   z-index: var(--z-default);
   max-height: auto;
 
-  // &--hide {
-  //   max-height: 0;
-  // }
-
   &__title-bar {
     background-color: var(--color-sea-serpent--dark);
     padding: unit(1) unit(2);

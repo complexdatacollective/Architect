@@ -83,10 +83,3 @@ $opaque-background: rgba(255, 255, 255, .7);
     }
   }
 }
-
-// TODO: where should this live?
-.screen--new-stage {
-  .screen__content {
-    overflow: hidden;
-  }
-}

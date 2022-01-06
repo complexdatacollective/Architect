@@ -7,6 +7,27 @@ import windowRootProvider from '@codaco/ui/lib/components/windowRootProvider';
 import ControlBar from '@components/ControlBar';
 import { ScreenErrorBoundary } from '@components/Errors';
 
+const list = {
+  visible: {
+    opacity: 1,
+    transition: {
+      when: 'beforeChildren',
+      staggerChildren: 1,
+    },
+  },
+  hidden: {
+    opacity: 0,
+    transition: {
+      when: 'afterChildren',
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
 const Screen = ({
   buttons,
   children,
@@ -22,7 +43,7 @@ const Screen = ({
   const styles = zIndex ? { zIndex } : {};
 
   return (
-    <div className="screen-wrapper" ref={setWindowRoot}>
+    <div className="screen-wrapper" ref={setWindowRoot} styles={styles}>
       <motion.div
         className="modal__background"
         initial={{ opacity: 0 }}
@@ -30,16 +51,21 @@ const Screen = ({
       />
       <motion.div
         className={classes}
-        style={styles}
         layoutId={layoutId}
+        variants={list}
+        initial="hidden"
+        animate="visible"
       >
-        <div className="screen__content">
+        <motion.div
+          className="screen__content"
+          variants={item}
+        >
           <ScreenErrorBoundary onAcknowledge={onAcknowledgeError}>
             { typeof children === 'function'
               && children({ windowRoot })}
             { children && typeof children !== 'function' && children }
           </ScreenErrorBoundary>
-        </div>
+        </motion.div>
         <ControlBar
           className="screen__controls"
           buttons={buttons}

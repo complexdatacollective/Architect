@@ -3,18 +3,35 @@ import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
+const barVariants = {
+  visible: {
+    y: 0,
+    transition: {
+      delay: 0.5,
+      when: 'beforeChildren',
+      staggerChildren: 0.1,
+      stiffness: 300,
+      damping: 30,
+    },
+  },
+  hidden: {
+    y: '100%',
+    transition: {
+      when: 'afterChildren',
+    },
+  },
+};
+
 const buttonVariants = {
-  show: { opacity: 1, y: 0, transition: { type: 'spring' } },
-  hide: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 10 },
 };
 
 const animatedButton = (button, index) => (
   <motion.div
     key={(button && button.key) || index}
     variants={buttonVariants}
-    initial="hide"
-    animate="show"
-    exit="hide"
+    exit="hidden"
     layout
   >
     {button}
@@ -38,16 +55,19 @@ const ControlBar = ({ buttons, secondaryButtons, className }) => {
   ];
 
   return (
-    <div
+    <motion.div
       className={cx(
         'control-bar',
         className,
       )}
+      variants={barVariants}
+      initial="hidden"
+      animate="visible"
     >
       <AnimateSharedLayout>
         { buttonLayout }
       </AnimateSharedLayout>
-    </div>
+    </motion.div>
   );
 };
 

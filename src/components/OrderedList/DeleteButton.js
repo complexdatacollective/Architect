@@ -5,9 +5,10 @@ import { Icon } from '@codaco/ui';
 
 const DeleteButton = ({ onDelete }) => (
   <motion.div
-    whileHover={{ scale: 1.2, rotate: 90 }}
+    whileHover={{ scale: 1.5, rotate: 180 }}
     className="list-delete-button"
     onClick={onDelete}
+    title="Delete"
   >
     <Icon name="delete" />
   </motion.div>
