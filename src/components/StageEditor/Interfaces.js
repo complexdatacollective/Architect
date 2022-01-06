@@ -7,6 +7,7 @@ import {
   ContentGrid,
   DyadCensusPrompts,
   ExternalDataSource,
+  AutomaticLayout,
   FilteredEdgeType,
   FilteredNodeType,
   Form,
@@ -180,6 +181,7 @@ const Sociogram = {
   ],
   sections: [
     Background,
+    AutomaticLayout,
     SociogramPrompts,
     InterviewScript,
   ],

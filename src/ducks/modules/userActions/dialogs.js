@@ -193,30 +193,27 @@ const mayUpgradeProtocolDialog = (
   const message = (
     <>
       <p>
-        This protocol uses an older schema version
-        (
-        <strong>
-          version
-          { ' ' }
-          {protocolSchemaVersion}
-        </strong>
-        ) that is not compatible with
-        this version of Architect. It can be automatically upgraded
-        to schema
+        This protocol uses schema version
         {' '}
-        <strong>
-          version
-          { ' ' }
-          {targetSchemaVersion}
-        </strong>
+        {protocolSchemaVersion}
+        {', '}
+        which is not compatible with
+        this version of Architect.
+      </p>
+      <p>
+        It can be automatically upgraded to schema version
+        { ' ' }
+        {targetSchemaVersion}
         {' '}
-        using our migration feature.
+        using our migration feature, OR you can downgrade your version of
+        Architect to continue editing this protocol without changing its schema version.
       </p>
       { migrationNotes.length > 0
         && (
         <>
           <p>
-            Read the following notes about this migration carefully, as these actions
+            If you choose to migrate, the following actions will be automatically
+            performed on your protocol. Read these notes carefully, as these actions
             may affect your data.
           </p>
           <div className="migration-panel">
@@ -224,6 +221,7 @@ const mayUpgradeProtocolDialog = (
               <React.Fragment key={version}>
                 <h4>
                   Migrating to schema Version
+                  {' '}
                   {version}
                   {' '}
                   will:
