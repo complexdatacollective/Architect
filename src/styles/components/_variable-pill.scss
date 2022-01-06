@@ -1,10 +1,17 @@
+:root {
+  --variable-pill-width: #{unit(55)};
+  --variable-pill-background: var(--color-white);
+  --variable-pill-shadow-color: var(--color-platinum--dark);
+}
+
 .variable-pill {
-  flex: 0 1 auto;
-  display: flex;
+  width: var(--variable-pill-width);
+  display: inline-flex;
   flex-wrap: nowrap;
-  background-color: var(--color-platinum--dark);
+  background-color: var(--variable-pill-background);
   border-radius: unit(4);
   overflow: hidden;
+  box-shadow: 0 0 unit(1) var(--variable-pill-shadow-color);
 
   &--disabled {
     opacity: .35;
@@ -41,9 +48,18 @@
 
   &__container {
     flex: 1;
+    width: calc(100% - #{unit(6)});
     height: unit(7);
     display: flex;
     justify-content: space-between;
+
+    .label {
+      cursor: text;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
     .form-field-container {
       margin-bottom: 0;
@@ -55,7 +71,7 @@
       }
 
       .form-field-text__input {
-        padding-right: 4.25em;
+        padding-right: 5em;
         margin-bottom: 0;
       }
     }

@@ -61,17 +61,17 @@ const StageEditor = (props) => {
     >
       {
         ({ submitFailed, windowRoot }) => (
-        <>
-          <StageHeading id={id} toggleCodeView={toggleShowCodeView} />
-          <Layout>
-            <CodeView
-              form={formName}
-              show={showCodeView}
-              toggleCodeView={toggleShowCodeView}
-            />
-            {renderSections(sections, { submitFailed, windowRoot })}
-          </Layout>
-        </>
+          <>
+            <StageHeading id={id} toggleCodeView={toggleShowCodeView} />
+            <Layout>
+              <CodeView
+                form={formName}
+                show={showCodeView}
+                toggleCodeView={toggleShowCodeView}
+              />
+              {renderSections(sections, { submitFailed, windowRoot })}
+            </Layout>
+          </>
         )
       }
     </Editor>

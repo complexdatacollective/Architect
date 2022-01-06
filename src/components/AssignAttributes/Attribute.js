@@ -33,8 +33,8 @@ const Attribute = ({
       </div>
       { variable
         && (
-        <div className="assign-attributes-attribute__value">
-          <h4>Value</h4>
+        <fieldset className="assign-attributes-attribute__value">
+          <legend>Set value of variable to:</legend>
           <ValidatedField
             name={`${field}.value`}
             options={[
@@ -45,7 +45,7 @@ const Attribute = ({
             validation={{ required: true }}
             noReset
           />
-        </div>
+        </fieldset>
         )}
     </div>
     <div

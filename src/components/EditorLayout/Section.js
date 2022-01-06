@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { AnimateSharedLayout, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Icon } from '@codaco/ui';
 import cx from 'classnames';
 
@@ -42,6 +42,7 @@ const Section = ({
     <fieldset className={sectionClasses}>
       <legend
         onClick={() => toggleable && toggleOpen()}
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
         role="button"
         className={toggleable ? 'toggleable' : ''}
       >

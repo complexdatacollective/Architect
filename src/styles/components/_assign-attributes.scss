@@ -1,4 +1,5 @@
 .assign-attributes {
+  --input-background-color: 
   &__empty {
     margin-top: unit(2);
     font-style: italic;
@@ -41,7 +42,7 @@
 
     .form-fields-variable-picker {
       fieldset {
-        border-color: var(--text);
+        border-color: #c7ced0; // sass-lint:disable-line no-color-literals
       }
     }
   }
@@ -49,6 +50,14 @@
   &__value {
     flex: 1 0 auto;
     margin-left: unit(2);
+    border: 2px dashed #c7ced0; // sass-lint:disable-line no-color-literals;
+    padding: unit(2);
+    border-radius: var(--border-radius);
+
+    legend {
+      @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
+      padding: 0 unit(2);
+    }
   }
 
   &__delete {

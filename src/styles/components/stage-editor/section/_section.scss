@@ -17,10 +17,10 @@
 
   > legend {
     @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
-    font-size: 13px;
-    padding: unit(1) unit(2);
+    font-size: 1rem;
+    padding: unit(1) unit(3);
     background: var(--section-background-color);
-    border-radius: 9px;
+    border-radius: var(--border-radius);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,6 +51,10 @@
 
   .stage-editor-section {
     --section-background-color: var(--architect-panel-grey--dark);
+    --architect-panel-divider: #bbc4c5; // sass-lint:disable-line no-color-literals
+    --variable-pill-shadow-color: #c7ced0; // sass-lint:disable-line no-color-literals
+    --input-background: var(--color-platinum--dark);
+
     margin: unit(4) 0;
     background: var(--section-background-color);
     border-radius: unit(1);

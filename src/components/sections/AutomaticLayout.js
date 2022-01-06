@@ -19,18 +19,18 @@ const AutomaticLayout = () => {
   const handleChooseLayoutMode = () => {
     if (useAutomaticLayout) {
       dispatch(change('edit-stage', FORM_PROPERTY, false));
-    } else {
-      dispatch(change('edit-stage', FORM_PROPERTY, true));
+      setUseAutomaticLayout(false);
+      return;
     }
 
-    setUseAutomaticLayout(!useAutomaticLayout);
+    dispatch(change('edit-stage', FORM_PROPERTY, true));
+    setUseAutomaticLayout(true);
   };
 
   return (
-    <Section>
+    <Section title="Layout Mode">
       <Row>
         <div id={getFieldId('behaviours.automaticLayout.enabled')} data-name="Layout mode" />
-        <h3>Layout Mode</h3>
         <p>
           Interviewer offers two modes for positioning nodes on the
           sociogram: &quot;Manual&quot;, and &quot;Automatic&quot;.

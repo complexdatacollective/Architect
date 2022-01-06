@@ -87,6 +87,8 @@
 
   &--selected {
     --text: var(--color-white);
+    --variable-pill-shadow-color: var(--color-sea-green--dark);
+  
     background: var(--primary);
   }
 

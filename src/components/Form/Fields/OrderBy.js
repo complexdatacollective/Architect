@@ -58,7 +58,7 @@ const Rule = compose(
               onChange: (value) => handleChange(index, { property: value }),
               value: property,
             }}
-            placeholder="Select a property"
+            placeholder="Select a variable"
             options={variables.map(({ label, value }) => (
               {
                 value,
@@ -182,7 +182,7 @@ class OrderBy extends Component {
     if (this.variables.length === 0) { return null; }
 
     return (
-      <div className="form-fields-order-by">
+      <div className="list-item form-fields-order-by">
         { label
           && <div className="form-fields-order-by__label">{label}</div>}
         <Rules

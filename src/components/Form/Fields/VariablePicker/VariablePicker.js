@@ -68,19 +68,18 @@ const VariablePicker = (props) => {
       <div className="form-fields-variable-picker">
         <fieldset>
           <legend>{label}</legend>
+          { value && (
           <AnimatePresence exitBeforeEnter initial={false}>
-            { value && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                enter={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                key={value}
-              >
-                <h1>Hello!</h1>
-                {variablePillComponent()}
-              </motion.div>
-            )}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              key={value}
+            >
+              {variablePillComponent()}
+            </motion.div>
           </AnimatePresence>
+          )}
           <Button
             icon="add"
             onClick={() => setShowPicker(true)}

@@ -1,10 +1,9 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { SortableElement } from 'react-sortable-hoc';
-import { Icon } from '@codaco/ui';
 import Handle from './Handle';
+import { DeleteButton } from '.';
 
 const ListItem = ({
   children,
@@ -20,32 +19,23 @@ const ListItem = ({
     className,
   );
 
-  console.log(layoutId);
-
   return (
-    <div className={componentClasses}>
-      <motion.div
-        layoutId={layoutId}
-        className="list-item__container"
-      >
-        { sortable
-          && (
-          <div className="list-item__control list-item__control--left" key="handle">
-            <Handle />
-          </div>
-          )}
-        <div className="list-item__content" onClick={onClick} key="content">
-          {children}
+    <div
+      className={componentClasses}
+      layoutId={layoutId}
+    >
+      { sortable
+        && (
+        <div className="list-item__control list-item__control--left" key="handle">
+          <Handle />
         </div>
-        <div className="list-item__control list-item__control--right" key="controls">
-          <div
-            className="list-delete-button"
-            onClick={onDelete}
-          >
-            <Icon name="delete" />
-          </div>
-        </div>
-      </motion.div>
+        )}
+      <div className="list-item__content" onClick={onClick} key="content">
+        {children}
+      </div>
+      <div className="list-item__control list-item__control--right" key="controls">
+        <DeleteButton onDelete={onDelete} />
+      </div>
     </div>
   );
 };

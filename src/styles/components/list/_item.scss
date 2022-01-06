@@ -1,19 +1,16 @@
 $component-name: list-item;
 
 .#{$component-name} {
+  --input-border: var(--architect-sortable-text);
   z-index: var(--z-fx);
-
-  &__container {
-    --input-border: var(--architect-sortable-text);
-    width: 100%;
-    background-color: var(--architect-sortable-background);
-    color: var(--architect-sortable-text);
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    border-radius: unit(1.5);
-    margin: unit(2) 0 0;
-  }
+  width: 100%;
+  background-color: var(--architect-sortable-background);
+  color: var(--architect-sortable-text);
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  border-radius: var(--border-radius);
+  margin-bottom: unit(1);
 
   &__control {
     padding: unit(2);
@@ -42,8 +39,6 @@ $component-name: list-item;
   }
 
   &--clickable {
-    .#{$component-name}__container {
-      // @include clickable(2);
-    }
+    // @include clickable(2);
   }
 }

@@ -32,7 +32,16 @@ const AssetBrowser = ({
           type={type}
         />
       </Section>
-      <Section title={`Resource Library ${type && (<>showing type {type}</>)}`}>
+      <Section
+        title={`Resource Library ${type
+        && (
+          <>
+            showing type
+            {' '}
+            {type}
+          </>
+        )}`}
+      >
         <Assets
           onSelect={onSelect}
           onPreview={handleShowPreview}

@@ -8,7 +8,7 @@ $component-name: form-fields-variable-picker;
   fieldset {
     background: var(--section-background-color);
     flex: 1;
-    border: 1px solid var(--text);
+    border: 2px dashed var(--architect-panel-divider);
     padding: unit(2);
     border-radius: var(--border-radius);
 
@@ -18,9 +18,7 @@ $component-name: form-fields-variable-picker;
     }
 
     .variable-pill {
-      max-width: 35rem;
       margin-bottom: unit(2);
-      background-color: var(--color-white);
     }
   }
 
