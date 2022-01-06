@@ -107,6 +107,10 @@ $font-sizes: (
     width: calc(50% - (#{unit(4)} - #{$rule-width}));
     position: relative;
 
+    .protocol-card {
+      max-width: 30rem;
+    }
+
     &:not(:last-of-type) {
       margin-bottom: unit(1);
     }

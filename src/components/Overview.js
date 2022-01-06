@@ -12,11 +12,14 @@ import { actionCreators as protocolActions } from '@modules/protocol';
 import { actionCreators as uiActions } from '@modules/ui';
 import { actionCreators as userActions } from '@modules/userActions';
 import PrintIcon from '@material-ui/icons/Print';
+import withTooltip from './enhancers/withTooltip';
 
 const panelVariants = {
   hide: { opacity: 0, y: -200 },
   show: { opacity: 1, y: 0, transition: { type: 'spring', damping: 20, when: 'beforeChildren' } },
 };
+
+const PrintableSummaryButton = withTooltip(Button);
 
 const Overview = ({
   name,
@@ -53,7 +56,15 @@ const Overview = ({
         <Icon name="protocol-card" />
       </div>
       <div className="action-buttons">
-        <Button onClick={printOverview} color="slate-blue" icon={<PrintIcon />} disabled={!protocolIsValid || hasUnsavedChanges}>Printable Summary</Button>
+        <PrintableSummaryButton
+          onClick={printOverview}
+          color="slate-blue"
+          icon={<PrintIcon />}
+          disabled={!protocolIsValid || hasUnsavedChanges}
+          tooltip={hasUnsavedChanges ? 'You must save your protocol before you can view the printable summary.' : null}
+        >
+          Printable Summary
+        </PrintableSummaryButton>
         <motion.div
           layoutId="resource-library"
         >

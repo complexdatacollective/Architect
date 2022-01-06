@@ -14,6 +14,7 @@ import { actionCreators as codebookActionCreators } from '@modules/protocol/code
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import UsageColumn from './UsageColumn';
 import ControlsColumn from './ControlsColumn';
+import EditableVariablePill from '../Form/Fields/VariablePicker/VariablePill';
 
 const SortDirection = {
   ASC: Symbol('ASC'),
@@ -73,8 +74,6 @@ const Variables = ({
   sortBy,
   sortDirection,
   sort,
-  entity,
-  type: entityType,
 }) => {
   const headingProps = {
     sortBy,
@@ -93,13 +92,6 @@ const Variables = ({
               {...headingProps}
             >
               Name
-            </Heading>
-            <Heading
-              name="type"
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              {...headingProps}
-            >
-              Type
             </Heading>
             <Heading
               name="component"
@@ -122,17 +114,14 @@ const Variables = ({
         <tbody>
           {variables.map(({
             id,
-            name,
             component,
-            type,
             inUse,
             usage,
           }, index) => (
             <tr className={rowClassName(index)} key={id}>
               <td className="codebook__variables-column">
-                {name}
+                <EditableVariablePill uuid={id} />
               </td>
-              <td className="codebook__variables-column">{type}</td>
               <td className="codebook__variables-column">{component}</td>
               <td className="codebook__variables-column codebook__variables-column--usage">
                 <UsageColumn
@@ -144,8 +133,6 @@ const Variables = ({
                 <ControlsColumn
                   onDelete={onDelete}
                   inUse={inUse}
-                  entity={entity}
-                  type={entityType}
                   id={id}
                 />
               </td>

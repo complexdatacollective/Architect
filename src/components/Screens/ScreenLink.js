@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actionCreators as screenActions } from '@modules/ui/screens';
-import Link from '@components/Link';
+import InternalLink from '@components/Link';
 
 const ScreenLink = ({
   children,
@@ -22,9 +22,9 @@ const ScreenLink = ({
   }, ['openScreen', 'onClick']);
 
   return (
-    <Link onClick={handleOpenStage}>
+    <InternalLink onClick={handleOpenStage}>
       {children}
-    </Link>
+    </InternalLink>
   );
 };
 

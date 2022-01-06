@@ -1,31 +1,76 @@
+import { get } from 'lodash';
+import NumberVariable from '../images/variables/number-variable.svg';
+import TextVariable from '../images/variables/text-variable.svg';
+import BooleanVariable from '../images/variables/boolean-variable.svg';
+import OrdinalVariable from '../images/variables/ordinal-variable.svg';
+import CategoricalVariable from '../images/variables/categorical-variable.svg';
+import ScalarVariable from '../images/variables/scalar-variable.svg';
+import DateVariable from '../images/variables/date-variable.svg';
+import LayoutVariable from '../images/variables/layout-variable.svg';
+import LocationVariable from '../images/variables/location-variable.svg';
+import DefaultVariable from '../images/variables/default-variable.svg';
+
+// TODO: This should be a monolithic object that contains all variable types
+// and properties. All other derivations/permutations of this data should be
+// merged into this object.
+//
+// For example: input components, if the variable has options or properties,
+// etc. Then the required properties can be picked from this object using
+// map/reduce/get etc.
 export const VARIABLE_TYPES = {
   number: {
     label: 'Number',
     value: 'number',
+    icon: NumberVariable,
+    color: 'var(--color-paradise-pink)',
   },
   text: {
     label: 'Text',
     value: 'text',
+    icon: TextVariable,
+    color: 'var(--color-cerulean-blue)',
   },
   boolean: {
     label: 'Boolean',
     value: 'boolean',
+    icon: BooleanVariable,
+    color: 'var(--color-neon-carrot)',
   },
   ordinal: {
     label: 'Ordinal',
     value: 'ordinal',
+    icon: OrdinalVariable,
+    color: 'var(--color-sea-green)',
   },
   categorical: {
     label: 'Categorical',
     value: 'categorical',
+    icon: CategoricalVariable,
+    color: 'var(--color-mustard)',
   },
   scalar: {
     label: 'Scalar',
     value: 'scalar',
+    icon: ScalarVariable,
+    color: 'var(--color-kiwi)',
   },
   datetime: {
     label: 'Date',
     value: 'datetime',
+    icon: DateVariable,
+    color: 'var(--color-tomato)',
+  },
+  layout: {
+    label: 'Layout',
+    value: 'layout',
+    icon: LayoutVariable,
+    color: 'var(--color-purple-pizazz)',
+  },
+  location: {
+    label: 'Location',
+    value: 'location',
+    icon: LocationVariable,
+    color: 'var(--color-slate-blue--dark)',
   },
 };
 
@@ -105,13 +150,13 @@ export const COMPONENTS = {
 };
 
 export const VARIABLE_TYPES_COMPONENTS = [
-  ['number', [COMPONENTS.NumberInput], 'var(--color-paradise-pink)', '-- Number Types -- '],
-  ['scalar', [COMPONENTS.VisualAnalogScale], 'var(--color-cerulean-blue)', '-- Scalar Types --'],
-  ['datetime', [COMPONENTS.DatePicker, COMPONENTS.RelativeDatePicker], 'var(--color-tomato)', '-- Date Types --'],
-  ['text', [COMPONENTS.TextInput, COMPONENTS.TextArea], 'var(--color-slate-blue--dark)', '-- Text Types --'],
-  ['boolean', [COMPONENTS.BooleanChoice, COMPONENTS.Toggle], 'var(--color-neon-carrot)', '-- Boolean Types --'],
-  ['ordinal', [COMPONENTS.RadioGroup, COMPONENTS.LikertScale], 'var(--color-sea-green)', '-- Ordinal Types --'],
-  ['categorical', [COMPONENTS.CheckboxGroup, COMPONENTS.ToggleButtonGroup], 'var(--color-sea-green--dark)', '-- Categorical Types --'],
+  ['number', [COMPONENTS.NumberInput], '-- Number Types -- '],
+  ['scalar', [COMPONENTS.VisualAnalogScale], '-- Scalar Types --'],
+  ['datetime', [COMPONENTS.DatePicker, COMPONENTS.RelativeDatePicker], '-- Date Types --'],
+  ['text', [COMPONENTS.TextInput, COMPONENTS.TextArea], '-- Text Types --'],
+  ['boolean', [COMPONENTS.BooleanChoice, COMPONENTS.Toggle], '-- Boolean Types --'],
+  ['ordinal', [COMPONENTS.RadioGroup, COMPONENTS.LikertScale], '-- Ordinal Types --'],
+  ['categorical', [COMPONENTS.CheckboxGroup, COMPONENTS.ToggleButtonGroup], '-- Categorical Types --'],
 ];
 
 export const VARIABLE_TYPES_WITH_OPTIONS = [
@@ -131,7 +176,7 @@ export const INPUT_OPTIONS = Object.values(COMPONENTS);
 
 const formattedInputOptions = VARIABLE_TYPES_COMPONENTS.reduce((accumulator, currentValue) => ([
   ...accumulator,
-  { label: currentValue[3], value: null, disabled: true },
+  { label: currentValue[2], value: null, disabled: true },
   ...currentValue[1],
 ]), []);
 
@@ -165,12 +210,9 @@ const getTypeForComponent = (component) => {
   return type;
 };
 
-const getColorForType = (type) => {
-  const [,, color] = findTypeIndex(findByType(type));
+const getColorForType = (type) => get(VARIABLE_TYPES, [type, 'color'], 'var(--color-charcoal)');
 
-  if (!color) { return 'var(--color-navy-taupe)'; }
-  return color;
-};
+const getIconForType = (type) => get(VARIABLE_TYPES, `${type}.icon`, DefaultVariable);
 
 export {
   INPUT_OPTIONS as inputOptions,
@@ -178,6 +220,7 @@ export {
   VARIABLE_OPTIONS as variableOptions,
   getTypeForComponent,
   getComponentsForType,
+  getIconForType,
   getColorForType,
   isOrdinalOrCategoricalType,
   isVariableTypeWithParameters,
