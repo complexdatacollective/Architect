@@ -17,7 +17,6 @@ const ContextPanel = ({
   const variants = useMemo(() => {
     const transition = {
       duration: getCSSVariableAsNumber('--animation-duration-standard-ms') * 0.001,
-      // type: 'spring',
     };
 
     return {

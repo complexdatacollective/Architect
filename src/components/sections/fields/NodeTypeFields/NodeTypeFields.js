@@ -27,7 +27,7 @@ const NodeType = ({
     handleTypeScreenMessage(typeScreenMessage);
   });
 
-  // console.log('disa', disabled);
+  console.log('disa', disabled);
 
   return (
     <Section title="Node Type" disabled={disabled}>

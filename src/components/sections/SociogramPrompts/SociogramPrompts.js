@@ -19,9 +19,7 @@ const SociogramPrompts = (props) => (
     editComponent={PromptFields}
     template={template}
     {...props}
-  >
-    <p>Add prompts to your Sociogram:</p>
-  </EditableList>
+  />
 );
 
 export default compose(

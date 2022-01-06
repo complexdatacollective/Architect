@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
 import cx from 'classnames';
 import { useSelector } from 'react-redux';
 import { getFormSyncErrors } from 'redux-form';
@@ -103,13 +104,22 @@ const Issues = ({
   const issuesClasses = cx(
     'issues',
     {
-      'issues--show': isVisible,
+      'issues--hide': !isVisible,
       'issues--open': open,
     },
   );
 
   return (
-    <div className={issuesClasses}>
+    <motion.div
+      className={issuesClasses}
+      initial={{ y: '100%' }}
+      animate={{ y: isVisible ? '0%' : '100%' }}
+      transition={{
+        type: 'spring',
+        stiffness: 300,
+        damping: 30,
+      }}
+    >
       <div className="issues__panel">
         <div className="issues__title-bar" onClick={handleClickTitleBar}>
           <div className="issues__title-bar-icon">
@@ -120,24 +130,27 @@ const Issues = ({
             {flatIssues.length}
             )
           </div>
-          <div className="issues__title-bar-toggle">
-            <Icon
-              name="chevron-down"
-              color="white"
-              className="issues__toggle--open"
-            />
+          <motion.div
+            className="issues__title-bar-toggle"
+            animate={{ rotate: isVisible ? 180 : 0 }}
+
+          >
             <Icon
               name="chevron-up"
               color="white"
-              className="issues__toggle--close"
+              className="issues-toggle"
             />
-          </div>
+          </motion.div>
         </div>
-        <ol className="issues__issues">
+        <motion.ol
+          className="issues__issues"
+          initial={{ height: 0 }}
+          animate={{ height: open ? 'auto' : 0 }}
+        >
           {renderedIssues}
-        </ol>
+        </motion.ol>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -83,15 +83,13 @@ class Background extends PureComponent {
         { (useImage)
           && (
           <Row>
-            <div style={{ position: 'relative', minHeight: '100px' }}>
-              <div id={getFieldId('background.image')} data-name="Background &gt; Image" />
-              <ValidatedField
-                name="background.image"
-                component={ArchitectFields.Image}
-                label="Background image"
-                validation={{ required: true }}
-              />
-            </div>
+            <div id={getFieldId('background.image')} data-name="Background &gt; Image" />
+            <ValidatedField
+              name="background.image"
+              component={ArchitectFields.Image}
+              label="Background image"
+              validation={{ required: true }}
+            />
           </Row>
           )}
       </Section>

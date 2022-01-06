@@ -48,10 +48,11 @@ a {
 }
 
 .form-field {
-  padding: 1rem unit(2);
+  padding: 1em unit(2);
 
   &.boolean {
     background: transparent;
+    padding: 0;
   }
 }
 
@@ -179,6 +180,14 @@ a {
 
   > .round-checkbox {
     margin: unit(2);
+
+    &--checked {
+      border-color: var(--color-white);
+    }
+  }
+
+  > :last-child {
+    margin-right: unit(2);
   }
 
   &--selected {
@@ -187,4 +196,14 @@ a {
   }
 }
 
+.form-field-label {
+  margin-top: unit(4);
+  margin-bottom: unit(2);
+  font-weight: 600;
+
+  p {
+    margin: 0;
+    font-weight: inherit;
+  }
+}
 

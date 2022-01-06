@@ -28,7 +28,7 @@ const PromptFields = ({
       </p>
     </Row>
     <Row>
-      <h4>Layout Variable</h4>
+      <h4 className="form-field-label">Layout Variable</h4>
       <p>Which variable should be used to store or retrieve the X/Y coordinates of nodes?</p>
       <ValidatedField
         name="layout.layoutVariable"

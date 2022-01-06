@@ -4,19 +4,18 @@
   width: 100%;
   background-color: var(--color-sea-serpent);
   transform-origin: 0 100%;
-  transform: scaleY(0) translateY(1px);
-  transition-duration: var(--animation-duration-fast);
-  transition-timing-function: var(--animation-easing);
-  transition-property: transform;
   overflow: hidden;
   color: var(--text-light);
   z-index: var(--z-default);
+  max-height: auto;
+
+  // &--hide {
+  //   max-height: 0;
+  // }
 
   &__title-bar {
-    @include typography(title-2);
     background-color: var(--color-sea-serpent--dark);
-    padding: 0 unit(4);
-    height: unit(8);
+    padding: unit(1) unit(2);
     cursor: pointer;
     display: flex;
     flex-direction: row;
@@ -27,28 +26,23 @@
       .icon {
         position: relative;
         top: unit(.25);
-        height: unit(3.5);
-        width: unit(3.5);
+        height: unit(4);
+        width: unit(4);
       }
     }
 
     &-text {
+      @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
       margin: 0 unit(2);
       flex: 1 0 auto;
     }
 
     &-toggle {
-      .icon {
-        position: relative;
-        top: unit(.25);
+      .issues-toggle {
         height: unit(2);
         width: unit(2);
       }
     }
-  }
-
-  .issues__toggle--open {
-    display: none;
   }
 
   &__issues {
@@ -60,7 +54,6 @@
     transition-timing-function: var(--animation-easing);
     transition-duration: var(--animation-duration-standard);
     overflow: hidden auto;
-    max-height: 0;
   }
 
   &__issue {
@@ -87,25 +80,6 @@
 
     &:hover {
       background-color: var(--color-sea-green);
-    }
-  }
-
-  &--show {
-    transform: scaleY(1) translateY(1px);
-  }
-
-  &--open {
-
-    .issues__issues {
-      max-height: 300px;
-    }
-
-    .issues__toggle--open {
-      display: block;
-    }
-
-    .issues__toggle--close {
-      display: none;
     }
   }
 }
