@@ -8,11 +8,14 @@ import Fuse from 'fuse.js';
 import Search from '@codaco/ui/lib/components/Fields/Search';
 import Button from '@codaco/ui/lib/components/Button';
 import Screen from '@components/Screen/Screen';
+import { Layout } from '@components/EditorLayout';
 import { actionCreators as uiActions } from '@modules/ui';
 import Tag from '@components/Tag';
 import { INTERFACE_TYPES, TAGS, TAG_COLORS } from './interfaceOptions';
 import useTagList from './useTagList';
 import InterfaceList from './InterfaceList';
+import CollapsableHeader from '../../Screen/CollapsableHeader';
+import ControlBar from '../../ControlBar';
 
 const fuseOptions = {
   shouldSort: true,
@@ -39,7 +42,6 @@ const search = (query) => {
 const NewStageScreen = ({
   insertAtIndex,
   onComplete,
-  show,
 }) => {
   const [tags, selectedTags, selectTag, deselectTag] = useTagList(TAGS);
   const [query, setQuery] = useState('');
@@ -90,15 +92,25 @@ const NewStageScreen = ({
 
   return (
     <Screen
-      show={show}
-      buttons={buttons}
-      type="new-stage"
+      footer={<ControlBar buttons={buttons} />}
     >
-      <motion.div className={componentClasses}>
-        <div className="new-stage-screen__heading">
-          <h1>Add new screen</h1>
-          <p>Select an interface type from below to add it to your protocol.</p>
+      <CollapsableHeader
+        collapsedState={(
+          <div className="stage-heading stage-heading--collapsed">
+            <Layout>
+              <h2>Add Stage</h2>
+            </Layout>
+          </div>
+        )}
+      >
+        <div className="stage-heading">
+          <Layout>
+            <h1 className="screen-heading">Add Stage</h1>
+            <p>Select an interface type from below to add it to your protocol.</p>
+          </Layout>
         </div>
+      </CollapsableHeader>
+      <motion.div className={componentClasses}>
         <div className="new-stage-screen__picker">
           <div className="new-stage-screen__menu">
             <div className="new-stage-screen__menu-section">

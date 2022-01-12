@@ -8,7 +8,7 @@ import { getInterface } from './Interfaces';
 import withStageEditorHandlers from './withStageEditorHandlers';
 import withStageEditorMeta from './withStageEditorMeta';
 import { formName } from './configuration';
-import StageHeading from './StageHeading';
+import StageHeading, { CondensedStageHeading } from './StageHeading';
 import CollapsableHeader from '../Screen/CollapsableHeader';
 
 const StageEditor = (props) => {
@@ -56,12 +56,8 @@ const StageEditor = (props) => {
         ({ submitFailed }) => (
           <>
             <CollapsableHeader
-              threshold={115}
-              collapsedState={(
-                <Layout>
-                  <h2>Stage Editor</h2>
-                </Layout>
-              )}
+              threshold={165}
+              collapsedState={<CondensedStageHeading id={id} />}
             >
               <StageHeading id={id} />
             </CollapsableHeader>

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { noop, get } from 'lodash';
 import * as Fields from '@codaco/ui/lib/components/Fields';
@@ -12,12 +12,41 @@ import { getFieldId } from '../../utils/issues';
 
 const getTimelineImage = (type) => get(timelineImages, type, timelineImages.Default);
 
+export const CondensedStageHeading = ({
+  id,
+}) => {
+  const stageIndex = useSelector((state) => getStageIndex(state, id));
+  const stageNumber = stageIndex !== -1 ? stageIndex + 1 : null;
+  const formValues = useSelector(getFormValues('edit-stage'));
+  const type = get(formValues, 'type', '');
+
+  return (
+    <div className="stage-heading stage-heading--collapsed">
+      <div className="stage-meta">
+        <img
+          src={getTimelineImage(type)}
+          alt={`${type} interface`}
+          title={`${type} interface`}
+        />
+      </div>
+      <div className="stage-name-container">
+        <h2>
+          {stageNumber}
+          .
+          {' '}
+          {formValues.label}
+        </h2>
+      </div>
+    </div>
+  );
+};
+
 const StageHeading = ({
   stageNumber,
   type,
   toggleCodeView,
 }) => (
-  <div className="stage-editor-section stage-heading">
+  <div className="stage-heading">
     <div className="stage-meta">
       {
         getTimelineImage(type)
@@ -63,7 +92,6 @@ StageHeading.defaultProps = {
 
 const mapStateToProps = (state, props) => {
   const { id } = props;
-  console.log('heading props', props);
   const stageIndex = getStageIndex(state, id);
   const stageNumber = stageIndex !== -1 ? stageIndex + 1 : null;
   const formValues = getFormValues('edit-stage')(state);

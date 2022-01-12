@@ -48,7 +48,6 @@ const CollapsableHeader = (props) => {
             width: '100%',
             zIndex: 'var(--z-panel)',
           }}
-          className="stage-heading stage-heading--collapsed"
           variants={variants}
           initial="collapsed"
           animate="expanded"
@@ -59,7 +58,6 @@ const CollapsableHeader = (props) => {
         )}
       <motion.div
         key="expanded-state"
-        className="stage-heading"
         variants={variants}
         initial="collapsed"
         animate="expanded"

@@ -5,12 +5,31 @@
   flex-direction: column;
   padding: 0;
   margin: 0;
-  top: 0;
-  z-index: var(--z-default);
-  border-radius: 0;
+  margin-bottom: unit(2);
 
   &--collapsed {
     box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
+  }
+
+  &.stage-heading--collapsed {
+    flex-direction: row;
+    padding: unit(1) unit(4);
+
+    .stage-meta {
+      width: initial;
+      padding: 0;
+      margin-right: unit(2);
+
+
+      img {
+        width: unit(8);
+
+      }
+    }
+
+    .stage-name-container {
+      flex: 1;
+    }
   }
 
   &.stage-editor-section {
@@ -86,5 +105,8 @@
 }
 
 table { border: none; border-collapse: collapse; }
-table td { border-left: 1px solid #000; }
-table td:first-child { border-left: none; }
+table td, table th {
+  border-left: 2px solid var(--color-platinum--dark);
+  padding: unit(1) unit(2);
+}
+table td:first-child, table th:first-child { border-left: none; }

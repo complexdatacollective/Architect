@@ -64,18 +64,22 @@ const CodebookScreen = (props) => {
     >
       <CollapsableHeader
         collapsedState={(
-          <Layout>
-            <h2>Codebook</h2>
-          </Layout>
+          <div className="stage-heading stage-heading--collapsed">
+            <Layout>
+              <h2>Codebook</h2>
+            </Layout>
+          </div>
         )}
       >
-        <Layout>
-          <h1 className="screen-heading">Codebook</h1>
-          <p>
-            Below you can find an overview of the node and edge types that you have
-            defined while creating your interview. Entities that are unused may be deleted.
-          </p>
-        </Layout>
+        <div className="stage-heading">
+          <Layout>
+            <h1 className="screen-heading">Codebook</h1>
+            <p>
+              Below you can find an overview of the node and edge types that you have
+              defined while creating your interview. Entities that are unused may be deleted.
+            </p>
+          </Layout>
+        </div>
       </CollapsableHeader>
       <Layout>
         <Codebook />
