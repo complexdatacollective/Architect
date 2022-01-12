@@ -2,15 +2,36 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Icon from '@codaco/ui/lib/components/Icon';
+import { motion, useAnimation } from 'framer-motion/dist/framer-motion';
 
 const Tip = ({ type, icon, children }) => {
   const classes = cx('tip', `tip__${type}`);
 
+  const animation = useAnimation();
+
   return (
     <div className={classes}>
       { icon
-        && <Icon name={type} />}
-      {children}
+        && (
+          <motion.div
+            animate={animation}
+            style={{
+              transformOrigin: 'center',
+            }}
+            onViewportEnter={() => animation.start({
+              rotate: [0, 15, -15, 0, 15, -15, 0],
+              scale: [1, 1.2, 1],
+              transition: {
+                delay: 1,
+              },
+            })}
+          >
+            <Icon name={type} />
+          </motion.div>
+        )}
+      <div className="tip__content">
+        {children}
+      </div>
     </div>
   );
 };

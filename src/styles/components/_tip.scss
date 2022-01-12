@@ -13,7 +13,10 @@
     flex: 0 0 unit(4);
     height: unit(4);
     width: unit(4);
-    margin-right: unit(2);
+  }
+
+  &__content {
+    margin-left: unit(2);
   }
 
   &__info {
