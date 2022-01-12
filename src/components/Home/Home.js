@@ -1,5 +1,5 @@
 import React from 'react';
-import { AnimateSharedLayout, motion } from 'framer-motion';
+import { AnimateSharedLayout, motion } from 'framer-motion/dist/framer-motion';
 import WelcomeHeader from './WelcomeHeader';
 import LaunchPad from './LaunchPad';
 
@@ -19,16 +19,14 @@ const variants = {
 
 const Home = () => (
   <div className="home">
-    <AnimateSharedLayout>
-      <motion.div
-        className="home__container"
-        variants={variants}
-        key="start-screen"
-      >
-        <WelcomeHeader />
-        <LaunchPad />
-      </motion.div>
-    </AnimateSharedLayout>
+    <motion.div
+      className="home__container"
+      variants={variants}
+      key="start-screen"
+    >
+      <WelcomeHeader />
+      <LaunchPad />
+    </motion.div>
   </div>
 );
 

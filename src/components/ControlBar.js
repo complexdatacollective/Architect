@@ -1,5 +1,5 @@
 import React from 'react';
-import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
+import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion/dist/framer-motion';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -7,7 +7,6 @@ const barVariants = {
   visible: {
     y: 0,
     transition: {
-      delay: 0.5,
       when: 'beforeChildren',
       staggerChildren: 0.1,
       stiffness: 300,

@@ -61,14 +61,16 @@ StageHeading.defaultProps = {
   toggleCodeView: noop,
 };
 
-const mapStateToProps = (state, { id }) => {
+const mapStateToProps = (state, props) => {
+  const { id } = props;
+  console.log('heading props', props);
   const stageIndex = getStageIndex(state, id);
   const stageNumber = stageIndex !== -1 ? stageIndex + 1 : null;
   const formValues = getFormValues('edit-stage')(state);
 
   return {
     stageNumber,
-    type: formValues.type,
+    type: get(formValues, 'type', ''),
   };
 };
 

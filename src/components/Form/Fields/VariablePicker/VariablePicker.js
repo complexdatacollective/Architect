@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion';
 import { Button } from '@codaco/ui';
 import PropTypes from 'prop-types';
 import { has, get } from 'lodash';

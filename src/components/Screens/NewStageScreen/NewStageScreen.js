@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion/dist/framer-motion';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { get } from 'lodash';

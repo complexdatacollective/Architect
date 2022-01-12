@@ -6,7 +6,7 @@ import { getValidator } from '@app/utils/validations';
 import { Text } from '@codaco/ui/lib/components/Fields';
 import { Button } from '@codaco/ui';
 import { sortBy } from 'lodash';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
 import { untouch } from 'redux-form';
 import { useDispatch } from 'react-redux';
 

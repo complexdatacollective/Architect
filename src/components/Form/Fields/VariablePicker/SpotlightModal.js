@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import window from '@app/behaviours/window';

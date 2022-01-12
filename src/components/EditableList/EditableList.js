@@ -2,7 +2,7 @@ import React from 'react';
 import { compose, defaultProps } from 'recompose';
 import PropTypes from 'prop-types';
 import { startCase } from 'lodash';
-import { AnimateSharedLayout } from 'framer-motion';
+import { AnimateSharedLayout } from 'framer-motion/dist/framer-motion';
 import { Button } from '@codaco/ui';
 import { getFieldId, scrollToFirstIssue } from '@app/utils/issues';
 import { Section } from '@components/EditorLayout';

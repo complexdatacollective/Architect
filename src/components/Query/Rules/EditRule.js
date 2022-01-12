@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion/dist/framer-motion';
 import Modal from '@codaco/ui/lib/components/Modal';
 import Button from '@codaco/ui/lib/components/Button';
 import EditAlterRule from './EditAlterRule';

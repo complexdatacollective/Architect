@@ -6,7 +6,7 @@ import { Icon, Scroller } from '@codaco/ui';
 import cx from 'classnames';
 import { uniqueByList, allowedVariableName } from '@app/utils/validations';
 import Search from '@codaco/ui/lib/components/Fields/Search';
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion/dist/framer-motion';
 import { useSelector } from 'react-redux';
 import { get } from 'lodash';
 import { SimpleVariablePill } from './VariablePill';

@@ -7,7 +7,7 @@ import Tippy from '@tippyjs/react';
 import {
   AnimatePresence,
   motion,
-} from 'framer-motion';
+} from 'framer-motion/dist/framer-motion';
 import { get } from 'lodash';
 import cx from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
@@ -200,6 +200,7 @@ const EditableVariablePill = ({ uuid }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsEditing(true)}
+              title="Click to rename this variable..."
             >
               {name}
             </motion.h4>

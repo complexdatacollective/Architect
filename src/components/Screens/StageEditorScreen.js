@@ -9,7 +9,6 @@ import { Button } from '@codaco/ui';
 import { actionCreators as previewActions } from '../../ducks/modules/preview';
 import EditorScreen from '../Screen/EditorScreen';
 import StageEditor, { formName } from '../StageEditor';
-import StageHeading from '../StageEditor/StageHeading';
 import withTooltip from '../enhancers/withTooltip';
 
 const mapStateToProps = (state) => ({
@@ -47,7 +46,6 @@ const stageEditorProps = withProps(({
   invalid,
 }) => ({
   editor: StageEditor,
-  header: StageHeading,
   form: formName,
   secondaryButtons: [
     <TooltipButton
