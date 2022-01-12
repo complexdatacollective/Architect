@@ -20,7 +20,7 @@ const variants = {
 const CollapsableHeader = (props) => {
   const {
     children,
-    threshold = 60,
+    threshold = 115,
     collapsedState,
   } = props;
 

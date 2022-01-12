@@ -16,13 +16,16 @@ const screenVariants = {
     y: 0,
     opacity: 1,
     transition: {
-      when: 'beforeChildren',
+      // when: 'beforeChildren',
     },
   },
   hidden: {
     y: '-15%',
     opacity: 0,
     when: 'beforeChildren',
+    transition: {
+      damping: 20,
+    },
   },
 };
 
