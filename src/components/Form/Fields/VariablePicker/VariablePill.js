@@ -200,6 +200,7 @@ const EditableVariablePill = ({ uuid }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsEditing(true)}
+              title="Click to rename this variable..."
             >
               {name}
             </motion.h4>

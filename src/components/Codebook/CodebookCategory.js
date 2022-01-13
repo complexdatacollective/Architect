@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const CodebookCategory = ({ title, children }) => (
   <div className="codebook-category">
-    <h1>{title}</h1>
+    <h2>{title}</h2>
     <div className="codebook__category-items">
       {children}
     </div>

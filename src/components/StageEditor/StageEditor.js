@@ -1,15 +1,15 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { ipcRenderer } from 'electron';
 import { compose, defaultProps } from 'recompose';
 import Editor from '@components/Editor';
 import { Layout } from '@components/EditorLayout';
-import CodeView from '@components/CodeView';
 import { getInterface } from './Interfaces';
 import withStageEditorHandlers from './withStageEditorHandlers';
 import withStageEditorMeta from './withStageEditorMeta';
 import { formName } from './configuration';
-import StageHeading from './StageHeading';
+import StageHeading, { CondensedStageHeading } from './StageHeading';
+import CollapsableHeader from '../Screen/CollapsableHeader';
 
 const StageEditor = (props) => {
   const {
@@ -20,10 +20,6 @@ const StageEditor = (props) => {
     hasSkipLogic,
     ...rest
   } = props;
-
-  const [showCodeView, setShowCodeView] = useState(false);
-  const toggleShowCodeView = () => setShowCodeView((show) => !show);
-
   useEffect(() => {
     ipcRenderer.on('REFRESH_PREVIEW', previewStage);
 
@@ -36,7 +32,7 @@ const StageEditor = (props) => {
   );
 
   const renderSections = (
-    sectionsList, { submitFailed, windowRoot },
+    sectionsList, { submitFailed },
   ) => sectionsList.map((SectionComponent, sectionIndex) => {
     const sectionKey = `${interfaceType}-${sectionIndex}`;
     return (
@@ -45,9 +41,6 @@ const StageEditor = (props) => {
         form={formName}
         stagePath={stagePath}
         hasSubmitFailed={submitFailed}
-        // `windowRoot` will ensure connect() components re-render
-        // when the window root changes
-        windowRoot={windowRoot}
         interfaceType={interfaceType}
       />
     );
@@ -60,16 +53,16 @@ const StageEditor = (props) => {
       {...rest}
     >
       {
-        ({ submitFailed, windowRoot }) => (
+        ({ submitFailed }) => (
           <>
-            <StageHeading id={id} toggleCodeView={toggleShowCodeView} />
+            <CollapsableHeader
+              threshold={165}
+              collapsedState={<CondensedStageHeading id={id} />}
+            >
+              <StageHeading id={id} />
+            </CollapsableHeader>
             <Layout>
-              <CodeView
-                form={formName}
-                show={showCodeView}
-                toggleCodeView={toggleShowCodeView}
-              />
-              {renderSections(sections, { submitFailed, windowRoot })}
+              {renderSections(sections, { submitFailed })}
             </Layout>
           </>
         )

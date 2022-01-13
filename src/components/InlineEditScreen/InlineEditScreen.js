@@ -33,7 +33,7 @@ const InlineEditScreen = ({
             className="inline-edit-screen__container"
           >
             <div className="inline-edit-screen__header">
-              <h1>{title}</h1>
+              <h2>{title}</h2>
             </div>
             <div className="inline-edit-screen__content">
               <Layout>

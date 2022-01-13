@@ -4,7 +4,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { SortableElement } from 'react-sortable-hoc';
 import Handle from './Handle';
-import { DeleteButton } from '.';
+import DeleteButton from './DeleteButton';
 
 const ListItem = ({
   children,

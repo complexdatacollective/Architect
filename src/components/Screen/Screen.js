@@ -1,24 +1,28 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { compose } from 'recompose';
-import { motion } from 'framer-motion';
-import windowRootProvider from '@codaco/ui/lib/components/windowRootProvider';
-import ControlBar from '@components/ControlBar';
+import { motion, useElementScroll } from 'framer-motion';
 import { ScreenErrorBoundary } from '@components/Errors';
 
-const list = {
+export const ScreenContext = React.createContext({
+  scrollY: 0,
+  updateScrollY: () => {},
+});
+
+const screenVariants = {
   visible: {
+    y: 0,
     opacity: 1,
     transition: {
-      when: 'beforeChildren',
-      staggerChildren: 1,
+      // when: 'beforeChildren',
     },
   },
   hidden: {
+    y: '-15%',
     opacity: 0,
+    when: 'beforeChildren',
     transition: {
-      when: 'afterChildren',
+      damping: 20,
     },
   },
 };
@@ -29,75 +33,81 @@ const item = {
 };
 
 const Screen = ({
-  buttons,
+  header,
+  footer,
   children,
-  layoutId,
-  onAcknowledgeError,
-  secondaryButtons,
-  setWindowRoot,
-  type,
-  windowRoot,
-  zIndex,
+  className,
+  onComplete,
+  beforeCloseHandler,
 }) => {
-  const classes = cx('screen', 'screen--modal', `screen--${type}`);
-  const styles = zIndex ? { zIndex } : {};
+  const classes = cx('screen', className);
+  const [currentScroll, setCurrentScroll] = React.useState(0);
+
+  const ref = useRef(null);
+  const { scrollY } = useElementScroll(ref);
+
+  useEffect(() => {
+    scrollY.onChange((progress) => {
+      setCurrentScroll(progress);
+    });
+  }, [scrollY]);
+
+  const handleClose = () => {
+    if (beforeCloseHandler) {
+      const outcome = beforeCloseHandler();
+      if (outcome) {
+        onComplete();
+      }
+      return;
+    }
+
+    onComplete();
+  };
 
   return (
-    <div className="screen-wrapper" ref={setWindowRoot} styles={styles}>
-      <motion.div
-        className="modal__background"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      />
-      <motion.div
-        className={classes}
-        layoutId={layoutId}
-        variants={list}
-        initial="hidden"
-        animate="visible"
-      >
+    <div className="screen-wrapper">
+      <ScreenContext.Provider value={{ scrollY: currentScroll }}>
+        <div
+          className="modal__background"
+          onClick={handleClose}
+        />
         <motion.div
-          className="screen__content"
-          variants={item}
+          className={classes}
+          // layoutId={layoutId}
+          variants={screenVariants}
         >
-          <ScreenErrorBoundary onAcknowledge={onAcknowledgeError}>
-            { typeof children === 'function'
-              && children({ windowRoot })}
-            { children && typeof children !== 'function' && children }
+          <ScreenErrorBoundary>
+            <motion.header variants={item} className="screen__header">
+              {header}
+            </motion.header>
+            <motion.main variants={item} className="screen__content" ref={ref}>
+              {children}
+            </motion.main>
+            <motion.footer variants={item} className="screen__footer">
+              {footer}
+            </motion.footer>
           </ScreenErrorBoundary>
         </motion.div>
-        <ControlBar
-          className="screen__controls"
-          buttons={buttons}
-          secondaryButtons={secondaryButtons}
-        />
-      </motion.div>
+      </ScreenContext.Provider>
     </div>
   );
 };
 
 Screen.propTypes = {
-  buttons: PropTypes.arrayOf(PropTypes.node),
-  children: PropTypes.any, // eslint-disable-line react/forbid-prop-types
-  layoutId: PropTypes.string,
-  onAcknowledgeError: PropTypes.func,
-  secondaryButtons: PropTypes.arrayOf(PropTypes.node),
-  setWindowRoot: PropTypes.func.isRequired,
-  type: PropTypes.string,
-  windowRoot: PropTypes.any.isRequired, // eslint-disable-line react/forbid-prop-types
-  zIndex: PropTypes.number,
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  header: PropTypes.node,
+  footer: PropTypes.node,
+  onComplete: PropTypes.func,
+  beforeCloseHandler: PropTypes.func,
 };
 
 Screen.defaultProps = {
-  buttons: [],
-  children: null,
-  layoutId: null,
-  onAcknowledgeError: () => {},
-  secondaryButtons: [],
-  type: 'default',
-  zIndex: null,
+  className: '',
+  header: null,
+  footer: null,
+  onComplete: () => {},
+  beforeCloseHandler: null,
 };
 
-export default compose(
-  windowRootProvider,
-)(Screen);
+export default Screen;

@@ -1,8 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { reduxForm, Form } from 'redux-form';
 import PropTypes from 'prop-types';
 import { compose, withStateHandlers } from 'recompose';
-import CodeView from './CodeView';
 import Issues from './Issues';
 
 /**
@@ -57,36 +56,30 @@ const Editor = ({
   submitFailed,
   component: Component,
   ...rest
-}) => {
-  const [showCodeView, setCodeView] = useState(false);
-  const toggleCodeView = useCallback(() => setCodeView((value) => !value));
-
-  return (
-    <>
-      <CodeView toggleCodeView={toggleCodeView} form={form} show={showCodeView} />
-      <Form onSubmit={handleSubmit}>
-        { typeof children === 'function'
-          && children({
-            form, toggleCodeView, submitFailed, ...rest,
-          })}
-        { children && typeof children !== 'function' && children }
-        { !children && (
-          <Component
-            form={form}
-            submitFailed={submitFailed}
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...rest}
-          />
-        )}
-      </Form>
-      <Issues
-        form={form}
-        show={isIssuesVisible}
-        hideIssues={hideIssues}
-      />
-    </>
-  );
-};
+}) => (
+  <>
+    <Form onSubmit={handleSubmit}>
+      { typeof children === 'function'
+        && children({
+          form, submitFailed, ...rest,
+        })}
+      { children && typeof children !== 'function' && children }
+      { !children && (
+        <Component
+          form={form}
+          submitFailed={submitFailed}
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...rest}
+        />
+      )}
+    </Form>
+    <Issues
+      form={form}
+      show={isIssuesVisible}
+      hideIssues={hideIssues}
+    />
+  </>
+);
 
 Editor.propTypes = {
   hideIssues: PropTypes.func.isRequired,

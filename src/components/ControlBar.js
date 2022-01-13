@@ -7,7 +7,6 @@ const barVariants = {
   visible: {
     y: 0,
     transition: {
-      delay: 0.5,
       when: 'beforeChildren',
       staggerChildren: 0.1,
       stiffness: 300,

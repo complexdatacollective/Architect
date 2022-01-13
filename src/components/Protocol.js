@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
-import { motion } from 'framer-motion';
+import { motion, useElementScroll } from 'framer-motion';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { getHasUnsavedChanges } from '@selectors/session';
@@ -33,14 +33,22 @@ const Protocol = ({
     },
   };
 
+  const ref = useRef(null);
+  const { scrollY } = useElementScroll(ref);
+  const [scrollOffset, setScrollOffset] = useState(0);
+
+  useEffect(() => {
+    scrollY.onChange((value) => setScrollOffset(value));
+  }, [scrollY]);
+
   return (
     <motion.div
       className={sceneClasses}
       variants={variants}
     >
-      <div className="scene__protocol">
+      <div className="scene__protocol" ref={ref}>
         <Overview
-          show={hasProtocol}
+          scrollOffset={scrollOffset}
         />
         <Timeline show={hasProtocol} />
       </div>
