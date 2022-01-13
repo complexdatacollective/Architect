@@ -1,6 +1,6 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { motion } from 'framer-motion/dist/framer-motion';
+import { motion } from 'framer-motion';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { compose, withStateHandlers, defaultProps } from 'recompose';
@@ -66,10 +66,6 @@ const Timeline = (props) => {
 
   const handleEditStage = (id, origin) => {
     openScreen('stage', { locus, id, origin });
-  };
-
-  const createStage = (type, insertAtIndex) => {
-    openScreen('stage', { type, insertAtIndex, locus });
   };
 
   const renderStages = useCallback(() => stages.flatMap((stage, index) => ([

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion/dist/framer-motion';
+import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 

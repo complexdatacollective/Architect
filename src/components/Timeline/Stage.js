@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { SortableElement } from 'react-sortable-hoc';
 import cx from 'classnames';
-import { motion } from 'framer-motion/dist/framer-motion';
+import { motion } from 'framer-motion';
 import getAbsoluteBoundingRect from '@app/utils/getAbsoluteBoundingRect';
 import EditStageButton from './EditStageButton';
 

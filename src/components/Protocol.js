@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
-import { motion, useElementScroll } from 'framer-motion/dist/framer-motion';
+import { motion, useElementScroll } from 'framer-motion';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { getHasUnsavedChanges } from '@selectors/session';
@@ -36,7 +36,6 @@ const Protocol = ({
   const ref = useRef(null);
   const { scrollY } = useElementScroll(ref);
   const [scrollOffset, setScrollOffset] = useState(0);
-
 
   useEffect(() => {
     scrollY.onChange((value) => setScrollOffset(value));

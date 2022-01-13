@@ -145,6 +145,11 @@ const loaderRules = Object.freeze([
     include: paths.appSrc,
   },
   {
+    test: /\.mjs$/,
+    include: /node_modules/,
+    type: 'javascript/auto',
+  },
+  {
     // "oneOf" will traverse all following loaders until one will
     // match the requirements. When no loader matches it will fall
     // back to the "file" loader at the end of the loader list.

@@ -7,7 +7,7 @@ import Tippy from '@tippyjs/react';
 import {
   AnimatePresence,
   motion,
-} from 'framer-motion/dist/framer-motion';
+} from 'framer-motion';
 import { get } from 'lodash';
 import cx from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';

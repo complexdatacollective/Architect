@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect, useSelector } from 'react-redux';
@@ -41,6 +40,10 @@ export const CondensedStageHeading = ({
   );
 };
 
+CondensedStageHeading.propTypes = {
+  id: PropTypes.string.isRequired,
+};
+
 const StageHeading = ({
   stageNumber,
   type,
@@ -51,12 +54,11 @@ const StageHeading = ({
       {
         getTimelineImage(type)
           && (
-          <div className="timeline-preview">
+          <div className="timeline-preview" onClick={toggleCodeView}>
             <img
               src={getTimelineImage(type)}
               alt={`${type} interface`}
               title={`${type} interface`}
-              onClick={toggleCodeView}
             />
             <div className="timeline-stage__notch">{stageNumber}</div>
           </div>

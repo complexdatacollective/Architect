@@ -1,13 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import { getScreensStack } from '@selectors/ui';
 import { actionCreators as uiActions } from '@modules/ui';
 import { getScreenComponent } from './screenIndex';
-
-const body = document.body;
 
 const screenVariants = {
   visible: {
@@ -42,13 +39,32 @@ const Screens = () => {
   const screens = useSelector((state) => getScreensStack(state));
 
   const dispatch = useDispatch();
+
   const closeScreen = useCallback(
     (name, params) => dispatch(uiActions.closeScreen(name, params)),
     [dispatch],
   );
 
-  const renderScreens = useCallback(() => screens.map(({ screen, params }, index) => {
+  const handleEscape = useCallback((e) => {
+    if (e.key === 'Escape') {
+      const lastScreen = screens[screens.length - 1];
+      if (lastScreen) {
+        closeScreen(lastScreen.screen, lastScreen.params);
+      }
+    }
+  }, [screens, closeScreen]);
+
+  useEffect(() => {
+    document.body.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.body.removeEventListener('keydown', handleEscape);
+    };
+  }, [screens, closeScreen]);
+
+  const renderScreens = useCallback(() => screens.map(({ screen, params }) => {
     const ScreenComponent = getScreenComponent(screen);
+
     const onComplete = (result) => closeScreen(screen, result);
 
     return (
@@ -74,7 +90,7 @@ const Screens = () => {
     <AnimatePresence>
       {renderScreens()}
     </AnimatePresence>,
-    body,
+    document.body,
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import PropTypes from 'prop-types';
 import { ScreenContext } from './Screen';
 
 const variants = {
@@ -28,7 +29,6 @@ const CollapsableHeader = (props) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   useEffect(() => {
-    console.log('screen context', currentOffset);
     if (currentOffset > threshold) {
       setIsCollapsed(true);
     } else {
@@ -67,6 +67,16 @@ const CollapsableHeader = (props) => {
       </motion.div>
     </AnimatePresence>
   );
+};
+
+CollapsableHeader.propTypes = {
+  children: PropTypes.node.isRequired,
+  threshold: PropTypes.number,
+  collapsedState: PropTypes.node.isRequired,
+};
+
+CollapsableHeader.defaultProps = {
+  threshold: 115,
 };
 
 export default CollapsableHeader;

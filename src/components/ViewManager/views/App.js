@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion/dist/framer-motion';
+import { motion } from 'framer-motion';
 import cx from 'classnames';
 import { isMacOS } from '@app/utils/platform';
 import { AppErrorBoundary } from '@components/Errors';

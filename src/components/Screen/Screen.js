@@ -1,9 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { compose } from 'recompose';
-import { motion, useElementScroll } from 'framer-motion/dist/framer-motion';
-import windowRootProvider from '@codaco/ui/lib/components/windowRootProvider';
+import { motion, useElementScroll } from 'framer-motion';
 import { ScreenErrorBoundary } from '@components/Errors';
 
 export const ScreenContext = React.createContext({
@@ -38,9 +36,9 @@ const Screen = ({
   header,
   footer,
   children,
-  layoutId,
   className,
   onComplete,
+  beforeCloseHandler,
 }) => {
   const classes = cx('screen', className);
   const [currentScroll, setCurrentScroll] = React.useState(0);
@@ -54,11 +52,25 @@ const Screen = ({
     });
   }, [scrollY]);
 
+  const handleClose = () => {
+    if (beforeCloseHandler) {
+      const outcome = beforeCloseHandler();
+      if (outcome) {
+        onComplete();
+      }
+      return;
+    }
+
+    onComplete();
+  };
+
   return (
-    <ScreenContext.Provider value={{ scrollY: currentScroll }}>
-      <div
-        className="modal__background screen-wrapper"
-      >
+    <div className="screen-wrapper">
+      <ScreenContext.Provider value={{ scrollY: currentScroll }}>
+        <div
+          className="modal__background"
+          onClick={handleClose}
+        />
         <motion.div
           className={classes}
           // layoutId={layoutId}
@@ -76,27 +88,26 @@ const Screen = ({
             </motion.footer>
           </ScreenErrorBoundary>
         </motion.div>
-      </div>
-    </ScreenContext.Provider>
+      </ScreenContext.Provider>
+    </div>
   );
 };
 
 Screen.propTypes = {
-  children: PropTypes.any, // eslint-disable-line react/forbid-prop-types
-  layoutId: PropTypes.string,
-  onAcknowledgeError: PropTypes.func,
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  header: PropTypes.node,
+  footer: PropTypes.node,
+  onComplete: PropTypes.func,
+  beforeCloseHandler: PropTypes.func,
 };
 
 Screen.defaultProps = {
-  buttons: [],
-  children: null,
-  layoutId: null,
-  onAcknowledgeError: () => {},
-  secondaryButtons: [],
-  type: 'default',
-  zIndex: null,
+  className: '',
+  header: null,
+  footer: null,
+  onComplete: () => {},
+  beforeCloseHandler: null,
 };
 
-export default compose(
-  windowRootProvider,
-)(Screen);
+export default Screen;

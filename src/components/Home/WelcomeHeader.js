@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '@codaco/ui';
 import networkCanvasLogo from '@app/images/NC-Mark.svg';
 import headerGraphic from '@app/images/Arc-Flat.svg';

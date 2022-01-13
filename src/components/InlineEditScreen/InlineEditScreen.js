@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { submit } from 'redux-form';
-import { motion } from 'framer-motion/dist/framer-motion';
+import { motion } from 'framer-motion';
 import window from '@codaco/ui/lib/components/window';
 import { compose } from 'recompose';
 import Button from '@codaco/ui/lib/components/Button';
@@ -33,7 +33,7 @@ const InlineEditScreen = ({
             className="inline-edit-screen__container"
           >
             <div className="inline-edit-screen__header">
-              <h1>{title}</h1>
+              <h2>{title}</h2>
             </div>
             <div className="inline-edit-screen__content">
               <Layout>

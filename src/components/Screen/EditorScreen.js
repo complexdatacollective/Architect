@@ -11,8 +11,6 @@ import { actionCreators as dialogActions } from '@modules/dialogs';
 import { hasChanges as timelineHasChanges } from '@selectors/timeline';
 import Screen from './Screen';
 import ControlBar from '../ControlBar';
-import StageHeading from '../StageEditor/StageHeading';
-import CollapsableHeader from './CollapsableHeader';
 
 class EditorScreen extends Component {
   handleSubmit = () => {
@@ -84,6 +82,7 @@ class EditorScreen extends Component {
       <Screen
         footer={<ControlBar buttons={this.buttons()} secondaryButtons={secondaryButtons} />}
         layoutId={layoutId}
+        beforeCloseHandler={this.handleCancel}
       >
         <EditorComponent
           // eslint-disable-next-line react/jsx-props-no-spreading

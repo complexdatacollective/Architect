@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { motion } from 'framer-motion/dist/framer-motion';
+import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { getFormSyncErrors } from 'redux-form';
 import { map, isEmpty } from 'lodash';

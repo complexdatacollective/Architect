@@ -1,39 +1,11 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@codaco/ui/lib/components';
 import Codebook from '@components/Codebook/Codebook';
 import Screen from '@components/Screen/Screen';
 import { Layout } from '@components/EditorLayout';
 import ControlBar from '../ControlBar';
-import { motion, useElementScroll, useTransform } from 'framer-motion/dist/framer-motion';
 import CollapsableHeader from '../Screen/CollapsableHeader';
-
-const cardVariants = {
-  offscreen: {
-    background: 'var(--color-neon-coral)',
-  },
-  onscreen: {
-    background: 'var(--color-sea-serpent)',
-  },
-};
-
-const textVariants = {
-  offscreen: {
-    opacity: 0,
-  },
-  onscreen: {
-    opacity: 1,
-  },
-};
-
-const headerVariants = {
-  offscreen: {
-    fontSize: '1rem',
-  },
-  onscreen: {
-    fontSize: '1.75rem',
-  },
-};
 
 /**
  * This component acts as an index for types. i.e. Nodes and Edges,

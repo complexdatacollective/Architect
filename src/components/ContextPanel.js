@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Toggle from '@codaco/ui/lib/components/Fields/Toggle';
 import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
 

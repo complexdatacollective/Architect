@@ -1,10 +1,10 @@
 import React from 'react';
-import { motion } from 'framer-motion/dist/framer-motion';
+import { motion } from 'framer-motion';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { SortableElement } from 'react-sortable-hoc';
 import Handle from './Handle';
-import { DeleteButton } from '.';
+import DeleteButton from './DeleteButton';
 
 const ListItem = ({
   children,

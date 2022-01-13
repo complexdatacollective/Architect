@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { compose } from 'recompose';
 import DetachedField from '@components/DetachedField';
 import ExternalLink from '@components/ExternalLink';

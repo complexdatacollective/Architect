@@ -1,5 +1,5 @@
 import React from 'react';
-import { AnimateSharedLayout, motion } from 'framer-motion/dist/framer-motion';
+import { motion } from 'framer-motion';
 import WelcomeHeader from './WelcomeHeader';
 import LaunchPad from './LaunchPad';
 

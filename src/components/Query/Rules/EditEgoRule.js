@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import ExternalLink from '@components/ExternalLink';
 import DetachedField from '@components/DetachedField';
 import NativeSelect from '@components/Form/Fields/NativeSelect';

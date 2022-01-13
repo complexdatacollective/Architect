@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { compose } from 'recompose';
 import DetachedField from '@components/DetachedField';
 import NodeSelect from '@components/Form/Fields/NodeSelect';

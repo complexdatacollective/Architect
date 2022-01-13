@@ -1,7 +1,7 @@
 import path from 'path';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
-import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { Icon, Button } from '@codaco/ui';
@@ -33,6 +33,10 @@ const summaryVariants = {
       staggerChildren: 0.1,
     },
   },
+  exit: {
+    opacity: 0,
+    y: -200,
+  },
 };
 
 const buttonVariants = {
@@ -52,9 +56,7 @@ const Overview = ({
   hasUnsavedChanges,
   scrollOffset,
 }) => {
-  console.log('scrollOffset', scrollOffset);
-
-  const renderActionButtons = (collapsed = false) => (
+  const renderActionButtons = useCallback((collapsed = false) => (
     <div className="action-buttons">
       <motion.div
         variants={buttonVariants}
@@ -95,23 +97,23 @@ const Overview = ({
         />
       </motion.div>
     </div>
-  );
+  ));
 
-  const renderSummary = () => (
+  const renderSummary = useCallback(() => (
     <motion.div
       key="summary"
       className="overview-summary"
       variants={summaryVariants}
       initial="hide"
       animate="show"
-      exit="hide"
+      exit="exit"
     >
       <div className="overview-summary__header">
         <h3>{name}</h3>
       </div>
       {renderActionButtons(true)}
     </motion.div>
-  );
+  ));
 
   return (
     <AnimatePresence>
@@ -157,6 +159,7 @@ Overview.propTypes = {
   printOverview: PropTypes.func.isRequired,
   protocolIsValid: PropTypes.bool.isRequired,
   hasUnsavedChanges: PropTypes.bool.isRequired,
+  scrollOffset: PropTypes.number.isRequired,
 };
 
 Overview.defaultProps = {

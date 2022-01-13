@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
-import { motion } from 'framer-motion/dist/framer-motion';
+import { motion } from 'framer-motion';
 import timelineImages from '@app/images/timeline';
 import filterIcon from '@app/images/timeline/filter-icon.svg';
 import skipLogicIcon from '@app/images/timeline/skip-logic-icon.svg';
