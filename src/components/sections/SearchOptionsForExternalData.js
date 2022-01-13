@@ -16,14 +16,17 @@ const SearchOptions = ({
   const { variables: variableOptions } = useVariablesFromExternalData(dataSource, true);
 
   return (
-    <Section group disabled={disabled}>
-      <Row>
-        <h3>Search Options</h3>
+    <Section
+      title="Search Options"
+      summary={(
         <p>
           To find and select nodes from the roster, the participant will use a search function.
           This section controls how this search function works on this stage.
         </p>
-      </Row>
+      )}
+      group
+      disabled={disabled}
+    >
       <Row>
         <h4>Searchable Properties</h4>
         <p>Which attributes in your data file should be searchable? Select one or more.</p>

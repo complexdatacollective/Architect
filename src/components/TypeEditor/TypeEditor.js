@@ -11,6 +11,7 @@ import { getCodebook } from '@selectors/protocol';
 import IconOption from './IconOption';
 import getPalette from './getPalette';
 import Variables from './Variables';
+import CollapsableHeader from '../Screen/CollapsableHeader';
 
 const ICON_OPTIONS = [
   'add-a-person',
@@ -28,77 +29,104 @@ const TypeEditor = ({
   const { name: paletteName, size: paletteSize } = getPalette(entity);
 
   return (
-    <Layout>
-      <Section>
-        <h1>{ type ? `Edit ${entity}` : `Create ${entity}` }</h1>
-      </Section>
-      <Section title={`${capitalize(entity)} Type`}>
-        <p>
-          What type of
-          {' '}
-          {entity}
-          {' '}
-          is this?
-          { entity === 'node' && ' Some examples might be "Person", "Place", or "Agency".' }
-          { entity === 'edge' && ' Some examples might be "Friend" or "Colleague".' }
-        </p>
-        <ValidatedField
-          component={Fields.Text}
-          name="name"
-          validation={{ required: true, allowedNMToken: `${entity} type name`, uniqueByList: existingTypes }}
-        />
-      </Section>
-
-      <Section title="Color" id={getFieldId('color')}>
-        <p>
-          Choose a color for this
-          {' '}
-          {entity}
-          {' '}
-          type.
-        </p>
-        <ValidatedField
-          component={ArchitectFields.ColorPicker}
-          name="color"
-          palette={paletteName}
-          paletteRange={paletteSize}
-          validation={{ required: true }}
-        />
-      </Section>
-      { entity === 'node'
-        && (
-          <Section title="Icon" id={getFieldId('iconVariant')}>
-            <p>
-              Choose an icon to display on interfaces that create this
-              {' '}
-              {entity}
-              .
-            </p>
-            <ValidatedField
-              component={Fields.RadioGroup}
-              name="iconVariant"
-              options={ICON_OPTIONS}
-              optionComponent={IconOption}
-              validation={{ required: true }}
-            />
-          </Section>
+    <>
+      <CollapsableHeader
+        collapsedState={(
+          <div className="stage-heading stage-heading--collapsed">
+            <Layout>
+              <h2>{ type ? `Edit ${entity}` : `Create ${entity}` }</h2>
+            </Layout>
+          </div>
         )}
-
-      {(!isNew && !metaOnly)
-        && (
-        <Section>
-          <Variables
-            form={form}
-            name="variables"
-            sortableProperties={['name', 'type']}
-            initialSortOrder={{
-              direction: 'asc',
-              property: 'name',
-            }}
+      >
+        <div className="stage-heading">
+          <Layout>
+            <h1 className="screen-heading">{ type ? `Edit ${entity}` : `Create ${entity}` }</h1>
+          </Layout>
+        </div>
+      </CollapsableHeader>
+      <Layout>
+        <Section
+          title={`${capitalize(entity)} Type`}
+        >
+          <p>
+            Name this
+            {' '}
+            {entity}
+            {' '}
+            type. This name will be used to identify this type in the
+            codebook, and in your data exports.
+            { entity === 'node' && ' Some examples might be "Person", "Place", or "Organization".' }
+            { entity === 'edge' && ' Some examples might be "Friends" or "Works With".' }
+          </p>
+          <ValidatedField
+            component={Fields.Text}
+            name="name"
+            placeholder="Enter a name for this entity type..."
+            validation={{ required: true, allowedNMToken: `${entity} type name`, uniqueByList: existingTypes }}
           />
         </Section>
-        )}
-    </Layout>
+
+        <Section
+          title="Color"
+          id={getFieldId('color')}
+          summary={(
+            <p>
+              Choose a color for this
+              {' '}
+              {entity}
+              {' '}
+              type.
+            </p>
+          )}
+        >
+          <ValidatedField
+            component={ArchitectFields.ColorPicker}
+            name="color"
+            palette={paletteName}
+            paletteRange={paletteSize}
+            validation={{ required: true }}
+          />
+        </Section>
+        { entity === 'node'
+          && (
+            <Section
+              title="Icon"
+              id={getFieldId('iconVariant')}
+              summary={(
+                <p>
+                  Choose an icon to display on interfaces that create this
+                  {' '}
+                  {entity}
+                  .
+                </p>
+              )}
+            >
+              <ValidatedField
+                component={Fields.RadioGroup}
+                name="iconVariant"
+                options={ICON_OPTIONS}
+                optionComponent={IconOption}
+                validation={{ required: true }}
+              />
+            </Section>
+          )}
+        {(!isNew && !metaOnly)
+          && (
+          <Section title="Option Values">
+            <Variables
+              form={form}
+              name="variables"
+              sortableProperties={['name', 'type']}
+              initialSortOrder={{
+                direction: 'asc',
+                property: 'name',
+              }}
+            />
+          </Section>
+          )}
+      </Layout>
+    </>
   );
 };
 

@@ -72,6 +72,7 @@ class EditorScreen extends Component {
 
   render() {
     const {
+      header,
       secondaryButtons,
       editor: EditorComponent,
       layoutId,
@@ -80,6 +81,7 @@ class EditorScreen extends Component {
 
     return (
       <Screen
+        header={header}
         footer={<ControlBar buttons={this.buttons()} secondaryButtons={secondaryButtons} />}
         layoutId={layoutId}
         beforeCloseHandler={this.handleCancel}
@@ -94,6 +96,7 @@ class EditorScreen extends Component {
 }
 
 EditorScreen.propTypes = {
+  header: PropTypes.node,
   editor: PropTypes.any.isRequired, // eslint-disable-line react/forbid-prop-types
   hasUnsavedChanges: PropTypes.bool.isRequired,
   jump: PropTypes.func.isRequired,
@@ -107,6 +110,7 @@ EditorScreen.propTypes = {
 };
 
 EditorScreen.defaultProps = {
+  header: null,
   layoutId: null,
   secondaryButtons: null,
 };

@@ -23,9 +23,11 @@ const ItemEditor = ({
   type,
   handleChangeType,
 }) => (
-  <Section>
+  <Section
+    title="Type"
+  >
     <Row>
-      <h3 id={getFieldId('type')}>Type</h3>
+      <div id={getFieldId('type')} data-name="Content Type" />
       <ValidatedField
         name="type"
         component={RadioGroup}

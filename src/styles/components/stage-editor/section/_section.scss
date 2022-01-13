@@ -11,10 +11,6 @@
     margin-bottom: 0;
   }
 
-  .section-description {
-    margin: 0;
-  }
-
   > legend {
     @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
     font-size: 1rem;

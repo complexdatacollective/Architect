@@ -30,9 +30,14 @@ const NodeType = ({
   console.log('disa', disabled);
 
   return (
-    <Section title="Node Type" disabled={disabled}>
+    <Section
+      title="Node Type"
+      summary={(
+        <p>Select the type of node you wish to use with this stage.</p>
+      )}
+      disabled={disabled}
+    >
       <div id={getFieldId('subject')} data-name="Node type" />
-      <p>Select the type of node you wish to use with this stage.</p>
       <div
         className="stage-editor-section-node-type__edit"
         onClick={handleResetStage}

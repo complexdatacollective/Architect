@@ -10,10 +10,18 @@ const InterviewerScript = () => {
   const currentValue = useSelector((state) => getFormValue(state, 'interviewScript'));
 
   return (
-    <Section id={getFieldId('interviewScript')} className="interview-script" title="Interviewer Script" toggleable startExpanded={!!currentValue}>
-      <p>
-        Use this section to create notes or a guide for the interviewer.
-      </p>
+    <Section
+      id={getFieldId('interviewScript')}
+      className="interview-script"
+      title="Interviewer Script"
+      summary={(
+        <p>
+          Use this section to create notes or a guide for the interviewer.
+        </p>
+      )}
+      toggleable
+      startExpanded={!!currentValue}
+    >
       <Field
         name="interviewScript"
         component={RichText}

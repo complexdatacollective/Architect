@@ -17,6 +17,7 @@ const animations = {
 
 const Section = ({
   title,
+  summary,
   disabled,
   group,
   children,
@@ -52,9 +53,7 @@ const Section = ({
           <span style={{ color: 'var(--error)' }}> *</span>
         )}
       </legend>
-      <p className="section-description">
-        Use this section to add content to your experiment.
-      </p>
+      { summary }
       <motion.div
         variants={animations}
         initial={toggleable ? 'collapsed' : 'open'}
@@ -70,6 +69,7 @@ Section.propTypes = {
   toggleable: PropTypes.bool,
   startExpanded: PropTypes.bool,
   title: PropTypes.string.isRequired,
+  summary: PropTypes.node,
   disabled: PropTypes.bool,
   group: PropTypes.bool,
   className: PropTypes.string,
@@ -77,6 +77,7 @@ Section.propTypes = {
 };
 
 Section.defaultProps = {
+  summary: null,
   toggleable: false,
   startExpanded: true,
   disabled: false,

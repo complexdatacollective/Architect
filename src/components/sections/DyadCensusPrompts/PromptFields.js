@@ -14,9 +14,11 @@ const PromptFields = ({
   handleCreateEdge,
   handleChangeCreateEdge,
 }) => (
-  <Section>
+  <Section
+    title="Dyad Census Prompts"
+  >
     <Row>
-      <h3 id={getFieldId('text')}>Dyad Census Prompts</h3>
+      <div id={getFieldId('text')} data-title="Dyad Census Prompts" />
       <p>
         Dyad Census prompts explain to your participant which relationship they should
         evaluate (for example, &apos;friendship&apos;, &apos;material
@@ -39,7 +41,6 @@ const PromptFields = ({
         either a &apos;yes&apos; or a &apos;no&apos; by the participant, since these
         are the user-interface options that are shown.
       </p>
-
       <ValidatedField
         name="text"
         component={RichText}

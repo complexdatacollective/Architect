@@ -20,14 +20,16 @@ class Background extends PureComponent {
     } = this.props;
 
     return (
-      <Section title="Background">
-        <Row>
+      <Section
+        title="Background"
+        summary={(
           <p>
             This section determines the graphical background for this prompt. You can choose
             between a conventional series of concentric circles, or provide your own
             background image.
           </p>
-        </Row>
+        )}
+      >
         <Row>
           <DetachedField
             component={Fields.Boolean}

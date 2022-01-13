@@ -5,12 +5,15 @@ import { ValidatedField } from '../Form';
 import { getFieldId } from '../../utils/issues';
 
 const Title = () => (
-  <Section>
-    <div id={getFieldId('title')} data-name="Title text" />
-    <h2>Page Heading</h2>
-    <p>
-      Use the page heading to show a large title element on your information stage.
-    </p>
+  <Section
+    title="Page Heading"
+    summary={(
+      <p>
+        Use the page heading to show a large title element on your information stage.
+      </p>
+    )}
+  >
+    <div id={getFieldId('title')} data-name="Page Heading" />
     <ValidatedField
       name="title"
       component={Fields.Text}

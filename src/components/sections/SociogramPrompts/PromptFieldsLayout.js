@@ -20,18 +20,21 @@ const PromptFields = ({
   type,
   variablesForSubject,
 }) => (
-  <Section title="Layout" group>
-    <Row>
-      <div id={getFieldId('layout.layoutVariable')} data-name="Layout Variable" />
+  <Section
+    title="Layout"
+    summary={(
       <p>
         This section controls the position of nodes on this sociogram prompt.
       </p>
-    </Row>
+    )}
+    group
+  >
     <Row>
-      <h4 className="form-field-label">Layout Variable</h4>
+      <div id={getFieldId('layout.layoutVariable')} data-name="Layout Variable" />
       <p>Which variable should be used to store or retrieve the X/Y coordinates of nodes?</p>
       <ValidatedField
         name="layout.layoutVariable"
+        label="Layout Variable"
         type={type}
         entity={entity}
         component={VariablePicker}

@@ -28,11 +28,16 @@ const HighlightFields = ({
   };
 
   return (
-    <Section group title="Variable Toggling">
-      <p>
-        The sociogram can be configured to allow the participant to toggle
-        a node variable to true or false by tapping it.
-      </p>
+    <Section
+      group
+      title="Variable Toggling"
+      summary={(
+        <p>
+          The sociogram can be configured to allow the participant to toggle
+          a node variable to true or false by tapping it.
+        </p>
+      )}
+    >
       <Tip>
         <p>
           You cannot use this setting at the same time

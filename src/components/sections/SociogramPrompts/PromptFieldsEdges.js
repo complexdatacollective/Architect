@@ -33,13 +33,17 @@ const EdgeFields = (props) => {
 
   return (
     <>
-      <Section title="Edge Creation">
-        <Row>
-          <h4 className="form-field-label">Enable Edge Creation</h4>
+      <Section
+        title="Edge Creation"
+        summary={(
           <p>
             The sociogram can be configured to allow the participant to create edges by
             consecutively tapping nodes.
           </p>
+        )}
+      >
+        <Row>
+          <h4 className="form-field-label">Enable Edge Creation</h4>
           <Tip>
             <p>
               You cannot use this setting at the same time

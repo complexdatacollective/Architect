@@ -19,12 +19,19 @@ const CardDisplayOptions = ({
   const maxVariableOptions = variableOptions.length;
 
   return (
-    <Section title="Card Display Options" key={dataSource} group disabled={disabled}>
-      <Row>
+    <Section
+      title="Card Display Options"
+      summary={(
         <p>
           This section controls how the cards (which represent each item in your roster
           data file) are displayed to the participant.
         </p>
+      )}
+      key={dataSource}
+      group
+      disabled={disabled}
+    >
+      <Row>
         <Tip>
           <p>
             Cards will use the

@@ -59,9 +59,14 @@ const PromptFields = ({
         />
       </Row>
     </Section>
-    <Section title="Question Prompt" id={getFieldId('prompt')}>
-      <Row>
+    <Section
+      title="Question Prompt"
+      id={getFieldId('prompt')}
+      summary={(
         <p>Enter question for the participant. e.g. What is this person&apos;s name?</p>
+      )}
+    >
+      <Row>
         <ValidatedField
           name="prompt"
           component={RichText}
@@ -73,8 +78,10 @@ const PromptFields = ({
     </Section>
     { variable
       && (
-      <Section title="Input Control" id={getFieldId('component')}>
-        <Row>
+      <Section
+        title="Input Control"
+        id={getFieldId('component')}
+        summary={(
           <p>
             Choose an input control that should be used to collect the answer. For
             detailed information about these options, see our
@@ -82,6 +89,9 @@ const PromptFields = ({
             <ExternalLink href="https://documentation.networkcanvas.com/key-concepts/input-controls/">documentation</ExternalLink>
             .
           </p>
+        )}
+      >
+        <Row>
           <ValidatedField
             name="component"
             component={NativeSelect}
@@ -136,13 +146,18 @@ const PromptFields = ({
       )}
     { isOrdinalOrCategoricalType(variableType)
       && (
-      <Section id={getFieldId('options')} title="Categorical/Ordinal options">
-        <Row>
+      <Section
+        id={getFieldId('options')}
+        title="Categorical/Ordinal options"
+        summary={(
           <p>
             The input type you selected indicates that this is a categorical or ordinal variable.
             Next, please create a minimum of two possible values for the participant to choose
             between.
           </p>
+        )}
+      >
+        <Row>
           <Options
             name="options"
             label="Options"
@@ -174,12 +189,17 @@ const PromptFields = ({
       )}
     { variableType
       && (
-      <Section id={getFieldId('validation')} title="Validation">
-        <Row>
+      <Section
+        id={getFieldId('validation')}
+        title="Validation"
+        summary={(
           <p>
             Add one or more validation rules to require that participants complete
             this field in a specific way.
           </p>
+        )}
+      >
+        <Row>
           <Validations
             form={form}
             name="validation"

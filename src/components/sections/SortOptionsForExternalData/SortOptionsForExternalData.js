@@ -20,13 +20,16 @@ const SortOptions = ({
   const sortOrderOptionGetter = getSortOrderOptionGetter(variableOptions);
 
   return (
-    <Section group disabled={disabled}>
-      <Row>
-        <h3>Sort Options</h3>
+    <Section
+      group
+      disabled={disabled}
+      title="Sort Options"
+      summary={(
         <p>
           This section controls how the cards in the roster are sorted.
         </p>
-      </Row>
+      )}
+    >
       <Row>
         <h4>
           Initial Sort Order

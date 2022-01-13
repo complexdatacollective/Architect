@@ -45,9 +45,11 @@ const PromptFields = ({
 
   return (
     <>
-      <Section>
+      <Section
+        title="Tie-Strength Census Prompt"
+        id={getFieldId('text')}
+      >
         <Row>
-          <h3 id={getFieldId('text')}>Tie-Strength Census Prompt</h3>
           <p>
             Tie-Strength Census prompts explain to your participant which relationship they should
             evaluate (for example, &apos;friendship&apos;, &apos;material
@@ -76,8 +78,10 @@ const PromptFields = ({
           />
         </Row>
       </Section>
-      <Section>
-        <h2 id={getFieldId('set-ordinal-value')}>Tie Strength Configuration</h2>
+      <Section
+        title="Tie-Strength Configuration"
+        id={getFieldId('set-ordinal-value')}
+      >
         <p>This interface works by presenting the user with a choice to either:</p>
         <ul>
           <li>

@@ -49,9 +49,7 @@ const Variables = ({
     validation={{}}
     // eslint-disable-next-line react/jsx-props-no-spreading
     {...rest}
-  >
-    <h2>Variables</h2>
-  </EditableList>
+  />
 );
 
 Variables.propTypes = {

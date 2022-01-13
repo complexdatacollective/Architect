@@ -9,17 +9,17 @@ import {
 const FilterField = withFieldConnector(withStoreConnector(FilterQuery));
 
 const Filter = () => (
-  <Section>
+  <Section
+    title="Filter"
+    toggleable
+    summary={(
+      <p>
+        You can optionally filter which nodes are shown on this stage, by creating
+        one or more rules using the options below.
+      </p>
+    )}
+  >
     <div id={getFieldId('filter')} data-name="Filter text" />
-    <h2>
-      Filter
-      { ' ' }
-      <small>(optional)</small>
-    </h2>
-    {/* <p>
-      You can optionally filter which nodes are shown on this stage, by creating
-      one or more rules using the options below.
-    </p> */}
     <Field
       name="filter"
       component={FilterField}

@@ -28,13 +28,17 @@ const AutomaticLayout = () => {
   };
 
   return (
-    <Section title="Layout Mode">
-      <Row>
-        <div id={getFieldId('behaviours.automaticLayout.enabled')} data-name="Layout mode" />
+    <Section
+      title="Layout Mode"
+      summary={(
         <p>
           Interviewer offers two modes for positioning nodes on the
           sociogram: &quot;Manual&quot;, and &quot;Automatic&quot;.
         </p>
+      )}
+    >
+      <Row>
+        <div id={getFieldId('behaviours.automaticLayout.enabled')} data-name="Layout mode" />
         <p>
           <strong>Automatic mode</strong>
           {' '}

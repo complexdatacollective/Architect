@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import cx from 'classnames';
 import { Button } from '@codaco/ui';
-import Window from '@components/Window';
 import DownloadIcon from '@material-ui/icons/GetApp';
 import withAssetMeta from '@components/Assets/withAssetMeta';
 import withAssetPath from '@components/Assets/withAssetPath';
 import * as Assets from '@components/Assets';
+import Screen from '../Screen/Screen';
+import ControlBar from '../ControlBar';
 
 const getRenderer = (meta) => {
   switch (meta.type) {
@@ -65,15 +66,21 @@ const Preview = ({
   );
 
   return (
-    <Window
-      title={meta.name}
-      className={className}
-      leftControls={leftControls}
-      rightControls={rightControls}
-      windowRoot={document.body}
+    <Screen
+      header={(
+        <div className="stage-header">
+          {meta.name}
+        </div>
+      )}
+      footer={(
+        <ControlBar
+          buttons={leftControls}
+          secondaryButtons={rightControls}
+        />
+      )}
     >
       <AssetRenderer id={id} />
-    </Window>
+    </Screen>
   );
 };
 
