@@ -172,30 +172,6 @@ a {
   width: 50rem;
 }
 
-.boolean-option {
-  border: 0;
-  padding: unit(1);
-  background: var(--input-background);
-  margin-right: unit(2);
-
-  > .round-checkbox {
-    margin: unit(2);
-
-    &--checked {
-      border-color: var(--color-white);
-    }
-  }
-
-  > :last-child {
-    margin-right: unit(2);
-  }
-
-  &--selected {
-    background: var(--input-accent);
-    color: var(--color-white);
-  }
-}
-
 .form-field-label {
   margin-top: unit(4);
   margin-bottom: unit(2);

@@ -53,7 +53,9 @@ const Section = ({
           <span style={{ color: 'var(--error)' }}> *</span>
         )}
       </legend>
-      { summary }
+      <div className="summary">
+        { summary }
+      </div>
       <motion.div
         variants={animations}
         initial={toggleable ? 'collapsed' : 'open'}

@@ -31,10 +31,9 @@ const PromptFields = ({
   >
     <Row>
       <div id={getFieldId('layout.layoutVariable')} data-name="Layout Variable" />
-      <p>Which variable should be used to store or retrieve the X/Y coordinates of nodes?</p>
       <ValidatedField
         name="layout.layoutVariable"
-        label="Layout Variable"
+        label="Create or select a variable to store node coordinates"
         type={type}
         entity={entity}
         component={VariablePicker}
@@ -46,13 +45,18 @@ const PromptFields = ({
     </Row>
     { allowPositioning
       && (
-      <Section toggleable title="Sort Unplaced Nodes">
-        <Row>
+      <Section
+        toggleable
+        title="Sort Unplaced Nodes"
+        summary={(
           <p>
             Nodes without any coordinates are stacked in a bucket until your participant drags them
             into position. You can control the order of this stack, which will determine the order
             that your participant is able to position the nodes.
           </p>
+        )}
+      >
+        <Row>
           <Field
             name="sortOrder"
             component={OrderBy}

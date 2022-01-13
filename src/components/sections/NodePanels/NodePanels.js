@@ -23,9 +23,11 @@ const NodePanels = ({
       title="Side Panels"
       toggleable
       id={getFieldId('panels')}
+      summary={(
+        <p>Use this section to configure up to two side panels on this name generator.</p>
+      )}
     >
       <div className="stage-editor-section-content-items">
-        <p>Use this section to configure up to two side panels on this name generator.</p>
         <Field
           name="panels"
           component={OrderedList}

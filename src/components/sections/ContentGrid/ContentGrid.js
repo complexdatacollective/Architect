@@ -39,7 +39,6 @@ const ContentGrid = (props) => (
     // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
-    <h2>Edit Items</h2>
     <p>
       Add up to 4 &quot;items&quot; below.
     </p>

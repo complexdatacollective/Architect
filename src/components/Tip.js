@@ -22,7 +22,7 @@ const Tip = ({ type, icon, children }) => {
               rotate: [0, 15, -15, 0, 15, -15, 0],
               scale: [1, 1.2, 1],
               transition: {
-                delay: 1,
+                delay: 0.5,
               },
             })}
           >

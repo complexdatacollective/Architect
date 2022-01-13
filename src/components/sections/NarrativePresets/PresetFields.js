@@ -23,9 +23,9 @@ const PresetFields = ({
   type,
 }) => (
   <>
-    <Section>
+    <Section title="Preset Label">
       <Row>
-        <h3 id={getFieldId('text')}>Preset label</h3>
+        <div id={getFieldId('text')}>Preset label</div>
         <ValidatedField
           name="label"
           component={Text}
@@ -35,14 +35,13 @@ const PresetFields = ({
         />
       </Row>
     </Section>
-    <Section>
+    <Section title="Layout Variable">
       <Row>
         <ValidatedField
           name="layoutVariable"
           component={VariablePicker}
           entity={entity}
           type={type}
-          label="Layout variable"
           validation={{ required: true }}
           options={layoutVariablesForSubject}
           onCreateOption={handleCreateLayoutVariable}
@@ -50,14 +49,21 @@ const PresetFields = ({
         />
       </Row>
     </Section>
-    <Section>
+    <Section
+      title="Group Variable"
+      summary={(
+        <p>
+          Select a categorical variable to draw convex hulls
+          around nodes based on their value(s).
+        </p>
+      )}
+    >
       <Row>
         <Field
           name="groupVariable"
           component={VariablePicker}
           allowPlaceholderSelect
           placeholder="None"
-          label="Group variable"
           entity={entity}
           type={type}
           variable={groupVariable}
@@ -65,23 +71,31 @@ const PresetFields = ({
         />
       </Row>
     </Section>
-    <Section>
+    <Section title="Edge Types to Display">
       <Row>
         <Field
           name="edges.display"
           component={CheckboxGroup}
-          label="Edge types to display"
+          label="Select one or more edge types"
           placeholder="&mdash; Toggle an edge to display &mdash;"
           options={edgesForSubject}
         />
       </Row>
     </Section>
-    <Section>
+    <Section
+      title="Highlight Nodes"
+      summary={(
+        <p>
+          Select one or more boolean variables below. Nodes whose
+          value is &quot;true&quot; for this variable will be highlighted.
+        </p>
+      )}
+    >
       <Row>
         <Field
           name="highlight"
           component={CheckboxGroup}
-          label="Highlight nodes with the following attributes"
+          label="Select one or more boolean variables"
           placeholder="&mdash; Toggle a variable to highlight &mdash;"
           options={highlightVariablesForSubject}
         />

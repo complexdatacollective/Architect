@@ -191,6 +191,7 @@ const PromptFields = ({
       && (
       <Section
         id={getFieldId('validation')}
+        toggleable
         title="Validation"
         summary={(
           <p>

@@ -20,27 +20,19 @@ const SortOptions = ({
   const sortOrderOptionGetter = getSortOrderOptionGetter(variableOptions);
 
   return (
-    <Section
-      group
-      disabled={disabled}
-      title="Sort Options"
-      summary={(
-        <p>
-          This section controls how the cards in the roster are sorted.
-        </p>
-      )}
-    >
-      <Row>
-        <h4>
-          Initial Sort Order
-          { ' ' }
-          <small>(optional)</small>
-        </h4>
-        <p>
-          Create one or more rules to determine the default sort order or the roster,
-          when it is first shown to the participant. By default, Interviewer will
-          use the order that nodes are defined in your data file.
-        </p>
+    <>
+      <Section
+        toggleable
+        title="Initial Sort Order"
+        disabled={disabled}
+        summary={(
+          <p>
+            Create one or more rules to determine the default sort order or the roster,
+            when it is first shown to the participant. By default, Interviewer will
+            use the order that nodes are defined in your data file.
+          </p>
+        )}
+      >
         <MultiSelect
           name="sortOptions.sortOrder"
           maxItems={1}
@@ -50,18 +42,19 @@ const SortOptions = ({
           ]}
           options={sortOrderOptionGetter}
         />
-      </Row>
-      <Row>
-        <h4>
-          Participant Sortable Properties
-          { ' ' }
-          <small>(optional)</small>
-        </h4>
-        <p>
-          This interface allows the participant to sort the roster, to help with locating
-          a specific member. Select one or more attributes from your roster that the
-          participant can use to sort the list.
-        </p>
+      </Section>
+      <Section
+        toggleable
+        disabled={disabled}
+        title="Participant Sortable Properties"
+        summmary={(
+          <p>
+            This interface allows the participant to sort the roster, to help with locating
+            a specific member. Select one or more attributes from your roster that the
+            participant can use to sort the list.
+          </p>
+        )}
+      >
         <MultiSelect
           name="sortOptions.sortableProperties"
           maxItems={maxVariableOptions}
@@ -75,8 +68,8 @@ const SortOptions = ({
           ]}
           options={variableOptionsGetter}
         />
-      </Row>
-    </Section>
+      </Section>
+    </>
   );
 };
 

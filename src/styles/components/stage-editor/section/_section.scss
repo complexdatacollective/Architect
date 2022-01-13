@@ -7,6 +7,17 @@
   border-radius: var(--border-radius);
   position: relative;
 
+  &--toggleable {
+    &:not(.stage-editor-section--open) {
+      .summary {
+        margin-top: -1.2rem;
+        margin-bottom: -1.2rem;
+      }
+    }
+  }
+
+
+
   .form-field-container {
     margin-bottom: 0;
   }

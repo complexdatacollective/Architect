@@ -20,7 +20,6 @@ import {
   NarrativePresets,
   NodePanels,
   NodeType,
-  EdgeType,
   OrdinalBinPrompts,
   QuickAdd,
   SearchOptionsForExternalData,
@@ -33,7 +32,6 @@ import {
 
 const AlterEdgeForm = {
   sections: [
-    EdgeType,
     FilteredEdgeType,
     IntroductionPanel,
     Form,
@@ -45,7 +43,6 @@ const AlterEdgeForm = {
 
 const AlterForm = {
   sections: [
-    NodeType,
     FilteredNodeType,
     IntroductionPanel,
     Form,
@@ -56,7 +53,6 @@ const AlterForm = {
 
 const CategoricalBin = {
   sections: [
-    NodeType,
     FilteredNodeType,
     CategoricalBinPrompts,
     SkipLogic,
@@ -66,7 +62,6 @@ const CategoricalBin = {
 
 const DyadCensus = {
   sections: [
-    NodeType,
     FilteredNodeType,
     IntroductionPanel,
     DyadCensusPrompts,
@@ -146,7 +141,6 @@ const NameGeneratorQuickAdd = {
 
 const Narrative = {
   sections: [
-    NodeType,
     FilteredNodeType,
     Background,
     NarrativePresets,
@@ -163,7 +157,6 @@ const Narrative = {
 
 const OrdinalBin = {
   sections: [
-    NodeType,
     FilteredNodeType,
     OrdinalBinPrompts,
     SkipLogic,
@@ -173,7 +166,6 @@ const OrdinalBin = {
 
 const Sociogram = {
   sections: [
-    NodeType,
     FilteredNodeType,
     Background,
     AutomaticLayout,
@@ -185,7 +177,6 @@ const Sociogram = {
 
 const TieStrengthCensus = {
   sections: [
-    NodeType,
     FilteredNodeType,
     IntroductionPanel,
     TieStrengthCensusPrompts,

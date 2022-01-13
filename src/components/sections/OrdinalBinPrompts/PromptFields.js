@@ -111,13 +111,14 @@ const PromptFields = ({
         summary={(
           <p>
             Interviewer will render each option in your ordinal variable using a
-            color gradient. Which color would you like to use for this scale?
+            color gradient.
           </p>
         )}
       >
         <Row>
           <div id={getFieldId('color')} data-name="Gradient color" />
           <ValidatedField
+            label="Which color would you like to use for this scale?"
             component={ColorPicker}
             name="color"
             palette="ord-color-seq"

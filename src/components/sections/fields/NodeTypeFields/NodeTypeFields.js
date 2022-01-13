@@ -11,7 +11,6 @@ import withDisableAndReset from './withDisableAndReset';
 import withCreateNewType from './withCreateNewType';
 import withNodeTypeOptions from './withNodeTypeOptions';
 import withSubjectVariables from './withSubjectHasNameVariable';
-import Section from '../../../EditorLayout/Section';
 
 const NodeType = ({
   disabled,
@@ -30,56 +29,48 @@ const NodeType = ({
   console.log('disa', disabled);
 
   return (
-    <Section
-      title="Node Type"
-      summary={(
-        <p>Select the type of node you wish to use with this stage.</p>
-      )}
-      disabled={disabled}
+    <div
+      className="stage-editor-section-node-type__edit"
+      onClick={handleResetStage}
     >
       <div id={getFieldId('subject')} data-name="Node type" />
-      <div
-        className="stage-editor-section-node-type__edit"
-        onClick={handleResetStage}
-      >
-        <div className="stage-editor-section-node-type__edit-capture">
-          <ValidatedField
-            name="subject"
-            parse={(value) => ({ type: value, entity: 'node' })}
-            format={(value) => get(value, 'type')}
-            options={nodeTypes}
-            component={NodeSelect}
-            validation={{ required: true }}
-          />
+      <div className="stage-editor-section-node-type__edit-capture">
+        <ValidatedField
+          name="subject"
+          parse={(value) => ({ type: value, entity: 'node' })}
+          format={(value) => get(value, 'type')}
+          options={nodeTypes}
+          component={NodeSelect}
+          validation={{ required: true }}
+        />
 
-          { nodeTypes.length === 0
-            && (
-            <p className="stage-editor-section-node-type__empty">
-              No node types currently defined. Use the button below to create one.
-            </p>
-            )}
-
-          <Button
-            color="primary"
-            icon="add"
-            size="small"
-            onClick={handleOpenCreateNewType}
-          >
-            Create new node type
-          </Button>
-          { nodeTypes.length !== 0 && type && !subjectHasVariableCalledName
+        { nodeTypes.length === 0
           && (
-          <Tip type="warning">
-            <p>
-              Ensure you create and assign a variable called &quot;name&quot; for this
-              node type, unless you have a good reason not to. Interviewer will then
-              automatically use this variable as the label for the node in the interview.
-            </p>
-          </Tip>
+          <p className="stage-editor-section-node-type__empty">
+            No node types currently defined. Use the button below to create one.
+          </p>
           )}
-        </div>
+
+        <Button
+          color="primary"
+          icon="add"
+          size="small"
+          onClick={handleOpenCreateNewType}
+        >
+          Create new node type
+        </Button>
+        { nodeTypes.length !== 0 && type && !subjectHasVariableCalledName
+        && (
+        <Tip type="warning">
+          <p>
+            Ensure you create and assign a variable called &quot;name&quot; for this
+            node type, unless you have a good reason not to. Interviewer will then
+            automatically use this variable as the label for the node in the interview.
+          </p>
+        </Tip>
+        )}
       </div>
-    </Section>
+    </div>
   );
 };
 
