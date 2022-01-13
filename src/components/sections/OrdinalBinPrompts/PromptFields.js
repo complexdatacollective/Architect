@@ -51,9 +51,9 @@ const PromptFields = ({
   return (
     <>
       <PromptText />
-      <Section>
+      <Section title="Ordinal Variable">
         <Row>
-          <h3 id={getFieldId('variable')}>Ordinal Variable</h3>
+          <div id={getFieldId('variable')} />
           <ValidatedField
             name="variable"
             component={VariablePicker}
@@ -69,9 +69,9 @@ const PromptFields = ({
       </Section>
       { variable
         && (
-        <Section>
-          <Row>
-            <h3 id={getFieldId('variableOptions')}>Variable Options</h3>
+        <Section
+          title="Variable Options"
+          summary={(
             <p>
               Create
               { ' ' }
@@ -79,6 +79,10 @@ const PromptFields = ({
               {' '}
               options for this variable.
             </p>
+          )}
+        >
+          <Row>
+            <div id={getFieldId('variableOptions')} />
             { showVariableOptionsTip
             && (
             <Tip type="error">
@@ -102,13 +106,17 @@ const PromptFields = ({
           </Row>
         </Section>
         )}
-      <Section>
-        <Row>
-          <h3 id={getFieldId('color')} data-name="Gradient color">Color</h3>
+      <Section
+        title="Color"
+        summary={(
           <p>
             Interviewer will render each option in your ordinal variable using a
             color gradient. Which color would you like to use for this scale?
           </p>
+        )}
+      >
+        <Row>
+          <div id={getFieldId('color')} data-name="Gradient color" />
           <ValidatedField
             component={ColorPicker}
             name="color"
@@ -118,19 +126,19 @@ const PromptFields = ({
           />
         </Row>
       </Section>
-      <Section>
-        <Row>
-          <h3>
-            Bucket Sort Order
-            { ' ' }
-            <small>(optional)</small>
-          </h3>
+      <Section
+        title="Bucket Sort Order"
+        toggleable
+        summary={(
           <p>
             Nodes are stacked in the bucket before they are placed by the participant. You may
             optionally configure a list of rules to determine how nodes are sorted in the bucket
             when the task starts, which will determine the order that your participant places them
             into bins. Interviewer will default to using the order in which nodes were named.
           </p>
+        )}
+      >
+        <Row>
           <Tip>
             <p>
               Use the asterisk property to sort by the order that nodes were created.
@@ -147,17 +155,17 @@ const PromptFields = ({
           />
         </Row>
       </Section>
-      <Section>
-        <Row>
-          <h3>
-            Bin Sort Order
-            { ' ' }
-            <small>(optional)</small>
-          </h3>
+      <Section
+        title="Bin Sort Order"
+        toggleable
+        summary={(
           <p>
             You may also configure one or more sort rules that determine the order that nodes
             are listed after they have been placed into a bin.
           </p>
+        )}
+      >
+        <Row>
           <MultiSelect
             name="binSortOrder"
             properties={[
