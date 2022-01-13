@@ -277,6 +277,7 @@ module.exports = {
       // paths.appSrc,
     ),
     alias: {
+      'framer-motion': 'framer-motion/dist/framer-motion.js',
       concaveman: path.join(paths.appSrc, 'utils', 'webShims', 'concavemock.js'),
       '@app': paths.appSrc,
       '@components': path.join(paths.appSrc, 'components'),
