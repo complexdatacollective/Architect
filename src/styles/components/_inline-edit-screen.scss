@@ -14,13 +14,16 @@
     background: var(--color-slate-blue--dark);
     color: var(--color-white);
     width: 100%;
-    padding: unit(2) unit(4);
+    padding: unit(1) unit(4);
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
+    z-index: var(--z-panel);
   }
 
   &__container {
+    background: var(--color-white);
     max-width: 80rem;
     max-height: calc(100% - #{unit(18)});
     border-radius: var(--border-radius);

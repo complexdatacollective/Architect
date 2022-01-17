@@ -23,7 +23,7 @@ const ListItem = ({
   return (
     <motion.div
       className={componentClasses}
-      layoutId={layoutId}
+      // layoutId={layoutId}
     >
       { sortable
         && (

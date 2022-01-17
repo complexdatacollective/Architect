@@ -22,17 +22,15 @@ const PromptFields = ({
         title="Assign additional Variables"
         toggleable
         startExpanded={!!hasAdditionalAttributes}
-      >
-        <Row>
+        summary={(
           <p>
             This feature allows you to assign a variable and associated value to
-            any nodes created on this prompt. You can use this to
-            keep track of where a node was elicited, or to reflect a name interpreter element of
-            your prompt. For example, if you have a prompt that asks &apos;Who are you
-            close to?&apos;, you could add an additional variable called close_tie
-            and set it to true. You could then use this variable in your skip logic or
+            any nodes created on this prompt. You could then use this variable in your skip logic or
             stage filtering rules.
           </p>
+        )}
+      >
+        <Row>
           <Tip>
             <p>
               Select an existing variable, or select &quot;create new variable&quot;

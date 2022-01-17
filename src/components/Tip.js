@@ -19,7 +19,7 @@ const Tip = ({ type, icon, children }) => {
               transformOrigin: 'center',
             }}
             onViewportEnter={() => animation.start({
-              rotate: [0, 15, -15, 0, 15, -15, 0],
+              rotate: [-15, 10, -7, 0],
               scale: [1, 1.2, 1],
               transition: {
                 delay: 0.5,

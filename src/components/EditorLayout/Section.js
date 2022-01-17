@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Icon } from '@codaco/ui';
 import cx from 'classnames';
+import { Toggle } from '@codaco/ui/lib/components/Fields';
 
 const animations = {
   collapsed: {
@@ -34,6 +35,8 @@ const Section = ({
 
   const sectionClasses = cx(
     'stage-editor-section',
+    { 'stage-editor-section--toggleable': toggleable },
+    { 'stage-editor-section--open': isOpen },
     { 'stage-editor-section--disabled': disabled },
     { 'stage-editor-section--group': group },
     className,
@@ -42,12 +45,15 @@ const Section = ({
   return (
     <fieldset className={sectionClasses}>
       <legend
-        onClick={() => toggleable && toggleOpen()}
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
-        role="button"
         className={toggleable ? 'toggleable' : ''}
       >
-        { toggleable && (!isOpen ? (<Icon name="chevron-right" />) : (<Icon name="chevron-down" />)) }
+        { toggleable && (
+          <Toggle input={{
+            value: isOpen,
+            onChange: toggleOpen,
+          }}
+          />
+        )}
         {title}
         {!toggleable && (
           <span style={{ color: 'var(--error)' }}> *</span>
@@ -56,13 +62,18 @@ const Section = ({
       <div className="summary">
         { summary }
       </div>
-      <motion.div
-        variants={animations}
-        initial={toggleable ? 'collapsed' : 'open'}
-        animate={(isOpen ? 'open' : 'collapsed')}
-      >
-        {children}
-      </motion.div>
+      <AnimatePresence>
+        { (isOpen || !toggleable) && (
+          <motion.div
+            variants={animations}
+            initial="collapsed"
+            animate="open"
+            exit="collapsed"
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </fieldset>
   );
 };

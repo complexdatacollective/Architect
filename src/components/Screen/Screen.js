@@ -11,19 +11,15 @@ export const ScreenContext = React.createContext({
 
 const screenVariants = {
   visible: {
-    y: 0,
+    scale: 1,
     opacity: 1,
     transition: {
-      // when: 'beforeChildren',
+      when: 'beforeChildren',
     },
   },
   hidden: {
-    y: '-15%',
+    scale: 0.8,
     opacity: 0,
-    when: 'beforeChildren',
-    transition: {
-      damping: 20,
-    },
   },
 };
 

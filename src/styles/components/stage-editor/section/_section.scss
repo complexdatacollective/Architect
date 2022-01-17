@@ -24,6 +24,7 @@
 
   > legend {
     @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
+    --input-background: transparent;
     font-size: 1rem;
     padding: unit(1) unit(3);
     background: var(--section-background-color);
@@ -31,6 +32,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    .form-field {
+      padding: 0;
+      margin: 0;
+      min-height: auto;
+
+      .form-field-toggle__toggle {
+        transform: scale(.8);
+    }
+    }
 
     &.toggleable {
       cursor: pointer;

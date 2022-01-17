@@ -33,6 +33,7 @@ const NodeType = ({
       className="stage-editor-section-node-type__edit"
       onClick={handleResetStage}
     >
+      <p>Select the type of node you wish to use with this stage.</p>
       <div id={getFieldId('subject')} data-name="Node type" />
       <div className="stage-editor-section-node-type__edit-capture">
         <ValidatedField

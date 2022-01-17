@@ -67,7 +67,7 @@ const VariablePicker = (props) => {
     <>
       <div className="form-fields-variable-picker">
         <fieldset>
-          <legend>{label}</legend>
+          { label && (<legend>{label}</legend>)}
           { value && (
           <AnimatePresence exitBeforeEnter initial={false}>
             <motion.div

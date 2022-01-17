@@ -10,6 +10,15 @@ $color-picker-border-size: 5px;
     padding: unit(1) 0 0 unit(1);
   }
 
+  &__label{
+    font-family: var(--heading-font-family);
+    font-size: inherit;
+    color: var(--text);
+    margin-top: unit(4);
+    margin-bottom: unit(2);
+    font-weight: 600;
+  }
+
   &__colors {
     display: flex;
     flex-wrap: wrap;

@@ -39,6 +39,6 @@ $component-name: list-item;
   }
 
   &--clickable {
-    // @include clickable(2);
+    @include clickable;
   }
 }

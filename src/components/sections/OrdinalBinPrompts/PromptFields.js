@@ -59,7 +59,6 @@ const PromptFields = ({
             component={VariablePicker}
             entity={entity}
             type={type}
-            label=""
             options={ordinalVariableOptions}
             onCreateOption={handleNewVariable}
             validation={{ required: true }}

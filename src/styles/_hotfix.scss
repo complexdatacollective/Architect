@@ -100,8 +100,13 @@ a {
 .modal {
   height: 100vh;
 
+  &__background {
+    z-index: var(--z-modal);
+  }
+
   &__content {
     flex-direction: row;
+    z-index: var(--z-modal);
   }
 }
 
@@ -182,4 +187,3 @@ a {
     font-weight: inherit;
   }
 }
-

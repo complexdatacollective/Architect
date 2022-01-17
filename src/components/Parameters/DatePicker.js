@@ -25,7 +25,6 @@ const DateTimeParameters = ({
 
   return (
     <>
-      <p>This input type has three options for you to set.</p>
       <h4>Date Resolution</h4>
       <p>
         Date resolution controls the precision of the measurement. By default, this input

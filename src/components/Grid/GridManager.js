@@ -54,7 +54,10 @@ const GridManager = ({
   const isEditing = !!editField;
 
   return (
-    <Section disabled={disabled} contentId={contentId}>
+    <Section
+      disabled={disabled}
+      contentId={contentId}
+    >
       <Flipper
         flipKey={isEditing}
         portalKey="grid-manager"

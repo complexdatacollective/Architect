@@ -9,6 +9,7 @@
   color: var(--text);
   border-radius: var(--border-radius);
   box-shadow: 0 0 4rem var(--modal-window-box-shadow);
+  z-index: var(--z-modal);
 
   &__empty {
     border-radius: var(--border-radius);
@@ -88,7 +89,7 @@
   &--selected {
     --text: var(--color-white);
     --variable-pill-shadow-color: var(--color-sea-green--dark);
-  
+
     background: var(--primary);
   }
 
@@ -111,7 +112,7 @@
     .icon {
       height: unit(3);
       margin-right: unit(2);
-      
+
 
       .cls-1,
       .cls-2 {

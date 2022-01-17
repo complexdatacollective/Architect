@@ -45,22 +45,22 @@ const Screens = () => {
     [dispatch],
   );
 
-  const handleEscape = useCallback((e) => {
-    if (e.key === 'Escape') {
-      const lastScreen = screens[screens.length - 1];
-      if (lastScreen) {
-        closeScreen(lastScreen.screen, lastScreen.params);
-      }
-    }
-  }, [screens, closeScreen]);
+  // const handleEscape = useCallback((e) => {
+  //   if (e.key === 'Escape') {
+  //     const lastScreen = screens[screens.length - 1];
+  //     if (lastScreen) {
+  //       closeScreen(lastScreen.screen, lastScreen.params);
+  //     }
+  //   }
+  // }, [screens, closeScreen]);
 
-  useEffect(() => {
-    document.body.addEventListener('keydown', handleEscape);
+  // useEffect(() => {
+  //   document.body.addEventListener('keydown', handleEscape);
 
-    return () => {
-      document.body.removeEventListener('keydown', handleEscape);
-    };
-  }, [screens, closeScreen]);
+  //   return () => {
+  //     document.body.removeEventListener('keydown', handleEscape);
+  //   };
+  // }, [screens, closeScreen]);
 
   const renderScreens = useCallback(() => screens.map(({ screen, params }) => {
     const ScreenComponent = getScreenComponent(screen);

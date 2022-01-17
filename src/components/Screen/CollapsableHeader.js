@@ -38,34 +38,33 @@ const CollapsableHeader = (props) => {
   [currentOffset]);
 
   return (
-    <AnimatePresence>
-      {isCollapsed
-        && (
-        <motion.div
-          key="collapsed-state"
-          style={{
-            position: 'fixed',
-            width: '100%',
-            zIndex: 'var(--z-panel)',
-          }}
-          variants={variants}
-          initial="collapsed"
-          animate="expanded"
-          exit="collapsed"
-        >
-          {collapsedState}
-        </motion.div>
-        )}
+    <>
       <motion.div
         key="expanded-state"
-        variants={variants}
-        initial="collapsed"
-        animate="expanded"
-        exit="collapsed"
       >
         {children}
       </motion.div>
-    </AnimatePresence>
+      <AnimatePresence>
+        {isCollapsed
+          && (
+          <motion.div
+            key="collapsed-state"
+            style={{
+              position: 'absolute',
+              top: 0,
+              width: '100%',
+              zIndex: 'var(--z-panel)',
+            }}
+            variants={variants}
+            initial="collapsed"
+            animate="expanded"
+            exit="collapsed"
+          >
+            {collapsedState}
+          </motion.div>
+          )}
+      </AnimatePresence>
+    </>
   );
 };
 
