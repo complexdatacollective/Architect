@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { formValueSelector } from 'redux-form';
-import { useSelector } from 'react-redux';
+import { change, formValueSelector } from 'redux-form';
+import { useDispatch, useSelector } from 'react-redux';
 import { Section, Row } from '@components/EditorLayout';
 import PromptText from '@components/sections/PromptText';
 import AssignAttributes from '@components/AssignAttributes';
@@ -12,8 +12,17 @@ const PromptFields = ({
   entity,
   type,
 }) => {
+  const dispatch = useDispatch();
   const getFormValue = formValueSelector('editable-list-form');
   const hasAdditionalAttributes = useSelector((state) => getFormValue(state, 'additionalAttributes'));
+
+  const handleToggleAdditionalAttributes = (nextState) => {
+    if (nextState === false) {
+      dispatch(change(form, 'additionalAttributes', null));
+    }
+
+    return true;
+  };
 
   return (
     <>
@@ -29,6 +38,7 @@ const PromptFields = ({
             stage filtering rules.
           </p>
         )}
+        handleToggleChange={handleToggleAdditionalAttributes}
       >
         <Row>
           <Tip>

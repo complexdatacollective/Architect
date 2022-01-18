@@ -59,11 +59,6 @@
   &--disabled {
     opacity: .5;
     cursor: not-allowed;
-    pointer-events: none;
-
-    > * {
-      pointer-events: none;
-    }
   }
 
   .stage-editor-section {

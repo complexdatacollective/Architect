@@ -11,6 +11,7 @@ import * as ArchitectFields from '@components/Form/Fields';
 import { Row } from '@components/OrderedList';
 import Validations from './Validations';
 import Options from './Options';
+import ValidationSection from '../sections/ValidationSection';
 
 const variableTypes = Object.values(VARIABLE_TYPES);
 
@@ -58,16 +59,11 @@ class VariableFields extends Component {
               form={form}
             />
             )}
-
-          { variableType
-            && (
-            <Validations
-              name="validation"
-              label="Validations"
-              variableType={variableType}
-              form={form}
-            />
-            )}
+          <ValidationSection
+            form={form}
+            disabled={!variableType}
+            variableType={variableType}
+          />
         </Row>
       </>
     );

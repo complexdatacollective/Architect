@@ -1,5 +1,5 @@
 .assign-attributes {
-  --input-background-color: 
+  --input-background-color:
   &__empty {
     margin-top: unit(2);
     font-style: italic;
@@ -18,7 +18,7 @@
   --section-background-color: var(--architect-panel-grey--dark);
 
   display: flex;
-  margin-top: unit(2);
+  margin: unit(2) 0;
   padding: unit(2);
   border-radius: var(--border-radius);
   background: var(--section-background-color);
@@ -26,21 +26,22 @@
 
   .form-field {
     background: var(--architect-panel-grey);
-  }
-
-  &:first-child {
-    margin-top: 0;
+    margin-bottom: 0;
   }
 
   &__wrapper {
     display: flex;
     flex: 1 0 auto;
+    flex-direction: column;
   }
 
   &__variable {
     flex: 1 0 auto;
 
     .form-fields-variable-picker {
+      margin-top: 0;
+      margin-bottom: unit(2);
+
       fieldset {
         border-color: #c7ced0; // sass-lint:disable-line no-color-literals
       }
@@ -49,7 +50,6 @@
 
   &__value {
     flex: 1 0 auto;
-    margin-left: unit(2);
     border: 2px dashed #c7ced0; // sass-lint:disable-line no-color-literals;
     padding: unit(2);
     border-radius: var(--border-radius);

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { getFieldId } from '@app/utils/issues';
-import ToggleField from '@codaco/ui/lib/components/Fields/Toggle';
+import { useSelector } from 'react-redux';
+import { formValueSelector } from 'redux-form';
 import RichTextField from '@codaco/ui/lib/components/Fields/RichText';
-import DetachedField from '@components/DetachedField';
 import { ValidatedField } from '@components/Form';
 import MultiSelect from '@components/Form/MultiSelect';
 import Options from '@components/Options';
@@ -16,8 +16,6 @@ import { getSortOrderOptionGetter } from './optionGetters';
 import withVariableOptions from './withVariableOptions';
 import withVariableHandlers from './withVariableHandlers';
 import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
-import { useSelector } from 'react-redux';
-import { formValueSelector } from 'redux-form';
 
 const PromptFields = ({
   changeForm,

@@ -1,0 +1,68 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { change, formValueSelector } from 'redux-form';
+import { Section, Row } from '@components/EditorLayout';
+import Validations from '@components/Validations';
+import { getFieldId } from '../../utils/issues';
+
+const ValidationSection = ({
+  disabled,
+  form,
+  variableType,
+  existingVariables,
+}) => {
+  const dispatch = useDispatch();
+  const getFormValue = formValueSelector(form);
+  const hasValidation = useSelector((state) => getFormValue(state, 'validation'));
+
+  const handleToggleValidation = (nextState) => {
+    if (nextState === false) {
+      dispatch(change(form, 'validation', null));
+    }
+
+    return true;
+  };
+
+  return (
+    <Section
+      disabled={disabled}
+      id={getFieldId('validation')}
+      toggleable
+      title="Validation"
+      summary={(
+        <p>
+          Add one or more validation rules to this form field.
+        </p>
+      )}
+      startExpanded={!!hasValidation}
+      handleToggleChange={handleToggleValidation}
+    >
+      <Row>
+        <Validations
+          form={form}
+          name="validation"
+          variableType={variableType}
+          existingVariables={existingVariables}
+        />
+      </Row>
+    </Section>
+  );
+};
+
+ValidationSection.propTypes = {
+  disabled: PropTypes.bool,
+  form: PropTypes.string.isRequired,
+  variableType: PropTypes.string.isRequired,
+  existingVariables: PropTypes.objectOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
+
+ValidationSection.defaultProps = {
+  disabled: false,
+};
+
+export default ValidationSection;

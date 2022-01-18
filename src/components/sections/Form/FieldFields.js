@@ -17,6 +17,7 @@ import ExternalLink from '../../ExternalLink';
 import InputPreview from '../../Form/Fields/InputPreview';
 import BooleanChoice from '../../BooleanChoice';
 import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
+import ValidationSection from '../ValidationSection';
 
 const PromptFields = ({
   form,
@@ -76,74 +77,72 @@ const PromptFields = ({
         />
       </Row>
     </Section>
-    { variable
-      && (
-      <Section
-        title="Input Control"
-        id={getFieldId('component')}
-        summary={(
-          <p>
-            Choose an input control that should be used to collect the answer. For
-            detailed information about these options, see our
-            {' '}
-            <ExternalLink href="https://documentation.networkcanvas.com/key-concepts/input-controls/">documentation</ExternalLink>
-            .
-          </p>
-        )}
-      >
-        <Row>
-          <ValidatedField
-            name="component"
-            component={NativeSelect}
-            placeholder="Select an input control"
-            options={componentOptions}
-            validation={{ required: true }}
-            onChange={handleChangeComponent}
-            sortOptionsByLabel={!isNewVariable}
-          />
-          { isNewVariable && variableType
-            && (
-            <Tip>
+    <Section
+      disabled={!variable}
+      title="Input Control"
+      id={getFieldId('component')}
+      summary={(
+        <p>
+          Choose an input control that should be used to collect the answer. For
+          detailed information about these options, see our
+          {' '}
+          <ExternalLink href="https://documentation.networkcanvas.com/key-concepts/input-controls/">documentation</ExternalLink>
+          .
+        </p>
+      )}
+    >
+      <Row>
+        <ValidatedField
+          name="component"
+          component={NativeSelect}
+          placeholder="Select an input control"
+          options={componentOptions}
+          validation={{ required: true }}
+          onChange={handleChangeComponent}
+          sortOptionsByLabel={!isNewVariable}
+        />
+        { isNewVariable && variableType
+          && (
+          <Tip>
+            <p>
+              The selected input control will cause this variable to be defined as
+              type
+              {' '}
+              <strong>{variableType}</strong>
+              . Once set, this cannot be changed
+              (although you may change the input control within this type).
+            </p>
+          </Tip>
+          )}
+        { !isNewVariable && variableType
+          && (
+          <Tip type="warning">
+            <div>
               <p>
-                The selected input control will cause this variable to be defined as
-                type
+                A pre-existing variable is currently selected. You cannot change a variable
+                type after it has been created, so only
                 {' '}
                 <strong>{variableType}</strong>
-                . Once set, this cannot be changed
-                (although you may change the input control within this type).
+                {' '}
+                compatible
+                input controls can be selected above. If you would like to use a different
+                input control type, you will need to create a new variable.
               </p>
-            </Tip>
-            )}
-          { !isNewVariable && variableType
-            && (
-            <Tip type="warning">
-              <div>
-                <p>
-                  A pre-existing variable is currently selected. You cannot change a variable
-                  type after it has been created, so only
-                  {' '}
-                  <strong>{variableType}</strong>
-                  {' '}
-                  compatible
-                  input controls can be selected above. If you would like to use a different
-                  input control type, you will need to create a new variable.
-                </p>
-              </div>
-            </Tip>
-            )}
-        </Row>
-        { variableType
-        && (
-        <Row>
-          <h4>Preview</h4>
-          <InputPreview
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...metaForType}
-          />
-        </Row>
-        )}
-      </Section>
+            </div>
+          </Tip>
+          )}
+      </Row>
+      { variableType
+      && (
+      <Row>
+        <h4>Preview</h4>
+        <InputPreview
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...metaForType}
+        />
+      </Row>
       )}
+    </Section>
     { isOrdinalOrCategoricalType(variableType)
       && (
       <Section
@@ -187,30 +186,12 @@ const PromptFields = ({
         </Row>
       </Section>
       )}
-    { variableType
-      && (
-      <Section
-        id={getFieldId('validation')}
-        toggleable
-        title="Validation"
-        summary={(
-          <p>
-            Add one or more validation rules to require that participants complete
-            this field in a specific way.
-          </p>
-        )}
-      >
-        <Row>
-          <Validations
-            form={form}
-            name="validation"
-            variableType={variableType}
-            entity={entity}
-            existingVariables={omit(existingVariables, variable)}
-          />
-        </Row>
-      </Section>
-      )}
+    <ValidationSection
+      form={form}
+      disabled={!variableType}
+      variableType={variableType}
+      existingVariables={omit(existingVariables, variable)}
+    />
   </>
 );
 
