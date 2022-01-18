@@ -7,12 +7,13 @@ import {
 } from '@components/Query';
 import { Row } from '@components/EditorLayout';
 import { getFieldId } from '../../../utils/issues';
+import IssueAnchor from '../../IssueAnchor';
 
 const ConnectedQuery = withFieldConnector(withStoreConnector(Query));
 const SkipLogicFields = () => (
   <>
     <Row>
-      <div id={getFieldId('skipLogic.action')} data-name="Skip Logic Action" />
+      <IssueAnchor id={getFieldId('skipLogic.action')} description="Skip Logic Action" />
       <ValidatedField
         className="form-fields-select"
         component={RadioGroup}
@@ -25,6 +26,7 @@ const SkipLogicFields = () => (
       />
     </Row>
     <Row>
+      <IssueAnchor id={getFieldId('skipLogic.filter')} description="Skip Logic Rules" />
       <Field
         component={ConnectedQuery}
         name="skipLogic.filter"

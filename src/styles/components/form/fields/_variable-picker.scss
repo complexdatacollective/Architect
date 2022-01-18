@@ -4,6 +4,7 @@ $component-name: form-fields-variable-picker;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: unit(4) 0;
 
   fieldset {
     background: var(--section-background-color);

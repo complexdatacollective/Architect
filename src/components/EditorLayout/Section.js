@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { AnimatePresence, motion } from 'framer-motion';
 import cx from 'classnames';
 import { Toggle } from '@codaco/ui/lib/components/Fields';
+import IssueAnchor from '../IssueAnchor';
 
 const animations = {
   collapsed: {
@@ -16,6 +17,7 @@ const animations = {
 };
 
 const Section = ({
+  id,
   title,
   summary,
   disabled,
@@ -52,11 +54,16 @@ const Section = ({
       <legend
         className={toggleable ? 'toggleable' : ''}
       >
+        { id && (
+          <IssueAnchor fieldName={id} description={title} />
+        )}
         { toggleable && (
-          <Toggle input={{
-            value: isOpen,
-            onChange: changeToggleState,
-          }}
+          <Toggle
+            input={{
+              value: isOpen,
+              onChange: changeToggleState,
+            }}
+            title="Turn this feature on or off"
           />
         )}
         {title}

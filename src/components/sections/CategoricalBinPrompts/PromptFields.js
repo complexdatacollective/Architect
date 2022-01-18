@@ -16,14 +16,8 @@ import { getSortOrderOptionGetter } from './optionGetters';
 import withVariableOptions from './withVariableOptions';
 import withVariableHandlers from './withVariableHandlers';
 import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
-
-const useToggle = (initialState) => {
-  const [value, setValue] = useState(initialState);
-
-  const toggleValue = () => setValue(!value);
-
-  return [value, toggleValue, setValue];
-};
+import { useSelector } from 'react-redux';
+import { formValueSelector } from 'redux-form';
 
 const PromptFields = ({
   changeForm,
@@ -36,24 +30,26 @@ const PromptFields = ({
   variable,
   variableOptions,
 }) => {
-  const [otherVariableToggle, toggleOtherVariableToggle] = useToggle(!!otherVariable);
-
   const newVariableWindowInitialProps = {
     entity,
     type,
     initialValues: { name: null, type: null },
   };
 
+  const getFormValue = formValueSelector(form);
+  const hasBucketSortOrder = useSelector((state) => getFormValue(state, 'bucketSortOrder'));
+  const hasBinSortOrder = useSelector((state) => getFormValue(state, 'binSortOrder'));
+
   const handleCreatedNewVariable = (id, { field }) => changeForm(form, field, id);
 
-  const handleToggleOtherVariable = () => {
-    if (otherVariableToggle) {
+  const handleToggleOtherVariable = (nextState) => {
+    if (nextState === false) {
       changeForm(form, 'otherVariable', null);
       changeForm(form, 'otherVariablePrompt', null);
       changeForm(form, 'otherOptionLabel', null);
     }
 
-    toggleOtherVariableToggle();
+    return true;
   };
 
   const [newVariableWindowProps, openNewVariableWindow] = useNewVariableWindowState(
@@ -73,7 +69,7 @@ const PromptFields = ({
 
   const totalOptionsLength = (
     optionsForVariableDraft && optionsForVariableDraft.length
-    + (!!otherVariableToggle && 1)
+    + (!!otherVariable && 1)
   );
 
   const showVariableOptionsTip = totalOptionsLength > 8;
@@ -128,71 +124,70 @@ const PromptFields = ({
         </Row>
         )}
       </Section>
-      { variable && (
-        <Section title="Follow-up &quot;Other&quot; Option" id={getFieldId('toggleOtherVariable')} toggleable>
-          <Row>
-            <p>
-              You can optionally create an &quot;other&quot; option that triggers a
-              follow-up dialog
-              when nodes are dropped within it, and stores the value the participant enters in a
-              designated variable. This feature may be useful in order to collect values
-              you might not have listed above.
-            </p>
-            <DetachedField
-              component={ToggleField}
-              label="Use follow-up &quot;other&quot; option?"
-              name="toggleOtherVariable"
-              value={otherVariableToggle}
-              onChange={handleToggleOtherVariable}
-            />
-          </Row>
-          { otherVariableToggle && (
-          <>
-            <Row>
-              <ValidatedField
-                name="otherVariable"
-                component={VariablePicker}
-                entity={entity}
-                label="Variable"
-                type={type}
-                options={otherVariableOptions}
-                onCreateOption={(value) => onCreateOtherVariable(value, 'otherVariable')}
-                validation={{ required: true }}
-                variable={otherVariable}
-              />
-            </Row>
-            <Row>
-              <ValidatedField
-                name="otherOptionLabel"
-                component={RichTextField}
-                inline
-                placeholder="Enter a label (such as &quot;other&quot;) for this bin..."
-                label="Label for Bin"
-                validation={{ required: true }}
-              />
-            </Row>
-            <Row>
-              <ValidatedField
-                name="otherVariablePrompt"
-                component={RichTextField}
-                inline
-                placeholder="Enter a question prompt to show when the other option is triggered..."
-                label="Question Prompt for Dialog"
-                validation={{ required: true }}
-              />
-            </Row>
-          </>
-          )}
-        </Section>
-      )}
-      <Section title="Bucket Sort Order" toggleable>
+      <Section
+        disabled={!variable}
+        title="Follow-up &quot;Other&quot; Option"
+        summary={(
+          <p>
+            You can optionally create an &quot;other&quot; option that triggers a
+            follow-up dialog
+            when nodes are dropped within it, and stores the value the participant enters in a
+            designated variable. This feature may be useful in order to collect values
+            you might not have listed above.
+          </p>
+        )}
+        toggleable
+        startExpanded={!!otherVariable}
+        handleToggleChange={handleToggleOtherVariable}
+      >
         <Row>
+          <ValidatedField
+            name="otherVariable"
+            component={VariablePicker}
+            entity={entity}
+            type={type}
+            options={otherVariableOptions}
+            onCreateOption={(value) => onCreateOtherVariable(value, 'otherVariable')}
+            validation={{ required: true }}
+            variable={otherVariable}
+          />
+        </Row>
+        <Row>
+          <ValidatedField
+            name="otherOptionLabel"
+            component={RichTextField}
+            inline
+            placeholder="Enter a label (such as &quot;other&quot;) for this bin..."
+            label="Label for Bin"
+            validation={{ required: true }}
+          />
+        </Row>
+        <Row>
+          <ValidatedField
+            name="otherVariablePrompt"
+            component={RichTextField}
+            inline
+            placeholder="Enter a question prompt to show when the other option is triggered..."
+            label="Question Prompt for Dialog"
+            validation={{ required: true }}
+          />
+        </Row>
+      </Section>
+      <Section
+        title="Bucket Sort Order"
+        summary={(
           <p>
             Nodes are stacked in the bucket before they are placed by the participant. You may
             optionally configure a list of rules to determine how nodes are sorted in the bucket
             when the task starts, which will determine the order that your participant places them
             into bins. Interviewer will default to using the order in which nodes were named.
           </p>
+        )}
+        toggleable
+        disabled={!variable}
+        startExpanded={!!hasBucketSortOrder}
+      >
+        <Row>
           <Tip>
             <p>
               Use the asterisk property to sort by the order that nodes were created.
@@ -209,12 +204,19 @@ const PromptFields = ({
           />
         </Row>
       </Section>
-      <Section title="Bin Sort Order" toggleable>
-        <Row>
+      <Section
+        title="Bin Sort Order"
+        summary={(
           <p>
             You may also configure one or more sort rules that determine the order that nodes
             are listed after they have been placed into a bin.
           </p>
+        )}
+        toggleable
+        disabled={!variable}
+        startExpanded={!!hasBinSortOrder}
+      >
+        <Row>
           <MultiSelect
             name="binSortOrder"
             properties={[

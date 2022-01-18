@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Section } from '@components/EditorLayout';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import SkipLogicFields from '@components/sections/fields/SkipLogicFields';
-import { change, formValueSelector, getFormValues } from 'redux-form';
+import { change, formValueSelector } from 'redux-form';
 
 export const handleDeactivateSkipLogic = async (openDialog) => {
   const result = await openDialog({
