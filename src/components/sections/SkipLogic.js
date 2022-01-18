@@ -1,21 +1,65 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Section } from '@components/EditorLayout';
-import SkipLogic from '../StageEditor/SkipLogic';
+import { actionCreators as dialogActions } from '@modules/dialogs';
+import SkipLogicFields from '@components/sections/fields/SkipLogicFields';
+import { has } from 'lodash';
+import { change, getFormValues } from 'redux-form';
 
-const SkipLogicSection = () => (
-  <Section
-    toggleable
-    group
-    title="Skip Logic"
-    summary={(
-      <p>
-        Use skip logic to determine if this stage should be shown in the interview.
-      </p>
-    )}
-  >
-    <SkipLogic />
-  </Section>
-);
+export const handleDeactivateSkipLogic = async (openDialog) => {
+  const result = await openDialog({
+    type: 'Warning',
+    title: 'This will clear your skip logic',
+    message: 'This will clear your skip logic, and delete any rules you have created. Do you want to continue?',
+    confirmLabel: 'Clear skip logic',
+  });
+
+  return result;
+};
+
+const SkipLogicSection = () => {
+  const dispatch = useDispatch();
+  const openDialog = useCallback(
+    (dialog) => dispatch(dialogActions.openDialog(dialog)),
+    [dispatch],
+  );
+
+  const hasSkipLogic = useSelector((state) => has(getFormValues('edit-stage')(state), 'skipLogic.action'));
+
+  const handleToggleChange = useCallback(
+    async (newState) => {
+      if (!hasSkipLogic || newState === true) {
+        return true;
+      }
+
+      const confirm = await handleDeactivateSkipLogic(openDialog);
+
+      if (confirm) {
+        dispatch(change('edit-stage', 'skipLogic', null));
+        return true;
+      }
+
+      return false;
+    },
+    [dispatch, openDialog, hasSkipLogic],
+  );
+  return (
+    <Section
+      toggleable
+      group
+      title="Skip Logic"
+      summary={(
+        <p>
+          Use skip logic to determine if this stage should be shown in the interview.
+        </p>
+      )}
+      startExpanded={hasSkipLogic}
+      handleToggleChange={handleToggleChange}
+    >
+      <SkipLogicFields />
+    </Section>
+  );
+};
 
 SkipLogicSection.propTypes = {
 };

@@ -23,28 +23,36 @@ const ItemEditor = ({
   type,
   handleChangeType,
 }) => (
-  <Section
-    title="Type"
-  >
-    <Row>
-      <div id={getFieldId('type')} data-name="Content Type" />
-      <ValidatedField
-        name="type"
-        component={RadioGroup}
-        options={typeOptions}
-        validation={{ required: true }}
-        onChange={handleChangeType}
-      />
-    </Row>
-    <Row disabled={!type}>
-      <h3 id={getFieldId('content')}>Content</h3>
-      <ValidatedField
-        name="content"
-        component={getInputComponent(type)}
-        validation={{ required: true }}
-      />
-    </Row>
-  </Section>
+  <>
+    <Section
+      title="Type"
+    >
+      <Row>
+        <div id={getFieldId('type')} data-name="Content Type" />
+        <ValidatedField
+          name="type"
+          component={RadioGroup}
+          options={typeOptions}
+          validation={{ required: true }}
+          onChange={handleChangeType}
+        />
+      </Row>
+    </Section>
+    { type && (
+      <Section
+        title="Content"
+      >
+        <Row disabled={!type}>
+          <div id={getFieldId('content')} />
+          <ValidatedField
+            name="content"
+            component={getInputComponent(type)}
+            validation={{ required: true }}
+          />
+        </Row>
+      </Section>
+    )}
+  </>
 );
 
 ItemEditor.propTypes = {

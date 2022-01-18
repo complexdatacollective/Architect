@@ -1,7 +1,8 @@
-import React from 'react';
-import { Field, formValueSelector } from 'redux-form';
-import { useSelector } from 'react-redux';
+import React, { useCallback } from 'react';
+import { change, Field, formValueSelector } from 'redux-form';
+import { useDispatch, useSelector } from 'react-redux';
 import { Section } from '@components/EditorLayout';
+import { actionCreators as dialogActions } from '@modules/dialogs';
 import { getFieldId } from '../../utils/issues';
 import {
   Filter as FilterQuery, withFieldConnector, withStoreConnector, ruleValidator,
@@ -9,9 +10,43 @@ import {
 
 const FilterField = withFieldConnector(withStoreConnector(FilterQuery));
 
+export const handleFilterDeactivate = async (openDialog) => {
+  const result = await openDialog({
+    type: 'Warning',
+    title: 'This will clear your filter',
+    message: 'This will clear your filter, and delete any rules you have created. Do you want to continue?',
+    confirmLabel: 'Clear filter',
+  });
+
+  return result;
+};
+
 const Filter = () => {
   const getFormValue = formValueSelector('edit-stage');
+  const dispatch = useDispatch();
   const currentValue = useSelector((state) => getFormValue(state, 'filter'));
+  const openDialog = useCallback(
+    (dialog) => dispatch(dialogActions.openDialog(dialog)),
+    [dispatch],
+  );
+
+  const handleToggleChange = useCallback(
+    async (newState) => {
+      if (!currentValue || newState === true) {
+        return true;
+      }
+
+      const confirm = await handleFilterDeactivate(openDialog);
+
+      if (confirm) {
+        dispatch(change('edit-stage', 'filter', null));
+        return true;
+      }
+
+      return false;
+    },
+    [dispatch, openDialog, currentValue],
+  );
 
   return (
     <Section
@@ -24,14 +59,7 @@ const Filter = () => {
         </p>
       )}
       startExpanded={!!currentValue}
-      handleToggleOff={() => {
-        // eslint-disable-next-line no-alert
-        if (window.confirm('Are you sure you want to remove the filter? This will remove all nodes from this stage.')) {
-          return true;
-        }
-
-        return false;
-      }}
+      handleToggleChange={handleToggleChange}
     >
       <div id={getFieldId('filter')} data-name="Filter text" />
       <Field

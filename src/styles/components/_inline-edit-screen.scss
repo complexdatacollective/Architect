@@ -25,6 +25,7 @@
   &__container {
     background: var(--color-white);
     max-width: 80rem;
+    min-width: 30rem;
     max-height: calc(100% - #{unit(18)});
     border-radius: var(--border-radius);
     box-shadow: 0 0 4rem 0 var(--modal-window-box-shadow);

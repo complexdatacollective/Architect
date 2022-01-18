@@ -24,25 +24,18 @@ const Section = ({
   className,
   toggleable,
   startExpanded,
-  handleToggleOff,
-  handleToggleOn,
+  handleToggleChange,
 }) => {
   const [isOpen, setIsOpen] = useState(startExpanded);
 
   const changeToggleState = useCallback(
-    () => {
-      if (isOpen) {
-        if ((handleToggleOff && handleToggleOff()) || !handleToggleOff) {
-          setIsOpen(false);
-        }
-        return;
-      }
-
-      if ((handleToggleOn && handleToggleOn()) || !handleToggleOn) {
-        setIsOpen(true);
+    async () => {
+      const result = await handleToggleChange(!isOpen);
+      if (result) {
+        setIsOpen((prevState) => !prevState);
       }
     },
-    [setIsOpen, handleToggleOff, handleToggleOn],
+    [isOpen, setIsOpen, handleToggleChange],
   );
 
   const sectionClasses = cx(
@@ -74,7 +67,7 @@ const Section = ({
       <div className="summary">
         { summary }
       </div>
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         { (isOpen || !toggleable) && (
           <motion.div
             variants={animations}
@@ -99,8 +92,7 @@ Section.propTypes = {
   group: PropTypes.bool,
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
-  handleToggleOn: PropTypes.func,
-  handleToggleOff: PropTypes.func,
+  handleToggleChange: PropTypes.func,
 };
 
 Section.defaultProps = {
@@ -110,8 +102,7 @@ Section.defaultProps = {
   disabled: false,
   group: false,
   className: '',
-  handleToggleOn: null,
-  handleToggleOff: null,
+  handleToggleChange: () => Promise.resolve(true),
 };
 
 export default Section;

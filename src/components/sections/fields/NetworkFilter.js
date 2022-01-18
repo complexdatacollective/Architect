@@ -5,14 +5,14 @@ import { get } from 'lodash';
 import { Field, change, getFormValues } from 'redux-form';
 import { compose, defaultProps } from 'recompose';
 import { actionCreators as dialogActions } from '@modules/dialogs';
-import { getFieldId } from '@app/utils/issues';
-import ContextPanel from '@components/ContextPanel';
 import {
   Filter as FilterQuery,
   withFieldConnector,
   withStoreConnector,
   ruleValidator,
 } from '@components/Query';
+import { handleFilterDeactivate } from '../Filter';
+import Section from '../../EditorLayout/Section';
 
 const FilterField = withFieldConnector(withStoreConnector(FilterQuery));
 
@@ -22,24 +22,19 @@ const NetworkFilter = ({
   changeField,
   openDialog,
   name,
-  title,
-  variant,
 }) => {
-  const handleDeactivate = useCallback(
-    () => {
+  const handleToggleChange = useCallback(
+    async (newStatus) => {
+      if (newStatus === true) {
+        return Promise.resolve(true);
+      }
+
       if (hasFilter) {
-        return openDialog({
-          type: 'Warning',
-          title: 'This will clear your filter',
-          message: 'This will clear your filter, and delete any rules you have created. Do you want to continue?',
-          confirmLabel: 'Clear filter',
-        })
-          .then((confirm) => {
-            if (confirm) {
-              changeField(form, name, null);
-            }
-            return confirm;
-          });
+        const result = await handleFilterDeactivate(openDialog);
+
+        if (!result) {
+          return Promise.resolve(false);
+        }
       }
 
       changeField(form, name, null);
@@ -49,23 +44,23 @@ const NetworkFilter = ({
   );
 
   return (
-    <ContextPanel
-      title={title}
-      id={getFieldId(name)}
-      isActive={hasFilter}
-      onDeactivate={handleDeactivate}
-      variant={variant}
+    <Section
+      title="Filter"
+      toggleable
+      summary={(
+        <p>
+          You can optionally filter which nodes are shown on in this panel.
+        </p>
+      )}
+      startExpanded={!!hasFilter}
+      handleToggleChange={handleToggleChange}
     >
-      {/* <p>
-        You can optionally filter which nodes are shown on this stage, by creating
-        one or more rules using the options below.
-      </p> */}
       <Field
         name={name}
         component={FilterField}
         validate={ruleValidator}
       />
-    </ContextPanel>
+    </Section>
   );
 };
 
@@ -75,13 +70,9 @@ NetworkFilter.propTypes = {
   changeField: PropTypes.func.isRequired,
   openDialog: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
-  variant: PropTypes.string,
-  title: PropTypes.string,
 };
 
 NetworkFilter.defaultProps = {
-  variant: null,
-  title: 'Use network filter',
 };
 
 const mapStateToProps = (state, props) => ({

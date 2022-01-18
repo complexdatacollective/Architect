@@ -17,7 +17,7 @@ const Title = () => (
     <ValidatedField
       name="title"
       component={Fields.Text}
-      placeholder="Enter your title here"
+      placeholder="Enter your title here..."
       className="stage-editor-section-title"
       validation={{ required: true }}
     />
