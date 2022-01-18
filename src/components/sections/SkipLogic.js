@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Section } from '@components/EditorLayout';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import SkipLogicFields from '@components/sections/fields/SkipLogicFields';
-import { has } from 'lodash';
-import { change, getFormValues } from 'redux-form';
+import { change, formValueSelector, getFormValues } from 'redux-form';
 
 export const handleDeactivateSkipLogic = async (openDialog) => {
   const result = await openDialog({
@@ -24,7 +23,8 @@ const SkipLogicSection = () => {
     [dispatch],
   );
 
-  const hasSkipLogic = useSelector((state) => has(getFormValues('edit-stage')(state), 'skipLogic.action'));
+  const getFormValue = formValueSelector('edit-stage');
+  const hasSkipLogic = useSelector((state) => getFormValue(state, 'skipLogic'));
 
   const handleToggleChange = useCallback(
     async (newState) => {
@@ -53,7 +53,7 @@ const SkipLogicSection = () => {
           Use skip logic to determine if this stage should be shown in the interview.
         </p>
       )}
-      startExpanded={hasSkipLogic}
+      startExpanded={!!hasSkipLogic}
       handleToggleChange={handleToggleChange}
     >
       <SkipLogicFields />

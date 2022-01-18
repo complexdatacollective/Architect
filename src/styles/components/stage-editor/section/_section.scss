@@ -11,7 +11,7 @@
   &--toggleable {
     &:not(.stage-editor-section--open) {
       .summary {
-        margin-top: -unit(2);
+        margin-top: -#{unit(2)};
       }
     }
   }

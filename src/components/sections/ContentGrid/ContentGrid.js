@@ -38,17 +38,7 @@ const ContentGrid = (props) => (
     capacity={capacity}
     // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
-  >
-    <p>
-      Add up to 4 &quot;items&quot; below.
-    </p>
-    <p>
-      Items can be resized by dragging.
-    </p>
-    <p>
-      Available sizes are: Small (4 spaces), Medium (2 spaces) and large (1 space).
-    </p>
-  </Grid>
+  />
 );
 
 export { ContentGrid };

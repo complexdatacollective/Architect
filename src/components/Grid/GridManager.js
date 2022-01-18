@@ -4,7 +4,6 @@ import {
   defaultProps,
   withState,
 } from 'recompose';
-import { Flipper } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import { Button } from '@codaco/ui/lib/components';
 import { Section } from '@components/EditorLayout';
@@ -48,67 +47,64 @@ const GridManager = ({
   setEditField,
   template,
   upsert,
-  windowRoot,
   ...rest
-}) => {
-  const isEditing = !!editField;
-
-  return (
-    <Section
-      disabled={disabled}
-      contentId={contentId}
-    >
-      <Flipper
-        flipKey={isEditing}
-        portalKey="grid-manager"
-      >
-        <div id={getFieldId(`${fieldName}._error`)} data-name={fieldName} />
-        {children}
-        <div className="grid-manager">
-          <div className="grid-manager__items">
-            <ValidatedFieldArray
-              name={fieldName}
-              component={Grid}
-              previewComponent={previewComponent}
-              validation={validation}
-              onEditItem={handleEditField}
-              editField={editField}
-              capacity={capacity}
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              {...rest}
-            />
-          </div>
-          { hasSpace
-            && (
-            <div className="grid-manager__add">
-              <Button onClick={handleAddNew} size="small" icon="add">
-                Add new item
-              </Button>
-            </div>
-            )}
+}) => (
+  <Section
+    title="Items"
+    summary={(
+      <p>
+        Add up to four content blocks (depending on size) below.
+        You can resize a content block by dragging the bottom right corner.
+      </p>
+    )}
+    disabled={disabled}
+    contentId={contentId}
+  >
+    <div id={getFieldId(`${fieldName}._error`)} data-name={fieldName} />
+    {children}
+    <div className="grid-manager">
+      <div className="grid-manager__items">
+        <ValidatedFieldArray
+          name={fieldName}
+          component={Grid}
+          previewComponent={previewComponent}
+          validation={validation}
+          onEditItem={handleEditField}
+          editField={editField}
+          capacity={capacity}
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...rest}
+        />
+      </div>
+      { hasSpace
+        && (
+        <div className="grid-manager__add">
+          <Button onClick={handleAddNew} size="small" icon="add">
+            Add new item
+          </Button>
         </div>
-        <InlineEditScreen
-          show={!!editField}
-          initialValues={initialValues}
-          flipId={editField}
-          title={title}
-          onSubmit={handleUpdate}
-          onSubmitFail={handleSubmitFail}
-          onCancel={handleResetEditField}
-          form={formName}
-        >
-          <EditComponent
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...rest}
-            form={formName}
-            fieldId={editField}
-            onComplete={handleResetEditField}
-          />
-        </InlineEditScreen>
-      </Flipper>
-    </Section>
-  );
-};
+        )}
+    </div>
+    <InlineEditScreen
+      show={!!editField}
+      initialValues={initialValues}
+      flipId={editField}
+      title={title}
+      onSubmit={handleUpdate}
+      onSubmitFail={handleSubmitFail}
+      onCancel={handleResetEditField}
+      form={formName}
+    >
+      <EditComponent
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...rest}
+        form={formName}
+        fieldId={editField}
+        onComplete={handleResetEditField}
+      />
+    </InlineEditScreen>
+  </Section>
+);
 
 GridManager.propTypes = {
   form: PropTypes.string.isRequired,
@@ -141,8 +137,6 @@ GridManager.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   template: PropTypes.any,
   upsert: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  windowRoot: PropTypes.any.isRequired,
 };
 
 GridManager.defaultProps = {
