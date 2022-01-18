@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect, useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { noop, get } from 'lodash';
+import { get } from 'lodash';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import timelineImages from '@app/images/timeline';
 import { getStageIndex } from '@selectors/protocol';
@@ -47,14 +47,13 @@ CondensedStageHeading.propTypes = {
 const StageHeading = ({
   stageNumber,
   type,
-  toggleCodeView,
 }) => (
-  <div className="stage-heading">
+  <div className="stage-heading stage-heading--inline">
     <div className="stage-meta">
       {
         getTimelineImage(type)
           && (
-          <div className="timeline-preview" onClick={toggleCodeView}>
+          <div className="timeline-preview">
             <img
               src={getTimelineImage(type)}
               alt={`${type} interface`}
@@ -83,13 +82,11 @@ const StageHeading = ({
 StageHeading.propTypes = {
   stageNumber: PropTypes.number,
   type: PropTypes.string,
-  toggleCodeView: PropTypes.func,
 };
 
 StageHeading.defaultProps = {
   stageNumber: null,
   type: '',
-  toggleCodeView: noop,
 };
 
 const mapStateToProps = (state, props) => {

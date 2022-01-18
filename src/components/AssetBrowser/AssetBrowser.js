@@ -33,14 +33,7 @@ const AssetBrowser = ({
         />
       </Section>
       <Section
-        title={`Resource Library ${type
-        && (
-          <>
-            showing type
-            {' '}
-            {type}
-          </>
-        )}`}
+        title="Resource Library"
       >
         <Assets
           onSelect={onSelect}

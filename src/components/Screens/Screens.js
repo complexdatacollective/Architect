@@ -6,7 +6,7 @@ import { getScreensStack } from '@selectors/ui';
 import { actionCreators as uiActions } from '@modules/ui';
 import { getScreenComponent } from './screenIndex';
 
-const screenVariants = {
+export const screenVariants = {
   visible: {
     opacity: 1,
     transition: {

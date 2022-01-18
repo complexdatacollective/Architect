@@ -43,20 +43,6 @@ $component-name: timeline-stage;
     transform: translateZ(0) translateX(unit(-10));
   }
 
-  &__control {
-    display: block;
-    padding: unit(1) 0;
-    color: var(--architect-text);
-
-    &-icon {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: unit(4);
-    }
-  }
-
   &__edit-stage {
     cursor: pointer;
     position: relative;
@@ -71,6 +57,7 @@ $component-name: timeline-stage;
   }
 
   &__screen {
+    @include clickable(2);
     display: block;
     background: var(--color-navy-taupe);
     padding: 1rem;
@@ -81,7 +68,7 @@ $component-name: timeline-stage;
     text-align: center;
     border-radius: .5rem;
     overflow: hidden;
-    box-shadow: .6rem .6rem 0 0 var(--architect-panel-shadow);
+
 
     &-preview {
       width: 100%;
@@ -128,6 +115,7 @@ $component-name: timeline-stage;
       transform: translateX(0);
       transition: opacity var(--animation-duration-fast) var(--animation-duration-fast) var(--animation-easing),
       transform var(--animation-duration-fast) var(--animation-duration-fast) var(--animation-easing);
+      transition-delay: 1s;
     }
   }
 

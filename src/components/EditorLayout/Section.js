@@ -1,7 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Icon } from '@codaco/ui';
 import cx from 'classnames';
 import { Toggle } from '@codaco/ui/lib/components/Fields';
 
@@ -25,12 +24,25 @@ const Section = ({
   className,
   toggleable,
   startExpanded,
+  handleToggleOff,
+  handleToggleOn,
 }) => {
   const [isOpen, setIsOpen] = useState(startExpanded);
 
-  const toggleOpen = useCallback(
-    () => setIsOpen((s) => !s),
-    [setIsOpen],
+  const changeToggleState = useCallback(
+    () => {
+      if (isOpen) {
+        if ((handleToggleOff && handleToggleOff()) || !handleToggleOff) {
+          setIsOpen(false);
+        }
+        return;
+      }
+
+      if ((handleToggleOn && handleToggleOn()) || !handleToggleOn) {
+        setIsOpen(true);
+      }
+    },
+    [setIsOpen, handleToggleOff, handleToggleOn],
   );
 
   const sectionClasses = cx(
@@ -50,7 +62,7 @@ const Section = ({
         { toggleable && (
           <Toggle input={{
             value: isOpen,
-            onChange: toggleOpen,
+            onChange: changeToggleState,
           }}
           />
         )}
@@ -87,6 +99,8 @@ Section.propTypes = {
   group: PropTypes.bool,
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
+  handleToggleOn: PropTypes.func,
+  handleToggleOff: PropTypes.func,
 };
 
 Section.defaultProps = {
@@ -96,6 +110,8 @@ Section.defaultProps = {
   disabled: false,
   group: false,
   className: '',
+  handleToggleOn: null,
+  handleToggleOff: null,
 };
 
 export default Section;

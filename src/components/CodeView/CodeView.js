@@ -3,18 +3,17 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { getFormValues } from 'redux-form';
+import { createPortal } from 'react-dom';
 
 const variants = {
   hide: { translateY: '-100%' },
-  show: { translateY: '0%' },
+  show: { translateY: '0%', transition: { stiffness: 1000 } },
 };
 
 const CodeView = ({ toggleCodeView, show, form }) => {
   const code = useSelector(getFormValues(form));
 
-  console.log('code', show, code);
-
-  return (
+  return createPortal(
     <motion.div
       className="code-view"
       variants={variants}
@@ -29,7 +28,8 @@ const CodeView = ({ toggleCodeView, show, form }) => {
         </pre>
       </div>
       <div className="code-view__controls" onClick={toggleCodeView}>Close code view</div>
-    </motion.div>
+    </motion.div>,
+    document.body,
   );
 };
 

@@ -3,11 +3,15 @@
   background: var(--color-slate-blue--dark);
   display: flex;
   flex-direction: column;
-  padding: 0;
+  padding: unit(2);
   margin: 0;
-  margin-bottom: unit(4);
+
+  &--inline {
+    margin-bottom: unit(4);
+  }
 
   &--collapsed {
+    padding: 0;
     box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
   }
 
@@ -18,17 +22,19 @@
     .stage-meta {
       width: initial;
       padding: 0;
-      margin-right: unit(2);
+      margin-right: unit(4);
 
 
       img {
-        width: unit(8);
+        width: unit(10);
 
       }
     }
 
     .stage-name-container {
       flex: 1;
+      display: flex;
+      align-items: center;
     }
   }
 
@@ -46,11 +52,11 @@
 
   .stage-meta {
     flex: 0 0 auto;
-    padding: unit(2) unit(4);
     display: flex;
     align-items: center;
     max-width: 75rem;
-    margin: 0 auto;
+    padding: 0 unit(4);
+    margin: auto;
     width: 100%;
 
     .stage-name-container {

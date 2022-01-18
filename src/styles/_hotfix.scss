@@ -187,3 +187,8 @@ a {
     font-weight: inherit;
   }
 }
+
+// Rich text does not have the form-field class for some reason, so doesnt get bottom margin
+.form-field-rich-text {
+  margin-bottom: 2rem;
+}

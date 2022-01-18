@@ -30,7 +30,7 @@ const Window = ({
         >
           <div className="window__container">
             { title && (
-              <div className="window__heading stage-heading stage-heading--collapsed">
+              <div className="window__heading stage-heading stage-heading--inline stage-heading--collapsed">
                 <div className="stage-editor">
                   <h2>{title}</h2>
                 </div>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '@codaco/ui/lib/components/Button';
 import Screen from '@components/Screen/Screen';
 import AssetBrowser from '@components/AssetBrowser';
-import { Layout } from '@components/EditorLayout';
+import Layout from '@components/EditorLayout/Layout';
 import ExternalLink from '@components/ExternalLink';
 import ControlBar from '../ControlBar';
 import CollapsableHeader from '../Screen/CollapsableHeader';
@@ -31,14 +31,14 @@ const AssetBrowserScreen = ({
     >
       <CollapsableHeader
         collapsedState={(
-          <div className="stage-heading stage-heading--collapsed">
+          <div className="stage-heading  stage-heading--collapsed">
             <Layout>
               <h2>Resource Library</h2>
             </Layout>
           </div>
         )}
       >
-        <div className="stage-heading">
+        <div className="stage-heading stage-heading--inline">
           <Layout>
             <h1 className="screen-heading">Resource Library</h1>
             <p>

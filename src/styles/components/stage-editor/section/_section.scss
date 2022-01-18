@@ -6,17 +6,15 @@
   background: var(--section-background-color);
   border-radius: var(--border-radius);
   position: relative;
+  box-shadow: 0 .2rem .2rem 0 var(--architect-panel-shadow);
 
   &--toggleable {
     &:not(.stage-editor-section--open) {
       .summary {
-        margin-top: -1.2rem;
-        margin-bottom: -1.2rem;
+        margin-top: -unit(2);
       }
     }
   }
-
-
 
   .form-field-container {
     margin-bottom: 0;
@@ -33,14 +31,14 @@
     align-items: center;
     justify-content: center;
 
+    .form-field-container {
+      transform: scale(.7);
+    }
+
     .form-field {
       padding: 0;
       margin: 0;
       min-height: auto;
-
-      .form-field-toggle__toggle {
-        transform: scale(.8);
-    }
     }
 
     &.toggleable {
@@ -65,6 +63,11 @@
   &--disabled {
     opacity: .5;
     cursor: not-allowed;
+    pointer-events: none;
+
+    > * {
+      pointer-events: none;
+    }
   }
 
   .stage-editor-section {

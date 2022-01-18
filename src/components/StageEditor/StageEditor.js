@@ -1,10 +1,13 @@
-import React, { useEffect, useMemo } from 'react';
+import React, {
+  useEffect, useState, useCallback, useMemo,
+} from 'react';
 import PropTypes from 'prop-types';
 import { ipcRenderer } from 'electron';
 import { compose, defaultProps } from 'recompose';
 import Editor from '@components/Editor';
 import { Layout } from '@components/EditorLayout';
 import { getInterface } from './Interfaces';
+import CodeView from '../CodeView';
 import withStageEditorHandlers from './withStageEditorHandlers';
 import withStageEditorMeta from './withStageEditorMeta';
 import { formName } from './configuration';
@@ -20,6 +23,26 @@ const StageEditor = (props) => {
     hasSkipLogic,
     ...rest
   } = props;
+
+  const [showCodeView, setShowCodeView] = useState(false);
+
+  const toggleCodeView = useCallback(() => {
+    setShowCodeView((state) => !state);
+  }, []);
+
+  const handleKeyDown = useCallback((event) => {
+    if (event.metaKey && event.key === '/') {
+      toggleCodeView();
+    }
+  });
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
   useEffect(() => {
     ipcRenderer.on('REFRESH_PREVIEW', previewStage);
 
@@ -55,6 +78,11 @@ const StageEditor = (props) => {
       {
         ({ submitFailed }) => (
           <>
+            <CodeView
+              form={formName}
+              show={showCodeView}
+              toggleCodeView={toggleCodeView}
+            />
             <CollapsableHeader
               threshold={165}
               collapsedState={<CondensedStageHeading id={id} />}

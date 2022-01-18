@@ -43,7 +43,7 @@ const CodebookScreen = (props) => {
           </div>
         )}
       >
-        <div className="stage-heading">
+        <div className="stage-heading stage-heading--inline">
           <Layout>
             <h1 className="screen-heading">Codebook</h1>
             <p>

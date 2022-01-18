@@ -2,7 +2,8 @@
   display: block;
   background: none;
   padding: 0;
-  margin-bottom: 2rem;
+  margin-bottom: 2rem; // match with form fields
+  cursor: pointer;
 
   .node {
     --base-node-size: 7rem;

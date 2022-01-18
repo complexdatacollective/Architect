@@ -39,7 +39,7 @@ const TypeEditor = ({
           </div>
         )}
       >
-        <div className="stage-heading">
+        <div className="stage-heading stage-heading--inline">
           <Layout>
             <h1 className="screen-heading">{ type ? `Edit ${entity}` : `Create ${entity}` }</h1>
           </Layout>
