@@ -15,6 +15,7 @@ import withVariableOptions from '@components/sections/CategoricalBinPrompts/with
 import withVariableHandlers from '@components/sections/CategoricalBinPrompts/withVariableHandlers';
 import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
 import BucketSortOrderSection from '../BucketSortOrderSection';
+import BinSortOrderSection from '../BinSortOrderSection';
 
 const PromptFields = ({
   changeForm,
@@ -133,28 +134,12 @@ const PromptFields = ({
         maxItems={sortMaxItems}
         optionGetter={getSortOrderOptionGetter(variableOptions)}
       />
-      <Section
-        title="Bin Sort Order"
-        toggleable
-        summary={(
-          <p>
-            You may also configure one or more sort rules that determine the order that nodes
-            are listed after they have been placed into a bin.
-          </p>
-        )}
-      >
-        <Row>
-          <MultiSelect
-            name="binSortOrder"
-            properties={[
-              { fieldName: 'property' },
-              { fieldName: 'direction' },
-            ]}
-            maxItems={sortMaxItems}
-            options={getSortOrderOptionGetter(variableOptions)}
-          />
-        </Row>
-      </Section>
+      <BinSortOrderSection
+        form={form}
+        disabled={!variable}
+        maxItems={sortMaxItems}
+        optionGetter={getSortOrderOptionGetter(variableOptions)}
+      />
       <NewVariableWindow
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...newVariableWindowProps}
