@@ -53,6 +53,7 @@ const Asset = ({
 
   const assetClasses = cx(
     'asset-browser-asset',
+    { 'asset-browser-asset--clickable': onClick },
     { 'asset-browser-asset--is-used': isUsed },
   );
 

@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
-import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
-import window from '@codaco/ui/lib/components/window';
+import { AnimatePresence, motion } from 'framer-motion';
+import { createPortal } from 'react-dom';
 import Button from '@codaco/ui/lib/components/Button';
-import SimpleDialog from '@codaco/ui/lib/components/Dialog/Simple';
-import Stackable from '../Stackable';
+import { Layout } from '@components/EditorLayout';
+import ControlBar from '../ControlBar';
+import Screen from '../Screen/Screen';
 import AssetBrowser from './AssetBrowser';
+import { screenVariants } from '../Screens/Screens';
 
 const AssetBrowserWindow = ({
   show,
@@ -17,7 +18,7 @@ const AssetBrowserWindow = ({
 }) => {
   const cancelButton = [(
     <Button
-      color="white"
+      color="platinum"
       onClick={onCancel}
       key="cancel"
     >
@@ -25,30 +26,45 @@ const AssetBrowserWindow = ({
     </Button>
   )];
 
-  const dialogZIndex = getCSSVariableAsNumber('--z-dialog');
+  if (!show) { return null; }
 
-  return (
-    <Stackable stackKey={show}>
-      {({ stackIndex }) => (
-        <SimpleDialog
-          show={show}
-          onBlur={onCancel}
-          title="Resource Browser"
-          options={cancelButton}
-          style={{
-            zIndex: stackIndex + dialogZIndex,
-          }}
-          className="asset-browser__window"
+  return createPortal(
+    <AnimatePresence>
+      { show && (
+        <motion.div
+          variants={screenVariants}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          className="screens-container"
         >
-          <AssetBrowser
-            type={type}
-            onSelect={onSelect}
-            selected={selected}
-            disableDelete
-          />
-        </SimpleDialog>
+          <Screen
+            header={(
+              <div className="stage-heading stage-heading--collapsed">
+                <Layout>
+                  <h2>Resource Browser</h2>
+                </Layout>
+              </div>
+            )}
+            footer={(
+              <ControlBar
+                buttons={cancelButton}
+              />
+            )}
+          >
+            <Layout>
+              <AssetBrowser
+                type={type}
+                onSelect={onSelect}
+                selected={selected}
+                disableDelete
+              />
+            </Layout>
+          </Screen>
+        </motion.div>
       )}
-    </Stackable>
+    </AnimatePresence>,
+    document.body,
   );
 };
 
@@ -68,6 +84,4 @@ AssetBrowserWindow.defaultProps = {
   onCancel: () => {},
 };
 
-export default compose(
-  window,
-)(AssetBrowserWindow);
+export default AssetBrowserWindow;
