@@ -76,7 +76,7 @@ class Background extends PureComponent {
             <Row>
               <Field
                 name="background.skewedTowardCenter"
-                component={Fields.Checkbox}
+                component={Fields.Toggle}
                 label="Skew the size of the circles so that the middle is proportionally larger."
               />
             </Row>

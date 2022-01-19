@@ -2,11 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { getFieldId } from '@app/utils/issues';
-import { useSelector } from 'react-redux';
-import { formValueSelector } from 'redux-form';
 import RichTextField from '@codaco/ui/lib/components/Fields/RichText';
 import { ValidatedField } from '@components/Form';
-import MultiSelect from '@components/Form/MultiSelect';
 import Options from '@components/Options';
 import { Section, Row } from '@components/EditorLayout';
 import Tip from '@components/Tip';
@@ -35,10 +32,6 @@ const PromptFields = ({
     type,
     initialValues: { name: null, type: null },
   };
-
-  const getFormValue = formValueSelector(form);
-  const hasBucketSortOrder = useSelector((state) => getFormValue(state, 'bucketSortOrder'));
-  const hasBinSortOrder = useSelector((state) => getFormValue(state, 'binSortOrder'));
 
   const handleCreatedNewVariable = (id, { field }) => changeForm(form, field, id);
 

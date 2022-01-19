@@ -6,7 +6,6 @@ export { default as File } from './File';
 export { default as Image } from './Image';
 export { default as Mode } from './Mode';
 export { default as NodeSelect } from './NodeSelect';
-export { default as OrderBy } from './OrderBy';
 export { default as Select } from './Select';
 export { default as NativeSelect } from './NativeSelect';
 export { default as TextArea } from './TextArea';
