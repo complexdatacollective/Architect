@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { AnimatePresence, motion } from 'framer-motion';
 import cx from 'classnames';
@@ -91,6 +91,7 @@ const Section = ({
 };
 
 Section.propTypes = {
+  id: PropTypes.string,
   toggleable: PropTypes.bool,
   startExpanded: PropTypes.bool,
   title: PropTypes.string.isRequired,
@@ -103,6 +104,7 @@ Section.propTypes = {
 };
 
 Section.defaultProps = {
+  id: null,
   summary: null,
   toggleable: false,
   startExpanded: true,
