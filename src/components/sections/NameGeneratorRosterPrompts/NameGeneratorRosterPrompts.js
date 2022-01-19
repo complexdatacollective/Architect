@@ -8,7 +8,7 @@ import { PromptPreview } from '../NameGeneratorPrompts';
 import PromptFields from '../NameGeneratorPrompts/PromptFields';
 import withMapFormToProps from '../../enhancers/withMapFormToProps';
 
-const NameGeneratorAutoCompletePrompts = (props) => (
+const NameGeneratorRosterPrompts = (props) => (
   <EditableList
     sectionTitle="Prompts"
     editComponent={PromptFields}
@@ -25,11 +25,11 @@ const NameGeneratorAutoCompletePrompts = (props) => (
   />
 );
 
-export { NameGeneratorAutoCompletePrompts };
+export { NameGeneratorRosterPrompts };
 
 export default compose(
   withSubject,
   withMapFormToProps('dataSource'),
   withDisabledSubjectRequired,
   withDisabledAssetRequired,
-)(NameGeneratorAutoCompletePrompts);
+)(NameGeneratorRosterPrompts);

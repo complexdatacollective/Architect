@@ -9,6 +9,8 @@ import useVariablesFromExternalData from '@hooks/useVariablesFromExternalData';
 import MultiSelect from '@components/Form/MultiSelect';
 import getVariableOptionsGetter from '../SortOptionsForExternalData/getVariableOptionsGetter';
 import Tip from '../../Tip';
+import { useDispatch, useSelector } from 'react-redux';
+import { change, formValueSelector } from 'redux-form';
 
 const CardDisplayOptions = ({
   dataSource,
@@ -17,6 +19,18 @@ const CardDisplayOptions = ({
   const { variables: variableOptions } = useVariablesFromExternalData(dataSource, true);
   const variableOptionsGetter = getVariableOptionsGetter(variableOptions);
   const maxVariableOptions = variableOptions.length;
+
+  const dispatch = useDispatch();
+  const getFormValue = formValueSelector('edit-stage');
+  const hasCardDisplayOptions = useSelector((state) => getFormValue(state, 'cardOptions.additionalProperties'));
+
+  const handleToggleCardDisplayOptions = (nextState) => {
+    if (nextState === false) {
+      dispatch(change('edit-stage', 'cardOptions.additionalProperties', null));
+    }
+
+    return true;
+  };
 
   return (
     <Section
@@ -27,8 +41,9 @@ const CardDisplayOptions = ({
           data file) are displayed to the participant.
         </p>
       )}
-      key={dataSource}
-      group
+      toggleable
+      startExpanded={!!hasCardDisplayOptions}
+      handleToggleChange={handleToggleCardDisplayOptions}
       disabled={disabled}
     >
       <Row>
