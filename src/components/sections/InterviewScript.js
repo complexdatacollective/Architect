@@ -23,9 +23,9 @@ const InterviewerScript = () => {
 
       const confirm = await openDialog({
         type: 'Warning',
-        title: 'This will clear your filter',
-        message: 'This will clear your filter, and delete any rules you have created. Do you want to continue?',
-        confirmLabel: 'Clear filter',
+        title: 'This will clear your interview script',
+        message: 'This will clear your interview script, and delete content you previously entered. Do you want to continue?',
+        confirmLabel: 'Clear script',
       });
 
       if (confirm) {

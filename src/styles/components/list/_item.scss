@@ -12,6 +12,8 @@ $component-name: list-item;
   border-radius: var(--border-radius);
   margin-bottom: unit(1);
 
+
+
   &__control {
     padding: unit(2);
     flex-grow: 0;
@@ -29,6 +31,11 @@ $component-name: list-item;
   &__content {
     padding: unit(2);
     flex-grow: 1;
+
+    > .stage-editor-section {
+      --section-background-color: var(--color-slate-blue--dark) !important; //sass-lint:disable-line no-important
+      --architect-panel-shadow: rgba(58, 58, 117, .76) !important; //sass-lint:disable-line no-color-literals no-important
+    }
   }
 
   .list-row,

@@ -30,10 +30,15 @@ export const CondensedStageHeading = ({
       </div>
       <div className="stage-name-container">
         <h2>
-          {stageNumber}
-          .
+          {stageNumber && (
+            <span>
+              Stage
+              {' '}
+              {stageNumber}
+            </span>
+          )}
           {' '}
-          {formValues.label}
+          {formValues.label || (<em>No Stage Name</em>)}
         </h2>
       </div>
     </div>

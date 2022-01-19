@@ -8,8 +8,6 @@ import withFormUsedVariableIndex from './withFormUsedVariableIndex';
 import PromptPreview from './PromptPreview';
 import PromptFields from './PromptFields';
 
-const template = () => ({ sortOrder: [] });
-
 // TODO no prop spreading
 const SociogramPrompts = (props) => (
   <EditableList
@@ -23,7 +21,6 @@ const SociogramPrompts = (props) => (
     title="Edit Prompt"
     previewComponent={PromptPreview}
     editComponent={PromptFields}
-    template={template}
     {...props}
   />
 );

@@ -1,5 +1,8 @@
-.stage-editor-section {
+:root {
   --section-background-color: var(--architect-panel-grey);
+}
+
+.stage-editor-section {
   overflow: hidden;
   margin: unit(4);
   padding: unit(2) unit(4);
@@ -63,8 +66,10 @@
     --variable-pill-shadow-color: #c7ced0; // sass-lint:disable-line no-color-literals
     --input-background: var(--color-platinum--dark);
     --slider-color: var(--color-charcoal);
-
     margin: unit(4) 0;
+  }
+
+  > .stage-editor-section {
     background: var(--section-background-color);
     border-radius: unit(1);
 

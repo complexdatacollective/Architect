@@ -54,9 +54,6 @@ const Section = ({
       <legend
         className={toggleable ? 'toggleable' : ''}
       >
-        { id && (
-          <IssueAnchor fieldName={id} description={title} />
-        )}
         { toggleable && (
           <Toggle
             input={{
@@ -74,6 +71,9 @@ const Section = ({
       <div className="summary">
         { summary }
       </div>
+      { id && (
+        <IssueAnchor fieldName={id} description={title} />
+      )}
       <AnimatePresence initial={false}>
         { (isOpen || !toggleable) && (
           <motion.div
