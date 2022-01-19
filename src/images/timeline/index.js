@@ -1,8 +1,7 @@
 import CategoricalBin from './stage--CategoricalBin.png';
 import NameGenerator from './stage--NameGenerator.png';
 import NameGeneratorQuickAdd from './stage--NameGeneratorQuickAdd.png';
-import NameGeneratorList from './stage--NameGeneratorList.png';
-import NameGeneratorAutoComplete from './stage--NameGeneratorAutoComplete.png';
+import NameGeneratorRoster from './stage--NameGeneratorRoster.png';
 import DyadCensus from './stage--DyadCensus.png';
 import TieStrengthCensus from './stage--TieStrengthCensus.png';
 import OrdinalBin from './stage--OrdinalBin.png';
@@ -18,8 +17,7 @@ export default {
   CategoricalBin,
   NameGenerator,
   NameGeneratorQuickAdd,
-  NameGeneratorList,
-  NameGeneratorAutoComplete,
+  NameGeneratorRoster,
   DyadCensus,
   TieStrengthCensus,
   Narrative,

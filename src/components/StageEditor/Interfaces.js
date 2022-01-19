@@ -101,30 +101,19 @@ const NameGenerator = {
   name: 'Name Generator (using forms)',
 };
 
-const NameGeneratorAutoComplete = {
-  sections: [
-    NodeType,
-    ExternalDataSource,
-    CardDisplayOptions,
-    SearchOptionsForExternalData,
-    NameGeneratorAutoCompletePrompts,
-    SkipLogic,
-    InterviewScript,
-  ],
-  name: 'Large Roster Name Generator',
-};
-
-const NameGeneratorList = {
+const NameGeneratorRoster = {
   sections: [
     NodeType,
     ExternalDataSource,
     CardDisplayOptions,
     SortOptionsForExternalData,
+    SearchOptionsForExternalData,
+    NameGeneratorAutoCompletePrompts,
     NameGeneratorListPrompts,
     SkipLogic,
     InterviewScript,
   ],
-  name: 'Small Roster Name Generator',
+  name: 'Name Generator for Roster Data',
 };
 
 const NameGeneratorQuickAdd = {
@@ -193,8 +182,7 @@ const interfaces = {
   EgoForm,
   Information,
   NameGenerator,
-  NameGeneratorAutoComplete,
-  NameGeneratorList,
+  NameGeneratorRoster,
   NameGeneratorQuickAdd,
   Narrative,
   OrdinalBin,
