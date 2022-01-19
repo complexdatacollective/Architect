@@ -23,33 +23,33 @@ const SortOptions = ({
 
   const dispatch = useDispatch();
   const getFormValue = formValueSelector('edit-stage');
-  const hasInitialSortOrder = useSelector((state) => getFormValue(state, 'sortOptions.sortOrder'));
-  const hasParticipantSortableProperties = useSelector((state) => getFormValue(state, 'sortOptions.sortableProperties'));
+  const hasSortOptions = useSelector((state) => getFormValue(state, 'sortOptions'));
 
-  const handleToggleInitialSortOrder = (nextState) => {
+  const handleToggleSortOptions = (nextState) => {
     if (nextState === false) {
-      dispatch(change('edit-stage', 'sortOptions.sortOrder', null));
-    }
-
-    return true;
-  };
-
-  const handleToggleParticipantSortableProps = (nextState) => {
-    if (nextState === false) {
-      dispatch(change('edit-stage', 'sortOptions.sortableProperties', null));
+      dispatch(change('edit-stage', 'sortOptions', null));
     }
 
     return true;
   };
 
   return (
-    <>
+    <Section
+      title="Sort Options"
+      summary={(
+        <p>
+          Your roster will be presented to the interview participant as a list of cards.
+          You may configure the sort options of this list, including which attributes
+          are available for the participant to sort by during the interview.
+        </p>
+      )}
+      toggleable
+      startExpanded={!!hasSortOptions}
+      handleToggleChange={handleToggleSortOptions}
+      disabled={disabled}
+    >
       <Section
-        toggleable
         title="Initial Sort Order"
-        disabled={disabled}
-        startExpanded={!!hasInitialSortOrder}
-        handleToggleChange={handleToggleInitialSortOrder}
         summary={(
           <p>
             Create one or more rules to determine the default sort order or the roster,
@@ -69,8 +69,6 @@ const SortOptions = ({
         />
       </Section>
       <Section
-        toggleable
-        disabled={disabled}
         title="Participant Sortable Properties"
         summary={(
           <p>
@@ -79,8 +77,6 @@ const SortOptions = ({
             participant can use to sort the list.
           </p>
         )}
-        startExpanded={!!hasParticipantSortableProperties}
-        handleToggleChange={handleToggleParticipantSortableProps}
       >
         <MultiSelect
           name="sortOptions.sortableProperties"
@@ -96,7 +92,7 @@ const SortOptions = ({
           options={variableOptionsGetter}
         />
       </Section>
-    </>
+    </Section>
   );
 };
 
