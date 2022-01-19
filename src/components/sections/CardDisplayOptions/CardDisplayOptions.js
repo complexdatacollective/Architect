@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import * as Fields from '@codaco/ui/lib/components/Fields';
+import { useDispatch, useSelector } from 'react-redux';
+import { change, formValueSelector } from 'redux-form';
 import { Section, Row } from '@components/EditorLayout';
 import withDisabledAssetRequired from '@components/enhancers/withDisabledAssetRequired';
 import withMapFormToProps from '@components/enhancers/withMapFormToProps';
@@ -9,8 +11,6 @@ import useVariablesFromExternalData from '@hooks/useVariablesFromExternalData';
 import MultiSelect from '@components/Form/MultiSelect';
 import getVariableOptionsGetter from '../SortOptionsForExternalData/getVariableOptionsGetter';
 import Tip from '../../Tip';
-import { useDispatch, useSelector } from 'react-redux';
-import { change, formValueSelector } from 'redux-form';
 
 const CardDisplayOptions = ({
   dataSource,
