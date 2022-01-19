@@ -16,6 +16,7 @@ import { getSortOrderOptionGetter } from './optionGetters';
 import withVariableOptions from './withVariableOptions';
 import withVariableHandlers from './withVariableHandlers';
 import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
+import BucketSortOrderSection from '../BucketSortOrderSection';
 
 const PromptFields = ({
   changeForm,
@@ -171,37 +172,12 @@ const PromptFields = ({
           />
         </Row>
       </Section>
-      <Section
-        title="Bucket Sort Order"
-        summary={(
-          <p>
-            Nodes are stacked in the bucket before they are placed by the participant. You may
-            optionally configure a list of rules to determine how nodes are sorted in the bucket
-            when the task starts, which will determine the order that your participant places them
-            into bins. Interviewer will default to using the order in which nodes were named.
-          </p>
-        )}
-        toggleable
+      <BucketSortOrderSection
+        form={form}
         disabled={!variable}
-        startExpanded={!!hasBucketSortOrder}
-      >
-        <Row>
-          <Tip>
-            <p>
-              Use the asterisk property to sort by the order that nodes were created.
-            </p>
-          </Tip>
-          <MultiSelect
-            name="bucketSortOrder"
-            properties={[
-              { fieldName: 'property' },
-              { fieldName: 'direction' },
-            ]}
-            maxItems={sortMaxItems}
-            options={getSortOrderOptionGetter(variableOptions)}
-          />
-        </Row>
-      </Section>
+        maxItems={sortMaxItems}
+        optionGetter={getSortOrderOptionGetter(variableOptions)}
+      />
       <Section
         title="Bin Sort Order"
         summary={(

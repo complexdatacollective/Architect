@@ -14,6 +14,7 @@ import { getSortOrderOptionGetter } from '@components/sections/CategoricalBinPro
 import withVariableOptions from '@components/sections/CategoricalBinPrompts/withVariableOptions';
 import withVariableHandlers from '@components/sections/CategoricalBinPrompts/withVariableHandlers';
 import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
+import BucketSortOrderSection from '../BucketSortOrderSection';
 
 const PromptFields = ({
   changeForm,
@@ -126,35 +127,12 @@ const PromptFields = ({
           />
         </Row>
       </Section>
-      <Section
-        title="Bucket Sort Order"
-        toggleable
-        summary={(
-          <p>
-            Nodes are stacked in the bucket before they are placed by the participant. You may
-            optionally configure a list of rules to determine how nodes are sorted in the bucket
-            when the task starts, which will determine the order that your participant places them
-            into bins. Interviewer will default to using the order in which nodes were named.
-          </p>
-        )}
-      >
-        <Row>
-          <Tip>
-            <p>
-              Use the asterisk property to sort by the order that nodes were created.
-            </p>
-          </Tip>
-          <MultiSelect
-            name="bucketSortOrder"
-            properties={[
-              { fieldName: 'property' },
-              { fieldName: 'direction' },
-            ]}
-            maxItems={sortMaxItems}
-            options={getSortOrderOptionGetter(variableOptions)}
-          />
-        </Row>
-      </Section>
+      <BucketSortOrderSection
+        form={form}
+        disabled={!variable}
+        maxItems={sortMaxItems}
+        optionGetter={getSortOrderOptionGetter(variableOptions)}
+      />
       <Section
         title="Bin Sort Order"
         toggleable
