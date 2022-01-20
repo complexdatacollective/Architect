@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Node from '@codaco/ui/lib/components/Node';
+import { useDispatch } from 'react-redux';
+import { actionCreators as dialogActions } from '@modules/dialogs';
 
 const PreviewNode = ({
   label, color, onClick, selected,
@@ -23,47 +25,55 @@ PreviewNode.defaultProps = {
   selected: false,
 };
 
-class NodeSelect extends Component {
-  handleClickNode = (value) => {
-    const { input } = this.props;
-    input.onChange(value);
+const NodeSelect = (props) => {
+  const {
+    children,
+    options,
+    input,
+  } = props;
+
+  const { value, onChange } = input;
+
+  const dispatch = useDispatch();
+
+  const handleClickNode = (clickedNode) => {
+    if (!value) {
+      onChange(clickedNode);
+    }
+    if (value) {
+      dispatch(dialogActions.openDialog({
+        type: 'Confirm',
+        title: 'Change node type for this stage?',
+        message: 'Changing the node type will reset any existing configuration and cannot be undone. Do you want to change the node type?',
+        onConfirm: () => onChange(clickedNode),
+        confirmLabel: 'Change node type',
+      }));
+    }
   };
 
-  render() {
-    const {
-      children,
-      options,
-      input: {
-        value,
-      },
-    } = this.props;
+  const renderedOptions = options.map(
+    ({ label, color, value: optionValue }) => (
+      <PreviewNode
+        key={optionValue}
+        label={label}
+        color={color}
+        onClick={() => handleClickNode(optionValue)}
+        selected={value === optionValue}
+      />
+    ),
+  );
 
-    const renderedOptions = options.map(
-      ({ label, color, value: optionValue }) => (
-        <PreviewNode
-          key={optionValue}
-          label={label}
-          color={color}
-          onClick={() => this.handleClickNode(optionValue)}
-          selected={value === optionValue}
-        />
-      ),
-    );
-
-    return (
-      <div className={cx('form-fields-node-select', 'form-node-select')}>
-        {renderedOptions}
-        {children}
-      </div>
-    );
-  }
-}
+  return (
+    <div className={cx('form-fields-node-select', 'form-node-select')}>
+      {renderedOptions}
+      {children}
+    </div>
+  );
+};
 
 NodeSelect.propTypes = {
   children: PropTypes.node,
-  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
-  // eslint-disable-next-line react/forbid-prop-types
   input: PropTypes.object.isRequired,
 };
 

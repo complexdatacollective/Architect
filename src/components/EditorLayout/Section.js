@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { AnimatePresence, motion } from 'framer-motion';
 import cx from 'classnames';
@@ -29,6 +29,12 @@ const Section = ({
   handleToggleChange,
 }) => {
   const [isOpen, setIsOpen] = useState(startExpanded);
+
+  // If the startExpanded prop changes, update the state.
+  // This happens when a stage is reset
+  useEffect(() => {
+    setIsOpen(startExpanded);
+  }, [startExpanded]);
 
   const changeToggleState = useCallback(
     async () => {

@@ -12,8 +12,7 @@ import withCreateNewType from './withCreateNewType';
 import withNodeTypeOptions from './withNodeTypeOptions';
 import withSubjectVariables from './withSubjectHasNameVariable';
 
-const NodeType = ({
-  disabled,
+const NodeTypeFields = ({
   nodeTypes,
   handleResetStage,
   handleOpenCreateNewType,
@@ -26,12 +25,9 @@ const NodeType = ({
     handleTypeScreenMessage(typeScreenMessage);
   });
 
-  console.log('disa', disabled);
-
   return (
     <div
       className="stage-editor-section-node-type__edit"
-      onClick={handleResetStage}
     >
       <p>Select the type of node you wish to use with this stage.</p>
       <div id={getFieldId('subject')} data-name="Node type" />
@@ -40,6 +36,11 @@ const NodeType = ({
           name="subject"
           parse={(value) => ({ type: value, entity: 'node' })}
           format={(value) => get(value, 'type')}
+          onChange={(_, newValue, previousValue) => {
+            if (newValue !== previousValue) {
+              handleResetStage();
+            }
+          }}
           options={nodeTypes}
           component={NodeSelect}
           validation={{ required: true }}
@@ -75,7 +76,7 @@ const NodeType = ({
   );
 };
 
-NodeType.propTypes = {
+NodeTypeFields.propTypes = {
   nodeTypes: PropTypes.arrayOf(PropTypes.object),
   handleResetStage: PropTypes.func.isRequired,
   handleOpenCreateNewType: PropTypes.func.isRequired,
@@ -86,18 +87,18 @@ NodeType.propTypes = {
   typeScreenMessage: PropTypes.any, // eslint-disable-line react/forbid-prop-types
 };
 
-NodeType.defaultProps = {
+NodeTypeFields.defaultProps = {
   nodeTypes: [],
   disabled: false,
   typeScreenMessage: null,
   type: null,
 };
 
-export { NodeType };
+export { NodeTypeFields };
 
 export default compose(
   withNodeTypeOptions,
   withSubjectVariables,
   withDisableAndReset,
   withCreateNewType,
-)(NodeType);
+)(NodeTypeFields);

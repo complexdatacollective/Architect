@@ -1,6 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { change, formValueSelector } from 'redux-form';
 import { capitalize, toPairs } from 'lodash';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getFieldId } from '@app/utils/issues';
@@ -12,6 +13,7 @@ import IconOption from './IconOption';
 import getPalette from './getPalette';
 import Variables from './Variables';
 import CollapsableHeader from '../Screen/CollapsableHeader';
+import DetachedField from '../DetachedField';
 
 const ICON_OPTIONS = [
   'add-a-person',
@@ -26,6 +28,17 @@ const TypeEditor = ({
   isNew,
   metaOnly,
 }) => {
+  const dispatch = useDispatch();
+  const getFormValue = formValueSelector(form);
+  const formIcon = useSelector((state) => getFormValue(state, 'iconVariant'));
+
+  // Provide a default icon
+  useEffect(() => {
+    if (!formIcon) {
+      dispatch(change(form, 'iconVariant', ICON_OPTIONS[0]));
+    }
+  }, [form, formIcon, dispatch]);
+
   const { name: paletteName, size: paletteSize } = getPalette(entity);
 
   return (

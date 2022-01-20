@@ -21,9 +21,19 @@ const createTypeState = connect(
 );
 
 const createTypeHandlers = withHandlers({
-  handleTypeScreenMessage: ({ changeForm, form }) => (message) => {
-    if (!message) { return; }
+  // If there is no stage subject, switch to it.
+  // If there *is* a stage subject, just create the new type.
+  handleTypeScreenMessage: ({
+    changeForm,
+    form,
+    type: currentType,
+  }) => (message) => {
+    // Message is sent by the new entity screen dialog.
+    // If it is empty, we don't need to do anything.
+    // If there is a currentType, we also don't do anything
+    if (!message || currentType) { return; }
 
+    // If there's no currentType, change the form to the new type.
     const { entity, type } = message;
     changeForm(form, 'subject', { entity, type });
   },
