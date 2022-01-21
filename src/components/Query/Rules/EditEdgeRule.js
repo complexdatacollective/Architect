@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import DetachedField from '@components/DetachedField';
-import EdgeSelect from '@components/Form/Fields/EdgeSelect';
 import NativeSelect from '@components/Form/Fields/NativeSelect';
 import withRuleChangeHandler from './withRuleChangeHandler';
 import withOptions from './withOptions';
 import Section from '../../EditorLayout/Section';
+import EntitySelectField from '../../sections/fields/EntitySelectField/EntitySelectField';
 
 const defaultOptions = {
   type: null,
@@ -34,7 +34,8 @@ const EditEdgeRule = ({
         )}
       >
         <DetachedField
-          component={EdgeSelect}
+          component={EntitySelectField}
+          entityType="edge"
           name="type"
           options={typeOptions}
           onChange={handleRuleChange}

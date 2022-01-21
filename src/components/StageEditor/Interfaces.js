@@ -9,7 +9,6 @@ import {
   ExternalDataSource,
   AutomaticLayout,
   FilteredEdgeType,
-  FilteredNodeType,
   Form,
   InterviewScript,
   IntroductionPanel,
@@ -28,6 +27,7 @@ import {
   TieStrengthCensusPrompts,
   Title,
 } from '@components/sections';
+import { FilteredNodeType } from '@components/sections/NodeType';
 
 const AlterEdgeForm = {
   sections: [

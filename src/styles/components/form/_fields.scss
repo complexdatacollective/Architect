@@ -22,6 +22,7 @@
 
 @import './fields/native-select';
 @import './fields/variable-select';
+@import './fields/entity-select';
 @import './fields/select';
 @import './fields/input-preview';
 @import './fields/variable-picker';
@@ -34,7 +35,5 @@
 @import './fields/video';
 @import './fields/data-source';
 @import './fields/multi-select';
-@import './fields/node-select';
-@import './fields/edge-select';
 @import './fields/color-picker';
 @import './fields/field-preview';

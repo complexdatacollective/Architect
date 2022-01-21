@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { change, formValueSelector } from 'redux-form';
@@ -13,7 +13,6 @@ import IconOption from './IconOption';
 import getPalette from './getPalette';
 import Variables from './Variables';
 import CollapsableHeader from '../Screen/CollapsableHeader';
-import DetachedField from '../DetachedField';
 
 const ICON_OPTIONS = [
   'add-a-person',
@@ -34,30 +33,20 @@ const TypeEditor = ({
 
   // Provide a default icon
   useEffect(() => {
-    if (!formIcon) {
+    if (entity === 'node' && !formIcon) {
       dispatch(change(form, 'iconVariant', ICON_OPTIONS[0]));
     }
-  }, [form, formIcon, dispatch]);
+  }, [entity, form, formIcon, dispatch]);
 
   const { name: paletteName, size: paletteSize } = getPalette(entity);
 
   return (
     <>
-      <CollapsableHeader
-        collapsedState={(
-          <div className="stage-heading stage-heading--collapsed">
-            <Layout>
-              <h2>{ type ? `Edit ${entity}` : `Create ${entity}` }</h2>
-            </Layout>
-          </div>
-        )}
-      >
-        <div className="stage-heading stage-heading--inline">
-          <Layout>
-            <h1 className="screen-heading">{ type ? `Edit ${entity}` : `Create ${entity}` }</h1>
-          </Layout>
-        </div>
-      </CollapsableHeader>
+      <div className="stage-heading stage-heading--collapsed">
+        <Layout>
+          <h2>{ type ? `Edit ${entity}` : `Create ${entity}` }</h2>
+        </Layout>
+      </div>
       <Layout>
         <Section
           title={`${capitalize(entity)} Type`}

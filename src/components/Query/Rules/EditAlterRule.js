@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import DetachedField from '@components/DetachedField';
-import NodeSelect from '@components/Form/Fields/NodeSelect';
 import NativeSelect from '@components/Form/Fields/NativeSelect';
 import RadioGroup from '@codaco/ui/lib/components/Fields/RadioGroup';
 import EditValue from './EditValue';
@@ -16,6 +15,7 @@ import {
   alterRuleTypeOptions,
 } from './withAlterRuleType';
 import { makeGetOptionsWithDefaults } from './defaultRule';
+import EntitySelectField from '../../sections/fields/EntitySelectField/EntitySelectField';
 
 const EditAlterRule = ({
   alterRuleType,
@@ -50,7 +50,8 @@ const EditAlterRule = ({
         )}
       >
         <DetachedField
-          component={NodeSelect}
+          component={EntitySelectField}
+          entityType="node"
           name="type"
           options={typeOptions}
           onChange={handleRuleChange}

@@ -1,0 +1,45 @@
+.form-fields-entity-select {
+  padding: unit(2);
+  border-radius: 1rem 1rem 0 0;
+  border: .125rem solid transparent;
+  background: var(--input-background);
+  overflow: hidden;
+
+  .node-type {
+    display: inline-block;
+    margin-right: unit(2);
+
+    .node {
+      --base-node-size: 7rem;
+    }
+  }
+
+  .preview-edge {
+    background: var(--input-background);
+    margin: 0 unit(2) unit(2) 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    padding: unit(1) unit(2);
+    border: 4px solid transparent;
+    border-radius: unit(20); // arbitrarily large
+    transition: border-color var(--animation-easing) var(--animation-duration-standard);
+
+    .icon {
+      margin: 0 unit(1) 0 0;
+    }
+
+    &--selected {
+      border-color: var(--edge-color);
+
+      &.preview-edge--selected {
+        pointer-events: none;
+      }
+    }
+
+    &--clickable {
+      @include clickable;
+    }
+  }
+}

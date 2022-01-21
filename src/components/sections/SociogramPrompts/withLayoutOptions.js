@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { getLayoutVariablesForSubject } from './selectors';
-import { getVariableOptionsForSubject, getVariablesForSubject } from '../../../selectors/codebook';
+import { getVariableOptionsForSubject } from '../../../selectors/codebook';
 
 const withLayoutOptions = (state, { entity, type, form }) => {
   const variableOptions = getVariableOptionsForSubject(state, { entity, type });

@@ -17,14 +17,12 @@
 .screen {
   position: relative;
   z-index: var(--z-modal);
-  width: 80%;
   max-width: 120rem;
   margin: unit(6);
-  height: calc(100% - #{unit(12)});
+  max-height: calc(100% - #{unit(12)});
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  max-height: 90%;
   border-radius: var(--border-radius);
   box-shadow: 0 unit(2) unit(4) 0 var(--modal-window-box-shadow);
   background: var(--color-white);

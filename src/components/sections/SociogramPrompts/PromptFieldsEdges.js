@@ -13,6 +13,7 @@ import Tip from '@components/Tip';
 import withEdgesOptions from './withEdgesOptions';
 import withEdgeHighlightChangeHandler from './withEdgeHighlightChangeHandler';
 import PromptFieldsHighlight from './PromptFieldsHighlight';
+import EntitySelectField from '../fields/EntitySelectField/EntitySelectField';
 
 const EdgeFields = (props) => {
   const {
@@ -63,21 +64,20 @@ const EdgeFields = (props) => {
         <Row disabled={!canCreateEdge}>
           { canCreateEdge
             && (
-            <ValidatedField
-              name="edges.create"
-              component={NativeSelect}
-              options={edgesForSubject}
-              onCreateOption={(option) => {
-                handleChangeCreateEdge(handleCreateEdge(option));
-              }}
-              onChange={handleChangeCreateEdge}
-              placeholder="Select or create an edge type"
-              createLabelText="✨ Create new edge type ✨"
-              createInputLabel="New edge type name"
-              createInputPlaceholder="Enter an edge type..."
-              label="Create edges of the following type"
-              validation={{ required: true, allowedNMToken: 'edge type name' }}
-            />
+              <ValidatedField
+                entityType="edge"
+                name="edges.create"
+                component={EntitySelectField}
+                // parse={(value) => ({ type: value, entity: 'edge' })}
+                // format={(value) => get(value, 'type')}
+                // onChange={(_, newValue, previousValue) => {
+                //   if (!noResetOnChange && (newValue !== previousValue)) {
+                //     handleResetStage();
+                //   }
+                // }}
+                label="Create edges of the following type"
+                validation={{ required: true }}
+              />
             )}
         </Row>
         <Row disabled={edgesForSubject.length === 0}>
