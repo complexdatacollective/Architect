@@ -37,7 +37,6 @@ const allTagsSelected = (selectedTags, interfaceTags) => {
 const search = (query) => {
   if (query.length === 0) { return INTERFACE_TYPES; }
   const result = fuse.search(query);
-  console.log('query', result);
   return result.sort((a, b) => a.score - b.score).map((item) => item.item);
 };
 
@@ -49,7 +48,7 @@ const NewStageScreen = ({
   const [query, setQuery] = useState('');
 
   const [cursor, setCursor] = useState(0);
-  const [cursorActive, setCursorActive] = useState(true);
+  const [cursorActive, setCursorActive] = useState(false);
 
   const tags = useMemo(
     () => Object.values(TAGS).map((value) => ({
@@ -120,14 +119,13 @@ const NewStageScreen = ({
     [query, selectedTags],
   );
 
-  useEffect(() => console.log('cursor', cursor, filteredInterfaces[cursor]), [cursor]);
+  const hasQuery = query !== '';
 
   useEffect(() => {
+    if (!hasQuery) { return; }
     setCursor(0);
     setCursorActive(true);
-  }, [filteredInterfaces]);
-
-  const hasQuery = query !== '';
+  }, [hasQuery]);
 
   const componentClasses = cx(
     'new-stage-screen',
@@ -153,7 +151,7 @@ const NewStageScreen = ({
     }
 
     if (e.key === 'Enter') {
-      handleSelectInterface(cursor);
+      handleSelectInterface(filteredInterfaces[cursor].type);
       return;
     }
 

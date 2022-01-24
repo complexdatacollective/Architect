@@ -54,7 +54,7 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: unit(2);
-    margin: unit(2);
+    margin: unit(2) unit(4);
 
     &--empty {
       position: absolute;
@@ -76,12 +76,13 @@
     padding: unit(2) unit(4);
     box-shadow: 0 0 unit(1) var(--variable-pill-shadow-color);
     border-radius: var(--border-radius);
+    background: var(--section-background-color);
 
     &-content {
       margin: 0 auto;
       display: flex;
       align-items: center;
-      max-width: 75rem;
+      max-width: 65rem;
     }
 
     &--highlighted {
@@ -91,7 +92,7 @@
 
     &-image {
       flex: 0 0 15rem;
-      margin-right: unit(2);
+      margin-right: unit(4);
     }
 
     &-preview {
