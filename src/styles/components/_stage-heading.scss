@@ -1,21 +1,18 @@
 .stage-heading {
-  color: var(--color-white);
-  background: var(--color-slate-blue--dark);
   display: flex;
   flex-direction: column;
-  padding: unit(2);
+  padding: unit(2) unit(8);
   margin: 0;
 
   &--inline {
     margin-bottom: unit(4);
   }
 
-  &--collapsed {
-    padding: 0;
+  &--shadow {
     box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
   }
 
-  &.stage-heading--collapsed {
+  &--collapsed {
     flex-direction: row;
     padding: unit(1) unit(4);
 
@@ -110,9 +107,3 @@
   }
 }
 
-table { border: none; border-collapse: collapse; }
-table td, table th {
-  border-left: 2px solid var(--color-platinum--dark);
-  padding: unit(1) unit(2);
-}
-table td:first-child, table th:first-child { border-left: none; }

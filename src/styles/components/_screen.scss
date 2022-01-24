@@ -9,11 +9,6 @@
   justify-content: center;
 }
 
-// Extra large heading font only for use on screen headings
-.screen-heading {
-  font-size: 2.33rem;
-}
-
 .screen {
   position: relative;
   z-index: var(--z-modal);
@@ -26,6 +21,11 @@
   border-radius: var(--border-radius);
   box-shadow: 0 unit(2) unit(4) 0 var(--modal-window-box-shadow);
   background: var(--color-white);
+
+  &__header {
+    background: var(--color-slate-blue--dark);
+    color: var(--color-white);
+  }
 
   &__header,
   &__footer {

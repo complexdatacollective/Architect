@@ -1,35 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Button } from '@codaco/ui';
 import Interface from './Interface';
 import { PropTypes as InterfacePropTypes } from './interfaceOptions';
-
-const animations = {
-  show: { opacity: 1 },
-  hide: { opacity: 0 },
-};
 
 const InterfaceList = ({
   items,
   onSelect,
+  highlightedIndex,
+  handleClearSearchAndFilter,
+  setHighlighted,
+  removeHighlighted,
 }) => (
-  <motion.div className="new-stage-screen__interfaces" layout>
-    <AnimatePresence>
-      {items.map(({ type: interfaceType }) => (
-        <motion.div
-          className="new-stage-screen__interface-container"
-          variants={animations}
-          initial="hide"
-          exit="hide"
-          animate="show"
+  <motion.div className="new-stage-screen__interfaces">
+    {items.length === 0 && (
+      <div className="new-stage-screen__interfaces--empty">
+        <p>
+          No interfaces match your filter and/or search
+          results. Try a different combination of types, or clear your filters and search query
+          to see all available interfaces.
+        </p>
+        <Button onClick={handleClearSearchAndFilter}>Clear search and filter</Button>
+      </div>
+    )}
+    <AnimatePresence initial={false}>
+      {items.map(({ type: interfaceType }, index) => (
+        <Interface
           key={interfaceType}
-          layout
-        >
-          <Interface
-            type={interfaceType}
-            onClick={onSelect}
-          />
-        </motion.div>
+          type={interfaceType}
+          onClick={onSelect}
+          highlighted={index === highlightedIndex}
+          setHighlighted={() => setHighlighted(index)}
+          removeHighlighted={() => removeHighlighted(index)}
+        />
       ))}
     </AnimatePresence>
   </motion.div>
@@ -38,10 +42,13 @@ const InterfaceList = ({
 InterfaceList.propTypes = {
   items: PropTypes.arrayOf(InterfacePropTypes.interface),
   onSelect: PropTypes.func.isRequired,
+  highlightedIndex: PropTypes.number,
+  handleClearSearchAndFilter: PropTypes.func.isRequired,
 };
 
 InterfaceList.defaultProps = {
   items: [],
+  highlightedIndex: null,
 };
 
 export default InterfaceList;

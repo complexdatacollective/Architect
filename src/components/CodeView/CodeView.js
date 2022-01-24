@@ -6,8 +6,8 @@ import { getFormValues } from 'redux-form';
 import { createPortal } from 'react-dom';
 
 const variants = {
-  hide: { translateY: '-100%' },
-  show: { translateY: '0%', transition: { stiffness: 1000 } },
+  hide: { translateY: '-100%', transition: { stiffness: 1000 } },
+  show: { translateY: '0%' },
 };
 
 const CodeView = ({ toggleCodeView, show, form }) => {

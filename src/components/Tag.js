@@ -1,59 +1,36 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { motion } from 'framer-motion';
-import CancelIcon from '@material-ui/icons/CancelRounded';
 
 const Tag = ({
   id,
   children,
   color,
   onClick,
-  onReset,
   selected,
+  light,
 }) => {
   const componentClasses = cx(
     'tag',
     {
       'tag--selected': selected,
-      'tag--can-reset': !!onReset,
-      [`tag--${color}`]: color,
+      'tag--light': light,
+      'tag--clickable': !!onClick,
     },
   );
 
-  const handleClick = useCallback((e) => {
-    e.stopPropagation();
-    e.preventDefault();
-
-    onClick(id);
-  }, []);
-
-  const handleReset = useCallback((e) => {
-    e.stopPropagation();
-    e.preventDefault();
-
-    onReset(id);
-  }, []);
+  const dotClasses = `tag__dot tag__dot--${color}`;
 
   return (
-    <motion.div
+    <div
       className={componentClasses}
-      onClick={handleClick}
-      layout
+      onClick={() => onClick(id)}
     >
+      <div className={dotClasses} />
       <div className="tag__label">
         {children}
       </div>
-
-      { onReset && selected && (
-        <div
-          className="tag__reset"
-          onClick={handleReset}
-        >
-          <CancelIcon />
-        </div>
-      )}
-    </motion.div>
+    </div>
   );
 };
 
@@ -62,16 +39,16 @@ Tag.propTypes = {
   children: PropTypes.node,
   color: PropTypes.string,
   onClick: PropTypes.func,
-  onReset: PropTypes.func,
   selected: PropTypes.bool,
+  light: PropTypes.bool,
 };
 
 Tag.defaultProps = {
   children: null,
   color: null,
-  onClick: () => {},
-  onReset: null,
+  onClick: null,
   selected: false,
+  light: false,
 };
 
 export default Tag;
