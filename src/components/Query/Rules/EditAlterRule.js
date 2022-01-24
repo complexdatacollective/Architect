@@ -16,6 +16,7 @@ import {
 } from './withAlterRuleType';
 import { makeGetOptionsWithDefaults } from './defaultRule';
 import EntitySelectField from '../../sections/fields/EntitySelectField/EntitySelectField';
+import IssueAnchor from '../../IssueAnchor';
 
 const EditAlterRule = ({
   alterRuleType,
@@ -49,6 +50,10 @@ const EditAlterRule = ({
           </p>
         )}
       >
+        <IssueAnchor
+          fieldName="type"
+          description="Alter Type"
+        />
         <DetachedField
           component={EntitySelectField}
           entityType="node"

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Section, Row } from '@components/EditorLayout';
 import { difference, keys, get } from 'lodash';
@@ -8,6 +8,8 @@ import Filter from './Filter';
 import { ValidatedField } from '../Form';
 import EntitySelectField from './fields/EntitySelectField/EntitySelectField';
 import { SUBJECT_INDEPENDENT_FIELDS } from './NodeType';
+import IssueAnchor from '../IssueAnchor';
+import { makeScreenMessageListener } from '../../selectors/ui';
 
 const FilteredEdgeType = (props) => {
   const {
@@ -25,13 +27,34 @@ const FilteredEdgeType = (props) => {
     },
   );
 
+  const currentSubject = get(formValues, 'subject');
+
+  const screenMessageListener = makeScreenMessageListener('type');
+  const typeScreenMessage = useSelector((state) => screenMessageListener(state));
+
+  // Automatically switch to a newly created stage subject if
+  // there are no existing subjects.
+  useEffect(() => {
+    // Message is sent by the new entity screen dialog.
+    // If it is empty, we don't need to do anything.
+    // If there is a subject, we also don't do anything
+    if (!typeScreenMessage || currentSubject) { return; }
+
+    const { type } = typeScreenMessage;
+    dispatch(change(form, 'subject', { entity: 'edge', type }));
+  }, [typeScreenMessage]);
+
   return (
     <Section title="Edge Type">
       <Row>
+        <IssueAnchor
+          fieldName="subject"
+          description="Edge Type"
+        />
         <ValidatedField
           name="subject"
           entityType="edge"
-          promptBeforeChange="You attempted to change the node type of a stage that you have already configured. Before you can proceed the stage must be reset, which will remove any existing configuration. Do you want to reset the stage now?"
+          promptBeforeChange="You attempted to change the edge type of a stage that you have already configured. Before you can proceed the stage must be reset, which will remove any existing configuration. Do you want to reset the stage now?"
           component={EntitySelectField}
           onChange={handleResetStage}
           parse={(value) => ({ type: value, entity: 'edge' })}

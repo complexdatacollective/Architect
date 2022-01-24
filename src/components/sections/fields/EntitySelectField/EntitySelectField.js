@@ -13,7 +13,10 @@ import { getEdgeTypes, getNodeTypes } from '../../../../selectors/codebook';
 const PreviewNode = ({
   label, color, onClick, selected,
 }) => (
-  <div className="preview-node" onClick={!selected ? onClick : undefined}>
+  <div
+    className={cx('preview-node', { 'preview-node--selected': selected }, { 'preview-node--clickable': onClick })}
+    onClick={!selected ? onClick : undefined}
+  >
     <Node label={label} selected={selected} color={color} />
   </div>
 );
@@ -68,25 +71,9 @@ const EntitySelectField = (props) => {
   const edgeOptions = useSelector((state) => asOptions(getEdgeTypes(state)));
   const nodeOptions = useSelector((state) => asOptions(getNodeTypes(state)));
 
-  const screenMessageListener = makeScreenMessageListener('type');
-  const typeScreenMessage = useSelector((state) => screenMessageListener(state));
-
-  // // If there is no stage subject, switch to it.
-  // // If there *is* a stage subject, just create the new type.
-  // useEffect(() => {
-  //     // Message is sent by the new entity screen dialog.
-  //     // If it is empty, we don't need to do anything.
-  //     // If there is a currentType, we also don't do anything
-  //     if (!typeScreenMessage || currentType) { return; }
-
-  //     // If there's no currentType, change the form to the new type.
-  //     const { entity, type } = typeScreenMessage;
-  //     changeForm(form, 'subject', { entity, type });
-  // }, [typeScreenMessage]);
-
   const options = useMemo(() => entityType === 'edge' ? edgeOptions : nodeOptions, [entityType, edgeOptions, nodeOptions]);
 
-  const hasError = !!error;
+  const hasError = !!touched && !!error;
 
   const handleClickItem = (clickedItem) => {
     if (!value || !promptBeforeChange) {
@@ -122,9 +109,15 @@ const EntitySelectField = (props) => {
   ), [options, value, handleClickItem, PreviewComponent]);
 
   const classes = cx(
-    'form-field form-fields-entity-select',
+    'form-fields-entity-select',
     {
-      'form-field form-fields-entity-select--has-error': hasError,
+      'form-fields-entity-select--has-error': hasError,
+    },
+    {
+      'form-fields-entity-select--nodes': entityType === 'node',
+    },
+    {
+      'form-fields-entity-select--edges': entityType === 'edge',
     },
   );
 
@@ -132,40 +125,38 @@ const EntitySelectField = (props) => {
 
   return (
     <div className={classes}>
-      <div className="form-field form-fields-entity-select__edit">
-        { label && (<h4 className="form-field-label">{label}</h4>) }
-        <div className="form-fields-entity-select__edit-capture">
-          { renderOptions() }
-          { options.length === 0
-            && (
-            <p className="form-fields-entity-select__empty">
-              No
-              {' '}
-              {entityType}
-              {' '}
-              types currently defined. Use the button below to create one.
-            </p>
-            )}
-          {invalid && touched && (
-          <div className="form-field-text__error">
-            <Icon name="warning" />
-            {error}
-          </div>
-          )}
-          <Button
-            color="primary"
-            icon="add"
-            size="small"
-            onClick={handleOpenCreateNewType}
-          >
-            Create new
+      { label && (<h4 className="form-field-label">{label}</h4>) }
+      <div className="form-field form-fields-entity-select__field">
+        { renderOptions() }
+        { options.length === 0
+          && (
+          <p className="form-fields-entity-select__empty">
+            No
             {' '}
             {entityType}
             {' '}
-            type
-          </Button>
-        </div>
+            types currently defined. Use the button below to create one.
+          </p>
+          )}
       </div>
+      {invalid && touched && (
+        <div className="form-fields-entity-select__error">
+          <Icon name="warning" />
+          {error}
+        </div>
+      )}
+      <Button
+        color="primary"
+        icon="add"
+        size="small"
+        onClick={handleOpenCreateNewType}
+      >
+        Create new
+        {' '}
+        {entityType}
+        {' '}
+        type
+      </Button>
     </div>
   );
 };
