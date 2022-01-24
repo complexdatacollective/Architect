@@ -6,10 +6,9 @@ import * as Fields from '@codaco/ui/lib/components/Fields';
 import { VARIABLE_TYPES, VARIABLE_TYPES_WITH_OPTIONS } from '@app/config/variables';
 import { getFieldId } from '@app/utils/issues';
 import safeName from '@app/utils/safeName';
-import ValidatedField from '@components/Form/ValidatedField';
-import * as ArchitectFields from '@components/Form/Fields';
 import { Row } from '@components/OrderedList';
-import Validations from './Validations';
+import ValidatedField from '@components/Form/ValidatedField';
+import NativeSelect from '../Form/Fields/NativeSelect';
 import Options from './Options';
 import ValidationSection from '../sections/ValidationSection';
 
@@ -42,7 +41,7 @@ class VariableFields extends Component {
           <ValidatedField
             name="type"
             className="form-field-container"
-            component={ArchitectFields.NativeSelect}
+            component={NativeSelect}
             label="Variable type"
             options={variableTypes}
             validation={{ required: true }}

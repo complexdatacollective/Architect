@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Markdown } from '@codaco/ui/lib/components/Fields';
 import { get } from 'lodash';
-import { BackgroundImage, Video, Audio } from '../../Assets';
+import { BackgroundImage } from '../../Assets/BackgroundImage';
+import { Video } from '../../Assets/Video';
+import { Audio } from '../../Assets/Audio';
 import { getAssetManifest } from '../../../selectors/protocol';
 
 const mapStateToProps = (state, { content }) => {

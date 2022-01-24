@@ -11,7 +11,6 @@ import { Button } from '@codaco/ui';
 import { Section } from '@components/EditorLayout';
 import OrderedList from '@components/OrderedList';
 import { actionCreators as dialogActions } from '@modules/dialogs';
-import { getFieldId } from '@app/utils/issues';
 import NodePanel from './NodePanel';
 import IssueAnchor from '../../IssueAnchor';
 

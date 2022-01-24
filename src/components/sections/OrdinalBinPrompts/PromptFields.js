@@ -4,7 +4,6 @@ import { compose } from 'recompose';
 import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
 import ColorPicker from '@components/Form/Fields/ColorPicker';
-import MultiSelect from '@components/Form/MultiSelect';
 import { Section, Row } from '@components/EditorLayout';
 import NewVariableWindow, { useNewVariableWindowState } from '@components/NewVariableWindow';
 import Options from '@components/Options';

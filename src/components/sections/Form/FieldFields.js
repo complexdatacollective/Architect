@@ -9,7 +9,6 @@ import ValidatedField from '@components/Form/ValidatedField';
 import NativeSelect from '@components/Form/Fields/NativeSelect';
 import Options from '@components/Options';
 import Parameters from '@components/Parameters';
-import Validations from '@components/Validations';
 import { Section, Row } from '@components/EditorLayout';
 import withFieldsHandlers from './withFieldsHandlers';
 import Tip from '../../Tip';

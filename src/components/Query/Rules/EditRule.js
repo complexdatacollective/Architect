@@ -55,7 +55,7 @@ class EditRule extends Component {
                 <ControlBar
                   buttons={[
                     <Button type="button" onClick={onCancel} color="platinum">Cancel</Button>,
-                    <Button type="button" onClick={onSave} color="primary">Finish and Close</Button>
+                    <Button type="button" onClick={onSave} color="primary">Finish and Close</Button>,
                   ]}
                 />
               )}

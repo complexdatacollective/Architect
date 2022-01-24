@@ -6,13 +6,12 @@ import { capitalize, toPairs } from 'lodash';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
-import * as ArchitectFields from '@components/Form/Fields';
 import { Layout, Section } from '@components/EditorLayout';
 import { getCodebook } from '@selectors/protocol';
+import ColorPicker from '../Form/Fields/ColorPicker';
 import IconOption from './IconOption';
 import getPalette from './getPalette';
 import Variables from './Variables';
-import CollapsableHeader from '../Screen/CollapsableHeader';
 
 const ICON_OPTIONS = [
   'add-a-person',
@@ -68,7 +67,6 @@ const TypeEditor = ({
             validation={{ required: true, allowedNMToken: `${entity} type name`, uniqueByList: existingTypes }}
           />
         </Section>
-
         <Section
           title="Color"
           id={getFieldId('color')}
@@ -83,7 +81,7 @@ const TypeEditor = ({
           )}
         >
           <ValidatedField
-            component={ArchitectFields.ColorPicker}
+            component={ColorPicker}
             name="color"
             palette={paletteName}
             paletteRange={paletteSize}

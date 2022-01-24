@@ -5,9 +5,7 @@ import { Field } from 'redux-form';
 import { compose } from 'recompose';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
-import NativeSelect from '@components/Form/Fields/NativeSelect';
 import DetachedField from '@components/DetachedField';
-import withCreateEdgeHandlers from '@components/enhancers/withCreateEdgeHandler';
 import { ValidatedField } from '@components/Form';
 import Tip from '@components/Tip';
 import withEdgesOptions from './withEdgesOptions';
@@ -20,8 +18,6 @@ const EdgeFields = (props) => {
     edgesForSubject,
     displayEdgesOptions,
     handleEdgeHighlightChange,
-    handleCreateEdge,
-    handleChangeCreateEdge,
     allowHighlighting,
     canCreateEdge,
     setCanCreateEdge,
@@ -68,13 +64,6 @@ const EdgeFields = (props) => {
                 entityType="edge"
                 name="edges.create"
                 component={EntitySelectField}
-                // parse={(value) => ({ type: value, entity: 'edge' })}
-                // format={(value) => get(value, 'type')}
-                // onChange={(_, newValue, previousValue) => {
-                //   if (!noResetOnChange && (newValue !== previousValue)) {
-                //     handleResetStage();
-                //   }
-                // }}
                 label="Create edges of the following type"
                 validation={{ required: true }}
               />
@@ -119,5 +108,4 @@ export { EdgeFields };
 export default compose(
   withEdgesOptions,
   withEdgeHighlightChangeHandler,
-  withCreateEdgeHandlers,
 )(EdgeFields);

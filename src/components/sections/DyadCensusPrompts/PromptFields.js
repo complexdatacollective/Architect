@@ -1,18 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { compose } from 'redux';
 import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
 import { Section, Row } from '@components/EditorLayout';
 import { getFieldId } from '@app/utils/issues';
 import Tip from '@components/Tip';
 import ValidatedField from '@components/Form/ValidatedField';
-import withCreateEdgeHandlers from './withCreateEdgeHandler';
-import withEdgesOptions from './withEdgesOptions';
 import EntitySelectField from '../fields/EntitySelectField/EntitySelectField';
 
-const PromptFields = ({
-  edgesForSubject,
-}) => (
+const PromptFields = () => (
   <Section
     title="Dyad Census Prompts"
   >
@@ -57,13 +51,6 @@ const PromptFields = ({
         entityType="edge"
         name="createEdge"
         component={EntitySelectField}
-        // parse={(value) => ({ type: value, entity: 'edge' })}
-        // format={(value) => get(value, 'type')}
-        // onChange={(_, newValue, previousValue) => {
-        //   if (!noResetOnChange && (newValue !== previousValue)) {
-        //     handleResetStage();
-        //   }
-        // }}
         label="Create edges of the following type"
         validation={{ required: true }}
       />
@@ -71,14 +58,4 @@ const PromptFields = ({
   </Section>
 );
 
-PromptFields.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  edgesForSubject: PropTypes.array.isRequired,
-  handleCreateEdge: PropTypes.func.isRequired,
-  handleChangeCreateEdge: PropTypes.func.isRequired,
-};
-
-export default compose(
-  withCreateEdgeHandlers,
-  withEdgesOptions,
-)(PromptFields);
+export default PromptFields;

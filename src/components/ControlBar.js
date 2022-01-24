@@ -1,5 +1,5 @@
 import React from 'react';
-import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -55,6 +55,7 @@ const ControlBar = ({ buttons, secondaryButtons, className }) => {
         'control-bar',
         className,
       )}
+      variants={barVariants}
     >
       <AnimatePresence>
         { buttonLayout }

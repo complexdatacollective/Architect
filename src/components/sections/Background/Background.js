@@ -9,7 +9,7 @@ import { Section, Row } from '@components/EditorLayout';
 import { getFieldId } from '../../../utils/issues';
 import DetachedField from '../../DetachedField';
 import ValidatedField from '../../Form/ValidatedField';
-import * as ArchitectFields from '../../Form/Fields';
+import Image from '../../Form/Fields/Image';
 import withBackgroundChangeHandler from './withBackgroundChangeHandler';
 
 class Background extends PureComponent {
@@ -88,7 +88,7 @@ class Background extends PureComponent {
             <div id={getFieldId('background.image')} data-name="Background &gt; Image" />
             <ValidatedField
               name="background.image"
-              component={ArchitectFields.Image}
+              component={Image}
               label="Background image"
               validation={{ required: true }}
             />

@@ -12,7 +12,6 @@ const ListItem = ({
   onClick,
   className,
   sortable,
-  layoutId,
 }) => {
   const componentClasses = cx(
     'list-item',
@@ -23,7 +22,6 @@ const ListItem = ({
   return (
     <motion.div
       className={componentClasses}
-      // layoutId={layoutId}
     >
       { sortable
         && (
@@ -47,7 +45,6 @@ ListItem.propTypes = {
   children: PropTypes.node,
   sortable: PropTypes.bool,
   onClick: PropTypes.func,
-  layoutId: PropTypes.string,
 };
 
 ListItem.defaultProps = {
@@ -55,7 +52,6 @@ ListItem.defaultProps = {
   children: null,
   sortable: true,
   onClick: null,
-  layoutId: null,
 };
 
 export default SortableElement(ListItem);
