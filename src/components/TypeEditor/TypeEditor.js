@@ -12,7 +12,6 @@ import ColorPicker from '../Form/Fields/ColorPicker';
 import IconOption from './IconOption';
 import getPalette from './getPalette';
 import Variables from './Variables';
-import CollapsableHeader from '../Screen/CollapsableHeader';
 
 const ICON_OPTIONS = [
   'add-a-person',

@@ -8,6 +8,8 @@ import timelineImages from '@app/images/timeline';
 import { getStageIndex } from '@selectors/protocol';
 import { ValidatedField } from '../Form';
 import { getFieldId } from '../../utils/issues';
+import ExternalLink from '../ExternalLink';
+import { getInterface } from './Interfaces';
 
 const getTimelineImage = (type) => get(timelineImages, type, timelineImages.Default);
 
@@ -18,6 +20,7 @@ export const CondensedStageHeading = ({
   const stageNumber = stageIndex !== -1 ? stageIndex + 1 : null;
   const formValues = useSelector(getFormValues('edit-stage'));
   const type = get(formValues, 'type', '');
+  const documentationLinkForType = get(getInterface(type), 'documentation', null);
 
   return (
     <div className="stage-heading stage-heading--collapsed stage-heading--shadow">
@@ -35,12 +38,23 @@ export const CondensedStageHeading = ({
               Stage
               {' '}
               {stageNumber}
+              :
+              {' '}
             </span>
           )}
           {' '}
           {formValues.label || (<em>No Stage Name</em>)}
         </h2>
       </div>
+      { type && documentationLinkForType && (
+      <div className="documentation-link">
+        <ExternalLink
+          href={documentationLinkForType}
+        >
+          Documentation for this interface
+        </ExternalLink>
+      </div>
+      )}
     </div>
   );
 };

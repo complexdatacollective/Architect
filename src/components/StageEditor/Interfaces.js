@@ -37,6 +37,7 @@ const AlterEdgeForm = {
     SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/per-alter-edge-form/',
   template: {},
 };
 
@@ -48,6 +49,7 @@ const AlterForm = {
     SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/per-alter-form/',
 };
 
 const CategoricalBin = {
@@ -57,6 +59,7 @@ const CategoricalBin = {
     SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/categorical-bin/',
 };
 
 const DyadCensus = {
@@ -67,6 +70,7 @@ const DyadCensus = {
     SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/dyad-census/',
 };
 
 const EgoForm = {
@@ -76,6 +80,7 @@ const EgoForm = {
     SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/ego-form/',
   template: {},
 };
 
@@ -86,6 +91,7 @@ const Information = {
     SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/information/',
 };
 
 const NameGenerator = {
@@ -97,6 +103,7 @@ const NameGenerator = {
     SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/name-generator-using-forms/',
   name: 'Name Generator (using forms)',
 };
 
@@ -111,6 +118,7 @@ const NameGeneratorRoster = {
     SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/name-generator-roster/',
   name: 'Name Generator for Roster Data',
 };
 
@@ -123,7 +131,8 @@ const NameGeneratorQuickAdd = {
     SkipLogic,
     InterviewScript,
   ],
-  name: 'Name Generator (quick add mode)',
+  name: 'Name Generator (quick add)',
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/name-generator-using-quick-add/',
 };
 
 const Narrative = {
@@ -135,6 +144,7 @@ const Narrative = {
     SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/narrative/',
   template: {
     behaviours: {
       allowRepositioning: true,
@@ -149,6 +159,7 @@ const OrdinalBin = {
     SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/ordinal-bin/',
 };
 
 const Sociogram = {
@@ -160,6 +171,7 @@ const Sociogram = {
     SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/sociogram/',
 };
 
 const TieStrengthCensus = {
@@ -170,6 +182,7 @@ const TieStrengthCensus = {
     SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/tie-strength-census/',
 };
 
 const interfaces = {
