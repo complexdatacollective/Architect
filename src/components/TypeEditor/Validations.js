@@ -7,7 +7,7 @@ import { get, map } from 'lodash';
 import { Field, FieldArray } from 'redux-form';
 import { Icon, Button } from '@codaco/ui';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import { NativeSelect } from '../Form/Fields';
+import NativeSelect from '../Form/Fields/NativeSelect';
 import ValidatedField from '../Form/ValidatedField';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 

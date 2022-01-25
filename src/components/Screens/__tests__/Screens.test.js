@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Screens } from '../Screens';
+import Screens from '../Screens';
 
 const mockProps = {
   screens: [],

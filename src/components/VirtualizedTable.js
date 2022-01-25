@@ -1,22 +1,12 @@
-import React, { useMemo, useCallback } from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useTable, useBlockLayout } from 'react-table';
 import { FixedSizeList } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
-import scrollbarWidth from '../utils/scrollbarWidth';
 
 const VirtualizedTable = ({ columns, data }) => {
   // Use the state and functions returned from useTable to build your UI
-
-  const defaultColumn = useMemo(
-    () => ({
-      width: 250,
-    }),
-    [],
-  );
-
-  const scrollBarSize = useMemo(() => scrollbarWidth(), []);
-
   const {
     getTableProps,
     getTableBodyProps,
@@ -62,7 +52,7 @@ const VirtualizedTable = ({ columns, data }) => {
   // Render the UI for your table
   return (
     <AutoSizer>
-      {({ height, width }) => (
+      {({ height }) => (
         // eslint-disable-next-line react/jsx-props-no-spreading
         <div {...getTableProps()} className="table">
           <div>

@@ -1,13 +1,4 @@
 .rules-preview-text {
-  &__type,
-  &__entity,
-  &__operator,
-  &__variable,
-  &__copy,
-  &__value {
-
-  }
-
   &__join {
     padding: unit(2) unit(4);
     border-top: 4px solid var(--section-background-color);

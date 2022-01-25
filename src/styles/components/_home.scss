@@ -264,7 +264,7 @@ $font-sizes: (
 
   &--is-open {
     background: var(--color-slate-blue);
-    box-shadow: 0 0.6rem .2rem 0 var(--architect-panel-shadow);
+    box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
     color: var(--color-white);
   }
 

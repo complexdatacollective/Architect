@@ -1,5 +1,6 @@
+$field-color: #c7ced0;
+
 .assign-attributes {
-  --input-background-color:
   &__empty {
     margin-top: unit(2);
     font-style: italic;
@@ -43,14 +44,14 @@
       margin-bottom: unit(2);
 
       fieldset {
-        border-color: #c7ced0; // sass-lint:disable-line no-color-literals
+        border-color: $field-color;
       }
     }
   }
 
   &__value {
     flex: 1 0 auto;
-    border: 2px dashed #c7ced0; // sass-lint:disable-line no-color-literals;
+    border: 2px dashed $field-color;
     padding: unit(2);
     border-radius: var(--border-radius);
 
