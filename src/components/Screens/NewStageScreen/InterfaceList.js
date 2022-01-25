@@ -44,6 +44,8 @@ InterfaceList.propTypes = {
   onSelect: PropTypes.func.isRequired,
   highlightedIndex: PropTypes.number,
   handleClearSearchAndFilter: PropTypes.func.isRequired,
+  setHighlighted: PropTypes.func.isRequired,
+  removeHighlighted: PropTypes.func.isRequired,
 };
 
 InterfaceList.defaultProps = {

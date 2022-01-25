@@ -43,7 +43,7 @@ export const INTERFACE_TYPES = [
     tags: [TAGS.CREATE_NODES, TAGS.ROSTER_DATA],
     keywords: 'namegenerator name generator quick add simple easy nodes node create roster',
     type: 'NameGeneratorQuickAdd',
-    title: 'Name Generator (quick)',
+    title: 'Name Generator (quick add)',
     description: 'A name generator interface designed for low response-burden. Only requires a label in order to create an alter.',
   },
   {

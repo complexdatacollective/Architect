@@ -1,4 +1,6 @@
-import React, { useCallback, useEffect, useRef, useMemo } from 'react';
+import React, {
+  useCallback, useEffect, useRef, useMemo,
+} from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
@@ -85,10 +87,14 @@ InterfaceThumbnail.propTypes = {
   type: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   highlighted: PropTypes.bool,
+  setHighlighted: PropTypes.func,
+  removeHighlighted: PropTypes.func,
 };
 
 InterfaceThumbnail.defaultProps = {
   highlighted: false,
+  setHighlighted: null,
+  removeHighlighted: null,
 };
 
 export default InterfaceThumbnail;

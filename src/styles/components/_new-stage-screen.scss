@@ -16,8 +16,7 @@
 
   &__filter {
     .form-field-container {
-      width: 30rem;
-      margin-bottom: 0;
+      margin: unit(1) 0;
 
       .form-field-text__input {
         margin-bottom: 0;
@@ -28,13 +27,13 @@
   &__menu-tags {
     display: flex;
     align-items: center;
-    max-width: 65rem;
 
     .menu-tags {
       &__label {
-        flex: 0 0 8rem;
+        flex: 0 0;
         display: flex;
         align-items: center;
+        margin-right: unit(1);
       }
 
       &__tags {
@@ -51,10 +50,9 @@
 
 
   &__interfaces {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: unit(2);
-    margin: unit(2) unit(4);
+    display: flex;
+    flex-direction: column;
+    margin: unit(2) 0;
 
     &--empty {
       position: absolute;
@@ -73,16 +71,13 @@
   &__interface {
     flex: 1 0 100%;
     cursor: pointer;
-    padding: unit(2) unit(4);
-    box-shadow: 0 0 unit(1) var(--variable-pill-shadow-color);
-    border-radius: var(--border-radius);
-    background: var(--section-background-color);
+    padding: unit(2) unit(8);
+    border-bottom: 2px solid var(--architect-divider);
 
     &-content {
       margin: 0 auto;
       display: flex;
       align-items: center;
-      max-width: 65rem;
     }
 
     &--highlighted {
@@ -103,12 +98,6 @@
     &-info {
       display: flex;
       flex-direction: column;
-
-      h2 {
-        letter-spacing: .15em;
-        text-transform: uppercase;
-        font-size: 1.2rem;
-      }
     }
 
     &-description {

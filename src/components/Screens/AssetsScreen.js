@@ -16,10 +16,9 @@ const AssetBrowserScreen = ({
     <Button
       key="done"
       onClick={onComplete}
-      iconPosition="right"
-      icon="arrow-right"
+      color="platinum"
     >
-      Return to Timeline
+      Close
     </Button>,
   ];
 

@@ -9,13 +9,15 @@ const Tag = ({
   onClick,
   selected,
   light,
+  disabled,
 }) => {
   const componentClasses = cx(
     'tag',
     {
       'tag--selected': selected,
       'tag--light': light,
-      'tag--clickable': !!onClick,
+      'tag--clickable': !disabled && !!onClick,
+      'tag--disabled': disabled,
     },
   );
 
@@ -41,6 +43,7 @@ Tag.propTypes = {
   onClick: PropTypes.func,
   selected: PropTypes.bool,
   light: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 Tag.defaultProps = {
@@ -49,6 +52,7 @@ Tag.defaultProps = {
   onClick: null,
   selected: false,
   light: false,
+  disabled: false,
 };
 
 export default Tag;

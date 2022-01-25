@@ -12,7 +12,7 @@
 .screen {
   position: relative;
   z-index: var(--z-modal);
-  max-width: 120rem;
+  max-width: 100rem;
   margin: unit(6);
   max-height: calc(100% - #{unit(12)});
   overflow: hidden;

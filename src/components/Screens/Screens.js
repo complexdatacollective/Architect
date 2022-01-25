@@ -52,7 +52,7 @@ const Screens = () => {
 
     return (
       <motion.div
-        key={params.id}
+        key={params.id || screen}
         variants={screenVariants}
         initial="hidden"
         animate="visible"

@@ -13,11 +13,16 @@
 
   &--light {
     color: var(--text-dark);
-    background: var(--color-platinum--dark);
+    background: var(--color-platinum);
   }
 
   &--clickable {
     @include clickable(.5);
+  }
+
+  &--disabled {
+    opacity: .5;
+    cursor: not-allowed;
   }
 
   &__dot {
