@@ -97,6 +97,6 @@ EditEgoRule.defaultProps = {
 };
 
 export default compose(
-  withOptions('ego'),
+  withOptions,
   withRuleChangeHandler,
 )(EditEgoRule);

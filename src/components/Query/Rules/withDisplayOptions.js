@@ -6,10 +6,17 @@ const withDisplayOptions = withProps(({ type, options, codebook }) => {
   const entityType = type === 'alter' ? 'node' : 'edge';
   const entityRoot = type === 'ego' ? ['ego'] : [entityType, options.type];
   const typeLabel = get(codebook, [entityType, options.type, 'name'], options.type); // noop for ego
+  const typeColor = get(codebook, [entityType, options.type, 'color'], '#000'); // noop for ego
   const variableLabel = get(
     codebook,
     [...entityRoot, 'variables', options.attribute, 'name'],
     options.attribute,
+  );
+
+  const variableType = get(
+    codebook,
+    [...entityRoot, 'variables', options.attribute, 'type'],
+    'string',
   );
 
   const variableOptions = get(
@@ -25,8 +32,10 @@ const withDisplayOptions = withProps(({ type, options, codebook }) => {
   return {
     options: {
       ...options,
-      ...(typeLabel ? { type: typeLabel } : {}),
+      ...(typeLabel ? { typeLabel } : {}),
+      ...(typeColor ? { typeColor } : {}),
       attribute: variableLabel,
+      variableType,
       value,
     },
   };

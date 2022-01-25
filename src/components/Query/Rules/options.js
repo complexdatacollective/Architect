@@ -3,7 +3,7 @@ import { omit } from 'lodash';
 import { VARIABLE_TYPES } from '../../../config/variables';
 
 // Variable types that can't be used in rules
-const disallowedVariableTypes = ['scalar'];
+const disallowedVariableTypes = ['scalar', 'layout'];
 
 export const validTypes = new Set(Object.keys(omit(VARIABLE_TYPES, disallowedVariableTypes)));
 
@@ -57,8 +57,7 @@ export const operatorsByType = {
 };
 
 export const templates = {
-  edgeRule: ['type', 'operator'],
-  alterTypeRule: ['type', 'operator'],
-  alterVariableRule: ['type', 'operator', 'attribute', 'value'],
+  entityTypeRule: ['type', 'operator'],
+  entityVariableRule: ['type', 'operator', 'attribute', 'value'],
   egoRule: ['attribute', 'value'],
 };

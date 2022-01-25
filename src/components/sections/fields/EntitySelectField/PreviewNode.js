@@ -15,7 +15,7 @@ const PreviewNode = ({
 );
 
 PreviewNode.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   selected: PropTypes.bool,
   label: PropTypes.string.isRequired,
   color: PropTypes.string,
@@ -24,6 +24,7 @@ PreviewNode.propTypes = {
 PreviewNode.defaultProps = {
   color: 'node-color-seq-1',
   selected: false,
+  onClick: undefined,
 };
 
 export default PreviewNode;

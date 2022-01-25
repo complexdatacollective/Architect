@@ -1,21 +1,26 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { get, isNil } from 'lodash';
+import PreviewNode from '../../sections/fields/EntitySelectField/PreviewNode';
+import PreviewEdge from '../../sections/fields/EntitySelectField/PreviewEdge';
+import { SimpleVariablePill } from '../../Form/Fields/VariablePicker/VariablePill';
 
-const operatorsAsText = {
-  EXISTS: 'with',
+const operatorsAsText = (isEgo) => ({
+  EXISTS: 'where',
   NOT_EXISTS: 'without',
-  EXACTLY: 'exactly',
-  NOT: 'is not',
-  GREATER_THAN: 'greater than',
-  GREATER_THAN_OR_EQUAL: 'greater than or equal to',
-  LESS_THAN: 'less than',
-  LESS_THAN_OR_EQUAL: 'less that or equal to',
-};
+  EXACTLY: isEgo ? 'that is is exactly equal to' : 'is exactly equal to',
+  NOT: isEgo ? 'that is not' : 'is not',
+  GREATER_THAN: isEgo ? 'that is greater than' : 'is greater than',
+  GREATER_THAN_OR_EQUAL: isEgo ? 'that is greater than or equal to' : 'is greater than or equal to',
+  LESS_THAN: isEgo ? 'that is less than' : 'is less than',
+  LESS_THAN_OR_EQUAL: isEgo ? 'that is less that or equal to' : 'is less than or equal to',
+  INCLUDES: isEgo ? 'that includes' : 'includes',
+  NOT_INCLUDES: isEgo ? 'that does not include' : 'does not include',
+});
 
 const typeOperatorsAsText = {
-  EXISTS: 'is',
-  NOT_EXISTS: 'is not',
+  EXISTS: 'exists',
+  NOT_EXISTS: 'does not exist',
 };
 
 const formatValue = (value) => {
@@ -27,7 +32,13 @@ const formatValue = (value) => {
   }
 };
 
-export const Join = ({ value }) => (<div className="rules-preview-text__join">{ value.toLowerCase() }</div>);
+export const Join = ({ value }) => (
+  <fieldset className="rules-preview-text__join">
+    <legend>
+      { value.toLowerCase() }
+    </legend>
+  </fieldset>
+);
 Join.propTypes = { value: PropTypes.string };
 Join.defaultProps = { value: '' };
 
@@ -35,7 +46,12 @@ const Type = ({ children }) => (<div className="rules-preview-text__type">{child
 Type.propTypes = { children: PropTypes.node };
 Type.defaultProps = { children: '' };
 
-const Entity = ({ children }) => (<div className="rules-preview-text__entity">{children}</div>);
+const Entity = ({ children }) => (
+  <div className="rules-preview-text__entity">
+    {children}
+    s
+  </div>
+);
 Entity.propTypes = { children: PropTypes.node };
 Entity.defaultProps = { children: '' };
 
@@ -43,13 +59,20 @@ const Variable = ({ children }) => (<div className="rules-preview-text__variable
 Variable.propTypes = { children: PropTypes.node };
 Variable.defaultProps = { children: '' };
 
-const Operator = ({ value }) => (
+const Operator = ({ value, isEgo }) => (
   <div className="rules-preview-text__operator">
-    {get(operatorsAsText, value, value.toLowerCase())}
+    {get(operatorsAsText(isEgo), value, value.toLowerCase())}
   </div>
 );
-Operator.propTypes = { value: PropTypes.string };
-Operator.defaultProps = { value: '' };
+Operator.propTypes = {
+  value: PropTypes.string,
+  isEgo: PropTypes.bool,
+};
+
+Operator.defaultProps = {
+  value: '',
+  isEgo: false,
+};
 
 const TypeOperator = ({ value }) => (
   <div className="rules-preview-text__operator">
@@ -79,63 +102,63 @@ Copy.propTypes = { children: PropTypes.string };
 Copy.defaultProps = { children: '' };
 
 const PreviewText = ({ type, options }) => {
-  switch (type) {
-    case 'alter': {
-      if (isNil(options.attribute)) {
-        return (
-          <>
-            <TypeOperator value={options.operator} />
-            <Entity>alter</Entity>
-            <Copy>of type</Copy>
-            <Type>{options.type}</Type>
-          </>
-        );
-      }
-      if (isNil(options.value)) {
-        return (
-          <>
-            <Entity>alter</Entity>
-            <Copy>of type</Copy>
-            <Type>{options.type}</Type>
-            <Operator value={options.operator} />
-            <Variable>{options.attribute}</Variable>
-          </>
-        );
-      }
-      return (
-        <>
-          <Entity>alter</Entity>
-          <Copy>of type</Copy>
-          <Type>{options.type}</Type>
-          <Copy>with</Copy>
-          <Variable>{options.attribute}</Variable>
-          <Operator value={options.operator} />
-          <Value value={options.value} />
-        </>
-      );
-    }
-    case 'edge':
-      return (
-        <>
-          <Operator value={options.operator} />
-          <Entity>edge</Entity>
-          <Copy>of type</Copy>
-          <Type>{options.type}</Type>
-        </>
-      );
-    case 'ego':
-      return (
-        <>
-          <Entity>ego</Entity>
-          <Copy>has</Copy>
-          <Variable>{options.attribute}</Variable>
-          <Operator value={options.operator} />
-          <Value value={options.value} />
-        </>
-      );
-    default:
-      return `Syntax for "${type}" is not defined`;
+  if (type === 'ego') {
+    return (
+      <>
+        <span style={{ '--node--label': 'var(--text-dark)' }}><PreviewNode label="Ego" color="color-platinum" /></span>
+        <Copy>has</Copy>
+        <SimpleVariablePill label={options.attribute} type={options.variableType} />
+        <Operator value={options.operator} isEgo />
+        <Value value={options.value} />
+      </>
+    );
   }
+
+  const PreviewComponent = type === 'edge' ? PreviewEdge : PreviewNode;
+
+  if (isNil(options.attribute)) {
+    return (
+      <>
+        <PreviewComponent color={options.typeColor} label={options.typeLabel} />
+        <TypeOperator value={options.operator} />
+      </>
+    );
+  }
+  if (isNil(options.value)) {
+    return (
+      <>
+        <PreviewComponent color={options.typeColor} label={options.typeLabel} />
+        <Operator value={options.operator} />
+        <Variable>{options.attribute}</Variable>
+      </>
+    );
+  }
+  return (
+    <>
+      <PreviewComponent color={options.typeColor} label={options.typeLabel} />
+      <Copy>where</Copy>
+      <SimpleVariablePill label={options.attribute} type={options.variableType} />
+      <Operator value={options.operator} />
+      <Value value={options.value} />
+    </>
+  );
+};
+
+PreviewText.propTypes = {
+  type: PropTypes.string.isRequired,
+  options: PropTypes.shape({
+    attribute: PropTypes.string,
+    operator: PropTypes.string,
+    type: PropTypes.string,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      PropTypes.bool,
+    ]),
+    variableType: PropTypes.string,
+    typeColor: PropTypes.string,
+    typeLabel: PropTypes.string,
+  }).isRequired,
 };
 
 export default PreviewText;

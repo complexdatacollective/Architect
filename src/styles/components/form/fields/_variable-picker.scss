@@ -7,6 +7,9 @@ $component-name: form-fields-variable-picker;
   margin: unit(4) 0;
 
   fieldset {
+    --variable-pill-background: var(--color-white);
+    --variable-pill-shadow-color: var(--color-platinum--dark);
+
     background: var(--section-background-color);
     flex: 1;
     border: 2px dashed var(--architect-panel-divider);

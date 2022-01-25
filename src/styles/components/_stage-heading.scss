@@ -1,10 +1,18 @@
 .stage-heading {
+  --text: var(--color-white);
+
   display: flex;
   flex-direction: column;
   padding: unit(2) unit(8);
   margin: 0;
   background: var(--color-slate-blue--dark);
-  color: var(--text-light);
+  color: var(--text);
+
+  a {
+    color: var(--text);
+    font-weight: 700;
+    border-bottom: 2px solid var(--primary);
+  }
 
   &--inline {
     margin-bottom: unit(4);

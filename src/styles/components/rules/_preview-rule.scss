@@ -1,17 +1,52 @@
+.stage-editor-section {
+  --variable-pill-background: var(--color-platinum);
+  --variable-pill-shadow-color: rgb(212, 212, 212); //sass-lint:disable-line no-color-literals
+
+  .preview-edge {
+    background: var(--variable-pill-background);
+  }
+
+  .stage-editor-section {
+    --variable-pill-background: var(--color-white);
+    --variable-pill-shadow-color: var(--color-platinum--dark);
+
+    .preview-edge {
+      background: var(--variable-pill-background);
+    }
+  }
+}
+
 .rules-preview-rule {
   padding: unit(1) unit(2);
   cursor: pointer;
-  background-color: transparent;
-  transition: background-color var(--animation-duration-standard) var(--animation-easing);
   display: flex;
-  border-radius: unit(5);
-  width: 100%;
+  border-radius: var(--border-radius);
+  width: 95%;
+  margin: 0 auto;
+  height: 5rem;
   align-items: center;
 
   &__text {
+    --base-node-size: 7rem;
     flex-grow: 1;
     color: var(--text-dark);
-    transition: color var(--animation-duration-fast) var(--animation-easing);
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    .preview-node,
+    .preview-edge,
+    .variable-pill {
+      zoom: .8;
+      margin: 0;
+      max-width: 24rem;
+      color: var(--text-dark);
+    }
+
+    .preview-edge,
+    .variable-pill {
+      margin: 0 .8rem;
+    }
   }
 
   &__delete {
@@ -43,6 +78,7 @@
   }
 
   &:hover {
+    --variable-pill-shadow-color: var(--color-rich-black);
     background-color: var(--background-dark);
 
     .rules-preview-rule__delete {

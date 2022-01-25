@@ -10,17 +10,17 @@ import { operatorsWithValue } from './options';
 import withRuleChangeHandler from './withRuleChangeHandler';
 import withOptions from './withOptions';
 import {
-  withAlterRuleType,
-  alterRuleTypes,
-  alterRuleTypeOptions,
-} from './withAlterRuleType';
+  withEntityRuleType,
+  entityRuleTypes,
+  entityRuleTypeOptions,
+} from './withEntityRuleType';
 import { makeGetOptionsWithDefaults } from './defaultRule';
 import EntitySelectField from '../../sections/fields/EntitySelectField/EntitySelectField';
 import IssueAnchor from '../../IssueAnchor';
 
-const EditAlterRule = ({
-  alterRuleType,
-  handleChangeAlterRuleType,
+const EditEntityRule = ({
+  entityRuleType,
+  handleChangeEntityRuleType,
   rule,
   typeOptions,
   variableType,
@@ -29,6 +29,7 @@ const EditAlterRule = ({
   operatorOptions,
   handleRuleChange,
 }) => {
+  const { type: entityType } = rule;
   const options = rule && rule.options;
   const getOptionsWithDefaults = makeGetOptionsWithDefaults(
     variableType,
@@ -36,27 +37,31 @@ const EditAlterRule = ({
   );
   const optionsWithDefaults = getOptionsWithDefaults(options);
   const operatorNeedsValue = operatorsWithValue.has(optionsWithDefaults.operator);
-  const isVariableRule = alterRuleType === alterRuleTypes.VARIABLE_ALTER;
-  const isTypeRule = alterRuleType === alterRuleTypes.TYPE_ALTER;
+  const isVariableRule = entityRuleType === entityRuleTypes.VARIABLE_RULE;
+  const isTypeRule = entityRuleType === entityRuleTypes.TYPE_RULE;
 
   return (
     <>
       <Section
-        title="Alter Type"
+        title={`${entityType} Type`}
         summary={(
           <p>
-            Choose an alter type to base your rule on. Remember you can add multiple rules if
-            you need to cover different alter types.
+            Choose an
+            {' '}
+            {entityType}
+            {' '}
+            type to base your rule on. Remember you can add multiple rules if
+            you need to cover different types.
           </p>
         )}
       >
         <IssueAnchor
           fieldName="type"
-          description="Alter Type"
+          description={`${entityType} Type`}
         />
         <DetachedField
           component={EntitySelectField}
-          entityType="node"
+          entityType={entityType === 'alter' ? 'node' : 'edge'}
           name="type"
           options={typeOptions}
           onChange={handleRuleChange}
@@ -70,9 +75,9 @@ const EditAlterRule = ({
       >
         <DetachedField
           component={RadioGroup}
-          options={alterRuleTypeOptions}
-          value={alterRuleType}
-          onChange={handleChangeAlterRuleType}
+          options={entityRuleTypeOptions}
+          value={entityRuleType}
+          onChange={handleChangeEntityRuleType}
         />
       </Section>
       { isTypeRule && optionsWithDefaults.type
@@ -144,10 +149,11 @@ const EditAlterRule = ({
   );
 };
 
-EditAlterRule.propTypes = {
+EditEntityRule.propTypes = {
   rule: PropTypes.shape({
     // eslint-disable-next-line react/forbid-prop-types
     options: PropTypes.object,
+    type: PropTypes.string,
   }).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   typeOptions: PropTypes.array.isRequired,
@@ -158,19 +164,19 @@ EditAlterRule.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   operatorOptions: PropTypes.array.isRequired,
   handleRuleChange: PropTypes.func.isRequired,
-  alterRuleType: PropTypes.string,
+  entityRuleType: PropTypes.string,
   variableType: PropTypes.string,
-  handleChangeAlterRuleType: PropTypes.func.isRequired,
+  handleChangeEntityRuleType: PropTypes.func.isRequired,
 };
 
-EditAlterRule.defaultProps = {
+EditEntityRule.defaultProps = {
   variableOptions: null,
-  alterRuleType: null,
+  entityRuleType: null,
   variableType: null,
 };
 
 export default compose(
-  withAlterRuleType,
+  withEntityRuleType,
   withRuleChangeHandler,
-  withOptions('node'),
-)(EditAlterRule);
+  withOptions,
+)(EditEntityRule);

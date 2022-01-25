@@ -3,8 +3,7 @@ import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { AnimatePresence, motion } from 'framer-motion';
 import Button from '@codaco/ui/lib/components/Button';
-import EditAlterRule from './EditAlterRule';
-import EditEdgeRule from './EditEdgeRule';
+import EditEntityRule from './EditEntityRule';
 import EditEgoRule from './EditEgoRule';
 import ControlBar from '../../ControlBar';
 import Screen from '../../Screen/Screen';
@@ -15,18 +14,12 @@ import CollapsableHeader from '../../Screen/CollapsableHeader';
 
 class EditRule extends Component {
   get TypeComponent() {
-    // eslint-disable-next-line react/destructuring-assignment
-    switch (this.props.rule.type) {
-      case 'ego':
-        return EditEgoRule;
-      case 'edge':
-        return EditEdgeRule;
-      case 'alter': {
-        return EditAlterRule;
-      }
-      default:
-        return null;
+    const { rule: { type } } = this.props;
+    if (type === 'ego') {
+      return EditEgoRule;
     }
+
+    return EditEntityRule;
   }
 
   handleSave = () => {

@@ -1,7 +1,5 @@
 .screen {
   &.rule-screen {
-    width: 80%;
-    max-width: 60rem;
     max-height: calc(100% - #{unit(16)});
     height: auto;
   }

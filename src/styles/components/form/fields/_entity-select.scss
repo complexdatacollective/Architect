@@ -45,35 +45,33 @@ $component-name: 'form-fields-entity-select';
       }
     }
   }
+}
 
-  &--edges {
-    .preview-edge {
-      background: var(--color-platinum);
-      margin: unit(1);
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      position: relative;
-      padding: unit(1) unit(2);
-      border: 4px solid transparent;
-      border-radius: unit(20); // arbitrarily large
-      transition: border-color var(--animation-easing) var(--animation-duration-standard);
+.preview-edge {
+  background: var(--color-platinum);
+  margin: unit(1);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  padding: unit(1) unit(2);
+  border: 4px solid transparent;
+  border-radius: unit(20); // arbitrarily large
+  transition: border-color var(--animation-easing) var(--animation-duration-standard);
 
-      .icon {
-        margin: 0 unit(1) 0 0;
-      }
+  .icon {
+    margin: 0 unit(1) 0 0;
+  }
 
-      &--selected {
-        border-color: var(--edge-color);
+  &--selected {
+    border-color: var(--edge-color);
 
-        &.preview-edge--selected {
-          pointer-events: none;
-        }
-      }
-
-      &--clickable {
-        @include clickable;
-      }
+    &.preview-edge--selected {
+      pointer-events: none;
     }
+  }
+
+  &--clickable {
+    @include clickable;
   }
 }

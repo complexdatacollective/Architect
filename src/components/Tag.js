@@ -26,7 +26,7 @@ const Tag = ({
   return (
     <div
       className={componentClasses}
-      onClick={() => onClick(id)}
+      onClick={() => !disabled && onClick(id)}
     >
       <div className={dotClasses} />
       <div className="tag__label">
