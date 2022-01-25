@@ -12,6 +12,7 @@ import ColorPicker from '../Form/Fields/ColorPicker';
 import IconOption from './IconOption';
 import getPalette from './getPalette';
 import Variables from './Variables';
+import CollapsableHeader from '../Screen/CollapsableHeader';
 
 const ICON_OPTIONS = [
   'add-a-person',
@@ -41,7 +42,7 @@ const TypeEditor = ({
 
   return (
     <>
-      <div className="stage-heading stage-heading--collapsed">
+      <div className="stage-heading stage-heading--collapsed stage-heading--shadow">
         <Layout>
           <h2>{ type ? `Edit ${entity}` : `Create ${entity}` }</h2>
         </Layout>

@@ -20,7 +20,7 @@ export const CondensedStageHeading = ({
   const type = get(formValues, 'type', '');
 
   return (
-    <div className="stage-heading stage-heading--collapsed">
+    <div className="stage-heading stage-heading--collapsed stage-heading--shadow">
       <div className="stage-meta">
         <img
           src={getTimelineImage(type)}

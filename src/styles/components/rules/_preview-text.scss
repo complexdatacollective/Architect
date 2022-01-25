@@ -18,7 +18,7 @@
       @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
       text-align: center;
       font-style: italic;
-      color: var(--transparent--md);
+      color: var(--text);
       padding: unit(1) unit(2);
     }
   }

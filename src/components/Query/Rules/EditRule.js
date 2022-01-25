@@ -55,7 +55,7 @@ class EditRule extends Component {
             >
               <CollapsableHeader
                 collapsedState={(
-                  <div className="stage-heading stage-heading--collapsed">
+                  <div className="stage-heading stage-heading--collapsed stage-heading--shadow">
                     <Layout>
                       <h2>Construct a Rule</h2>
                     </Layout>

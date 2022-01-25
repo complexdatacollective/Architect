@@ -22,7 +22,7 @@
     box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
   }
 
-  &--collapsed {
+  &.stage-heading--collapsed {
     flex-direction: row;
     padding: unit(1) unit(4);
 
@@ -30,7 +30,6 @@
       width: initial;
       padding: 0;
       margin-right: unit(4);
-
 
       img {
         width: unit(10);
