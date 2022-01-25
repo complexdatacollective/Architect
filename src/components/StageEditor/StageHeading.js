@@ -60,7 +60,11 @@ export const CondensedStageHeading = ({
 };
 
 CondensedStageHeading.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
+};
+
+CondensedStageHeading.defaultProps = {
+  id: null,
 };
 
 const StageHeading = ({
