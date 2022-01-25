@@ -17,120 +17,50 @@ exports[`<CodeView /> can render 1`] = `
     show={false}
     toggleCodeView={[Function]}
   >
-    <ForwardRef(MotionComponent)
-      animate="hide"
-      className="code-view"
-      initial="hide"
-      transition={
-        Object {
-          "duration": NaN,
-          "ease": "easeInOut",
-        }
-      }
-      variants={
-        Object {
-          "hide": Object {
-            "opacity": 0,
-            "translateY": "-100%",
-          },
-          "show": Object {
-            "opacity": 1,
-            "translateY": "0%",
-          },
-        }
+    <Portal
+      containerInfo={
+        <body>
+          <div
+            class="code-view"
+            style="transform: translateY(-100%) translateZ(0);"
+          >
+            <div
+              class="code-view__content"
+            >
+              <pre>
+                <code />
+              </pre>
+            </div>
+            <div
+              class="code-view__controls"
+            >
+              Close code view
+            </div>
+          </div>
+        </body>
       }
     >
-      <div
-        className="code-view"
-        style={
-          Object {
-            "opacity": 0,
-            "transform": "translateY(-100%) translateZ(0)",
-          }
-        }
-      >
-        <div
-          className="code-view__content"
-        >
-          <pre>
-            <code />
-          </pre>
-        </div>
-        <div
-          className="code-view__controls"
-          onClick={[Function]}
-        >
-          Close code view
-        </div>
-      </div>
-      <Component
+      <ForwardRef(MotionComponent)
         animate="hide"
         className="code-view"
-        inherit={false}
         initial="hide"
-        key="animation"
-        transition={
-          Object {
-            "duration": NaN,
-            "ease": "easeInOut",
-          }
-        }
         variants={
           Object {
             "hide": Object {
-              "opacity": 0,
+              "transition": Object {
+                "stiffness": 1000,
+              },
               "translateY": "-100%",
             },
             "show": Object {
-              "opacity": 1,
               "translateY": "0%",
             },
           }
         }
-        visualElement={
-          HTMLVisualElement {
-            "activeOverrides": Set {},
-            "axisProgress": Object {
-              "x": MotionValue {
-                "canTrackVelocity": true,
-                "current": 0,
-                "lastUpdated": 0,
-                "prev": undefined,
-                "renderSubscribers": SubscriptionManager {
-                  "subscriptions": Set {},
-                },
-                "scheduleVelocityCheck": [Function],
-                "timeDelta": 0,
-                "updateAndNotify": [Function],
-                "updateSubscribers": SubscriptionManager {
-                  "subscriptions": Set {},
-                },
-                "velocityCheck": [Function],
-              },
-              "y": MotionValue {
-                "canTrackVelocity": true,
-                "current": 0,
-                "lastUpdated": 0,
-                "prev": undefined,
-                "renderSubscribers": SubscriptionManager {
-                  "subscriptions": Set {},
-                },
-                "scheduleVelocityCheck": [Function],
-                "timeDelta": 0,
-                "updateAndNotify": [Function],
-                "updateSubscribers": SubscriptionManager {
-                  "subscriptions": Set {},
-                },
-                "velocityCheck": [Function],
-              },
-            },
-            "baseTarget": Object {
-              "opacity": 0,
-              "translateY": "-100%",
-            },
-            "children": Set {},
-            "config": Object {
-              "allowTransformNone": true,
+      >
+        <VisualElementHandler
+          props={
+            Object {
               "animate": "hide",
               "children": Array [
                 <div
@@ -148,207 +78,634 @@ exports[`<CodeView /> can render 1`] = `
                 </div>,
               ],
               "className": "code-view",
-              "enableHardwareAcceleration": true,
               "initial": "hide",
-              "transition": Object {
-                "duration": NaN,
-                "ease": "easeInOut",
-              },
+              "isStatic": false,
+              "layoutId": undefined,
+              "transformPagePoint": [Function],
               "variants": Object {
                 "hide": Object {
-                  "opacity": 0,
+                  "transition": Object {
+                    "stiffness": 1000,
+                  },
                   "translateY": "-100%",
                 },
                 "show": Object {
-                  "opacity": 1,
                   "translateY": "0%",
                 },
               },
-            },
-            "current": <div
-              class="code-view"
-              style="opacity: 0; transform: translateY(-100%) translateZ(0);"
-            >
-              <div
-                class="code-view__content"
-              >
-                <pre>
-                  <code />
-                </pre>
-              </div>
-              <div
-                class="code-view__controls"
-              >
-                Close code view
-              </div>
-            </div>,
-            "defaultConfig": Object {
-              "allowTransformNone": true,
-              "enableHardwareAcceleration": true,
-            },
-            "delta": Object {
-              "x": Object {
-                "origin": 0,
-                "originPoint": 0,
-                "scale": 1,
-                "translate": 0,
-              },
-              "y": Object {
-                "origin": 0,
-                "originPoint": 0,
-                "scale": 1,
-                "translate": 0,
-              },
-            },
-            "deltaFinal": Object {
-              "x": Object {
-                "origin": 0,
-                "originPoint": 0,
-                "scale": 1,
-                "translate": 0,
-              },
-              "y": Object {
-                "origin": 0,
-                "originPoint": 0,
-                "scale": 1,
-                "translate": 0,
-              },
-            },
-            "deltaTransform": "translate3d(0px, 0px, 0) scale(1, 1)",
-            "depth": 0,
-            "element": <div
-              class="code-view"
-              style="opacity: 0; transform: translateY(-100%) translateZ(0);"
-            >
-              <div
-                class="code-view__content"
-              >
-                <pre>
-                  <code />
-                </pre>
-              </div>
-              <div
-                class="code-view__controls"
-              >
-                Close code view
-              </div>
-            </div>,
-            "externalRef": null,
-            "hasViewportBoxUpdated": false,
-            "isAnimating": Set {},
-            "isLayoutProjectionEnabled": false,
-            "isMounted": true,
-            "isPresenceRoot": true,
-            "isPresent": true,
-            "isTargetBoxLocked": false,
-            "latest": Object {
-              "opacity": 0,
-              "translateY": "-100%",
-            },
-            "layoutId": undefined,
-            "layoutMeasureListeners": SubscriptionManager {
-              "subscriptions": Set {},
-            },
-            "layoutUpdateListeners": SubscriptionManager {
-              "subscriptions": Set {},
-            },
-            "overrides": Array [],
-            "parent": undefined,
-            "prevTreeScale": Object {
-              "x": 1,
-              "y": 1,
-            },
-            "reactStyle": Object {},
-            "ref": [Function],
-            "resolvedOverrides": Array [],
-            "rootParent": [Circular],
-            "stopLayoutAxisAnimation": Object {
-              "x": [Function],
-              "y": [Function],
-            },
-            "style": Object {
-              "opacity": 0,
-              "transform": "translateY(-100%) translateZ(0)",
-            },
-            "targetBoxFinal": Object {
-              "x": Object {
-                "max": 1,
-                "min": 0,
-              },
-              "y": Object {
-                "max": 1,
-                "min": 0,
-              },
-            },
-            "transform": Object {
-              "translateY": "-100%",
-            },
-            "transformKeys": Array [
-              "translateY",
-            ],
-            "transformOrigin": Object {},
-            "treePath": Array [],
-            "treeScale": Object {
-              "x": 1,
-              "y": 1,
-            },
-            "triggerRender": [Function],
-            "update": [Function],
-            "updateLayoutDelta": [Function],
-            "valueSubscriptions": Map {
-              "opacity" => [Function],
-              "translateY" => [Function],
-            },
-            "values": Map {
-              "opacity" => MotionValue {
-                "canTrackVelocity": true,
-                "current": 0,
-                "lastUpdated": 0,
-                "prev": undefined,
-                "renderSubscribers": SubscriptionManager {
-                  "subscriptions": Set {
-                    [Function],
-                  },
-                },
-                "scheduleVelocityCheck": [Function],
-                "timeDelta": 0,
-                "updateAndNotify": [Function],
-                "updateSubscribers": SubscriptionManager {
-                  "subscriptions": Set {
-                    [Function],
-                  },
-                },
-                "velocityCheck": [Function],
-              },
-              "translateY" => MotionValue {
-                "canTrackVelocity": true,
-                "current": "-100%",
-                "lastUpdated": 0,
-                "prev": undefined,
-                "renderSubscribers": SubscriptionManager {
-                  "subscriptions": Set {
-                    [Function],
-                  },
-                },
-                "scheduleVelocityCheck": [Function],
-                "timeDelta": 0,
-                "updateAndNotify": [Function],
-                "updateSubscribers": SubscriptionManager {
-                  "subscriptions": Set {
-                    [Function],
-                  },
-                },
-                "velocityCheck": [Function],
-              },
-            },
-            "vars": Object {},
-            "viewportBoxUpdateListeners": SubscriptionManager {
-              "subscriptions": Set {},
-            },
+            }
           }
-        }
-      />
-    </ForwardRef(MotionComponent)>
+          visualElement={
+            Object {
+              "addValue": [Function],
+              "addVariantChild": [Function],
+              "animationState": Object {
+                "animateChanges": [Function],
+                "getState": [Function],
+                "isAnimated": [Function],
+                "setActive": [Function],
+                "setAnimateFunction": [Function],
+              },
+              "blockInitialAnimation": false,
+              "build": [Function],
+              "children": Set {},
+              "clearAllListeners": [Function],
+              "current": <div
+                class="code-view"
+                style="transform: translateY(-100%) translateZ(0);"
+              >
+                <div
+                  class="code-view__content"
+                >
+                  <pre>
+                    <code />
+                  </pre>
+                </div>
+                <div
+                  class="code-view__controls"
+                >
+                  Close code view
+                </div>
+              </div>,
+              "depth": 0,
+              "forEachValue": [Function],
+              "getBaseTarget": [Function],
+              "getClosestVariantNode": [Function],
+              "getDefaultTransition": [Function],
+              "getInstance": [Function],
+              "getLatestValues": [Function],
+              "getLayoutId": [Function],
+              "getProps": [Function],
+              "getStaticValue": [Function],
+              "getTransformPagePoint": [Function],
+              "getValue": [Function],
+              "getVariant": [Function],
+              "getVariantContext": [Function],
+              "hasValue": [Function],
+              "isMounted": [Function],
+              "isVisible": undefined,
+              "makeTargetAnimatable": [Function],
+              "manuallyAnimateOnMount": false,
+              "measureViewportBox": [Function],
+              "mount": [Function],
+              "notifyAnimationComplete": [Function],
+              "notifyAnimationStart": [Function],
+              "notifyBeforeLayoutMeasure": [Function],
+              "notifyLayoutAnimationComplete": [Function],
+              "notifyLayoutMeasure": [Function],
+              "notifyLayoutUpdate": [Function],
+              "notifyRender": [Function],
+              "notifySetAxisTarget": [Function],
+              "notifyUnmount": [Function],
+              "notifyUpdate": [Function],
+              "notifyViewportBoxUpdate": [Function],
+              "onAnimationComplete": [Function],
+              "onAnimationStart": [Function],
+              "onBeforeLayoutMeasure": [Function],
+              "onLayoutAnimationComplete": [Function],
+              "onLayoutMeasure": [Function],
+              "onLayoutUpdate": [Function],
+              "onRender": [Function],
+              "onSetAxisTarget": [Function],
+              "onUnmount": [Function],
+              "onUpdate": [Function],
+              "onViewportBoxUpdate": [Function],
+              "parent": undefined,
+              "presenceId": undefined,
+              "projection": ProjectionNode {
+                "animationProgress": 0,
+                "checkUpdateFailed": [Function],
+                "children": Set {},
+                "depth": 1,
+                "eventHandlers": Map {},
+                "hasProjected": false,
+                "id": undefined,
+                "instance": <div
+                  class="code-view"
+                  style="transform: translateY(-100%) translateZ(0);"
+                >
+                  <div
+                    class="code-view__content"
+                  >
+                    <pre>
+                      <code />
+                    </pre>
+                  </div>
+                  <div
+                    class="code-view__controls"
+                  >
+                    Close code view
+                  </div>
+                </div>,
+                "isAnimationBlocked": false,
+                "isLayoutDirty": false,
+                "isSVG": true,
+                "isTreeAnimating": false,
+                "isUpdating": false,
+                "isVisible": true,
+                "latestValues": Object {
+                  "translateY": "-100%",
+                },
+                "needsReset": false,
+                "options": Object {
+                  "alwaysMeasureLayout": undefined,
+                  "animationType": "both",
+                  "crossfade": true,
+                  "initialPromotionConfig": Object {},
+                  "layout": undefined,
+                  "layoutId": undefined,
+                  "layoutScroll": undefined,
+                  "scheduleRender": [Function],
+                  "visualElement": [Circular],
+                },
+                "parent": ProjectionNode {
+                  "animationProgress": 0,
+                  "checkUpdateFailed": [Function],
+                  "children": Set {
+                    [Circular],
+                  },
+                  "depth": 0,
+                  "eventHandlers": Map {},
+                  "hasProjected": false,
+                  "id": 0,
+                  "instance": [Window],
+                  "isAnimationBlocked": false,
+                  "isLayoutDirty": false,
+                  "isSVG": false,
+                  "isTreeAnimating": false,
+                  "isUpdating": false,
+                  "isVisible": true,
+                  "latestValues": Object {},
+                  "needsReset": false,
+                  "nodes": FlatTree {
+                    "children": Array [
+                      [Circular],
+                      [Circular],
+                    ],
+                    "isDirty": true,
+                  },
+                  "options": Object {
+                    "crossfade": true,
+                    "layoutScroll": true,
+                  },
+                  "parent": undefined,
+                  "path": Array [],
+                  "potentialNodes": Map {},
+                  "root": [Circular],
+                  "sharedNodes": Map {},
+                  "shouldResetTransform": true,
+                  "treeScale": Object {
+                    "x": 1,
+                    "y": 1,
+                  },
+                  "updateBlockedByResize": false,
+                  "updateManuallyBlocked": false,
+                  "updateProjection": [Function],
+                },
+                "path": Array [
+                  ProjectionNode {
+                    "animationProgress": 0,
+                    "checkUpdateFailed": [Function],
+                    "children": Set {
+                      [Circular],
+                    },
+                    "depth": 0,
+                    "eventHandlers": Map {},
+                    "hasProjected": false,
+                    "id": 0,
+                    "instance": [Window],
+                    "isAnimationBlocked": false,
+                    "isLayoutDirty": false,
+                    "isSVG": false,
+                    "isTreeAnimating": false,
+                    "isUpdating": false,
+                    "isVisible": true,
+                    "latestValues": Object {},
+                    "needsReset": false,
+                    "nodes": FlatTree {
+                      "children": Array [
+                        [Circular],
+                        [Circular],
+                      ],
+                      "isDirty": true,
+                    },
+                    "options": Object {
+                      "crossfade": true,
+                      "layoutScroll": true,
+                    },
+                    "parent": undefined,
+                    "path": Array [],
+                    "potentialNodes": Map {},
+                    "root": [Circular],
+                    "sharedNodes": Map {},
+                    "shouldResetTransform": true,
+                    "treeScale": Object {
+                      "x": 1,
+                      "y": 1,
+                    },
+                    "updateBlockedByResize": false,
+                    "updateManuallyBlocked": false,
+                    "updateProjection": [Function],
+                  },
+                ],
+                "potentialNodes": Map {},
+                "root": ProjectionNode {
+                  "animationProgress": 0,
+                  "checkUpdateFailed": [Function],
+                  "children": Set {
+                    [Circular],
+                  },
+                  "depth": 0,
+                  "eventHandlers": Map {},
+                  "hasProjected": false,
+                  "id": 0,
+                  "instance": [Window],
+                  "isAnimationBlocked": false,
+                  "isLayoutDirty": false,
+                  "isSVG": false,
+                  "isTreeAnimating": false,
+                  "isUpdating": false,
+                  "isVisible": true,
+                  "latestValues": Object {},
+                  "needsReset": false,
+                  "nodes": FlatTree {
+                    "children": Array [
+                      [Circular],
+                      [Circular],
+                    ],
+                    "isDirty": true,
+                  },
+                  "options": Object {
+                    "crossfade": true,
+                    "layoutScroll": true,
+                  },
+                  "parent": undefined,
+                  "path": Array [],
+                  "potentialNodes": Map {},
+                  "root": [Circular],
+                  "sharedNodes": Map {},
+                  "shouldResetTransform": true,
+                  "treeScale": Object {
+                    "x": 1,
+                    "y": 1,
+                  },
+                  "updateBlockedByResize": false,
+                  "updateManuallyBlocked": false,
+                  "updateProjection": [Function],
+                },
+                "sharedNodes": Map {},
+                "shouldResetTransform": false,
+                "treeScale": Object {
+                  "x": 1,
+                  "y": 1,
+                },
+                "updateBlockedByResize": false,
+                "updateManuallyBlocked": false,
+                "updateProjection": [Function],
+              },
+              "readValue": [Function],
+              "removeValue": [Function],
+              "scheduleRender": [Function],
+              "setBaseTarget": [Function],
+              "setProps": [Function],
+              "setStaticValue": [Function],
+              "setVisibility": [Function],
+              "sortNodePosition": [Function],
+              "syncRender": [Function],
+              "treeType": "dom",
+              "unmount": [Function],
+              "updatePropListeners": [Function],
+              "variantChildren": Set {},
+            }
+          }
+        >
+          <Component
+            animate="hide"
+            className="code-view"
+            initial="hide"
+            key="animation"
+            variants={
+              Object {
+                "hide": Object {
+                  "transition": Object {
+                    "stiffness": 1000,
+                  },
+                  "translateY": "-100%",
+                },
+                "show": Object {
+                  "translateY": "0%",
+                },
+              }
+            }
+            visualElement={
+              Object {
+                "addValue": [Function],
+                "addVariantChild": [Function],
+                "animationState": Object {
+                  "animateChanges": [Function],
+                  "getState": [Function],
+                  "isAnimated": [Function],
+                  "setActive": [Function],
+                  "setAnimateFunction": [Function],
+                },
+                "blockInitialAnimation": false,
+                "build": [Function],
+                "children": Set {},
+                "clearAllListeners": [Function],
+                "current": <div
+                  class="code-view"
+                  style="transform: translateY(-100%) translateZ(0);"
+                >
+                  <div
+                    class="code-view__content"
+                  >
+                    <pre>
+                      <code />
+                    </pre>
+                  </div>
+                  <div
+                    class="code-view__controls"
+                  >
+                    Close code view
+                  </div>
+                </div>,
+                "depth": 0,
+                "forEachValue": [Function],
+                "getBaseTarget": [Function],
+                "getClosestVariantNode": [Function],
+                "getDefaultTransition": [Function],
+                "getInstance": [Function],
+                "getLatestValues": [Function],
+                "getLayoutId": [Function],
+                "getProps": [Function],
+                "getStaticValue": [Function],
+                "getTransformPagePoint": [Function],
+                "getValue": [Function],
+                "getVariant": [Function],
+                "getVariantContext": [Function],
+                "hasValue": [Function],
+                "isMounted": [Function],
+                "isVisible": undefined,
+                "makeTargetAnimatable": [Function],
+                "manuallyAnimateOnMount": false,
+                "measureViewportBox": [Function],
+                "mount": [Function],
+                "notifyAnimationComplete": [Function],
+                "notifyAnimationStart": [Function],
+                "notifyBeforeLayoutMeasure": [Function],
+                "notifyLayoutAnimationComplete": [Function],
+                "notifyLayoutMeasure": [Function],
+                "notifyLayoutUpdate": [Function],
+                "notifyRender": [Function],
+                "notifySetAxisTarget": [Function],
+                "notifyUnmount": [Function],
+                "notifyUpdate": [Function],
+                "notifyViewportBoxUpdate": [Function],
+                "onAnimationComplete": [Function],
+                "onAnimationStart": [Function],
+                "onBeforeLayoutMeasure": [Function],
+                "onLayoutAnimationComplete": [Function],
+                "onLayoutMeasure": [Function],
+                "onLayoutUpdate": [Function],
+                "onRender": [Function],
+                "onSetAxisTarget": [Function],
+                "onUnmount": [Function],
+                "onUpdate": [Function],
+                "onViewportBoxUpdate": [Function],
+                "parent": undefined,
+                "presenceId": undefined,
+                "projection": ProjectionNode {
+                  "animationProgress": 0,
+                  "checkUpdateFailed": [Function],
+                  "children": Set {},
+                  "depth": 1,
+                  "eventHandlers": Map {},
+                  "hasProjected": false,
+                  "id": undefined,
+                  "instance": <div
+                    class="code-view"
+                    style="transform: translateY(-100%) translateZ(0);"
+                  >
+                    <div
+                      class="code-view__content"
+                    >
+                      <pre>
+                        <code />
+                      </pre>
+                    </div>
+                    <div
+                      class="code-view__controls"
+                    >
+                      Close code view
+                    </div>
+                  </div>,
+                  "isAnimationBlocked": false,
+                  "isLayoutDirty": false,
+                  "isSVG": true,
+                  "isTreeAnimating": false,
+                  "isUpdating": false,
+                  "isVisible": true,
+                  "latestValues": Object {
+                    "translateY": "-100%",
+                  },
+                  "needsReset": false,
+                  "options": Object {
+                    "alwaysMeasureLayout": undefined,
+                    "animationType": "both",
+                    "crossfade": true,
+                    "initialPromotionConfig": Object {},
+                    "layout": undefined,
+                    "layoutId": undefined,
+                    "layoutScroll": undefined,
+                    "scheduleRender": [Function],
+                    "visualElement": [Circular],
+                  },
+                  "parent": ProjectionNode {
+                    "animationProgress": 0,
+                    "checkUpdateFailed": [Function],
+                    "children": Set {
+                      [Circular],
+                    },
+                    "depth": 0,
+                    "eventHandlers": Map {},
+                    "hasProjected": false,
+                    "id": 0,
+                    "instance": [Window],
+                    "isAnimationBlocked": false,
+                    "isLayoutDirty": false,
+                    "isSVG": false,
+                    "isTreeAnimating": false,
+                    "isUpdating": false,
+                    "isVisible": true,
+                    "latestValues": Object {},
+                    "needsReset": false,
+                    "nodes": FlatTree {
+                      "children": Array [
+                        [Circular],
+                        [Circular],
+                      ],
+                      "isDirty": true,
+                    },
+                    "options": Object {
+                      "crossfade": true,
+                      "layoutScroll": true,
+                    },
+                    "parent": undefined,
+                    "path": Array [],
+                    "potentialNodes": Map {},
+                    "root": [Circular],
+                    "sharedNodes": Map {},
+                    "shouldResetTransform": true,
+                    "treeScale": Object {
+                      "x": 1,
+                      "y": 1,
+                    },
+                    "updateBlockedByResize": false,
+                    "updateManuallyBlocked": false,
+                    "updateProjection": [Function],
+                  },
+                  "path": Array [
+                    ProjectionNode {
+                      "animationProgress": 0,
+                      "checkUpdateFailed": [Function],
+                      "children": Set {
+                        [Circular],
+                      },
+                      "depth": 0,
+                      "eventHandlers": Map {},
+                      "hasProjected": false,
+                      "id": 0,
+                      "instance": [Window],
+                      "isAnimationBlocked": false,
+                      "isLayoutDirty": false,
+                      "isSVG": false,
+                      "isTreeAnimating": false,
+                      "isUpdating": false,
+                      "isVisible": true,
+                      "latestValues": Object {},
+                      "needsReset": false,
+                      "nodes": FlatTree {
+                        "children": Array [
+                          [Circular],
+                          [Circular],
+                        ],
+                        "isDirty": true,
+                      },
+                      "options": Object {
+                        "crossfade": true,
+                        "layoutScroll": true,
+                      },
+                      "parent": undefined,
+                      "path": Array [],
+                      "potentialNodes": Map {},
+                      "root": [Circular],
+                      "sharedNodes": Map {},
+                      "shouldResetTransform": true,
+                      "treeScale": Object {
+                        "x": 1,
+                        "y": 1,
+                      },
+                      "updateBlockedByResize": false,
+                      "updateManuallyBlocked": false,
+                      "updateProjection": [Function],
+                    },
+                  ],
+                  "potentialNodes": Map {},
+                  "root": ProjectionNode {
+                    "animationProgress": 0,
+                    "checkUpdateFailed": [Function],
+                    "children": Set {
+                      [Circular],
+                    },
+                    "depth": 0,
+                    "eventHandlers": Map {},
+                    "hasProjected": false,
+                    "id": 0,
+                    "instance": [Window],
+                    "isAnimationBlocked": false,
+                    "isLayoutDirty": false,
+                    "isSVG": false,
+                    "isTreeAnimating": false,
+                    "isUpdating": false,
+                    "isVisible": true,
+                    "latestValues": Object {},
+                    "needsReset": false,
+                    "nodes": FlatTree {
+                      "children": Array [
+                        [Circular],
+                        [Circular],
+                      ],
+                      "isDirty": true,
+                    },
+                    "options": Object {
+                      "crossfade": true,
+                      "layoutScroll": true,
+                    },
+                    "parent": undefined,
+                    "path": Array [],
+                    "potentialNodes": Map {},
+                    "root": [Circular],
+                    "sharedNodes": Map {},
+                    "shouldResetTransform": true,
+                    "treeScale": Object {
+                      "x": 1,
+                      "y": 1,
+                    },
+                    "updateBlockedByResize": false,
+                    "updateManuallyBlocked": false,
+                    "updateProjection": [Function],
+                  },
+                  "sharedNodes": Map {},
+                  "shouldResetTransform": false,
+                  "treeScale": Object {
+                    "x": 1,
+                    "y": 1,
+                  },
+                  "updateBlockedByResize": false,
+                  "updateManuallyBlocked": false,
+                  "updateProjection": [Function],
+                },
+                "readValue": [Function],
+                "removeValue": [Function],
+                "scheduleRender": [Function],
+                "setBaseTarget": [Function],
+                "setProps": [Function],
+                "setStaticValue": [Function],
+                "setVisibility": [Function],
+                "sortNodePosition": [Function],
+                "syncRender": [Function],
+                "treeType": "dom",
+                "unmount": [Function],
+                "updatePropListeners": [Function],
+                "variantChildren": Set {},
+              }
+            }
+          />
+          <div
+            className="code-view"
+            style={
+              Object {
+                "transform": "translateY(-100%) translateZ(0)",
+              }
+            }
+          >
+            <div
+              className="code-view__content"
+            >
+              <pre>
+                <code />
+              </pre>
+            </div>
+            <div
+              className="code-view__controls"
+              onClick={[Function]}
+            >
+              Close code view
+            </div>
+          </div>
+        </VisualElementHandler>
+      </ForwardRef(MotionComponent)>
+    </Portal>
   </CodeView>
 </Provider>
 `;
@@ -370,124 +727,71 @@ exports[`<CodeView /> renders content only when show is true 1`] = `
     show={true}
     toggleCodeView={[Function]}
   >
-    <ForwardRef(MotionComponent)
-      animate="show"
-      className="code-view code-view--show"
-      initial="hide"
-      transition={
-        Object {
-          "duration": NaN,
-          "ease": "easeInOut",
-        }
-      }
-      variants={
-        Object {
-          "hide": Object {
-            "opacity": 0,
-            "translateY": "-100%",
-          },
-          "show": Object {
-            "opacity": 1,
-            "translateY": "0%",
-          },
-        }
-      }
-    >
-      <div
-        className="code-view code-view--show"
-        style={
-          Object {
-            "opacity": 0,
-            "transform": "translateY(-100%) translateZ(0)",
-          }
-        }
-      >
-        <div
-          className="code-view__content"
-        >
-          <pre>
-            <code>
-              {
+    <Portal
+      containerInfo={
+        <body>
+          <div
+            class="code-view"
+            style="transform: translateY(-100%) translateZ(0);"
+          >
+            <div
+              class="code-view__content"
+            >
+              <pre>
+                <code />
+              </pre>
+            </div>
+            <div
+              class="code-view__controls"
+            >
+              Close code view
+            </div>
+          </div>
+          <div
+            class="code-view"
+            style="transform: translateY(-100%) translateZ(0);"
+          >
+            <div
+              class="code-view__content"
+            >
+              <pre>
+                <code>
+                  {
   "name": "example name"
 }
-            </code>
-          </pre>
-        </div>
-        <div
-          className="code-view__controls"
-          onClick={[Function]}
-        >
-          Close code view
-        </div>
-      </div>
-      <Component
+                </code>
+              </pre>
+            </div>
+            <div
+              class="code-view__controls"
+            >
+              Close code view
+            </div>
+          </div>
+        </body>
+      }
+    >
+      <ForwardRef(MotionComponent)
         animate="show"
-        className="code-view code-view--show"
-        inherit={false}
+        className="code-view"
         initial="hide"
-        key="animation"
-        transition={
-          Object {
-            "duration": NaN,
-            "ease": "easeInOut",
-          }
-        }
         variants={
           Object {
             "hide": Object {
-              "opacity": 0,
+              "transition": Object {
+                "stiffness": 1000,
+              },
               "translateY": "-100%",
             },
             "show": Object {
-              "opacity": 1,
               "translateY": "0%",
             },
           }
         }
-        visualElement={
-          HTMLVisualElement {
-            "activeOverrides": Set {},
-            "axisProgress": Object {
-              "x": MotionValue {
-                "canTrackVelocity": true,
-                "current": 0,
-                "lastUpdated": 0,
-                "prev": undefined,
-                "renderSubscribers": SubscriptionManager {
-                  "subscriptions": Set {},
-                },
-                "scheduleVelocityCheck": [Function],
-                "timeDelta": 0,
-                "updateAndNotify": [Function],
-                "updateSubscribers": SubscriptionManager {
-                  "subscriptions": Set {},
-                },
-                "velocityCheck": [Function],
-              },
-              "y": MotionValue {
-                "canTrackVelocity": true,
-                "current": 0,
-                "lastUpdated": 0,
-                "prev": undefined,
-                "renderSubscribers": SubscriptionManager {
-                  "subscriptions": Set {},
-                },
-                "scheduleVelocityCheck": [Function],
-                "timeDelta": 0,
-                "updateAndNotify": [Function],
-                "updateSubscribers": SubscriptionManager {
-                  "subscriptions": Set {},
-                },
-                "velocityCheck": [Function],
-              },
-            },
-            "baseTarget": Object {
-              "opacity": 1,
-              "translateY": "0%",
-            },
-            "children": Set {},
-            "config": Object {
-              "allowTransformNone": true,
+      >
+        <VisualElementHandler
+          props={
+            Object {
               "animate": "show",
               "children": Array [
                 <div
@@ -508,221 +812,2479 @@ exports[`<CodeView /> renders content only when show is true 1`] = `
                   Close code view
                 </div>,
               ],
-              "className": "code-view code-view--show",
-              "enableHardwareAcceleration": true,
+              "className": "code-view",
               "initial": "hide",
-              "transition": Object {
-                "duration": NaN,
-                "ease": "easeInOut",
-              },
+              "isStatic": false,
+              "layoutId": undefined,
+              "transformPagePoint": [Function],
               "variants": Object {
                 "hide": Object {
-                  "opacity": 0,
+                  "transition": Object {
+                    "stiffness": 1000,
+                  },
                   "translateY": "-100%",
                 },
                 "show": Object {
-                  "opacity": 1,
                   "translateY": "0%",
                 },
               },
-            },
-            "current": <div
-              class="code-view code-view--show"
-              style="opacity: 0; transform: translateY(-100%) translateZ(0);"
-            >
-              <div
-                class="code-view__content"
-              >
-                <pre>
-                  <code>
-                    {
-  "name": "example name"
-}
-                  </code>
-                </pre>
-              </div>
-              <div
-                class="code-view__controls"
-              >
-                Close code view
-              </div>
-            </div>,
-            "defaultConfig": Object {
-              "allowTransformNone": true,
-              "enableHardwareAcceleration": true,
-            },
-            "delta": Object {
-              "x": Object {
-                "origin": 0,
-                "originPoint": 0,
-                "scale": 1,
-                "translate": 0,
-              },
-              "y": Object {
-                "origin": 0,
-                "originPoint": 0,
-                "scale": 1,
-                "translate": 0,
-              },
-            },
-            "deltaFinal": Object {
-              "x": Object {
-                "origin": 0,
-                "originPoint": 0,
-                "scale": 1,
-                "translate": 0,
-              },
-              "y": Object {
-                "origin": 0,
-                "originPoint": 0,
-                "scale": 1,
-                "translate": 0,
-              },
-            },
-            "deltaTransform": "translate3d(0px, 0px, 0) scale(1, 1)",
-            "depth": 0,
-            "element": <div
-              class="code-view code-view--show"
-              style="opacity: 0; transform: translateY(-100%) translateZ(0);"
-            >
-              <div
-                class="code-view__content"
-              >
-                <pre>
-                  <code>
-                    {
-  "name": "example name"
-}
-                  </code>
-                </pre>
-              </div>
-              <div
-                class="code-view__controls"
-              >
-                Close code view
-              </div>
-            </div>,
-            "externalRef": null,
-            "hasViewportBoxUpdated": false,
-            "isAnimating": Set {
-              "opacity",
-              "translateY",
-            },
-            "isLayoutProjectionEnabled": false,
-            "isMounted": true,
-            "isPresenceRoot": true,
-            "isPresent": true,
-            "isTargetBoxLocked": false,
-            "latest": Object {
-              "opacity": 0,
-              "translateY": "-100%",
-            },
-            "layoutId": undefined,
-            "layoutMeasureListeners": SubscriptionManager {
-              "subscriptions": Set {},
-            },
-            "layoutUpdateListeners": SubscriptionManager {
-              "subscriptions": Set {},
-            },
-            "overrides": Array [],
-            "parent": undefined,
-            "prevTreeScale": Object {
-              "x": 1,
-              "y": 1,
-            },
-            "reactStyle": Object {},
-            "ref": [Function],
-            "resolvedOverrides": Array [],
-            "rootParent": [Circular],
-            "stopLayoutAxisAnimation": Object {
-              "x": [Function],
-              "y": [Function],
-            },
-            "style": Object {
-              "opacity": 0,
-              "transform": "translateY(-100%) translateZ(0)",
-            },
-            "targetBoxFinal": Object {
-              "x": Object {
-                "max": 1,
-                "min": 0,
-              },
-              "y": Object {
-                "max": 1,
-                "min": 0,
-              },
-            },
-            "transform": Object {
-              "translateY": "-100%",
-            },
-            "transformKeys": Array [
-              "translateY",
-            ],
-            "transformOrigin": Object {},
-            "treePath": Array [],
-            "treeScale": Object {
-              "x": 1,
-              "y": 1,
-            },
-            "triggerRender": [Function],
-            "update": [Function],
-            "updateLayoutDelta": [Function],
-            "valueSubscriptions": Map {
-              "opacity" => [Function],
-              "translateY" => [Function],
-            },
-            "values": Map {
-              "opacity" => MotionValue {
-                "canTrackVelocity": true,
-                "current": 0,
-                "lastUpdated": 0,
-                "prev": undefined,
-                "renderSubscribers": SubscriptionManager {
-                  "subscriptions": Set {
-                    [Function],
-                  },
-                },
-                "scheduleVelocityCheck": [Function],
-                "stopAnimation": [Function],
-                "timeDelta": 0,
-                "updateAndNotify": [Function],
-                "updateSubscribers": SubscriptionManager {
-                  "subscriptions": Set {
-                    [Function],
-                  },
-                },
-                "velocityCheck": [Function],
-              },
-              "translateY" => MotionValue {
-                "canTrackVelocity": true,
-                "current": "-100%",
-                "lastUpdated": 0,
-                "prev": undefined,
-                "renderSubscribers": SubscriptionManager {
-                  "subscriptions": Set {
-                    [Function],
-                  },
-                },
-                "scheduleVelocityCheck": [Function],
-                "stopAnimation": [Function],
-                "timeDelta": 0,
-                "updateAndNotify": [Function],
-                "updateSubscribers": SubscriptionManager {
-                  "subscriptions": Set {
-                    [Function],
-                  },
-                },
-                "velocityCheck": [Function],
-              },
-            },
-            "vars": Object {},
-            "viewportBoxUpdateListeners": SubscriptionManager {
-              "subscriptions": Set {},
-            },
+            }
           }
-        }
-      />
-    </ForwardRef(MotionComponent)>
+          visualElement={
+            Object {
+              "addValue": [Function],
+              "addVariantChild": [Function],
+              "animationState": Object {
+                "animateChanges": [Function],
+                "getState": [Function],
+                "isAnimated": [Function],
+                "setActive": [Function],
+                "setAnimateFunction": [Function],
+              },
+              "blockInitialAnimation": false,
+              "build": [Function],
+              "children": Set {},
+              "clearAllListeners": [Function],
+              "current": <div
+                class="code-view"
+                style="transform: translateY(-100%) translateZ(0);"
+              >
+                <div
+                  class="code-view__content"
+                >
+                  <pre>
+                    <code>
+                      {
+  "name": "example name"
+}
+                    </code>
+                  </pre>
+                </div>
+                <div
+                  class="code-view__controls"
+                >
+                  Close code view
+                </div>
+              </div>,
+              "depth": 0,
+              "forEachValue": [Function],
+              "getBaseTarget": [Function],
+              "getClosestVariantNode": [Function],
+              "getDefaultTransition": [Function],
+              "getInstance": [Function],
+              "getLatestValues": [Function],
+              "getLayoutId": [Function],
+              "getProps": [Function],
+              "getStaticValue": [Function],
+              "getTransformPagePoint": [Function],
+              "getValue": [Function],
+              "getVariant": [Function],
+              "getVariantContext": [Function],
+              "hasValue": [Function],
+              "isMounted": [Function],
+              "isVisible": undefined,
+              "makeTargetAnimatable": [Function],
+              "manuallyAnimateOnMount": false,
+              "measureViewportBox": [Function],
+              "mount": [Function],
+              "notifyAnimationComplete": [Function],
+              "notifyAnimationStart": [Function],
+              "notifyBeforeLayoutMeasure": [Function],
+              "notifyLayoutAnimationComplete": [Function],
+              "notifyLayoutMeasure": [Function],
+              "notifyLayoutUpdate": [Function],
+              "notifyRender": [Function],
+              "notifySetAxisTarget": [Function],
+              "notifyUnmount": [Function],
+              "notifyUpdate": [Function],
+              "notifyViewportBoxUpdate": [Function],
+              "onAnimationComplete": [Function],
+              "onAnimationStart": [Function],
+              "onBeforeLayoutMeasure": [Function],
+              "onLayoutAnimationComplete": [Function],
+              "onLayoutMeasure": [Function],
+              "onLayoutUpdate": [Function],
+              "onRender": [Function],
+              "onSetAxisTarget": [Function],
+              "onUnmount": [Function],
+              "onUpdate": [Function],
+              "onViewportBoxUpdate": [Function],
+              "parent": undefined,
+              "presenceId": undefined,
+              "projection": ProjectionNode {
+                "animationProgress": 0,
+                "checkUpdateFailed": [Function],
+                "children": Set {},
+                "depth": 1,
+                "eventHandlers": Map {},
+                "hasProjected": false,
+                "id": undefined,
+                "instance": <div
+                  class="code-view"
+                  style="transform: translateY(-100%) translateZ(0);"
+                >
+                  <div
+                    class="code-view__content"
+                  >
+                    <pre>
+                      <code>
+                        {
+  "name": "example name"
+}
+                      </code>
+                    </pre>
+                  </div>
+                  <div
+                    class="code-view__controls"
+                  >
+                    Close code view
+                  </div>
+                </div>,
+                "isAnimationBlocked": false,
+                "isLayoutDirty": false,
+                "isSVG": true,
+                "isTreeAnimating": false,
+                "isUpdating": false,
+                "isVisible": true,
+                "latestValues": Object {
+                  "translateY": "-100%",
+                },
+                "needsReset": false,
+                "options": Object {
+                  "alwaysMeasureLayout": undefined,
+                  "animationType": "both",
+                  "crossfade": true,
+                  "initialPromotionConfig": Object {},
+                  "layout": undefined,
+                  "layoutId": undefined,
+                  "layoutScroll": undefined,
+                  "scheduleRender": [Function],
+                  "visualElement": [Circular],
+                },
+                "parent": ProjectionNode {
+                  "animationProgress": 0,
+                  "checkUpdateFailed": [Function],
+                  "children": Set {
+                    ProjectionNode {
+                      "animationProgress": 0,
+                      "checkUpdateFailed": [Function],
+                      "children": Set {},
+                      "depth": 1,
+                      "eventHandlers": Map {},
+                      "hasProjected": false,
+                      "id": undefined,
+                      "instance": <div
+                        class="code-view"
+                        style="transform: translateY(-100%) translateZ(0);"
+                      >
+                        <div
+                          class="code-view__content"
+                        >
+                          <pre>
+                            <code />
+                          </pre>
+                        </div>
+                        <div
+                          class="code-view__controls"
+                        >
+                          Close code view
+                        </div>
+                      </div>,
+                      "isAnimationBlocked": false,
+                      "isLayoutDirty": false,
+                      "isSVG": true,
+                      "isTreeAnimating": false,
+                      "isUpdating": false,
+                      "isVisible": true,
+                      "latestValues": Object {
+                        "translateY": "-100%",
+                      },
+                      "needsReset": false,
+                      "options": Object {
+                        "alwaysMeasureLayout": undefined,
+                        "animationType": "both",
+                        "crossfade": true,
+                        "initialPromotionConfig": Object {},
+                        "layout": undefined,
+                        "layoutId": undefined,
+                        "layoutScroll": undefined,
+                        "scheduleRender": [Function],
+                        "visualElement": Object {
+                          "addValue": [Function],
+                          "addVariantChild": [Function],
+                          "animationState": Object {
+                            "animateChanges": [Function],
+                            "getState": [Function],
+                            "isAnimated": [Function],
+                            "setActive": [Function],
+                            "setAnimateFunction": [Function],
+                          },
+                          "blockInitialAnimation": false,
+                          "build": [Function],
+                          "children": Set {},
+                          "clearAllListeners": [Function],
+                          "current": <div
+                            class="code-view"
+                            style="transform: translateY(-100%) translateZ(0);"
+                          >
+                            <div
+                              class="code-view__content"
+                            >
+                              <pre>
+                                <code />
+                              </pre>
+                            </div>
+                            <div
+                              class="code-view__controls"
+                            >
+                              Close code view
+                            </div>
+                          </div>,
+                          "depth": 0,
+                          "forEachValue": [Function],
+                          "getBaseTarget": [Function],
+                          "getClosestVariantNode": [Function],
+                          "getDefaultTransition": [Function],
+                          "getInstance": [Function],
+                          "getLatestValues": [Function],
+                          "getLayoutId": [Function],
+                          "getProps": [Function],
+                          "getStaticValue": [Function],
+                          "getTransformPagePoint": [Function],
+                          "getValue": [Function],
+                          "getVariant": [Function],
+                          "getVariantContext": [Function],
+                          "hasValue": [Function],
+                          "isMounted": [Function],
+                          "isVisible": undefined,
+                          "makeTargetAnimatable": [Function],
+                          "manuallyAnimateOnMount": false,
+                          "measureViewportBox": [Function],
+                          "mount": [Function],
+                          "notifyAnimationComplete": [Function],
+                          "notifyAnimationStart": [Function],
+                          "notifyBeforeLayoutMeasure": [Function],
+                          "notifyLayoutAnimationComplete": [Function],
+                          "notifyLayoutMeasure": [Function],
+                          "notifyLayoutUpdate": [Function],
+                          "notifyRender": [Function],
+                          "notifySetAxisTarget": [Function],
+                          "notifyUnmount": [Function],
+                          "notifyUpdate": [Function],
+                          "notifyViewportBoxUpdate": [Function],
+                          "onAnimationComplete": [Function],
+                          "onAnimationStart": [Function],
+                          "onBeforeLayoutMeasure": [Function],
+                          "onLayoutAnimationComplete": [Function],
+                          "onLayoutMeasure": [Function],
+                          "onLayoutUpdate": [Function],
+                          "onRender": [Function],
+                          "onSetAxisTarget": [Function],
+                          "onUnmount": [Function],
+                          "onUpdate": [Function],
+                          "onViewportBoxUpdate": [Function],
+                          "parent": undefined,
+                          "presenceId": undefined,
+                          "projection": [Circular],
+                          "readValue": [Function],
+                          "removeValue": [Function],
+                          "scheduleRender": [Function],
+                          "setBaseTarget": [Function],
+                          "setProps": [Function],
+                          "setStaticValue": [Function],
+                          "setVisibility": [Function],
+                          "sortNodePosition": [Function],
+                          "syncRender": [Function],
+                          "treeType": "dom",
+                          "unmount": [Function],
+                          "updatePropListeners": [Function],
+                          "variantChildren": Set {},
+                        },
+                      },
+                      "parent": [Circular],
+                      "path": Array [
+                        [Circular],
+                      ],
+                      "potentialNodes": Map {},
+                      "root": [Circular],
+                      "sharedNodes": Map {},
+                      "shouldResetTransform": false,
+                      "treeScale": Object {
+                        "x": 1,
+                        "y": 1,
+                      },
+                      "updateBlockedByResize": false,
+                      "updateManuallyBlocked": false,
+                      "updateProjection": [Function],
+                    },
+                    [Circular],
+                  },
+                  "depth": 0,
+                  "eventHandlers": Map {},
+                  "hasProjected": false,
+                  "id": 0,
+                  "instance": [Window],
+                  "isAnimationBlocked": false,
+                  "isLayoutDirty": false,
+                  "isSVG": false,
+                  "isTreeAnimating": false,
+                  "isUpdating": false,
+                  "isVisible": true,
+                  "latestValues": Object {},
+                  "needsReset": false,
+                  "nodes": FlatTree {
+                    "children": Array [
+                      [Circular],
+                      ProjectionNode {
+                        "animationProgress": 0,
+                        "checkUpdateFailed": [Function],
+                        "children": Set {},
+                        "depth": 1,
+                        "eventHandlers": Map {},
+                        "hasProjected": false,
+                        "id": undefined,
+                        "instance": <div
+                          class="code-view"
+                          style="transform: translateY(-100%) translateZ(0);"
+                        >
+                          <div
+                            class="code-view__content"
+                          >
+                            <pre>
+                              <code />
+                            </pre>
+                          </div>
+                          <div
+                            class="code-view__controls"
+                          >
+                            Close code view
+                          </div>
+                        </div>,
+                        "isAnimationBlocked": false,
+                        "isLayoutDirty": false,
+                        "isSVG": true,
+                        "isTreeAnimating": false,
+                        "isUpdating": false,
+                        "isVisible": true,
+                        "latestValues": Object {
+                          "translateY": "-100%",
+                        },
+                        "needsReset": false,
+                        "options": Object {
+                          "alwaysMeasureLayout": undefined,
+                          "animationType": "both",
+                          "crossfade": true,
+                          "initialPromotionConfig": Object {},
+                          "layout": undefined,
+                          "layoutId": undefined,
+                          "layoutScroll": undefined,
+                          "scheduleRender": [Function],
+                          "visualElement": Object {
+                            "addValue": [Function],
+                            "addVariantChild": [Function],
+                            "animationState": Object {
+                              "animateChanges": [Function],
+                              "getState": [Function],
+                              "isAnimated": [Function],
+                              "setActive": [Function],
+                              "setAnimateFunction": [Function],
+                            },
+                            "blockInitialAnimation": false,
+                            "build": [Function],
+                            "children": Set {},
+                            "clearAllListeners": [Function],
+                            "current": <div
+                              class="code-view"
+                              style="transform: translateY(-100%) translateZ(0);"
+                            >
+                              <div
+                                class="code-view__content"
+                              >
+                                <pre>
+                                  <code />
+                                </pre>
+                              </div>
+                              <div
+                                class="code-view__controls"
+                              >
+                                Close code view
+                              </div>
+                            </div>,
+                            "depth": 0,
+                            "forEachValue": [Function],
+                            "getBaseTarget": [Function],
+                            "getClosestVariantNode": [Function],
+                            "getDefaultTransition": [Function],
+                            "getInstance": [Function],
+                            "getLatestValues": [Function],
+                            "getLayoutId": [Function],
+                            "getProps": [Function],
+                            "getStaticValue": [Function],
+                            "getTransformPagePoint": [Function],
+                            "getValue": [Function],
+                            "getVariant": [Function],
+                            "getVariantContext": [Function],
+                            "hasValue": [Function],
+                            "isMounted": [Function],
+                            "isVisible": undefined,
+                            "makeTargetAnimatable": [Function],
+                            "manuallyAnimateOnMount": false,
+                            "measureViewportBox": [Function],
+                            "mount": [Function],
+                            "notifyAnimationComplete": [Function],
+                            "notifyAnimationStart": [Function],
+                            "notifyBeforeLayoutMeasure": [Function],
+                            "notifyLayoutAnimationComplete": [Function],
+                            "notifyLayoutMeasure": [Function],
+                            "notifyLayoutUpdate": [Function],
+                            "notifyRender": [Function],
+                            "notifySetAxisTarget": [Function],
+                            "notifyUnmount": [Function],
+                            "notifyUpdate": [Function],
+                            "notifyViewportBoxUpdate": [Function],
+                            "onAnimationComplete": [Function],
+                            "onAnimationStart": [Function],
+                            "onBeforeLayoutMeasure": [Function],
+                            "onLayoutAnimationComplete": [Function],
+                            "onLayoutMeasure": [Function],
+                            "onLayoutUpdate": [Function],
+                            "onRender": [Function],
+                            "onSetAxisTarget": [Function],
+                            "onUnmount": [Function],
+                            "onUpdate": [Function],
+                            "onViewportBoxUpdate": [Function],
+                            "parent": undefined,
+                            "presenceId": undefined,
+                            "projection": [Circular],
+                            "readValue": [Function],
+                            "removeValue": [Function],
+                            "scheduleRender": [Function],
+                            "setBaseTarget": [Function],
+                            "setProps": [Function],
+                            "setStaticValue": [Function],
+                            "setVisibility": [Function],
+                            "sortNodePosition": [Function],
+                            "syncRender": [Function],
+                            "treeType": "dom",
+                            "unmount": [Function],
+                            "updatePropListeners": [Function],
+                            "variantChildren": Set {},
+                          },
+                        },
+                        "parent": [Circular],
+                        "path": Array [
+                          [Circular],
+                        ],
+                        "potentialNodes": Map {},
+                        "root": [Circular],
+                        "sharedNodes": Map {},
+                        "shouldResetTransform": false,
+                        "treeScale": Object {
+                          "x": 1,
+                          "y": 1,
+                        },
+                        "updateBlockedByResize": false,
+                        "updateManuallyBlocked": false,
+                        "updateProjection": [Function],
+                      },
+                      [Circular],
+                    ],
+                    "isDirty": true,
+                  },
+                  "options": Object {
+                    "crossfade": true,
+                    "layoutScroll": true,
+                  },
+                  "parent": undefined,
+                  "path": Array [],
+                  "potentialNodes": Map {},
+                  "root": [Circular],
+                  "sharedNodes": Map {},
+                  "shouldResetTransform": true,
+                  "treeScale": Object {
+                    "x": 1,
+                    "y": 1,
+                  },
+                  "updateBlockedByResize": false,
+                  "updateManuallyBlocked": false,
+                  "updateProjection": [Function],
+                },
+                "path": Array [
+                  ProjectionNode {
+                    "animationProgress": 0,
+                    "checkUpdateFailed": [Function],
+                    "children": Set {
+                      ProjectionNode {
+                        "animationProgress": 0,
+                        "checkUpdateFailed": [Function],
+                        "children": Set {},
+                        "depth": 1,
+                        "eventHandlers": Map {},
+                        "hasProjected": false,
+                        "id": undefined,
+                        "instance": <div
+                          class="code-view"
+                          style="transform: translateY(-100%) translateZ(0);"
+                        >
+                          <div
+                            class="code-view__content"
+                          >
+                            <pre>
+                              <code />
+                            </pre>
+                          </div>
+                          <div
+                            class="code-view__controls"
+                          >
+                            Close code view
+                          </div>
+                        </div>,
+                        "isAnimationBlocked": false,
+                        "isLayoutDirty": false,
+                        "isSVG": true,
+                        "isTreeAnimating": false,
+                        "isUpdating": false,
+                        "isVisible": true,
+                        "latestValues": Object {
+                          "translateY": "-100%",
+                        },
+                        "needsReset": false,
+                        "options": Object {
+                          "alwaysMeasureLayout": undefined,
+                          "animationType": "both",
+                          "crossfade": true,
+                          "initialPromotionConfig": Object {},
+                          "layout": undefined,
+                          "layoutId": undefined,
+                          "layoutScroll": undefined,
+                          "scheduleRender": [Function],
+                          "visualElement": Object {
+                            "addValue": [Function],
+                            "addVariantChild": [Function],
+                            "animationState": Object {
+                              "animateChanges": [Function],
+                              "getState": [Function],
+                              "isAnimated": [Function],
+                              "setActive": [Function],
+                              "setAnimateFunction": [Function],
+                            },
+                            "blockInitialAnimation": false,
+                            "build": [Function],
+                            "children": Set {},
+                            "clearAllListeners": [Function],
+                            "current": <div
+                              class="code-view"
+                              style="transform: translateY(-100%) translateZ(0);"
+                            >
+                              <div
+                                class="code-view__content"
+                              >
+                                <pre>
+                                  <code />
+                                </pre>
+                              </div>
+                              <div
+                                class="code-view__controls"
+                              >
+                                Close code view
+                              </div>
+                            </div>,
+                            "depth": 0,
+                            "forEachValue": [Function],
+                            "getBaseTarget": [Function],
+                            "getClosestVariantNode": [Function],
+                            "getDefaultTransition": [Function],
+                            "getInstance": [Function],
+                            "getLatestValues": [Function],
+                            "getLayoutId": [Function],
+                            "getProps": [Function],
+                            "getStaticValue": [Function],
+                            "getTransformPagePoint": [Function],
+                            "getValue": [Function],
+                            "getVariant": [Function],
+                            "getVariantContext": [Function],
+                            "hasValue": [Function],
+                            "isMounted": [Function],
+                            "isVisible": undefined,
+                            "makeTargetAnimatable": [Function],
+                            "manuallyAnimateOnMount": false,
+                            "measureViewportBox": [Function],
+                            "mount": [Function],
+                            "notifyAnimationComplete": [Function],
+                            "notifyAnimationStart": [Function],
+                            "notifyBeforeLayoutMeasure": [Function],
+                            "notifyLayoutAnimationComplete": [Function],
+                            "notifyLayoutMeasure": [Function],
+                            "notifyLayoutUpdate": [Function],
+                            "notifyRender": [Function],
+                            "notifySetAxisTarget": [Function],
+                            "notifyUnmount": [Function],
+                            "notifyUpdate": [Function],
+                            "notifyViewportBoxUpdate": [Function],
+                            "onAnimationComplete": [Function],
+                            "onAnimationStart": [Function],
+                            "onBeforeLayoutMeasure": [Function],
+                            "onLayoutAnimationComplete": [Function],
+                            "onLayoutMeasure": [Function],
+                            "onLayoutUpdate": [Function],
+                            "onRender": [Function],
+                            "onSetAxisTarget": [Function],
+                            "onUnmount": [Function],
+                            "onUpdate": [Function],
+                            "onViewportBoxUpdate": [Function],
+                            "parent": undefined,
+                            "presenceId": undefined,
+                            "projection": [Circular],
+                            "readValue": [Function],
+                            "removeValue": [Function],
+                            "scheduleRender": [Function],
+                            "setBaseTarget": [Function],
+                            "setProps": [Function],
+                            "setStaticValue": [Function],
+                            "setVisibility": [Function],
+                            "sortNodePosition": [Function],
+                            "syncRender": [Function],
+                            "treeType": "dom",
+                            "unmount": [Function],
+                            "updatePropListeners": [Function],
+                            "variantChildren": Set {},
+                          },
+                        },
+                        "parent": [Circular],
+                        "path": Array [
+                          [Circular],
+                        ],
+                        "potentialNodes": Map {},
+                        "root": [Circular],
+                        "sharedNodes": Map {},
+                        "shouldResetTransform": false,
+                        "treeScale": Object {
+                          "x": 1,
+                          "y": 1,
+                        },
+                        "updateBlockedByResize": false,
+                        "updateManuallyBlocked": false,
+                        "updateProjection": [Function],
+                      },
+                      [Circular],
+                    },
+                    "depth": 0,
+                    "eventHandlers": Map {},
+                    "hasProjected": false,
+                    "id": 0,
+                    "instance": [Window],
+                    "isAnimationBlocked": false,
+                    "isLayoutDirty": false,
+                    "isSVG": false,
+                    "isTreeAnimating": false,
+                    "isUpdating": false,
+                    "isVisible": true,
+                    "latestValues": Object {},
+                    "needsReset": false,
+                    "nodes": FlatTree {
+                      "children": Array [
+                        [Circular],
+                        ProjectionNode {
+                          "animationProgress": 0,
+                          "checkUpdateFailed": [Function],
+                          "children": Set {},
+                          "depth": 1,
+                          "eventHandlers": Map {},
+                          "hasProjected": false,
+                          "id": undefined,
+                          "instance": <div
+                            class="code-view"
+                            style="transform: translateY(-100%) translateZ(0);"
+                          >
+                            <div
+                              class="code-view__content"
+                            >
+                              <pre>
+                                <code />
+                              </pre>
+                            </div>
+                            <div
+                              class="code-view__controls"
+                            >
+                              Close code view
+                            </div>
+                          </div>,
+                          "isAnimationBlocked": false,
+                          "isLayoutDirty": false,
+                          "isSVG": true,
+                          "isTreeAnimating": false,
+                          "isUpdating": false,
+                          "isVisible": true,
+                          "latestValues": Object {
+                            "translateY": "-100%",
+                          },
+                          "needsReset": false,
+                          "options": Object {
+                            "alwaysMeasureLayout": undefined,
+                            "animationType": "both",
+                            "crossfade": true,
+                            "initialPromotionConfig": Object {},
+                            "layout": undefined,
+                            "layoutId": undefined,
+                            "layoutScroll": undefined,
+                            "scheduleRender": [Function],
+                            "visualElement": Object {
+                              "addValue": [Function],
+                              "addVariantChild": [Function],
+                              "animationState": Object {
+                                "animateChanges": [Function],
+                                "getState": [Function],
+                                "isAnimated": [Function],
+                                "setActive": [Function],
+                                "setAnimateFunction": [Function],
+                              },
+                              "blockInitialAnimation": false,
+                              "build": [Function],
+                              "children": Set {},
+                              "clearAllListeners": [Function],
+                              "current": <div
+                                class="code-view"
+                                style="transform: translateY(-100%) translateZ(0);"
+                              >
+                                <div
+                                  class="code-view__content"
+                                >
+                                  <pre>
+                                    <code />
+                                  </pre>
+                                </div>
+                                <div
+                                  class="code-view__controls"
+                                >
+                                  Close code view
+                                </div>
+                              </div>,
+                              "depth": 0,
+                              "forEachValue": [Function],
+                              "getBaseTarget": [Function],
+                              "getClosestVariantNode": [Function],
+                              "getDefaultTransition": [Function],
+                              "getInstance": [Function],
+                              "getLatestValues": [Function],
+                              "getLayoutId": [Function],
+                              "getProps": [Function],
+                              "getStaticValue": [Function],
+                              "getTransformPagePoint": [Function],
+                              "getValue": [Function],
+                              "getVariant": [Function],
+                              "getVariantContext": [Function],
+                              "hasValue": [Function],
+                              "isMounted": [Function],
+                              "isVisible": undefined,
+                              "makeTargetAnimatable": [Function],
+                              "manuallyAnimateOnMount": false,
+                              "measureViewportBox": [Function],
+                              "mount": [Function],
+                              "notifyAnimationComplete": [Function],
+                              "notifyAnimationStart": [Function],
+                              "notifyBeforeLayoutMeasure": [Function],
+                              "notifyLayoutAnimationComplete": [Function],
+                              "notifyLayoutMeasure": [Function],
+                              "notifyLayoutUpdate": [Function],
+                              "notifyRender": [Function],
+                              "notifySetAxisTarget": [Function],
+                              "notifyUnmount": [Function],
+                              "notifyUpdate": [Function],
+                              "notifyViewportBoxUpdate": [Function],
+                              "onAnimationComplete": [Function],
+                              "onAnimationStart": [Function],
+                              "onBeforeLayoutMeasure": [Function],
+                              "onLayoutAnimationComplete": [Function],
+                              "onLayoutMeasure": [Function],
+                              "onLayoutUpdate": [Function],
+                              "onRender": [Function],
+                              "onSetAxisTarget": [Function],
+                              "onUnmount": [Function],
+                              "onUpdate": [Function],
+                              "onViewportBoxUpdate": [Function],
+                              "parent": undefined,
+                              "presenceId": undefined,
+                              "projection": [Circular],
+                              "readValue": [Function],
+                              "removeValue": [Function],
+                              "scheduleRender": [Function],
+                              "setBaseTarget": [Function],
+                              "setProps": [Function],
+                              "setStaticValue": [Function],
+                              "setVisibility": [Function],
+                              "sortNodePosition": [Function],
+                              "syncRender": [Function],
+                              "treeType": "dom",
+                              "unmount": [Function],
+                              "updatePropListeners": [Function],
+                              "variantChildren": Set {},
+                            },
+                          },
+                          "parent": [Circular],
+                          "path": Array [
+                            [Circular],
+                          ],
+                          "potentialNodes": Map {},
+                          "root": [Circular],
+                          "sharedNodes": Map {},
+                          "shouldResetTransform": false,
+                          "treeScale": Object {
+                            "x": 1,
+                            "y": 1,
+                          },
+                          "updateBlockedByResize": false,
+                          "updateManuallyBlocked": false,
+                          "updateProjection": [Function],
+                        },
+                        [Circular],
+                      ],
+                      "isDirty": true,
+                    },
+                    "options": Object {
+                      "crossfade": true,
+                      "layoutScroll": true,
+                    },
+                    "parent": undefined,
+                    "path": Array [],
+                    "potentialNodes": Map {},
+                    "root": [Circular],
+                    "sharedNodes": Map {},
+                    "shouldResetTransform": true,
+                    "treeScale": Object {
+                      "x": 1,
+                      "y": 1,
+                    },
+                    "updateBlockedByResize": false,
+                    "updateManuallyBlocked": false,
+                    "updateProjection": [Function],
+                  },
+                ],
+                "potentialNodes": Map {},
+                "root": ProjectionNode {
+                  "animationProgress": 0,
+                  "checkUpdateFailed": [Function],
+                  "children": Set {
+                    ProjectionNode {
+                      "animationProgress": 0,
+                      "checkUpdateFailed": [Function],
+                      "children": Set {},
+                      "depth": 1,
+                      "eventHandlers": Map {},
+                      "hasProjected": false,
+                      "id": undefined,
+                      "instance": <div
+                        class="code-view"
+                        style="transform: translateY(-100%) translateZ(0);"
+                      >
+                        <div
+                          class="code-view__content"
+                        >
+                          <pre>
+                            <code />
+                          </pre>
+                        </div>
+                        <div
+                          class="code-view__controls"
+                        >
+                          Close code view
+                        </div>
+                      </div>,
+                      "isAnimationBlocked": false,
+                      "isLayoutDirty": false,
+                      "isSVG": true,
+                      "isTreeAnimating": false,
+                      "isUpdating": false,
+                      "isVisible": true,
+                      "latestValues": Object {
+                        "translateY": "-100%",
+                      },
+                      "needsReset": false,
+                      "options": Object {
+                        "alwaysMeasureLayout": undefined,
+                        "animationType": "both",
+                        "crossfade": true,
+                        "initialPromotionConfig": Object {},
+                        "layout": undefined,
+                        "layoutId": undefined,
+                        "layoutScroll": undefined,
+                        "scheduleRender": [Function],
+                        "visualElement": Object {
+                          "addValue": [Function],
+                          "addVariantChild": [Function],
+                          "animationState": Object {
+                            "animateChanges": [Function],
+                            "getState": [Function],
+                            "isAnimated": [Function],
+                            "setActive": [Function],
+                            "setAnimateFunction": [Function],
+                          },
+                          "blockInitialAnimation": false,
+                          "build": [Function],
+                          "children": Set {},
+                          "clearAllListeners": [Function],
+                          "current": <div
+                            class="code-view"
+                            style="transform: translateY(-100%) translateZ(0);"
+                          >
+                            <div
+                              class="code-view__content"
+                            >
+                              <pre>
+                                <code />
+                              </pre>
+                            </div>
+                            <div
+                              class="code-view__controls"
+                            >
+                              Close code view
+                            </div>
+                          </div>,
+                          "depth": 0,
+                          "forEachValue": [Function],
+                          "getBaseTarget": [Function],
+                          "getClosestVariantNode": [Function],
+                          "getDefaultTransition": [Function],
+                          "getInstance": [Function],
+                          "getLatestValues": [Function],
+                          "getLayoutId": [Function],
+                          "getProps": [Function],
+                          "getStaticValue": [Function],
+                          "getTransformPagePoint": [Function],
+                          "getValue": [Function],
+                          "getVariant": [Function],
+                          "getVariantContext": [Function],
+                          "hasValue": [Function],
+                          "isMounted": [Function],
+                          "isVisible": undefined,
+                          "makeTargetAnimatable": [Function],
+                          "manuallyAnimateOnMount": false,
+                          "measureViewportBox": [Function],
+                          "mount": [Function],
+                          "notifyAnimationComplete": [Function],
+                          "notifyAnimationStart": [Function],
+                          "notifyBeforeLayoutMeasure": [Function],
+                          "notifyLayoutAnimationComplete": [Function],
+                          "notifyLayoutMeasure": [Function],
+                          "notifyLayoutUpdate": [Function],
+                          "notifyRender": [Function],
+                          "notifySetAxisTarget": [Function],
+                          "notifyUnmount": [Function],
+                          "notifyUpdate": [Function],
+                          "notifyViewportBoxUpdate": [Function],
+                          "onAnimationComplete": [Function],
+                          "onAnimationStart": [Function],
+                          "onBeforeLayoutMeasure": [Function],
+                          "onLayoutAnimationComplete": [Function],
+                          "onLayoutMeasure": [Function],
+                          "onLayoutUpdate": [Function],
+                          "onRender": [Function],
+                          "onSetAxisTarget": [Function],
+                          "onUnmount": [Function],
+                          "onUpdate": [Function],
+                          "onViewportBoxUpdate": [Function],
+                          "parent": undefined,
+                          "presenceId": undefined,
+                          "projection": [Circular],
+                          "readValue": [Function],
+                          "removeValue": [Function],
+                          "scheduleRender": [Function],
+                          "setBaseTarget": [Function],
+                          "setProps": [Function],
+                          "setStaticValue": [Function],
+                          "setVisibility": [Function],
+                          "sortNodePosition": [Function],
+                          "syncRender": [Function],
+                          "treeType": "dom",
+                          "unmount": [Function],
+                          "updatePropListeners": [Function],
+                          "variantChildren": Set {},
+                        },
+                      },
+                      "parent": [Circular],
+                      "path": Array [
+                        [Circular],
+                      ],
+                      "potentialNodes": Map {},
+                      "root": [Circular],
+                      "sharedNodes": Map {},
+                      "shouldResetTransform": false,
+                      "treeScale": Object {
+                        "x": 1,
+                        "y": 1,
+                      },
+                      "updateBlockedByResize": false,
+                      "updateManuallyBlocked": false,
+                      "updateProjection": [Function],
+                    },
+                    [Circular],
+                  },
+                  "depth": 0,
+                  "eventHandlers": Map {},
+                  "hasProjected": false,
+                  "id": 0,
+                  "instance": [Window],
+                  "isAnimationBlocked": false,
+                  "isLayoutDirty": false,
+                  "isSVG": false,
+                  "isTreeAnimating": false,
+                  "isUpdating": false,
+                  "isVisible": true,
+                  "latestValues": Object {},
+                  "needsReset": false,
+                  "nodes": FlatTree {
+                    "children": Array [
+                      [Circular],
+                      ProjectionNode {
+                        "animationProgress": 0,
+                        "checkUpdateFailed": [Function],
+                        "children": Set {},
+                        "depth": 1,
+                        "eventHandlers": Map {},
+                        "hasProjected": false,
+                        "id": undefined,
+                        "instance": <div
+                          class="code-view"
+                          style="transform: translateY(-100%) translateZ(0);"
+                        >
+                          <div
+                            class="code-view__content"
+                          >
+                            <pre>
+                              <code />
+                            </pre>
+                          </div>
+                          <div
+                            class="code-view__controls"
+                          >
+                            Close code view
+                          </div>
+                        </div>,
+                        "isAnimationBlocked": false,
+                        "isLayoutDirty": false,
+                        "isSVG": true,
+                        "isTreeAnimating": false,
+                        "isUpdating": false,
+                        "isVisible": true,
+                        "latestValues": Object {
+                          "translateY": "-100%",
+                        },
+                        "needsReset": false,
+                        "options": Object {
+                          "alwaysMeasureLayout": undefined,
+                          "animationType": "both",
+                          "crossfade": true,
+                          "initialPromotionConfig": Object {},
+                          "layout": undefined,
+                          "layoutId": undefined,
+                          "layoutScroll": undefined,
+                          "scheduleRender": [Function],
+                          "visualElement": Object {
+                            "addValue": [Function],
+                            "addVariantChild": [Function],
+                            "animationState": Object {
+                              "animateChanges": [Function],
+                              "getState": [Function],
+                              "isAnimated": [Function],
+                              "setActive": [Function],
+                              "setAnimateFunction": [Function],
+                            },
+                            "blockInitialAnimation": false,
+                            "build": [Function],
+                            "children": Set {},
+                            "clearAllListeners": [Function],
+                            "current": <div
+                              class="code-view"
+                              style="transform: translateY(-100%) translateZ(0);"
+                            >
+                              <div
+                                class="code-view__content"
+                              >
+                                <pre>
+                                  <code />
+                                </pre>
+                              </div>
+                              <div
+                                class="code-view__controls"
+                              >
+                                Close code view
+                              </div>
+                            </div>,
+                            "depth": 0,
+                            "forEachValue": [Function],
+                            "getBaseTarget": [Function],
+                            "getClosestVariantNode": [Function],
+                            "getDefaultTransition": [Function],
+                            "getInstance": [Function],
+                            "getLatestValues": [Function],
+                            "getLayoutId": [Function],
+                            "getProps": [Function],
+                            "getStaticValue": [Function],
+                            "getTransformPagePoint": [Function],
+                            "getValue": [Function],
+                            "getVariant": [Function],
+                            "getVariantContext": [Function],
+                            "hasValue": [Function],
+                            "isMounted": [Function],
+                            "isVisible": undefined,
+                            "makeTargetAnimatable": [Function],
+                            "manuallyAnimateOnMount": false,
+                            "measureViewportBox": [Function],
+                            "mount": [Function],
+                            "notifyAnimationComplete": [Function],
+                            "notifyAnimationStart": [Function],
+                            "notifyBeforeLayoutMeasure": [Function],
+                            "notifyLayoutAnimationComplete": [Function],
+                            "notifyLayoutMeasure": [Function],
+                            "notifyLayoutUpdate": [Function],
+                            "notifyRender": [Function],
+                            "notifySetAxisTarget": [Function],
+                            "notifyUnmount": [Function],
+                            "notifyUpdate": [Function],
+                            "notifyViewportBoxUpdate": [Function],
+                            "onAnimationComplete": [Function],
+                            "onAnimationStart": [Function],
+                            "onBeforeLayoutMeasure": [Function],
+                            "onLayoutAnimationComplete": [Function],
+                            "onLayoutMeasure": [Function],
+                            "onLayoutUpdate": [Function],
+                            "onRender": [Function],
+                            "onSetAxisTarget": [Function],
+                            "onUnmount": [Function],
+                            "onUpdate": [Function],
+                            "onViewportBoxUpdate": [Function],
+                            "parent": undefined,
+                            "presenceId": undefined,
+                            "projection": [Circular],
+                            "readValue": [Function],
+                            "removeValue": [Function],
+                            "scheduleRender": [Function],
+                            "setBaseTarget": [Function],
+                            "setProps": [Function],
+                            "setStaticValue": [Function],
+                            "setVisibility": [Function],
+                            "sortNodePosition": [Function],
+                            "syncRender": [Function],
+                            "treeType": "dom",
+                            "unmount": [Function],
+                            "updatePropListeners": [Function],
+                            "variantChildren": Set {},
+                          },
+                        },
+                        "parent": [Circular],
+                        "path": Array [
+                          [Circular],
+                        ],
+                        "potentialNodes": Map {},
+                        "root": [Circular],
+                        "sharedNodes": Map {},
+                        "shouldResetTransform": false,
+                        "treeScale": Object {
+                          "x": 1,
+                          "y": 1,
+                        },
+                        "updateBlockedByResize": false,
+                        "updateManuallyBlocked": false,
+                        "updateProjection": [Function],
+                      },
+                      [Circular],
+                    ],
+                    "isDirty": true,
+                  },
+                  "options": Object {
+                    "crossfade": true,
+                    "layoutScroll": true,
+                  },
+                  "parent": undefined,
+                  "path": Array [],
+                  "potentialNodes": Map {},
+                  "root": [Circular],
+                  "sharedNodes": Map {},
+                  "shouldResetTransform": true,
+                  "treeScale": Object {
+                    "x": 1,
+                    "y": 1,
+                  },
+                  "updateBlockedByResize": false,
+                  "updateManuallyBlocked": false,
+                  "updateProjection": [Function],
+                },
+                "sharedNodes": Map {},
+                "shouldResetTransform": false,
+                "treeScale": Object {
+                  "x": 1,
+                  "y": 1,
+                },
+                "updateBlockedByResize": false,
+                "updateManuallyBlocked": false,
+                "updateProjection": [Function],
+              },
+              "readValue": [Function],
+              "removeValue": [Function],
+              "scheduleRender": [Function],
+              "setBaseTarget": [Function],
+              "setProps": [Function],
+              "setStaticValue": [Function],
+              "setVisibility": [Function],
+              "sortNodePosition": [Function],
+              "syncRender": [Function],
+              "treeType": "dom",
+              "unmount": [Function],
+              "updatePropListeners": [Function],
+              "variantChildren": Set {},
+            }
+          }
+        >
+          <Component
+            animate="show"
+            className="code-view"
+            initial="hide"
+            key="animation"
+            variants={
+              Object {
+                "hide": Object {
+                  "transition": Object {
+                    "stiffness": 1000,
+                  },
+                  "translateY": "-100%",
+                },
+                "show": Object {
+                  "translateY": "0%",
+                },
+              }
+            }
+            visualElement={
+              Object {
+                "addValue": [Function],
+                "addVariantChild": [Function],
+                "animationState": Object {
+                  "animateChanges": [Function],
+                  "getState": [Function],
+                  "isAnimated": [Function],
+                  "setActive": [Function],
+                  "setAnimateFunction": [Function],
+                },
+                "blockInitialAnimation": false,
+                "build": [Function],
+                "children": Set {},
+                "clearAllListeners": [Function],
+                "current": <div
+                  class="code-view"
+                  style="transform: translateY(-100%) translateZ(0);"
+                >
+                  <div
+                    class="code-view__content"
+                  >
+                    <pre>
+                      <code>
+                        {
+  "name": "example name"
+}
+                      </code>
+                    </pre>
+                  </div>
+                  <div
+                    class="code-view__controls"
+                  >
+                    Close code view
+                  </div>
+                </div>,
+                "depth": 0,
+                "forEachValue": [Function],
+                "getBaseTarget": [Function],
+                "getClosestVariantNode": [Function],
+                "getDefaultTransition": [Function],
+                "getInstance": [Function],
+                "getLatestValues": [Function],
+                "getLayoutId": [Function],
+                "getProps": [Function],
+                "getStaticValue": [Function],
+                "getTransformPagePoint": [Function],
+                "getValue": [Function],
+                "getVariant": [Function],
+                "getVariantContext": [Function],
+                "hasValue": [Function],
+                "isMounted": [Function],
+                "isVisible": undefined,
+                "makeTargetAnimatable": [Function],
+                "manuallyAnimateOnMount": false,
+                "measureViewportBox": [Function],
+                "mount": [Function],
+                "notifyAnimationComplete": [Function],
+                "notifyAnimationStart": [Function],
+                "notifyBeforeLayoutMeasure": [Function],
+                "notifyLayoutAnimationComplete": [Function],
+                "notifyLayoutMeasure": [Function],
+                "notifyLayoutUpdate": [Function],
+                "notifyRender": [Function],
+                "notifySetAxisTarget": [Function],
+                "notifyUnmount": [Function],
+                "notifyUpdate": [Function],
+                "notifyViewportBoxUpdate": [Function],
+                "onAnimationComplete": [Function],
+                "onAnimationStart": [Function],
+                "onBeforeLayoutMeasure": [Function],
+                "onLayoutAnimationComplete": [Function],
+                "onLayoutMeasure": [Function],
+                "onLayoutUpdate": [Function],
+                "onRender": [Function],
+                "onSetAxisTarget": [Function],
+                "onUnmount": [Function],
+                "onUpdate": [Function],
+                "onViewportBoxUpdate": [Function],
+                "parent": undefined,
+                "presenceId": undefined,
+                "projection": ProjectionNode {
+                  "animationProgress": 0,
+                  "checkUpdateFailed": [Function],
+                  "children": Set {},
+                  "depth": 1,
+                  "eventHandlers": Map {},
+                  "hasProjected": false,
+                  "id": undefined,
+                  "instance": <div
+                    class="code-view"
+                    style="transform: translateY(-100%) translateZ(0);"
+                  >
+                    <div
+                      class="code-view__content"
+                    >
+                      <pre>
+                        <code>
+                          {
+  "name": "example name"
+}
+                        </code>
+                      </pre>
+                    </div>
+                    <div
+                      class="code-view__controls"
+                    >
+                      Close code view
+                    </div>
+                  </div>,
+                  "isAnimationBlocked": false,
+                  "isLayoutDirty": false,
+                  "isSVG": true,
+                  "isTreeAnimating": false,
+                  "isUpdating": false,
+                  "isVisible": true,
+                  "latestValues": Object {
+                    "translateY": "-100%",
+                  },
+                  "needsReset": false,
+                  "options": Object {
+                    "alwaysMeasureLayout": undefined,
+                    "animationType": "both",
+                    "crossfade": true,
+                    "initialPromotionConfig": Object {},
+                    "layout": undefined,
+                    "layoutId": undefined,
+                    "layoutScroll": undefined,
+                    "scheduleRender": [Function],
+                    "visualElement": [Circular],
+                  },
+                  "parent": ProjectionNode {
+                    "animationProgress": 0,
+                    "checkUpdateFailed": [Function],
+                    "children": Set {
+                      ProjectionNode {
+                        "animationProgress": 0,
+                        "checkUpdateFailed": [Function],
+                        "children": Set {},
+                        "depth": 1,
+                        "eventHandlers": Map {},
+                        "hasProjected": false,
+                        "id": undefined,
+                        "instance": <div
+                          class="code-view"
+                          style="transform: translateY(-100%) translateZ(0);"
+                        >
+                          <div
+                            class="code-view__content"
+                          >
+                            <pre>
+                              <code />
+                            </pre>
+                          </div>
+                          <div
+                            class="code-view__controls"
+                          >
+                            Close code view
+                          </div>
+                        </div>,
+                        "isAnimationBlocked": false,
+                        "isLayoutDirty": false,
+                        "isSVG": true,
+                        "isTreeAnimating": false,
+                        "isUpdating": false,
+                        "isVisible": true,
+                        "latestValues": Object {
+                          "translateY": "-100%",
+                        },
+                        "needsReset": false,
+                        "options": Object {
+                          "alwaysMeasureLayout": undefined,
+                          "animationType": "both",
+                          "crossfade": true,
+                          "initialPromotionConfig": Object {},
+                          "layout": undefined,
+                          "layoutId": undefined,
+                          "layoutScroll": undefined,
+                          "scheduleRender": [Function],
+                          "visualElement": Object {
+                            "addValue": [Function],
+                            "addVariantChild": [Function],
+                            "animationState": Object {
+                              "animateChanges": [Function],
+                              "getState": [Function],
+                              "isAnimated": [Function],
+                              "setActive": [Function],
+                              "setAnimateFunction": [Function],
+                            },
+                            "blockInitialAnimation": false,
+                            "build": [Function],
+                            "children": Set {},
+                            "clearAllListeners": [Function],
+                            "current": <div
+                              class="code-view"
+                              style="transform: translateY(-100%) translateZ(0);"
+                            >
+                              <div
+                                class="code-view__content"
+                              >
+                                <pre>
+                                  <code />
+                                </pre>
+                              </div>
+                              <div
+                                class="code-view__controls"
+                              >
+                                Close code view
+                              </div>
+                            </div>,
+                            "depth": 0,
+                            "forEachValue": [Function],
+                            "getBaseTarget": [Function],
+                            "getClosestVariantNode": [Function],
+                            "getDefaultTransition": [Function],
+                            "getInstance": [Function],
+                            "getLatestValues": [Function],
+                            "getLayoutId": [Function],
+                            "getProps": [Function],
+                            "getStaticValue": [Function],
+                            "getTransformPagePoint": [Function],
+                            "getValue": [Function],
+                            "getVariant": [Function],
+                            "getVariantContext": [Function],
+                            "hasValue": [Function],
+                            "isMounted": [Function],
+                            "isVisible": undefined,
+                            "makeTargetAnimatable": [Function],
+                            "manuallyAnimateOnMount": false,
+                            "measureViewportBox": [Function],
+                            "mount": [Function],
+                            "notifyAnimationComplete": [Function],
+                            "notifyAnimationStart": [Function],
+                            "notifyBeforeLayoutMeasure": [Function],
+                            "notifyLayoutAnimationComplete": [Function],
+                            "notifyLayoutMeasure": [Function],
+                            "notifyLayoutUpdate": [Function],
+                            "notifyRender": [Function],
+                            "notifySetAxisTarget": [Function],
+                            "notifyUnmount": [Function],
+                            "notifyUpdate": [Function],
+                            "notifyViewportBoxUpdate": [Function],
+                            "onAnimationComplete": [Function],
+                            "onAnimationStart": [Function],
+                            "onBeforeLayoutMeasure": [Function],
+                            "onLayoutAnimationComplete": [Function],
+                            "onLayoutMeasure": [Function],
+                            "onLayoutUpdate": [Function],
+                            "onRender": [Function],
+                            "onSetAxisTarget": [Function],
+                            "onUnmount": [Function],
+                            "onUpdate": [Function],
+                            "onViewportBoxUpdate": [Function],
+                            "parent": undefined,
+                            "presenceId": undefined,
+                            "projection": [Circular],
+                            "readValue": [Function],
+                            "removeValue": [Function],
+                            "scheduleRender": [Function],
+                            "setBaseTarget": [Function],
+                            "setProps": [Function],
+                            "setStaticValue": [Function],
+                            "setVisibility": [Function],
+                            "sortNodePosition": [Function],
+                            "syncRender": [Function],
+                            "treeType": "dom",
+                            "unmount": [Function],
+                            "updatePropListeners": [Function],
+                            "variantChildren": Set {},
+                          },
+                        },
+                        "parent": [Circular],
+                        "path": Array [
+                          [Circular],
+                        ],
+                        "potentialNodes": Map {},
+                        "root": [Circular],
+                        "sharedNodes": Map {},
+                        "shouldResetTransform": false,
+                        "treeScale": Object {
+                          "x": 1,
+                          "y": 1,
+                        },
+                        "updateBlockedByResize": false,
+                        "updateManuallyBlocked": false,
+                        "updateProjection": [Function],
+                      },
+                      [Circular],
+                    },
+                    "depth": 0,
+                    "eventHandlers": Map {},
+                    "hasProjected": false,
+                    "id": 0,
+                    "instance": [Window],
+                    "isAnimationBlocked": false,
+                    "isLayoutDirty": false,
+                    "isSVG": false,
+                    "isTreeAnimating": false,
+                    "isUpdating": false,
+                    "isVisible": true,
+                    "latestValues": Object {},
+                    "needsReset": false,
+                    "nodes": FlatTree {
+                      "children": Array [
+                        [Circular],
+                        ProjectionNode {
+                          "animationProgress": 0,
+                          "checkUpdateFailed": [Function],
+                          "children": Set {},
+                          "depth": 1,
+                          "eventHandlers": Map {},
+                          "hasProjected": false,
+                          "id": undefined,
+                          "instance": <div
+                            class="code-view"
+                            style="transform: translateY(-100%) translateZ(0);"
+                          >
+                            <div
+                              class="code-view__content"
+                            >
+                              <pre>
+                                <code />
+                              </pre>
+                            </div>
+                            <div
+                              class="code-view__controls"
+                            >
+                              Close code view
+                            </div>
+                          </div>,
+                          "isAnimationBlocked": false,
+                          "isLayoutDirty": false,
+                          "isSVG": true,
+                          "isTreeAnimating": false,
+                          "isUpdating": false,
+                          "isVisible": true,
+                          "latestValues": Object {
+                            "translateY": "-100%",
+                          },
+                          "needsReset": false,
+                          "options": Object {
+                            "alwaysMeasureLayout": undefined,
+                            "animationType": "both",
+                            "crossfade": true,
+                            "initialPromotionConfig": Object {},
+                            "layout": undefined,
+                            "layoutId": undefined,
+                            "layoutScroll": undefined,
+                            "scheduleRender": [Function],
+                            "visualElement": Object {
+                              "addValue": [Function],
+                              "addVariantChild": [Function],
+                              "animationState": Object {
+                                "animateChanges": [Function],
+                                "getState": [Function],
+                                "isAnimated": [Function],
+                                "setActive": [Function],
+                                "setAnimateFunction": [Function],
+                              },
+                              "blockInitialAnimation": false,
+                              "build": [Function],
+                              "children": Set {},
+                              "clearAllListeners": [Function],
+                              "current": <div
+                                class="code-view"
+                                style="transform: translateY(-100%) translateZ(0);"
+                              >
+                                <div
+                                  class="code-view__content"
+                                >
+                                  <pre>
+                                    <code />
+                                  </pre>
+                                </div>
+                                <div
+                                  class="code-view__controls"
+                                >
+                                  Close code view
+                                </div>
+                              </div>,
+                              "depth": 0,
+                              "forEachValue": [Function],
+                              "getBaseTarget": [Function],
+                              "getClosestVariantNode": [Function],
+                              "getDefaultTransition": [Function],
+                              "getInstance": [Function],
+                              "getLatestValues": [Function],
+                              "getLayoutId": [Function],
+                              "getProps": [Function],
+                              "getStaticValue": [Function],
+                              "getTransformPagePoint": [Function],
+                              "getValue": [Function],
+                              "getVariant": [Function],
+                              "getVariantContext": [Function],
+                              "hasValue": [Function],
+                              "isMounted": [Function],
+                              "isVisible": undefined,
+                              "makeTargetAnimatable": [Function],
+                              "manuallyAnimateOnMount": false,
+                              "measureViewportBox": [Function],
+                              "mount": [Function],
+                              "notifyAnimationComplete": [Function],
+                              "notifyAnimationStart": [Function],
+                              "notifyBeforeLayoutMeasure": [Function],
+                              "notifyLayoutAnimationComplete": [Function],
+                              "notifyLayoutMeasure": [Function],
+                              "notifyLayoutUpdate": [Function],
+                              "notifyRender": [Function],
+                              "notifySetAxisTarget": [Function],
+                              "notifyUnmount": [Function],
+                              "notifyUpdate": [Function],
+                              "notifyViewportBoxUpdate": [Function],
+                              "onAnimationComplete": [Function],
+                              "onAnimationStart": [Function],
+                              "onBeforeLayoutMeasure": [Function],
+                              "onLayoutAnimationComplete": [Function],
+                              "onLayoutMeasure": [Function],
+                              "onLayoutUpdate": [Function],
+                              "onRender": [Function],
+                              "onSetAxisTarget": [Function],
+                              "onUnmount": [Function],
+                              "onUpdate": [Function],
+                              "onViewportBoxUpdate": [Function],
+                              "parent": undefined,
+                              "presenceId": undefined,
+                              "projection": [Circular],
+                              "readValue": [Function],
+                              "removeValue": [Function],
+                              "scheduleRender": [Function],
+                              "setBaseTarget": [Function],
+                              "setProps": [Function],
+                              "setStaticValue": [Function],
+                              "setVisibility": [Function],
+                              "sortNodePosition": [Function],
+                              "syncRender": [Function],
+                              "treeType": "dom",
+                              "unmount": [Function],
+                              "updatePropListeners": [Function],
+                              "variantChildren": Set {},
+                            },
+                          },
+                          "parent": [Circular],
+                          "path": Array [
+                            [Circular],
+                          ],
+                          "potentialNodes": Map {},
+                          "root": [Circular],
+                          "sharedNodes": Map {},
+                          "shouldResetTransform": false,
+                          "treeScale": Object {
+                            "x": 1,
+                            "y": 1,
+                          },
+                          "updateBlockedByResize": false,
+                          "updateManuallyBlocked": false,
+                          "updateProjection": [Function],
+                        },
+                        [Circular],
+                      ],
+                      "isDirty": true,
+                    },
+                    "options": Object {
+                      "crossfade": true,
+                      "layoutScroll": true,
+                    },
+                    "parent": undefined,
+                    "path": Array [],
+                    "potentialNodes": Map {},
+                    "root": [Circular],
+                    "sharedNodes": Map {},
+                    "shouldResetTransform": true,
+                    "treeScale": Object {
+                      "x": 1,
+                      "y": 1,
+                    },
+                    "updateBlockedByResize": false,
+                    "updateManuallyBlocked": false,
+                    "updateProjection": [Function],
+                  },
+                  "path": Array [
+                    ProjectionNode {
+                      "animationProgress": 0,
+                      "checkUpdateFailed": [Function],
+                      "children": Set {
+                        ProjectionNode {
+                          "animationProgress": 0,
+                          "checkUpdateFailed": [Function],
+                          "children": Set {},
+                          "depth": 1,
+                          "eventHandlers": Map {},
+                          "hasProjected": false,
+                          "id": undefined,
+                          "instance": <div
+                            class="code-view"
+                            style="transform: translateY(-100%) translateZ(0);"
+                          >
+                            <div
+                              class="code-view__content"
+                            >
+                              <pre>
+                                <code />
+                              </pre>
+                            </div>
+                            <div
+                              class="code-view__controls"
+                            >
+                              Close code view
+                            </div>
+                          </div>,
+                          "isAnimationBlocked": false,
+                          "isLayoutDirty": false,
+                          "isSVG": true,
+                          "isTreeAnimating": false,
+                          "isUpdating": false,
+                          "isVisible": true,
+                          "latestValues": Object {
+                            "translateY": "-100%",
+                          },
+                          "needsReset": false,
+                          "options": Object {
+                            "alwaysMeasureLayout": undefined,
+                            "animationType": "both",
+                            "crossfade": true,
+                            "initialPromotionConfig": Object {},
+                            "layout": undefined,
+                            "layoutId": undefined,
+                            "layoutScroll": undefined,
+                            "scheduleRender": [Function],
+                            "visualElement": Object {
+                              "addValue": [Function],
+                              "addVariantChild": [Function],
+                              "animationState": Object {
+                                "animateChanges": [Function],
+                                "getState": [Function],
+                                "isAnimated": [Function],
+                                "setActive": [Function],
+                                "setAnimateFunction": [Function],
+                              },
+                              "blockInitialAnimation": false,
+                              "build": [Function],
+                              "children": Set {},
+                              "clearAllListeners": [Function],
+                              "current": <div
+                                class="code-view"
+                                style="transform: translateY(-100%) translateZ(0);"
+                              >
+                                <div
+                                  class="code-view__content"
+                                >
+                                  <pre>
+                                    <code />
+                                  </pre>
+                                </div>
+                                <div
+                                  class="code-view__controls"
+                                >
+                                  Close code view
+                                </div>
+                              </div>,
+                              "depth": 0,
+                              "forEachValue": [Function],
+                              "getBaseTarget": [Function],
+                              "getClosestVariantNode": [Function],
+                              "getDefaultTransition": [Function],
+                              "getInstance": [Function],
+                              "getLatestValues": [Function],
+                              "getLayoutId": [Function],
+                              "getProps": [Function],
+                              "getStaticValue": [Function],
+                              "getTransformPagePoint": [Function],
+                              "getValue": [Function],
+                              "getVariant": [Function],
+                              "getVariantContext": [Function],
+                              "hasValue": [Function],
+                              "isMounted": [Function],
+                              "isVisible": undefined,
+                              "makeTargetAnimatable": [Function],
+                              "manuallyAnimateOnMount": false,
+                              "measureViewportBox": [Function],
+                              "mount": [Function],
+                              "notifyAnimationComplete": [Function],
+                              "notifyAnimationStart": [Function],
+                              "notifyBeforeLayoutMeasure": [Function],
+                              "notifyLayoutAnimationComplete": [Function],
+                              "notifyLayoutMeasure": [Function],
+                              "notifyLayoutUpdate": [Function],
+                              "notifyRender": [Function],
+                              "notifySetAxisTarget": [Function],
+                              "notifyUnmount": [Function],
+                              "notifyUpdate": [Function],
+                              "notifyViewportBoxUpdate": [Function],
+                              "onAnimationComplete": [Function],
+                              "onAnimationStart": [Function],
+                              "onBeforeLayoutMeasure": [Function],
+                              "onLayoutAnimationComplete": [Function],
+                              "onLayoutMeasure": [Function],
+                              "onLayoutUpdate": [Function],
+                              "onRender": [Function],
+                              "onSetAxisTarget": [Function],
+                              "onUnmount": [Function],
+                              "onUpdate": [Function],
+                              "onViewportBoxUpdate": [Function],
+                              "parent": undefined,
+                              "presenceId": undefined,
+                              "projection": [Circular],
+                              "readValue": [Function],
+                              "removeValue": [Function],
+                              "scheduleRender": [Function],
+                              "setBaseTarget": [Function],
+                              "setProps": [Function],
+                              "setStaticValue": [Function],
+                              "setVisibility": [Function],
+                              "sortNodePosition": [Function],
+                              "syncRender": [Function],
+                              "treeType": "dom",
+                              "unmount": [Function],
+                              "updatePropListeners": [Function],
+                              "variantChildren": Set {},
+                            },
+                          },
+                          "parent": [Circular],
+                          "path": Array [
+                            [Circular],
+                          ],
+                          "potentialNodes": Map {},
+                          "root": [Circular],
+                          "sharedNodes": Map {},
+                          "shouldResetTransform": false,
+                          "treeScale": Object {
+                            "x": 1,
+                            "y": 1,
+                          },
+                          "updateBlockedByResize": false,
+                          "updateManuallyBlocked": false,
+                          "updateProjection": [Function],
+                        },
+                        [Circular],
+                      },
+                      "depth": 0,
+                      "eventHandlers": Map {},
+                      "hasProjected": false,
+                      "id": 0,
+                      "instance": [Window],
+                      "isAnimationBlocked": false,
+                      "isLayoutDirty": false,
+                      "isSVG": false,
+                      "isTreeAnimating": false,
+                      "isUpdating": false,
+                      "isVisible": true,
+                      "latestValues": Object {},
+                      "needsReset": false,
+                      "nodes": FlatTree {
+                        "children": Array [
+                          [Circular],
+                          ProjectionNode {
+                            "animationProgress": 0,
+                            "checkUpdateFailed": [Function],
+                            "children": Set {},
+                            "depth": 1,
+                            "eventHandlers": Map {},
+                            "hasProjected": false,
+                            "id": undefined,
+                            "instance": <div
+                              class="code-view"
+                              style="transform: translateY(-100%) translateZ(0);"
+                            >
+                              <div
+                                class="code-view__content"
+                              >
+                                <pre>
+                                  <code />
+                                </pre>
+                              </div>
+                              <div
+                                class="code-view__controls"
+                              >
+                                Close code view
+                              </div>
+                            </div>,
+                            "isAnimationBlocked": false,
+                            "isLayoutDirty": false,
+                            "isSVG": true,
+                            "isTreeAnimating": false,
+                            "isUpdating": false,
+                            "isVisible": true,
+                            "latestValues": Object {
+                              "translateY": "-100%",
+                            },
+                            "needsReset": false,
+                            "options": Object {
+                              "alwaysMeasureLayout": undefined,
+                              "animationType": "both",
+                              "crossfade": true,
+                              "initialPromotionConfig": Object {},
+                              "layout": undefined,
+                              "layoutId": undefined,
+                              "layoutScroll": undefined,
+                              "scheduleRender": [Function],
+                              "visualElement": Object {
+                                "addValue": [Function],
+                                "addVariantChild": [Function],
+                                "animationState": Object {
+                                  "animateChanges": [Function],
+                                  "getState": [Function],
+                                  "isAnimated": [Function],
+                                  "setActive": [Function],
+                                  "setAnimateFunction": [Function],
+                                },
+                                "blockInitialAnimation": false,
+                                "build": [Function],
+                                "children": Set {},
+                                "clearAllListeners": [Function],
+                                "current": <div
+                                  class="code-view"
+                                  style="transform: translateY(-100%) translateZ(0);"
+                                >
+                                  <div
+                                    class="code-view__content"
+                                  >
+                                    <pre>
+                                      <code />
+                                    </pre>
+                                  </div>
+                                  <div
+                                    class="code-view__controls"
+                                  >
+                                    Close code view
+                                  </div>
+                                </div>,
+                                "depth": 0,
+                                "forEachValue": [Function],
+                                "getBaseTarget": [Function],
+                                "getClosestVariantNode": [Function],
+                                "getDefaultTransition": [Function],
+                                "getInstance": [Function],
+                                "getLatestValues": [Function],
+                                "getLayoutId": [Function],
+                                "getProps": [Function],
+                                "getStaticValue": [Function],
+                                "getTransformPagePoint": [Function],
+                                "getValue": [Function],
+                                "getVariant": [Function],
+                                "getVariantContext": [Function],
+                                "hasValue": [Function],
+                                "isMounted": [Function],
+                                "isVisible": undefined,
+                                "makeTargetAnimatable": [Function],
+                                "manuallyAnimateOnMount": false,
+                                "measureViewportBox": [Function],
+                                "mount": [Function],
+                                "notifyAnimationComplete": [Function],
+                                "notifyAnimationStart": [Function],
+                                "notifyBeforeLayoutMeasure": [Function],
+                                "notifyLayoutAnimationComplete": [Function],
+                                "notifyLayoutMeasure": [Function],
+                                "notifyLayoutUpdate": [Function],
+                                "notifyRender": [Function],
+                                "notifySetAxisTarget": [Function],
+                                "notifyUnmount": [Function],
+                                "notifyUpdate": [Function],
+                                "notifyViewportBoxUpdate": [Function],
+                                "onAnimationComplete": [Function],
+                                "onAnimationStart": [Function],
+                                "onBeforeLayoutMeasure": [Function],
+                                "onLayoutAnimationComplete": [Function],
+                                "onLayoutMeasure": [Function],
+                                "onLayoutUpdate": [Function],
+                                "onRender": [Function],
+                                "onSetAxisTarget": [Function],
+                                "onUnmount": [Function],
+                                "onUpdate": [Function],
+                                "onViewportBoxUpdate": [Function],
+                                "parent": undefined,
+                                "presenceId": undefined,
+                                "projection": [Circular],
+                                "readValue": [Function],
+                                "removeValue": [Function],
+                                "scheduleRender": [Function],
+                                "setBaseTarget": [Function],
+                                "setProps": [Function],
+                                "setStaticValue": [Function],
+                                "setVisibility": [Function],
+                                "sortNodePosition": [Function],
+                                "syncRender": [Function],
+                                "treeType": "dom",
+                                "unmount": [Function],
+                                "updatePropListeners": [Function],
+                                "variantChildren": Set {},
+                              },
+                            },
+                            "parent": [Circular],
+                            "path": Array [
+                              [Circular],
+                            ],
+                            "potentialNodes": Map {},
+                            "root": [Circular],
+                            "sharedNodes": Map {},
+                            "shouldResetTransform": false,
+                            "treeScale": Object {
+                              "x": 1,
+                              "y": 1,
+                            },
+                            "updateBlockedByResize": false,
+                            "updateManuallyBlocked": false,
+                            "updateProjection": [Function],
+                          },
+                          [Circular],
+                        ],
+                        "isDirty": true,
+                      },
+                      "options": Object {
+                        "crossfade": true,
+                        "layoutScroll": true,
+                      },
+                      "parent": undefined,
+                      "path": Array [],
+                      "potentialNodes": Map {},
+                      "root": [Circular],
+                      "sharedNodes": Map {},
+                      "shouldResetTransform": true,
+                      "treeScale": Object {
+                        "x": 1,
+                        "y": 1,
+                      },
+                      "updateBlockedByResize": false,
+                      "updateManuallyBlocked": false,
+                      "updateProjection": [Function],
+                    },
+                  ],
+                  "potentialNodes": Map {},
+                  "root": ProjectionNode {
+                    "animationProgress": 0,
+                    "checkUpdateFailed": [Function],
+                    "children": Set {
+                      ProjectionNode {
+                        "animationProgress": 0,
+                        "checkUpdateFailed": [Function],
+                        "children": Set {},
+                        "depth": 1,
+                        "eventHandlers": Map {},
+                        "hasProjected": false,
+                        "id": undefined,
+                        "instance": <div
+                          class="code-view"
+                          style="transform: translateY(-100%) translateZ(0);"
+                        >
+                          <div
+                            class="code-view__content"
+                          >
+                            <pre>
+                              <code />
+                            </pre>
+                          </div>
+                          <div
+                            class="code-view__controls"
+                          >
+                            Close code view
+                          </div>
+                        </div>,
+                        "isAnimationBlocked": false,
+                        "isLayoutDirty": false,
+                        "isSVG": true,
+                        "isTreeAnimating": false,
+                        "isUpdating": false,
+                        "isVisible": true,
+                        "latestValues": Object {
+                          "translateY": "-100%",
+                        },
+                        "needsReset": false,
+                        "options": Object {
+                          "alwaysMeasureLayout": undefined,
+                          "animationType": "both",
+                          "crossfade": true,
+                          "initialPromotionConfig": Object {},
+                          "layout": undefined,
+                          "layoutId": undefined,
+                          "layoutScroll": undefined,
+                          "scheduleRender": [Function],
+                          "visualElement": Object {
+                            "addValue": [Function],
+                            "addVariantChild": [Function],
+                            "animationState": Object {
+                              "animateChanges": [Function],
+                              "getState": [Function],
+                              "isAnimated": [Function],
+                              "setActive": [Function],
+                              "setAnimateFunction": [Function],
+                            },
+                            "blockInitialAnimation": false,
+                            "build": [Function],
+                            "children": Set {},
+                            "clearAllListeners": [Function],
+                            "current": <div
+                              class="code-view"
+                              style="transform: translateY(-100%) translateZ(0);"
+                            >
+                              <div
+                                class="code-view__content"
+                              >
+                                <pre>
+                                  <code />
+                                </pre>
+                              </div>
+                              <div
+                                class="code-view__controls"
+                              >
+                                Close code view
+                              </div>
+                            </div>,
+                            "depth": 0,
+                            "forEachValue": [Function],
+                            "getBaseTarget": [Function],
+                            "getClosestVariantNode": [Function],
+                            "getDefaultTransition": [Function],
+                            "getInstance": [Function],
+                            "getLatestValues": [Function],
+                            "getLayoutId": [Function],
+                            "getProps": [Function],
+                            "getStaticValue": [Function],
+                            "getTransformPagePoint": [Function],
+                            "getValue": [Function],
+                            "getVariant": [Function],
+                            "getVariantContext": [Function],
+                            "hasValue": [Function],
+                            "isMounted": [Function],
+                            "isVisible": undefined,
+                            "makeTargetAnimatable": [Function],
+                            "manuallyAnimateOnMount": false,
+                            "measureViewportBox": [Function],
+                            "mount": [Function],
+                            "notifyAnimationComplete": [Function],
+                            "notifyAnimationStart": [Function],
+                            "notifyBeforeLayoutMeasure": [Function],
+                            "notifyLayoutAnimationComplete": [Function],
+                            "notifyLayoutMeasure": [Function],
+                            "notifyLayoutUpdate": [Function],
+                            "notifyRender": [Function],
+                            "notifySetAxisTarget": [Function],
+                            "notifyUnmount": [Function],
+                            "notifyUpdate": [Function],
+                            "notifyViewportBoxUpdate": [Function],
+                            "onAnimationComplete": [Function],
+                            "onAnimationStart": [Function],
+                            "onBeforeLayoutMeasure": [Function],
+                            "onLayoutAnimationComplete": [Function],
+                            "onLayoutMeasure": [Function],
+                            "onLayoutUpdate": [Function],
+                            "onRender": [Function],
+                            "onSetAxisTarget": [Function],
+                            "onUnmount": [Function],
+                            "onUpdate": [Function],
+                            "onViewportBoxUpdate": [Function],
+                            "parent": undefined,
+                            "presenceId": undefined,
+                            "projection": [Circular],
+                            "readValue": [Function],
+                            "removeValue": [Function],
+                            "scheduleRender": [Function],
+                            "setBaseTarget": [Function],
+                            "setProps": [Function],
+                            "setStaticValue": [Function],
+                            "setVisibility": [Function],
+                            "sortNodePosition": [Function],
+                            "syncRender": [Function],
+                            "treeType": "dom",
+                            "unmount": [Function],
+                            "updatePropListeners": [Function],
+                            "variantChildren": Set {},
+                          },
+                        },
+                        "parent": [Circular],
+                        "path": Array [
+                          [Circular],
+                        ],
+                        "potentialNodes": Map {},
+                        "root": [Circular],
+                        "sharedNodes": Map {},
+                        "shouldResetTransform": false,
+                        "treeScale": Object {
+                          "x": 1,
+                          "y": 1,
+                        },
+                        "updateBlockedByResize": false,
+                        "updateManuallyBlocked": false,
+                        "updateProjection": [Function],
+                      },
+                      [Circular],
+                    },
+                    "depth": 0,
+                    "eventHandlers": Map {},
+                    "hasProjected": false,
+                    "id": 0,
+                    "instance": [Window],
+                    "isAnimationBlocked": false,
+                    "isLayoutDirty": false,
+                    "isSVG": false,
+                    "isTreeAnimating": false,
+                    "isUpdating": false,
+                    "isVisible": true,
+                    "latestValues": Object {},
+                    "needsReset": false,
+                    "nodes": FlatTree {
+                      "children": Array [
+                        [Circular],
+                        ProjectionNode {
+                          "animationProgress": 0,
+                          "checkUpdateFailed": [Function],
+                          "children": Set {},
+                          "depth": 1,
+                          "eventHandlers": Map {},
+                          "hasProjected": false,
+                          "id": undefined,
+                          "instance": <div
+                            class="code-view"
+                            style="transform: translateY(-100%) translateZ(0);"
+                          >
+                            <div
+                              class="code-view__content"
+                            >
+                              <pre>
+                                <code />
+                              </pre>
+                            </div>
+                            <div
+                              class="code-view__controls"
+                            >
+                              Close code view
+                            </div>
+                          </div>,
+                          "isAnimationBlocked": false,
+                          "isLayoutDirty": false,
+                          "isSVG": true,
+                          "isTreeAnimating": false,
+                          "isUpdating": false,
+                          "isVisible": true,
+                          "latestValues": Object {
+                            "translateY": "-100%",
+                          },
+                          "needsReset": false,
+                          "options": Object {
+                            "alwaysMeasureLayout": undefined,
+                            "animationType": "both",
+                            "crossfade": true,
+                            "initialPromotionConfig": Object {},
+                            "layout": undefined,
+                            "layoutId": undefined,
+                            "layoutScroll": undefined,
+                            "scheduleRender": [Function],
+                            "visualElement": Object {
+                              "addValue": [Function],
+                              "addVariantChild": [Function],
+                              "animationState": Object {
+                                "animateChanges": [Function],
+                                "getState": [Function],
+                                "isAnimated": [Function],
+                                "setActive": [Function],
+                                "setAnimateFunction": [Function],
+                              },
+                              "blockInitialAnimation": false,
+                              "build": [Function],
+                              "children": Set {},
+                              "clearAllListeners": [Function],
+                              "current": <div
+                                class="code-view"
+                                style="transform: translateY(-100%) translateZ(0);"
+                              >
+                                <div
+                                  class="code-view__content"
+                                >
+                                  <pre>
+                                    <code />
+                                  </pre>
+                                </div>
+                                <div
+                                  class="code-view__controls"
+                                >
+                                  Close code view
+                                </div>
+                              </div>,
+                              "depth": 0,
+                              "forEachValue": [Function],
+                              "getBaseTarget": [Function],
+                              "getClosestVariantNode": [Function],
+                              "getDefaultTransition": [Function],
+                              "getInstance": [Function],
+                              "getLatestValues": [Function],
+                              "getLayoutId": [Function],
+                              "getProps": [Function],
+                              "getStaticValue": [Function],
+                              "getTransformPagePoint": [Function],
+                              "getValue": [Function],
+                              "getVariant": [Function],
+                              "getVariantContext": [Function],
+                              "hasValue": [Function],
+                              "isMounted": [Function],
+                              "isVisible": undefined,
+                              "makeTargetAnimatable": [Function],
+                              "manuallyAnimateOnMount": false,
+                              "measureViewportBox": [Function],
+                              "mount": [Function],
+                              "notifyAnimationComplete": [Function],
+                              "notifyAnimationStart": [Function],
+                              "notifyBeforeLayoutMeasure": [Function],
+                              "notifyLayoutAnimationComplete": [Function],
+                              "notifyLayoutMeasure": [Function],
+                              "notifyLayoutUpdate": [Function],
+                              "notifyRender": [Function],
+                              "notifySetAxisTarget": [Function],
+                              "notifyUnmount": [Function],
+                              "notifyUpdate": [Function],
+                              "notifyViewportBoxUpdate": [Function],
+                              "onAnimationComplete": [Function],
+                              "onAnimationStart": [Function],
+                              "onBeforeLayoutMeasure": [Function],
+                              "onLayoutAnimationComplete": [Function],
+                              "onLayoutMeasure": [Function],
+                              "onLayoutUpdate": [Function],
+                              "onRender": [Function],
+                              "onSetAxisTarget": [Function],
+                              "onUnmount": [Function],
+                              "onUpdate": [Function],
+                              "onViewportBoxUpdate": [Function],
+                              "parent": undefined,
+                              "presenceId": undefined,
+                              "projection": [Circular],
+                              "readValue": [Function],
+                              "removeValue": [Function],
+                              "scheduleRender": [Function],
+                              "setBaseTarget": [Function],
+                              "setProps": [Function],
+                              "setStaticValue": [Function],
+                              "setVisibility": [Function],
+                              "sortNodePosition": [Function],
+                              "syncRender": [Function],
+                              "treeType": "dom",
+                              "unmount": [Function],
+                              "updatePropListeners": [Function],
+                              "variantChildren": Set {},
+                            },
+                          },
+                          "parent": [Circular],
+                          "path": Array [
+                            [Circular],
+                          ],
+                          "potentialNodes": Map {},
+                          "root": [Circular],
+                          "sharedNodes": Map {},
+                          "shouldResetTransform": false,
+                          "treeScale": Object {
+                            "x": 1,
+                            "y": 1,
+                          },
+                          "updateBlockedByResize": false,
+                          "updateManuallyBlocked": false,
+                          "updateProjection": [Function],
+                        },
+                        [Circular],
+                      ],
+                      "isDirty": true,
+                    },
+                    "options": Object {
+                      "crossfade": true,
+                      "layoutScroll": true,
+                    },
+                    "parent": undefined,
+                    "path": Array [],
+                    "potentialNodes": Map {},
+                    "root": [Circular],
+                    "sharedNodes": Map {},
+                    "shouldResetTransform": true,
+                    "treeScale": Object {
+                      "x": 1,
+                      "y": 1,
+                    },
+                    "updateBlockedByResize": false,
+                    "updateManuallyBlocked": false,
+                    "updateProjection": [Function],
+                  },
+                  "sharedNodes": Map {},
+                  "shouldResetTransform": false,
+                  "treeScale": Object {
+                    "x": 1,
+                    "y": 1,
+                  },
+                  "updateBlockedByResize": false,
+                  "updateManuallyBlocked": false,
+                  "updateProjection": [Function],
+                },
+                "readValue": [Function],
+                "removeValue": [Function],
+                "scheduleRender": [Function],
+                "setBaseTarget": [Function],
+                "setProps": [Function],
+                "setStaticValue": [Function],
+                "setVisibility": [Function],
+                "sortNodePosition": [Function],
+                "syncRender": [Function],
+                "treeType": "dom",
+                "unmount": [Function],
+                "updatePropListeners": [Function],
+                "variantChildren": Set {},
+              }
+            }
+          />
+          <div
+            className="code-view"
+            style={
+              Object {
+                "transform": "translateY(-100%) translateZ(0)",
+              }
+            }
+          >
+            <div
+              className="code-view__content"
+            >
+              <pre>
+                <code>
+                  {
+  "name": "example name"
+}
+                </code>
+              </pre>
+            </div>
+            <div
+              className="code-view__controls"
+              onClick={[Function]}
+            >
+              Close code view
+            </div>
+          </div>
+        </VisualElementHandler>
+      </ForwardRef(MotionComponent)>
+    </Portal>
   </CodeView>
 </Provider>
 `;

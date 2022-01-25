@@ -30,24 +30,25 @@ exports[`<Stage /> can render 1`] = `
     hasFilter={false}
     hasSkipLogic={false}
     label=""
-    layoutId="809895df-bbd7-4c76-ac58-e6ada2625f9b"
     onEditStage={[Function]}
     type="Foo"
   />
   <div
     className="timeline-stage__controls"
   >
-    <a
-      className="timeline-stage__control"
+    <Button
+      color="neon-coral"
+      content=""
+      disabled={false}
+      icon={<Memo />}
+      iconPosition="left"
       onClick={[Function]}
+      size="small"
+      title="Delete variable"
+      type="button"
     >
-      <div
-        className="timeline-stage__control-icon"
-      >
-        ✕
-      </div>
       Delete stage
-    </a>
+    </Button>
   </div>
 </ForwardRef(MotionComponent)>
 `;

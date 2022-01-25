@@ -99,6 +99,7 @@ Object {
   "stages[13].cardOptions.additionalProperties[0].variable": "last_name",
   "stages[13].cardOptions.additionalProperties[1].variable": "age",
   "stages[13].prompts[0].additionalAttributes[0].variable": "ae44b6ba-ad49-4ecf-bf38-b65decfce000",
+  "stages[13].prompts[1].additionalAttributes[0].variable": "e1dda563-f6f6-47b7-91cb-31b4c2fdb73a",
   "stages[13].searchOptions.matchProperties[0]": "variableNotInRegistry",
   "stages[13].searchOptions.matchProperties[1]": "nickname",
   "stages[13].searchOptions.matchProperties[2]": "last_name",

@@ -1,45 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CodebookScreen /> can render 1`] = `
-<withState(withContext(Screen))
-  buttons={
-    Array [
-      <Button
-        color=""
-        content=""
-        disabled={false}
-        icon="arrow-right"
-        iconPosition="right"
-        onClick={[Function]}
-        size=""
-        type="button"
-      >
-        Return to Timeline
-      </Button>,
-    ]
+<Screen
+  beforeCloseHandler={null}
+  className=""
+  footer={
+    <ControlBar
+      buttons={
+        Array [
+          <Button
+            color="platinum"
+            content=""
+            disabled={false}
+            icon=""
+            iconPosition="left"
+            onClick={[Function]}
+            size=""
+            type="button"
+          >
+            Close
+          </Button>,
+        ]
+      }
+      className=""
+      secondaryButtons={null}
+    />
   }
+  header={null}
   layoutId={null}
-  onAcknowledgeError={[Function]}
-  show={true}
-  transitionState={null}
+  onComplete={[Function]}
 >
+  <CollapsableHeader
+    collapsedState={
+      <div
+        className="stage-heading stage-heading--collapsed stage-heading--shadow"
+      >
+        <Layout
+          className=""
+        >
+          <h2>
+            Codebook
+          </h2>
+        </Layout>
+      </div>
+    }
+    threshold={115}
+  >
+    <div
+      className="stage-heading stage-heading--inline"
+    >
+      <Layout
+        className=""
+      >
+        <h1
+          className="screen-heading"
+        >
+          Codebook
+        </h1>
+        <p>
+          Below you can find an overview of the node and edge types that you have defined while creating your interview. Entities that are unused may be deleted.
+        </p>
+      </Layout>
+    </div>
+  </CollapsableHeader>
   <Layout
     className=""
   >
-    <Section
-      className=""
-      compactNext={false}
-      disabled={false}
-      group={false}
-    >
-      <h1>
-        Codebook
-      </h1>
-      <p>
-        Below you can find an overview of the node and edge types that you have defined while creating your interview. Entities that are unused may be deleted.
-      </p>
-    </Section>
     <Connect(Codebook) />
   </Layout>
-</withState(withContext(Screen))>
+</Screen>
 `;
