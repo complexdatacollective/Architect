@@ -66,6 +66,10 @@
     &-meta {
       flex: 1;
       padding-left: unit(4);
+
+      .link {
+        margin-right: .75rem;
+      }
     }
 
     &-control {
