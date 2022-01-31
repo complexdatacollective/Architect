@@ -26,6 +26,8 @@
   > legend {
     @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
     --input-background: transparent;
+
+    font-family: var(--heading-font-family);
     font-size: 1rem;
     padding: unit(1) unit(3);
     background: var(--section-background-color);
