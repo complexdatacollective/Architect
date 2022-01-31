@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import { Text } from '@codaco/ui/lib/components/Fields';
-import { Section } from '@components/EditorLayout';
+import { Section, Row } from '@components/EditorLayout';
 import { useDispatch, useSelector } from 'react-redux';
 import { change, formValueSelector } from 'redux-form';
 import MultiSelect from '@components/Form/MultiSelect';
@@ -23,7 +23,8 @@ const SortOptions = ({
 
   const dispatch = useDispatch();
   const getFormValue = formValueSelector('edit-stage');
-  const hasSortOptions = useSelector((state) => getFormValue(state, 'sortOptions'));
+  const hasSortOrder = useSelector((state) => getFormValue(state, 'sortOptions.sortOrder'));
+  const hasSortableProperties = useSelector((state) => getFormValue(state, 'sortOptions.sortableProperties'));
 
   const handleToggleSortOptions = (nextState) => {
     if (nextState === false) {
@@ -44,20 +45,17 @@ const SortOptions = ({
         </p>
       )}
       toggleable
-      startExpanded={!!hasSortOptions}
+      startExpanded={!!hasSortOrder || !!hasSortableProperties}
       handleToggleChange={handleToggleSortOptions}
       disabled={disabled}
     >
-      <Section
-        title="Initial Sort Order"
-        summary={(
-          <p>
-            Create one or more rules to determine the default sort order or the roster,
-            when it is first shown to the participant. By default, Interviewer will
-            use the order that nodes are defined in your data file.
-          </p>
-        )}
-      >
+      <Row>
+        <h4>Initial Sort Order</h4>
+        <p>
+          Create one or more rules to determine the default sort order or the roster,
+          when it is first shown to the participant. By default, Interviewer will
+          use the order that nodes are defined in your data file.
+        </p>
         <MultiSelect
           name="sortOptions.sortOrder"
           maxItems={1}
@@ -67,17 +65,14 @@ const SortOptions = ({
           ]}
           options={sortOrderOptionGetter}
         />
-      </Section>
-      <Section
-        title="Participant Sortable Properties"
-        summary={(
-          <p>
-            This interface allows the participant to sort the roster, to help with locating
-            a specific member. Select one or more attributes from your roster that the
-            participant can use to sort the list.
-          </p>
-        )}
-      >
+      </Row>
+      <Row>
+        <h4>Participant Sortable Properties</h4>
+        <p>
+          This interface allows the participant to sort the roster, to help with locating
+          a specific member. Select one or more attributes from your roster that the
+          participant can use to sort the list.
+        </p>
         <MultiSelect
           name="sortOptions.sortableProperties"
           maxItems={maxVariableOptions}
@@ -91,7 +86,7 @@ const SortOptions = ({
           ]}
           options={variableOptionsGetter}
         />
-      </Section>
+      </Row>
     </Section>
   );
 };
