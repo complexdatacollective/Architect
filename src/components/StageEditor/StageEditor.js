@@ -31,7 +31,7 @@ const StageEditor = (props) => {
   }, []);
 
   const handleKeyDown = useCallback((event) => {
-    if (event.metaKey && event.key === '/') {
+    if (event.ctrlKey && event.key === '/') {
       toggleCodeView();
     }
   });
