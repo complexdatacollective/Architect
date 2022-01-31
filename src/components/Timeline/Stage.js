@@ -88,7 +88,7 @@ const Stage = ({
           color="neon-coral"
           icon={<DeleteIcon />}
           onClick={() => onDeleteStage(id)}
-          title="Delete variable"
+          title="Delete stage"
         >
           Delete stage
         </Button>
