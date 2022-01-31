@@ -1,75 +1,47 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
-import { compose } from 'recompose';
+import { useSelector } from 'react-redux';
+import { Field, formValueSelector } from 'redux-form';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
-import DetachedField from '@components/DetachedField';
-import { ValidatedField } from '@components/Form';
-import Tip from '@components/Tip';
-import withEdgesOptions from './withEdgesOptions';
-import withEdgeHighlightChangeHandler from './withEdgeHighlightChangeHandler';
-import PromptFieldsHighlight from './PromptFieldsHighlight';
-import EntitySelectField from '../fields/EntitySelectField/EntitySelectField';
+import Tip from '../../Tip';
+import { getEdgesForSubject } from './selectors';
 
-const EdgeFields = (props) => {
-  const {
-    edgesForSubject,
-    displayEdgesOptions,
-    handleEdgeHighlightChange,
-    allowHighlighting,
-    canCreateEdge,
-    setCanCreateEdge,
-  } = props;
+const DisplayEdges = ({ form, entity, type }) => {
+  const edgesForSubject = useSelector((state) => getEdgesForSubject(state, { entity, type }));
+  const createEdges = useSelector((state) => formValueSelector(form)(state, 'edges.create'));
 
-  const handleToggleCreateEdge = (value) => {
-    setCanCreateEdge(!canCreateEdge);
-    handleEdgeHighlightChange(value, 'edge');
-  };
+  const displayEdgesOptions = edgesForSubject.map((edge) => {
+    if (edge.value !== createEdges) { return edge; }
+    return {
+      ...edge,
+      disabled: true,
+    };
+  });
+
+  const hasDisabledEdgeOption = displayEdgesOptions.some((option) => option.disabled);
 
   return (
     <>
       <Section
-        title="Edge Creation"
+        title="Display Edges"
         summary={(
           <p>
-            The sociogram can be configured to allow the participant to create edges by
-            consecutively tapping nodes.
+            You can display one or more edge types on this prompt. Where two nodes are connected
+            by multiple edge types, only one of those edge types will be displayed.
           </p>
         )}
       >
-        <Row>
-          <h4 className="form-field-label">Enable Edge Creation</h4>
-          <Tip>
-            <p>
-              You cannot use this setting at the same time
-              as the &quot;Variable toggling&quot; option below. Enabling this setting will
-              disable that option.
-            </p>
-          </Tip>
-          <DetachedField
-            component={Fields.Toggle}
-            value={canCreateEdge}
-            onChange={handleToggleCreateEdge}
-            label="Create edges by tapping on a node"
-            disabled={allowHighlighting}
-            title={allowHighlighting ? 'Allow highlighting must be disabled to create edge' : ''}
-          />
-        </Row>
-        <Row disabled={!canCreateEdge}>
-          { canCreateEdge
-            && (
-              <ValidatedField
-                entityType="edge"
-                name="edges.create"
-                component={EntitySelectField}
-                label="Create edges of the following type"
-                validation={{ required: true }}
-              />
-            )}
-        </Row>
         <Row disabled={edgesForSubject.length === 0}>
+          { hasDisabledEdgeOption && (
+            <Tip>
+              <p>
+                The edge type being created must always be displayed. This
+                edge type is shown in italics below, and cannot be deselected.
+              </p>
+            </Tip>
+          )}
           { edgesForSubject.length > 0
             && (
             <Field
@@ -81,31 +53,14 @@ const EdgeFields = (props) => {
             )}
         </Row>
       </Section>
-      <PromptFieldsHighlight {...props} />
     </>
   );
 };
 
-EdgeFields.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  edgesForSubject: PropTypes.array.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  displayEdgesOptions: PropTypes.array.isRequired,
-  handleEdgeHighlightChange: PropTypes.func.isRequired,
-  handleCreateEdge: PropTypes.func.isRequired,
-  handleChangeCreateEdge: PropTypes.func.isRequired,
-  setCanCreateEdge: PropTypes.func.isRequired,
-  canCreateEdge: PropTypes.bool.isRequired,
-  allowHighlighting: PropTypes.bool,
+DisplayEdges.propTypes = {
+  form: PropTypes.string.isRequired,
+  entity: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
-EdgeFields.defaultProps = {
-  allowHighlighting: false,
-};
-
-export { EdgeFields };
-
-export default compose(
-  withEdgesOptions,
-  withEdgeHighlightChangeHandler,
-)(EdgeFields);
+export default DisplayEdges;

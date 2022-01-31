@@ -12,6 +12,7 @@ import withLayoutOptions from './withLayoutOptions';
 import withCanCreateEdgesState from './withCanCreateEdgesState';
 import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
 import { getSortOrderOptionGetter } from '../CategoricalBinPrompts/optionGetters';
+import Tip from '../../Tip';
 
 const PromptFields = ({
   form,
@@ -40,13 +41,19 @@ const PromptFields = ({
       title="Layout"
       summary={(
         <p>
-          This section controls the position of nodes on this sociogram prompt.
+          This variable stores the position of nodes on the sociogram.
         </p>
       )}
       group
     >
       <Row>
         <div id={getFieldId('layout.layoutVariable')} data-name="Layout Variable" />
+        <Tip type="info">
+          <p>
+            If you use the same layout variable across all prompts, the position of nodes will
+            be automatically set as the participant moves between tasks.
+          </p>
+        </Tip>
         <ValidatedField
           name="layout.layoutVariable"
           label="Create or select a variable to store node coordinates"

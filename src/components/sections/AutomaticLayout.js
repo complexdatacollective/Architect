@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
 import { change, formValueSelector } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { get } from 'lodash';
 import { getFieldId } from '../../utils/issues';
 import DetachedField from '../DetachedField';
 
 const FORM_PROPERTY = 'behaviours.automaticLayout.enabled';
 
-const AutomaticLayout = () => {
+const AutomaticLayout = ({ form }) => {
   const dispatch = useDispatch();
-  const form = useSelector((state) => get(state, 'form', {}));
   const formValue = useSelector((state) => !!formValueSelector(form)(state, FORM_PROPERTY));
 
   const [useAutomaticLayout, setUseAutomaticLayout] = useState(formValue);
@@ -88,6 +87,10 @@ const AutomaticLayout = () => {
       </Row>
     </Section>
   );
+};
+
+AutomaticLayout.propTypes = {
+  form: PropTypes.string.isRequired,
 };
 
 export default AutomaticLayout;
