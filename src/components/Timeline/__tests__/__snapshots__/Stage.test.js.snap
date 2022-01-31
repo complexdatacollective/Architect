@@ -44,7 +44,7 @@ exports[`<Stage /> can render 1`] = `
       iconPosition="left"
       onClick={[Function]}
       size="small"
-      title="Delete variable"
+      title="Delete stage"
       type="button"
     >
       Delete stage
