@@ -16,6 +16,7 @@ const VariablePicker = (props) => {
     type,
     label = 'Create or Select a Variable',
     onCreateOption,
+    disallowCreation,
     meta: {
       error,
       invalid,
@@ -102,6 +103,7 @@ const VariablePicker = (props) => {
           onCancel={hideModal}
           options={options}
           onCreateOption={handleCreateOption}
+          disallowCreation={disallowCreation}
         />
       </SpotlightModal>
     </>
@@ -109,6 +111,7 @@ const VariablePicker = (props) => {
 };
 
 VariablePicker.propTypes = {
+  disallowCreation: PropTypes.bool,
   entity: PropTypes.string,
   type: PropTypes.string,
   label: PropTypes.string,
@@ -130,6 +133,7 @@ VariablePicker.propTypes = {
 };
 
 VariablePicker.defaultProps = {
+  disallowCreation: false,
   entity: null,
   type: null,
   label: 'Create or Select a Variable',

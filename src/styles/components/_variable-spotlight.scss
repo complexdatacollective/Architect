@@ -22,9 +22,18 @@
       margin-right: unit(1);
       flex: 0 0 auto;
 
-      .cls-3 {
-        fill: var(--color-platinum--dark);
+      &[name='info'] {
+        .cls-3 {
+          fill: var(--color-platinum--dark);
+        }
       }
+
+      &[name='warning'] {
+        .cls-1 {
+          fill: var(--color-platinum--dark);
+        }
+      }
+
     }
   }
 

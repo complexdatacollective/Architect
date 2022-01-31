@@ -97,6 +97,7 @@ const VariableSpotlight = (props) => {
     onCancel,
     onCreateOption,
     options,
+    disallowCreation,
   } = props;
 
   const [filterTerm, setFilterTerm] = useState('');
@@ -138,36 +139,52 @@ const VariableSpotlight = (props) => {
       <ol>
         { filterTerm && options.filter((item) => item.label === filterTerm).length !== 1 && (
           <>
-            <Divider legend="Create" />
-            { !invalidVariableName ? (
-              <ListItem
-                onSelect={handleCreateOption}
-                selected={showCursor && cursor === -1}
-                setSelected={() => { setShowCursor(true); setCursor(-1); }}
-                removeSelected={() => setCursor(0)}
-              >
-                <div className="create-new">
-                  <Icon name="add" color="charcoal" />
-                  <span>
-                    Create new variable called &quot;
-                    {filterTerm}
-                    &quot;.
-                  </span>
+            { disallowCreation && filterTerm && sortedAndFilteredItems.length === 0 && (
+              <div className="variable-spotlight__empty">
+                <Icon name="warning" />
+                <div>
+                  <p>
+                    You cannot create a new
+                    variable from here. Please create one or more variables elsewhere
+                    in your protocol, and return here to select them.
+                  </p>
                 </div>
-              </ListItem>
-            ) : (
-              <ListItem disabled>
-                <div className="create-new">
-                  <Icon name="warning" />
-                  <span>
-                    Cannot create variable named &quot;
-                    {filterTerm}
-                    &quot;&nbsp;&mdash;&nbsp;
-                    {invalidVariableName}
-                    .
-                  </span>
-                </div>
-              </ListItem>
+              </div>
+            )}
+            { !disallowCreation && (
+              <>
+                <Divider legend="Create" />
+                { !invalidVariableName ? (
+                  <ListItem
+                    onSelect={handleCreateOption}
+                    selected={showCursor && cursor === -1}
+                    setSelected={() => { setShowCursor(true); setCursor(-1); }}
+                    removeSelected={() => setCursor(0)}
+                  >
+                    <div className="create-new">
+                      <Icon name="add" color="charcoal" />
+                      <span>
+                        Create new variable called &quot;
+                        {filterTerm}
+                        &quot;.
+                      </span>
+                    </div>
+                  </ListItem>
+                ) : (
+                  <ListItem disabled>
+                    <div className="create-new">
+                      <Icon name="warning" />
+                      <span>
+                        Cannot create variable named &quot;
+                        {filterTerm}
+                        &quot;&nbsp;&mdash;&nbsp;
+                        {invalidVariableName}
+                        .
+                      </span>
+                    </div>
+                  </ListItem>
+                )}
+              </>
             )}
           </>
         )}
@@ -266,7 +283,7 @@ const VariableSpotlight = (props) => {
       // If the cursor is in the create option,
       // and there is a filter term,
       // create a new variable with that value
-      if (!invalidVariableName && filterTerm && cursor === -1) {
+      if (!disallowCreation && !invalidVariableName && filterTerm && cursor === -1) {
         handleCreateOption();
       }
     }
@@ -299,7 +316,7 @@ const VariableSpotlight = (props) => {
       <header className="variable-spotlight__header">
         <Search
           autoFocus
-          placeholder="Create or find a variable..."
+          placeholder={disallowCreation ? 'Find a variable...' : 'Create or find a variable...'}
           input={{
             value: filterTerm,
             onChange: handleFilter,
@@ -312,7 +329,7 @@ const VariableSpotlight = (props) => {
         variants={resultsVariants}
         transition={{ duration: 0.2, ease: 'easeInOut' }}
       >
-        { options.length === 0 && (
+        { !disallowCreation && options.length === 0 && (
           <div className="variable-spotlight__empty">
             <Icon name="info" />
             <div>
@@ -325,6 +342,18 @@ const VariableSpotlight = (props) => {
             </div>
           </div>
         )}
+        { disallowCreation && options.length === 0 && (
+          <div className="variable-spotlight__empty">
+            <Icon name="warning" />
+            <div>
+              <p>
+                No variables exist for you to select, and you cannot create a new
+                variable from here. Please create one or more variables elsewhere
+                in your protocol, and return here to select them.
+              </p>
+            </div>
+          </div>
+        )}
         { renderResults() }
       </motion.main>
     </motion.div>
@@ -332,6 +361,7 @@ const VariableSpotlight = (props) => {
 };
 
 VariableSpotlight.propTypes = {
+  disallowCreation: PropTypes.bool,
   onSelect: PropTypes.func.isRequired,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string,
@@ -346,6 +376,7 @@ VariableSpotlight.propTypes = {
 
 VariableSpotlight.defaultProps = {
   type: null,
+  disallowCreation: false,
 };
 
 export default VariableSpotlight;

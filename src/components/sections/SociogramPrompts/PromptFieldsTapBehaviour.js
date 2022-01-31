@@ -15,7 +15,7 @@ import { actionCreators as codebookActions } from '../../../ducks/modules/protoc
 // This was created as part of removing the HOC pattern used throughout the app.
 // It replaces withCreateVariableHandler. Other uses of this handler could be
 // updated to use this function.
-const createVariableHandler = (dispatch, entity, type, form) => async (
+export const createVariableHandler = (dispatch, entity, type, form) => async (
   variableName,
   variableType,
   field,
