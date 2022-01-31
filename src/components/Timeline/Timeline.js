@@ -108,7 +108,7 @@ const Timeline = (props) => {
         { renderStages() }
         <motion.div
           className="timeline__insert timeline__insert--new"
-          onClick={handleInsertStage}
+          onClick={() => handleInsertStage(stages.length)}
           variants={variants.newStage}
         >
           Add new stage
