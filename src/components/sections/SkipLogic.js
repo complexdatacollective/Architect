@@ -28,10 +28,12 @@ const SkipLogicSection = () => {
 
   const handleToggleChange = useCallback(
     async (newState) => {
+      // When turning skip logic on
       if (!hasSkipLogic || newState === true) {
         return true;
       }
 
+      // When turning skip logic off, confirm that the user wants to clear the skip logic
       const confirm = await handleDeactivateSkipLogic(openDialog);
 
       if (confirm) {
@@ -43,10 +45,10 @@ const SkipLogicSection = () => {
     },
     [dispatch, openDialog, hasSkipLogic],
   );
+
   return (
     <Section
       toggleable
-      group
       title="Skip Logic"
       summary={(
         <p>

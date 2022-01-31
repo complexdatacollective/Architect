@@ -38,9 +38,15 @@ const Section = ({
 
   const changeToggleState = useCallback(
     async () => {
+      // Save the intended state here, so that if startExpanded changes
+      // in the meantime, we don't inadvertently change the open state
+      // back.
+      const intendedState = !isOpen;
       const result = await handleToggleChange(!isOpen);
+
+      // If result of the callback, update the state with intendedState
       if (result) {
-        setIsOpen((prevState) => !prevState);
+        setIsOpen(intendedState);
       }
     },
     [isOpen, setIsOpen, handleToggleChange],
