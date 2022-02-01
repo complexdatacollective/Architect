@@ -125,6 +125,12 @@ const VariableSpotlight = (props) => {
     (state) => getVariablesForSubject(state, { entity, type }),
   );
 
+  const hasOptions = useMemo(() => options.length > 0, [options]);
+  const hasFilterTerm = useMemo(() => filterTerm.length > 0, [filterTerm]);
+  const hasFilterResults = useMemo(
+    () => sortedAndFilteredItems.length > 0, [sortedAndFilteredItems],
+  );
+
   const existingVariableNames = useMemo(() => Object.keys(existingVariables).map((variable) => get(existingVariables[variable], 'name')));
 
   const invalidVariableName = useMemo(() => {
@@ -139,7 +145,11 @@ const VariableSpotlight = (props) => {
       <ol>
         { filterTerm && options.filter((item) => item.label === filterTerm).length !== 1 && (
           <>
-            { disallowCreation && filterTerm && sortedAndFilteredItems.length === 0 && (
+            {
+              disallowCreation
+              && hasFilterTerm
+              && !hasFilterResults
+              && (
               <div className="variable-spotlight__empty">
                 <Icon name="warning" />
                 <div>
@@ -150,7 +160,8 @@ const VariableSpotlight = (props) => {
                   </p>
                 </div>
               </div>
-            )}
+              )
+            }
             { !disallowCreation && (
               <>
                 <Divider legend="Create" />
@@ -188,9 +199,9 @@ const VariableSpotlight = (props) => {
             )}
           </>
         )}
-        { sortedAndFilteredItems.length > 0 && (
+        { hasFilterResults && (
           <Divider
-            legend={filterTerm.length > 0 ? `Existing Variables Containing "${filterTerm}"` : 'Existing Variables'}
+            legend={hasFilterTerm ? `Existing Variables Containing "${filterTerm}"` : 'Existing Variables'}
           />
         )}
         { sortedAndFilteredItems.map(({ value, label, type: optionType }, index) => (
@@ -211,7 +222,7 @@ const VariableSpotlight = (props) => {
   // Reset cursor position when list is filtered
   useEffect(() => {
     // Set cursor to create if there are no other options
-    if (sortedAndFilteredItems.length === 0) {
+    if (!hasFilterResults) {
       setCursor(-1);
       setShowCursor(true);
       return;
@@ -221,7 +232,7 @@ const VariableSpotlight = (props) => {
     if (cursor > sortedAndFilteredItems.length - 1) {
       setCursor(sortedAndFilteredItems.length - 1);
     }
-  }, [sortedAndFilteredItems, filterTerm, cursor]);
+  }, [sortedAndFilteredItems, filterTerm, cursor, hasFilterResults]);
 
   const handleFilter = (e) => {
     // throw new Error();
@@ -249,7 +260,7 @@ const VariableSpotlight = (props) => {
       // If there are items and the cursor is not at the top,
       // or if there are no items and the cursor is not at the top
       // move the cursor up
-      if ((filterTerm.length > 0 && cursor > -1) || cursor > 0) {
+      if ((hasFilterTerm && cursor > -1) || cursor > 0) {
         setCursor(cursor - 1);
       }
     } else if (e.key === 'ArrowDown') {
@@ -283,7 +294,7 @@ const VariableSpotlight = (props) => {
       // If the cursor is in the create option,
       // and there is a filter term,
       // create a new variable with that value
-      if (!disallowCreation && !invalidVariableName && filterTerm && cursor === -1) {
+      if (!disallowCreation && !invalidVariableName && hasFilterTerm && cursor === -1) {
         handleCreateOption();
       }
     }
@@ -329,7 +340,7 @@ const VariableSpotlight = (props) => {
         variants={resultsVariants}
         transition={{ duration: 0.2, ease: 'easeInOut' }}
       >
-        { !disallowCreation && options.length === 0 && (
+        { !disallowCreation && !hasOptions && (
           <div className="variable-spotlight__empty">
             <Icon name="info" />
             <div>
@@ -342,7 +353,7 @@ const VariableSpotlight = (props) => {
             </div>
           </div>
         )}
-        { disallowCreation && options.length === 0 && (
+        { disallowCreation && !hasFilterTerm && !hasOptions && (
           <div className="variable-spotlight__empty">
             <Icon name="warning" />
             <div>
