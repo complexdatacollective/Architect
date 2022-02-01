@@ -40,8 +40,25 @@ const DisplayEdges = ({ form, entity, type }) => {
             by multiple edge types, only one of those edge types will be displayed.
           </p>
         )}
+        toggleable
+        startExpanded={!!displayEdges}
+        disabled={edgesForSubject.length === 0}
+        handleToggleChange={(value) => {
+          // Disallow closing when there is a disabled edge option
+          if (!value && hasDisabledEdgeOption) {
+            return false;
+          }
+
+          if (value) {
+            return true;
+          }
+
+          // Reset edge creation
+          dispatch(change(form, 'edges.display', null));
+          return true;
+        }}
       >
-        <Row disabled={edgesForSubject.length === 0}>
+        <Row>
           { hasDisabledEdgeOption && (
             <Tip>
               <p>
@@ -50,15 +67,12 @@ const DisplayEdges = ({ form, entity, type }) => {
               </p>
             </Tip>
           )}
-          { edgesForSubject.length > 0
-            && (
-            <Field
-              name="edges.display"
-              component={Fields.CheckboxGroup}
-              options={displayEdgesOptions}
-              label="Display edges of the following type(s)"
-            />
-            )}
+          <Field
+            name="edges.display"
+            component={Fields.CheckboxGroup}
+            options={displayEdgesOptions}
+            label="Display edges of the following type(s)"
+          />
         </Row>
       </Section>
     </>
