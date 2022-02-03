@@ -53,7 +53,7 @@ const ValidationSection = ({
 ValidationSection.propTypes = {
   disabled: PropTypes.bool,
   form: PropTypes.string.isRequired,
-  variableType: PropTypes.string.isRequired,
+  variableType: PropTypes.string,
   existingVariables: PropTypes.objectOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -62,6 +62,7 @@ ValidationSection.propTypes = {
 };
 
 ValidationSection.defaultProps = {
+  variableType: '',
   disabled: false,
 };
 
