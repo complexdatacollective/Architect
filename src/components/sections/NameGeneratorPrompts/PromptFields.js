@@ -1,49 +1,65 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { change, formValueSelector } from 'redux-form';
+import { useDispatch, useSelector } from 'react-redux';
 import { Section, Row } from '@components/EditorLayout';
-import AssignAttributes from '@components/AssignAttributes';
 import PromptText from '@components/sections/PromptText';
+import AssignAttributes from '@components/AssignAttributes';
+import Tip from '@components/Tip';
 
-class PromptFields extends PureComponent {
-  render() {
-    const {
-      type,
-      entity,
-      form,
-    } = this.props;
+const PromptFields = ({
+  form,
+  entity,
+  type,
+}) => {
+  const dispatch = useDispatch();
+  const getFormValue = formValueSelector('editable-list-form');
+  const hasAdditionalAttributes = useSelector((state) => getFormValue(state, 'additionalAttributes'));
 
-    return (
-      <>
-        <PromptText />
-        <Section>
-          <Row>
-            <h3>
-              Assign Additional Variables?
-              { ' ' }
-              <small>(optional)</small>
-            </h3>
+  const handleToggleAdditionalAttributes = (nextState) => {
+    if (nextState === false) {
+      dispatch(change(form, 'additionalAttributes', null));
+    }
+
+    return true;
+  };
+
+  return (
+    <>
+      <PromptText />
+      <Section
+        title="Assign additional Variables"
+        toggleable
+        startExpanded={!!hasAdditionalAttributes}
+        summary={(
+          <p>
+            This feature allows you to assign a variable and associated value to
+            any nodes created on this prompt. You could then use this variable in your skip logic or
+            stage filtering rules.
+          </p>
+        )}
+        handleToggleChange={handleToggleAdditionalAttributes}
+      >
+        <Row>
+          <Tip>
             <p>
-              This feature allows you to assign a variable and associated value to
-              any nodes created on this prompt. You can use this to
-              keep track of where a node was elicited, or to reflect a name interpreter element of
-              your prompt. For example, if you have a prompt that asks &apos;Who are you
-              close to?&apos;, you could add an additional variable called close_tie
-              and set it to true. You could then use this variable in your skip logic or
-              stage filtering rules.
+              Select an existing variable, or select &quot;create new variable&quot;
+              from the bottom of the list, and then assign a value. You can set different values
+              for this variable for nodes created on different prompts.
             </p>
-            <AssignAttributes
-              form={form}
-              name="additionalAttributes"
-              id="additionalAttributes"
-              type={type}
-              entity={entity}
-            />
-          </Row>
-        </Section>
-      </>
-    );
-  }
-}
+          </Tip>
+          <AssignAttributes
+            name="additionalAttributes"
+            id="additionalAttributes"
+            form={form}
+            type={type}
+            entity={entity}
+          />
+        </Row>
+      </Section>
+    </>
+  );
+};
 
 PromptFields.propTypes = {
   type: PropTypes.string,
@@ -54,6 +70,7 @@ PromptFields.propTypes = {
 PromptFields.defaultProps = {
   type: null,
   entity: null,
+
 };
 
 export default PromptFields;

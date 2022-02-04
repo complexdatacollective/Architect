@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
 import TextField from '@codaco/ui/lib/components/Fields/Text';
+import { ValidatedField } from '../Form';
 
 const ScalarParameters = ({ name }) => (
   <>
@@ -18,15 +18,17 @@ const ScalarParameters = ({ name }) => (
       label,
       which will be displayed at each end of the scale.
     </p>
-    <Field
+    <ValidatedField
       label="Minimum label"
       component={TextField}
       name={`${name}.minLabel`}
+      validation={{ required: true }}
     />
-    <Field
+    <ValidatedField
       label="Maximum label"
       component={TextField}
       name={`${name}.maxLabel`}
+      validation={{ required: true }}
     />
   </>
 );

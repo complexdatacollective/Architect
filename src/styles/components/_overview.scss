@@ -1,8 +1,43 @@
+.app--macos {
+  .overview-summary {
+    padding-top: unit(2.5);
+  }
+}
+
+.overview-summary {
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: unit(1) unit(4);
+  width: 100%;
+  background-color: var(--color-slate-blue--dark);
+  box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
+  z-index: var(--z-panel);
+
+  &__header {
+    color: var(--text-light);
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-left: auto;
+
+    &__button {
+      &:not(:last-child) {
+        margin-right: unit(2);
+      }
+    }
+  }
+}
+
 .overview {
   margin: 0 auto;
   margin-top: unit(4);
   width: 70rem;
-  z-index: var(--z-default);
   position: relative;
   background: var(--color-white);
   border-radius: var(--border-radius);

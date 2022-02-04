@@ -72,7 +72,7 @@ const fieldsHandlers = withHandlers({
     // If we have changed type, also reset validation since options may not be
     // applicable.
     if (variableType !== typeForComponent) {
-      changeField(form, 'validation', {});
+      changeField(form, 'validation', null);
       changeField(form, 'options', null);
     // Special case for boolean, where BooleanChoice has options but Toggle doesn't
     } else if (variableType === 'boolean') {
@@ -86,7 +86,7 @@ const fieldsHandlers = withHandlers({
     // Either load settings from codebook, or reset
     const options = get(existingVariables, [value, 'options'], null);
     const parameters = get(existingVariables, [value, 'parameters'], null);
-    const validation = get(existingVariables, [value, 'validation'], {});
+    const validation = get(existingVariables, [value, 'validation'], null);
     const component = get(existingVariables, [value, 'component'], null);
 
     // If value was set to something from codebook, reset this flag

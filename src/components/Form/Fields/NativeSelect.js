@@ -142,7 +142,7 @@ const NativeSelect = ({
     notSubmittedError,
   ]);
 
-  const sortedOptions = useMemo(() => (sortOptionsByLabel ? sortBy(options, 'label') : options), [options]);
+  const sortedOptions = useMemo(() => (sortOptionsByLabel ? sortBy(options, 'label') : options), [options, sortOptionsByLabel]);
 
   const variants = {
     show: { opacity: 1 },

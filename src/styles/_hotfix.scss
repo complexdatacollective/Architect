@@ -48,7 +48,12 @@ a {
 }
 
 .form-field {
-  padding: 1rem unit(2);
+  padding: 1em unit(2);
+
+  &.boolean {
+    background: transparent;
+    padding: 0;
+  }
 }
 
 .form-field-toggle__button {
@@ -56,6 +61,8 @@ a {
 }
 
 .dialog {
+  --text: var(--color-white);
+
   .migration-panel {
     background: var(--color-navy-taupe);
     padding: 0 unit(2);
@@ -76,6 +83,16 @@ a {
   }
 }
 
+.dialog-release-notes {
+  &__notes {
+    max-height: 50vh;
+    overflow-y: auto;
+    background: var(--color-navy-taupe);
+    padding: 0 1.2rem;
+    border-radius: var(--border-radius);
+  }
+}
+
 .dialog__additional-box {
   background-color: var(--background-dark);
 }
@@ -83,8 +100,13 @@ a {
 .modal {
   height: 100vh;
 
+  &__background {
+    z-index: var(--z-modal);
+  }
+
   &__content {
     flex-direction: row;
+    z-index: var(--z-modal);
   }
 }
 
@@ -126,4 +148,47 @@ a {
   }
 }
 
+// Make rich text toolbar background white within sections
+.stage-editor-section {
+  .rich-text__toolbar {
+    background: var(--input-background);
+  }
+}
 
+// Override UI toast style for now (make wider)
+.toast-container-list {
+  align-items: flex-end;
+}
+
+.toast {
+  .toast-button-group {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      &:not(:last-child) {
+        margin-right: unit(1);
+      }
+    }
+  }
+}
+
+.update-available-toast {
+  width: 50rem;
+}
+
+.form-field-label {
+  margin-top: unit(4);
+  margin-bottom: unit(2);
+  font-weight: 600;
+
+  p {
+    margin: 0;
+    font-weight: inherit;
+  }
+}
+
+// Rich text does not have the form-field class for some reason, so doesnt get bottom margin
+.form-field-rich-text {
+  margin-bottom: 2rem;
+}

@@ -23,16 +23,18 @@ const ExternalDataSource = (props) => {
 
   return (
     <Section
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-    >
-      <Row>
-        <h3>External Data Source for Roster</h3>
-        <div id={getFieldId('dataSource')} data-name="Roster data-source" />
+      title="Data source for Roster"
+      summary={(
         <p>
           This stage needs a source of nodes to populate the roster.
           Select a network data file to use.
         </p>
+      )}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+    >
+      <Row>
+        <div id={getFieldId('dataSource')} data-name="Roster data-source" />
         <ValidatedField
           component={DataSource}
           name="dataSource"

@@ -10,6 +10,7 @@ import { actionCreators as timelineActions } from '@app/ducks/middleware/timelin
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import { hasChanges as timelineHasChanges } from '@selectors/timeline';
 import Screen from './Screen';
+import ControlBar from '../ControlBar';
 
 class EditorScreen extends Component {
   handleSubmit = () => {
@@ -71,37 +72,31 @@ class EditorScreen extends Component {
 
   render() {
     const {
-      show,
+      header,
       secondaryButtons,
-      transitionState,
       editor: EditorComponent,
       layoutId,
-      zIndex,
       ...rest
     } = this.props;
 
     return (
       <Screen
-        buttons={this.buttons()}
-        secondaryButtons={secondaryButtons}
-        show={show}
-        transitionState={transitionState}
+        header={header}
+        footer={<ControlBar buttons={this.buttons()} secondaryButtons={secondaryButtons} />}
         layoutId={layoutId}
-        zIndex={zIndex}
+        beforeCloseHandler={this.handleCancel}
       >
-        {({ windowRoot }) => (
-          <EditorComponent
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...rest}
-            windowRoot={windowRoot}
-          />
-        )}
+        <EditorComponent
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...rest}
+        />
       </Screen>
     );
   }
 }
 
 EditorScreen.propTypes = {
+  header: PropTypes.node,
   editor: PropTypes.any.isRequired, // eslint-disable-line react/forbid-prop-types
   hasUnsavedChanges: PropTypes.bool.isRequired,
   jump: PropTypes.func.isRequired,
@@ -110,19 +105,14 @@ EditorScreen.propTypes = {
   onComplete: PropTypes.func.isRequired,
   openDialog: PropTypes.func.isRequired,
   secondaryButtons: PropTypes.array, // eslint-disable-line react/forbid-prop-types
-  show: PropTypes.bool,
   submitForm: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
-  transitionState: PropTypes.string,
-  zIndex: PropTypes.number,
 };
 
 EditorScreen.defaultProps = {
+  header: null,
   layoutId: null,
   secondaryButtons: null,
-  show: true,
-  transitionState: null,
-  zIndex: null,
 };
 
 const mapStateToProps = (state, { form, locus }) => ({

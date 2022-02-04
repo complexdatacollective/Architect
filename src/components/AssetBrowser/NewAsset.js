@@ -12,7 +12,6 @@ const NewAsset = ({
   onCreate,
 }) => (
   <>
-    <h3>Import a new resource</h3>
     <AutoFileDrop
       type={type}
       onDrop={onCreate}

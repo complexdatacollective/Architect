@@ -39,6 +39,7 @@ const ExternalEntity = ({
             <Button
               size="small"
               onClick={() => handleDownloadAsset(id)}
+              color="sea-serpent"
             >
               Download
             </Button>

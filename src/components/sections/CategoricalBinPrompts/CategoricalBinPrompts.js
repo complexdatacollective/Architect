@@ -24,15 +24,16 @@ const CategoricalBinPrompts = ({
     itemSelector={itemSelector(entity, type)}
     entity={entity}
     type={type}
+    sectionTitle="Edit Prompts"
+    sectionSummary={(
+      <p>
+        Add one or more prompts below to frame the task for the user. You can reorder
+        the prompts using the draggable handles on the left hand side.
+      </p>
+    )}
     // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
-  >
-    <h2>Edit Prompts</h2>
-    <p>
-      Add one or more prompts below to frame the task for the user. You can reorder
-      the prompts using the draggable handles on the left hand side.
-    </p>
-  </EditableList>
+  />
 );
 
 CategoricalBinPrompts.propTypes = {

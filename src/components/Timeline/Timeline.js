@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { bindActionCreators } from 'redux';
@@ -39,14 +39,22 @@ const variants = {
   },
 };
 
-class Timeline extends Component {
-  handleInsertStage = (index) => {
-    const { openScreen } = this.props;
+const Timeline = (props) => {
+  const {
+    show,
+    sorting,
+    stages,
+    openScreen,
+    locus,
+    openDialog,
+    deleteStage,
+  } = props;
+
+  const handleInsertStage = (index) => {
     openScreen('newStage', { insertAtIndex: index });
   };
 
-  handleDeleteStage = (stageId) => {
-    const { openDialog, deleteStage } = this.props;
+  const handleDeleteStage = (stageId) => {
     openDialog({
       type: 'Warning',
       title: 'Delete stage',
@@ -54,31 +62,17 @@ class Timeline extends Component {
       onConfirm: () => deleteStage(stageId),
       confirmLabel: 'Delete stage',
     });
-  }
+  };
 
-  handleEditStage = (id, origin) => {
-    const { openScreen, locus } = this.props;
+  const handleEditStage = (id, origin) => {
     openScreen('stage', { locus, id, origin });
   };
 
-  createStage = (type, insertAtIndex) => {
-    const { openScreen, locus } = this.props;
-    openScreen('stage', { type, insertAtIndex, locus });
-  };
-
-  // eslint-disable-next-line react/destructuring-assignment
-  hasStages = () => this.props.stages.length > 0;
-
-  // eslint-disable-next-line react/destructuring-assignment
-  renderStages = () => this.props.stages.flatMap((stage, index) => ([
+  const renderStages = useCallback(() => stages.flatMap((stage, index) => ([
     <InsertButton
       key={`insert_${index}`}
-      onClick={() => this.handleInsertStage(index)}
+      onClick={() => handleInsertStage(index)}
     />,
-    this.renderStage(stage, index),
-  ]));
-
-  renderStage = (stage, index) => (
     <Stage
       key={`stage_${stage.id}`}
       index={index}
@@ -88,45 +82,41 @@ class Timeline extends Component {
       hasFilter={stage.hasFilter}
       hasSkipLogic={stage.hasSkipLogic}
       label={stage.label}
-      onEditStage={this.handleEditStage}
-      onDeleteStage={this.handleDeleteStage}
-    />
+      onEditStage={handleEditStage}
+      onDeleteStage={handleDeleteStage}
+    />,
+  ])), [stages, handleInsertStage]);
+
+  const timelineStyles = cx(
+    'timeline',
+    {
+      'timeline--show': show,
+      'timeline--sorting': sorting,
+    },
   );
 
-  render() {
-    const { show, sorting } = this.props;
-
-    const timelineStyles = cx(
-      'timeline',
-      {
-        'timeline--show': show,
-        'timeline--sorting': sorting,
-      },
-    );
-
-    return (
-      <div
-        className={timelineStyles}
+  return (
+    <div
+      className={timelineStyles}
+    >
+      <motion.div
+        className="timeline__stages"
+        initial={sorting ? false : 'hide'}
+        animate="show"
+        variants={variants.outer}
       >
+        { renderStages() }
         <motion.div
-          className="timeline__stages"
-          initial={sorting ? false : 'hide'}
-          animate="show"
-          variants={variants.outer}
+          className="timeline__insert timeline__insert--new"
+          onClick={() => handleInsertStage(stages.length)}
+          variants={variants.newStage}
         >
-          { this.renderStages() }
-          <motion.div
-            className="timeline__insert timeline__insert--new"
-            onClick={() => this.handleInsertStage()}
-            variants={variants.newStage}
-          >
-            Add new stage
-          </motion.div>
+          Add new stage
         </motion.div>
-      </div>
-    );
-  }
-}
+      </motion.div>
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => ({
   locus: state.protocol.timeline[state.protocol.timeline.length - 1],

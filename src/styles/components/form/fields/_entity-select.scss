@@ -1,0 +1,77 @@
+$component-name: 'form-fields-entity-select';
+
+.#{$component-name} {
+  &__field {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  &__error {
+    opacity: 0;
+    background: var(--error);
+    color: var(--form-error-text);
+    transition: opacity var(--animation-easing) var(--animation-duration-standard),
+    max-height var(--animation-easing) var(--animation-duration-standard);
+    padding: .5rem .25rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    svg {
+      max-height: 1.2rem;
+    }
+  }
+
+  &--has-error {
+    .#{$component-name}__field {
+      border: .125rem solid var(--error);
+      margin-bottom: 0;
+    }
+
+    .#{$component-name}__error {
+      opacity: 1;
+    }
+  }
+
+  &--nodes {
+    --base-node-size: 7rem;
+
+    .preview-node {
+      &--clickable {
+        &:not(.preview-node--selected) {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.preview-edge {
+  background: var(--color-platinum);
+  margin: unit(1);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  padding: unit(1) unit(2);
+  border: 4px solid transparent;
+  border-radius: unit(20); // arbitrarily large
+  transition: border-color var(--animation-easing) var(--animation-duration-standard);
+
+  .icon {
+    margin: 0 unit(1) 0 0;
+  }
+
+  &--selected {
+    border-color: var(--edge-color);
+
+    &.preview-edge--selected {
+      pointer-events: none;
+    }
+  }
+
+  &--clickable {
+    @include clickable;
+  }
+}

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withState } from 'recompose';
-import cx from 'classnames';
 import { fieldPropTypes } from 'redux-form';
 import Radio from '@codaco/ui/lib/components/Fields/Radio';
 import NetworkThumbnail from '@components/Thumbnail/Network';
@@ -54,26 +53,21 @@ const DataSource = (props) => {
         </div>
         <div className="form-fields-data-source__option">
           <Radio input={networkAssetInput} label="Use a network data file" />
-          <div
-            className={cx(
-              'form-fields-data-source__option-file',
-              { 'form-fields-data-source__option-file--hide': !networkAssetInput.value },
+          { showNetworkAssetInput
+            && (
+              <div className="form-fields-data-source__option-file">
+                <File
+                  type="network"
+                  showBrowser={selectNetworkAsset}
+                  onCloseBrowser={handleCloseBrowser}
+                  selected={input.value}
+                  // eslint-disable-next-line react/jsx-props-no-spreading
+                  {...props}
+                >
+                  { (id) => <NetworkThumbnail id={id} /> }
+                </File>
+              </div>
             )}
-          >
-            { showNetworkAssetInput
-              && (
-              <File
-                type="network"
-                showBrowser={selectNetworkAsset}
-                onCloseBrowser={handleCloseBrowser}
-                selected={input.value}
-                // eslint-disable-next-line react/jsx-props-no-spreading
-                {...props}
-              >
-                { (id) => <NetworkThumbnail id={id} /> }
-              </File>
-              )}
-          </div>
         </div>
       </div>
     ) : (

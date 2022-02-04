@@ -1,33 +1,44 @@
-$opaque-background: rgba(255, 255, 255, .7);
+.screen {
+  &.new-stage {
+    height: 100%;
+
+    .stage-heading {
+      .stage-editor {
+        flex: 1;
+      }
+    }
+
+  }
+}
 
 .new-stage-screen {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
   height: 100%;
-  max-height: auto;
-  max-width: 80rem;
-  margin: 0 auto;
 
-  &__heading {
-    padding: unit(2) 0;
+  &__filter {
+    .form-field-container {
+      margin: unit(1) 0;
+
+      .form-field-text__input {
+        margin-bottom: 0;
+      }
+    }
   }
 
-  &__picker {
+  &__menu-tags {
     display: flex;
-    flex-direction: row;
-    flex: 1;
-  }
+    align-items: center;
 
-  &__menu {
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    flex: unit(30) 0 0;
+    .menu-tags {
+      &__label {
+        flex: 0 0;
+        display: flex;
+        align-items: center;
+        margin-right: unit(1);
+      }
 
-    &-section {
-      padding: unit(2) 0;
-      margin-bottom: unit(2);
+      &__tags {
+        flex: 1 auto;
+      }
     }
   }
 
@@ -37,56 +48,60 @@ $opaque-background: rgba(255, 255, 255, .7);
     flex-direction: column;
   }
 
-  &__search {
-    flex: 50px 0 0;
-    padding: unit(2) unit(2) 0 unit(4);
-  }
 
-  &__list {
-    flex: 1;
-    overflow-y: scroll;
-  }
-
-  &__interface {
-    cursor: pointer;
+  &__interfaces {
     display: flex;
     flex-direction: column;
-    background-color: var(--color-platinum--dark);
-    border-radius: unit(2);
-    padding: unit(4) unit(2);
+    margin: unit(2) 0;
 
-    h3 {
-      line-height: 1.3em;
-      margin: 0 .25rem unit(1);
+    &--empty {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+
+  &__interface {
+    flex: 1 0 100%;
+    cursor: pointer;
+    padding: unit(2) unit(8);
+    border-bottom: 2px solid var(--architect-divider);
+
+    &-content {
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+    }
+
+    &--highlighted {
+      background: var(--primary);
+      color: var(--color-white);
+    }
+
+    &-image {
+      flex: 0 0 15rem;
+      margin-right: unit(4);
+    }
+
+    &-preview {
+      width: 100%;
+      border-radius: .5rem;
+    }
+
+    &-info {
+      display: flex;
+      flex-direction: column;
     }
 
     &-description {
       margin: 0 0 unit(1);
     }
-
-    &-preview {
-      width: 100%;
-      border-width: .25rem;
-      border-style: solid;
-      border-color: transparent;
-      margin-bottom: unit(1);
-    }
-
-    &-container {
-      width: calc(50% - #{unit(4)});
-      display: inline-block;
-      margin: 0 0 unit(4) unit(4);
-    }
-
-    &:focus {
-      background-color: var(--architect-active);
-    }
-  }
-}
-
-// TODO: where should this live?
-.screen--new-stage {
-  .screen__content {
-    overflow: hidden;
   }
 }

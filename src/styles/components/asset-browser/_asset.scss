@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+
 
     .thumbnail {
       width: 100%;
@@ -67,6 +67,14 @@
     bottom: unit(.75);
     left: unit(.75);
     background: var(--error);
+  }
+
+  &--clickable {
+    .asset-browser-asset__preview {
+      .thumbnail {
+        @include clickable;
+      }
+    }
   }
 
   &--is-used {

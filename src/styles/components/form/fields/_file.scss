@@ -24,13 +24,13 @@
     color: var(--error);
     transition: opacity var(--animation-easing) var(--animation-duration-standard),
     max-height var(--animation-easing) var(--animation-duration-standard);
-    padding: .5rem .25rem;
+    padding: unit(1) unit(.5);
     display: flex;
     align-items: center;
 
     .icon {
-      height: 1.2rem;
-      width: 1.2rem;
+      height: unit(2);
+      width: unit(2);
       margin-right: unit(1);
     }
   }

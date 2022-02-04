@@ -16,22 +16,24 @@ const withDeleteHandler = withHandlers({
 const PreviewRule = ({
   type, options, join, onClick, handleDelete,
 }) => (
-  <div
-    className="rules-preview-rule"
-    onClick={onClick}
-  >
-    <div className="rules-preview-rule__text">
-      <RuleText type={type} options={options} />
-      { join && <Join value={join} /> }
-    </div>
-    <button
-      type="button"
-      className="rules-preview-rule__delete"
-      onClick={handleDelete}
+  <>
+    <div
+      className="rules-preview-rule"
+      onClick={onClick}
     >
-      <Icon name="delete" />
-    </button>
-  </div>
+      <div className="rules-preview-rule__text">
+        <RuleText type={type} options={options} />
+      </div>
+      <button
+        type="button"
+        className="rules-preview-rule__delete"
+        onClick={handleDelete}
+      >
+        <Icon name="delete" />
+      </button>
+    </div>
+    { join && <Join value={join} /> }
+  </>
 );
 
 PreviewRule.propTypes = {

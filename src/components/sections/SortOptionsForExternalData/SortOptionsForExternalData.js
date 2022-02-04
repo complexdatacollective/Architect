@@ -3,6 +3,8 @@ import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import { Text } from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
+import { useDispatch, useSelector } from 'react-redux';
+import { change, formValueSelector } from 'redux-form';
 import MultiSelect from '@components/Form/MultiSelect';
 import withMapFormToProps from '@components/enhancers/withMapFormToProps';
 import withDisabledAssetRequired from '@components/enhancers/withDisabledAssetRequired';
@@ -19,20 +21,36 @@ const SortOptions = ({
   const maxVariableOptions = variableOptions.length;
   const sortOrderOptionGetter = getSortOrderOptionGetter(variableOptions);
 
+  const dispatch = useDispatch();
+  const getFormValue = formValueSelector('edit-stage');
+  const hasSortOrder = useSelector((state) => getFormValue(state, 'sortOptions.sortOrder'));
+  const hasSortableProperties = useSelector((state) => getFormValue(state, 'sortOptions.sortableProperties'));
+
+  const handleToggleSortOptions = (nextState) => {
+    if (nextState === false) {
+      dispatch(change('edit-stage', 'sortOptions', null));
+    }
+
+    return true;
+  };
+
   return (
-    <Section group disabled={disabled}>
-      <Row>
-        <h3>Sort Options</h3>
+    <Section
+      title="Sort Options"
+      summary={(
         <p>
-          This section controls how the cards in the roster are sorted.
+          Your roster will be presented to the interview participant as a list of cards.
+          You may configure the sort options of this list, including which attributes
+          are available for the participant to sort by during the interview.
         </p>
-      </Row>
+      )}
+      toggleable
+      startExpanded={!!hasSortOrder || !!hasSortableProperties}
+      handleToggleChange={handleToggleSortOptions}
+      disabled={disabled}
+    >
       <Row>
-        <h4>
-          Initial Sort Order
-          { ' ' }
-          <small>(optional)</small>
-        </h4>
+        <h4>Initial Sort Order</h4>
         <p>
           Create one or more rules to determine the default sort order or the roster,
           when it is first shown to the participant. By default, Interviewer will
@@ -49,11 +67,7 @@ const SortOptions = ({
         />
       </Row>
       <Row>
-        <h4>
-          Participant Sortable Properties
-          { ' ' }
-          <small>(optional)</small>
-        </h4>
+        <h4>Participant Sortable Properties</h4>
         <p>
           This interface allows the participant to sort the roster, to help with locating
           a specific member. Select one or more attributes from your roster that the

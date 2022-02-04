@@ -1,52 +1,86 @@
+:root {
+  --section-background-color: var(--architect-panel-grey);
+}
+
 .stage-editor-section {
-  transition-property: opacity, transform, max-height, margin-top;
-  transition-duration: var(--animation-duration-standard);
-  transition-timing-function: var(--animation-easing);
-  opacity: 1;
-  max-height: auto;
-  max-width: 80rem;
-  transform: translateX(0);
   overflow: hidden;
-  margin: unit(4) auto;
-  padding: unit(4);
-  background: var(--architect-panel-grey);
+  margin: unit(4) unit(8);
+  padding: unit(2) unit(4);
+  background: var(--section-background-color);
   border-radius: var(--border-radius);
+  position: relative;
+  box-shadow: 0 .2rem .2rem 0 var(--architect-panel-shadow);
 
-  >:first-child {
-    margin-top: 0;
-  }
-
-  &:last-child {
-    margin-top: 0;
-    border: 0;
-  }
-
-  &--disabled {
-    opacity: 0;
-    max-height: 0;
-    transform: translateX(-100%);
-    margin-top: 0;
-    padding: 0;
-    margin: 0;
-  }
-
-  > .form-field-container,
-  .form-field-text,
-  .form-field-checkbox-group,
-  .form-field-radio-group {
-    &:last-child {
-      margin-bottom: 0;
-
-      .form-field {
-        margin-bottom: 0;
+  &--toggleable {
+    &:not(.stage-editor-section--open) {
+      .summary {
+        margin-top: -#{unit(2)};
       }
     }
   }
 
-  // &--group {
+  .form-field-container {
+    margin-bottom: 0;
+  }
+
+  > legend {
+    @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
+    --input-background: transparent;
+
+    font-family: var(--heading-font-family);
+    font-size: 1rem;
+    padding: unit(1) unit(3);
+    background: var(--section-background-color);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .form-field-container {
+      transform: scale(.7);
+    }
+
+    .form-field {
+      padding: 0;
+      margin: 0;
+      min-height: auto;
+    }
+
+    .icon {
+      height: unit(1);
+      width: unit(1);
+      margin-right: unit(1);
+
+      .cls-2 {
+        fill: var(--color-charcoal);
+      }
+    }
+  }
+
+  &--disabled {
+    opacity: .5;
+    cursor: not-allowed;
+
+    > * {
+      pointer-events: none;
+    }
+  }
+
   .stage-editor-section {
+    --section-background-color: var(--architect-panel-grey--dark);
+    --architect-panel-divider: #bbc4c5; // sass-lint:disable-line no-color-literals
+    --variable-pill-shadow-color: #c7ced0; // sass-lint:disable-line no-color-literals
+    --input-background: var(--color-platinum--dark);
+    --slider-color: var(--color-charcoal);
     margin: unit(4) 0;
-    background: var(--color-panel-grey--dark);
+
+    .form-field-slider {
+      --slider-color: var(--color-charcoal);
+    }
+  }
+
+  > .stage-editor-section {
+    background: var(--section-background-color);
     border-radius: unit(1);
   }
 

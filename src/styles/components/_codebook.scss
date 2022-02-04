@@ -1,4 +1,9 @@
 .codebook {
+  --variable-pill-width: 25rem;
+
+  margin: unit(4) unit(8);
+  max-width: 80rem;
+
   &__notice {
     margin-top: 2rem;
     background-color: var(--background-alt);
@@ -61,6 +66,10 @@
     &-meta {
       flex: 1;
       padding-left: unit(4);
+
+      .link {
+        margin-right: .75rem;
+      }
     }
 
     &-control {

@@ -12,17 +12,9 @@
     }
   }
 
-  .rules-preview-rules {
-    border: 1px solid transparent;
-  }
-
   &--has-error {
     .rules-preview-rules {
       border-color: var(--error);
     }
-  }
-
-  .form-field-radio-group {
-    background-color: var(--color-white);
   }
 }

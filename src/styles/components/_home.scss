@@ -259,6 +259,14 @@ $font-sizes: (
 .welcome-header {
   overflow: visible;
   border-radius: none;
+  background: transparent;
+  box-shadow: none;
+
+  &--is-open {
+    background: var(--color-slate-blue);
+    box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
+    color: var(--color-white);
+  }
 
   &__header {
     padding: 0;

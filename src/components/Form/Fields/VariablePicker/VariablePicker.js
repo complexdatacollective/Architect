@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@codaco/ui';
 import PropTypes from 'prop-types';
 import { has, get } from 'lodash';
@@ -15,6 +16,7 @@ const VariablePicker = (props) => {
     type,
     label = 'Create or Select a Variable',
     onCreateOption,
+    disallowCreation,
     meta: {
       error,
       invalid,
@@ -66,8 +68,19 @@ const VariablePicker = (props) => {
     <>
       <div className="form-fields-variable-picker">
         <fieldset>
-          <legend>{label}</legend>
-          {value && variablePillComponent()}
+          { label && (<legend>{label}</legend>)}
+          { value && (
+          <AnimatePresence exitBeforeEnter initial={false}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              key={value}
+            >
+              {variablePillComponent()}
+            </motion.div>
+          </AnimatePresence>
+          )}
           <Button
             icon="add"
             onClick={() => setShowPicker(true)}
@@ -90,6 +103,7 @@ const VariablePicker = (props) => {
           onCancel={hideModal}
           options={options}
           onCreateOption={handleCreateOption}
+          disallowCreation={disallowCreation}
         />
       </SpotlightModal>
     </>
@@ -97,6 +111,7 @@ const VariablePicker = (props) => {
 };
 
 VariablePicker.propTypes = {
+  disallowCreation: PropTypes.bool,
   entity: PropTypes.string,
   type: PropTypes.string,
   label: PropTypes.string,
@@ -118,9 +133,10 @@ VariablePicker.propTypes = {
 };
 
 VariablePicker.defaultProps = {
+  disallowCreation: false,
   entity: null,
   type: null,
-  label: null,
+  label: 'Create or Select a Variable',
   options: [],
   meta: {
     error: null,

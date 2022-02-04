@@ -14,8 +14,6 @@ const RelativeDatePickerParameters = ({ name, anchorValue, resetField }) => {
   const [useInterviewDate, setUseInterviewDate] = useState(!anchorValue);
   return (
     <>
-      <p>This input type has three options for you to set.</p>
-      <br />
       <h4>Anchor Date</h4>
       <p>
         The anchor date defines the point that the participant can select a date relative to.

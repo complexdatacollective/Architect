@@ -1,30 +1,24 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import cx from 'classnames';
 import { motion } from 'framer-motion';
 import { getFormValues } from 'redux-form';
-import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
+import { createPortal } from 'react-dom';
 
 const variants = {
-  hide: { opacity: 0, translateY: '-100%' },
-  show: { opacity: 1, translateY: '0%' },
+  hide: { translateY: '-100%', transition: { stiffness: 1000 } },
+  show: { translateY: '0%' },
 };
 
 const CodeView = ({ toggleCodeView, show, form }) => {
   const code = useSelector(getFormValues(form));
-  const transition = useMemo(() => ({
-    ease: 'easeInOut',
-    duration: getCSSVariableAsNumber('--animation-duration-standard-ms') / 1000,
-  }), []);
 
-  return (
+  return createPortal(
     <motion.div
-      className={cx('code-view', { 'code-view--show': show })}
+      className="code-view"
       variants={variants}
       initial="hide"
       animate={show ? 'show' : 'hide'}
-      transition={transition}
     >
       <div className="code-view__content">
         <pre>
@@ -34,7 +28,8 @@ const CodeView = ({ toggleCodeView, show, form }) => {
         </pre>
       </div>
       <div className="code-view__controls" onClick={toggleCodeView}>Close code view</div>
-    </motion.div>
+    </motion.div>,
+    document.body,
   );
 };
 

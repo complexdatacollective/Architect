@@ -1,19 +1,18 @@
 $component-name: list-item;
 
 .#{$component-name} {
+  --input-border: var(--architect-sortable-text);
   z-index: var(--z-fx);
+  width: 100%;
+  background-color: var(--architect-sortable-background);
+  color: var(--architect-sortable-text);
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  border-radius: var(--border-radius);
+  margin-bottom: unit(1);
 
-  &__container {
-    --input-border: var(--architect-sortable-text);
-    width: 100%;
-    background-color: var(--architect-sortable-background);
-    color: var(--architect-sortable-text);
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    border-radius: unit(1.5);
-    margin: unit(2) 0 0;
-  }
+
 
   &__control {
     padding: unit(2);
@@ -32,6 +31,13 @@ $component-name: list-item;
   &__content {
     padding: unit(2);
     flex-grow: 1;
+
+    > .stage-editor-section {
+      --section-background-color: var(--color-slate-blue--dark) !important; //sass-lint:disable-line no-important
+      --architect-panel-shadow: rgba(58, 58, 117, .76) !important; //sass-lint:disable-line no-color-literals no-important
+      --input-background: var(--color-white) !important; //sass-lint:disable-line no-important
+      --variable-pill-background: var(--color-platinum) !important; //sass-lint:disable-line no-important
+    }
   }
 
   .list-row,
@@ -42,18 +48,17 @@ $component-name: list-item;
   }
 
   &--clickable {
-    .list-item__container {
-      box-shadow: 0 .4rem rgba(17, 21, 27, .664); // sass-lint:disable-line no-color-literals
-      cursor: pointer;
-      transition: box-shadow var(--animation-duration-very-fast) var(--animation-easing);
+    box-shadow: 0 .2rem rgba(17, 21, 27, .664); // sass-lint:disable-line no-color-literals
+    cursor: pointer;
+    transition: box-shadow var(--animation-duration-very-fast) var(--animation-easing);
 
-      &:hover {
-        box-shadow: 0 .8rem .4rem 0 rgba(17, 21, 27, .35); // sass-lint:disable-line no-color-literals
-      }
-
-      &:active {
-        box-shadow: unset;
-      }
+    &:hover {
+      box-shadow: 0 .4rem .2rem 0 rgba(17, 21, 27, .35); // sass-lint:disable-line no-color-literals
     }
+
+    &:active {
+      box-shadow: unset;
+    }
+
   }
 }

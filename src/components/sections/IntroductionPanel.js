@@ -6,12 +6,15 @@ import { ValidatedField } from '../Form';
 import IssueAnchor from '../IssueAnchor';
 
 const Name = () => (
-  <Section>
-    <h2>Introduction Panel</h2>
-    <p>
-      This panel is shown prior to completion of the forms,
-      and should serve as an introduction to the task.
-    </p>
+  <Section
+    title="Introduction Panel"
+    summary={(
+      <p>
+        This panel is shown prior to completion of the forms,
+        and should serve as an introduction to the task.
+      </p>
+    )}
+  >
     <Row>
       <IssueAnchor
         fieldName="introductionPanel.title"

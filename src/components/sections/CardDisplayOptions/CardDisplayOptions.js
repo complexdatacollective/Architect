@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import * as Fields from '@codaco/ui/lib/components/Fields';
+import { useDispatch, useSelector } from 'react-redux';
+import { change, formValueSelector } from 'redux-form';
 import { Section, Row } from '@components/EditorLayout';
 import withDisabledAssetRequired from '@components/enhancers/withDisabledAssetRequired';
 import withMapFormToProps from '@components/enhancers/withMapFormToProps';
@@ -18,14 +20,33 @@ const CardDisplayOptions = ({
   const variableOptionsGetter = getVariableOptionsGetter(variableOptions);
   const maxVariableOptions = variableOptions.length;
 
+  const dispatch = useDispatch();
+  const getFormValue = formValueSelector('edit-stage');
+  const hasCardDisplayOptions = useSelector((state) => getFormValue(state, 'cardOptions.additionalProperties'));
+
+  const handleToggleCardDisplayOptions = (nextState) => {
+    if (nextState === false) {
+      dispatch(change('edit-stage', 'cardOptions.additionalProperties', null));
+    }
+
+    return true;
+  };
+
   return (
-    <Section key={dataSource} group disabled={disabled}>
-      <Row>
-        <h3>Card Display Options</h3>
+    <Section
+      title="Card Display Options"
+      summary={(
         <p>
           This section controls how the cards (which represent each item in your roster
           data file) are displayed to the participant.
         </p>
+      )}
+      toggleable
+      startExpanded={!!hasCardDisplayOptions}
+      handleToggleChange={handleToggleCardDisplayOptions}
+      disabled={disabled}
+    >
+      <Row>
         <Tip>
           <p>
             Cards will use the

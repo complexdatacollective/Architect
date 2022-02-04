@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
-import Modal from '@codaco/ui/lib/components/Modal';
+import { AnimatePresence, motion } from 'framer-motion';
 import Button from '@codaco/ui/lib/components/Button';
-import EditAlterRule from './EditAlterRule';
-import EditEdgeRule from './EditEdgeRule';
+import EditEntityRule from './EditEntityRule';
 import EditEgoRule from './EditEgoRule';
+import ControlBar from '../../ControlBar';
+import Screen from '../../Screen/Screen';
+import { screenVariants } from '../../Screens/Screens';
+import Layout from '../../EditorLayout/Layout';
+import ExternalLink from '../../ExternalLink';
+import CollapsableHeader from '../../Screen/CollapsableHeader';
 
 class EditRule extends Component {
   get TypeComponent() {
-    // eslint-disable-next-line react/destructuring-assignment
-    switch (this.props.rule.type) {
-      case 'ego':
-        return EditEgoRule;
-      case 'edge':
-        return EditEdgeRule;
-      case 'alter': {
-        return EditAlterRule;
-      }
-      default:
-        return null;
+    const { rule: { type } } = this.props;
+    if (type === 'ego') {
+      return EditEgoRule;
     }
+
+    return EditEntityRule;
   }
 
   handleSave = () => {
@@ -32,25 +31,67 @@ class EditRule extends Component {
     const {
       rule, codebook, onChange, onCancel, onSave,
     } = this.props;
-    return (
-      <Modal show={!!rule}>
-        <motion.div layout className="rules-edit-rule">
-          <div className="rules-edit-rule__container">
-            { rule && rule.options
-              && (
-              <this.TypeComponent
-                rule={rule}
-                codebook={codebook}
-                onChange={onChange}
-              />
+
+    return createPortal(
+      <AnimatePresence>
+        { !!rule && (
+          <motion.div
+            variants={screenVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className="screens-container"
+          >
+            <Screen
+              className="rule-screen"
+              footer={(
+                <ControlBar
+                  buttons={[
+                    <Button type="button" onClick={onCancel} color="platinum">Cancel</Button>,
+                    <Button type="button" onClick={onSave} color="primary">Finish and Close</Button>,
+                  ]}
+                />
               )}
-            <div className="rules-edit-rule__controls">
-              <Button type="button" onClick={onCancel} color="platinum">Cancel</Button>
-              <Button type="button" onClick={onSave} color="primary">Finish and Close</Button>
-            </div>
-          </div>
-        </motion.div>
-      </Modal>
+            >
+              <CollapsableHeader
+                collapsedState={(
+                  <div className="stage-heading stage-heading--collapsed stage-heading--shadow">
+                    <Layout>
+                      <h2>Construct a Rule</h2>
+                    </Layout>
+                  </div>
+                )}
+              >
+                <div className="stage-heading stage-heading--inline">
+                  <Layout>
+                    <h1 className="screen-heading">Construct a Rule</h1>
+                    <p>
+                      For help with constructing rules, see our documentation articles
+                      on
+                      {' '}
+                      <ExternalLink href="https://documentation.networkcanvas.com/key-concepts/skip-logic/">skip logic</ExternalLink>
+                      {' '}
+                      and
+                      {' '}
+                      <ExternalLink href="https://documentation.networkcanvas.com/key-concepts/network-filtering/">network filtering</ExternalLink>
+                      .
+                    </p>
+                  </Layout>
+                </div>
+              </CollapsableHeader>
+              { rule && rule.options
+              && (
+                <this.TypeComponent
+                  rule={rule}
+                  codebook={codebook}
+                  onChange={onChange}
+                />
+              )}
+            </Screen>
+          </motion.div>
+        )}
+      </AnimatePresence>,
+      document.body,
     );
   }
 }

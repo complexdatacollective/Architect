@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
 import { change, formValueSelector } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { get } from 'lodash';
 import { getFieldId } from '../../utils/issues';
 import DetachedField from '../DetachedField';
 
 const FORM_PROPERTY = 'behaviours.automaticLayout.enabled';
 
-const AutomaticLayout = () => {
+const AutomaticLayout = ({ form }) => {
   const dispatch = useDispatch();
-  const form = useSelector((state) => get(state, 'form', {}));
   const formValue = useSelector((state) => !!formValueSelector(form)(state, FORM_PROPERTY));
 
   const [useAutomaticLayout, setUseAutomaticLayout] = useState(formValue);
@@ -19,22 +18,26 @@ const AutomaticLayout = () => {
   const handleChooseLayoutMode = () => {
     if (useAutomaticLayout) {
       dispatch(change('edit-stage', FORM_PROPERTY, false));
-    } else {
-      dispatch(change('edit-stage', FORM_PROPERTY, true));
+      setUseAutomaticLayout(false);
+      return;
     }
 
-    setUseAutomaticLayout(!useAutomaticLayout);
+    dispatch(change('edit-stage', FORM_PROPERTY, true));
+    setUseAutomaticLayout(true);
   };
 
   return (
-    <Section>
-      <Row>
-        <div id={getFieldId('behaviours.automaticLayout.enabled')} data-name="Layout mode" />
-        <h3>Layout Mode</h3>
+    <Section
+      title="Layout Mode"
+      summary={(
         <p>
           Interviewer offers two modes for positioning nodes on the
           sociogram: &quot;Manual&quot;, and &quot;Automatic&quot;.
         </p>
+      )}
+    >
+      <Row>
+        <div id={getFieldId('behaviours.automaticLayout.enabled')} data-name="Layout mode" />
         <p>
           <strong>Automatic mode</strong>
           {' '}
@@ -84,6 +87,10 @@ const AutomaticLayout = () => {
       </Row>
     </Section>
   );
+};
+
+AutomaticLayout.propTypes = {
+  form: PropTypes.string.isRequired,
 };
 
 export default AutomaticLayout;

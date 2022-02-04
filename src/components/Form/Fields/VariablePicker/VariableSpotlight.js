@@ -97,6 +97,7 @@ const VariableSpotlight = (props) => {
     onCancel,
     onCreateOption,
     options,
+    disallowCreation,
   } = props;
 
   const [filterTerm, setFilterTerm] = useState('');
@@ -124,6 +125,12 @@ const VariableSpotlight = (props) => {
     (state) => getVariablesForSubject(state, { entity, type }),
   );
 
+  const hasOptions = useMemo(() => options.length > 0, [options]);
+  const hasFilterTerm = useMemo(() => filterTerm.length > 0, [filterTerm]);
+  const hasFilterResults = useMemo(
+    () => sortedAndFilteredItems.length > 0, [sortedAndFilteredItems],
+  );
+
   const existingVariableNames = useMemo(() => Object.keys(existingVariables).map((variable) => get(existingVariables[variable], 'name')));
 
   const invalidVariableName = useMemo(() => {
@@ -138,42 +145,63 @@ const VariableSpotlight = (props) => {
       <ol>
         { filterTerm && options.filter((item) => item.label === filterTerm).length !== 1 && (
           <>
-            <Divider legend="Create" />
-            { !invalidVariableName ? (
-              <ListItem
-                onSelect={handleCreateOption}
-                selected={showCursor && cursor === -1}
-                setSelected={() => { setShowCursor(true); setCursor(-1); }}
-                removeSelected={() => setCursor(0)}
-              >
-                <div className="create-new">
-                  <Icon name="add" />
-                  <span>
-                    Create new variable called &quot;
-                    {filterTerm}
-                    &quot;.
-                  </span>
+            {
+              disallowCreation
+              && hasFilterTerm
+              && !hasFilterResults
+              && (
+              <div className="variable-spotlight__empty">
+                <Icon name="warning" />
+                <div>
+                  <p>
+                    You cannot create a new
+                    variable from here. Please create one or more variables elsewhere
+                    in your protocol, and return here to select them.
+                  </p>
                 </div>
-              </ListItem>
-            ) : (
-              <ListItem disabled>
-                <div className="create-new">
-                  <Icon name="warning" />
-                  <span>
-                    Cannot create variable named &quot;
-                    {filterTerm}
-                    &quot;&nbsp;&mdash;&nbsp;
-                    {invalidVariableName}
-                    .
-                  </span>
-                </div>
-              </ListItem>
+              </div>
+              )
+            }
+            { !disallowCreation && (
+              <>
+                <Divider legend="Create" />
+                { !invalidVariableName ? (
+                  <ListItem
+                    onSelect={handleCreateOption}
+                    selected={showCursor && cursor === -1}
+                    setSelected={() => { setShowCursor(true); setCursor(-1); }}
+                    removeSelected={() => setCursor(0)}
+                  >
+                    <div className="create-new">
+                      <Icon name="add" color="charcoal" />
+                      <span>
+                        Create new variable called &quot;
+                        {filterTerm}
+                        &quot;.
+                      </span>
+                    </div>
+                  </ListItem>
+                ) : (
+                  <ListItem disabled>
+                    <div className="create-new">
+                      <Icon name="warning" />
+                      <span>
+                        Cannot create variable named &quot;
+                        {filterTerm}
+                        &quot;&nbsp;&mdash;&nbsp;
+                        {invalidVariableName}
+                        .
+                      </span>
+                    </div>
+                  </ListItem>
+                )}
+              </>
             )}
           </>
         )}
-        { sortedAndFilteredItems.length > 0 && (
+        { hasFilterResults && (
           <Divider
-            legend={filterTerm.length > 0 ? `Existing Variables Containing "${filterTerm}"` : 'Existing Variables'}
+            legend={hasFilterTerm ? `Existing Variables Containing "${filterTerm}"` : 'Existing Variables'}
           />
         )}
         { sortedAndFilteredItems.map(({ value, label, type: optionType }, index) => (
@@ -194,7 +222,7 @@ const VariableSpotlight = (props) => {
   // Reset cursor position when list is filtered
   useEffect(() => {
     // Set cursor to create if there are no other options
-    if (sortedAndFilteredItems.length === 0) {
+    if (!hasFilterResults) {
       setCursor(-1);
       setShowCursor(true);
       return;
@@ -204,7 +232,7 @@ const VariableSpotlight = (props) => {
     if (cursor > sortedAndFilteredItems.length - 1) {
       setCursor(sortedAndFilteredItems.length - 1);
     }
-  }, [sortedAndFilteredItems, filterTerm, cursor]);
+  }, [sortedAndFilteredItems, filterTerm, cursor, hasFilterResults]);
 
   const handleFilter = (e) => {
     // throw new Error();
@@ -232,7 +260,7 @@ const VariableSpotlight = (props) => {
       // If there are items and the cursor is not at the top,
       // or if there are no items and the cursor is not at the top
       // move the cursor up
-      if ((filterTerm.length > 0 && cursor > -1) || cursor > 0) {
+      if ((hasFilterTerm && cursor > -1) || cursor > 0) {
         setCursor(cursor - 1);
       }
     } else if (e.key === 'ArrowDown') {
@@ -266,7 +294,7 @@ const VariableSpotlight = (props) => {
       // If the cursor is in the create option,
       // and there is a filter term,
       // create a new variable with that value
-      if (!invalidVariableName && filterTerm && cursor === -1) {
+      if (!disallowCreation && !invalidVariableName && hasFilterTerm && cursor === -1) {
         handleCreateOption();
       }
     }
@@ -282,7 +310,7 @@ const VariableSpotlight = (props) => {
   };
 
   const resultsVariants = {
-    visible: { height: 'auto' },
+    visible: { height: 'auto', transitionEnd: { display: 'flex' } },
     hidden: { height: 0 },
   };
 
@@ -293,13 +321,13 @@ const VariableSpotlight = (props) => {
       initial="hidden"
       animate="visible"
       transition={{
-        type: 'spring', stiffness: 300, damping: 30, when: 'beforeChildren',
+        type: 'spring',
       }}
     >
       <header className="variable-spotlight__header">
         <Search
           autoFocus
-          placeholder="Create or find a variable..."
+          placeholder={disallowCreation ? 'Find a variable...' : 'Create or find a variable...'}
           input={{
             value: filterTerm,
             onChange: handleFilter,
@@ -312,7 +340,7 @@ const VariableSpotlight = (props) => {
         variants={resultsVariants}
         transition={{ duration: 0.2, ease: 'easeInOut' }}
       >
-        { options.length === 0 && (
+        { !disallowCreation && !hasOptions && (
           <div className="variable-spotlight__empty">
             <Icon name="info" />
             <div>
@@ -325,6 +353,18 @@ const VariableSpotlight = (props) => {
             </div>
           </div>
         )}
+        { disallowCreation && !hasFilterTerm && !hasOptions && (
+          <div className="variable-spotlight__empty">
+            <Icon name="warning" />
+            <div>
+              <p>
+                No variables exist for you to select, and you cannot create a new
+                variable from here. Please create one or more variables elsewhere
+                in your protocol, and return here to select them.
+              </p>
+            </div>
+          </div>
+        )}
         { renderResults() }
       </motion.main>
     </motion.div>
@@ -332,9 +372,10 @@ const VariableSpotlight = (props) => {
 };
 
 VariableSpotlight.propTypes = {
+  disallowCreation: PropTypes.bool,
   onSelect: PropTypes.func.isRequired,
   entity: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   onCancel: PropTypes.func.isRequired,
   onCreateOption: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.shape({
@@ -342,6 +383,11 @@ VariableSpotlight.propTypes = {
     label: PropTypes.string.isRequired,
     type: PropTypes.string,
   })).isRequired,
+};
+
+VariableSpotlight.defaultProps = {
+  type: null,
+  disallowCreation: false,
 };
 
 export default VariableSpotlight;

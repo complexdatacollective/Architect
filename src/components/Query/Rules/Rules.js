@@ -54,7 +54,7 @@ const Rules = ({
       />
 
       <div className="rules-rules__preview">
-        <h2>Rules</h2>
+        <h4>Rules</h4>
         <PreviewRules
           rules={rules}
           join={join}
@@ -98,7 +98,7 @@ const Rules = ({
       { rules.length > 1
         && (
         <div className="rules-rules__join">
-          <h2>Must match</h2>
+          <h4>Must match</h4>
           <DetachedField
             component={RadioGroup}
             options={[

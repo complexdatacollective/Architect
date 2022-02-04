@@ -51,12 +51,16 @@ class NewVariableWindow extends Component {
         initialValues={initialValues}
         title="Create New Variable"
       >
-        <Section>
-          <h3 id={getFieldId('name')}>Variable name</h3>
-          <p>
-            Enter a name for this variable. The variable name is how you will reference
-            the variable elsewhere, including in exported data.
-          </p>
+        <Section
+          title="Variable Name"
+          summary={(
+            <p>
+              Enter a name for this variable. The variable name is how you will reference
+              the variable elsewhere, including in exported data.
+            </p>
+          )}
+        >
+          <div id={getFieldId('name')} />
           <Field
             name="name"
             component={Fields.Text}
@@ -65,9 +69,13 @@ class NewVariableWindow extends Component {
             normalize={safeName}
           />
         </Section>
-        <Section>
-          <h3 id={getFieldId('type')}>Variable type</h3>
-          <p>Choose a variable type</p>
+        <Section
+          title="Variable Type"
+          summary={(
+            <p>Choose a variable type</p>
+          )}
+        >
+          <div id={getFieldId('type')} />
           <ValidatedField
             name="type"
             component={Select}
@@ -79,9 +87,13 @@ class NewVariableWindow extends Component {
         </Section>
         { isOrdinalOrCategoricalType(variableType)
           && (
-          <Section>
-            <h3 id={getFieldId('options')}>Options</h3>
-            <p>Create some options for this input control</p>
+          <Section
+            title="Options"
+            summary={(
+              <p>Create some options for this input control</p>
+            )}
+          >
+            <div id={getFieldId('options')} />
             <Options
               name="options"
               label="Options"

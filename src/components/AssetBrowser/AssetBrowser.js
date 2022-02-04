@@ -26,23 +26,15 @@ const AssetBrowser = ({
 
   return (
     <>
-      <Section>
+      <Section title="Import a New Resource">
         <NewAsset
           onCreate={handleCreate}
           type={type}
         />
       </Section>
-      <Section>
-        <h3>
-          Resource library
-          { type && (
-          <span>
-            (showing type:
-            {type}
-            )
-          </span>
-          )}
-        </h3>
+      <Section
+        title="Resource Library"
+      >
         <Assets
           onSelect={onSelect}
           onPreview={handleShowPreview}

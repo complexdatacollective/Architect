@@ -1,27 +1,40 @@
-$vertical-padding: .25rem;
-$font-size: .8rem;
-
 .tag {
-  position: relative;
   display: inline-flex;
-  padding: $vertical-padding 0;
-  border-radius: 1rem;
+  padding: 3px;
+  border-radius: unit(5);
   width: auto;
-  margin: 0 unit(.5) unit(.5) 0;
+  margin: unit(.5);
   cursor: pointer;
   align-items: center;
   justify-content: flex-start;
-  color: var(--text-light);
-  background: var(--architect-selected);
-  opacity: .6;
-  transition-property: opacity, filter;
-  transition-duration: var(--animation-duration-fast);
-  transition-timing-function: var(--animation-easing);
-  filter: saturate(.3);
+  color: var(--text-light-muted);
+  background: var(--architect-panel-shadow);
+  border: 4px solid transparent;
+
+  &--light {
+    color: var(--text-dark);
+    background: var(--color-platinum);
+  }
+
+  &--clickable {
+    @include clickable(.5);
+  }
+
+  &--disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+
+  &__dot {
+    @include color-modifiers($include-hover: false);
+
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+  }
 
   &__label {
-    line-height: $font-size;
-    font-size: $font-size;
+    font-size: .8rem;
     text-transform: uppercase;
     letter-spacing: .15em;
     padding: 0 .75rem;
@@ -33,18 +46,14 @@ $font-size: .8rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 #{$vertical-padding} 0 #{-$vertical-padding};
 
     svg {
-      font-size: 1rem;
+      font-size: unit(2);
     }
   }
 
   &--selected {
-    cursor: default;
-    opacity: 1;
-    filter: saturate(1);
+    color: var(--color-white);
+    background: var(--color-slate-blue);
   }
-
-  @include color-modifiers($include-hover: false);
 }

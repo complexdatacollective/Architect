@@ -22,12 +22,19 @@ const Form = ({
   entity,
   disableFormTitle,
 }) => (
-  <Section disabled={disabled} group>
-    <div id={getFieldId('form.title')} data-name="Form title" />
-    <h2>Form</h2>
-    <p>
-      Use this section to define the fields to collect when this form is shown.
-    </p>
+  <Section
+    disabled={disabled}
+    group
+    title="Form"
+    summary={(
+      <>
+        <div id={getFieldId('form.title')} data-name="Form title" />
+        <p>
+          Use this section to define the fields to collect when this form is shown.
+        </p>
+      </>
+    )}
+  >
     {!disableFormTitle
     && (
     <ValidatedField
@@ -52,17 +59,18 @@ const Form = ({
       normalize={normalizeField}
       itemSelector={itemSelector(entity, type)}
       form={form}
-    >
-      <div id={getFieldId('form.title')} data-name="Form fields" />
-      <h4>Fields</h4>
-      <p>
-        Add one or more fields to your form to collect attributes about each
-        node the participant creates.
-      </p>
-      <p>
-        Use the drag handle on the left of each prompt adjust its order.
-      </p>
-    </EditableList>
+      sectionTitle="Fields"
+      sectionSummary={(
+        <>
+          <div id={getFieldId('form.title')} data-name="Form fields" />
+          <p>
+            Add one or more fields to your form to collect attributes about each
+            node the participant creates. Use the drag handle on the left of each
+            prompt adjust its order.
+          </p>
+        </>
+      )}
+    />
   </Section>
 );
 

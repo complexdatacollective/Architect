@@ -36,7 +36,7 @@
     max-height var(--animation-easing) var(--animation-duration-standard);
 
     .icon {
-      height: 1.2rem;
+      height: unit(2);
     }
   }
 
@@ -81,8 +81,8 @@
     padding: .5rem;
 
     .icon {
-      height: 1.25rem;
-      width: 1.25rem;
+      height: unit(2);
+      width: unit(2);
     }
   }
 

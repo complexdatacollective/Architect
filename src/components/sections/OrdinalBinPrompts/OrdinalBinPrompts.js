@@ -18,6 +18,13 @@ const OrdinalBinPrompts = ({
   ...props
 }) => (
   <EditableList
+    sectionTitle="Prompts"
+    sectionSummary={(
+      <p>
+        Add one or more prompts below to frame the task for the user.
+        You can reorder the prompts using the draggable handles on the left hand side.
+      </p>
+    )}
     previewComponent={PromptPreview}
     editComponent={PromptFields}
     title="Edit Prompt"
@@ -28,16 +35,7 @@ const OrdinalBinPrompts = ({
     type={type}
     // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
-  >
-    <h2>Prompts</h2>
-    <p>
-      Add one or more prompts below to frame the task for the user.
-      You can reorder the prompts using the draggable handles on the left hand side.
-    </p>
-    {/* <Tip>
-      <p>Tap an existing prompt to edit it.</p>
-    </Tip> */}
-  </EditableList>
+  />
 );
 
 OrdinalBinPrompts.propTypes = {

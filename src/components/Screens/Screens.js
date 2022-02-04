@@ -1,12 +1,26 @@
-import React, { useMemo } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { compose } from 'recompose';
-import Window from '@codaco/ui/lib/components/window';
-import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
+import React, { useCallback } from 'react';
+import { createPortal } from 'react-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useDispatch, useSelector } from 'react-redux';
 import { getScreensStack } from '@selectors/ui';
 import { actionCreators as uiActions } from '@modules/ui';
 import { getScreenComponent } from './screenIndex';
+
+export const screenVariants = {
+  visible: {
+    opacity: 1,
+    transition: {
+      when: 'beforeChildren',
+      duration: 0.1,
+    },
+  },
+  hidden: {
+    opacity: 0,
+    transition: {
+      when: 'afterChildren',
+    },
+  },
+};
 
 /**
  * Screen manager for Architect.
@@ -21,47 +35,46 @@ import { getScreenComponent } from './screenIndex';
  *    This will be rendered as `<ScreenComponent {...params} />`
  * - `closeScreen(name, params)`
  */
-const Screens = (props) => {
-  const zPanel = useMemo(() => getCSSVariableAsNumber('--z-panel'), []);
+const Screens = () => {
+  const screens = useSelector((state) => getScreensStack(state));
 
-  const screens = props.screens.map(({ screen, params }, index) => {
+  const dispatch = useDispatch();
+
+  const closeScreen = useCallback(
+    (name, params) => dispatch(uiActions.closeScreen(name, params)),
+    [dispatch],
+  );
+
+  const renderScreens = useCallback(() => screens.map(({ screen, params }) => {
     const ScreenComponent = getScreenComponent(screen);
-    const onComplete = (result) => props.closeScreen(screen, result);
 
-    const zIndex = zPanel + index;
+    const onComplete = (result) => closeScreen(screen, result);
 
     return (
-      <ScreenComponent
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...params}
-        zIndex={zIndex}
-        layoutId={params.id}
-        key={params.id || index}
-        onComplete={onComplete}
-      />
+      <motion.div
+        key={params.id || screen}
+        variants={screenVariants}
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+        className="screens-container"
+      >
+        <ScreenComponent
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...params}
+          layoutId={params.id}
+          onComplete={onComplete}
+        />
+      </motion.div>
     );
-  });
+  }), [screens, closeScreen]);
 
-  return screens;
+  return createPortal(
+    <AnimatePresence>
+      {renderScreens()}
+    </AnimatePresence>,
+    document.body,
+  );
 };
 
-Screens.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  screens: PropTypes.array.isRequired,
-  closeScreen: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  screens: getScreensStack(state),
-});
-
-const mapDispatchToProps = {
-  closeScreen: uiActions.closeScreen,
-};
-
-export { Screens };
-
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  Window,
-)(Screens);
+export default Screens;

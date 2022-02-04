@@ -1,16 +1,18 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {
+  useEffect, useState, useCallback, useMemo,
+} from 'react';
 import PropTypes from 'prop-types';
 import { ipcRenderer } from 'electron';
 import { compose, defaultProps } from 'recompose';
 import Editor from '@components/Editor';
 import { Layout } from '@components/EditorLayout';
-import CodeView from '@components/CodeView';
 import { getInterface } from './Interfaces';
+import CodeView from '../CodeView';
 import withStageEditorHandlers from './withStageEditorHandlers';
 import withStageEditorMeta from './withStageEditorMeta';
-import StageHeading from './StageHeading';
-import SkipLogic from './SkipLogic';
 import { formName } from './configuration';
+import StageHeading, { CondensedStageHeading } from './StageHeading';
+import CollapsableHeader from '../Screen/CollapsableHeader';
 
 const StageEditor = (props) => {
   const {
@@ -23,7 +25,23 @@ const StageEditor = (props) => {
   } = props;
 
   const [showCodeView, setShowCodeView] = useState(false);
-  const toggleShowCodeView = () => setShowCodeView((show) => !show);
+
+  const toggleCodeView = useCallback(() => {
+    setShowCodeView((state) => !state);
+  }, []);
+
+  const handleKeyDown = useCallback((event) => {
+    if (event.ctrlKey && event.key === '/') {
+      toggleCodeView();
+    }
+  });
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
 
   useEffect(() => {
     ipcRenderer.on('REFRESH_PREVIEW', previewStage);
@@ -36,13 +54,8 @@ const StageEditor = (props) => {
     [interfaceType],
   );
 
-  const headerSections = useMemo(
-    () => getInterface(interfaceType).headerSections,
-    [interfaceType],
-  );
-
   const renderSections = (
-    sectionsList, { submitFailed, windowRoot },
+    sectionsList, { submitFailed },
   ) => sectionsList.map((SectionComponent, sectionIndex) => {
     const sectionKey = `${interfaceType}-${sectionIndex}`;
     return (
@@ -51,9 +64,6 @@ const StageEditor = (props) => {
         form={formName}
         stagePath={stagePath}
         hasSubmitFailed={submitFailed}
-        // `windowRoot` will ensure connect() components re-render
-        // when the window root changes
-        windowRoot={windowRoot}
         interfaceType={interfaceType}
       />
     );
@@ -66,19 +76,23 @@ const StageEditor = (props) => {
       {...rest}
     >
       {
-        ({ submitFailed, windowRoot }) => (
-          <Layout>
+        ({ submitFailed }) => (
+          <>
             <CodeView
               form={formName}
               show={showCodeView}
-              toggleCodeView={toggleShowCodeView}
+              toggleCodeView={toggleCodeView}
             />
-            <StageHeading id={id} toggleCodeView={toggleShowCodeView}>
-              { headerSections && renderSections(headerSections, { submitFailed, windowRoot })}
-              <SkipLogic />
-            </StageHeading>
-            {renderSections(sections, { submitFailed, windowRoot })}
-          </Layout>
+            <CollapsableHeader
+              threshold={165}
+              collapsedState={<CondensedStageHeading id={id} />}
+            >
+              <StageHeading id={id} />
+            </CollapsableHeader>
+            <Layout>
+              {renderSections(sections, { submitFailed })}
+            </Layout>
+          </>
         )
       }
     </Editor>

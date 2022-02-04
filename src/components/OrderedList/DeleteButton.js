@@ -1,14 +1,17 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { Icon } from '@codaco/ui';
 
 const DeleteButton = ({ onDelete }) => (
-  <div
+  <motion.div
+    whileHover={{ scale: 1.5, rotate: 180 }}
     className="list-delete-button"
-    onDelete={onDelete}
+    onClick={onDelete}
+    title="Delete"
   >
     <Icon name="delete" />
-  </div>
+  </motion.div>
 );
 
 DeleteButton.propTypes = {

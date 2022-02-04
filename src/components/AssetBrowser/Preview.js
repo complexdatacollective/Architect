@@ -39,7 +39,7 @@ const Preview = ({
     onDownload(assetPath, meta);
   }, [onDownload, assetPath, meta]);
 
-  const leftControls = [
+  const primaryButtons = [
     <Button
       onClick={onClose}
       color="white"
@@ -49,7 +49,7 @@ const Preview = ({
     </Button>,
   ];
 
-  const rightControls = [
+  const secondaryButtons = [
     <Button
       onClick={handleDownload}
       icon={<DownloadIcon />}
@@ -68,8 +68,8 @@ const Preview = ({
     <Window
       title={meta.name}
       className={className}
-      leftControls={leftControls}
-      rightControls={rightControls}
+      leftControls={secondaryButtons}
+      rightControls={primaryButtons}
       windowRoot={document.body}
     >
       <AssetRenderer id={id} />

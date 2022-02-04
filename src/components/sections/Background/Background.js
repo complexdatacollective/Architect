@@ -9,7 +9,7 @@ import { Section, Row } from '@components/EditorLayout';
 import { getFieldId } from '../../../utils/issues';
 import DetachedField from '../../DetachedField';
 import ValidatedField from '../../Form/ValidatedField';
-import * as ArchitectFields from '../../Form/Fields';
+import Image from '../../Form/Fields/Image';
 import withBackgroundChangeHandler from './withBackgroundChangeHandler';
 
 class Background extends PureComponent {
@@ -20,15 +20,16 @@ class Background extends PureComponent {
     } = this.props;
 
     return (
-      <Section>
-        <Row>
-          <h3>Background</h3>
+      <Section
+        title="Background"
+        summary={(
           <p>
             This section determines the graphical background for this prompt. You can choose
             between a conventional series of concentric circles, or provide your own
             background image.
           </p>
-        </Row>
+        )}
+      >
         <Row>
           <DetachedField
             component={Fields.Boolean}
@@ -75,7 +76,7 @@ class Background extends PureComponent {
             <Row>
               <Field
                 name="background.skewedTowardCenter"
-                component={Fields.Checkbox}
+                component={Fields.Toggle}
                 label="Skew the size of the circles so that the middle is proportionally larger."
               />
             </Row>
@@ -84,15 +85,13 @@ class Background extends PureComponent {
         { (useImage)
           && (
           <Row>
-            <div style={{ position: 'relative', minHeight: '100px' }}>
-              <div id={getFieldId('background.image')} data-name="Background &gt; Image" />
-              <ValidatedField
-                name="background.image"
-                component={ArchitectFields.Image}
-                label="Background image"
-                validation={{ required: true }}
-              />
-            </div>
+            <div id={getFieldId('background.image')} data-name="Background &gt; Image" />
+            <ValidatedField
+              name="background.image"
+              component={Image}
+              label="Background image"
+              validation={{ required: true }}
+            />
           </Row>
           )}
       </Section>

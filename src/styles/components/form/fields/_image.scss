@@ -4,6 +4,7 @@ $component-name: form-fields-image;
   width: 100%;
   background: var(--color-rich-black);
   padding: unit(2);
+  border-radius: var(--border-radius);
 
   &__image {
     background-size: contain;

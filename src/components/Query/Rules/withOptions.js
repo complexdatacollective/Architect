@@ -27,33 +27,43 @@ const getOperatorsForType = (type) => {
   return operatorsAsOptions.filter(({ value }) => operatorsForType.has(value));
 };
 
-const withOptions = (entityCategory) => withProps((props) => {
+const withOptions = withProps((props) => {
+  const entityType = get(props.rule, 'type');
+
   const entityId = get(props.rule, 'options.type', null);
   const variableId = get(props.rule, 'options.attribute', null);
 
-  const variablesRoot = entityCategory === 'ego'
-    ? ['ego', 'variables']
-    : [entityCategory, entityId, 'variables'];
+  const variablesRoot = () => {
+    if (entityType === 'ego') {
+      return ['ego', 'variables'];
+    }
 
-  const entityTypes = get(props.codebook, entityCategory, {});
+    if (entityType === 'alter') {
+      return ['node', entityId, 'variables'];
+    }
 
-  const typeOptions = map(entityTypes, (entity, id) => ({
+    return ['edge', entityId, 'variables'];
+  };
+
+  const entitiesOfType = get(props.codebook, entityType, {});
+
+  const typeOptions = map(entitiesOfType, (entity, id) => ({
     value: id,
     label: entity.name,
     color: entity.color,
   }));
 
-  const variablesAsOptions = getVariablesAsOptions(get(props.codebook, variablesRoot, {}));
+  const variablesAsOptions = getVariablesAsOptions(get(props.codebook, variablesRoot(), {}));
 
   const variableType = get(
     props.codebook,
-    [...variablesRoot, variableId, 'type'],
+    [...variablesRoot(), variableId, 'type'],
     null,
   );
 
   const variableOptions = get(
     props.codebook,
-    [...variablesRoot, variableId, 'options'],
+    [...variablesRoot(), variableId, 'options'],
     null,
   );
 

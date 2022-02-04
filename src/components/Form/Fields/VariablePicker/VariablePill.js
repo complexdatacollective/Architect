@@ -195,36 +195,18 @@ const EditableVariablePill = ({ uuid }) => {
           ) : (
             <motion.h4
               key="label"
+              className="label"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              onClick={() => setIsEditing(true)}
+              title="Click to rename this variable..."
             >
               {name}
             </motion.h4>
           )}
         </AnimatePresence>
       </BaseVariablePill>
-      { !editing && (
-        <Tippy
-          reference={ref}
-          interactive
-          delay={[750, 500]}
-          content={(
-            <>
-              <div
-                className="variable-pill__edit-tooltip"
-                onClick={() => setIsEditing(true)}
-                role="button"
-                tabIndex={0}
-              >
-                <Icon name="edit" />
-                &nbsp;
-                <span>Rename</span>
-              </div>
-            </>
-          )}
-        />
-      )}
     </>
   );
 };

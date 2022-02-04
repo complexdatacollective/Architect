@@ -1,25 +1,36 @@
 import React from 'react';
-import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const panelVariants = {
-  show: { opacity: 1, y: 0, transition: { ease: 'easeOut', when: 'beforeChildren', staggerChildren: 0.3 } },
-  hide: { opacity: 0, y: 100 },
+const barVariants = {
+  visible: {
+    y: 0,
+    transition: {
+      when: 'beforeChildren',
+      staggerChildren: 0.1,
+      stiffness: 300,
+      damping: 30,
+    },
+  },
+  hidden: {
+    y: '100%',
+    transition: {
+      when: 'afterChildren',
+    },
+  },
 };
 
 const buttonVariants = {
-  show: { opacity: 1, y: 0, transition: { type: 'spring' } },
-  hide: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 10 },
 };
 
 const animatedButton = (button, index) => (
   <motion.div
     key={(button && button.key) || index}
     variants={buttonVariants}
-    initial="hide"
-    animate="show"
-    exit="hide"
+    exit="hidden"
     layout
   >
     {button}
@@ -28,21 +39,13 @@ const animatedButton = (button, index) => (
 
 const ControlBar = ({ buttons, secondaryButtons, className }) => {
   const buttonLayout = [
-    <motion.div layout className="control-bar__secondary-buttons" key="secondary">
-      <AnimateSharedLayout>
-        <AnimatePresence>
-          { secondaryButtons
-            && Array.from(secondaryButtons).map(animatedButton)}
-        </AnimatePresence>
-      </AnimateSharedLayout>
+    <motion.div className="control-bar__secondary-buttons" key="secondary">
+      { secondaryButtons
+        && Array.from(secondaryButtons).map(animatedButton)}
     </motion.div>,
-    <motion.div layout className="control-bar__primary-buttons" key="primary">
-      <AnimateSharedLayout>
-        <AnimatePresence>
-          { buttons
-            && Array.from(buttons).map(animatedButton)}
-        </AnimatePresence>
-      </AnimateSharedLayout>
+    <motion.div className="control-bar__primary-buttons" key="primary">
+      { buttons
+        && Array.from(buttons).map(animatedButton)}
     </motion.div>,
   ];
 
@@ -52,13 +55,11 @@ const ControlBar = ({ buttons, secondaryButtons, className }) => {
         'control-bar',
         className,
       )}
-      variants={panelVariants}
-      initial="hide"
-      animate="show"
-      // initial={{ y: 100, opacity: 0 }}
-      // animate={{ y: 0, opacity: 1 }}
+      variants={barVariants}
     >
-      { buttonLayout }
+      <AnimatePresence>
+        { buttonLayout }
+      </AnimatePresence>
     </motion.div>
   );
 };

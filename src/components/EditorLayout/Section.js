@@ -1,42 +1,129 @@
-import React from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { AnimatePresence, motion } from 'framer-motion';
 import cx from 'classnames';
+import { Toggle } from '@codaco/ui/lib/components/Fields';
+import IssueAnchor from '../IssueAnchor';
+
+const animations = {
+  collapsed: {
+    height: 0,
+    opacity: 0,
+  },
+  open: {
+    height: 'auto',
+    opacity: 1,
+  },
+};
 
 const Section = ({
+  id,
+  title,
+  summary,
   disabled,
   group,
-  compactNext,
   children,
   className,
+  toggleable,
+  startExpanded,
+  handleToggleChange,
 }) => {
+  const [isOpen, setIsOpen] = useState(startExpanded);
+
+  // If the startExpanded prop changes, update the state.
+  // This happens when a stage is reset
+  useEffect(() => {
+    setIsOpen(startExpanded);
+  }, [startExpanded]);
+
+  const changeToggleState = useCallback(
+    async () => {
+      // Save the intended state here, so that if startExpanded changes
+      // in the meantime, we don't inadvertently change the open state
+      // back.
+      const intendedState = !isOpen;
+      const result = await handleToggleChange(!isOpen);
+
+      // If result of the callback, update the state with intendedState
+      if (result) {
+        setIsOpen(intendedState);
+      }
+    },
+    [isOpen, setIsOpen, handleToggleChange],
+  );
+
   const sectionClasses = cx(
     'stage-editor-section',
+    { 'stage-editor-section--toggleable': toggleable },
+    { 'stage-editor-section--open': isOpen },
     { 'stage-editor-section--disabled': disabled },
     { 'stage-editor-section--group': group },
-    { 'stage-editor-section--compact-next': compactNext },
     className,
   );
 
   return (
-    <div className={sectionClasses}>
-      {children}
-    </div>
+    <fieldset className={sectionClasses}>
+      <legend
+        className={toggleable ? 'toggleable' : ''}
+      >
+        { toggleable && (
+          <Toggle
+            input={{
+              value: isOpen,
+              onChange: changeToggleState,
+            }}
+            title="Turn this feature on or off"
+          />
+        )}
+        {title}
+        {!toggleable && (
+          <span style={{ color: 'var(--error)' }}> *</span>
+        )}
+      </legend>
+      <div className="summary">
+        { summary }
+      </div>
+      { id && (
+        <IssueAnchor fieldName={id} description={title} />
+      )}
+      <AnimatePresence initial={false}>
+        { (isOpen || !toggleable) && (
+          <motion.div
+            variants={animations}
+            initial="collapsed"
+            animate="open"
+            exit="collapsed"
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </fieldset>
   );
 };
 
 Section.propTypes = {
+  id: PropTypes.string,
+  toggleable: PropTypes.bool,
+  startExpanded: PropTypes.bool,
+  title: PropTypes.string.isRequired,
+  summary: PropTypes.node,
   disabled: PropTypes.bool,
   group: PropTypes.bool,
-  compactNext: PropTypes.bool,
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
+  handleToggleChange: PropTypes.func,
 };
 
 Section.defaultProps = {
+  id: null,
+  summary: null,
+  toggleable: false,
+  startExpanded: true,
   disabled: false,
   group: false,
   className: '',
-  compactNext: false,
+  handleToggleChange: () => Promise.resolve(true),
 };
 
 export default Section;

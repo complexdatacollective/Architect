@@ -3,7 +3,9 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { SortableElement } from 'react-sortable-hoc';
 import cx from 'classnames';
+import { Button } from '@codaco/ui';
 import { motion } from 'framer-motion';
+import DeleteIcon from '@material-ui/icons/DeleteRounded';
 import getAbsoluteBoundingRect from '@app/utils/getAbsoluteBoundingRect';
 import EditStageButton from './EditStageButton';
 
@@ -73,7 +75,6 @@ const Stage = ({
         {stageNumber}
       </div>
       <EditStageButton
-        layoutId={id}
         ref={previewRef}
         onEditStage={handleEditStage}
         type={type}
@@ -82,13 +83,15 @@ const Stage = ({
         hasFilter={hasFilter}
       />
       <div className="timeline-stage__controls">
-        <a
-          className="timeline-stage__control"
+        <Button
+          size="small"
+          color="neon-coral"
+          icon={<DeleteIcon />}
           onClick={() => onDeleteStage(id)}
+          title="Delete stage"
         >
-          <div className="timeline-stage__control-icon">✕</div>
           Delete stage
-        </a>
+        </Button>
       </div>
     </motion.div>
   );

@@ -6,13 +6,17 @@ import { Section, Row } from '@components/EditorLayout';
 import ValidatedField from '@components/Form/ValidatedField';
 
 const PromptText = ({ name }) => (
-  <Section>
-    <Row>
-      <h3 id={getFieldId(name)}>Prompt Text</h3>
+  <Section
+    id={getFieldId(name)}
+    title="Prompt Text"
+    summary={(
       <p>
         The prompt text instructs your participant about the task on this stage.
         Enter the text to use for your prompt below.
       </p>
+    )}
+  >
+    <Row>
       <ValidatedField
         name={name}
         component={RichText}

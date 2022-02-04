@@ -60,7 +60,7 @@ const FileInput = ({
   return (
     <div className={fieldClasses}>
       { label
-        && <h4 className="form-fields-file__label">{label}</h4>}
+        && <h4 className="form-field-label">{label}</h4>}
       {invalid && touched && (
       <div className="form-fields-file__error">
         <Icon name="warning" />

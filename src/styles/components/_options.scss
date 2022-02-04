@@ -59,14 +59,18 @@ $component-name: 'options';
       color: var(--architect-sortable-text);
 
       .icon {
-        width: 1.5rem;
-        height: 1.5rem;
+        width: unit(2);
+        height: unit(2);
 
         .cls-1,
         .cls-2 {
           fill: var(--architect-sortable-text);
         }
       }
+    }
+
+    &-handle {
+      cursor: grab;
     }
 
     .form-field-container {

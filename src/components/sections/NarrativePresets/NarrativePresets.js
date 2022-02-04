@@ -31,14 +31,16 @@ const NarrativePresets = (props) => (
     fieldName="presets"
     template={template}
     normalize={normalizePreset}
+    sectionTitle="Narrative Presets"
+    sectionSummary={(
+      <p>
+        Add one or more &quot;presets&quot; below, to create different
+        visualizations that you can switch between within the interview.
+      </p>
+    )}
     // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
-  >
-    <h2>Narrative Presets</h2>
-    <p>
-      Add one or more &quot;presets&quot; below, to encourage lines of discourse with participants.
-    </p>
-  </EditableList>
+  />
 );
 
 export { NarrativePresets };

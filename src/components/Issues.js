@@ -1,12 +1,23 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { getFormSyncErrors } from 'redux-form';
 import { map, isEmpty } from 'lodash';
 import { Icon } from '@codaco/ui';
 import { flattenIssues, getFieldId } from '../utils/issues';
 import scrollTo from '../utils/scrollTo';
+
+const variants = {
+  show: {
+    opacity: 1,
+    y: 0,
+  },
+  hide: {
+    opacity: 0,
+    y: '100%',
+  },
+};
 
 const Issues = ({
   show,
@@ -45,7 +56,7 @@ const Issues = ({
 
       const fieldName = targetField.getAttribute('data-name') || targetField.textContent;
 
-      if (fieldName) {
+      if (fieldName && issueRefs && issueRefs.current[fieldId]) {
         issueRefs.current[fieldId].textContent = fieldName;
       }
     });
@@ -71,7 +82,7 @@ const Issues = ({
     scrollTo(destination);
   };
 
-  const renderedIssues = map(
+  const renderIssues = () => map(
     flatIssues,
     ({ field, issue }) => {
       const fieldId = getFieldId(field);
@@ -100,44 +111,53 @@ const Issues = ({
 
   const isVisible = show && flatIssues.length > 0;
 
-  const issuesClasses = cx(
-    'issues',
-    {
-      'issues--show': isVisible,
-      'issues--open': open,
-    },
-  );
-
   return (
-    <div className={issuesClasses}>
-      <div className="issues__panel">
-        <div className="issues__title-bar" onClick={handleClickTitleBar}>
-          <div className="issues__title-bar-icon">
-            <Icon name="info" color="white" />
+    <AnimatePresence>
+      { isVisible && (
+        <motion.div
+          className="issues"
+          variants={variants}
+          initial="hide"
+          animate="show"
+          exit="hide"
+          transition={{
+            type: 'spring',
+            stiffness: 300,
+            damping: 30,
+          }}
+        >
+          <div className="issues__panel">
+            <div className="issues__title-bar" onClick={handleClickTitleBar}>
+              <div className="issues__title-bar-icon">
+                <Icon name="info" color="white" />
+              </div>
+              <div className="issues__title-bar-text">
+                Issues (
+                {flatIssues.length}
+                )
+              </div>
+              <motion.div
+                className="issues__title-bar-toggle"
+                animate={{ rotate: isVisible ? 180 : 0 }}
+              >
+                <Icon
+                  name="chevron-up"
+                  color="white"
+                  className="issues-toggle"
+                />
+              </motion.div>
+            </div>
+            <motion.ol
+              className="issues__issues"
+              initial={{ height: 0 }}
+              animate={{ height: open ? 'auto' : 0 }}
+            >
+              {renderIssues()}
+            </motion.ol>
           </div>
-          <div className="issues__title-bar-text">
-            Issues (
-            {flatIssues.length}
-            )
-          </div>
-          <div className="issues__title-bar-toggle">
-            <Icon
-              name="chevron-down"
-              color="white"
-              className="issues__toggle--open"
-            />
-            <Icon
-              name="chevron-up"
-              color="white"
-              className="issues__toggle--close"
-            />
-          </div>
-        </div>
-        <ol className="issues__issues">
-          {renderedIssues}
-        </ol>
-      </div>
-    </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

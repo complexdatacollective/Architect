@@ -34,9 +34,6 @@ const Section = ({
   return (
     <motion.div
       className={classes}
-      initial="hide"
-      animate="show"
-      exit="exit"
       variants={springy}
     >
       {children}

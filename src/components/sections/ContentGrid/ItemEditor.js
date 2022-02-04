@@ -6,7 +6,9 @@ import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
 import { Section, Row } from '@components/EditorLayout';
 import { getFieldId } from '../../../utils/issues';
 import ValidatedField from '../../Form/ValidatedField';
-import { Image, Audio, Video } from '../../Form/Fields';
+import Image from '../../Form/Fields/Image';
+import Audio from '../../Form/Fields/Audio';
+import Video from '../../Form/Fields/Video';
 import { typeOptions } from './options';
 import withItemHandlers from './withItemHandlers';
 
@@ -23,26 +25,36 @@ const ItemEditor = ({
   type,
   handleChangeType,
 }) => (
-  <Section>
-    <Row>
-      <h3 id={getFieldId('type')}>Type</h3>
-      <ValidatedField
-        name="type"
-        component={RadioGroup}
-        options={typeOptions}
-        validation={{ required: true }}
-        onChange={handleChangeType}
-      />
-    </Row>
-    <Row disabled={!type}>
-      <h3 id={getFieldId('content')}>Content</h3>
-      <ValidatedField
-        name="content"
-        component={getInputComponent(type)}
-        validation={{ required: true }}
-      />
-    </Row>
-  </Section>
+  <>
+    <Section
+      title="Type"
+    >
+      <Row>
+        <div id={getFieldId('type')} data-name="Content Type" />
+        <ValidatedField
+          name="type"
+          component={RadioGroup}
+          options={typeOptions}
+          validation={{ required: true }}
+          onChange={handleChangeType}
+        />
+      </Row>
+    </Section>
+    { type && (
+      <Section
+        title="Content"
+      >
+        <Row disabled={!type}>
+          <div id={getFieldId('content')} />
+          <ValidatedField
+            name="content"
+            component={getInputComponent(type)}
+            validation={{ required: true }}
+          />
+        </Row>
+      </Section>
+    )}
+  </>
 );
 
 ItemEditor.propTypes = {

@@ -1,3 +1,5 @@
+$field-color: #c7ced0;
+
 .assign-attributes {
   &__empty {
     margin-top: unit(2);
@@ -14,32 +16,49 @@
 }
 
 .assign-attributes-attribute {
+  --section-background-color: var(--architect-panel-grey--dark);
+
   display: flex;
-  margin-top: unit(2);
+  margin: unit(2) 0;
   padding: unit(2);
   border-radius: var(--border-radius);
-  background: var(--color-panel-grey--dark);
+  background: var(--section-background-color);
+
 
   .form-field {
-    background: var(--color-panel-grey--light);
-  }
-
-  &:first-child {
-    margin-top: 0;
+    background: var(--architect-panel-grey);
+    margin-bottom: 0;
   }
 
   &__wrapper {
     display: flex;
-    flex-direction: column;
     flex: 1 0 auto;
+    flex-direction: column;
   }
 
   &__variable {
     flex: 1 0 auto;
+
+    .form-fields-variable-picker {
+      margin-top: 0;
+      margin-bottom: unit(2);
+
+      fieldset {
+        border-color: $field-color;
+      }
+    }
   }
 
   &__value {
     flex: 1 0 auto;
+    border: 2px dashed $field-color;
+    padding: unit(2);
+    border-radius: var(--border-radius);
+
+    legend {
+      @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
+      padding: 0 unit(2);
+    }
   }
 
   &__delete {
@@ -50,7 +69,7 @@
     justify-content: center;
 
     .icon {
-      height: 1rem;
+      height: unit(2);
       cursor: pointer;
 
       .cls-1 {

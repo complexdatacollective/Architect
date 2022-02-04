@@ -4,20 +4,24 @@ $component-name: form-fields-variable-picker;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: unit(4) 0;
 
   fieldset {
+    --variable-pill-background: var(--color-white);
+    --variable-pill-shadow-color: var(--color-platinum--dark);
+
+    background: var(--section-background-color);
     flex: 1;
-    border: .3rem dotted var(--architect-border);
+    border: 2px dashed var(--architect-panel-divider);
     padding: unit(2);
     border-radius: var(--border-radius);
 
-    legend {
+    > legend {
       @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
       padding: 0 unit(2);
     }
 
     .variable-pill {
-      max-width: 35rem;
       margin-bottom: unit(2);
     }
   }

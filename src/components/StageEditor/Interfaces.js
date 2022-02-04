@@ -9,12 +9,10 @@ import {
   ExternalDataSource,
   AutomaticLayout,
   FilteredEdgeType,
-  FilteredNodeType,
   Form,
   InterviewScript,
   IntroductionPanel,
-  NameGeneratorAutoCompletePrompts,
-  NameGeneratorListPrompts,
+  NameGeneratorRosterPrompts,
   NameGeneratorPrompts,
   NarrativeBehaviours,
   NarrativePresets,
@@ -25,139 +23,128 @@ import {
   SearchOptionsForExternalData,
   SociogramPrompts,
   SortOptionsForExternalData,
+  SkipLogic,
   TieStrengthCensusPrompts,
   Title,
 } from '@components/sections';
+import { FilteredNodeType } from '@components/sections/NodeType';
 
 const AlterEdgeForm = {
-  headerSections: [
-    FilteredEdgeType,
-  ],
   sections: [
+    FilteredEdgeType,
     IntroductionPanel,
     Form,
+    SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/per-alter-edge-form/',
   template: {},
 };
 
 const AlterForm = {
-  headerSections: [
-    FilteredNodeType,
-  ],
   sections: [
+    FilteredNodeType,
     IntroductionPanel,
     Form,
+    SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/per-alter-form/',
 };
 
 const CategoricalBin = {
-  headerSections: [
-    FilteredNodeType,
-  ],
   sections: [
+    FilteredNodeType,
     CategoricalBinPrompts,
+    SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/categorical-bin/',
 };
 
 const DyadCensus = {
-  headerSections: [
-    FilteredNodeType,
-  ],
   sections: [
+    FilteredNodeType,
     IntroductionPanel,
     DyadCensusPrompts,
+    SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/dyad-census/',
 };
 
 const EgoForm = {
-  headerSections: [
-  ],
   sections: [
     IntroductionPanel,
     Form,
+    SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/ego-form/',
   template: {},
 };
 
 const Information = {
-  headerSections: [
-  ],
   sections: [
     Title,
     ContentGrid,
+    SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/information/',
 };
 
 const NameGenerator = {
-  headerSections: [
-    NodeType,
-  ],
   sections: [
+    NodeType,
     Form,
     NameGeneratorPrompts,
     NodePanels,
+    SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/name-generator-using-forms/',
   name: 'Name Generator (using forms)',
 };
 
-const NameGeneratorAutoComplete = {
-  headerSections: [
-    NodeType,
-  ],
+const NameGeneratorRoster = {
   sections: [
-    ExternalDataSource,
-    CardDisplayOptions,
-    SearchOptionsForExternalData,
-    NameGeneratorAutoCompletePrompts,
-    InterviewScript,
-  ],
-  name: 'Large Roster Name Generator',
-};
-
-const NameGeneratorList = {
-  headerSections: [
     NodeType,
-  ],
-  sections: [
     ExternalDataSource,
     CardDisplayOptions,
     SortOptionsForExternalData,
-    NameGeneratorListPrompts,
+    SearchOptionsForExternalData,
+    NameGeneratorRosterPrompts,
+    SkipLogic,
     InterviewScript,
   ],
-  name: 'Small Roster Name Generator',
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/name-generator-roster/',
+  name: 'Name Generator for Roster Data',
 };
 
 const NameGeneratorQuickAdd = {
-  headerSections: [
-    NodeType,
-  ],
   sections: [
+    NodeType,
     QuickAdd,
     NameGeneratorPrompts,
     NodePanels,
+    SkipLogic,
     InterviewScript,
   ],
-  name: 'Name Generator (quick add mode)',
+  name: 'Name Generator (quick add)',
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/name-generator-using-quick-add/',
 };
 
 const Narrative = {
-  headerSections: [
-    FilteredNodeType,
-  ],
   sections: [
+    FilteredNodeType,
     Background,
     NarrativePresets,
     NarrativeBehaviours,
+    SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/narrative/',
   template: {
     behaviours: {
       allowRepositioning: true,
@@ -166,36 +153,36 @@ const Narrative = {
 };
 
 const OrdinalBin = {
-  headerSections: [
-    FilteredNodeType,
-  ],
   sections: [
+    FilteredNodeType,
     OrdinalBinPrompts,
+    SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/ordinal-bin/',
 };
 
 const Sociogram = {
-  headerSections: [
-    FilteredNodeType,
-  ],
   sections: [
+    FilteredNodeType,
     Background,
     AutomaticLayout,
     SociogramPrompts,
+    SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/sociogram/',
 };
 
 const TieStrengthCensus = {
-  headerSections: [
-    FilteredNodeType,
-  ],
   sections: [
+    FilteredNodeType,
     IntroductionPanel,
     TieStrengthCensusPrompts,
+    SkipLogic,
     InterviewScript,
   ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/tie-strength-census/',
 };
 
 const interfaces = {
@@ -206,8 +193,7 @@ const interfaces = {
   EgoForm,
   Information,
   NameGenerator,
-  NameGeneratorAutoComplete,
-  NameGeneratorList,
+  NameGeneratorRoster,
   NameGeneratorQuickAdd,
   Narrative,
   OrdinalBin,

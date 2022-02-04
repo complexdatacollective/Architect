@@ -1,13 +1,13 @@
 .list-delete-button {
+  transform-origin: center center;
   width: unit(4);
   height: unit(4);
   cursor: pointer;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
 
   .icon {
-    width: unit(1);
+    width: unit(2);
   }
 }

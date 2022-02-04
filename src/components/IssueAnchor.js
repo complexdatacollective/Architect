@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getFieldId } from '../utils/issues';
 
-const IssueAnchor = ({ fieldName, description }) => (
+const IssueAnchor = ({ fieldName = '', description = '' }) => (
   <div
     id={getFieldId(fieldName)}
     data-name={description}

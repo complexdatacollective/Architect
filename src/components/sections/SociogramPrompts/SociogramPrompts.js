@@ -8,20 +8,21 @@ import withFormUsedVariableIndex from './withFormUsedVariableIndex';
 import PromptPreview from './PromptPreview';
 import PromptFields from './PromptFields';
 
-const template = () => ({ sortOrder: [] });
-
 // TODO no prop spreading
 const SociogramPrompts = (props) => (
   <EditableList
+    sectionTitle="Prompts"
+    sectionSummary={(
+      <p>
+        Add one or more prompts below to frame the task for the user.
+        You can reorder the prompts using the draggable handles on the left hand side.
+      </p>
+    )}
     title="Edit Prompt"
     previewComponent={PromptPreview}
     editComponent={PromptFields}
-    template={template}
     {...props}
-  >
-    <h2>Prompts</h2>
-    <p>Add prompts to your Sociogram:</p>
-  </EditableList>
+  />
 );
 
 export default compose(
