@@ -19,6 +19,10 @@ export const operators = {
   GREATER_THAN_OR_EQUAL: 'GREATER_THAN_OR_EQUAL',
   LESS_THAN: 'LESS_THAN',
   LESS_THAN_OR_EQUAL: 'LESS_THAN_OR_EQUAL',
+  OPTIONS_GREATER_THAN: 'OPTIONS_GREATER_THAN',
+  OPTIONS_LESS_THAN: 'OPTIONS_LESS_THAN',
+  OPTIONS_EQUALS: 'OPTIONS_EQUALS',
+  OPTIONS_NOT_EQUALS: 'OPTIONS_NOT_EQUALS',
 };
 
 // List of operator options with labels
@@ -33,6 +37,10 @@ export const operatorsAsOptions = [
   [operators.LESS_THAN_OR_EQUAL, 'is less than or exactly'],
   [operators.INCLUDES, 'includes'],
   [operators.EXCLUDES, 'excludes'],
+  [operators.OPTIONS_GREATER_THAN, 'number of selected options is greater than'],
+  [operators.OPTIONS_LESS_THAN, 'number of selected options is less than'],
+  [operators.OPTIONS_EQUALS, 'number of selected options is exactly'],
+  [operators.OPTIONS_NOT_EQUALS, 'number of selected options is not'],
 ].map(([value, label]) => ({ value, label }));
 
 // Operators that also require a value to be used
@@ -47,12 +55,20 @@ export const operatorsWithValue = new Set([
   operators.EXCLUDES,
 ]);
 
+// Operators that also require a count of options
+export const operatorsWithOptionCount = new Set([
+  operators.OPTIONS_GREATER_THAN,
+  operators.OPTIONS_LESS_THAN,
+  operators.OPTIONS_EQUALS,
+  operators.OPTIONS_NOT_EQUALS,
+]);
+
 export const operatorsByType = {
   text: new Set(['EXACTLY', 'NOT']),
   number: new Set(['EXACTLY', 'NOT', 'GREATER_THAN', 'GREATER_THAN_OR_EQUAL', 'LESS_THAN', 'LESS_THAN_OR_EQUAL']),
   boolean: new Set(['EXACTLY', 'NOT']),
   ordinal: new Set(['EXACTLY', 'NOT']),
-  categorical: new Set(['INCLUDES', 'EXCLUDES']),
+  categorical: new Set(['INCLUDES', 'EXCLUDES', 'OPTIONS_GREATER_THAN', 'OPTIONS_LESS_THAN', 'OPTIONS_EQUALS', 'OPTIONS_NOT_EQUALS']),
   exists: new Set(['EXISTS', 'NOT_EXISTS']), // TODO: Better words for these?
 };
 

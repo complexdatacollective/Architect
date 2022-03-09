@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import { isArray } from 'lodash';
 import DetachedField from '@components/DetachedField';
 import NativeSelect from '@components/Form/Fields/NativeSelect';
 import RadioGroup from '@codaco/ui/lib/components/Fields/RadioGroup';
 import EditValue from './EditValue';
 import Section from '../../EditorLayout/Section';
-import { operatorsWithValue } from './options';
+import { operatorsWithValue, operatorsWithOptionCount } from './options';
 import withRuleChangeHandler from './withRuleChangeHandler';
 import withOptions from './withOptions';
 import {
@@ -39,6 +40,11 @@ const EditEntityRule = ({
   const operatorNeedsValue = operatorsWithValue.has(optionsWithDefaults.operator);
   const isVariableRule = entityRuleType === entityRuleTypes.VARIABLE_RULE;
   const isTypeRule = entityRuleType === entityRuleTypes.TYPE_RULE;
+  const operatorNeedsOptionCount = operatorsWithOptionCount.has(optionsWithDefaults.operator);
+  const optionsWithCounts = {
+    ...optionsWithDefaults,
+    value: isArray(optionsWithDefaults.value) ? '' : (optionsWithDefaults.value || ''),
+  };
 
   return (
     <>
@@ -142,6 +148,20 @@ const EditEntityRule = ({
             value={optionsWithDefaults.value}
             options={variableOptions}
             validation={{ required: true }}
+          />
+        </Section>
+        )}
+      { isVariableRule && operatorNeedsOptionCount
+        && (
+        <Section
+          title="Selected Option Count"
+        >
+          <EditValue
+            variableType="number"
+            placeholder="Enter a value..."
+            onChange={handleRuleChange}
+            value={optionsWithCounts.value}
+            validation={{ requiredAcceptsZero: true }}
           />
         </Section>
         )}
