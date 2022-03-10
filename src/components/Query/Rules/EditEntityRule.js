@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { isArray } from 'lodash';
+import { isArray, isNil } from 'lodash';
 import DetachedField from '@components/DetachedField';
 import NativeSelect from '@components/Form/Fields/NativeSelect';
 import RadioGroup from '@codaco/ui/lib/components/Fields/RadioGroup';
@@ -41,9 +41,10 @@ const EditEntityRule = ({
   const isVariableRule = entityRuleType === entityRuleTypes.VARIABLE_RULE;
   const isTypeRule = entityRuleType === entityRuleTypes.TYPE_RULE;
   const operatorNeedsOptionCount = operatorsWithOptionCount.has(optionsWithDefaults.operator);
+  const countFriendlyValue = !isNil(optionsWithDefaults.value) ? optionsWithDefaults.value : '';
   const optionsWithCounts = {
     ...optionsWithDefaults,
-    value: isArray(optionsWithDefaults.value) ? '' : (optionsWithDefaults.value || ''),
+    value: isArray(optionsWithDefaults.value) ? '' : countFriendlyValue,
   };
 
   return (
