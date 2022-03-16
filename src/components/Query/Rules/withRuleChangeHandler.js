@@ -1,6 +1,12 @@
 import { withHandlers } from 'recompose';
-import { keys, pick } from 'lodash';
+import {
+  isArray,
+  isNil,
+  keys,
+  pick,
+} from 'lodash';
 import { makeGetOptionsWithDefaults } from './defaultRule';
+import { operatorsWithOptionCount } from './options';
 
 const RULE_ORDER = [
   'type',
@@ -26,9 +32,16 @@ const withRuleChangeHandlers = withHandlers({
       // ensure reset values have defaults
       const optionsWithDefaults = getOptionsWithDefaults(options);
 
+      const operatorNeedsOptionCount = operatorsWithOptionCount.has(optionsWithDefaults.operator)
+        && isArray(optionsWithDefaults.value);
+      const countFriendlyValue = !isNil(optionsWithDefaults.value) ? optionsWithDefaults.value : '';
+
       onChange({
         ...rule,
-        options: optionsWithDefaults,
+        options: {
+          ...optionsWithDefaults,
+          value: operatorNeedsOptionCount ? '' : countFriendlyValue,
+        },
       });
     };
   },

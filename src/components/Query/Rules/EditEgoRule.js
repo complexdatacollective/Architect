@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import { isArray, isNil } from 'lodash';
 import DetachedField from '@components/DetachedField';
 import NativeSelect from '@components/Form/Fields/NativeSelect';
-import { operatorsWithValue } from './options';
+import { operatorsWithValue, operatorsWithOptionCount } from './options';
 import EditValue from './EditValue';
 import withRuleChangeHandler from './withRuleChangeHandler';
 import withOptions from './withOptions';
@@ -27,7 +28,12 @@ const EditEgoRule = ({
   const options = rule && rule.options;
   const optionsWithDefaults = { ...defaultOptions, ...options };
   const operatorNeedsValue = operatorsWithValue.has(optionsWithDefaults.operator);
-
+  const operatorNeedsOptionCount = operatorsWithOptionCount.has(optionsWithDefaults.operator);
+  const countFriendlyValue = !isNil(optionsWithDefaults.value) ? optionsWithDefaults.value : '';
+  const optionsWithCounts = {
+    ...optionsWithDefaults,
+    value: isArray(optionsWithDefaults.value) ? '' : countFriendlyValue,
+  };
   return (
     <>
       <Section
@@ -69,6 +75,20 @@ const EditEgoRule = ({
             value={optionsWithDefaults.value}
             options={variableOptions}
             validation={{ required: true }}
+          />
+        </Section>
+        )}
+      { operatorNeedsOptionCount
+        && (
+        <Section
+          title="Selected Option Count"
+        >
+          <EditValue
+            variableType="number"
+            placeholder="Enter a value..."
+            onChange={handleRuleChange}
+            value={optionsWithCounts.value}
+            validation={{ requiredAcceptsZero: true }}
           />
         </Section>
         )}
