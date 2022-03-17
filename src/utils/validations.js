@@ -137,6 +137,15 @@ const validations = {
 /**
 * Returns the named validation function, if no matching one is found it returns a validation
 * which will always fail.
+*
+* Use with a custom function by passing a function as the object value:
+*
+* const customValidation = (value) => {
+*   return value === 'custom' ? undefined : 'Custom validation failed';
+* };
+*
+* validations.custom = customValidation;
+*
 * @param {object} validationOptions The protocol config for the validations to return.
   */
 export const getValidations = (validationOptions = {}) => map(

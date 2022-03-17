@@ -7,12 +7,12 @@ const ValidatedField = ({
   validation,
   ...rest
 }) => {
-  const validate = useValidate(validation);
+  const validations = useValidate(validation);
 
   return (
     <Field
       {...rest} // eslint-disable-line react/jsx-props-no-spreading
-      validate={validate}
+      validate={validations}
     />
   );
 };
