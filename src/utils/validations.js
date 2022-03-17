@@ -65,7 +65,7 @@ export const maxValue = (max, message) => (value) => (value && value > max ? mes
 export const minSelected = (min, message) => (value) => (!value || coerceArray(value).length < min ? messageWithDefault(message, `You must choose a minimum of ${min} option(s)`) : undefined);
 export const maxSelected = (max, message) => (value) => (!isEmpty(value) && coerceArray(value).length > max ? messageWithDefault(message, `You must choose a maximum of ${max} option(s)`) : undefined);
 
-export const uniqueArrayAttribute = (message) => (value, allValues, name) => {
+export const uniqueArrayAttribute = (message) => (value, allValues, _, name) => {
   if (!value) { return undefined; }
 
   // expects `name` of format: `fieldName[n].attribute`
