@@ -74,11 +74,11 @@ const MinMaxAlterLimits = () => {
 
   return (
     <Section
-      title="Require minimum or maximum alters"
+      title="Set minimum or maximum alter numbers"
       summary={(
         <p>
-          This feature allows you to specify that a minimum or maximum number of alters be named.
-          These limits apply to the stage as a whole, regardless of the number of
+          This feature allows you to specify that a minimum or maximum number of alters that can
+          be named. These limits apply to the stage as a whole, regardless of the number of
           prompts you have.
         </p>
       )}
