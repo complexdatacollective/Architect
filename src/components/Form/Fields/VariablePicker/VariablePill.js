@@ -12,7 +12,7 @@ import { get } from 'lodash';
 import cx from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
-import { requiredWithMessage, uniqueByList, allowedVariableName } from '@app/utils/validations';
+import { required as requiredValidation, uniqueByList, allowedVariableName } from '@app/utils/validations';
 import TextInput from '@codaco/ui/lib/components/Fields/Text';
 import { makeGetVariableFromUUID, getVariablesForSubject } from '../../../../selectors/codebook';
 import { getColorForType, getIconForType } from '../../../../config/variables';
@@ -108,7 +108,7 @@ const EditableVariablePill = ({ uuid }) => {
     const { target: { value } } = event;
     setNewName(value);
 
-    const required = requiredWithMessage('You must enter a variable name', true)(value);
+    const required = requiredValidation(true, 'You must enter a variable name', true)(value);
     const unique = uniqueByList(existingVariableNames)(value);
     const allowed = allowedVariableName()(value);
 

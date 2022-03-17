@@ -1,11 +1,22 @@
 import {
-  keys, get, pickBy, map, toPairs, isEqual, isUndefined, isNil,
+  get, isEmpty, map, toPairs, isEqual, isUndefined, isNil, isNull,
 } from 'lodash';
 import { DateTime } from 'luxon';
 
+// Simple function to allow returning a custom message if provided, and
+// or defaulting to the default message.
+const messageWithDefault = (message, defaultMessage) => {
+  if (message) {
+    return message;
+  }
+  return defaultMessage;
+};
+
+// Return an array of values given either a collection, an array,
+// or a single value
 const coerceArray = (value) => {
   if (value instanceof Object) {
-    return keys(pickBy(value));
+    return value.reduce((acc, individual) => ([...acc, individual.value]), []);
   }
   if (value instanceof Array) {
     return value;
@@ -31,35 +42,30 @@ const isRoughlyEqual = (left, right) => {
   return isEqual(left, right);
 };
 
-export const required = (isRequired) => (value) => {
+export const required = (isRequired, message) => (value) => {
   if (!isRequired) {
     return undefined;
   }
 
-  return (hasValue(value) ? undefined : 'Required');
+  return (hasValue(value) ? undefined : messageWithDefault(message, 'Required'));
 };
 
-export const requiredWithMessage = (
-  message,
-  isRequired,
-) => (value) => (required(isRequired)(value) ? message : undefined);
+export const requiredAcceptsZero = (isRequired, message) => (value) => (!isNil(value) && isRequired ? undefined : messageWithDefault(message, 'Required'));
 
-export const requiredAcceptsZero = () => (value) => (!isNil(value) ? undefined : 'Required');
+export const requiredAcceptsNull = (isRequired, message) => (value) => (!isUndefined(value) && isRequired ? undefined : messageWithDefault(message, 'Required'));
 
-export const requiredAcceptsNull = () => (value) => (!isUndefined(value) ? undefined : 'Required');
+export const positiveNumber = (message) => (value) => (value && Math.sign(value) === -1 ? messageWithDefault(message, 'Number must be positive') : undefined);
 
-export const positiveNumber = () => (value) => (value && Math.sign(value) === -1 ? 'Number must be positive' : undefined);
+export const maxLength = (max, message) => (value) => (!isNull(value) && !isUndefined(value) && value.length > max ? messageWithDefault(message, `Must be ${max} characters or less`) : undefined);
+export const minLength = (min, message) => (value) => ((isNull(value) || isUndefined(value)) || value.length < min ? messageWithDefault(message, `Must be ${min} characters or more`) : undefined);
 
-export const maxLength = (max) => (value) => (value && value.length > max ? `Must be ${max} characters or less` : undefined);
-export const minLength = (min) => (value) => (value && value.length < min ? `Must be ${min} characters or more` : undefined);
-export const minValue = (min) => (value) => (value && value < min ? `Must be at least ${min}` : undefined);
-export const maxValue = (max) => (value) => (value && value > max ? `Must be less than ${max}` : undefined);
+export const minValue = (min, message) => (value) => (!isNull(value) && value < min ? messageWithDefault(message, `Must be at least ${min}`) : undefined);
+export const maxValue = (max, message) => (value) => (value && value > max ? messageWithDefault(message, `Must be less than ${max}`) : undefined);
 
-export const minSelected = (min) => (value) => (!value || coerceArray(value).length < min ? `Must choose ${min} or more` : undefined);
+export const minSelected = (min, message) => (value) => (!value || coerceArray(value).length < min ? messageWithDefault(message, `You must choose a minimum of ${min} option(s)`) : undefined);
+export const maxSelected = (max, message) => (value) => (!isEmpty(value) && coerceArray(value).length > max ? messageWithDefault(message, `You must choose a maximum of ${max} option(s)`) : undefined);
 
-export const maxSelected = (max) => (value) => (!value || coerceArray(value).length > max ? `Must choose ${max} or less` : undefined);
-
-export const uniqueArrayAttribute = () => (value, allValues, formProps, name) => {
+export const uniqueArrayAttribute = (message) => (value, allValues, name) => {
   if (!value) { return undefined; }
 
   // expects `name` of format: `fieldName[n].attribute`
@@ -76,31 +82,31 @@ export const uniqueArrayAttribute = () => (value, allValues, formProps, name) =>
     }, 0);
 
   if (instanceCount >= 2) {
-    return `${capitalize(attribute)}s must be unique`;
+    return messageWithDefault(message, `${capitalize(attribute)}s must be unique`);
   }
   return undefined;
 };
 
-export const uniqueByList = (list = []) => (value) => {
+export const uniqueByList = (list = [], message) => (value) => {
   if (!value) { return undefined; }
 
   const existsAlready = list
     .some((existingValue) => isRoughlyEqual(existingValue, value));
 
   if (existsAlready) {
-    return `"${value}" is already used elsewhere in your protocol`;
+    return messageWithDefault(message, `"${value}" is already used elsewhere in your protocol`);
   }
 
   return undefined;
 };
 
-export const ISODate = (dateFormat) => (value) => {
+export const ISODate = (dateFormat, message) => (value) => {
   const dt = DateTime.fromISO(value);
   if (
     (value && dateFormat.length !== value.length)
       || (value && !dt.isValid)
   ) {
-    return `Date is not valid (${dateFormat.toUpperCase()})`;
+    return messageWithDefault(message, `Date is not valid (${dateFormat.toUpperCase()})`);
   }
   return undefined;
 };

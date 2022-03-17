@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { get, isNull } from 'lodash';
+import { get, isNull, isUndefined } from 'lodash';
 import { Section } from '@components/EditorLayout';
 import {
   change, FormSection, formValueSelector,
@@ -13,7 +13,7 @@ import IssueAnchor from '../IssueAnchor';
 const maxValidation = (value, allValues) => {
   const minValue = get(allValues, 'behaviours.minNodes', null);
 
-  if (isNull(minValue) || !value) {
+  if (isUndefined(minValue) || isNull(minValue) || !value) {
     return undefined;
   }
 
@@ -25,7 +25,7 @@ const maxValidation = (value, allValues) => {
 const minValidation = (value, allValues) => {
   const maxValue = get(allValues, 'behaviours.maxNodes');
 
-  if (isNull(maxValue) || !value) {
+  if (isUndefined(maxValue) || isNull(maxValue) || !value) {
     return undefined;
   }
 
@@ -47,8 +47,7 @@ const MinMaxAlterLimits = () => {
 
   const handleToggleChange = useCallback(
     async (newState) => {
-      console.log('handle')
-      if ((isNull(currentMinValue) && isNull(currentMaxValue)) || newState === true) {
+      if ((isUndefined(currentMinValue) && isUndefined(currentMaxValue)) || newState === true) {
         return true;
       }
 
@@ -70,7 +69,8 @@ const MinMaxAlterLimits = () => {
     [dispatch, openDialog, currentMinValue, currentMaxValue],
   );
 
-  const startExpanded = useMemo(() => !isNull(currentMinValue) || !isNull(currentMaxValue), []);
+  const startExpanded = useMemo(() => !isUndefined(currentMinValue)
+    || !isUndefined(currentMaxValue), []);
 
   return (
     <Section
@@ -106,7 +106,7 @@ const MinMaxAlterLimits = () => {
           placeholder="Infinity"
           validation={{
             greaterThanMin: maxValidation,
-            positiveNumber: true,
+            minValue: 1,
           }}
         />
       </FormSection>
