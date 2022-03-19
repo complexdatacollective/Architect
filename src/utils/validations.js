@@ -54,7 +54,7 @@ export const requiredAcceptsZero = (isRequired, message) => (value) => (!isNil(v
 
 export const requiredAcceptsNull = (isRequired, message) => (value) => (!isUndefined(value) && isRequired ? undefined : messageWithDefault(message, 'Required'));
 
-export const positiveNumber = (message) => (value) => (value && Math.sign(value) === -1 ? messageWithDefault(message, 'Number must be positive') : undefined);
+export const positiveNumber = (_, message) => (value) => (value && Math.sign(value) === -1 ? messageWithDefault(message, 'Number must be positive') : undefined);
 
 export const maxLength = (max, message) => (value) => (!isNull(value) && !isUndefined(value) && value.length > max ? messageWithDefault(message, `Must be ${max} characters or less`) : undefined);
 export const minLength = (min, message) => (value) => ((isNull(value) || isUndefined(value)) || value.length < min ? messageWithDefault(message, `Must be ${min} characters or more`) : undefined);
@@ -65,7 +65,7 @@ export const maxValue = (max, message) => (value) => (value && value > max ? mes
 export const minSelected = (min, message) => (value) => (!value || coerceArray(value).length < min ? messageWithDefault(message, `You must choose a minimum of ${min} option(s)`) : undefined);
 export const maxSelected = (max, message) => (value) => (!isEmpty(value) && coerceArray(value).length > max ? messageWithDefault(message, `You must choose a maximum of ${max} option(s)`) : undefined);
 
-export const uniqueArrayAttribute = (message) => (value, allValues, _, name) => {
+export const uniqueArrayAttribute = (_, message) => (value, allValues, __, name) => {
   if (!value) { return undefined; }
 
   // expects `name` of format: `fieldName[n].attribute`
