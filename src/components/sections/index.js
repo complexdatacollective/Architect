@@ -16,6 +16,7 @@ export { default as NarrativeBehaviours } from './NarrativeBehaviours';
 export { default as NarrativePresets } from './NarrativePresets';
 export { default as NodePanels } from './NodePanels';
 export { default as NodeType } from './NodeType';
+export { default as MinMaxAlterLimits } from './MinMaxAlterLimits';
 export { default as OrdinalBinPrompts } from './OrdinalBinPrompts';
 export { default as QuickAdd } from './QuickAdd';
 export { default as SearchOptionsForExternalData } from './SearchOptionsForExternalData';

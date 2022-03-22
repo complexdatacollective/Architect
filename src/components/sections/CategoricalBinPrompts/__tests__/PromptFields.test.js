@@ -69,7 +69,7 @@ export const testPromptFields = (PromptFieldsComponent, name = '') => {
     mockStore = getStore(initialState);
   });
 
-  // TODO This seems to test the wrong part of codebook
+  // FIXME This seems to test the wrong part of codebook
 
   describe(name, () => {
     describe('PromptFields', () => {
