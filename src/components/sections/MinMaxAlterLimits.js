@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Number } from '@codaco/ui/lib/components/Fields';
 import { ValidatedField } from '../Form';
 import IssueAnchor from '../IssueAnchor';
+import Tip from '../Tip';
 
 const maxValidation = (value, allValues) => {
   const minValue = get(allValues, 'behaviours.minNodes', null);
@@ -38,6 +39,10 @@ const MinMaxAlterLimits = () => {
   const getFormValue = formValueSelector('edit-stage');
   const currentMinValue = useSelector((state) => getFormValue(state, 'behaviours.minNodes'));
   const currentMaxValue = useSelector((state) => getFormValue(state, 'behaviours.maxNodes'));
+  const hasMultiplePrompts = useSelector((state) => {
+    const prompts = getFormValue(state, 'prompts');
+    return !!prompts && prompts.length > 1;
+  });
 
   const dispatch = useDispatch();
   const openDialog = useCallback(
@@ -76,16 +81,38 @@ const MinMaxAlterLimits = () => {
     <Section
       title="Set minimum or maximum alter numbers"
       summary={(
-        <p>
-          This feature allows you to specify that a minimum or maximum number of alters that can
-          be named. These limits apply to the stage as a whole, regardless of the number of
-          prompts you have.
-        </p>
+        <>
+          <p>
+            This feature allows you to specify a minimum or maximum number of alters that can
+            be named on this stage. Please note that these limits apply to the
+            {' '}
+            <strong>
+              stage as a whole
+            </strong>
+            , regardless of the number of
+            prompts you have created.
+          </p>
+        </>
       )}
       toggleable
       startExpanded={startExpanded}
       handleToggleChange={handleToggleChange}
     >
+      { hasMultiplePrompts && (
+        <Tip type="warning">
+          <p>
+            You have multiple prompts configured on this stage. Remember that the limits you
+            specify here apply to the
+            {' '}
+            <strong>
+              stage as a whole
+            </strong>
+            . Consider splitting your prompts up into multiple stages, or ensure you take extra
+            care in the phrasing of your prompts so that you communicate the alter limits
+            to your participants.
+          </p>
+        </Tip>
+      )}
       <FormSection name="behaviours">
         <IssueAnchor fieldName="behaviours.minNodes" description="Minimum alters" />
         <ValidatedField
