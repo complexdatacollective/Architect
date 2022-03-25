@@ -13,7 +13,7 @@ const operatorsAsText = (isEgo) => ({
   GREATER_THAN: isEgo ? 'that is greater than' : 'is greater than',
   GREATER_THAN_OR_EQUAL: isEgo ? 'that is greater than or equal to' : 'is greater than or equal to',
   LESS_THAN: isEgo ? 'that is less than' : 'is less than',
-  LESS_THAN_OR_EQUAL: isEgo ? 'that is less that or equal to' : 'is less than or equal to',
+  LESS_THAN_OR_EQUAL: isEgo ? 'that is less than or equal to' : 'is less than or equal to',
   INCLUDES: isEgo ? 'that includes' : 'includes',
   NOT_INCLUDES: isEgo ? 'that does not include' : 'does not include',
   OPTIONS_GREATER_THAN: isEgo ? 'that has selected options greater than' : 'has selected options greater than',
