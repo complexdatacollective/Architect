@@ -8,7 +8,7 @@ import { SimpleVariablePill } from '../../Form/Fields/VariablePicker/VariablePil
 const operatorsAsText = (isEgo) => ({
   EXISTS: 'where',
   NOT_EXISTS: 'without',
-  EXACTLY: isEgo ? 'that is is exactly equal to' : 'is exactly equal to',
+  EXACTLY: isEgo ? 'that is exactly equal to' : 'is exactly equal to',
   NOT: isEgo ? 'that is not' : 'is not',
   GREATER_THAN: isEgo ? 'that is greater than' : 'is greater than',
   GREATER_THAN_OR_EQUAL: isEgo ? 'that is greater than or equal to' : 'is greater than or equal to',
@@ -16,6 +16,10 @@ const operatorsAsText = (isEgo) => ({
   LESS_THAN_OR_EQUAL: isEgo ? 'that is less that or equal to' : 'is less than or equal to',
   INCLUDES: isEgo ? 'that includes' : 'includes',
   NOT_INCLUDES: isEgo ? 'that does not include' : 'does not include',
+  OPTIONS_GREATER_THAN: isEgo ? 'that has selected options greater than' : 'has selected options greater than',
+  OPTIONS_LESS_THAN: isEgo ? 'that has selected options less than' : 'has selected options less than',
+  OPTIONS_EQUALS: isEgo ? 'that has selected options equal to' : 'has selected options equal to',
+  OPTIONS_NOT_EQUALS: isEgo ? 'that has selected options not equal to' : 'has selected options not equal to',
 });
 
 const typeOperatorsAsText = {
