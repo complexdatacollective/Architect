@@ -16,6 +16,7 @@ const SkipLogic = ({ skipLogic }) => {
     <div className="protocol-summary-stage__skip-logic">
       <MiniTable
         rotated
+        wide
         rows={[
           ['Action', action],
           ['Rules', <Rules filter={filter} />],

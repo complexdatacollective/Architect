@@ -101,6 +101,7 @@ const Stage = ({
               <h2 className="section-heading">Network Filtering</h2>
               <MiniTable
                 rotated
+                wide
                 rows={[
                   ['Rules', <Filter filter={configuration.filter} />],
                 ]}

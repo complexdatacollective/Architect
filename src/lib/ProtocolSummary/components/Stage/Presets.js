@@ -40,7 +40,7 @@ const Presets = ({ presets }) => {
                       'Highlight attributes',
                       <ul>
                         {
-                          get(preset, 'preset.highlight', []).map((id) => (
+                          get(preset, 'highlight', []).map((id) => (
                             <li key={id}>
                               <Variable id={id} link />
                               <br />

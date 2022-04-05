@@ -4,10 +4,7 @@ import Markdown from '@codaco/ui/lib/components/Fields/Markdown';
 import SummaryContext from '../SummaryContext';
 import MiniTable from '../MiniTable';
 import Variable from '../Variable';
-
-const getVariableMeta = (index, variable) => (
-  index.find(({ id }) => id === variable) || {}
-);
+import { getVariableMeta } from '../helpers';
 
 const Form = ({ form }) => {
   const {

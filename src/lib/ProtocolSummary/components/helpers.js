@@ -16,6 +16,10 @@ export const getVariableName = (index, variableId) => {
   return entry && entry.name;
 };
 
+export const getVariableMeta = (index, variable) => (
+  index.find(({ id }) => id === variable) || {}
+);
+
 export const getEntityName = (codebook, entity, type) => (
   get(codebook, [entity, type, 'name'])
 );
