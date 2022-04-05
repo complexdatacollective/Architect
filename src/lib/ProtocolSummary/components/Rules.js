@@ -20,10 +20,12 @@ const Rules = ({ filter }) => {
     <div className="protocol-summary-rules">
       { rules.map(({ type, options }, n) => (
         // eslint-disable-next-line react/no-array-index-key
-        <div className="protocol-summary-rules__rule" key={n}>
-          <Rule type={type} options={options} codebook={protocol.codebook} />
+        <>
+          <div className="protocol-summary-rules__rule" key={n}>
+            <Rule type={type} options={options} codebook={protocol.codebook} />
+          </div>
           { n !== rules.length - 1 && join && <Join value={join} /> }
-        </div>
+        </>
       ))}
     </div>
   );
