@@ -19,8 +19,8 @@ const Rules = ({ filter }) => {
   return (
     <div className="protocol-summary-rules">
       { rules.map(({ type, options }, n) => (
-        // eslint-disable-next-line react/no-array-index-key
         <>
+          {/* eslint-disable-next-line react/no-array-index-key */}
           <div className="protocol-summary-rules__rule" key={n}>
             <Rule type={type} options={options} codebook={protocol.codebook} />
           </div>
