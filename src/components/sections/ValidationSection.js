@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { change, formValueSelector } from 'redux-form';
-import { get, filter } from 'lodash';
+import { get, pickBy } from 'lodash';
 import { Section, Row } from '@components/EditorLayout';
 import Validations from '@components/Validations';
 import { getFieldId } from '../../utils/issues';
@@ -25,7 +25,7 @@ const ValidationSection = ({
     return true;
   };
 
-  const existingVariablesForType = filter(existingVariables, (variable) => get(variable, 'type') === variableType);
+  const existingVariablesForType = pickBy(existingVariables, (variable) => get(variable, 'type') === variableType);
   return (
     <Section
       disabled={disabled}
