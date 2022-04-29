@@ -8,6 +8,8 @@ const VALIDATIONS = {
     'unique',
     'differentFrom',
     'sameAs',
+    'lessThanVariable',
+    'greaterThanVariable',
   ],
   number: [
     'required',
@@ -16,18 +18,24 @@ const VALIDATIONS = {
     'unique',
     'differentFrom',
     'sameAs',
+    'lessThanVariable',
+    'greaterThanVariable',
   ],
   datetime: [
     'required',
     'unique',
     'differentFrom',
     'sameAs',
+    'lessThanVariable',
+    'greaterThanVariable',
   ],
   scalar: [
     'required',
     'unique',
     'differentFrom',
     'sameAs',
+    'lessThanVariable',
+    'greaterThanVariable',
   ],
   boolean: [
     'required',
@@ -40,6 +48,8 @@ const VALIDATIONS = {
     'unique',
     'differentFrom',
     'sameAs',
+    'lessThanVariable',
+    'greaterThanVariable',
   ],
   categorical: [
     'required',
@@ -63,6 +73,8 @@ const VALIDATIONS_WITH_NUMBER_VALUES = [
 const VALIDATIONS_WITH_LIST_VALUES = [
   'differentFrom',
   'sameAs',
+  'lessThanVariable',
+  'greaterThanVariable',
 ];
 
 const isValidationWithNumberValue = (validation) => (
