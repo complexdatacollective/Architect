@@ -1,5 +1,5 @@
 import {
-  get, isEmpty, map, toPairs, isEqual, isUndefined, isNil, isNull,
+  get, isEmpty, map, toPairs, isEqual, isUndefined, isNil, isNull, isRegExp,
 } from 'lodash';
 import { DateTime } from 'luxon';
 
@@ -122,6 +122,18 @@ export const allowedVariableName = (name = 'variable name') => (value) => {
 
 export const allowedNMToken = allowedVariableName;
 
+export const validRegExp = (_, message) => (value) => {
+  try {
+    const regexp = new RegExp(value);
+    if (isRegExp(regexp)) {
+      return undefined;
+    }
+    return messageWithDefault(message, 'Not a valid regular expression.');
+  } catch (e) {
+    return messageWithDefault(message, 'Not a valid regular expression.');
+  }
+};
+
 const validations = {
   ISODate,
   allowedVariableName,
@@ -138,6 +150,7 @@ const validations = {
   requiredAcceptsZero,
   uniqueArrayAttribute,
   uniqueByList,
+  validRegExp,
 };
 
 /**

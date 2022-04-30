@@ -7,7 +7,7 @@ import NativeSelect from '@components/Form/Fields/NativeSelect';
 import RadioGroup from '@codaco/ui/lib/components/Fields/RadioGroup';
 import EditValue from './EditValue';
 import Section from '../../EditorLayout/Section';
-import { operatorsWithValue, operatorsWithOptionCount } from './options';
+import { operatorsWithValue, operatorsWithRegExp, operatorsWithOptionCount } from './options';
 import withRuleChangeHandler from './withRuleChangeHandler';
 import withOptions from './withOptions';
 import {
@@ -38,6 +38,7 @@ const EditEntityRule = ({
   );
   const optionsWithDefaults = getOptionsWithDefaults(options);
   const operatorNeedsValue = operatorsWithValue.has(optionsWithDefaults.operator);
+  const operatorNeedsRegExp = operatorsWithRegExp.has(optionsWithDefaults.operator);
   const isVariableRule = entityRuleType === entityRuleTypes.VARIABLE_RULE;
   const isTypeRule = entityRuleType === entityRuleTypes.TYPE_RULE;
   const operatorNeedsOptionCount = operatorsWithOptionCount.has(optionsWithDefaults.operator);
@@ -149,6 +150,21 @@ const EditEntityRule = ({
             value={optionsWithDefaults.value}
             options={variableOptions}
             validation={{ required: true }}
+          />
+        </Section>
+        )}
+      { isVariableRule && operatorNeedsRegExp
+        && (
+        <Section
+          title="Attribute Value"
+        >
+          <EditValue
+            variableType={variableType}
+            placeholder="Enter a regular expression..."
+            onChange={handleRuleChange}
+            value={optionsWithDefaults.value}
+            options={variableOptions}
+            validation={{ required: true, validRegExp: true }}
           />
         </Section>
         )}
