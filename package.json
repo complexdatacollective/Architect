@@ -1,6 +1,6 @@
 {
     "name": "network-canvas-architect",
-    "version": "6.4.0",
+    "version": "6.4.1",
     "productName": "Network Canvas Architect",
     "description": "A tool for building Network Canvas interviews.",
     "author": "Complex Data Collective <info@networkcanvas.com>",
@@ -48,7 +48,7 @@
         "@babel/eslint-plugin": "^7.13.10",
         "@babel/plugin-proposal-class-properties": "^7.12.1",
         "@babel/preset-react": "^7.12.1",
-        "@codaco/ui": "^5.7.7",
+        "@codaco/ui": "^5.8.0",
         "@material-ui/icons": "^4.11.2",
         "@tippyjs/react": "^4.2.5",
         "animejs": "^2.2.0",
