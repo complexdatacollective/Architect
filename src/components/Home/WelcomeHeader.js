@@ -10,6 +10,14 @@ import Switch from './Switch';
 import useAppState from './useAppState';
 import { openExternalLink } from '../ExternalLink';
 import Section from './Section';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { actionCreators as userActions } from '../../ducks/modules/userActions/userActions';
+import inEnvironment from '../../utils/Environment';
+import environments from '../../utils/environments';
+import friendlyErrorMessage from "../../utils/friendlyErrorMessage"
+import { writeFile } from "../../utils/fileSystem"
+import { useState, useEffect } from 'react';
 
 const WelcomeHeader = () => {
   const [isOpen, setIsOpen] = useAppState('showWelcome', true);
