@@ -268,5 +268,8 @@
             "@modules/(.*)$": "<rootDir>/src/ducks/modules/$1",
             "^react-native$": "react-native-web"
         }
+    },
+    "dependencies": {
+        "node-fetch": "^1.7.3"
     }
 }

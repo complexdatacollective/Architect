@@ -7,16 +7,17 @@ import headerGraphic from '@app/images/Arc-Flat.svg';
 import Version from '@components/Version';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import path from 'path';
+import electron from 'electron';
+import fs from 'fs';
+import friendlyErrorMessage from '../../utils/friendlyErrorMessage';
+import { writeFile } from '../../utils/fileSystem';
+import { actionCreators as userActions } from '../../ducks/modules/userActions/userActions';
 import Group from './Group';
 import Switch from './Switch';
 import useAppState from './useAppState';
 import { openExternalLink } from '../ExternalLink';
 import Section from './Section';
-import { actionCreators as userActions } from '../../ducks/modules/userActions/userActions';
-import inEnvironment from '../../utils/Environment';
-import environments from '../../utils/environments';
-import friendlyErrorMessage from '../../utils/friendlyErrorMessage';
-import { writeFile } from "../../utils/fileSystem";
 
 const WelcomeHeader = ({
   openNetcanvas
@@ -48,39 +49,25 @@ const WelcomeHeader = ({
   };
 
   const getURL = uri =>
-  new Promise((resolve, reject) => {
-    try {
-      resolve(new URL(uri));
-    } catch (error) {
-      reject(error);
-    }
+    new Promise((resolve, reject) => {
+      try {
+        resolve(new URL(uri));
+      } catch (error) {
+        reject(error);
+      }
   });
 
-const urlError = friendlyErrorMessage("The location you gave us doesn't seem to be a valid URL. Check the location, and try again.");
-const networkError = friendlyErrorMessage("We weren't able to fetch your protocol. Your device may not have an active network connection, or you may have mistyped the URL. Ensure you are connected to a network, double check your URL, and try again.");
-const fileError = friendlyErrorMessage('The protocol could not be saved to your device. You might not have enough storage available. ');
+  const urlError = friendlyErrorMessage("The location you gave us doesn't seem to be a valid URL. Check the location, and try again.");
+  const networkError = friendlyErrorMessage("We weren't able to fetch your protocol. Your device may not have an active network connection, or you may have mistyped the URL. Ensure you are connected to a network, double check your URL, and try again.");
+  const fileError = friendlyErrorMessage('The protocol could not be saved to your device. You might not have enough storage available. ');
 
-/**
- * Download a protocol from a remote server.
- *
- * If the URL points to an instance of a Network Canvas Server, then the caller must ensure
- * that the SSL certificate has been trusted. See {@link ApiClient#addTrustedCert}.
- *
- * @param {string} uri
- * @return {string} output filepath
- */
-const downloadProtocolFromURI = inEnvironment((environment)=> {
-
-  if (environment === environments.ELECTRON) {
+  const downloadProtocolFromURI = (uri) => {
     const request = require('request-promise-native');
-    const path = require('path');
-    const electron = require('electron');
-    const { dialog } = electron.remote
+    const { dialog } = electron.remote;
     const tempPath = (electron.app || electron.remote.app).getPath('temp');
     const from = path.join(tempPath, 'SampleProtocol') + '.netcanvas';
-    const fs = require('fs')
 
-    const selectPath = new Promise(function(resolve, reject){
+    const selectPath = new Promise(function(resolve){
       dialog.showOpenDialog(null, {
         properties: ['openDirectory']
       })
@@ -89,40 +76,35 @@ const downloadProtocolFromURI = inEnvironment((environment)=> {
           const destination = path.join(result.filePaths.toString(), 'SampleProtocol') + '.netcanvas';
           resolve(destination);
         }
-      })
-    })
-      
-    return (uri) => {
-      selectPath
-        .then((destination) => {
-          let promisedResponse;
-          promisedResponse = getURL(uri)
+      });
+    });
+    
+  return selectPath
+          .then((destination) => {
+            let promisedResponse;
+            promisedResponse = getURL(uri)
             .catch(urlError)
             .then(url => request({ method: 'GET', encoding: null, uri: url.href }));
 
-          return promisedResponse
-            .catch(networkError)
-            .then(data => writeFile(from, data))
-            .catch(fileError)
-            .then(() => {
-              fs.rename(from, destination, function(err){
-                if (err){
-                  throw error;
-                }
-                else {
-                  console.log("Successfully moved the file")
-                }
+            return promisedResponse
+              .catch(networkError)
+              .then(data => writeFile(from, data))
+              .catch(fileError)
+              .then(() => {
+                fs.rename(from, destination, function(err){
+                  if (err){
+                    throw err;
+                  }
+                  else {
+                    console.log('Successfully moved the file');
+                  }
+                });
               })
-            })
-            .then(() => {
-              openNetcanvas(destination)
-            })
-        })
-    };
-  }
-
-  return () => Promise.reject(new Error('downloadProtocolFromURI() not available on platform'));
-});
+              .then(() => {
+                openNetcanvas(destination);
+              });
+          });
+  };
 
 
   return (
@@ -206,7 +188,7 @@ const downloadProtocolFromURI = inEnvironment((environment)=> {
 
 WelcomeHeader.PropTypes = {
   openNetcanvas: PropTypes.func.isRequired,
-}
+};
 
 const mapDispatchToProps = {
   openNetcanvas: userActions.openNetcanvas,
