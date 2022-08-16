@@ -5,25 +5,23 @@ import { Button } from '@codaco/ui';
 import networkCanvasLogo from '@app/images/NC-Mark.svg';
 import headerGraphic from '@app/images/Arc-Flat.svg';
 import Version from '@components/Version';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Group from './Group';
 import Switch from './Switch';
 import useAppState from './useAppState';
 import { openExternalLink } from '../ExternalLink';
 import Section from './Section';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { actionCreators as userActions } from '../../ducks/modules/userActions/userActions';
 import inEnvironment from '../../utils/Environment';
 import environments from '../../utils/environments';
-import friendlyErrorMessage from "../../utils/friendlyErrorMessage"
-import { writeFile } from "../../utils/fileSystem"
-import { useState, useEffect } from 'react';
+import friendlyErrorMessage from '../../utils/friendlyErrorMessage';
+import { writeFile } from "../../utils/fileSystem";
 
 const WelcomeHeader = ({
   openNetcanvas
 }) => {
   const [isOpen, setIsOpen] = useAppState('showWelcome', true);
-  const [localPath, setLocalPath] = useState('');
 
   const classes = cx(
     'home-section',
@@ -48,15 +46,6 @@ const WelcomeHeader = ({
       },
     },
   };
-  
-  useEffect(() => {
-    if (localPath !== ''){
-      const installSampleProtocol = async() => {
-        return openNetcanvas(localPath)
-      }
-      installSampleProtocol()
-    }
-  }, [localPath])
 
   const getURL = uri =>
   new Promise((resolve, reject) => {
@@ -115,7 +104,6 @@ const downloadProtocolFromURI = inEnvironment((environment)=> {
             .catch(networkError)
             .then(data => writeFile(from, data))
             .catch(fileError)
-            .then(() => console.log(destination))
             .then(() => {
               fs.rename(from, destination, function(err){
                 if (err){
@@ -127,7 +115,7 @@ const downloadProtocolFromURI = inEnvironment((environment)=> {
               })
             })
             .then(() => {
-              setLocalPath(destination)
+              openNetcanvas(destination)
             })
         })
     };
