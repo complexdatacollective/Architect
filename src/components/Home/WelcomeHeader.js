@@ -19,8 +19,11 @@ import friendlyErrorMessage from "../../utils/friendlyErrorMessage"
 import { writeFile } from "../../utils/fileSystem"
 import { useState, useEffect } from 'react';
 
-const WelcomeHeader = () => {
+const WelcomeHeader = ({
+  openNetcanvas
+}) => {
   const [isOpen, setIsOpen] = useAppState('showWelcome', true);
+  const [localPath, setLocalPath] = useState('');
 
   const classes = cx(
     'home-section',
@@ -45,6 +48,94 @@ const WelcomeHeader = () => {
       },
     },
   };
+  
+  useEffect(() => {
+    if (localPath !== ''){
+      const installSampleProtocol = async() => {
+        return openNetcanvas(localPath)
+      }
+      installSampleProtocol()
+    }
+  }, [localPath])
+
+  const getURL = uri =>
+  new Promise((resolve, reject) => {
+    try {
+      resolve(new URL(uri));
+    } catch (error) {
+      reject(error);
+    }
+  });
+
+const urlError = friendlyErrorMessage("The location you gave us doesn't seem to be a valid URL. Check the location, and try again.");
+const networkError = friendlyErrorMessage("We weren't able to fetch your protocol. Your device may not have an active network connection, or you may have mistyped the URL. Ensure you are connected to a network, double check your URL, and try again.");
+const fileError = friendlyErrorMessage('The protocol could not be saved to your device. You might not have enough storage available. ');
+
+/**
+ * Download a protocol from a remote server.
+ *
+ * If the URL points to an instance of a Network Canvas Server, then the caller must ensure
+ * that the SSL certificate has been trusted. See {@link ApiClient#addTrustedCert}.
+ *
+ * @param {string} uri
+ * @return {string} output filepath
+ */
+const downloadProtocolFromURI = inEnvironment((environment)=> {
+
+  if (environment === environments.ELECTRON) {
+    const request = require('request-promise-native');
+    const path = require('path');
+    const electron = require('electron');
+    const { dialog } = electron.remote
+    const tempPath = (electron.app || electron.remote.app).getPath('temp');
+    const from = path.join(tempPath, 'SampleProtocol') + '.netcanvas';
+    const fs = require('fs')
+
+    const selectPath = new Promise(function(resolve, reject){
+      dialog.showOpenDialog(null, {
+        properties: ['openDirectory']
+      })
+      .then((result) => {
+        if (result.filePaths.toString() !== ''){
+          const destination = path.join(result.filePaths.toString(), 'SampleProtocol') + '.netcanvas';
+          resolve(destination);
+        }
+      })
+    })
+      
+    return (uri) => {
+      selectPath
+        .then((destination) => {
+          let promisedResponse;
+          promisedResponse = getURL(uri)
+            .catch(urlError)
+            .then(url => request({ method: 'GET', encoding: null, uri: url.href }));
+
+          return promisedResponse
+            .catch(networkError)
+            .then(data => writeFile(from, data))
+            .catch(fileError)
+            .then(() => console.log(destination))
+            .then(() => {
+              fs.rename(from, destination, function(err){
+                if (err){
+                  throw error;
+                }
+                else {
+                  console.log("Successfully moved the file")
+                }
+              })
+            })
+            .then(() => {
+              setLocalPath(destination)
+            })
+        })
+    };
+  }
+
+  return () => Promise.reject(new Error('downloadProtocolFromURI() not available on platform'));
+});
+
 
   return (
     <Section
@@ -107,6 +198,12 @@ const WelcomeHeader = () => {
                       onClick={() => openExternalLink('https://documentation.networkcanvas.com')}
                     >
                       Visit documentation website
+                    </Button>
+                    <Button
+                      color="mustard"
+                      onClick={() => downloadProtocolFromURI('https://documentation.networkcanvas.com/protocols/Sample%20Protocol%20v3.netcanvas')}
+                    >
+                      Install Sample Protocol
                     </Button>
                   </div>
                 </div>

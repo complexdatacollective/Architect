@@ -369,6 +369,10 @@ $font-sizes: (
           margin-right: unit(2);
         }
 
+        &:nth-child(2) {
+          margin-right: unit(2);
+        }
+
         .button__content {
           padding: 0;
           font-size: .75rem;
