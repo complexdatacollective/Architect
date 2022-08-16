@@ -12,6 +12,7 @@ import electron from 'electron';
 import fs from 'fs';
 import friendlyErrorMessage from '../../utils/friendlyErrorMessage';
 import { writeFile } from '../../utils/fileSystem';
+import fetch from 'node-fetch'
 import { actionCreators as userActions } from '../../ducks/modules/userActions/userActions';
 import Group from './Group';
 import Switch from './Switch';
@@ -62,7 +63,6 @@ const WelcomeHeader = ({
   const fileError = friendlyErrorMessage('The protocol could not be saved to your device. You might not have enough storage available. ');
 
   const downloadProtocolFromURI = (uri) => {
-    const request = require('request-promise-native');
     const { dialog } = electron.remote;
     const tempPath = (electron.app || electron.remote.app).getPath('temp');
     const from = path.join(tempPath, 'SampleProtocol') + '.netcanvas';
@@ -78,32 +78,31 @@ const WelcomeHeader = ({
         }
       });
     });
-    
-  return selectPath
-          .then((destination) => {
-            let promisedResponse;
-            promisedResponse = getURL(uri)
-            .catch(urlError)
-            .then(url => request({ method: 'GET', encoding: null, uri: url.href }));
 
-            return promisedResponse
-              .catch(networkError)
-              .then(data => writeFile(from, data))
-              .catch(fileError)
-              .then(() => {
-                fs.rename(from, destination, function(err){
-                  if (err){
-                    throw err;
-                  }
-                  else {
-                    console.log('Successfully moved the file');
-                  }
-                });
-              })
-              .then(() => {
-                openNetcanvas(destination);
-              });
+    return selectPath
+      .then((destination) => {
+        let promisedResponse;
+        promisedResponse = fetch(uri)
+          .then(response => response.buffer());
+
+        return promisedResponse
+          .catch(networkError)
+          .then(data => writeFile(from, data))
+          .catch(fileError)
+          .then(() => {
+            fs.rename(from, destination, function(err){
+              if (err){
+                throw err;
+              }
+              else {
+                console.log('Successfully moved the file');
+              }
+            });
+          })
+          .then(() => {
+            openNetcanvas(destination);
           });
+      });
   };
 
 
