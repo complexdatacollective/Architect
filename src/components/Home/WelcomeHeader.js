@@ -119,4 +119,14 @@ const WelcomeHeader = () => {
   );
 };
 
-export default WelcomeHeader;
+WelcomeHeader.PropTypes = {
+  openNetcanvas: PropTypes.func.isRequired,
+}
+
+const mapDispatchToProps = {
+  openNetcanvas: userActions.openNetcanvas,
+};
+
+const withState = connect(null, mapDispatchToProps);
+
+export default withState(WelcomeHeader);
