@@ -7,12 +7,6 @@ import headerGraphic from '@app/images/Arc-Flat.svg';
 import Version from '@components/Version';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import path from 'path';
-import electron from 'electron';
-import fs from 'fs';
-import friendlyErrorMessage from '../../utils/friendlyErrorMessage';
-import { writeFile } from '../../utils/fileSystem';
-import fetch from 'node-fetch'
 import { actionCreators as userActions } from '../../ducks/modules/userActions/userActions';
 import Group from './Group';
 import Switch from './Switch';
@@ -21,7 +15,7 @@ import { openExternalLink } from '../ExternalLink';
 import Section from './Section';
 
 const WelcomeHeader = ({
-  openNetcanvas
+  downloadProtocolFromURI
 }) => {
   const [isOpen, setIsOpen] = useAppState('showWelcome', true);
 
@@ -48,63 +42,6 @@ const WelcomeHeader = ({
       },
     },
   };
-
-  const getURL = uri =>
-    new Promise((resolve, reject) => {
-      try {
-        resolve(new URL(uri));
-      } catch (error) {
-        reject(error);
-      }
-  });
-
-  const urlError = friendlyErrorMessage("The location you gave us doesn't seem to be a valid URL. Check the location, and try again.");
-  const networkError = friendlyErrorMessage("We weren't able to fetch your protocol. Your device may not have an active network connection, or you may have mistyped the URL. Ensure you are connected to a network, double check your URL, and try again.");
-  const fileError = friendlyErrorMessage('The protocol could not be saved to your device. You might not have enough storage available. ');
-
-  const downloadProtocolFromURI = (uri) => {
-    const { dialog } = electron.remote;
-    const tempPath = (electron.app || electron.remote.app).getPath('temp');
-    const from = path.join(tempPath, 'SampleProtocol') + '.netcanvas';
-
-    const selectPath = new Promise(function(resolve){
-      dialog.showOpenDialog(null, {
-        properties: ['openDirectory']
-      })
-      .then((result) => {
-        if (result.filePaths.toString() !== ''){
-          const destination = path.join(result.filePaths.toString(), 'SampleProtocol') + '.netcanvas';
-          resolve(destination);
-        }
-      });
-    });
-
-    return selectPath
-      .then((destination) => {
-        let promisedResponse;
-        promisedResponse = fetch(uri)
-          .then(response => response.buffer());
-
-        return promisedResponse
-          .catch(networkError)
-          .then(data => writeFile(from, data))
-          .catch(fileError)
-          .then(() => {
-            fs.rename(from, destination, function(err){
-              if (err){
-                throw err;
-              }
-              else {
-                console.log('Successfully moved the file');
-              }
-            });
-          })
-          .then(() => {
-            openNetcanvas(destination);
-          });
-      });
-  };
-
 
   return (
     <Section
@@ -186,11 +123,11 @@ const WelcomeHeader = ({
 };
 
 WelcomeHeader.PropTypes = {
-  openNetcanvas: PropTypes.func.isRequired,
+  downloadProtocolFromURI: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
-  openNetcanvas: userActions.openNetcanvas,
+  downloadProtocolFromURI: userActions.downloadProtocolFromURI
 };
 
 const withState = connect(null, mapDispatchToProps);

@@ -22,6 +22,11 @@ import {
   netcanvasFileErrorHandler,
 } from '@modules/userActions/dialogs';
 import { createLock } from '@modules/ui/status';
+import electron from 'electron';
+import fs from 'fs';
+import fetch from 'node-fetch';
+import friendlyErrorMessage from '../../../utils/friendlyErrorMessage';
+import { writeFile } from '../../../utils/fileSystem';
 
 const protocolsLock = createLock('PROTOCOLS');
 const loadingLock = createLock('LOADING');
@@ -131,6 +136,52 @@ const openNetcanvas = (netcanvasFilePath) => {
     .catch((e) => dispatch(netcanvasFileErrorHandler(e, { filePath: netcanvasFilePath })));
 };
 
+
+const networkError = friendlyErrorMessage("We weren't able to fetch your protocol. Your device may not have an active network connection, or you may have mistyped the URL. Ensure you are connected to a network, double check your URL, and try again.");
+const fileError = friendlyErrorMessage('The protocol could not be saved to your device. You might not have enough storage available. ');
+
+const downloadProtocolFromURI = (uri) => (dispatch) => {
+  const { dialog } = electron.remote;
+  const tempPath = (electron.app || electron.remote.app).getPath('temp');
+  const from = path.join(tempPath, 'SampleProtocol') + '.netcanvas';
+
+  const selectPath = new Promise(function(resolve){
+    dialog.showOpenDialog(null, {
+      properties: ['openDirectory']
+    })
+    .then((result) => {
+      if (result.filePaths.toString() !== ''){
+        const destination = path.join(result.filePaths.toString(), 'SampleProtocol') + '.netcanvas';
+        resolve(destination);
+      }
+    });
+  });
+
+  return selectPath
+    .then((destination) => {
+      const promisedResponse = fetch(uri)
+        .then(response => response.buffer());
+
+      return promisedResponse
+        .catch(networkError)
+        .then(data => writeFile(from, data))
+        .catch(fileError)
+        .then(() => {
+          fs.rename(from, destination, function(err){
+            if (err){
+              throw err;
+            }
+            else {
+              console.log('Successfully moved the file');
+            }
+          });
+        })
+        .then(() => {
+          return dispatch(openNetcanvas(destination));
+        });
+    });
+};
+
 const createNetcanvas = () => (dispatch) => Promise.resolve()
   .then(() => dispatch(checkUnsavedChanges))
   .then((confirm) => {
@@ -195,5 +246,6 @@ export const actionCreators = {
   createNetcanvas: protocolsLock(createNetcanvas),
   saveAsNetcanvas: protocolsLock(saveAsNetcanvas), // savingLock
   saveNetcanvas: protocolsLock(savingLock(saveNetcanvas)), // savingLock
+  downloadProtocolFromURI: protocolsLock(downloadProtocolFromURI),
   printOverview,
 };
