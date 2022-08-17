@@ -26,7 +26,7 @@ import electron from 'electron';
 import fs from 'fs';
 import fetch from 'node-fetch';
 import friendlyErrorMessage from '../../../utils/friendlyErrorMessage';
-import { writeFile } from '../../../utils/fileSystem';
+// import { writeFile } from '../../../utils/fileSystem';
 
 const protocolsLock = createLock('PROTOCOLS');
 const loadingLock = createLock('LOADING');
@@ -136,7 +136,6 @@ const openNetcanvas = (netcanvasFilePath) => {
     .catch((e) => dispatch(netcanvasFileErrorHandler(e, { filePath: netcanvasFilePath })));
 };
 
-
 const networkError = friendlyErrorMessage("We weren't able to fetch your protocol. Your device may not have an active network connection, or you may have mistyped the URL. Ensure you are connected to a network, double check your URL, and try again.");
 const fileError = friendlyErrorMessage('The protocol could not be saved to your device. You might not have enough storage available. ');
 
@@ -164,14 +163,18 @@ const downloadProtocolFromURI = (uri) => (dispatch) => {
 
       return promisedResponse
         .catch(networkError)
-        .then(data => writeFile(from, data))
-        .catch(fileError)
+        .then(data => fs.writeFile(from, data, function(err) {
+          if (err) {
+            throw err;
+          } else {
+            console.log("Sucessfully write data to file.");
+          }
+        }))
         .then(() => {
           fs.rename(from, destination, function(err){
-            if (err){
+            if (err) {
               throw err;
-            }
-            else {
+            } else {
               console.log('Successfully moved the file');
             }
           });
