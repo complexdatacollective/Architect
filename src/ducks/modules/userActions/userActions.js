@@ -26,7 +26,7 @@ import {
   netcanvasFileErrorHandler,
 } from '@modules/userActions/dialogs';
 import { createLock } from '@modules/ui/status';
-import electron, { BrowserWindow } from 'electron';
+import electron from 'electron';
 import { rename, writeFile, remove } from 'fs-extra';
 import fetch from 'node-fetch';
 import friendlyErrorMessage from '../../../utils/friendlyErrorMessage';
@@ -263,6 +263,8 @@ const installProtocolFromURI = (uri) => (dispatch) => {
             dismissHandler: () => {
               dispatch(toastActions.removeToast(toastUUID));
               dispatch(showCancellationToast());
+              const { getCurrentWindow } = electron.remote;
+              getCurrentWindow().reload();
               cancelled = true;
             },
             content: (
@@ -368,6 +370,6 @@ export const actionCreators = {
   createNetcanvas: protocolsLock(createNetcanvas),
   saveAsNetcanvas: protocolsLock(saveAsNetcanvas), // savingLock
   saveNetcanvas: protocolsLock(savingLock(saveNetcanvas)), // savingLock
-  installProtocolFromURI: installProtocolFromURI,
+  installProtocolFromURI,
   printOverview,
 };
