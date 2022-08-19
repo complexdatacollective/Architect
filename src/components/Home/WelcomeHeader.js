@@ -15,7 +15,7 @@ import { openExternalLink } from '../ExternalLink';
 import Section from './Section';
 
 const WelcomeHeader = ({
-  downloadProtocolFromURI
+  installProtocolFromURI,
 }) => {
   const [isOpen, setIsOpen] = useAppState('showWelcome', true);
 
@@ -107,7 +107,7 @@ const WelcomeHeader = ({
                     </Button>
                     <Button
                       color="mustard"
-                      onClick={() => downloadProtocolFromURI('https://documentation.networkcanvas.com/protocols/Sample%20Protocol%20v3.netcanvas')}
+                      onClick={() => installProtocolFromURI('https://documentation.networkcanvas.com/protocols/Sample%20Protocol%20v3.netcanvas')}
                     >
                       Install Sample Protocol
                     </Button>
@@ -122,12 +122,12 @@ const WelcomeHeader = ({
   );
 };
 
-WelcomeHeader.PropTypes = {
-  downloadProtocolFromURI: PropTypes.func.isRequired
+WelcomeHeader.propTypes = {
+  installProtocolFromURI: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
-  downloadProtocolFromURI: userActions.downloadProtocolFromURI
+  installProtocolFromURI: userActions.installProtocolFromURI,
 };
 
 const withState = connect(null, mapDispatchToProps);
