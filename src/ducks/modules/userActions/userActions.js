@@ -51,7 +51,7 @@ const showCancellationToast = () => (dispatch) => {
 };
 
 // TODO: move this to sessions
-const validateAndOpenNetcanvas = (filePath, cancelled) => (dispatch) => Promise.resolve()
+const validateAndOpenNetcanvas = (filePath) => (dispatch) => Promise.resolve()
   .then(() => netcanvasFile.validateNetcanvas(filePath)
     .then(() => true))
   .catch((e) => {
@@ -85,7 +85,7 @@ const getNewFileName = (filePath) => Promise.resolve(path.basename(filePath, '.n
     filters: [{ name: 'Network Canvas', extensions: ['netcanvas'] }],
   }));
 
-const upgradeProtocol = (filePath, protocolSchemaVersion, toastUUID, cancelled) => (dispatch) => {
+const upgradeProtocol = (filePath, protocolSchemaVersion, toastUUID) => (dispatch) => {
   const migrationNotes = getMigrationNotes(protocolSchemaVersion, APP_SCHEMA_VERSION);
   const upgradeDialog = mayUpgradeProtocolDialog(
     protocolSchemaVersion,
@@ -111,12 +111,12 @@ const upgradeProtocol = (filePath, protocolSchemaVersion, toastUUID, cancelled) 
           }
 
           return netcanvasFile.migrateNetcanvas(filePath, newFilePath, APP_SCHEMA_VERSION)
-            .then((migratedFilePath) => dispatch(validateAndOpenNetcanvas(migratedFilePath, cancelled)));
+            .then((migratedFilePath) => dispatch(validateAndOpenNetcanvas(migratedFilePath)));
         });
     });
 };
 
-const openNetcanvas = (netcanvasFilePath, toastUUID, cancelled) => {
+const openNetcanvas = (netcanvasFilePath, toastUUID) => {
   // helper function so we can use loadingLock
   const openOrUpgrade = loadingLock(({ canceled, filePaths }) => (dispatch) => {
     const filePath = filePaths && filePaths[0];
@@ -126,9 +126,9 @@ const openNetcanvas = (netcanvasFilePath, toastUUID, cancelled) => {
       .then(([protocolSchemaVersion, schemaVersionStatus]) => {
         switch (schemaVersionStatus) {
           case schemaVersionStates.OK:
-            return dispatch(validateAndOpenNetcanvas(filePath, cancelled));
+            return dispatch(validateAndOpenNetcanvas(filePath));
           case schemaVersionStates.UPGRADE_PROTOCOL:
-            return dispatch(upgradeProtocol(filePath, protocolSchemaVersion, toastUUID, cancelled));
+            return dispatch(upgradeProtocol(filePath, protocolSchemaVersion, toastUUID));
           case schemaVersionStates.UPGRADE_APP:
             return dispatch(appUpgradeRequiredDialog(protocolSchemaVersion));
           default:
@@ -170,7 +170,7 @@ const installProtocolFromURI = (uri) => (dispatch) => {
   const toastUUID = uuid();
   const { dialog } = electron.remote;
   const tempPath = (electron.app || electron.remote.app).getPath('temp');
-  const from = path.join(tempPath, 'SampleProtocol') + '.netcanvas';
+  const from = path.join(tempPath, uuid());
 
   // Create a toast to show the status as it updates
   dispatch(toastActions.addToast({
@@ -191,13 +191,19 @@ const installProtocolFromURI = (uri) => (dispatch) => {
     ),
   }));
 
-  const selectPath = new Promise(function (resolve) {
-    dialog.showOpenDialog(null, {
-      properties: ['openDirectory'],
-    })
+  const options = {
+    buttonLabel: 'Save',
+    nameFieldLabel: 'Save:',
+    filters: [{ name: 'Network Canvas', extensions: ['netcanvas'] }],
+    properties: ['saveFile'],
+    defaultPath: '*/Sample Protocol',
+  };
+
+  const selectPath = new Promise((resolve) => {
+    dialog.showSaveDialog(electron.remote.getCurrentWindow(), options)
       .then((result) => {
         if (cancelled) return cancelledImport();
-        if (result.filePaths.toString() !== '') {
+        if (result.filePath.toString() !== '') {
           dispatch(toastActions.updateToast(toastUUID, {
             title: 'Downloading Protocol...',
             dismissHandler: () => {
@@ -211,7 +217,7 @@ const installProtocolFromURI = (uri) => (dispatch) => {
               </>
             ),
           }));
-          const destination = path.join(result.filePaths.toString(), 'SampleProtocol') + '.netcanvas';
+          const destination = result.filePath;
           resolve(destination);
         } else {
           dispatch(toastActions.removeToast(toastUUID));
@@ -226,7 +232,10 @@ const installProtocolFromURI = (uri) => (dispatch) => {
 
   return selectPath
     .then((destination) => {
-      if (cancelled) return cancelledImport();
+      if (cancelled) {
+        remove(from);
+        return cancelledImport();
+      }
       const promisedResponse = fetch(uri)
         .then((response) => response.buffer());
 
@@ -245,7 +254,10 @@ const installProtocolFromURI = (uri) => (dispatch) => {
           writeFile(from, data);
         })
         .then(() => {
-          if (cancelled) return cancelledImport();
+          if (cancelled) {
+            remove(from);
+            return cancelledImport();
+          }
           dispatch(toastActions.updateToast(toastUUID, {
             title: 'Extracting to destination storage...',
             content: (
@@ -261,6 +273,7 @@ const installProtocolFromURI = (uri) => (dispatch) => {
           dispatch(toastActions.updateToast(toastUUID, {
             title: 'Validating and opening protocol...',
             dismissHandler: () => {
+              remove(destination);
               dispatch(toastActions.removeToast(toastUUID));
               dispatch(showCancellationToast());
               const { getCurrentWindow } = electron.remote;
@@ -273,12 +286,15 @@ const installProtocolFromURI = (uri) => (dispatch) => {
               </>
             ),
           }));
-          return dispatch(openNetcanvas(destination, toastUUID, cancelled));
+          return dispatch(openNetcanvas(destination, toastUUID));
         })
         .then((result) => {
           if (result) {
             filePath = destination;
-            if (cancelled) return cancelledImport();
+            if (cancelled) {
+              remove(filePath);
+              return cancelledImport();
+            }
             dispatch(toastActions.removeToast(toastUUID));
             dispatch(toastActions.addToast({
               type: 'success',
