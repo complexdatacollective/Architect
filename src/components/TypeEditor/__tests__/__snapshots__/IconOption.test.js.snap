@@ -7,11 +7,8 @@ exports[`<IconOption /> can render 1`] = `
   fieldLabel={null}
   input={Object {}}
   label={
-    <Icon
-      className=""
-      color=""
+    <Memo(Icon)
       name="add-a-person"
-      style={Object {}}
     />
   }
 />
