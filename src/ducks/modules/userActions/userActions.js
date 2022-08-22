@@ -2,7 +2,6 @@
 import React from 'react';
 import path from 'path';
 import uuid from 'uuid';
-import { CancellationError } from 'builder-util-runtime';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import * as netcanvasFile from '@app/utils/netcanvasFile';
 import validateProtocol from '@app/utils/validateProtocol';
@@ -35,6 +34,12 @@ import { actionCreators as toastActions } from '../toasts';
 const protocolsLock = createLock('PROTOCOLS');
 const loadingLock = createLock('LOADING');
 const savingLock = createLock('SAVING');
+
+class CancellationError extends Error {
+  constructor() {
+    super('cancelled');
+  }
+}
 
 const { schemaVersionStates } = netcanvasFile;
 
