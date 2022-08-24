@@ -284,6 +284,7 @@ module.exports = {
       '@selectors': path.join(paths.appSrc, 'selectors'),
       '@hooks': path.join(paths.appSrc, 'hooks'),
       '@modules': path.join(paths.appSrc, 'ducks', 'modules'),
+      '@utils': path.join(paths.appSrc, 'utils'),
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).

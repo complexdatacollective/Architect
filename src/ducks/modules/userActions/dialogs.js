@@ -128,6 +128,25 @@ const netcanvasFileErrorHandler = (e, meta = {}) => {
   });
 };
 
+const importErrorDialog = (e) => {
+  e.friendlyMessage = (
+    <p>
+      There was an error downloading or importing the sample protocol. Please consult the
+      error message below for details. If you believe you have encountered a bug in the
+      software, please email us at
+      {' '}
+      <code>info@networkcanvas.com</code>
+      {' '}
+      with further details.
+    </p>
+  );
+
+  return dialogActions.openDialog({
+    type: 'Error',
+    error: e,
+  });
+};
+
 const validationErrorDialog = (e) => {
   e.friendlyMessage = (
     <>
@@ -256,6 +275,7 @@ const mayUpgradeProtocolDialog = (
 
 export {
   netcanvasFileErrorHandler,
+  importErrorDialog,
   validationErrorDialog,
   appUpgradeRequiredDialog,
   mayUpgradeProtocolDialog,

@@ -34,7 +34,8 @@
           ["@components", "./src/components"],
           ["@modules", "./src/ducks/modules"],
           ["@selectors", "./src/selectors"],
-          ["@hooks", "./src/hooks"]
+          ["@hooks", "./src/hooks"],
+          ["@utils", "./src/utils"]
         ]
       }
     },

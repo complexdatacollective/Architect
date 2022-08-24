@@ -2,11 +2,10 @@ import React from 'react';
 import cx from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '@codaco/ui';
+import { useDispatch } from 'react-redux';
 import networkCanvasLogo from '@app/images/NC-Mark.svg';
 import headerGraphic from '@app/images/Arc-Flat.svg';
 import Version from '@components/Version';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { actionCreators as userActions } from '../../ducks/modules/userActions/userActions';
 import Group from './Group';
 import Switch from './Switch';
@@ -14,10 +13,11 @@ import useAppState from './useAppState';
 import { openExternalLink } from '../ExternalLink';
 import Section from './Section';
 
-const WelcomeHeader = ({
-  installProtocolFromURI,
-}) => {
+const WelcomeHeader = () => {
   const [isOpen, setIsOpen] = useAppState('showWelcome', true);
+
+  const dispatch = useDispatch();
+  const downloadSampleProtocol = () => dispatch(userActions.importSampleProtocol());
 
   const classes = cx(
     'home-section',
@@ -107,9 +107,9 @@ const WelcomeHeader = ({
                     </Button>
                     <Button
                       color="mustard"
-                      onClick={() => installProtocolFromURI('https://documentation.networkcanvas.com/protocols/Sample%20Protocol%20v3.netcanvas')}
+                      onClick={downloadSampleProtocol}
                     >
-                      Install Sample Protocol
+                      Download Sample Protocol
                     </Button>
                   </div>
                 </div>
@@ -122,14 +122,4 @@ const WelcomeHeader = ({
   );
 };
 
-WelcomeHeader.propTypes = {
-  installProtocolFromURI: PropTypes.func.isRequired,
-};
-
-const mapDispatchToProps = {
-  installProtocolFromURI: userActions.installProtocolFromURI,
-};
-
-const withState = connect(null, mapDispatchToProps);
-
-export default withState(WelcomeHeader);
+export default WelcomeHeader;

@@ -1,14 +1,15 @@
 /* eslint-disable import/prefer-default-export */
-import React from 'react';
 import path from 'path';
-import uuid from 'uuid';
-import { APP_SCHEMA_VERSION } from '@app/config';
+import uuid from 'uuid/v4';
+import { remote } from 'electron';
+import { remove, rename, writeFile } from 'fs-extra';
+import axios from 'axios';
+import { APP_SCHEMA_VERSION, SAMPLE_PROTOCOL_URL } from '@app/config';
 import * as netcanvasFile from '@app/utils/netcanvasFile';
 import validateProtocol from '@app/utils/validateProtocol';
 import getMigrationNotes from '@app/protocol-validation/migrations/getMigrationNotes';
 import { getHasUnsavedChanges } from '@selectors/session';
 import { getProtocol } from '@selectors/protocol';
-import { ProgressBar, Spinner } from '@codaco/ui';
 import {
   openDialog,
   saveCopyDialog,
@@ -18,42 +19,24 @@ import {
 import { UnsavedChanges } from '@components/Dialogs';
 import { actionCreators as sessionActions, actionTypes as sessionActionTypes } from '@modules/session';
 import { actionCreators as dialogsActions } from '@modules/dialogs';
+import { actionCreators as toastActions } from '@modules/toasts';
 import {
   validationErrorDialog,
+  importErrorDialog,
   appUpgradeRequiredDialog,
   mayUpgradeProtocolDialog,
   netcanvasFileErrorHandler,
 } from '@modules/userActions/dialogs';
 import { createLock } from '@modules/ui/status';
-import electron from 'electron';
-import { rename, writeFile, remove } from 'fs-extra';
-import fetch from 'node-fetch';
-import friendlyErrorMessage from '../../../utils/friendlyErrorMessage';
-import { actionCreators as toastActions } from '../toasts';
+import CancellationError from '@utils/cancellationError';
+import { getNewFileName } from '@utils/netcanvasFile/netcanvasFile';
+import { createImportToast, updateDownloadProgress } from './userActionToasts';
 
 const protocolsLock = createLock('PROTOCOLS');
 const loadingLock = createLock('LOADING');
 const savingLock = createLock('SAVING');
 
-class CancellationError extends Error {
-  constructor() {
-    super('cancelled');
-  }
-}
-
 const { schemaVersionStates } = netcanvasFile;
-
-const showCancellationToast = () => (dispatch) => {
-  dispatch(toastActions.addToast({
-    type: 'warning',
-    title: 'Import cancelled',
-    content: (
-      <>
-        <p>You cancelled the import of this protocol.</p>
-      </>
-    ),
-  }));
-};
 
 // TODO: move this to sessions
 const validateAndOpenNetcanvas = (filePath) => (dispatch) => Promise.resolve()
@@ -82,15 +65,7 @@ const checkUnsavedChanges = () => (dispatch, getState) => Promise.resolve()
       });
   });
 
-const getNewFileName = (filePath) => Promise.resolve(path.basename(filePath, '.netcanvas'))
-  .then((basename) => saveDialog({
-    buttonLabel: 'Save',
-    nameFieldLabel: 'Save:',
-    defaultPath: `${basename} (schema version ${APP_SCHEMA_VERSION}).netcanvas`,
-    filters: [{ name: 'Network Canvas', extensions: ['netcanvas'] }],
-  }));
-
-const upgradeProtocol = (filePath, protocolSchemaVersion, toastUUID) => (dispatch) => {
+const upgradeProtocol = (filePath, protocolSchemaVersion) => (dispatch) => {
   const migrationNotes = getMigrationNotes(protocolSchemaVersion, APP_SCHEMA_VERSION);
   const upgradeDialog = mayUpgradeProtocolDialog(
     protocolSchemaVersion,
@@ -101,19 +76,11 @@ const upgradeProtocol = (filePath, protocolSchemaVersion, toastUUID) => (dispatc
   return Promise.resolve()
     .then(() => dispatch(upgradeDialog))
     .then((confirm) => {
-      if (!confirm) {
-        dispatch(toastActions.removeToast(toastUUID));
-        dispatch(showCancellationToast());
-        return Promise.resolve(null);
-      }
+      if (!confirm) { return Promise.resolve(null); }
 
       return getNewFileName(filePath)
         .then(({ canceled, filePath: newFilePath }) => {
-          if (canceled || !newFilePath) {
-            dispatch(toastActions.removeToast(toastUUID));
-            dispatch(showCancellationToast());
-            return Promise.resolve(null);
-          }
+          if (canceled || !newFilePath) { return Promise.resolve(null); }
 
           return netcanvasFile.migrateNetcanvas(filePath, newFilePath, APP_SCHEMA_VERSION)
             .then((migratedFilePath) => dispatch(validateAndOpenNetcanvas(migratedFilePath)));
@@ -121,7 +88,7 @@ const upgradeProtocol = (filePath, protocolSchemaVersion, toastUUID) => (dispatc
     });
 };
 
-const openNetcanvas = (netcanvasFilePath, toastUUID) => {
+const openNetcanvas = (netcanvasFilePath) => {
   // helper function so we can use loadingLock
   const openOrUpgrade = loadingLock(({ canceled, filePaths }) => (dispatch) => {
     const filePath = filePaths && filePaths[0];
@@ -133,7 +100,7 @@ const openNetcanvas = (netcanvasFilePath, toastUUID) => {
           case schemaVersionStates.OK:
             return dispatch(validateAndOpenNetcanvas(filePath));
           case schemaVersionStates.UPGRADE_PROTOCOL:
-            return dispatch(upgradeProtocol(filePath, protocolSchemaVersion, toastUUID));
+            return dispatch(upgradeProtocol(filePath, protocolSchemaVersion));
           case schemaVersionStates.UPGRADE_APP:
             return dispatch(appUpgradeRequiredDialog(protocolSchemaVersion));
           default:
@@ -163,168 +130,6 @@ const openNetcanvas = (netcanvasFilePath, toastUUID) => {
     })
     .then(({ canceled, filePaths }) => dispatch(openOrUpgrade({ canceled, filePaths })))
     .catch((e) => dispatch(netcanvasFileErrorHandler(e, { filePath: netcanvasFilePath })));
-};
-
-const networkError = friendlyErrorMessage("We weren't able to fetch your protocol. Your device may not have an active network connection, or you may have mistyped the URL. Ensure you are connected to a network, double check your URL, and try again.");
-
-const cancelledImport = () => Promise.reject(new CancellationError('Import cancelled.'));
-
-const installProtocolFromURI = (uri) => (dispatch) => {
-  let cancelled = false;
-  let filePath;
-  const toastUUID = uuid();
-  const { dialog } = electron.remote;
-  const tempPath = (electron.app || electron.remote.app).getPath('temp');
-  const from = path.join(tempPath, uuid());
-
-  // Create a toast to show the status as it updates
-  dispatch(toastActions.addToast({
-    id: toastUUID,
-    type: 'info',
-    title: 'Importing Protocol...',
-    CustomIcon: (<Spinner small />),
-    autoDismiss: false,
-    dismissHandler: () => {
-      dispatch(toastActions.removeToast(toastUUID));
-      dispatch(showCancellationToast());
-      cancelled = true;
-    },
-    content: (
-      <>
-        <ProgressBar orientation="horizontal" percentProgress={10} />
-      </>
-    ),
-  }));
-
-  const options = {
-    buttonLabel: 'Save',
-    nameFieldLabel: 'Save:',
-    filters: [{ name: 'Network Canvas', extensions: ['netcanvas'] }],
-    properties: ['saveFile'],
-    defaultPath: '*/Sample Protocol',
-  };
-
-  const selectPath = new Promise((resolve) => {
-    dialog.showSaveDialog(electron.remote.getCurrentWindow(), options)
-      .then((result) => {
-        if (cancelled) return cancelledImport();
-        if (result.filePath.toString() !== '') {
-          dispatch(toastActions.updateToast(toastUUID, {
-            title: 'Downloading Protocol...',
-            dismissHandler: () => {
-              dispatch(toastActions.removeToast(toastUUID));
-              dispatch(showCancellationToast());
-              cancelled = true;
-            },
-            content: (
-              <>
-                <ProgressBar orientation="horizontal" percentProgress={30} />
-              </>
-            ),
-          }));
-          const destination = result.filePath;
-          resolve(destination);
-        } else {
-          dispatch(toastActions.removeToast(toastUUID));
-          dispatch(showCancellationToast());
-          cancelled = true;
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
-
-  return selectPath
-    .then((destination) => {
-      if (cancelled) {
-        remove(from);
-        return cancelledImport();
-      }
-      const promisedResponse = fetch(uri)
-        .then((response) => response.buffer());
-
-      return promisedResponse
-        .catch(networkError)
-        .then((data) => {
-          if (cancelled) return cancelledImport();
-          dispatch(toastActions.updateToast(toastUUID, {
-            title: 'Extracting to temporary storage...',
-            content: (
-              <>
-                <ProgressBar orientation="horizontal" percentProgress={50} />
-              </>
-            ),
-          }));
-          writeFile(from, data);
-        })
-        .then(() => {
-          if (cancelled) {
-            remove(from);
-            return cancelledImport();
-          }
-          dispatch(toastActions.updateToast(toastUUID, {
-            title: 'Extracting to destination storage...',
-            content: (
-              <>
-                <ProgressBar orientation="horizontal" percentProgress={70} />
-              </>
-            ),
-          }));
-          rename(from, destination);
-        })
-        .then(() => {
-          if (cancelled) return cancelledImport(destination);
-          dispatch(toastActions.updateToast(toastUUID, {
-            title: 'Validating and opening protocol...',
-            dismissHandler: () => {
-              remove(destination);
-              dispatch(toastActions.removeToast(toastUUID));
-              dispatch(showCancellationToast());
-              const { getCurrentWindow } = electron.remote;
-              getCurrentWindow().reload();
-              cancelled = true;
-            },
-            content: (
-              <>
-                <ProgressBar orientation="horizontal" percentProgress={90} />
-              </>
-            ),
-          }));
-          return dispatch(openNetcanvas(destination, toastUUID));
-        })
-        .then((result) => {
-          if (result) {
-            filePath = destination;
-            if (cancelled) {
-              remove(filePath);
-              return cancelledImport();
-            }
-            dispatch(toastActions.removeToast(toastUUID));
-            dispatch(toastActions.addToast({
-              type: 'success',
-              title: 'Finished!',
-              autoDismiss: true,
-              content: (
-                <>
-                  <p>Protocol installed successfully.</p>
-                </>
-              ),
-            }));
-          }
-          return null;
-        })
-        .catch((err) => {
-          dispatch(toastActions.removeToast(toastUUID));
-          if (filePath) {
-            remove(filePath)
-              .catch((removeErr) => {
-                throw removeErr;
-              });
-          }
-          console.log(err);
-        });
-    });
 };
 
 const createNetcanvas = () => (dispatch) => Promise.resolve()
@@ -380,6 +185,112 @@ const printOverview = () => (dispatch, getState) => {
   dispatch({ ipc: true, type: 'PRINT_SUMMARY_DATA', payload });
 };
 
+const importSampleProtocol = () => (dispatch) => {
+  let userFilePath; // Path to save the file, chosen by user
+  let tempFilePath; // Temp file path for downloading to
+  let userCancelled = false; // Flag to determine if the user cancels
+  const importUUID = uuid(); // Identifier to avoid file name collisions
+  const controller = new AbortController(); // Abort controller for axios
+
+  // Utility that attempts to clean up temp files, and
+  // ensures import toast is removed
+  const handleCleanup = () => {
+    dispatch(toastActions.removeToast(importUUID));
+
+    if (tempFilePath) {
+      // Cleanup
+      try {
+        remove(tempFilePath);
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Error removing temp file path: ', e);
+      }
+    }
+  };
+
+  // Called when the user clicks close button on import toast
+  const handleCancel = () => {
+    controller.abort(); // Abort the axios request
+    userCancelled = true; // Set the cancellation flag to abort future steps
+
+    handleCleanup();
+  };
+
+  /**
+   *
+   * @param {*} parameters Any parameter to pass to next promise
+   * @returns Promise
+   *
+   * Utility function to be inserted between steps in the promise chain.
+   * Checks the value of the userCancelled token, and then throws our
+   * custom CancellationError() if it has, which we can handle separately
+   * in our catch block.
+   *
+   * Otherwise, transparently passes through promise parameters to next
+   * item in chain.
+   */
+  const checkIfUserCancelled = (parameters) => new Promise((resolve) => {
+    if (userCancelled) {
+      throw new CancellationError();
+    }
+
+    resolve(parameters);
+  });
+
+  return saveDialog({
+    defaultPath: '*/Sample Protocol',
+  })
+    .then(({ canceled, filePath }) => {
+      if (canceled) {
+        throw new CancellationError();
+      }
+
+      userFilePath = filePath;
+    })
+    .then(checkIfUserCancelled)
+    .then(() => dispatch(createImportToast(importUUID, handleCancel)))
+    .then(() => axios.get(SAMPLE_PROTOCOL_URL, {
+      signal: controller.signal,
+      responseType: 'arraybuffer',
+      onDownloadProgress: (progressEvent) => {
+        const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+        dispatch(updateDownloadProgress(importUUID, percentCompleted));
+      },
+    }).catch((error) => {
+      // Calling controller.abort() in handleCancel() causes axios to emit an error.
+      // In this special case, catch the error and reemit our CancellationError().
+      if (error.code === 'ERR_CANCELED') {
+        throw new CancellationError();
+      }
+
+      throw new Error(error);
+    }))
+    .then((response) => response.data)
+    .then(checkIfUserCancelled)
+    .then((data) => {
+      tempFilePath = path.join(remote.app.getPath('temp'), 'architect', importUUID);
+      return writeFile(tempFilePath, Buffer.from(data));
+    })
+    .then(checkIfUserCancelled)
+    .then(() => rename(tempFilePath, userFilePath))
+    .then(checkIfUserCancelled)
+    .then(() => handleCleanup())
+    .then(() => dispatch(sessionActions.openNetcanvas(userFilePath)))
+    .catch((error) => {
+      handleCleanup();
+
+      // Detect our custom error type, and suppress any error message
+      // that would otherwise result.
+      if (error instanceof CancellationError) {
+        // eslint-disable-next-line no-console
+        console.info('User cancelled the protocol import');
+        return;
+      }
+
+      dispatch(importErrorDialog(error));
+    });
+};
+
 export const actionLocks = {
   loading: loadingLock,
   protocols: protocolsLock,
@@ -391,6 +302,6 @@ export const actionCreators = {
   createNetcanvas: protocolsLock(createNetcanvas),
   saveAsNetcanvas: protocolsLock(saveAsNetcanvas), // savingLock
   saveNetcanvas: protocolsLock(savingLock(saveNetcanvas)), // savingLock
-  installProtocolFromURI,
+  importSampleProtocol,
   printOverview,
 };
