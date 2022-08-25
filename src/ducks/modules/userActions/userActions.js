@@ -88,7 +88,7 @@ const upgradeProtocol = (filePath, protocolSchemaVersion) => (dispatch) => {
     });
 };
 
-const openNetcanvas = (netcanvasFilePath) => {
+const openNetcanvas = protocolsLock((netcanvasFilePath) => {
   // helper function so we can use loadingLock
   const openOrUpgrade = loadingLock(({ canceled, filePaths }) => (dispatch) => {
     const filePath = filePaths && filePaths[0];
@@ -118,7 +118,7 @@ const openNetcanvas = (netcanvasFilePath) => {
 
   // actual dispatched action
   return (dispatch) => Promise.resolve()
-    .then(() => dispatch(checkUnsavedChanges()))
+    .then(() => dispatch(checkUnsavedChanges())) // Check for unsaved changes in open file
     .then((proceed) => {
       if (!proceed) { return Promise.resolve({ canceled: true }); }
 
@@ -130,7 +130,7 @@ const openNetcanvas = (netcanvasFilePath) => {
     })
     .then(({ canceled, filePaths }) => dispatch(openOrUpgrade({ canceled, filePaths })))
     .catch((e) => dispatch(netcanvasFileErrorHandler(e, { filePath: netcanvasFilePath })));
-};
+});
 
 const createNetcanvas = () => (dispatch) => Promise.resolve()
   .then(() => dispatch(checkUnsavedChanges))
@@ -230,10 +230,7 @@ const importSampleProtocol = () => (dispatch) => {
    * item in chain.
    */
   const checkIfUserCancelled = (parameters) => new Promise((resolve) => {
-    if (userCancelled) {
-      throw new CancellationError();
-    }
-
+    if (userCancelled) { throw new CancellationError(); }
     resolve(parameters);
   });
 
@@ -241,10 +238,7 @@ const importSampleProtocol = () => (dispatch) => {
     defaultPath: '*/Sample Protocol',
   })
     .then(({ canceled, filePath }) => {
-      if (canceled) {
-        throw new CancellationError();
-      }
-
+      if (canceled) { throw new CancellationError(); }
       userFilePath = filePath;
     })
     .then(checkIfUserCancelled)
@@ -259,9 +253,7 @@ const importSampleProtocol = () => (dispatch) => {
     }).catch((error) => {
       // Calling controller.abort() in handleCancel() causes axios to emit an error.
       // In this special case, catch the error and reemit our CancellationError().
-      if (error.code === 'ERR_CANCELED') {
-        throw new CancellationError();
-      }
+      if (error.code === 'ERR_CANCELED') { throw new CancellationError(); }
 
       throw new Error(error);
     }))
@@ -275,7 +267,7 @@ const importSampleProtocol = () => (dispatch) => {
     .then(() => rename(tempFilePath, userFilePath))
     .then(checkIfUserCancelled)
     .then(() => handleCleanup())
-    .then(() => dispatch(sessionActions.openNetcanvas(userFilePath)))
+    .then(() => dispatch(openNetcanvas(userFilePath)))
     .catch((error) => {
       handleCleanup();
 
@@ -298,7 +290,7 @@ export const actionLocks = {
 };
 
 export const actionCreators = {
-  openNetcanvas: protocolsLock(openNetcanvas), // loadingLock
+  openNetcanvas,
   createNetcanvas: protocolsLock(createNetcanvas),
   saveAsNetcanvas: protocolsLock(saveAsNetcanvas), // savingLock
   saveNetcanvas: protocolsLock(savingLock(saveNetcanvas)), // savingLock
