@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { change, formValueSelector } from 'redux-form';
@@ -7,6 +7,7 @@ import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
 import { Layout, Section } from '@components/EditorLayout';
+import { actionCreators as screenActions } from '@modules/ui/screens';
 import { getCodebook } from '@selectors/protocol';
 import ColorPicker from '../Form/Fields/ColorPicker';
 import IconOption from './IconOption';
@@ -23,6 +24,7 @@ const TypeEditor = ({
   entity,
   type,
   existingTypes,
+  ifCustom, // decides whether to render the preset list or the user-custom modal
   isNew,
   metaOnly,
 }) => {
@@ -38,6 +40,11 @@ const TypeEditor = ({
   }, [entity, form, formIcon, dispatch]);
 
   const { name: paletteName, size: paletteSize } = getPalette(entity);
+
+  const openScreen = (screen, params) => dispatch(screenActions.openScreen(screen, params));
+  const handleOpenCreateNewType = useCallback(() => {
+    openScreen('type', { entity: 'node', ifCustom: !ifCustom });
+  }, [openScreen, encodeURI]);
 
   return (
     <>
@@ -57,8 +64,24 @@ const TypeEditor = ({
             {' '}
             type. This name will be used to identify this type in the
             codebook, and in your data exports.
-            { entity === 'node' && ' Some examples might be "Person", "Place", or "Organization".' }
+            { entity === 'node' && ' Some examples might be "Person", "Place", or "Organization". ' }
             { entity === 'edge' && ' Some examples might be "Friends" or "Works With".' }
+            { entity === 'node'
+              && (
+                <span
+                  style={{
+                    cursor: 'pointer',
+                    color: 'red',
+                    textDecoration: 'underline',
+                    fontStyle: 'italic',
+                  }}
+                  type="button"
+                  onClick={handleOpenCreateNewType}
+                >
+                  { !ifCustom ? 'Not seeing the node you want to find? Create your own here.'
+                    : 'Would like to select from the preset list? Click here!' }
+                </span>
+              )}
           </p>
           <ValidatedField
             component={Fields.Text}
@@ -88,7 +111,7 @@ const TypeEditor = ({
             validation={{ required: true }}
           />
         </Section>
-        { entity === 'node'
+        { entity === 'node' && ifCustom
           && (
             <Section
               title="Icon"
@@ -138,12 +161,14 @@ TypeEditor.propTypes = {
   existingTypes: PropTypes.array.isRequired,
   isNew: PropTypes.bool,
   metaOnly: PropTypes.bool,
+  ifCustom: PropTypes.bool,
 };
 
 TypeEditor.defaultProps = {
   type: null,
   isNew: false,
   metaOnly: false,
+  ifCustom: false,
 };
 
 const mapStateToProps = (state, { type, isNew }) => {
