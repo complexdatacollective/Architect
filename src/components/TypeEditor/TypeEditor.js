@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { change, formValueSelector } from 'redux-form';
@@ -24,18 +24,34 @@ const TypeEditor = ({
   entity,
   type,
   existingTypes,
-  ifCustom, // decides whether to render the preset list or the user-custom modal
+  NODE_NAME_OPTIONS,
+  ifPreset, // decides whether to render the preset list or the user-custom modal
   isNew,
   metaOnly,
 }) => {
   const dispatch = useDispatch();
   const getFormValue = formValueSelector(form);
   const formIcon = useSelector((state) => getFormValue(state, 'iconVariant'));
+  const formNodeName = useSelector((state) => getFormValue(state, 'name'));
+  const NODE_NAME_OPTIONS_FILTERED = NODE_NAME_OPTIONS.filter(
+    (val) => !existingTypes.includes(val),
+  );
+
+  const [nodeName, setNodeName] = useState(NODE_NAME_OPTIONS_FILTERED[0]);
 
   // Provide a default icon
   useEffect(() => {
-    if (entity === 'node' && !formIcon) {
-      dispatch(change(form, 'iconVariant', ICON_OPTIONS[0]));
+    if (entity === 'node' && !formIcon && NODE_NAME_OPTIONS_FILTERED.length > 0) {
+      const matchedIcon = ICON_OPTIONS.filter(
+        (val) => val.substring(6) === NODE_NAME_OPTIONS_FILTERED[0].toLowerCase(),
+      )[0];
+      dispatch(change(form, 'iconVariant', matchedIcon));
+      if (ifPreset) {
+        dispatch(change(form, 'name', NODE_NAME_OPTIONS_FILTERED[0]));
+      }
+      else {
+        dispatch(change(form, 'name', ''));
+      }
     }
   }, [entity, form, formIcon, dispatch]);
 
@@ -43,8 +59,15 @@ const TypeEditor = ({
 
   const openScreen = (screen, params) => dispatch(screenActions.openScreen(screen, params));
   const handleOpenCreateNewType = useCallback(() => {
-    openScreen('type', { entity: 'node', ifCustom: !ifCustom });
+    openScreen('type', { entity: 'node', ifPreset: !ifPreset });
   }, [openScreen, encodeURI]);
+
+  const handleNodePick = (...args) => {
+    setNodeName(...args);
+    dispatch(change(form, 'name', ...args));
+    const matchedIcon = ICON_OPTIONS.filter((val) => val.substring(6) === args.toString().replace(' ', '').toLowerCase())[0];
+    dispatch(change(form, 'iconVariant', matchedIcon));
+  };
 
   return (
     <>
@@ -78,17 +101,32 @@ const TypeEditor = ({
                   type="button"
                   onClick={handleOpenCreateNewType}
                 >
-                  { !ifCustom ? 'Not seeing the node you want to find? Create your own here.'
+                  { ifPreset ? 'Not seeing the node you want to find? Create your own here.'
                     : 'Would like to select from the preset list? Click here!' }
                 </span>
               )}
           </p>
-          <ValidatedField
-            component={Fields.Text}
-            name="name"
-            placeholder="Enter a name for this entity type..."
-            validation={{ required: true, allowedNMToken: `${entity} type name`, uniqueByList: existingTypes }}
-          />
+          { ifPreset
+            ? (
+              <div style={{ height: '150px', overflowY: 'scroll' }}>
+                <Fields.RadioGroup
+                  name="name"
+                  options={NODE_NAME_OPTIONS_FILTERED}
+                  input={{
+                    onChange: handleNodePick,
+                    value: nodeName,
+                  }}
+                />
+              </div>
+            )
+            : (
+              <ValidatedField
+                component={Fields.Text}
+                name="name"
+                placeholder="Enter a name for this entity type..."
+                validation={{ required: true, allowedNMToken: `${entity} type name`, uniqueByList: existingTypes }}
+              />
+            )}
         </Section>
         <Section
           title="Color"
@@ -111,7 +149,7 @@ const TypeEditor = ({
             validation={{ required: true }}
           />
         </Section>
-        { entity === 'node' && ifCustom
+        { entity === 'node' && !ifPreset
           && (
             <Section
               title="Icon"
@@ -161,14 +199,16 @@ TypeEditor.propTypes = {
   existingTypes: PropTypes.array.isRequired,
   isNew: PropTypes.bool,
   metaOnly: PropTypes.bool,
-  ifCustom: PropTypes.bool,
+  NODE_NAME_OPTIONS: PropTypes.arrayOf(PropTypes.string),
+  ifPreset: PropTypes.bool,
 };
 
 TypeEditor.defaultProps = {
   type: null,
   isNew: false,
   metaOnly: false,
-  ifCustom: false,
+  NODE_NAME_OPTIONS: ['Place', 'Person', 'Colleague'],
+  ifPreset: true,
 };
 
 const mapStateToProps = (state, { type, isNew }) => {
