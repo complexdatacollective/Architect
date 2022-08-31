@@ -1,12 +1,11 @@
 import React, {
-  useCallback, useEffect, useState, useMemo,
+  useCallback, useEffect, useState,
 } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { change, formValueSelector } from 'redux-form';
 import { capitalize, toPairs, get } from 'lodash';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import Fuse from 'fuse.js';
 import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
 import { Layout, Section } from '@components/EditorLayout';
@@ -16,32 +15,12 @@ import ColorPicker from '../Form/Fields/ColorPicker';
 import IconOption from './IconOption';
 import getPalette from './getPalette';
 import Variables from './Variables';
-import { ICON_TYPES } from './iconOptions';
 import PresetElement from './PresetElement';
 
-// const ICON_OPTIONS = [
-//   'add-a-person',
-//   'add-a-place',
-// ];
-
-const fuseOptions = {
-  threshold: 0.25,
-  shouldSort: true,
-  findAllMatches: true,
-  includeScore: true,
-  distance: 10000, // Needed because keywords are long strings
-  keys: [
-    'title',
-  ],
-};
-
-const fuse = new Fuse(ICON_TYPES, fuseOptions);
-
-const search = (query) => {
-  if (query.length === 0) { return ICON_TYPES; }
-  const result = fuse.search(query);
-  return result.sort((a, b) => a.score - b.score).map((item) => item.item);
-};
+const ICON_OPTIONS = [
+  'add-a-person',
+  'add-a-place',
+];
 
 const TypeEditor = ({
   form,
@@ -60,19 +39,10 @@ const TypeEditor = ({
   const NODE_NAME_OPTIONS_FILTERED = NODE_NAME_OPTIONS.filter(
     (val) => !existingTypes.includes(val),
   );
+  let ICON_FILTERED = ICON_OPTIONS;
 
   const [nodeName, setNodeName] = useState(NODE_NAME_OPTIONS_FILTERED[0]);
   const [query, setQuery] = useState('');
-
-  const filteredIcons = useMemo(
-    () => search(query),
-    [query],
-  );
-
-  const ICON_OPTIONS = [];
-  for (let i = 0; i < filteredIcons.length; i += 1) {
-    ICON_OPTIONS.push(filteredIcons[i].title);
-  }
 
   // Provide a default icon
   useEffect(() => {
@@ -94,6 +64,11 @@ const TypeEditor = ({
       setQuery(formNodeName);
     }
   }, [formNodeName]);
+
+  useEffect(() => {
+    ICON_FILTERED = ICON_OPTIONS.filter((val) => val.includes(query));
+    console.log(typeof ICON_FILTERED, ICON_FILTERED);
+  }, [query]);
 
   const { name: paletteName, size: paletteSize } = getPalette(entity);
 
@@ -221,7 +196,7 @@ const TypeEditor = ({
               <ValidatedField
                 component={Fields.RadioGroup}
                 name="iconVariant"
-                options={ICON_OPTIONS}
+                options={ICON_FILTERED}
                 optionComponent={IconOption}
                 validation={{ required: true }}
               />
