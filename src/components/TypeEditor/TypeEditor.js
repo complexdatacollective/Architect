@@ -1,9 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {
+  useCallback, useEffect, useState, useMemo,
+} from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { change, formValueSelector } from 'redux-form';
-import { capitalize, toPairs } from 'lodash';
+import { capitalize, toPairs, get } from 'lodash';
 import * as Fields from '@codaco/ui/lib/components/Fields';
+import Fuse from 'fuse.js';
 import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
 import { Layout, Section } from '@components/EditorLayout';
@@ -13,11 +16,32 @@ import ColorPicker from '../Form/Fields/ColorPicker';
 import IconOption from './IconOption';
 import getPalette from './getPalette';
 import Variables from './Variables';
+import { ICON_TYPES } from './iconOptions';
+import PresetElement from './PresetElement';
 
-const ICON_OPTIONS = [
-  'add-a-person',
-  'add-a-place',
-];
+// const ICON_OPTIONS = [
+//   'add-a-person',
+//   'add-a-place',
+// ];
+
+const fuseOptions = {
+  threshold: 0.25,
+  shouldSort: true,
+  findAllMatches: true,
+  includeScore: true,
+  distance: 10000, // Needed because keywords are long strings
+  keys: [
+    'title',
+  ],
+};
+
+const fuse = new Fuse(ICON_TYPES, fuseOptions);
+
+const search = (query) => {
+  if (query.length === 0) { return ICON_TYPES; }
+  const result = fuse.search(query);
+  return result.sort((a, b) => a.score - b.score).map((item) => item.item);
+};
 
 const TypeEditor = ({
   form,
@@ -38,6 +62,17 @@ const TypeEditor = ({
   );
 
   const [nodeName, setNodeName] = useState(NODE_NAME_OPTIONS_FILTERED[0]);
+  const [query, setQuery] = useState('');
+
+  const filteredIcons = useMemo(
+    () => search(query),
+    [query],
+  );
+
+  const ICON_OPTIONS = [];
+  for (let i = 0; i < filteredIcons.length; i += 1) {
+    ICON_OPTIONS.push(filteredIcons[i].title);
+  }
 
   // Provide a default icon
   useEffect(() => {
@@ -48,12 +83,17 @@ const TypeEditor = ({
       dispatch(change(form, 'iconVariant', matchedIcon));
       if (ifPreset) {
         dispatch(change(form, 'name', NODE_NAME_OPTIONS_FILTERED[0]));
-      }
-      else {
+      } else {
         dispatch(change(form, 'name', ''));
       }
     }
   }, [entity, form, formIcon, dispatch]);
+
+  useEffect(() => {
+    if (formNodeName) {
+      setQuery(formNodeName);
+    }
+  }, [formNodeName]);
 
   const { name: paletteName, size: paletteSize } = getPalette(entity);
 
@@ -66,8 +106,15 @@ const TypeEditor = ({
     setNodeName(...args);
     dispatch(change(form, 'name', ...args));
     const matchedIcon = ICON_OPTIONS.filter((val) => val.substring(6) === args.toString().replace(' ', '').toLowerCase())[0];
-    dispatch(change(form, 'iconVariant', matchedIcon));
+    if (matchedIcon) {
+      dispatch(change(form, 'iconVariant', matchedIcon));
+    }
   };
+
+  const handleUpdateQuery = useCallback((eventOrValue) => {
+    const newQuery = get(eventOrValue, ['target', 'value'], eventOrValue);
+    setQuery(newQuery);
+  }, [setQuery]);
 
   return (
     <>
@@ -116,6 +163,7 @@ const TypeEditor = ({
                     onChange: handleNodePick,
                     value: nodeName,
                   }}
+                  // optionComponent={PresetElement}
                 />
               </div>
             )
@@ -163,6 +211,13 @@ const TypeEditor = ({
                 </p>
               )}
             >
+              <Fields.Search
+                placeholder="Enter an icon name you would like to search for..."
+                input={{
+                  value: query,
+                  onChange: handleUpdateQuery,
+                }}
+              />
               <ValidatedField
                 component={Fields.RadioGroup}
                 name="iconVariant"
