@@ -1,11 +1,12 @@
 import React, {
-  useCallback, useEffect, useState,
+  useCallback, useEffect, useState, useMemo,
 } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { change, formValueSelector } from 'redux-form';
 import { capitalize, toPairs, get } from 'lodash';
 import * as Fields from '@codaco/ui/lib/components/Fields';
+import Fuse from 'fuse.js';
 import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
 import { Layout, Section } from '@components/EditorLayout';
@@ -22,12 +23,28 @@ const ICON_OPTIONS = [
   'add-a-place',
 ];
 
+const fuseOptions = {
+  threshold: 0.25,
+  shouldSort: true,
+  findAllMatches: true,
+  includeScore: true,
+  distance: 10000, // Needed because keywords are long strings
+};
+
+const fuse = new Fuse(ICON_OPTIONS, fuseOptions);
+
+const search = (query) => {
+  if (query.length === 0) { return ICON_OPTIONS; }
+  const result = fuse.search(query);
+  return result.sort((a, b) => a.score - b.score).map((item) => ICON_OPTIONS[item.item]);
+};
+
 const TypeEditor = ({
   form,
   entity,
   type,
   existingTypes,
-  NODE_NAME_OPTIONS,
+  NODE_NAME_COLOR_OPTIONS,
   ifPreset, // decides whether to render the preset list or the user-custom modal
   isNew,
   metaOnly,
@@ -36,23 +53,28 @@ const TypeEditor = ({
   const getFormValue = formValueSelector(form);
   const formIcon = useSelector((state) => getFormValue(state, 'iconVariant'));
   const formNodeName = useSelector((state) => getFormValue(state, 'name'));
-  const NODE_NAME_OPTIONS_FILTERED = NODE_NAME_OPTIONS.filter(
-    (val) => !existingTypes.includes(val),
+  const NODE_NAME_COLOR_OPTIONS_FILTERED = NODE_NAME_COLOR_OPTIONS.filter(
+    (val) => !existingTypes.includes(val.label),
   );
-  let ICON_FILTERED = ICON_OPTIONS;
 
-  const [nodeName, setNodeName] = useState(NODE_NAME_OPTIONS_FILTERED[0]);
+  const [nodeName, setNodeName] = useState(NODE_NAME_COLOR_OPTIONS[0].label);
   const [query, setQuery] = useState('');
+
+  const filteredIcons = useMemo(
+    () => search(query),
+    [query],
+  );
 
   // Provide a default icon
   useEffect(() => {
-    if (entity === 'node' && !formIcon && NODE_NAME_OPTIONS_FILTERED.length > 0) {
+    if (entity === 'node' && !formIcon && NODE_NAME_COLOR_OPTIONS.length > 0) {
       const matchedIcon = ICON_OPTIONS.filter(
-        (val) => val.substring(6) === NODE_NAME_OPTIONS_FILTERED[0].toLowerCase(),
+        (val) => val.substring(6) === NODE_NAME_COLOR_OPTIONS[0].label.toLowerCase(),
       )[0];
       dispatch(change(form, 'iconVariant', matchedIcon));
       if (ifPreset) {
-        dispatch(change(form, 'name', NODE_NAME_OPTIONS_FILTERED[0]));
+        dispatch(change(form, 'name', NODE_NAME_COLOR_OPTIONS_FILTERED[0].label));
+        dispatch(change(form, 'color', NODE_NAME_COLOR_OPTIONS_FILTERED[0].color));
       } else {
         dispatch(change(form, 'name', ''));
       }
@@ -60,15 +82,10 @@ const TypeEditor = ({
   }, [entity, form, formIcon, dispatch]);
 
   useEffect(() => {
-    if (formNodeName) {
+    if (formNodeName && !ifPreset) {
       setQuery(formNodeName);
     }
   }, [formNodeName]);
-
-  useEffect(() => {
-    ICON_FILTERED = ICON_OPTIONS.filter((val) => val.includes(query));
-    console.log(typeof ICON_FILTERED, ICON_FILTERED);
-  }, [query]);
 
   const { name: paletteName, size: paletteSize } = getPalette(entity);
 
@@ -80,6 +97,10 @@ const TypeEditor = ({
   const handleNodePick = (...args) => {
     setNodeName(...args);
     dispatch(change(form, 'name', ...args));
+    const matchedColor = NODE_NAME_COLOR_OPTIONS.filter(
+      (val) => val.value === args.toString(),
+    )[0].color;
+    dispatch(change(form, 'color', matchedColor));
     const matchedIcon = ICON_OPTIONS.filter((val) => val.substring(6) === args.toString().replace(' ', '').toLowerCase())[0];
     if (matchedIcon) {
       dispatch(change(form, 'iconVariant', matchedIcon));
@@ -133,12 +154,12 @@ const TypeEditor = ({
               <div style={{ height: '150px', overflowY: 'scroll' }}>
                 <Fields.RadioGroup
                   name="name"
-                  options={NODE_NAME_OPTIONS_FILTERED}
+                  options={NODE_NAME_COLOR_OPTIONS_FILTERED}
                   input={{
                     onChange: handleNodePick,
                     value: nodeName,
                   }}
-                  // optionComponent={PresetElement}
+                  optionComponent={PresetElement}
                 />
               </div>
             )
@@ -151,27 +172,30 @@ const TypeEditor = ({
               />
             )}
         </Section>
-        <Section
-          title="Color"
-          id={getFieldId('color')}
-          summary={(
-            <p>
-              Choose a color for this
-              {' '}
-              {entity}
-              {' '}
-              type.
-            </p>
+        { !ifPreset
+          && (
+            <Section
+              title="Color"
+              id={getFieldId('color')}
+              summary={(
+                <p>
+                  Choose a color for this
+                  {' '}
+                  {entity}
+                  {' '}
+                  type.
+                </p>
+              )}
+            >
+              <ValidatedField
+                component={ColorPicker}
+                name="color"
+                palette={paletteName}
+                paletteRange={paletteSize}
+                validation={{ required: true }}
+              />
+            </Section>
           )}
-        >
-          <ValidatedField
-            component={ColorPicker}
-            name="color"
-            palette={paletteName}
-            paletteRange={paletteSize}
-            validation={{ required: true }}
-          />
-        </Section>
         { entity === 'node' && !ifPreset
           && (
             <Section
@@ -196,7 +220,7 @@ const TypeEditor = ({
               <ValidatedField
                 component={Fields.RadioGroup}
                 name="iconVariant"
-                options={ICON_FILTERED}
+                options={filteredIcons}
                 optionComponent={IconOption}
                 validation={{ required: true }}
               />
@@ -229,7 +253,7 @@ TypeEditor.propTypes = {
   existingTypes: PropTypes.array.isRequired,
   isNew: PropTypes.bool,
   metaOnly: PropTypes.bool,
-  NODE_NAME_OPTIONS: PropTypes.arrayOf(PropTypes.string),
+  NODE_NAME_COLOR_OPTIONS: PropTypes.arrayOf(PropTypes.object),
   ifPreset: PropTypes.bool,
 };
 
@@ -237,7 +261,23 @@ TypeEditor.defaultProps = {
   type: null,
   isNew: false,
   metaOnly: false,
-  NODE_NAME_OPTIONS: ['Place', 'Person', 'Colleague'],
+  NODE_NAME_COLOR_OPTIONS: [
+    {
+      label: 'Person',
+      value: 'Person',
+      color: 'node-color-seq-1',
+    },
+    {
+      label: 'Place',
+      value: 'Place',
+      color: 'node-color-seq-2',
+    },
+    {
+      label: 'Colleague',
+      value: 'Colleague',
+      color: 'node-color-seq-3',
+    },
+  ],
   ifPreset: true,
 };
 
