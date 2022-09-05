@@ -151,7 +151,7 @@ const TypeEditor = ({
           </p>
           { ifPreset
             ? (
-              <div style={{ height: '150px', overflowY: 'scroll' }}>
+              <div style={{ height: '250px', overflowY: 'scroll' }}>
                 <Fields.RadioGroup
                   name="name"
                   options={NODE_NAME_COLOR_OPTIONS_FILTERED}

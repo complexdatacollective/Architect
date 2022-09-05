@@ -7,6 +7,7 @@ const PresetElement = (props) => {
   const { label, color } = props;
   return (
     <Radio
+      className="preset-node"
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
       label={<PreviewNode label={label} color={color} />}
