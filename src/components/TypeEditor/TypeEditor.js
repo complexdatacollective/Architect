@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { change, formValueSelector } from 'redux-form';
 import { capitalize, toPairs, get } from 'lodash';
 import * as Fields from '@codaco/ui/lib/components/Fields';
+import ActionButton from '@codaco/ui/lib/components/ActionButton'
 import Fuse from 'fuse.js';
 import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
@@ -14,6 +15,7 @@ import { actionCreators as screenActions } from '@modules/ui/screens';
 import { getCodebook } from '@selectors/protocol';
 import ColorPicker from '../Form/Fields/ColorPicker';
 import IconOption from './IconOption';
+import Icon from '@codaco/ui/lib/components/Icon';
 import getPalette from './getPalette';
 import Variables from './Variables';
 import PresetElement from './PresetElement';
@@ -21,6 +23,7 @@ import PresetElement from './PresetElement';
 const ICON_OPTIONS = [
   'add-a-person',
   'add-a-place',
+  'AccountBox',
 ];
 
 const fuseOptions = {
@@ -67,9 +70,9 @@ const TypeEditor = ({
 
   // Provide a default icon
   useEffect(() => {
-    if (entity === 'node' && !formIcon && NODE_NAME_COLOR_OPTIONS.length > 0) {
+    if (entity === 'node' && !formIcon && NODE_NAME_COLOR_OPTIONS_FILTERED.length > 0) {
       const matchedIcon = ICON_OPTIONS.filter(
-        (val) => val.substring(6) === NODE_NAME_COLOR_OPTIONS[0].label.toLowerCase(),
+        (val) => val.substring(6) === NODE_NAME_COLOR_OPTIONS_FILTERED[0].label.toLowerCase(),
       )[0];
       dispatch(change(form, 'iconVariant', matchedIcon));
       if (ifPreset) {
@@ -97,7 +100,7 @@ const TypeEditor = ({
   const handleNodePick = (...args) => {
     setNodeName(...args);
     dispatch(change(form, 'name', ...args));
-    const matchedColor = NODE_NAME_COLOR_OPTIONS.filter(
+    const matchedColor = NODE_NAME_COLOR_OPTIONS_FILTERED.filter(
       (val) => val.value === args.toString(),
     )[0].color;
     dispatch(change(form, 'color', matchedColor));
@@ -217,13 +220,14 @@ const TypeEditor = ({
                   onChange: handleUpdateQuery,
                 }}
               />
-              <ValidatedField
+              {/* <ValidatedField
                 component={Fields.RadioGroup}
                 name="iconVariant"
                 options={filteredIcons}
                 optionComponent={IconOption}
                 validation={{ required: true }}
-              />
+              /> */}
+              <ActionButton icon="ZoomIn" />
             </Section>
           )}
         {(!isNew && !metaOnly)
