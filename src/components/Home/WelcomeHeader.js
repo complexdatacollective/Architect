@@ -2,9 +2,11 @@ import React from 'react';
 import cx from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '@codaco/ui';
+import { useDispatch } from 'react-redux';
 import networkCanvasLogo from '@app/images/NC-Mark.svg';
 import headerGraphic from '@app/images/Arc-Flat.svg';
 import Version from '@components/Version';
+import { actionCreators as userActions } from '../../ducks/modules/userActions/userActions';
 import Group from './Group';
 import Switch from './Switch';
 import useAppState from './useAppState';
@@ -13,6 +15,9 @@ import Section from './Section';
 
 const WelcomeHeader = () => {
   const [isOpen, setIsOpen] = useAppState('showWelcome', true);
+
+  const dispatch = useDispatch();
+  const downloadSampleProtocol = () => dispatch(userActions.importSampleProtocol());
 
   const classes = cx(
     'home-section',
@@ -99,6 +104,12 @@ const WelcomeHeader = () => {
                       onClick={() => openExternalLink('https://documentation.networkcanvas.com')}
                     >
                       Visit documentation website
+                    </Button>
+                    <Button
+                      color="mustard"
+                      onClick={downloadSampleProtocol}
+                    >
+                      Download Sample Protocol
                     </Button>
                   </div>
                 </div>

@@ -4,6 +4,7 @@ import path from 'path';
 import uuid from 'uuid';
 import { isEqual } from 'lodash';
 import { APP_SCHEMA_VERSION } from '@app/config';
+import { saveDialog } from '@app/utils/dialogs';
 import canUpgrade from '@app/protocol-validation/migrations/canUpgrade';
 import migrateProtocol from '@app/protocol-validation/migrations/migrateProtocol';
 import validateProtocol from '@app/utils/validateProtocol';
@@ -28,6 +29,14 @@ const schemaVersionStates = {
   UPGRADE_PROTOCOL: 'UPGRADE_PROTOCOL',
   OK: 'OK',
 };
+
+const getNewFileName = (filePath) => Promise.resolve(path.basename(filePath, '.netcanvas'))
+  .then((basename) => saveDialog({
+    buttonLabel: 'Save',
+    nameFieldLabel: 'Save:',
+    defaultPath: `${basename} (schema version ${APP_SCHEMA_VERSION}).netcanvas`,
+    filters: [{ name: 'Network Canvas', extensions: ['netcanvas'] }],
+  }));
 
 const ProtocolsDidNotMatchError = new Error('Protocols did not match');
 
@@ -166,6 +175,7 @@ export {
   checkSchemaVersion,
   createNetcanvas,
   verifyNetcanvas,
+  getNewFileName,
   importNetcanvas,
   migrateNetcanvas,
   saveNetcanvas,

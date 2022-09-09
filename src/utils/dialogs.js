@@ -46,7 +46,7 @@ const openDialog = (openDialogOptions = {}) => {
 };
 
 /**
- * Shows a save dialog and resolves to (cancelled, filepath), which mirrors later
+ * Shows a save dialog and resolves to (canceled, filepath), which mirrors later
  * versions of electron.
  */
 const saveDialog = (saveDialogOptions = {}) => {

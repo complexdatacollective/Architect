@@ -349,10 +349,13 @@ $font-sizes: (
 
   &__content {
     flex: 2;
-    padding-right: 40%;
 
     h2 {
       font-size: type-scale(1);
+    }
+
+    p {
+      padding-right: 40%;
     }
 
     .welcome-actions {
@@ -366,6 +369,10 @@ $font-sizes: (
         max-width: 50%;
 
         &:first-child {
+          margin-right: unit(2);
+        }
+
+        &:nth-child(2) {
           margin-right: unit(2);
         }
 

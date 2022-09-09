@@ -25,7 +25,7 @@ const Loading = ({
           position: 'absolute',
           top: 0,
           left: 0,
-          zIndex: 'var(--z-modal)',
+          zIndex: 'var(--z-dialog)',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
