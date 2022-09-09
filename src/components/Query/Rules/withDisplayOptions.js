@@ -27,7 +27,21 @@ const withDisplayOptions = withProps(({ type, options, codebook }) => {
   const valueOption = variableOptions
     && variableOptions.find(({ value }) => value === options.value);
 
-  const value = valueOption ? valueOption.label : options.value;
+  const valueWithFormatting = () => {
+    const getOptionLabel = (item) => {
+      const option = variableOptions.find(({ value: optionValue }) => optionValue === item);
+      return option ? option.label : item;
+    };
+
+    // Fetch option label based on value if available
+    switch (variableType) {
+      case 'categorical':
+      case 'ordinal':
+        return options.value.map(getOptionLabel);
+      default:
+        return valueOption ? valueOption.label : options.value;
+    }
+  };
 
   return {
     options: {
@@ -36,7 +50,7 @@ const withDisplayOptions = withProps(({ type, options, codebook }) => {
       ...(typeColor ? { typeColor } : {}),
       attribute: variableLabel,
       variableType,
-      value,
+      value: valueWithFormatting(),
     },
   };
 });
