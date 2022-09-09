@@ -1,6 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { get, isNil } from 'lodash';
+import {
+  get, isArray, isNil, join,
+} from 'lodash';
 import PreviewNode from '../../sections/fields/EntitySelectField/PreviewNode';
 import PreviewEdge from '../../sections/fields/EntitySelectField/PreviewEdge';
 import { SimpleVariablePill } from '../../Form/Fields/VariablePicker/VariablePill';
@@ -14,6 +16,8 @@ const operatorsAsText = (isEgo) => ({
   GREATER_THAN_OR_EQUAL: isEgo ? 'that is greater than or equal to' : 'is greater than or equal to',
   LESS_THAN: isEgo ? 'that is less than' : 'is less than',
   LESS_THAN_OR_EQUAL: isEgo ? 'that is less than or equal to' : 'is less than or equal to',
+  CONTAINS: isEgo ? 'that contains' : 'contains',
+  DOES_NOT_CONTAIN: isEgo ? 'that does not contain' : 'does not contain',
   INCLUDES: isEgo ? 'that includes' : 'includes',
   NOT_INCLUDES: isEgo ? 'that does not include' : 'does not include',
   OPTIONS_GREATER_THAN: isEgo ? 'that has selected options greater than' : 'has selected options greater than',
@@ -31,6 +35,12 @@ const formatValue = (value) => {
   switch (typeof value) {
     case 'boolean':
       return value ? 'true' : 'false';
+    case 'object': {
+      if (isArray(value)) {
+        return join(value, ', ');
+      }
+      return value;
+    }
     default:
       return value;
   }
@@ -97,6 +107,7 @@ Value.propTypes = {
     PropTypes.string,
     PropTypes.number,
     PropTypes.bool,
+    PropTypes.array,
   ]),
 };
 Value.defaultProps = { value: '' };
@@ -158,6 +169,7 @@ PreviewText.propTypes = {
       PropTypes.string,
       PropTypes.number,
       PropTypes.bool,
+      PropTypes.array,
     ]),
     variableType: PropTypes.string,
     typeColor: PropTypes.string,
