@@ -1,29 +1,30 @@
 import React, {
-  useCallback, useEffect, useState, useMemo,
+  useCallback, useEffect, useState,
 } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { change, formValueSelector } from 'redux-form';
 import { capitalize, toPairs, get } from 'lodash';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import ActionButton from '@codaco/ui/lib/components/ActionButton'
 import Fuse from 'fuse.js';
 import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
 import { Layout, Section } from '@components/EditorLayout';
-import { actionCreators as screenActions } from '@modules/ui/screens';
+import * as muiIcons from '@material-ui/icons';
 import { getCodebook } from '@selectors/protocol';
 import ColorPicker from '../Form/Fields/ColorPicker';
-import IconOption from './IconOption';
-import Icon from '@codaco/ui/lib/components/Icon';
 import getPalette from './getPalette';
 import Variables from './Variables';
 import PresetElement from './PresetElement';
+import IconElement from './IconElement';
 
 const ICON_OPTIONS = [
   'add-a-person',
   'add-a-place',
-  'AccountBox',
+  'add-a-relationship',
+  'add-a-context',
+  'add-a-protocol',
+  ...Object.keys(muiIcons),
 ];
 
 const fuseOptions = {
@@ -37,7 +38,7 @@ const fuseOptions = {
 const fuse = new Fuse(ICON_OPTIONS, fuseOptions);
 
 const search = (query) => {
-  if (query.length === 0) { return ICON_OPTIONS; }
+  if (query.length === 0) { return ICON_OPTIONS.slice(0, 10); }
   const result = fuse.search(query);
   return result.sort((a, b) => a.score - b.score).map((item) => ICON_OPTIONS[item.item]);
 };
@@ -49,6 +50,7 @@ const TypeEditor = ({
   existingTypes,
   NODE_NAME_COLOR_OPTIONS,
   ifPreset, // decides whether to render the preset list or the user-custom modal
+  nodeNameForEdit,
   isNew,
   metaOnly,
 }) => {
@@ -61,12 +63,23 @@ const TypeEditor = ({
   );
 
   const [nodeName, setNodeName] = useState(NODE_NAME_COLOR_OPTIONS[0].label);
+  const [iconName, setIconName] = useState(ICON_OPTIONS[0]);
   const [query, setQuery] = useState('');
+  const [timer, setTimer] = useState(null);
+  const [filteredIcons, setFilteredIcon] = useState(ICON_OPTIONS.slice(0, 10));
 
-  const filteredIcons = useMemo(
-    () => search(query),
-    [query],
-  );
+  // delay the search and filtering of icons to prevent lag
+  useEffect(() => {
+    if (timer) {
+      clearTimeout(timer);
+      setTimer(null);
+    }
+    setTimer(
+      setTimeout(() => {
+        setFilteredIcon(search(query));
+      }, 1000),
+    );
+  }, [query]);
 
   // Provide a default icon
   useEffect(() => {
@@ -75,27 +88,41 @@ const TypeEditor = ({
         (val) => val.substring(6) === NODE_NAME_COLOR_OPTIONS_FILTERED[0].label.toLowerCase(),
       )[0];
       dispatch(change(form, 'iconVariant', matchedIcon));
+    }
+  }, [entity, form, formIcon, dispatch]);
+
+  // Provide a default name and color for preset node list
+  useEffect(() => {
+    if (entity === 'node' && !formNodeName && NODE_NAME_COLOR_OPTIONS_FILTERED.length > 0) {
       if (ifPreset) {
         dispatch(change(form, 'name', NODE_NAME_COLOR_OPTIONS_FILTERED[0].label));
         dispatch(change(form, 'color', NODE_NAME_COLOR_OPTIONS_FILTERED[0].color));
       } else {
-        dispatch(change(form, 'name', ''));
+        const matchedColorDict = NODE_NAME_COLOR_OPTIONS_FILTERED.filter(
+          (val) => val.label === nodeNameForEdit,
+        );
+        const matchedColor = matchedColorDict.length > 0 ? matchedColorDict[0].color : '';
+        dispatch(change(form, 'color', matchedColor));
+        dispatch(change(form, 'name', nodeNameForEdit));
       }
     }
-  }, [entity, form, formIcon, dispatch]);
+  }, [entity, form, ifPreset, dispatch]);
 
   useEffect(() => {
-    if (formNodeName && !ifPreset) {
-      setQuery(formNodeName);
+    if (timer) {
+      clearTimeout(timer);
+      setTimer(null);
     }
+    setTimer(
+      setTimeout(() => {
+        if (formNodeName && !ifPreset) {
+          setQuery(formNodeName);
+        }
+      }, 1000),
+    );
   }, [formNodeName]);
 
   const { name: paletteName, size: paletteSize } = getPalette(entity);
-
-  const openScreen = (screen, params) => dispatch(screenActions.openScreen(screen, params));
-  const handleOpenCreateNewType = useCallback(() => {
-    openScreen('type', { entity: 'node', ifPreset: !ifPreset });
-  }, [openScreen, encodeURI]);
 
   const handleNodePick = (...args) => {
     setNodeName(...args);
@@ -110,6 +137,11 @@ const TypeEditor = ({
     }
   };
 
+  const handleIconPick = (...args) => {
+    setIconName(...args);
+    dispatch(change(form, 'iconVariant', ...args));
+  };
+
   const handleUpdateQuery = useCallback((eventOrValue) => {
     const newQuery = get(eventOrValue, ['target', 'value'], eventOrValue);
     setQuery(newQuery);
@@ -119,7 +151,7 @@ const TypeEditor = ({
     <>
       <div className="stage-heading stage-heading--collapsed stage-heading--shadow">
         <Layout>
-          <h2>{ type ? `Edit ${entity}` : `Create ${entity}` }</h2>
+          <h2>{ type ? `Edit ${entity}` : (ifPreset ? `Create ${entity}` : 'Customize node') }</h2>
         </Layout>
       </div>
       <Layout>
@@ -135,22 +167,6 @@ const TypeEditor = ({
             codebook, and in your data exports.
             { entity === 'node' && ' Some examples might be "Person", "Place", or "Organization". ' }
             { entity === 'edge' && ' Some examples might be "Friends" or "Works With".' }
-            { entity === 'node'
-              && (
-                <span
-                  style={{
-                    cursor: 'pointer',
-                    color: 'red',
-                    textDecoration: 'underline',
-                    fontStyle: 'italic',
-                  }}
-                  type="button"
-                  onClick={handleOpenCreateNewType}
-                >
-                  { ifPreset ? 'Not seeing the node you want to find? Create your own here.'
-                    : 'Would like to select from the preset list? Click here!' }
-                </span>
-              )}
           </p>
           { ifPreset
             ? (
@@ -215,19 +231,21 @@ const TypeEditor = ({
             >
               <Fields.Search
                 placeholder="Enter an icon name you would like to search for..."
+                // placeholder={nodeNameForEdit}
                 input={{
                   value: query,
                   onChange: handleUpdateQuery,
                 }}
               />
-              {/* <ValidatedField
-                component={Fields.RadioGroup}
+              <Fields.RadioGroup
                 name="iconVariant"
                 options={filteredIcons}
-                optionComponent={IconOption}
-                validation={{ required: true }}
-              /> */}
-              <ActionButton icon="ZoomIn" />
+                input={{
+                  onChange: handleIconPick,
+                  value: iconName,
+                }}
+                optionComponent={IconElement}
+              />
             </Section>
           )}
         {(!isNew && !metaOnly)
@@ -259,6 +277,7 @@ TypeEditor.propTypes = {
   metaOnly: PropTypes.bool,
   NODE_NAME_COLOR_OPTIONS: PropTypes.arrayOf(PropTypes.object),
   ifPreset: PropTypes.bool,
+  nodeNameForEdit: PropTypes.string,
 };
 
 TypeEditor.defaultProps = {
@@ -277,12 +296,23 @@ TypeEditor.defaultProps = {
       color: 'node-color-seq-2',
     },
     {
-      label: 'Colleague',
-      value: 'Colleague',
+      label: 'Relationship',
+      value: 'Relationship',
       color: 'node-color-seq-3',
+    },
+    {
+      label: 'Context',
+      value: 'Context',
+      color: 'node-color-seq-4',
+    },
+    {
+      label: 'Protocol',
+      value: 'Protocol',
+      color: 'node-color-seq-5',
     },
   ],
   ifPreset: true,
+  nodeNameForEdit: '',
 };
 
 const mapStateToProps = (state, { type, isNew }) => {
