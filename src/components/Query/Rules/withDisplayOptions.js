@@ -37,7 +37,11 @@ const withDisplayOptions = withProps(({ type, options, codebook }) => {
     switch (variableType) {
       case 'categorical':
       case 'ordinal':
-        return options.value.map(getOptionLabel);
+        if (Array.isArray(options.value)) {
+          return options.value.map(getOptionLabel);
+        }
+
+        return getOptionLabel(options.value);
       default:
         return valueOption ? valueOption.label : options.value;
     }
