@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { isArray, isNil } from 'lodash';
 import DetachedField from '@components/DetachedField';
 import NativeSelect from '@components/Form/Fields/NativeSelect';
-import { operatorsWithValue, operatorsWithOptionCount } from './options';
+import { operatorsWithValue, operatorsWithRegExp, operatorsWithOptionCount } from './options';
 import EditValue from './EditValue';
 import withRuleChangeHandler from './withRuleChangeHandler';
 import withOptions from './withOptions';
@@ -28,6 +28,7 @@ const EditEgoRule = ({
   const options = rule && rule.options;
   const optionsWithDefaults = { ...defaultOptions, ...options };
   const operatorNeedsValue = operatorsWithValue.has(optionsWithDefaults.operator);
+  const operatorNeedsRegExp = operatorsWithRegExp.has(optionsWithDefaults.operator);
   const operatorNeedsOptionCount = operatorsWithOptionCount.has(optionsWithDefaults.operator);
   const countFriendlyValue = !isNil(optionsWithDefaults.value) ? optionsWithDefaults.value : '';
   const optionsWithCounts = {
@@ -75,6 +76,21 @@ const EditEgoRule = ({
             value={optionsWithDefaults.value}
             options={variableOptions}
             validation={{ required: true }}
+          />
+        </Section>
+        )}
+      { operatorNeedsRegExp
+        && (
+        <Section
+          title="Attribute Value"
+        >
+          <EditValue
+            variableType={variableType}
+            placeholder="Enter a regular expression..."
+            onChange={handleRuleChange}
+            value={optionsWithDefaults.value}
+            options={variableOptions}
+            validation={{ required: true, validRegExp: true }}
           />
         </Section>
         )}

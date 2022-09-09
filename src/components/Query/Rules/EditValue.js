@@ -7,16 +7,16 @@ import DetachedField from '@components/DetachedField';
 import {
   Text,
   Toggle,
+  CheckboxGroup,
   Number,
-  RadioGroup,
 } from '@codaco/ui/lib/components/Fields';
 
 const INPUT_TYPES = {
   string: Text,
   number: Number,
   boolean: Toggle,
-  categorical: RadioGroup,
-  ordinal: RadioGroup,
+  categorical: CheckboxGroup,
+  ordinal: CheckboxGroup,
 };
 
 /**
@@ -59,6 +59,7 @@ EditValue.propTypes = {
     PropTypes.string,
     PropTypes.number,
     PropTypes.bool,
+    PropTypes.array,
   ]).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
