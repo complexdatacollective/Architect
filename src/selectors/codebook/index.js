@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 import { get, find } from 'lodash';
 import { getCodebook } from '../protocol';
 import { asOptions } from '../utils';
@@ -25,8 +23,29 @@ const getType = (state, subject) => {
  */
 const getVariablesForSubject = (state, subject) => get(getType(state, subject), 'variables', {});
 
-// Get all variables for all subjects in the codebook
-const getAllVariableUUIDs = ({ node: nodeTypes = {}, edge: edgeTypes = {}, ego = {} }) => {
+const getAllVariablesByUUID = ({ node: nodeTypes = {}, edge: edgeTypes = {}, ego = {} }) => {
+  const flattenedVariables = {};
+
+  const addVariables = (variables) => {
+    Object.keys(variables).forEach((variable) => {
+      flattenedVariables[variable] = variables[variable];
+    });
+  };
+
+  Object.values(nodeTypes).forEach((nodeType) => {
+    addVariables(nodeType.variables);
+  });
+
+  Object.values(edgeTypes).forEach((edgeType) => {
+    addVariables(edgeType.variables);
+  });
+
+  addVariables(ego.variables);
+  return flattenedVariables;
+};
+
+// Get all variables for all subjects in the codebook, adding the entity and type
+const getAllVariableUUIDsByEntity = ({ node: nodeTypes = {}, edge: edgeTypes = {}, ego = {} }) => {
   const variables = new Set();
 
   // Nodes
@@ -72,20 +91,27 @@ const getAllVariableUUIDs = ({ node: nodeTypes = {}, edge: edgeTypes = {}, ego =
   return [...variables]; // Spread converts Set to Array
 };
 
-export const makeGetVariableFromUUID = (uuid) => (state) => {
+const makeGetVariableWithEntity = (uuid) => (state) => {
   const codebook = getCodebook(state);
-  const variables = getAllVariableUUIDs(codebook);
+  const variables = getAllVariableUUIDsByEntity(codebook);
   const found = find(variables, { uuid });
   return found;
 };
 
+const makeGetVariable = (uuid) => (state) => {
+  const codebook = getCodebook(state);
+  const variables = getAllVariablesByUUID(codebook);
+  const found = get(variables, uuid, {});
+  return found;
+};
+
 /**
- * Given `subject` return a list of options (`{ label, value, ...}`)
- * for matching entity
- *
- * @param {object} state redux state
- * @param {object} subject subject object in format `{ entity, type }`
- */
+   * Given `subject` return a list of options (`{ label, value, ...}`)
+   * for matching entity
+   *
+   * @param {object} state redux state
+   * @param {object} subject subject object in format `{ entity, type }`
+   */
 const getVariableOptionsForSubject = (state, subject, isUsedOptions = {}) => {
   const variables = getVariablesForSubject(state, subject);
   const options = asOptions(variables);
@@ -115,5 +141,7 @@ export {
   getVariablesForSubject,
   getVariableOptionsForSubject,
   getOptionsForVariable,
-  getAllVariableUUIDs,
+  getAllVariableUUIDsByEntity,
+  makeGetVariableWithEntity,
+  makeGetVariable,
 };

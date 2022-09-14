@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { change, formValueSelector } from 'redux-form';
+import { get, pickBy } from 'lodash';
 import { Section, Row } from '@components/EditorLayout';
 import Validations from '@components/Validations';
 import { getFieldId } from '../../utils/issues';
@@ -9,12 +10,16 @@ import { getFieldId } from '../../utils/issues';
 const ValidationSection = ({
   disabled,
   form,
+  entity,
   variableType,
   existingVariables,
 }) => {
   const dispatch = useDispatch();
   const getFormValue = formValueSelector(form);
-  const hasValidation = useSelector((state) => getFormValue(state, 'validation'));
+  const hasValidation = useSelector((state) => {
+    const validation = getFormValue(state, 'validation');
+    return validation && Object.keys(pickBy(validation)).length > 0;
+  });
 
   const handleToggleValidation = (nextState) => {
     if (nextState === false) {
@@ -24,6 +29,7 @@ const ValidationSection = ({
     return true;
   };
 
+  const existingVariablesForType = pickBy(existingVariables, (variable) => get(variable, 'type') === variableType);
   return (
     <Section
       disabled={disabled}
@@ -43,7 +49,8 @@ const ValidationSection = ({
           form={form}
           name="validation"
           variableType={variableType}
-          existingVariables={existingVariables}
+          entity={entity}
+          existingVariables={existingVariablesForType}
         />
       </Row>
     </Section>
@@ -59,6 +66,7 @@ ValidationSection.propTypes = {
       name: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  entity: PropTypes.string.isRequired,
 };
 
 ValidationSection.defaultProps = {

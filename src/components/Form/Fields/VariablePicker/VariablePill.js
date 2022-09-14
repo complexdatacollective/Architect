@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 import { required as requiredValidation, uniqueByList, allowedVariableName } from '@app/utils/validations';
 import TextInput from '@codaco/ui/lib/components/Fields/Text';
-import { makeGetVariableFromUUID, getVariablesForSubject } from '../../../../selectors/codebook';
+import { makeGetVariableWithEntity, getVariablesForSubject } from '../../../../selectors/codebook';
 import { getColorForType, getIconForType } from '../../../../config/variables';
 
 const EDIT_COMPLETE_BUTTON_ID = 'editCompleteButton';
@@ -72,7 +72,7 @@ const EditableVariablePill = ({ uuid }) => {
 
   const {
     name, type, entity, entityType,
-  } = useSelector(makeGetVariableFromUUID(uuid));
+  } = useSelector(makeGetVariableWithEntity(uuid));
 
   const [newName, setNewName] = useState(name);
 
@@ -131,7 +131,7 @@ const EditableVariablePill = ({ uuid }) => {
     <>
       <BaseVariablePill type={type} ref={ref}>
         <AnimatePresence initial={false} exitBeforeEnter>
-          { editing ? (
+          {editing ? (
             <motion.div
               key="edit"
               style={{ flex: 1 }}
