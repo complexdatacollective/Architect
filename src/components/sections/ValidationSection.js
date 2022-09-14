@@ -10,12 +10,16 @@ import { getFieldId } from '../../utils/issues';
 const ValidationSection = ({
   disabled,
   form,
+  entity,
   variableType,
   existingVariables,
 }) => {
   const dispatch = useDispatch();
   const getFormValue = formValueSelector(form);
-  const hasValidation = useSelector((state) => getFormValue(state, 'validation'));
+  const hasValidation = useSelector((state) => {
+    const validation = getFormValue(state, 'validation');
+    return validation && Object.keys(pickBy(validation)).length > 0;
+  });
 
   const handleToggleValidation = (nextState) => {
     if (nextState === false) {
@@ -45,6 +49,7 @@ const ValidationSection = ({
           form={form}
           name="validation"
           variableType={variableType}
+          entity={entity}
           existingVariables={existingVariablesForType}
         />
       </Row>
@@ -61,6 +66,7 @@ ValidationSection.propTypes = {
       name: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  entity: PropTypes.string.isRequired,
 };
 
 ValidationSection.defaultProps = {

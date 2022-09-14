@@ -58,7 +58,7 @@ const ValidationsField = ({
   return (
     <div className={fieldClassNames}>
       <div className="form-fields-multi-select__rules">
-        { input.value.map(([key, value]) => (
+        {input.value.map(([key, value]) => (
           <Validation
             key={key}
             itemKey={key}
@@ -68,7 +68,7 @@ const ValidationsField = ({
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...rest}
           />
-        )) }
+        ))}
         {children}
       </div>
       <FieldError show={!!(submitFailed && error)} error={error} />
@@ -123,18 +123,18 @@ const Validations = ({
         onDelete={handleDelete}
         validate={validate}
       >
-        { addNew
+        {addNew
           && (
-          <Validation
-            onUpdate={handleAddNew}
-            onDelete={() => setAddNew(false)}
-            options={availableOptions}
-            existingVariables={existingVariables}
-          />
+            <Validation
+              onUpdate={handleAddNew}
+              onDelete={() => setAddNew(false)}
+              options={availableOptions}
+              existingVariables={existingVariables}
+            />
           )}
       </Field>
 
-      { !isFull
+      {!isFull
         && <AddItem onClick={() => setAddNew(true)} />}
     </div>
   );

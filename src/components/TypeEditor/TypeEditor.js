@@ -11,7 +11,6 @@ import { getCodebook } from '@selectors/protocol';
 import ColorPicker from '../Form/Fields/ColorPicker';
 import IconOption from './IconOption';
 import getPalette from './getPalette';
-import Variables from './Variables';
 
 const ICON_OPTIONS = [
   'add-a-person',
@@ -23,8 +22,6 @@ const TypeEditor = ({
   entity,
   type,
   existingTypes,
-  isNew,
-  metaOnly,
 }) => {
   const dispatch = useDispatch();
   const getFormValue = formValueSelector(form);
@@ -43,7 +40,7 @@ const TypeEditor = ({
     <>
       <div className="stage-heading stage-heading--collapsed stage-heading--shadow">
         <Layout>
-          <h2>{ type ? `Edit ${entity}` : `Create ${entity}` }</h2>
+          <h2>{type ? `Edit ${entity}` : `Create ${entity}`}</h2>
         </Layout>
       </div>
       <Layout>
@@ -57,8 +54,8 @@ const TypeEditor = ({
             {' '}
             type. This name will be used to identify this type in the
             codebook, and in your data exports.
-            { entity === 'node' && ' Some examples might be "Person", "Place", or "Organization".' }
-            { entity === 'edge' && ' Some examples might be "Friends" or "Works With".' }
+            {entity === 'node' && ' Some examples might be "Person", "Place", or "Organization".'}
+            {entity === 'edge' && ' Some examples might be "Friends" or "Works With".'}
           </p>
           <ValidatedField
             component={Fields.Text}
@@ -88,7 +85,7 @@ const TypeEditor = ({
             validation={{ required: true }}
           />
         </Section>
-        { entity === 'node'
+        {entity === 'node'
           && (
             <Section
               title="Icon"
@@ -111,20 +108,6 @@ const TypeEditor = ({
               />
             </Section>
           )}
-        {(!isNew && !metaOnly)
-          && (
-          <Section title="Option Values">
-            <Variables
-              form={form}
-              name="variables"
-              sortableProperties={['name', 'type']}
-              initialSortOrder={{
-                direction: 'asc',
-                property: 'name',
-              }}
-            />
-          </Section>
-          )}
       </Layout>
     </>
   );
@@ -136,14 +119,10 @@ TypeEditor.propTypes = {
   form: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   existingTypes: PropTypes.array.isRequired,
-  isNew: PropTypes.bool,
-  metaOnly: PropTypes.bool,
 };
 
 TypeEditor.defaultProps = {
   type: null,
-  isNew: false,
-  metaOnly: false,
 };
 
 const mapStateToProps = (state, { type, isNew }) => {

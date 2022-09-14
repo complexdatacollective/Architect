@@ -8,7 +8,6 @@ const mapStateToProps = (state, {
   form, name, variableType, entity,
 }) => {
   const validationOptions = getValidationOptionsForVariableType(variableType, entity);
-
   return {
     validationOptions,
     value: formValueSelector(form)(state, name),

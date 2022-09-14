@@ -4,6 +4,7 @@ import { change, SubmissionError } from 'redux-form';
 import { getTypeForComponent } from '@app/config/variables';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 import { getCodebookProperties } from './helpers';
+import { makeGetVariable } from '../../../selectors/codebook';
 
 const formHandlers = withHandlers({
   handleChangeFields: ({
@@ -13,10 +14,12 @@ const formHandlers = withHandlers({
     entity,
     changeForm,
     form,
+    getVariable,
   }) => async (values) => {
     const {
       variable, component, _createNewVariable, ...rest
     } = values;
+
     const variableType = getTypeForComponent(component);
     // prune properties that are not part of the codebook:
     const codebookProperties = getCodebookProperties(rest);
@@ -31,9 +34,23 @@ const formHandlers = withHandlers({
     changeForm(form, '_modified', new Date().getTime());
 
     if (!_createNewVariable) {
+      const current = getVariable(variable);
+
+      if (!current) {
+        throw new SubmissionError({
+          _error: 'Variable not found',
+        });
+      }
+
+      const baseProps = {
+        component: current.component,
+        type: current.type,
+        name: current.name,
+      };
+
       // Merge is set to false below so that properties that were removed, such
       // as 'options: []' and 'parameters: {}' get deleted.
-      await updateVariable(entity, type, variable, configuration, true);
+      await updateVariable(entity, type, variable, { ...baseProps, ...configuration }, false);
 
       return {
         variable,
@@ -63,7 +80,11 @@ const mapDispatchToProps = {
   createVariable: codebookActions.createVariable,
 };
 
-const formState = connect(null, mapDispatchToProps);
+const mapStateToProps = (state) => ({
+  getVariable: (uuid) => makeGetVariable(uuid)(state),
+});
+
+const formState = connect(mapStateToProps, mapDispatchToProps);
 
 export {
   formState,
