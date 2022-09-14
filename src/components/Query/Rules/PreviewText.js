@@ -8,12 +8,12 @@ import { SimpleVariablePill } from '../../Form/Fields/VariablePicker/VariablePil
 const operatorsAsText = (isEgo) => ({
   EXISTS: 'where',
   NOT_EXISTS: 'without',
-  EXACTLY: isEgo ? 'that is is exactly equal to' : 'is exactly equal to',
+  EXACTLY: isEgo ? 'that is exactly equal to' : 'is exactly equal to',
   NOT: isEgo ? 'that is not' : 'is not',
   GREATER_THAN: isEgo ? 'that is greater than' : 'is greater than',
   GREATER_THAN_OR_EQUAL: isEgo ? 'that is greater than or equal to' : 'is greater than or equal to',
   LESS_THAN: isEgo ? 'that is less than' : 'is less than',
-  LESS_THAN_OR_EQUAL: isEgo ? 'that is less that or equal to' : 'is less than or equal to',
+  LESS_THAN_OR_EQUAL: isEgo ? 'that is less than or equal to' : 'is less than or equal to',
   INCLUDES: isEgo ? 'that includes' : 'includes',
   NOT_INCLUDES: isEgo ? 'that does not include' : 'does not include',
 });
@@ -35,7 +35,7 @@ const formatValue = (value) => {
 export const Join = ({ value }) => (
   <fieldset className="rules-preview-text__join">
     <legend>
-      { value.toLowerCase() }
+      {value.toLowerCase()}
     </legend>
   </fieldset>
 );

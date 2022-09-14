@@ -1,49 +1,31 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import RuleText, { Join } from '@components/Query/Rules/PreviewText';
+import { Join } from '@components/Query/Rules/PreviewText';
 import SummaryContext from './SummaryContext';
-import { getVariableName, getEntityName } from './helpers';
-
-const labelRules = (codebook, index, rules) => rules
-  .map(({ type, options }) => {
-    const labeledOptions = {
-      ...options,
-    };
-
-    if (options.attribute) {
-      labeledOptions.attribute = getVariableName(index, options.attribute);
-    }
-
-    if (options.type) {
-      const entity = type === 'alter' ? 'node' : 'edge';
-      labeledOptions.type = getEntityName(codebook, entity, options.type);
-    }
-
-    return { type, options: labeledOptions };
-  });
+import Rule from './Rule';
 
 const Rules = ({ filter }) => {
   const {
     protocol,
-    index,
   } = useContext(SummaryContext);
 
   if (!filter) { return null; }
 
   const {
     join,
+    rules,
   } = filter;
-
-  const rules = labelRules(protocol.codebook, index, filter.rules);
 
   return (
     <div className="protocol-summary-rules">
-      { rules.map(({ type, options }, n) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <div className="protocol-summary-rules__rule" key={n}>
-          <RuleText type={type} options={options} />
-          { n !== rules.length - 1 && join && <Join value={join} /> }
-        </div>
+      {rules.map(({ type, options }, n) => (
+        <>
+          {/* eslint-disable-next-line react/no-array-index-key */}
+          <div className="protocol-summary-rules__rule" key={n}>
+            <Rule type={type} options={options} codebook={protocol.codebook} />
+          </div>
+          {n !== rules.length - 1 && join && <Join value={join} />}
+        </>
       ))}
     </div>
   );

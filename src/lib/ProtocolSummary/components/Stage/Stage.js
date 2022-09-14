@@ -56,7 +56,7 @@ const Stage = ({
             {configuration.subject && !isEmpty(stageVariables) && (
               <table className="protocol-summary-mini-table protocol-summary-mini-table--rotated">
                 <tbody>
-                  { configuration.subject && (
+                  {configuration.subject && (
                     <tr>
                       <td>Subject</td>
                       <td>
@@ -69,16 +69,16 @@ const Stage = ({
                       </td>
                     </tr>
                   )}
-                  { !isEmpty(stageVariables) && (
+                  {!isEmpty(stageVariables) && (
                     <tr>
                       <td>Variables</td>
                       <td>
-                        { stageVariables.map(([variableId, variable], i) => (
+                        {stageVariables.map(([variableId, variable], i) => (
                           <React.Fragment key={variableId}>
                             <DualLink to={`#variable-${variableId}`}>{variable}</DualLink>
-                            { i !== stageVariables.length - 1 && ', '}
+                            {i !== stageVariables.length - 1 && ', '}
                           </React.Fragment>
-                        )) }
+                        ))}
                       </td>
                     </tr>
                   )}
@@ -95,12 +95,13 @@ const Stage = ({
             </h4> */}
           </div>
         </div>
-        { configuration.filter && (
+        {configuration.filter && (
           <div className="protocol-summary-stage__heading-section">
             <div className="protocol-summary-stage__heading-section-content">
               <h2 className="section-heading">Network Filtering</h2>
               <MiniTable
                 rotated
+                wide
                 rows={[
                   ['Rules', <Filter filter={configuration.filter} />],
                 ]}
@@ -108,7 +109,7 @@ const Stage = ({
             </div>
           </div>
         )}
-        { configuration.skipLogic && (
+        {configuration.skipLogic && (
           <div className="protocol-summary-stage__heading-section">
             <div className="protocol-summary-stage__heading-section-content">
               <h2 className="section-heading">Skip Logic</h2>

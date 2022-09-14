@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Markdown } from '@codaco/ui/lib/components/Fields';
 import { get } from 'lodash';
-import { BackgroundImage } from '../../Assets/BackgroundImage';
-import { Video } from '../../Assets/Video';
-import { Audio } from '../../Assets/Audio';
+import BackgroundImageWithUrl from '../../Assets/BackgroundImage';
+import VideoWithUrl from '../../Assets/Video';
+import AudioWithUrl from '../../Assets/Audio';
 import { getAssetManifest } from '../../../selectors/protocol';
 
 const mapStateToProps = (state, { content }) => {
@@ -21,11 +21,11 @@ const mapStateToProps = (state, { content }) => {
 const ItemPreview = ({ content, assetType }) => {
   switch (assetType) {
     case 'image':
-      return <BackgroundImage id={content} />;
+      return <BackgroundImageWithUrl id={content} />;
     case 'video':
-      return <Video id={content} controls />;
+      return <VideoWithUrl id={content} controls />;
     case 'audio':
-      return <Audio id={content} controls />;
+      return <AudioWithUrl id={content} controls />;
     default:
       return <Markdown label={content} />;
   }

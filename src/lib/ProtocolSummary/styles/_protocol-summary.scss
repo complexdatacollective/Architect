@@ -42,6 +42,14 @@
 }
 
 .protocol-summary-rules {
+  .protocol-summary-rules__rule {
+    --base-node-size: 5.6rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-grow: 1;
+  }
+
   &__rule:not(:last-child) {
     margin-bottom: unit(1);
   }
@@ -117,6 +125,12 @@
   @media print {
     font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     font-size: 10pt;
+  }
+
+  .variable-pill {
+    zoom: .8;
+    max-width: 24rem;
+    margin: .5rem;
   }
 }
 

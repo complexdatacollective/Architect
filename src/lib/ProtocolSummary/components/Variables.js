@@ -6,6 +6,7 @@ import {
   toPairs, get, find, isEmpty, sortBy,
 } from 'lodash';
 import Markdown from '@codaco/ui/lib/components/Fields/Markdown';
+import { SimpleVariablePill } from '@components/Form/Fields/VariablePicker/VariablePill';
 import SummaryContext from './SummaryContext';
 import DualLink from './DualLink';
 import MiniTable from './MiniTable';
@@ -50,7 +51,7 @@ const Variables = ({ variables }) => {
           </tr>
         </thead>
         <tbody>
-          { isEmpty(variables) && (
+          {isEmpty(variables) && (
             <tr className="empty">
               <td colSpan={3}>No variables to display.</td>
             </tr>
@@ -73,7 +74,7 @@ const Variables = ({ variables }) => {
 
             return (
               <tr key={variableId} id={`variable-${variableId}`}>
-                <td>{name}</td>
+                <td><SimpleVariablePill label={name} type={type} /></td>
                 <td>
                   {type}
                   <br />

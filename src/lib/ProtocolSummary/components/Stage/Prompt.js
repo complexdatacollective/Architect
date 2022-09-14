@@ -13,10 +13,12 @@ const directionLabel = (direction) => (
 );
 
 const SortOrder = ({ rules }) => {
+  if (!rules) return null;
+
   const result = rules
     .map(({ property, direction }) => (
       <li key={property}>
-        <Variable id={property} />
+        {(property === '*') ? '*' : <Variable id={property} />}
         {' '}
         <small>
           (
@@ -41,7 +43,7 @@ const attributes = [
   ['highlight.allowHighlighting', 'Allow highlighting', (allow) => renderValue(allow)],
   ['highlight.variable', 'Highlight variable', (id) => <Variable id={id} />],
   ['negativeLabel', 'Negative Option Label', (text) => text],
-  ['sortOrder.property', 'Sort by property', (rules) => <SortOrder rules={rules} />],
+  ['sortOrder', 'Sort by property', (rules) => <SortOrder rules={rules} />],
   ['binSortOrder', 'Bin sort order', (rules) => <SortOrder rules={rules} />],
   ['bucketSortOrder', 'Bucket sort order', (rules) => <SortOrder rules={rules} />],
   ['otherVariable', 'Other variable', (id) => <Variable id={id} />],
@@ -73,10 +75,10 @@ const Prompt = ({
   return (
     <div className="protocol-summary-stage__prompts-item">
       <Markdown label={text} />
-      { attributeRows.length > 0 && (
+      {attributeRows.length > 0 && (
         <MiniTable rotated rows={attributeRows} />
       )}
-      { additionalAttributes.length > 0 && (
+      {additionalAttributes.length > 0 && (
         <MiniTable
           rows={[
             ['Variable', 'Value'],
