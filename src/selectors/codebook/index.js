@@ -1,4 +1,4 @@
-import { get, find } from 'lodash';
+import { get, find, isObject } from 'lodash';
 import { getCodebook } from '../protocol';
 import { asOptions } from '../utils';
 import { makeOptionsWithIsUsed } from './isUsed';
@@ -23,24 +23,36 @@ const getType = (state, subject) => {
  */
 const getVariablesForSubject = (state, subject) => get(getType(state, subject), 'variables', {});
 
-const getAllVariablesByUUID = ({ node: nodeTypes = {}, edge: edgeTypes = {}, ego = {} }) => {
+const getAllVariablesByUUID = (codebook) => {
+  if (!codebook) { throw new Error('Codebook not found'); }
+
+  const { node: nodeTypes = {}, edge: edgeTypes = {}, ego = {} } = codebook;
   const flattenedVariables = {};
 
   const addVariables = (variables) => {
+    if (!variables) { return; }
+    if (!isObject(variables)) { throw new Error('Variables must be an object'); }
+
     Object.keys(variables).forEach((variable) => {
       flattenedVariables[variable] = variables[variable];
     });
   };
 
-  Object.values(nodeTypes).forEach((nodeType) => {
-    addVariables(nodeType.variables);
-  });
+  if (nodeTypes && nodeTypes.variables) {
+    Object.values(nodeTypes).forEach((nodeType) => {
+      addVariables(nodeType.variables);
+    });
+  }
 
-  Object.values(edgeTypes).forEach((edgeType) => {
-    addVariables(edgeType.variables);
-  });
+  if (edgeTypes && edgeTypes.variables) {
+    Object.values(edgeTypes).forEach((edgeType) => {
+      addVariables(edgeType.variables);
+    });
+  }
 
-  addVariables(ego.variables);
+  if (ego.variables) {
+    addVariables(ego.variables);
+  }
   return flattenedVariables;
 };
 
