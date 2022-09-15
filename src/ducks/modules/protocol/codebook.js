@@ -3,7 +3,7 @@ import {
   omit, get, has, isEmpty, find,
 } from 'lodash';
 import prune from '@app/utils/prune';
-import { getAllVariableUUIDs, getVariablesForSubject } from '../../../selectors/codebook';
+import { getAllVariableUUIDsByEntity, getVariablesForSubject } from '../../../selectors/codebook';
 import { makeGetUsageForType } from '../../../selectors/usage';
 import { makeGetIsUsed } from '../../../selectors/codebook/isUsed';
 import { getNextCategoryColor } from './utils/helpers';
@@ -64,15 +64,15 @@ const createVariable = (entity, type, variable, configuration) => prune({
     entity,
     variable,
   },
-  configuration,
+  configuration: prune(configuration),
 });
 
-const updateVariable = (variable, configuration, merge = false) => prune({
+const updateVariable = (variable, configuration, merge = false) => ({
   type: UPDATE_VARIABLE,
   meta: {
     variable,
   },
-  configuration,
+  configuration: prune(configuration),
   merge,
 });
 
@@ -301,7 +301,7 @@ export default function reducer(state = initialState, action = {}) {
         action.merge,
       );
     case UPDATE_VARIABLE: {
-      const variables = getAllVariableUUIDs(state);
+      const variables = getAllVariableUUIDsByEntity(state);
       const { entity, entityType } = find(variables, ['uuid', action.meta.variable]);
 
       return getStateWithUpdatedVariable(

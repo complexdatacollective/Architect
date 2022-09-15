@@ -37,14 +37,14 @@ const PromptFields = ({
   <>
     <Section id={getFieldId('variable')} title="Variable">
       <Row>
-        { variable && !isNewVariable
+        {variable && !isNewVariable
           && (
-          <Tip>
-            <p>
-              When selecting an existing variable, changes you make to the input control or
-              validation options will also change other uses of this variable.
-            </p>
-          </Tip>
+            <Tip>
+              <p>
+                When selecting an existing variable, changes you make to the input control or
+                validation options will also change other uses of this variable.
+              </p>
+            </Tip>
           )}
         <ValidatedField
           name="variable"
@@ -100,71 +100,71 @@ const PromptFields = ({
           onChange={handleChangeComponent}
           sortOptionsByLabel={!isNewVariable}
         />
-        { isNewVariable && variableType
+        {isNewVariable && variableType
           && (
-          <Tip>
-            <p>
-              The selected input control will cause this variable to be defined as
-              type
-              {' '}
-              <strong>{variableType}</strong>
-              . Once set, this cannot be changed
-              (although you may change the input control within this type).
-            </p>
-          </Tip>
-          )}
-        { !isNewVariable && variableType
-          && (
-          <Tip type="warning">
-            <div>
+            <Tip>
               <p>
-                A pre-existing variable is currently selected. You cannot change a variable
-                type after it has been created, so only
+                The selected input control will cause this variable to be defined as
+                type
                 {' '}
                 <strong>{variableType}</strong>
-                {' '}
-                compatible
-                input controls can be selected above. If you would like to use a different
-                input control type, you will need to create a new variable.
+                . Once set, this cannot be changed
+                (although you may change the input control within this type).
               </p>
-            </div>
-          </Tip>
+            </Tip>
+          )}
+        {!isNewVariable && variableType
+          && (
+            <Tip type="warning">
+              <div>
+                <p>
+                  A pre-existing variable is currently selected. You cannot change a variable
+                  type after it has been created, so only
+                  {' '}
+                  <strong>{variableType}</strong>
+                  {' '}
+                  compatible
+                  input controls can be selected above. If you would like to use a different
+                  input control type, you will need to create a new variable.
+                </p>
+              </div>
+            </Tip>
           )}
       </Row>
-      { variableType
-      && (
-      <Row>
-        <h4>Preview</h4>
-        <InputPreview
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          {...metaForType}
-        />
-      </Row>
-      )}
-    </Section>
-    { isOrdinalOrCategoricalType(variableType)
-      && (
-      <Section
-        id={getFieldId('options')}
-        title="Categorical/Ordinal options"
-        summary={(
-          <p>
-            The input type you selected indicates that this is a categorical or ordinal variable.
-            Next, please create a minimum of two possible values for the participant to choose
-            between.
-          </p>
+      {variableType
+        && (
+          <Row>
+            <h4>Preview</h4>
+            <InputPreview
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...metaForType}
+            />
+          </Row>
         )}
-      >
-        <Row>
-          <Options
-            name="options"
-            label="Options"
-            form={form}
-          />
-        </Row>
-      </Section>
+    </Section>
+    {isOrdinalOrCategoricalType(variableType)
+      && (
+        <Section
+          id={getFieldId('options')}
+          title="Categorical/Ordinal options"
+          summary={(
+            <p>
+              The input type you selected indicates that this is a categorical or ordinal variable.
+              Next, please create a minimum of two possible values for the participant to choose
+              between.
+            </p>
+          )}
+        >
+          <Row>
+            <Options
+              name="options"
+              label="Options"
+              form={form}
+            />
+          </Row>
+        </Section>
       )}
-    { isBooleanWithOptions(component)
+    {isBooleanWithOptions(component)
       && (
         <Section id={getFieldId('parameters')} title="BooleanChoice Options">
           <Row>
@@ -172,22 +172,23 @@ const PromptFields = ({
           </Row>
         </Section>
       )}
-    { isVariableTypeWithParameters(variableType)
+    {isVariableTypeWithParameters(variableType)
       && (
-      <Section title="Input Options" id={getFieldId('parameters')}>
-        <Row>
-          <Parameters
-            type={variableType}
-            component={component}
-            name="parameters"
-            form={form}
-          />
-        </Row>
-      </Section>
+        <Section title="Input Options" id={getFieldId('parameters')}>
+          <Row>
+            <Parameters
+              type={variableType}
+              component={component}
+              name="parameters"
+              form={form}
+            />
+          </Row>
+        </Section>
       )}
     <ValidationSection
       form={form}
       disabled={!variableType}
+      entity={entity}
       variableType={variableType}
       existingVariables={omit(existingVariables, variable)}
     />

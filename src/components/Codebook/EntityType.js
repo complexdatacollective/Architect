@@ -40,14 +40,14 @@ const EntityType = ({
           </h2>
         </div>
         <div className="codebook__entity-meta">
-          { !inUse && <Tag>not in use</Tag> }
-          { inUse && (
-          <>
-            <em>used in:</em>
-            {' '}
-            {stages}
-          </>
-          ) }
+          {!inUse && <Tag>not in use</Tag>}
+          {inUse && (
+            <>
+              <em>used in:</em>
+              {' '}
+              {stages}
+            </>
+          )}
         </div>
         <div className="codebook__entity-control">
           <Button
@@ -65,16 +65,16 @@ const EntityType = ({
           </Button>
         </div>
       </div>
-      { variables.length > 0
+      {variables.length > 0
         && (
-        <div className="codebook__entity-variables">
-          <h3>Variables:</h3>
-          <Variables
-            variables={variables}
-            entity={entity}
-            type={type}
-          />
-        </div>
+          <div className="codebook__entity-variables">
+            <h3>Variables:</h3>
+            <Variables
+              variables={variables}
+              entity={entity}
+              type={type}
+            />
+          </div>
         )}
     </div>
   );
@@ -97,8 +97,8 @@ EntityType.propTypes = {
 EntityType.defaultProps = {
   variables: [],
   inUse: true, // Don't allow delete unless we explicitly say so
-  handleDelete: () => {},
-  handleEdit: () => {},
+  handleDelete: () => { },
+  handleEdit: () => { },
 };
 
 const mapStateToProps = (state, { entity, type }) => {
@@ -116,7 +116,7 @@ const withEntityHandlers = compose(
   }),
   withHandlers({
     handleEdit: ({ openScreen, entity, type }) => () => {
-      openScreen('type', { entity, type, metaOnly: true });
+      openScreen('type', { entity, type });
     },
     handleDelete: ({
       deleteType, openDialog, entity, type, name, inUse,
