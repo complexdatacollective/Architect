@@ -21,7 +21,6 @@ const mapStateToProps = (state, { form, entity, type }) => {
   const component = formSelector(state, 'component');
   const createNewVariable = formSelector(state, '_createNewVariable');
   const isNewVariable = !!createNewVariable;
-
   const existingVariables = getVariablesForSubject(state, { entity, type });
   const variableOptions = getVariableOptionsForSubject(state, { entity, type })
     // If not a variable with corresponding component, we can't use it here.
@@ -74,7 +73,7 @@ const fieldsHandlers = withHandlers({
     if (variableType !== typeForComponent) {
       changeField(form, 'validation', null);
       changeField(form, 'options', null);
-    // Special case for boolean, where BooleanChoice has options but Toggle doesn't
+      // Special case for boolean, where BooleanChoice has options but Toggle doesn't
     } else if (variableType === 'boolean') {
       changeField(form, 'options', null);
     }
