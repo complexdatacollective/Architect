@@ -1,10 +1,14 @@
 import React, {
-  useCallback, useEffect, useState,
+  useEffect, useState,
 } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { change, formValueSelector } from 'redux-form';
-import { capitalize, toPairs, get } from 'lodash';
+import ActionButton from '@codaco/ui/lib/components/ActionButton';
+import {
+  List,
+} from 'react-virtualized';
+import { capitalize, toPairs, debounce } from 'lodash';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import Fuse from 'fuse.js';
 import { getFieldId } from '@app/utils/issues';
@@ -16,7 +20,7 @@ import ColorPicker from '../Form/Fields/ColorPicker';
 import getPalette from './getPalette';
 import Variables from './Variables';
 import PresetElement from './PresetElement';
-import IconElement from './IconElement';
+import Radio from '../Form/Fields/Radio';
 
 const ICON_OPTIONS = [
   'add-a-person',
@@ -36,12 +40,6 @@ const fuseOptions = {
 };
 
 const fuse = new Fuse(ICON_OPTIONS, fuseOptions);
-
-const search = (query) => {
-  if (query.length === 0) { return ICON_OPTIONS.slice(0, 10); }
-  const result = fuse.search(query);
-  return result.sort((a, b) => a.score - b.score).map((item) => ICON_OPTIONS[item.item]);
-};
 
 const TypeEditor = ({
   form,
@@ -63,23 +61,23 @@ const TypeEditor = ({
   );
 
   const [nodeName, setNodeName] = useState(NODE_NAME_COLOR_OPTIONS[0].label);
-  const [iconName, setIconName] = useState(ICON_OPTIONS[0]);
+  const [iconName, setIconName] = useState(ICON_OPTIONS);
   const [query, setQuery] = useState('');
-  const [timer, setTimer] = useState(null);
-  const [filteredIcons, setFilteredIcon] = useState(ICON_OPTIONS.slice(0, 10));
+  const [searchResults, setSearchResults] = useState(ICON_OPTIONS);
 
-  // delay the search and filtering of icons to prevent lag
-  useEffect(() => {
-    if (timer) {
-      clearTimeout(timer);
-      setTimer(null);
-    }
-    setTimer(
-      setTimeout(() => {
-        setFilteredIcon(search(query));
-      }, 1000),
+  const search = (searchquery) => {
+    const result = fuse.search(searchquery);
+    setSearchResults(
+      result.sort((a, b) => a.score - b.score).map((item) => ICON_OPTIONS[item.item]),
     );
-  }, [query]);
+  };
+  const debounceSearch = debounce((searchquery) => search(searchquery), 1000);
+
+  const handleUpdateQuery = (e) => {
+    const newQuery = e.target.value;
+    setQuery(newQuery);
+    debounceSearch(newQuery);
+  };
 
   // Provide a default icon
   useEffect(() => {
@@ -104,23 +102,21 @@ const TypeEditor = ({
         const matchedColor = matchedColorDict.length > 0 ? matchedColorDict[0].color : '';
         dispatch(change(form, 'color', matchedColor));
         dispatch(change(form, 'name', nodeNameForEdit));
+        setQuery(nodeNameForEdit);
       }
     }
   }, [entity, form, ifPreset, dispatch]);
 
   useEffect(() => {
-    if (timer) {
-      clearTimeout(timer);
-      setTimer(null);
+    if (formNodeName) {
+      setQuery(formNodeName);
+      debounceSearch(formNodeName);
     }
-    setTimer(
-      setTimeout(() => {
-        if (formNodeName && !ifPreset) {
-          setQuery(formNodeName);
-        }
-      }, 1000),
-    );
   }, [formNodeName]);
+
+  useEffect(() => {
+    setIconName(searchResults[0]);
+  }, [searchResults]);
 
   const { name: paletteName, size: paletteSize } = getPalette(entity);
 
@@ -137,21 +133,28 @@ const TypeEditor = ({
     }
   };
 
-  const handleIconPick = (...args) => {
-    setIconName(...args);
-    dispatch(change(form, 'iconVariant', ...args));
+  const handleIconPick = (index) => {
+    setIconName(searchResults[index]);
+    dispatch(change(form, 'iconVariant', searchResults[index]));
   };
-
-  const handleUpdateQuery = useCallback((eventOrValue) => {
-    const newQuery = get(eventOrValue, ['target', 'value'], eventOrValue);
-    setQuery(newQuery);
-  }, [setQuery]);
 
   return (
     <>
       <div className="stage-heading stage-heading--collapsed stage-heading--shadow">
         <Layout>
-          <h2>{ type ? `Edit ${entity}` : (ifPreset ? `Create ${entity}` : 'Customize node') }</h2>
+          <h2>
+            {
+              (() => {
+                if (type) {
+                  return `Edit ${entity}`;
+                }
+                if (ifPreset) {
+                  return `Create ${entity}`;
+                }
+                return 'Customize node';
+              })
+            }
+          </h2>
         </Layout>
       </div>
       <Layout>
@@ -231,21 +234,37 @@ const TypeEditor = ({
             >
               <Fields.Search
                 placeholder="Enter an icon name you would like to search for..."
-                // placeholder={nodeNameForEdit}
                 input={{
                   value: query,
                   onChange: handleUpdateQuery,
                 }}
               />
-              <Fields.RadioGroup
-                name="iconVariant"
-                options={filteredIcons}
-                input={{
-                  onChange: handleIconPick,
-                  value: iconName,
+              {/* <AutoSizer>
+                {({width, height}) => ( */}
+              <List
+                width={1000}
+                height={1200}
+                rowHeight={120}
+                rowCount={searchResults.length}
+                rowRenderer={({
+                  key, index, style,
+                }) => {
+                  return (
+                    <div key={key} style={style}>
+                      <Radio
+                        input={{
+                          onChange: () => handleIconPick(index),
+                          value: iconName,
+                          checked: searchResults[index] === iconName,
+                        }}
+                        label={<ActionButton icon={searchResults[index]} />}
+                      />
+                    </div>
+                  );
                 }}
-                optionComponent={IconElement}
               />
+                {/* )}
+              </AutoSizer> */}
             </Section>
           )}
         {(!isNew && !metaOnly)
