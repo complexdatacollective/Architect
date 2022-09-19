@@ -5,9 +5,7 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { change, formValueSelector } from 'redux-form';
 import ActionButton from '@codaco/ui/lib/components/ActionButton';
-import {
-  List,
-} from 'react-virtualized';
+import { List } from 'react-virtualized';
 import { capitalize, toPairs, debounce } from 'lodash';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import Fuse from 'fuse.js';
@@ -89,10 +87,11 @@ const TypeEditor = ({
     }
   }, [entity, form, formIcon, dispatch]);
 
-  // Provide a default name and color for preset node list
+  // Provide a default name and color
   useEffect(() => {
     if (entity === 'node' && !formNodeName && NODE_NAME_COLOR_OPTIONS_FILTERED.length > 0) {
       if (ifPreset) {
+        setNodeName(NODE_NAME_COLOR_OPTIONS_FILTERED[0].label);
         dispatch(change(form, 'name', NODE_NAME_COLOR_OPTIONS_FILTERED[0].label));
         dispatch(change(form, 'color', NODE_NAME_COLOR_OPTIONS_FILTERED[0].color));
       } else {
@@ -239,8 +238,6 @@ const TypeEditor = ({
                   onChange: handleUpdateQuery,
                 }}
               />
-              {/* <AutoSizer>
-                {({width, height}) => ( */}
               <List
                 width={1000}
                 height={1200}
@@ -248,23 +245,19 @@ const TypeEditor = ({
                 rowCount={searchResults.length}
                 rowRenderer={({
                   key, index, style,
-                }) => {
-                  return (
-                    <div key={key} style={style}>
-                      <Radio
-                        input={{
-                          onChange: () => handleIconPick(index),
-                          value: iconName,
-                          checked: searchResults[index] === iconName,
-                        }}
-                        label={<ActionButton icon={searchResults[index]} />}
-                      />
-                    </div>
-                  );
-                }}
+                }) => (
+                  <div key={key} style={style}>
+                    <Radio
+                      input={{
+                        onChange: () => handleIconPick(index),
+                        value: iconName,
+                        checked: searchResults[index] === iconName,
+                      }}
+                      label={<ActionButton icon={searchResults[index]} />}
+                    />
+                  </div>
+                )}
               />
-                {/* )}
-              </AutoSizer> */}
             </Section>
           )}
         {(!isNew && !metaOnly)
