@@ -46,14 +46,14 @@ export const CondensedStageHeading = ({
           {formValues.label || (<em>No Stage Name</em>)}
         </h2>
       </div>
-      { type && documentationLinkForType && (
-      <div className="documentation-link">
-        <ExternalLink
-          href={documentationLinkForType}
-        >
-          Documentation for this interface
-        </ExternalLink>
-      </div>
+      {type && documentationLinkForType && (
+        <div className="documentation-link">
+          <ExternalLink
+            href={documentationLinkForType}
+          >
+            Documentation for this interface
+          </ExternalLink>
+        </div>
       )}
     </div>
   );
@@ -75,7 +75,7 @@ const StageHeading = ({
     <div className="stage-meta">
       {
         getTimelineImage(type)
-          && (
+        && (
           <div className="timeline-preview">
             <img
               src={getTimelineImage(type)}
@@ -84,7 +84,7 @@ const StageHeading = ({
             />
             <div className="timeline-stage__notch">{stageNumber}</div>
           </div>
-          )
+        )
       }
       <div className="stage-name-container">
         <div id={getFieldId('label')} data-name="Stage name" />
@@ -96,6 +96,7 @@ const StageHeading = ({
           className="stage-editor-section-title"
           maxLength="50"
           validation={{ required: true }}
+          autoFocus
         />
       </div>
     </div>
