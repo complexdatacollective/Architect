@@ -12,12 +12,21 @@ Jest (Testing suite)
 React Scripts
 
 # Operation
+
+## Node/NPM Version
+
+This project currently requires version `12.14.1` of node, and version `6.13.4` of npm. These are the only supported versions for this project.
+
+As a convenience, the repository contains a `.node-version` file that enables convinient use of a node environment manager.
+
 ## Installation
 This repository assumes that `npm` is installed. If you don't have it installed, here are [installation instructions](https://docs.npmjs.com/getting-started/installing-node).
 
-1. Clone this repo.
-2. Go into the repo directory
-3. Initialise the submodules `npm run update-submodules`
+0. Install the correct node and npm versions
+1. Clone this repository.
+2. Fetch submodules by typing `git submodule update --init --recursive -f`.
+3. Enter the directory where the repository is cloned, and install the project dependencies by typing `npm install`.
+4. Refer to the development tasks section below to learn how to test and build the app.
 
 ### Available commands:
 
