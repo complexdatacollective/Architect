@@ -65,5 +65,3 @@ Array [
 `;
 
 exports[`codebook selectors makeGetVariable() returns a variable by UUID 1`] = `null`;
-
-exports[`codebook selectors makeGetVariable() returns null if variable is not found 1`] = `null`;
