@@ -133,8 +133,7 @@ const importErrorDialog = (e) => {
     <p>
       There was an error downloading or importing the sample protocol. Please consult the
       error message below for details. If you believe you have encountered a bug in the
-      software, please help us to troubleshoot this issue by creating a topic on our
-      &nbsp;
+      software, please help us to troubleshoot this issue by creating a topic on our&nbsp;
       <ExternalLink href="https://community.networkcanvas.com/">
         <code>community website</code>
       </ExternalLink>
@@ -153,7 +152,7 @@ const validationErrorDialog = (e) => {
     <>
       <p>
         The protocol format seems to be invalid. Please help us to troubleshoot this issue
-        by by creating a topic on our &nbsp;
+        by by creating a topic on our&nbsp;
         <ExternalLink href="https://community.networkcanvas.com/">
           <code>community website</code>
         </ExternalLink>
