@@ -1,5 +1,6 @@
 import { get, without } from 'lodash';
 
+// Todo: reinstate the commented out validations when we switch to schema 8
 const VALIDATIONS = {
   text: [
     'required',
@@ -8,8 +9,8 @@ const VALIDATIONS = {
     'unique',
     'differentFrom',
     'sameAs',
-    'lessThanVariable',
-    'greaterThanVariable',
+    // 'lessThanVariable',
+    // 'greaterThanVariable',
   ],
   number: [
     'required',
@@ -18,24 +19,24 @@ const VALIDATIONS = {
     'unique',
     'differentFrom',
     'sameAs',
-    'lessThanVariable',
-    'greaterThanVariable',
+    // 'lessThanVariable',
+    // 'greaterThanVariable',
   ],
   datetime: [
     'required',
     'unique',
     'differentFrom',
     'sameAs',
-    'lessThanVariable',
-    'greaterThanVariable',
+    // 'lessThanVariable',
+    // 'greaterThanVariable',
   ],
   scalar: [
     'required',
     'unique',
     'differentFrom',
     'sameAs',
-    'lessThanVariable',
-    'greaterThanVariable',
+    // 'lessThanVariable',
+    // 'greaterThanVariable',
   ],
   boolean: [
     'required',
@@ -48,8 +49,8 @@ const VALIDATIONS = {
     'unique',
     'differentFrom',
     'sameAs',
-    'lessThanVariable',
-    'greaterThanVariable',
+    // 'lessThanVariable',
+    // 'greaterThanVariable',
   ],
   categorical: [
     'required',
@@ -73,8 +74,8 @@ const VALIDATIONS_WITH_NUMBER_VALUES = [
 const VALIDATIONS_WITH_LIST_VALUES = [
   'differentFrom',
   'sameAs',
-  'lessThanVariable',
-  'greaterThanVariable',
+  // 'lessThanVariable',
+  // 'greaterThanVariable',
 ];
 
 const isValidationWithNumberValue = (validation) => (
