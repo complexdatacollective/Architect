@@ -133,10 +133,11 @@ const importErrorDialog = (e) => {
     <p>
       There was an error downloading or importing the sample protocol. Please consult the
       error message below for details. If you believe you have encountered a bug in the
-      software, please email us at
-      {' '}
-      <code>info@networkcanvas.com</code>
-      {' '}
+      software, please help us to troubleshoot this issue by creating a topic on our
+      &nbsp;
+      <ExternalLink href="https://community.networkcanvas.com/">
+        <code>community website</code>
+      </ExternalLink>
       with further details.
     </p>
   );
@@ -152,11 +153,11 @@ const validationErrorDialog = (e) => {
     <>
       <p>
         The protocol format seems to be invalid. Please help us to troubleshoot this issue
-        by sharing your protocol file (or the steps to reproduce this problem) with us by
-        emailing
-        {' '}
-        <code>info@networkcanvas.com</code>
-        .
+        by by creating a topic on our &nbsp;
+        <ExternalLink href="https://community.networkcanvas.com/">
+          <code>community website</code>
+        </ExternalLink>
+        with further details.
       </p>
       <p>
         You may still save and edit the protocol but it

@@ -19,11 +19,11 @@ const genericAssetMessage = (
     </p>
     <p>
       If you believe you are seeing this message in error, please help us to
-      troubleshoot the issue by sharing the asset file with us at&nbsp;
-      <ExternalLink href="mailto:info@networkcanvas.com">
-        <code>info@networkcanvas.com</code>
+      troubleshoot this issue by creating a topic on our&nbsp;
+      <ExternalLink href="https://community.networkcanvas.com/">
+        <code>community website</code>
       </ExternalLink>
-      .
+      with further details.
     </p>
     <p>
       <ExternalLink href="https://documentation.networkcanvas.com/key-concepts/resources/#supported-file-types">
