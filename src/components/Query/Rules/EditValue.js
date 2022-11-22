@@ -7,16 +7,20 @@ import DetachedField from '@components/DetachedField';
 import {
   Text,
   Toggle,
-  CheckboxGroup,
+  // CheckboxGroup,
+  RadioGroup,
   Number,
 } from '@codaco/ui/lib/components/Fields';
 
+// Todo: reinstate CheckboxGroup support when we switch to schema 8
 const INPUT_TYPES = {
   string: Text,
   number: Number,
   boolean: Toggle,
-  categorical: CheckboxGroup,
-  ordinal: CheckboxGroup,
+  categorical: RadioGroup,
+  ordinal: RadioGroup,
+  // categorical: CheckboxGroup,
+  // ordinal: CheckboxGroup,
 };
 
 /**
@@ -59,7 +63,7 @@ EditValue.propTypes = {
     PropTypes.string,
     PropTypes.number,
     PropTypes.bool,
-    PropTypes.array,
+    // PropTypes.array,
   ]).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
@@ -72,7 +76,7 @@ EditValue.propTypes = {
 };
 
 EditValue.defaultProps = {
-  onChange: () => {},
+  onChange: () => { },
   options: [],
 };
 
