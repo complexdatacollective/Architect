@@ -184,6 +184,7 @@ const appUpgradeRequiredDialog = (protocolSchemaVersion) => {
       <p>
         In order to open it, you will need to install a version of Architect that
         supports schema version
+        {' '}
         {protocolSchemaVersion}
         .
       </p>
@@ -221,35 +222,35 @@ const mayUpgradeProtocolDialog = (
       </p>
       <p>
         It can be automatically upgraded to schema version
-        { ' ' }
+        {' '}
         {targetSchemaVersion}
         {' '}
         using our migration feature, OR you can downgrade your version of
         Architect to continue editing this protocol without changing its schema version.
       </p>
-      { migrationNotes.length > 0
+      {migrationNotes.length > 0
         && (
-        <>
-          <p>
-            If you choose to migrate, the following actions will be automatically
-            performed on your protocol. Read these notes carefully, as these actions
-            may affect your data.
-          </p>
-          <div className="migration-panel">
-            {migrationNotes.map(({ version, notes }) => (
-              <React.Fragment key={version}>
-                <h4>
-                  Migrating to schema Version
-                  {' '}
-                  {version}
-                  {' '}
-                  will:
-                </h4>
-                <Markdown label={notes} markdownRenderers={{ a: ExternalLink }} />
-              </React.Fragment>
-            ))}
-          </div>
-        </>
+          <>
+            <p>
+              If you choose to migrate, the following actions will be automatically
+              performed on your protocol. Read these notes carefully, as these actions
+              may affect your data.
+            </p>
+            <div className="migration-panel">
+              {migrationNotes.map(({ version, notes }) => (
+                <React.Fragment key={version}>
+                  <h4>
+                    Migrating to schema Version
+                    {' '}
+                    {version}
+                    {' '}
+                    will:
+                  </h4>
+                  <Markdown label={notes} markdownRenderers={{ a: ExternalLink }} />
+                </React.Fragment>
+              ))}
+            </div>
+          </>
         )}
       <p>
         If you choose to continue, an upgraded copy of your protocol
