@@ -7,7 +7,11 @@ import NativeSelect from '@components/Form/Fields/NativeSelect';
 import RadioGroup from '@codaco/ui/lib/components/Fields/RadioGroup';
 import EditValue from './EditValue';
 import Section from '../../EditorLayout/Section';
-import { operatorsWithValue, operatorsWithRegExp, operatorsWithOptionCount } from './options';
+import {
+  operatorsWithValue,
+  // operatorsWithRegExp,
+  operatorsWithOptionCount,
+} from './options';
 import withRuleChangeHandler from './withRuleChangeHandler';
 import withOptions from './withOptions';
 import {
@@ -38,7 +42,7 @@ const EditEntityRule = ({
   );
   const optionsWithDefaults = getOptionsWithDefaults(options);
   const operatorNeedsValue = operatorsWithValue.has(optionsWithDefaults.operator);
-  const operatorNeedsRegExp = operatorsWithRegExp.has(optionsWithDefaults.operator);
+  // const operatorNeedsRegExp = operatorsWithRegExp.has(optionsWithDefaults.operator);
   const isVariableRule = entityRuleType === entityRuleTypes.VARIABLE_RULE;
   const isTypeRule = entityRuleType === entityRuleTypes.TYPE_RULE;
   const operatorNeedsOptionCount = operatorsWithOptionCount.has(optionsWithDefaults.operator);
@@ -88,72 +92,72 @@ const EditEntityRule = ({
           onChange={handleChangeEntityRuleType}
         />
       </Section>
-      { isTypeRule && optionsWithDefaults.type
+      {isTypeRule && optionsWithDefaults.type
         && (
-        <Section
-          title="Operator"
-        >
-          <DetachedField
-            component={RadioGroup}
-            name="operator"
-            options={operatorOptions}
-            onChange={handleRuleChange}
-            value={optionsWithDefaults.operator}
-            validation={{ required: true }}
-          />
-        </Section>
+          <Section
+            title="Operator"
+          >
+            <DetachedField
+              component={RadioGroup}
+              name="operator"
+              options={operatorOptions}
+              onChange={handleRuleChange}
+              value={optionsWithDefaults.operator}
+              validation={{ required: true }}
+            />
+          </Section>
         )}
-      { isVariableRule && optionsWithDefaults.type
+      {isVariableRule && optionsWithDefaults.type
         && (
-        <Section
-          title="Variable"
-          summary={(
-            <p>
-              Select a variable to query.
-            </p>
-          )}
-        >
-          <DetachedField
-            component={NativeSelect}
-            name="attribute"
-            options={variablesAsOptions}
-            onChange={handleRuleChange}
-            value={optionsWithDefaults.attribute}
-            validation={{ required: true }}
-          />
-        </Section>
+          <Section
+            title="Variable"
+            summary={(
+              <p>
+                Select a variable to query.
+              </p>
+            )}
+          >
+            <DetachedField
+              component={NativeSelect}
+              name="attribute"
+              options={variablesAsOptions}
+              onChange={handleRuleChange}
+              value={optionsWithDefaults.attribute}
+              validation={{ required: true }}
+            />
+          </Section>
         )}
-      { isVariableRule && optionsWithDefaults.attribute
+      {isVariableRule && optionsWithDefaults.attribute
         && (
-        <Section
-          title="Operator"
-        >
-          <DetachedField
-            component={NativeSelect}
-            name="operator"
-            options={operatorOptions}
-            onChange={handleRuleChange}
-            value={optionsWithDefaults.operator}
-            validation={{ required: true }}
-          />
-        </Section>
+          <Section
+            title="Operator"
+          >
+            <DetachedField
+              component={NativeSelect}
+              name="operator"
+              options={operatorOptions}
+              onChange={handleRuleChange}
+              value={optionsWithDefaults.operator}
+              validation={{ required: true }}
+            />
+          </Section>
         )}
-      { isVariableRule && operatorNeedsValue
+      {isVariableRule && operatorNeedsValue
         && (
-        <Section
-          title="Attribute Value"
-        >
-          <EditValue
-            variableType={variableType}
-            placeholder="Enter a value..."
-            onChange={handleRuleChange}
-            value={optionsWithDefaults.value}
-            options={variableOptions}
-            validation={{ required: true }}
-          />
-        </Section>
+          <Section
+            title="Attribute Value"
+          >
+            <EditValue
+              variableType={variableType}
+              placeholder="Enter a value..."
+              onChange={handleRuleChange}
+              value={optionsWithDefaults.value}
+              options={variableOptions}
+              validation={{ required: true }}
+            />
+          </Section>
         )}
-      { isVariableRule && operatorNeedsRegExp
+      {/* { isVariableRule && operatorNeedsRegExp
         && (
         <Section
           title="Attribute Value"
@@ -167,20 +171,20 @@ const EditEntityRule = ({
             validation={{ required: true, validRegExp: true }}
           />
         </Section>
-        )}
-      { isVariableRule && operatorNeedsOptionCount
+        )} */}
+      {isVariableRule && operatorNeedsOptionCount
         && (
-        <Section
-          title="Selected Option Count"
-        >
-          <EditValue
-            variableType="number"
-            placeholder="Enter a value..."
-            onChange={handleRuleChange}
-            value={optionsWithCounts.value}
-            validation={{ requiredAcceptsZero: true }}
-          />
-        </Section>
+          <Section
+            title="Selected Option Count"
+          >
+            <EditValue
+              variableType="number"
+              placeholder="Enter a value..."
+              onChange={handleRuleChange}
+              value={optionsWithCounts.value}
+              validation={{ requiredAcceptsZero: true }}
+            />
+          </Section>
         )}
     </>
   );
