@@ -32,10 +32,8 @@ const formHandlers = withHandlers({
     // Register a change in the stage editor
     // `form` here refers to the `section/` parent form, not the fields form
     changeForm(form, '_modified', new Date().getTime());
-
     if (!_createNewVariable) {
       const current = getVariable(variable);
-
       if (!current) {
         throw new SubmissionError({
           _error: 'Variable not found',

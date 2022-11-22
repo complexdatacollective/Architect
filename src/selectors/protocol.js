@@ -1,13 +1,15 @@
 /* eslint-disable import/prefer-default-export */
 
 import { createSelector } from 'reselect';
-import { find, findIndex, reduce } from 'lodash';
+import {
+  find, findIndex, reduce, get,
+} from 'lodash';
 
 const propStageId = (_, props) => props.stageId;
 
 export const getProtocol = (state) => state.protocol.present;
-export const getAssetManifest = (state) => state.protocol.present.assetManifest;
-export const getCodebook = (state) => state.protocol.present.codebook;
+export const getAssetManifest = (state) => get(state, 'protocol.present.assetManifest', {});
+export const getCodebook = (state) => get(state, 'protocol.present.codebook', null);
 
 export const getStageList = (state) => {
   const protocol = getProtocol(state);
