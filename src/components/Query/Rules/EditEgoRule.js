@@ -4,7 +4,11 @@ import { compose } from 'recompose';
 import { isArray, isNil } from 'lodash';
 import DetachedField from '@components/DetachedField';
 import NativeSelect from '@components/Form/Fields/NativeSelect';
-import { operatorsWithValue, operatorsWithRegExp, operatorsWithOptionCount } from './options';
+import {
+  operatorsWithValue,
+  // operatorsWithRegExp,
+  operatorsWithOptionCount,
+} from './options';
 import EditValue from './EditValue';
 import withRuleChangeHandler from './withRuleChangeHandler';
 import withOptions from './withOptions';
@@ -28,7 +32,7 @@ const EditEgoRule = ({
   const options = rule && rule.options;
   const optionsWithDefaults = { ...defaultOptions, ...options };
   const operatorNeedsValue = operatorsWithValue.has(optionsWithDefaults.operator);
-  const operatorNeedsRegExp = operatorsWithRegExp.has(optionsWithDefaults.operator);
+  // const operatorNeedsRegExp = operatorsWithRegExp.has(optionsWithDefaults.operator);
   const operatorNeedsOptionCount = operatorsWithOptionCount.has(optionsWithDefaults.operator);
   const countFriendlyValue = !isNil(optionsWithDefaults.value) ? optionsWithDefaults.value : '';
   const optionsWithCounts = {
@@ -49,37 +53,37 @@ const EditEgoRule = ({
           validation={{ required: true }}
         />
       </Section>
-      { optionsWithDefaults.attribute
+      {optionsWithDefaults.attribute
         && (
-        <Section
-          title="Operator"
-        >
-          <DetachedField
-            component={NativeSelect}
-            name="operator"
-            options={operatorOptions}
-            onChange={handleRuleChange}
-            value={optionsWithDefaults.operator}
-            validation={{ required: true }}
-          />
-        </Section>
+          <Section
+            title="Operator"
+          >
+            <DetachedField
+              component={NativeSelect}
+              name="operator"
+              options={operatorOptions}
+              onChange={handleRuleChange}
+              value={optionsWithDefaults.operator}
+              validation={{ required: true }}
+            />
+          </Section>
         )}
-      { operatorNeedsValue
+      {operatorNeedsValue
         && (
-        <Section
-          title="Attribute Value"
-        >
-          <EditValue
-            variableType={variableType}
-            placeholder="Enter a value..."
-            onChange={handleRuleChange}
-            value={optionsWithDefaults.value}
-            options={variableOptions}
-            validation={{ required: true }}
-          />
-        </Section>
+          <Section
+            title="Attribute Value"
+          >
+            <EditValue
+              variableType={variableType}
+              placeholder="Enter a value..."
+              onChange={handleRuleChange}
+              value={optionsWithDefaults.value}
+              options={variableOptions}
+              validation={{ required: true }}
+            />
+          </Section>
         )}
-      { operatorNeedsRegExp
+      {/* { operatorNeedsRegExp
         && (
         <Section
           title="Attribute Value"
@@ -93,20 +97,20 @@ const EditEgoRule = ({
             validation={{ required: true, validRegExp: true }}
           />
         </Section>
-        )}
-      { operatorNeedsOptionCount
+        )} */}
+      {operatorNeedsOptionCount
         && (
-        <Section
-          title="Selected Option Count"
-        >
-          <EditValue
-            variableType="number"
-            placeholder="Enter a value..."
-            onChange={handleRuleChange}
-            value={optionsWithCounts.value}
-            validation={{ requiredAcceptsZero: true }}
-          />
-        </Section>
+          <Section
+            title="Selected Option Count"
+          >
+            <EditValue
+              variableType="number"
+              placeholder="Enter a value..."
+              onChange={handleRuleChange}
+              value={optionsWithCounts.value}
+              validation={{ requiredAcceptsZero: true }}
+            />
+          </Section>
         )}
     </>
   );

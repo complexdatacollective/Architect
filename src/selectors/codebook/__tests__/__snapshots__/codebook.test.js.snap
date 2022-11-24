@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`codebook selectors getAllVariablesByUUID() handles missing codebook 1`] = `Object {}`;
+
+exports[`codebook selectors getAllVariablesByUUID() handles missing edgeTypes 1`] = `Object {}`;
+
+exports[`codebook selectors getAllVariablesByUUID() handles missing ego 1`] = `Object {}`;
+
+exports[`codebook selectors getAllVariablesByUUID() handles missing nodeTypes 1`] = `Object {}`;
+
+exports[`codebook selectors getAllVariablesByUUID() handles missing variables 1`] = `Object {}`;
+
+exports[`codebook selectors getAllVariablesByUUID() returns all variables by UUID 1`] = `Object {}`;
+
 exports[`codebook selectors getVariableOptionsForSubject() extracts variables for nodeType into options list for ego entity 1`] = `
 Array [
   Object {
@@ -51,3 +63,5 @@ Array [
   },
 ]
 `;
+
+exports[`codebook selectors makeGetVariable() returns a variable by UUID 1`] = `null`;

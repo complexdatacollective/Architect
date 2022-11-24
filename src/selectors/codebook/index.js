@@ -26,7 +26,7 @@ const getVariablesForSubject = (state, subject) => get(getType(state, subject), 
 const getAllVariablesByUUID = (codebook) => {
   if (!codebook) { throw new Error('Codebook not found'); }
 
-  const { node: nodeTypes = {}, edge: edgeTypes = {}, ego = {} } = codebook;
+  const { node: nodeTypes = null, edge: edgeTypes = null, ego = null } = codebook;
   const flattenedVariables = {};
 
   const addVariables = (variables) => {
@@ -38,19 +38,19 @@ const getAllVariablesByUUID = (codebook) => {
     });
   };
 
-  if (nodeTypes && nodeTypes.variables) {
-    Object.values(nodeTypes).forEach((nodeType) => {
-      addVariables(nodeType.variables);
+  if (nodeTypes) {
+    Object.values(nodeTypes).forEach(({ variables = null }) => {
+      addVariables(variables);
     });
   }
 
-  if (edgeTypes && edgeTypes.variables) {
-    Object.values(edgeTypes).forEach((edgeType) => {
-      addVariables(edgeType.variables);
+  if (edgeTypes) {
+    Object.values(edgeTypes).forEach(({ variables = null }) => {
+      addVariables(variables);
     });
   }
 
-  if (ego.variables) {
+  if (ego && ego.variables) {
     addVariables(ego.variables);
   }
   return flattenedVariables;
@@ -113,7 +113,7 @@ const makeGetVariableWithEntity = (uuid) => (state) => {
 const makeGetVariable = (uuid) => (state) => {
   const codebook = getCodebook(state);
   const variables = getAllVariablesByUUID(codebook);
-  const found = get(variables, uuid, {});
+  const found = get(variables, uuid, null);
   return found;
 };
 
@@ -154,6 +154,7 @@ export {
   getVariableOptionsForSubject,
   getOptionsForVariable,
   getAllVariableUUIDsByEntity,
+  getAllVariablesByUUID,
   makeGetVariableWithEntity,
   makeGetVariable,
 };

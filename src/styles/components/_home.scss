@@ -364,16 +364,31 @@ $font-sizes: (
       justify-content: space-between;
       padding-top: unit(2);
 
+      .button--with-new {
+        position: relative;
+
+        &::before {
+          content: 'New';
+          position: absolute;
+          top: -8px;
+          left: -5px;
+          background-color: var(--color-white);
+          color: var(--color-rich-black);
+          font-size: .6rem;
+          font-weight: 900;
+          padding: unit(.5) unit(1);
+          border-radius: var(--border-radius);
+          margin-right: unit(1);
+        }
+      }
+
       > .button {
         flex: 1;
-        max-width: 50%;
+        margin-right: unit(2);
 
-        &:first-child {
-          margin-right: unit(2);
-        }
 
-        &:nth-child(2) {
-          margin-right: unit(2);
+        &:last-child {
+          margin-right: 0;
         }
 
         .button__content {

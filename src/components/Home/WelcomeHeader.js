@@ -69,7 +69,7 @@ const WelcomeHeader = () => {
         className="welcome-header__panel"
       >
         <AnimatePresence initial={false}>
-          { isOpen && (
+          {isOpen && (
             <motion.div
               variants={start}
               initial="hide"
@@ -82,28 +82,32 @@ const WelcomeHeader = () => {
                 <div className="home-welcome__content">
                   <h2>Welcome to Architect!</h2>
                   <p>
-                    If you are new to the software, please consider watching the overview
-                    video to the left. It will explain how the software works, and introduce
-                    all the essential skills needed to build an interview protocol. We also
-                    have extensive tutorials and information on a range of topics on our
-                    documentation website, which you can visit using the link below.
+                    Architect is a tool for building Network Canvas interviews. To learn more about
+                    the software, and how to use it, please visit the documentation website.
                   </p>
                   <p>
-                    Alternatively, to get started right away use the buttons below to
-                    create a new interview protocol, or open an existing one from elsewhere.
+                    If you encounter any issues, or have any questions, please visit our user
+                    community, where we will be happy to help.
                   </p>
                   <div className="welcome-actions">
                     <Button
+                      className="button button--cerulean-blue button--with-new"
+                      color="cerulean-blue"
+                      onClick={() => openExternalLink('https://community.networkcanvas.com')}
+                    >
+                      Community Website
+                    </Button>
+                    {/* <Button
                       color="primary"
                       onClick={() => openExternalLink('https://www.youtube.com/watch?v=XzfE6j-LnII')}
                     >
                       Watch overview video
-                    </Button>
+                    </Button> */}
                     <Button
                       color="sea-serpent"
                       onClick={() => openExternalLink('https://documentation.networkcanvas.com')}
                     >
-                      Visit documentation website
+                      Documentation website
                     </Button>
                     <Button
                       color="mustard"
