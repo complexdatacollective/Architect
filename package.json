@@ -6,8 +6,8 @@
     "author": "Complex Data Collective <info@networkcanvas.com>",
     "private": true,
     "engines": {
-        "node": "12.14.1",
-        "npm": "7.6.3"
+        "node": "14.21.3",
+        "npm": "8.3.2"
     },
     "scripts": {
         "postinstall": "cd network-canvas && npm install && cd ../",
@@ -68,6 +68,7 @@
         "csv-parse": "^4.10.1",
         "csvtojson": "^2.0.10",
         "decompress": "^4.2.1",
+        "dmg-builder": "~23.6.0",
         "dotenv": "4.0.0",
         "electron": "^9.4.4",
         "electron-builder": "^22.7.0",
