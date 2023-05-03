@@ -2,7 +2,7 @@
 import path from 'path';
 import uuid from 'uuid/v4';
 import { remote } from 'electron';
-import { remove, rename, writeFile } from 'fs-extra';
+import { remove, rename, outputFile } from 'fs-extra';
 import axios from 'axios';
 import { APP_SCHEMA_VERSION, SAMPLE_PROTOCOL_URL } from '@app/config';
 import * as netcanvasFile from '@app/utils/netcanvasFile';
@@ -195,6 +195,7 @@ const importSampleProtocol = () => (dispatch) => {
   // Utility that attempts to clean up temp files, and
   // ensures import toast is removed
   const handleCleanup = () => {
+    // eslint-disable-next-line no-console
     dispatch(toastActions.removeToast(importUUID));
 
     if (tempFilePath) {
@@ -261,7 +262,7 @@ const importSampleProtocol = () => (dispatch) => {
     .then(checkIfUserCancelled)
     .then((data) => {
       tempFilePath = path.join(remote.app.getPath('temp'), 'architect', importUUID);
-      return writeFile(tempFilePath, Buffer.from(data));
+      return outputFile(tempFilePath, Buffer.from(data));
     })
     .then(checkIfUserCancelled)
     .then(() => rename(tempFilePath, userFilePath))

@@ -135,8 +135,9 @@ const importErrorDialog = (e) => {
       error message below for details. If you believe you have encountered a bug in the
       software, please help us to troubleshoot this issue by creating a topic on our&nbsp;
       <ExternalLink href="https://community.networkcanvas.com/">
-        <code>community website</code>
+        community website
       </ExternalLink>
+      &nbsp;
       with further details.
     </p>
   );
@@ -154,8 +155,9 @@ const validationErrorDialog = (e) => {
         The protocol format seems to be invalid. Please help us to troubleshoot this issue
         by by creating a topic on our&nbsp;
         <ExternalLink href="https://community.networkcanvas.com/">
-          <code>community website</code>
+          community website
         </ExternalLink>
+        &nbsp;
         with further details.
       </p>
       <p>
