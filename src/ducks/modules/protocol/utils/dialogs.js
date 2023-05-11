@@ -21,8 +21,9 @@ const genericAssetMessage = (
       If you believe you are seeing this message in error, please help us to
       troubleshoot this issue by creating a topic on our&nbsp;
       <ExternalLink href="https://community.networkcanvas.com/">
-        <code>community website</code>
+        community website
       </ExternalLink>
+      &nbsp;
       with further details.
     </p>
     <p>
