@@ -5,14 +5,23 @@ import { getIdsFromCodebook } from './helpers';
 
 /**
  * Gets a key value object describing variables are
- * in use (including in redux forms)
- * @returns {object} in format: { [variableId]: boolean }
+ * in use (including in redux forms).
+ *
+ * Naive implementation: just checks if the variable id is in the flattened
+ * protocol, or any redux forms.
+ *
+ * @param {object} options  - options object
+ * @param {Array} options.formNames - names of forms to check for variable usage
+ * @param {Array} options.excludePaths - paths to exclude from the check (e.g. 'stages')
+ *
+ * @returns {function} - selector function that returns a key value object
+ * describing variables are in use
  */
-export const makeGetIsUsed = (isUsedOptions = {}) => (state) => {
+export const makeGetIsUsed = (options = {}) => (state) => {
   const {
     formNames = ['edit-stage', 'editable-list-form'],
     excludePaths = [],
-  } = isUsedOptions;
+  } = options;
 
   const protocol = getProtocol(state);
   const forms = getForms(formNames)(state);
