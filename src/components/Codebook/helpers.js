@@ -72,6 +72,8 @@ export const getEntityProperties = (state, { entity, type }) => {
   const variableIndex = getVariableIndex(state);
   const isUsedIndex = getIsUsed(state);
 
+  console.log('isUsedIndex', isUsedIndex, variableIndex);
+
   const variablesWithUsage = map(
     variables,
     (variable, id) => {

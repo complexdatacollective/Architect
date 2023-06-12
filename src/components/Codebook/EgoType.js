@@ -9,15 +9,15 @@ const EgoType = ({
   variables,
 }) => (
   <div className="codebook__entity">
-    { variables.length > 0
+    {variables.length > 0
       && (
-      <div className="codebook__entity-variables codebook__entity-variables--no-border">
-        <h3>Variables:</h3>
-        <Variables
-          variables={variables}
-          entity="ego"
-        />
-      </div>
+        <div className="codebook__entity-variables codebook__entity-variables--no-border">
+          <h3>Variables:</h3>
+          <Variables
+            variables={variables}
+            entity="ego"
+          />
+        </div>
       )}
   </div>
 );
@@ -33,7 +33,7 @@ EgoType.defaultProps = {
 
 const mapStateToProps = (state) => {
   const entityProperties = getEntityProperties(state, { entity: 'ego' });
-
+  console.log('entityProperties', entityProperties);
   return entityProperties;
 };
 

@@ -58,9 +58,10 @@ export const paths = {
     'stages[].presets[].edges.display[]',
     'stages[].presets[].highlight[]',
     // `sameAs` and `differentFrom` are variable references in these locations
-    'codebook.ego.variables[].validation',
-    'codebook.node.[].variables[].validation',
-    'codebook.edge.[].variables[].validation',
+    'codebook.ego.variables[].validation.sameAs',
+    'codebook.ego.variables[].validation.differentFrom',
+    'codebook.node.[].variables[].validation.sameAs',
+    'codebook.edge.[].variables[].validation.differentFrom',
   ],
   assets: [
     'stages[].panels[].dataSource',
@@ -94,7 +95,10 @@ const getNodeIndex = createSelector(
  */
 const getVariableIndex = createSelector(
   getProtocol,
-  (protocol) => collectPaths(paths.variables, protocol),
+  (protocol) => {
+    console.log('getVariableIndex', collectPaths(paths.variables, protocol));
+    return collectPaths(paths.variables, protocol);
+  },
 );
 
 /**

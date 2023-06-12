@@ -6,8 +6,18 @@ const variable1 = '1234-1234-1234-1';
 const variable2 = '1234-1234-1234-2';
 const variable3 = '1234-1234-1234-3';
 const variable4 = '1234-1234-1234-4';
+const variable5 = '1234-1234-1234-5';
+const variable6 = '1234-1234-1234-6';
+const variable7 = '1234-1234-1234-7';
+const variable8 = '1234-1234-1234-8';
 
 const mockCodebookWithoutUse = {
+  ego: {
+    variables: {
+      [variable5]: {},
+      [variable6]: {},
+    },
+  },
   node: {
     person: {
       variables: {
@@ -15,6 +25,14 @@ const mockCodebookWithoutUse = {
         [variable2]: {},
         [variable3]: {},
         [variable4]: {},
+      },
+    },
+  },
+  edge: {
+    friendship: {
+      variables: {
+        [variable7]: {},
+        [variable8]: {},
       },
     },
   },
@@ -51,6 +69,10 @@ describe('makeGetIsUsed', () => {
       [variable2]: false,
       [variable3]: false,
       [variable4]: false,
+      [variable5]: false,
+      [variable6]: false,
+      [variable7]: false,
+      [variable8]: false,
     });
   });
 
@@ -90,6 +112,10 @@ describe('makeGetIsUsed', () => {
       [variable2]: true,
       [variable3]: true,
       [variable4]: false,
+      [variable5]: false,
+      [variable6]: false,
+      [variable7]: false,
+      [variable8]: false,
     });
   });
 
@@ -123,6 +149,10 @@ describe('makeGetIsUsed', () => {
           [variable2]: true,
           [variable3]: true,
           [variable4]: false,
+          [variable5]: false,
+          [variable6]: false,
+          [variable7]: false,
+          [variable8]: false,
         });
       });
 
@@ -135,6 +165,10 @@ describe('makeGetIsUsed', () => {
           [variable2]: false,
           [variable3]: false,
           [variable4]: false,
+          [variable5]: false,
+          [variable6]: false,
+          [variable7]: false,
+          [variable8]: false,
         });
       });
     });
@@ -143,17 +177,22 @@ describe('makeGetIsUsed', () => {
   it('checks codebook for variable validation use', () => {
     const stateWithCodebookUse = {
       ...mockStateWithoutUse,
-      codebook: {
-        ...mockCodebookWithoutUse,
-        node: {
-          ...mockCodebookWithoutUse.node,
-          person: {
-            ...mockCodebookWithoutUse.node.person,
-            variables: {
-              ...mockCodebookWithoutUse.node.person.variables,
-              [variable1]: {
-                validation: {
-                  sameAs: variable2,
+      protocol: {
+        ...mockProtocolWithoutUse,
+        present: {
+          codebook: {
+            ...mockCodebookWithoutUse,
+            node: {
+              ...mockCodebookWithoutUse.node,
+              person: {
+                ...mockCodebookWithoutUse.node.person,
+                variables: {
+                  ...mockCodebookWithoutUse.node.person.variables,
+                  [variable1]: {
+                    validation: {
+                      sameAs: variable2,
+                    },
+                  },
                 },
               },
             },
@@ -169,6 +208,10 @@ describe('makeGetIsUsed', () => {
       [variable2]: true,
       [variable3]: false,
       [variable4]: false,
+      [variable5]: false,
+      [variable6]: false,
+      [variable7]: false,
+      [variable8]: false,
     });
   });
 
