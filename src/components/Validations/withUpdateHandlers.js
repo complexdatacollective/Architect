@@ -43,16 +43,9 @@ const getUpdatedValue = (previousValue, key, value, oldKey = null) => {
 };
 
 const withUpdateHandlers = withHandlers({
-  handleDelete: ({ openDialog, update, value: previousValue }) => (key) => {
+  handleDelete: ({ update, value: previousValue }) => (key) => {
     const newValue = omit(previousValue, key);
-
-    openDialog({
-      type: 'Warning',
-      title: 'Remove validation',
-      message: 'Are you sure you want to remove this rule?',
-      onConfirm: () => { update(newValue); },
-      confirmLabel: 'Remove validation',
-    });
+    update(newValue);
   },
   handleChange: ({ update, value: previousValue }) => (key, value, oldKey) => {
     const newValue = getUpdatedValue(previousValue, key, value, oldKey);
