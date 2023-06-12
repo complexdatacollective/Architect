@@ -4,7 +4,8 @@ import {
 import { getType } from '@selectors/codebook';
 import { makeGetIsUsed } from '@selectors/codebook/isUsed';
 import { getVariableIndex } from '@selectors/indexes';
-import { getProtocol } from '@selectors/protocol';
+import { getProtocol, getCodebook } from '@selectors/protocol';
+import { getAllVariablesByUUID } from '../../selectors/codebook';
 
 const getIsUsed = makeGetIsUsed({ formNames: [] });
 
@@ -13,10 +14,16 @@ const getIsUsed = makeGetIsUsed({ formNames: [] });
  * @param {Object} state Application state
  * @returns {Object[]} Stage meta sorted by index in state
  */
-const getStageMetaByIndex = (state) => {
+export const getStageMetaByIndex = (state) => {
   const protocol = getProtocol(state);
   return protocol.stages
     .map(({ label, id }) => ({ label, id }));
+};
+
+export const getVariableMetaByIndex = (state) => {
+  const codebook = getCodebook(state);
+  const variables = getAllVariablesByUUID(codebook);
+  return variables;
 };
 
 /**
@@ -29,18 +36,20 @@ const getStageIndexFromPath = (path) => {
   return get(matches, 1, null);
 };
 
+const codebookVariableReferenceRegex = /codebook\.(ego|node\[([^\]]+)\]|edge\[([^\]]+)\])\.variables\[(.*?)\].validation\.(sameAs|differentFrom)/;
+
 export const getCodebookVariableIndexFromValidationPath = (path) => {
   // Regexp that matches all of the following:
-  // "codebook.ego.variables[4b27bf9f-7058-4e74-84d8-2cc0bfd7d25c].validation.sameAs"
-  // "codebook.ego.variables[4b27bf9f-7058-4e74-84d8-2cc0bfd7d25c].validation.differentFrom"
-  // "codebook.node[nodeType].variables[variableType].validation.sameAs"
-  // "codebook.node[nodeType.variables[variableType].validation.differentFrom"
-  // "codebook.edge[edgeType].variables[4b27bf9f-7058-4e74-84d8-2cc0bfd7d25c].validation.sameAs"
-  // "codebook.edge[edgeType].variables[4b27bf9f-7058-4e74-84d8-2cc0bfd7d25c].validation.differentFrom"
+  // "codebook.ego.variables[variableId].validation.sameAs"
+  // "codebook.ego.variables[variableId].validation.differentFrom"
+  // "codebook.node[nodeType].variables[variableId].validation.sameAs"
+  // "codebook.node[nodeType.variables[variableId].validation.differentFrom"
+  // "codebook.edge[edgeType].variables[variableId].validation.sameAs"
+  // "codebook.edge[edgeType].variables[variableId].validation.differentFrom"
 
-  // eslint-disable-next-line max-len
-  const matches = /codebook\.(ego|node\[([^\]]+)\]|edge\[([^\]]+)\])\.variables\[([^\]]+)\]\.validation\.(sameAs|differentFrom)/.exec(path);
-  return get(matches, 1, null);
+  const match = path.match(codebookVariableReferenceRegex);
+
+  return get(match, 4, null);
 };
 
 /**
@@ -67,17 +76,13 @@ export const getUsage = (index, value) => reduce(index, (acc, indexValue, path) 
  * @param {string[]} usageArray "Usage array" as created by `getUsage()`
  * @returns {Object[]} List of stage meta `{ label, id }`.
  */
-export const getUsageAsStageMeta = (state, usageArray) => {
-  console.log('usageArray', usageArray);
-  const stageMetaByIndex = getStageMetaByIndex(state);
-
+export const getUsageAsStageMeta = (stageMetaByIndex, variableMetaByIndex, usageArray) => {
   // Filter codebook variables from usage array
   const codebookVariablePaths = usageArray.filter(getCodebookVariableIndexFromValidationPath);
-
   const codebookVariablesWithMeta = codebookVariablePaths.map((path) => {
-    console.log('codebookVariables:', path);
+    const variableId = getCodebookVariableIndexFromValidationPath(path);
     return {
-      label: 'Used as validation for variable',
+      label: `Used as validation for "${variableMetaByIndex[variableId].name}"`,
     };
   });
 
@@ -116,11 +121,12 @@ export const getEntityProperties = (state, { entity, type }) => {
     color,
     variables,
   } = getType(state, { entity, type });
-  console.log('getEntityProperties', entity, type);
 
   const variableIndex = getVariableIndex(state);
+  const variableMeta = getVariableMetaByIndex(state);
+  const stageMetaByIndex = getStageMetaByIndex(state);
   const isUsedIndex = getIsUsed(state);
-  console.log('variableIndex', variableIndex);
+
   const variablesWithUsage = map(
     variables,
     (variable, id) => {
@@ -136,8 +142,12 @@ export const getEntityProperties = (state, { entity, type }) => {
         return (baseProperties);
       }
 
-      const thing = getUsage(variableIndex, id);
-      const usage = getUsageAsStageMeta(state, thing).sort(sortByLabel);
+      const usage = getUsageAsStageMeta(
+        stageMetaByIndex,
+        variableMeta,
+        getUsage(variableIndex, id),
+      ).sort(sortByLabel);
+
       const usageString = usage.map(({ label }) => label).join(', ').toUpperCase();
       return ({
         ...baseProperties,

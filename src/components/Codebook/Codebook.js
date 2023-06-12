@@ -9,7 +9,7 @@ import EntityType from './EntityType';
 import ExternalEntity from './ExternalEntity';
 import EgoType from './EgoType';
 import CodebookCategory from './CodebookCategory';
-import { getUsage, getUsageAsStageMeta } from './helpers';
+import { getStageMetaByIndex, getUsage, getUsageAsStageMeta, getVariableMetaByIndex } from './helpers';
 
 const Codebook = ({
   edges,
@@ -99,8 +99,11 @@ const getEntityWithUsage = (state, index, mergeProps) => {
   return (_, id) => {
     const inUse = search.has(id);
 
+    const variableMeta = getVariableMetaByIndex(state);
+    const stageMetaByIndex = getStageMetaByIndex(state);
+
     const usage = inUse
-      ? getUsageAsStageMeta(state, getUsage(index, id))
+      ? getUsageAsStageMeta(stageMetaByIndex, variableMeta, getUsage(index, id))
       : [];
 
     return {
