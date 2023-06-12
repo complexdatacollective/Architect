@@ -34,8 +34,7 @@ const Codebook = ({
           <EgoType entity="ego" type="ego" />
         </CodebookCategory>
       )}
-
-    {/* {hasNodes
+    {hasNodes
       && (
         <CodebookCategory title="Node Types">
           {nodes.map((node) => (
@@ -74,7 +73,7 @@ const Codebook = ({
             ),
           )}
         </CodebookCategory>
-      )} */}
+      )}
 
   </div>
 );

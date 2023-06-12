@@ -95,10 +95,7 @@ const getNodeIndex = createSelector(
  */
 const getVariableIndex = createSelector(
   getProtocol,
-  (protocol) => {
-    console.log('getVariableIndex', collectPaths(paths.variables, protocol));
-    return collectPaths(paths.variables, protocol);
-  },
+  (protocol) => collectPaths(paths.variables, protocol),
 );
 
 /**

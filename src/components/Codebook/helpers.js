@@ -72,23 +72,27 @@ export const getEntityProperties = (state, { entity, type }) => {
   const variableIndex = getVariableIndex(state);
   const isUsedIndex = getIsUsed(state);
 
-  console.log('isUsedIndex', isUsedIndex, variableIndex);
-
   const variablesWithUsage = map(
     variables,
     (variable, id) => {
       const inUse = get(isUsedIndex, id, false);
 
-      const usage = inUse
-        ? getUsageAsStageMeta(state, getUsage(variableIndex, id)).sort(sortByLabel)
-        : [];
-
-      const usageString = usage.map(({ label }) => label).join(', ').toUpperCase();
-
-      return ({
+      const baseProperties = {
         ...variable,
         id,
         inUse,
+      };
+
+      if (!inUse) {
+        return (baseProperties);
+      }
+
+      const thing = getUsage(variableIndex, id);
+      const usage = getUsageAsStageMeta(state, thing).sort(sortByLabel);
+      const usageString = usage.map(({ label }) => label).join(', ').toUpperCase();
+
+      return ({
+        ...baseProperties,
         usage,
         usageString,
       });
