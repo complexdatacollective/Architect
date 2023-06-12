@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import { getUsage, getUsageAsStageMeta } from '../helpers';
+import { getUsage, getUsageAsStageMeta, getCodebookVariableIndexFromValidationPath } from '../helpers';
 
 const state = {
   protocol: {
@@ -35,4 +35,21 @@ it('getUsageAsStageMeta()', () => {
     { label: 'bar', id: 'efgh' },
   ];
   expect(getUsageAsStageMeta(state, usage)).toEqual(expectedResult);
+});
+
+it('getCodebookVariableIndexFromValidationPath()', () => {
+  const testStrings = [
+    "codebook.ego.variables[4b27bf9f-7058-4e74-84d8-2cc0bfd7d25c].validation.sameAs",
+    "codebook.ego.variables[4b27bf9f-7058-4e74-84d8-2cc0bfd7d25c].validation.differentFrom",
+    "codebook.node[nodeType].variables[variableType].validation.sameAs",
+    "codebook.node[nodeType].variables[variableType].validation.differentFrom",
+    "codebook.edge[edgeType].variables[4b27bf9f-7058-4e74-84d8-2cc0bfd7d25c].validation.sameAs",
+    "codebook.edge[edgeType].variables[4b27bf9f-7058-4e74-84d8-2cc0bfd7d25c].validation.differentFrom",
+  ];
+
+  // Run the function for each string in the array
+  testStrings.forEach((testString) => {
+    expect(getCodebookVariableIndexFromValidationPath(testString)).toEqual('4b27bf9f-7058-4e74-84d8-2cc0bfd7d25c');
+  }
+
 });

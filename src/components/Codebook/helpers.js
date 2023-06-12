@@ -29,9 +29,25 @@ const getStageIndexFromPath = (path) => {
   return get(matches, 1, null);
 };
 
+export const getCodebookVariableIndexFromValidationPath = (path) => {
+  // Regexp that matches all of the following:
+  // "codebook.ego.variables[4b27bf9f-7058-4e74-84d8-2cc0bfd7d25c].validation.sameAs"
+  // "codebook.ego.variables[4b27bf9f-7058-4e74-84d8-2cc0bfd7d25c].validation.differentFrom"
+  // "codebook.node[nodeType].variables[variableType].validation.sameAs"
+  // "codebook.node[nodeType.variables[variableType].validation.differentFrom"
+  // "codebook.edge[edgeType].variables[4b27bf9f-7058-4e74-84d8-2cc0bfd7d25c].validation.sameAs"
+  // "codebook.edge[edgeType].variables[4b27bf9f-7058-4e74-84d8-2cc0bfd7d25c].validation.differentFrom"
+
+  // eslint-disable-next-line max-len
+  const matches = /codebook\.(ego|node\[([^\]]+)\]|edge\[([^\]]+)\])\.variables\[([^\]]+)\]\.validation\.(sameAs|differentFrom)/.exec(path);
+  return get(matches, 1, null);
+};
+
 /**
- * Filters a usage index for items that match value.
- * @param {Object.<string, string>}} index Usage index in (in format `{[path]: value}`)
+ * Takes an object in the format of `{[path]: variableID}` and a variableID to
+ * search for. Returns an array of paths that match the variableID.
+ *
+ * @param {Object.<string, string>}} index Usage index in (in format `{[path]: variableID}`)
  * @param {any} value Value to match in usage index
  * @returns {string[]} List of paths ("usage array")
  */
@@ -41,37 +57,70 @@ export const getUsage = (index, value) => reduce(index, (acc, indexValue, path) 
 }, []);
 
 /**
- * Get stage meta that matches "usage array" (deduped).
- * See `getUsage()` for details of usage array,
+ * Get stage meta (wtf is stage meta, Steve? 🤦) that matches "usage array"
+ * (with duplicates removed).
+ *
+ * See `getUsage()` for how the usage array is generated.
+ *
  * Any stages that can't be found in the index are omitted.
  * @param {Object} state Application state
- * @param {string[]} usage "Usage array"
+ * @param {string[]} usageArray "Usage array" as created by `getUsage()`
  * @returns {Object[]} List of stage meta `{ label, id }`.
  */
-export const getUsageAsStageMeta = (state, usage) => {
+export const getUsageAsStageMeta = (state, usageArray) => {
+  console.log('usageArray', usageArray);
   const stageMetaByIndex = getStageMetaByIndex(state);
-  const stageIndexes = compact(uniq(usage.map(getStageIndexFromPath)));
-  return stageIndexes.map((stageIndex) => get(stageMetaByIndex, stageIndex));
+
+  // Filter codebook variables from usage array
+  const codebookVariablePaths = usageArray.filter(getCodebookVariableIndexFromValidationPath);
+
+  const codebookVariablesWithMeta = codebookVariablePaths.map((path) => {
+    console.log('codebookVariables:', path);
+    return {
+      label: 'Used as validation for variable',
+    };
+  });
+
+  const stageIndexes = compact(uniq(usageArray.map(getStageIndexFromPath)));
+  const stageVariablesWithMeta = stageIndexes.map((stageIndex) => get(stageMetaByIndex, stageIndex));
+
+  return [
+    ...stageVariablesWithMeta,
+    ...codebookVariablesWithMeta,
+  ];
 };
 
-// Function to be used with Array.sort. Sorts a collection of variable
-// definitions by the label property.
+/**
+ * Helper function to be used with Array.sort. Sorts a collection of variable
+ * definitions by the label property.
+ *
+ * @param {Object} a { label: string }
+ * @param {Object} b { label: string }
+ * @returns {number} -1 if a < b, 1 if a > b, 0 if a === b
+ */
 export const sortByLabel = (a, b) => {
   if (a.label < b.label) { return -1; }
   if (a.label > b.label) { return 1; }
   return 0;
 };
 
+/**
+ * Returns entity meta data for use in the codebook.
+ * @param {*} state
+ * @param {*} param1
+ * @returns
+ */
 export const getEntityProperties = (state, { entity, type }) => {
   const {
     name,
     color,
     variables,
   } = getType(state, { entity, type });
+  console.log('getEntityProperties', entity, type);
 
   const variableIndex = getVariableIndex(state);
   const isUsedIndex = getIsUsed(state);
-
+  console.log('variableIndex', variableIndex);
   const variablesWithUsage = map(
     variables,
     (variable, id) => {
@@ -90,7 +139,6 @@ export const getEntityProperties = (state, { entity, type }) => {
       const thing = getUsage(variableIndex, id);
       const usage = getUsageAsStageMeta(state, thing).sort(sortByLabel);
       const usageString = usage.map(({ label }) => label).join(', ').toUpperCase();
-
       return ({
         ...baseProperties,
         usage,

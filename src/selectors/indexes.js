@@ -60,8 +60,10 @@ export const paths = {
     // `sameAs` and `differentFrom` are variable references in these locations
     'codebook.ego.variables[].validation.sameAs',
     'codebook.ego.variables[].validation.differentFrom',
-    'codebook.node.[].variables[].validation.sameAs',
-    'codebook.edge.[].variables[].validation.differentFrom',
+    'codebook.node[].variables[].validation.sameAs',
+    'codebook.node[].variables[].validation.differentFrom',
+    'codebook.edge[].variables[].validation.sameAs',
+    'codebook.edge[].variables[].validation.differentFrom',
   ],
   assets: [
     'stages[].panels[].dataSource',

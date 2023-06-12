@@ -34,6 +34,7 @@ const Codebook = ({
           <EgoType entity="ego" type="ego" />
         </CodebookCategory>
       )}
+
     {hasNodes
       && (
         <CodebookCategory title="Node Types">
