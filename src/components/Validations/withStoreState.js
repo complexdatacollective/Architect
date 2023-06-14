@@ -1,7 +1,5 @@
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { formValueSelector, change } from 'redux-form';
-import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 import { getValidationOptionsForVariableType } from './options';
 
 const mapStateToProps = (state, {
@@ -15,7 +13,6 @@ const mapStateToProps = (state, {
 };
 
 const mapDispatchToProps = (dispatch, { form, name }) => ({
-  openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
   update: (value) => dispatch(change(form, name, value)),
 });
 

@@ -14,9 +14,13 @@ const mapAssetItems = ({ type, content }, path) => {
 };
 
 /**
- * Locations of referenceable entities in a standard protocol.
+ * Master list of paths where variables are used.
  *
- * This is generally used to find which entities are used where.
+ * ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+ * It is VITAL that this be updated when any new variable use occurs in the
+ * protocol schema!
+ * ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+ *
  */
 export const paths = {
   edges: [
@@ -53,6 +57,13 @@ export const paths = {
     'stages[].presets[].groupVariable',
     'stages[].presets[].edges.display[]',
     'stages[].presets[].highlight[]',
+    // `sameAs` and `differentFrom` are variable references in these locations
+    'codebook.ego.variables[].validation.sameAs',
+    'codebook.ego.variables[].validation.differentFrom',
+    'codebook.node[].variables[].validation.sameAs',
+    'codebook.node[].variables[].validation.differentFrom',
+    'codebook.edge[].variables[].validation.sameAs',
+    'codebook.edge[].variables[].validation.differentFrom',
   ],
   assets: [
     'stages[].panels[].dataSource',
