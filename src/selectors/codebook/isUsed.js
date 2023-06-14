@@ -1,4 +1,4 @@
-import { get, omit, cloneDeep, each } from 'lodash';
+import { get, omit, cloneDeep } from 'lodash';
 import { getForms } from '../reduxForm';
 import { getCodebook, getProtocol } from '../protocol';
 import { getIdsFromCodebook } from './helpers';

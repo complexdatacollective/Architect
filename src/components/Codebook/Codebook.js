@@ -9,7 +9,12 @@ import EntityType from './EntityType';
 import ExternalEntity from './ExternalEntity';
 import EgoType from './EgoType';
 import CodebookCategory from './CodebookCategory';
-import { getStageMetaByIndex, getUsage, getUsageAsStageMeta, getVariableMetaByIndex } from './helpers';
+import {
+  getStageMetaByIndex,
+  getUsage,
+  getUsageAsStageMeta,
+  getVariableMetaByIndex,
+} from './helpers';
 
 const Codebook = ({
   edges,

@@ -1,11 +1,10 @@
 import {
   reduce, get, compact, uniq, map,
 } from 'lodash';
-import { getType } from '@selectors/codebook';
+import { getType, getAllVariablesByUUID } from '@selectors/codebook';
 import { makeGetIsUsed } from '@selectors/codebook/isUsed';
 import { getVariableIndex } from '@selectors/indexes';
 import { getProtocol, getCodebook } from '@selectors/protocol';
-import { getAllVariablesByUUID } from '../../selectors/codebook';
 
 const getIsUsed = makeGetIsUsed({ formNames: [] });
 
@@ -39,14 +38,6 @@ const getStageIndexFromPath = (path) => {
 const codebookVariableReferenceRegex = /codebook\.(ego|node\[([^\]]+)\]|edge\[([^\]]+)\])\.variables\[(.*?)\].validation\.(sameAs|differentFrom)/;
 
 export const getCodebookVariableIndexFromValidationPath = (path) => {
-  // Regexp that matches all of the following:
-  // "codebook.ego.variables[variableId].validation.sameAs"
-  // "codebook.ego.variables[variableId].validation.differentFrom"
-  // "codebook.node[nodeType].variables[variableId].validation.sameAs"
-  // "codebook.node[nodeType.variables[variableId].validation.differentFrom"
-  // "codebook.edge[edgeType].variables[variableId].validation.sameAs"
-  // "codebook.edge[edgeType].variables[variableId].validation.differentFrom"
-
   const match = path.match(codebookVariableReferenceRegex);
 
   return get(match, 4, null);
@@ -72,7 +63,10 @@ export const getUsage = (index, value) => reduce(index, (acc, indexValue, path) 
  * See `getUsage()` for how the usage array is generated.
  *
  * Any stages that can't be found in the index are omitted.
- * @param {Object} state Application state
+ *
+ * @param {Object[]} stageMetaByIndex Stage meta by index (as created by `getStageMetaByIndex()`)
+ * @param {Object[]} variableMetaByIndex Variable meta by index (as created by
+ * `getVariableMetaByIndex()`)
  * @param {string[]} usageArray "Usage array" as created by `getUsage()`
  * @returns {Object[]} List of stage meta `{ label, id }`.
  */
@@ -81,13 +75,16 @@ export const getUsageAsStageMeta = (stageMetaByIndex, variableMetaByIndex, usage
   const codebookVariablePaths = usageArray.filter(getCodebookVariableIndexFromValidationPath);
   const codebookVariablesWithMeta = codebookVariablePaths.map((path) => {
     const variableId = getCodebookVariableIndexFromValidationPath(path);
+    const { name } = variableMetaByIndex[variableId];
     return {
-      label: `Used as validation for "${variableMetaByIndex[variableId].name}"`,
+      label: `Used as validation for "${name || 'unknown'}"`,
     };
   });
 
   const stageIndexes = compact(uniq(usageArray.map(getStageIndexFromPath)));
-  const stageVariablesWithMeta = stageIndexes.map((stageIndex) => get(stageMetaByIndex, stageIndex));
+  const stageVariablesWithMeta = stageIndexes.map(
+    (stageIndex) => get(stageMetaByIndex, stageIndex),
+  );
 
   return [
     ...stageVariablesWithMeta,

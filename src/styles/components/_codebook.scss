@@ -16,10 +16,11 @@
   &__tag {
     display: inline-block;
     border-radius: unit(1);
-    padding: unit(0.5) unit(0.75);
+    padding: unit(.5) unit(.75);
     font-size: .9em;
     color: var(--color-white);
     background-color: var(--color-mustard--dark);
+    word-break: break-word;
 
     &--not-used {
       background-color: var(--architect-warning);
@@ -160,6 +161,10 @@
           }
         }
       }
+    }
+
+    &--usage {
+      max-width: 300px;
     }
 
     &-usage-container {

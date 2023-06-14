@@ -33,7 +33,6 @@ EgoType.defaultProps = {
 
 const mapStateToProps = (state) => {
   const entityProperties = getEntityProperties(state, { entity: 'ego' });
-  console.log('entityProperties', entityProperties);
   return entityProperties;
 };
 

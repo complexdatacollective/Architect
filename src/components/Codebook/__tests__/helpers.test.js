@@ -1,10 +1,41 @@
 /* eslint-env jest */
 
-import { getUsage, getUsageAsStageMeta, getCodebookVariableIndexFromValidationPath } from '../helpers';
+import { getAllVariablesByUUID } from '../../../selectors/codebook';
+import { getUsage, getUsageAsStageMeta } from '../helpers';
 
 const state = {
   protocol: {
     present: {
+      codebook: {
+        ego: {
+          variables: {
+            1: {
+              name: 'name',
+              type: 'text',
+            },
+          },
+        },
+        node: {
+          person: {
+            variables: {
+              2: {
+                name: 'name',
+                type: 'text',
+              },
+            },
+          },
+        },
+        edge: {
+          friend: {
+            variables: {
+              3: {
+                name: 'name',
+                type: 'text',
+              },
+            },
+          },
+        },
+      },
       stages: [
         { label: 'foo', id: 'abcd', other: 'ignored' },
         { label: 'bar', id: 'efgh', other: 'ignored' },
@@ -30,26 +61,22 @@ it('getUsage() ', () => {
 
 it('getUsageAsStageMeta()', () => {
   const usage = ['stages[0].foo.bar', 'stages[0].foo.bar.bazz', 'stages[1].foo.bar.bazz'];
+
+  const mockStageMetaByIndex = [
+    { label: 'foo', id: 'abcd' },
+    { label: 'bar', id: 'efgh' },
+    { label: 'bazz', id: 'ijkl' },
+  ];
+
+  const mockVariableMetaByIndex = getAllVariablesByUUID(state.protocol.present.codebook);
+
   const expectedResult = [
     { label: 'foo', id: 'abcd' },
     { label: 'bar', id: 'efgh' },
   ];
-  expect(getUsageAsStageMeta(state, usage)).toEqual(expectedResult);
-});
-
-it('getCodebookVariableIndexFromValidationPath()', () => {
-  const testStrings = [
-    "codebook.ego.variables[4b27bf9f-7058-4e74-84d8-2cc0bfd7d25c].validation.sameAs",
-    "codebook.ego.variables[4b27bf9f-7058-4e74-84d8-2cc0bfd7d25c].validation.differentFrom",
-    "codebook.node[nodeType].variables[variableType].validation.sameAs",
-    "codebook.node[nodeType].variables[variableType].validation.differentFrom",
-    "codebook.edge[edgeType].variables[4b27bf9f-7058-4e74-84d8-2cc0bfd7d25c].validation.sameAs",
-    "codebook.edge[edgeType].variables[4b27bf9f-7058-4e74-84d8-2cc0bfd7d25c].validation.differentFrom",
-  ];
-
-  // Run the function for each string in the array
-  testStrings.forEach((testString) => {
-    expect(getCodebookVariableIndexFromValidationPath(testString)).toEqual('4b27bf9f-7058-4e74-84d8-2cc0bfd7d25c');
-  }
-
+  expect(getUsageAsStageMeta(
+    mockStageMetaByIndex,
+    mockVariableMetaByIndex,
+    usage,
+  )).toEqual(expectedResult);
 });
