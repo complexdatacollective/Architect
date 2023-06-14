@@ -4,6 +4,11 @@ import { flatMap } from 'lodash';
 
 const getIdsFromEntity = (entity) => (entity.variables ? Object.keys(entity.variables) : []);
 
+/**
+ *
+ * @param {*} codebook
+ * @returns
+ */
 export const getIdsFromCodebook = (codebook) => flatMap(
   codebook,
   (entityOrEntities, type) => (

@@ -67,6 +67,9 @@ Object {
 
 exports[`indexes selectors getVariableIndex() extracts variables into index 1`] = `
 Object {
+  "codebook.edge[77199445-9d50-4646-b0bc-6d6b0c0e06bd].variables[e343a91f-628d-4175-870c-957beffa0003].validation.sameAs": "e343a91f-628d-4175-870c-957beffa0002",
+  "codebook.ego.variables[9c47f32e-b72f-4b1b-93a2-e29766dc3012].validation.differentFrom": "23a10bcb-bd71-46a1-a36d-4ab80cb5a1d1",
+  "codebook.node[4aebf73e-95e3-4fd1-95e7-237dcc4a4466].variables[0e75ec18-2cb1-4606-9f18-034d28b07c19].validation.differentFrom": "6be95f85-c2d9-4daf-9de1-3939418af888",
   "stages[0].form.fields[0].variable": "3377af3f-3c79-41da-9b0b-6570fb519b93",
   "stages[0].form.fields[10].variable": "9c47f32e-b72f-4b1b-93a2-e29766dc3012",
   "stages[0].form.fields[1].variable": "b4956387-cada-412f-9e97-fe352c3cc44e",
