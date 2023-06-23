@@ -13,6 +13,8 @@ jobs:
     container:
       image: python:2.7.18-buster
     steps:
+      - name: Install sudo package
+        run: apt update && apt install sudo
       - uses: actions/checkout@v3
         with:
           submodules: recursive
@@ -48,14 +50,14 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-20.04
+    container:
+      image: python:2.7.18-buster
     steps:
+      - name: Install sudo package
+        run: apt update && apt install sudo
       - uses: actions/checkout@v3
         with:
           submodules: recursive
-      # Set python version to 2.x due to node-gyp and sass
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "2.7.18"
       # update apt cache
       - name: Update apt cache
         run: sudo apt-get update -y
