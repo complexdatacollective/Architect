@@ -39,6 +39,8 @@ jobs:
         run: sudo apt-get install libavahi-compat-libdnssd-dev -y
 
       - name: Install node modules
+        env:
+          NODE_OPTIONS: "--max_old_space_size=4096"
         run: npm install
 
       - name: Delete current release assets
