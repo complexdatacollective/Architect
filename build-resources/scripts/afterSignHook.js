@@ -9,7 +9,6 @@ async function note(params) {
   if (process.platform !== 'darwin') {
     return;
   }
-  console.log('afterSign hook triggered', params);
 
   const appPath = path.join(params.appOutDir, `${params.packager.appInfo.productFilename}.app`);
   if (!fs.existsSync(appPath)) {

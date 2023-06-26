@@ -1,5 +1,4 @@
 import React from 'react';
-import { Field } from 'redux-form';
 import RadioGroup from '@codaco/ui/lib/components/Fields/RadioGroup';
 import ValidatedField from '@components/Form/ValidatedField';
 import {
@@ -27,10 +26,10 @@ const SkipLogicFields = () => (
     </Row>
     <Row>
       <IssueAnchor fieldName={getFieldId('skipLogic.filter')} description="Skip Logic Rules" />
-      <Field
+      <ValidatedField
         component={ConnectedQuery}
         name="skipLogic.filter"
-        validate={ruleValidator}
+        validation={{ required: true, validator: ruleValidator }}
       />
     </Row>
   </>
