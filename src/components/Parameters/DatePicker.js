@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
@@ -19,9 +19,12 @@ const DateTimeParameters = ({
   const dateFormat = type ? DATE_FORMATS[type] : DATE_FORMATS.full;
   const [useDateFormat, setUseDateFormat] = useState(type);
 
-  if (!type) {
-    setSelectDefault();
-  }
+  useEffect(() => {
+    if (!type) {
+      setSelectDefault();
+    }
+    setUseDateFormat(type);
+  }, [type, setSelectDefault]);
 
   return (
     <>
