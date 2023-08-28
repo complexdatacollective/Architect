@@ -8,6 +8,7 @@ $font-path: '~@codaco/ui/lib/assets/fonts';
 @import './theme';
 @import './helpers';
 @import './mixins';
+@import './grid';
 @import './reset';
 @import './app';
 @import '../lib/ProtocolSummary/styles/all';
