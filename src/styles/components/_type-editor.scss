@@ -1,3 +1,17 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .type-editor {
-  @import './type-editor/icon-option';
+  .type-editor-icon-option {
+    margin: 0;
+    padding: units.unit(3) 0;
+    position: relative;
+
+    .icon {
+      position: absolute;
+      width: units.unit(8);
+      height: units.unit(8);
+      top: units.unit(0);
+      margin-left: units.unit(1);
+    }
+  }
 }

@@ -1,7 +1,9 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .codebook {
   --variable-pill-width: 25rem;
 
-  margin: unit(4) unit(8);
+  margin: units.unit(4) units.unit(8);
   max-width: 80rem;
 
   &__notice {
@@ -15,8 +17,8 @@
 
   &__tag {
     display: inline-block;
-    border-radius: unit(1);
-    padding: unit(.5) unit(.75);
+    border-radius: units.unit(1);
+    padding: units.unit(.5) units.unit(.75);
     font-size: .9em;
     color: var(--color-white);
     background-color: var(--color-mustard--dark);
@@ -28,16 +30,35 @@
   }
 
   &__category {
-    margin-top: unit(4);
+    margin-top: units.unit(4);
 
     &-items {
-      border-top: unit(.25) solid var(--architect-divider);
-      margin-top: unit(2);
+      border-top: units.unit(.25) solid var(--architect-divider);
+      margin-top: units.unit(2);
+    }
+  }
+
+  &-column {
+    vertical-align: middle;
+
+    &--control {
+      white-space: nowrap;
+      text-align: left;
+      width: 0;
+
+      // Ultimately this should probably live in codaco/ui Button as an option
+      button {
+        margin-left: units.unit(1);
+
+        .button__content {
+          padding: 0;
+          margin-left: 0 !important; // sass-lint:disable-line no-important
+        }
+      }
     }
   }
 
   &__entity {
-    margin-top: unit(8);
     overflow: hidden;
     margin: 2.4rem auto;
     padding: 2.4rem;
@@ -45,7 +66,7 @@
     border-radius: var(--border-radius);
 
     &:first-child {
-      margin-top: unit(4);
+      margin-top: units.unit(4);
     }
 
     &-detail {
@@ -55,20 +76,20 @@
 
     &-icon {
       flex-grow: 0;
-      flex-basis: unit(8);
+      flex-basis: units.unit(8);
 
       .node {
-        font-size: unit(8);
+        font-size: units.unit(8);
       }
     }
 
     &-name {
-      padding-left: unit(4);
+      padding-left: units.unit(4);
     }
 
     &-meta {
       flex: 1;
-      padding-left: unit(4);
+      padding-left: units.unit(4);
 
       .link {
         margin-right: .75rem;
@@ -81,19 +102,19 @@
 
       button {
         &:not(:last-of-type) {
-          margin-right: unit(1);
+          margin-right: units.unit(1);
         }
       }
     }
   }
 
   &__variables {
-    margin-top: unit(2);
+    margin-top: units.unit(2);
     width: 100%;
 
     &-row {
       &--heading {
-        border-bottom: unit(.25) solid var(--architect-divider);
+        border-bottom: units.unit(.25) solid var(--architect-divider);
       }
 
       &--even {
@@ -138,26 +159,6 @@
         &--desc {
           &::after {
             content: '\25B4';
-          }
-        }
-      }
-    }
-
-    &-column {
-      vertical-align: middle;
-
-      &--control {
-        white-space: nowrap;
-        text-align: left;
-        width: 0;
-
-        // Ultimately this should probably live in codaco/ui Button as an option
-        button {
-          margin-left: unit(1);
-
-          .button__content {
-            padding: 0;
-            margin-left: 0 !important; // sass-lint:disable-line no-important
           }
         }
       }

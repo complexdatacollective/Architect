@@ -1,11 +1,11 @@
-
+@use '~@codaco/ui/src/styles/global/core/units';
 
 .protocol-summary-stage {
   page-break-before: always;
 
   &__wrapper {
     display: flex;
-    padding-bottom: unit(4);
+    padding-bottom: units.unit(4);
     align-items: center;
   }
 
@@ -17,13 +17,13 @@
 
   &__preview {
     flex: 0 0 5cm;
-    display: flex;
     align-items: center;
     position: relative;
     display: flex;
 
     .stage-image {
       flex: 1 1;
+
       img {
         width: 100%;
         border-radius: var(--border-radius);
@@ -32,17 +32,19 @@
   }
 
   &__summary {
-    margin-right: unit(2);
+    margin-right: units.unit(2);
     flex: 1;
 
     .stage-label {
-      --size: #{unit(8)};
+      --size: #{units.unit(8)};
+
       font-size: 24px;
       font-weight: bold;
       display: flex;
       align-items: center;
-      &:before {
-        margin-right: unit(2);
+
+      &::before {
+        margin-right: units.unit(2);
         display: flex;
         flex: 0 0 var(--size);
         width: var(--size);
@@ -53,7 +55,7 @@
         background: var(--color-cyber-grape);
         content: attr(data-number);
         color: white;
-        font-family: 'Quicksand';
+        font-family: var(--heading-font-family);
       }
     }
   }
@@ -63,18 +65,17 @@
   &__panels-content {
     > ol {
       margin: 0;
-      padding: 0 0 0 unit(2);
-      padding-inline-start: unit(4);
+      padding: 0 0 0 units.unit(2);
+      padding-inline-start: units.unit(4);
 
       > li {
-        margin: unit(2) 0;
-        padding-left: unit(2);
+        margin: units.unit(2) 0;
+        padding-left: units.unit(2);
       }
     }
   }
 
   &__prompts {
-
     &-item {
       page-break-inside: avoid;
     }
@@ -86,6 +87,14 @@
 
   &__form {
     page-break-inside: avoid;
+  }
+
+  &__interview-script {
+    break-inside: avoid;
+
+    &-content {
+      min-height: 25rem;
+    }
   }
 
   // Sections!
@@ -108,13 +117,6 @@
 
     &-content {
       @extend .section;
-    }
-  }
-
-  &__interview-script {
-    break-inside: avoid;
-    &-content {
-      min-height: 25rem;
     }
   }
 }

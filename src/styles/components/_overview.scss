@@ -1,8 +1,4 @@
-.app--macos {
-  .overview-summary {
-    padding-top: unit(2.5);
-  }
-}
+@use '~@codaco/ui/src/styles/global/core/units';
 
 .overview-summary {
   position: fixed;
@@ -10,10 +6,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: unit(1) unit(4);
+  padding: units.unit(1) units.unit(4);
   width: 100%;
   background-color: var(--color-slate-blue--dark);
-  box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
+  box-shadow: 0 units.unit(1) .2rem 0 var(--architect-panel-shadow);
   z-index: var(--z-panel);
 
   &__header {
@@ -28,26 +24,32 @@
 
     &__button {
       &:not(:last-child) {
-        margin-right: unit(2);
+        margin-right: units.unit(2);
       }
     }
   }
 }
 
+.app--macos {
+  .overview-summary {
+    padding-top: units.unit(2.5);
+  }
+}
+
 .overview {
   margin: 0 auto;
-  margin-top: unit(4);
+  margin-top: units.unit(4);
   width: 70rem;
   position: relative;
   background: var(--color-white);
   border-radius: var(--border-radius);
   overflow: hidden;
-  box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
+  box-shadow: 0 units.unit(1) .2rem 0 var(--architect-panel-shadow);
   display: flex;
   flex-direction: column;
 
   &__panel {
-    padding: unit(2) unit(6);
+    padding: units.unit(2) units.unit(6);
 
     .overview-description {
       textarea {
@@ -70,13 +72,13 @@
     align-items: center;
     justify-content: space-between;
     flex: 0 0 auto;
-    padding: unit(2) unit(6);
+    padding: units.unit(2) units.unit(6);
 
     .action-buttons {
       display: flex;
 
       :not(:last-child) {
-        margin-right: unit(2);
+        margin-right: units.unit(2);
       }
     }
 

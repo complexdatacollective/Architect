@@ -1,5 +1,7 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 :root {
-  --variable-pill-width: #{unit(55)};
+  --variable-pill-width: #{units.unit(55)};
   --variable-pill-background: var(--color-white);
   --variable-pill-shadow-color: var(--color-platinum--dark);
 }
@@ -9,9 +11,9 @@
   display: inline-flex;
   flex-wrap: nowrap;
   background-color: var(--variable-pill-background);
-  border-radius: unit(4);
+  border-radius: units.unit(4);
   overflow: hidden;
-  box-shadow: 0 0 unit(1) var(--variable-pill-shadow-color);
+  box-shadow: 0 0 units.unit(1) var(--variable-pill-shadow-color);
 
   &--disabled {
     opacity: .35;
@@ -19,23 +21,23 @@
 
   &__edit-tooltip {
     cursor: pointer;
-    padding: unit(1);
+    padding: units.unit(1);
     border-radius: var(--border-radius);
     display: flex;
 
     .icon {
-      height: unit(2);
-      width: unit(2);
+      height: units.unit(2);
+      width: units.unit(2);
     }
   }
 
   &__icon {
     background-color: var(--color-platinum);
-    flex: 0 0 unit(6);
+    flex: 0 0 units.unit(6);
 
     .icon {
-      width: unit(2.5);
-      height: unit(2.5);
+      width: units.unit(2.5);
+      height: units.unit(2.5);
     }
   }
 
@@ -48,8 +50,8 @@
 
   &__container {
     flex: 1;
-    width: calc(100% - #{unit(6)});
-    height: unit(7);
+    width: calc(100% - #{units.unit(6)});
+    height: units.unit(7);
     display: flex;
     justify-content: space-between;
 
@@ -80,7 +82,7 @@
       margin: 0;
       color: var(--text-dark);
       flex: 1 0 auto;
-      padding: unit(1.5) unit(2);
+      padding: units.unit(1.5) units.unit(2);
       word-break: keep-all;
     }
 
@@ -99,12 +101,12 @@
         }
 
         .icon {
-          width: unit(2.5);
-          height: unit(2.5);
+          width: units.unit(2.5);
+          height: units.unit(2.5);
         }
 
         &--cancel {
-          margin-left: unit(1);
+          margin-left: units.unit(1);
         }
       }
     }

@@ -1,12 +1,14 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .list {
   &__error {
-    margin: unit(2) 0;
+    margin: units.unit(2) 0;
     color: var(--error);
   }
 
   &__controls {
-    padding-bottom: unit(2);
-    margin-bottom: unit(2);
+    padding-bottom: units.unit(2);
+    margin-bottom: units.unit(2);
     border-bottom: 2px solid var(--architect-sortable-preview-background--alt);
   }
 }

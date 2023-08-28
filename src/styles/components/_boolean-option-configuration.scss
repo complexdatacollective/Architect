@@ -1,10 +1,12 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .boolean-option-configuration {
   display: grid;
-  column-gap: unit(2);
+  column-gap: units.unit(2);
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 
   &__item {
-    padding: unit(3);
+    padding: units.unit(3);
     border-radius: var(--border-radius);
     background: var(--architect-panel-grey--dark);
 

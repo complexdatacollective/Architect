@@ -1,10 +1,12 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 $duration: var(--animation-duration-standard);
 
 .attributes-table-variable {
   min-height: 50px;
   background: transparent;
   transition: background $duration;
-  padding: unit(2) 0;
+  padding: units.unit(2) 0;
 
   .form-field-container,
   .form-field {
@@ -23,7 +25,7 @@ $duration: var(--animation-duration-standard);
     overflow: hidden;
     transition: opacity $duration, max-height $duration;
     color: var(--text-light);
-    padding: 0 unit(2);
+    padding: 0 units.unit(2);
   }
 
   &--edit {

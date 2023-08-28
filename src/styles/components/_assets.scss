@@ -1,11 +1,13 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .assets {
   background-color: var(--background-dark);
   color: var(--text-light);
-  border-radius: unit(2);
+  border-radius: units.unit(2);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: unit(2);
+  padding: units.unit(2);
   width: 100%;
   height: 100%;
   transition-property: background-color;
@@ -17,7 +19,7 @@
   &.assets-video {
     &__icon {
       flex: 0 0 25px;
-      margin: 0 unit(2) 0 0;
+      margin: 0 units.unit(2) 0 0;
     }
 
     &__label {

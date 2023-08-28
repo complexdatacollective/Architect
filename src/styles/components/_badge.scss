@@ -1,9 +1,11 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 %badge {
   display: inline-block;
   background-color: var(--color-mid-grey);
   border-radius: .75rem;
   padding: .2rem .5rem;
-  margin: 0 unit(1);
+  margin: 0 units.unit(1);
   font-size: .7rem;
   color: var(--text-light);
 }
@@ -13,6 +15,7 @@
 
   strong {
     text-transform: capitalize;
+
     // These properties are a hacky workaround for this:
     // https://stackoverflow.com/questions/49783681/text-transform-capitalize-css-not-working-correctly
     content: '';

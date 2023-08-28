@@ -1,5 +1,7 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .items-handle {
-  width: unit(4);
+  width: units.unit(4);
   height: 100%;
   cursor: grab;
   overflow: hidden;
@@ -8,7 +10,7 @@
   align-items: center;
 
   .icon {
-    width: unit(2);
-    height: unit(2);
+    width: units.unit(2);
+    height: units.unit(2);
   }
 }

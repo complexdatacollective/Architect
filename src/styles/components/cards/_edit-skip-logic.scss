@@ -1,5 +1,4 @@
 .edit-skip-logic {
-
   &__section {
     position: relative;
     padding-top: 20px;
@@ -24,6 +23,7 @@
 
   &__action {
     @include flex-inline;
+
     background: var(--architect-rule-operator);
     border-radius: 10px;
     padding: 20px;

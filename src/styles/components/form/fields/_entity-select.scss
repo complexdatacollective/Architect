@@ -1,9 +1,10 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 $component-name: 'form-fields-entity-select';
 
 .#{$component-name} {
   &__field {
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     justify-content: flex-start;
   }
 
@@ -49,18 +50,18 @@ $component-name: 'form-fields-entity-select';
 
 .preview-edge {
   background: var(--color-platinum);
-  margin: unit(1);
+  margin: units.unit(1);
   display: flex;
   flex-direction: row;
   align-items: center;
   position: relative;
-  padding: unit(1) unit(2);
+  padding: units.unit(1) units.unit(2);
   border: 4px solid transparent;
-  border-radius: unit(20); // arbitrarily large
+  border-radius: units.unit(20); // arbitrarily large
   transition: border-color var(--animation-easing) var(--animation-duration-standard);
 
   .icon {
-    margin: 0 unit(1) 0 0;
+    margin: 0 units.unit(1) 0 0;
   }
 
   &--selected {

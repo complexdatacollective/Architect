@@ -1,9 +1,11 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .form-round-button {
-  font-size: unit(3);
+  font-size: units.unit(3);
   background-color: var(--architect-button-background--dark);
   color: var(--text);
-  width: unit(4);
-  height: unit(4);
+  width: units.unit(4);
+  height: units.unit(4);
   border-radius: 100%;
   border: 0;
   cursor: pointer;
@@ -18,8 +20,8 @@
   }
 
   &--small {
-    width: unit(2);
-    height: unit(2);
+    width: units.unit(2);
+    height: units.unit(2);
 
     .icon {
       width: 100%;
