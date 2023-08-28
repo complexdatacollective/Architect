@@ -4,6 +4,8 @@
 
 // Default Settings
 // =============================================================================
+@use "sass:math";
+
 $grid-container-max-width: 990px !default;
 $grid-num-columns: 12 !default;
 
@@ -45,12 +47,12 @@ $grid-num-columns: 12 !default;
   @if $shrink {
     flex: 0 auto;
   } @else {
-    @include grid-item-percent(percentage($columns / $total-columns));
+    @include grid-item-percent(percentage(math.div($columns, $total-columns)));
   }
 }
 
 @mixin grid-item-margin($offset: 0, $columns: $grid-num-columns, $direction: left) {
-  margin-#{$direction}: percentage($offset / $columns);
+  margin-#{$direction}: percentage(math.div($offset, $columns));
 }
 
 @mixin grid-item-fluid {
@@ -205,7 +207,7 @@ $flex-align-stack: (
         // grid sizes for column
         &__#{$item-class}#{$breakpoint-class} {
           @for $i from 1 through $columns {
-            $percent: percentage($i / $columns);
+            $percent: percentage(math.div($i, $columns));
             $reduced: _reduceFraction($i, $columns);
             $fraction: #{nth($reduced, 1)}-#{nth($reduced, 2)};
 

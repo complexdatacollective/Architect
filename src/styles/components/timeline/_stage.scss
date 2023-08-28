@@ -1,6 +1,8 @@
+@use "sass:math";
+
 $preview-offset: unit(12);
 $preview-width: unit(26);
-$preview-ratio: 10 / 16;
+$preview-ratio: math.div(10, 16);
 $component-name: timeline-stage;
 
 .#{$component-name} {
