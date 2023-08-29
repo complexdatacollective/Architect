@@ -5,6 +5,7 @@
 // Default Settings
 // =============================================================================
 @use 'sass:math';
+@use 'sass:map';
 
 $grid-container-max-width: 990px !default;
 $grid-num-columns: 12 !default;
