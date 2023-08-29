@@ -97,7 +97,7 @@
     "icon-gen": "^1.0.5",
     "jest": "^26.4.2",
     "jest-date-mock": "^1.0.8",
-    "jszip": "^3.7.0",
+    "jszip": "^3.10.1",
     "lodash": "^4.17.19",
     "luxon": "^1.24.1",
     "mini-css-extract-plugin": "^1.6.2",
