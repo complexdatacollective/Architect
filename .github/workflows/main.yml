@@ -1,7 +1,7 @@
 name: CI
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
 
   # Allows you to run this workflow manually from the Actions tab
@@ -9,27 +9,29 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
-
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10.12"
+      # update apt cache
+      - name: Update apt cache
+        run: sudo apt-get update -y
       # Set node version
       - uses: actions/setup-node@v2
         with:
-          node-version: '12.14.1'
-
-      # Set npm version
+          node-version: "14.21.3"
       - name: Set NPM 7
-        run: npm install -g npm@7.6.3
-
+        run: npm install -g npm@8.19.4
       # Cache node_modules
       - uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
         with:
-          path: '**/node_modules'
+          path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install MDNS build dependencies
@@ -38,32 +40,37 @@ jobs:
       - name: Install node modules
         run: npm install
 
-      - name: Lint and test
-        run: npm run preflight
+      - name: Lint
+        run: npm run lint -- --max-warnings 0 && npm run sass-lint -- --max-warnings 0
+
+      - name: Run tests
+        run: npm run test
 
   build:
     needs: test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
-
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10.12"
+      # update apt cache
+      - name: Update apt cache
+        run: sudo apt-get update -y
       # Set node version
       - uses: actions/setup-node@v2
         with:
-          node-version: '12.14.1'
-
-      # Set npm version
+          node-version: "14.21.3"
       - name: Set NPM 7
-        run: npm install -g npm@7.6.3
-
+        run: npm install -g npm@8.19.4
       # Cache node_modules
       - uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
         with:
-          path: '**/node_modules'
+          path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install MDNS build dependencies
@@ -74,5 +81,3 @@ jobs:
 
       - name: Build
         run: npm run build
-
-

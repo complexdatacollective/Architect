@@ -18,7 +18,7 @@ const ValidationSection = ({
   const getFormValue = formValueSelector(form);
   const hasValidation = useSelector((state) => {
     const validation = getFormValue(state, 'validation');
-    return validation && Object.keys(pickBy(validation)).length > 0;
+    return validation && Object.keys(validation).length > 0;
   });
 
   const handleToggleValidation = (nextState) => {
