@@ -1,6 +1,8 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .screen {
   &.rule-screen {
-    max-height: calc(100% - #{unit(16)});
+    max-height: calc(100% - #{units.unit(16)});
     height: auto;
   }
 }

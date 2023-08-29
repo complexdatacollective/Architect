@@ -1,14 +1,16 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .recent-protocols {
   position: relative;
   margin: 0 auto;
-  border-radius: unit(1);
+  border-radius: units.unit(1);
   background-color: var(--light-background);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   filter: drop-shadow(10px 10px 0 var(--architect-control-bar-shadow));
   z-index: 2;
-  padding: unit(3);
+  padding: units.unit(3);
 
   &__title {
     width: 100%;
@@ -35,7 +37,7 @@
   &__welcome {
     text-align: center;
     width: 85vmin;
-    padding: unit(4);
+    padding: units.unit(4);
     color: var(--text-light);
     margin: 0 auto;
     align-self: center;

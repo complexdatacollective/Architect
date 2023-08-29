@@ -1,7 +1,9 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .inline-edit-screen {
   position: absolute;
-  top: unit(0);
-  left: unit(0);
+  top: units.unit(0);
+  left: units.unit(0);
   width: 100%;
   height: 100%;
   display: flex;
@@ -14,11 +16,11 @@
     background: var(--color-slate-blue--dark);
     color: var(--color-white);
     width: 100%;
-    padding: unit(1) unit(4);
+    padding: units.unit(1) units.unit(4);
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
+    box-shadow: 0 units.unit(1) .2rem 0 var(--architect-panel-shadow);
     z-index: var(--z-panel);
   }
 
@@ -26,7 +28,7 @@
     background: var(--color-white);
     max-width: 80rem;
     min-width: 50rem;
-    max-height: calc(100% - #{unit(18)});
+    max-height: calc(100% - #{units.unit(18)});
     border-radius: var(--border-radius);
     box-shadow: 0 0 4rem 0 var(--modal-window-box-shadow);
     display: flex;
@@ -39,19 +41,19 @@
     flex: 1 1 auto;
     overflow-y: scroll;
     scroll-behavior: smooth;
-    padding: unit(2);
+    padding: units.unit(2);
   }
 
   &__controls {
     width: 100%;
-    padding: unit(2) unit(4);
+    padding: units.unit(2) units.unit(4);
     background: var(--architect-control-bar-background);
     display: flex;
     justify-content: flex-end;
 
     button {
       &:last-child {
-        margin-left: unit(2);
+        margin-left: units.unit(2);
       }
     }
   }

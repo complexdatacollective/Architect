@@ -7,10 +7,12 @@ import IssueAnchor from '../IssueAnchor';
 
 const animations = {
   collapsed: {
+    overflow: 'hidden',
     height: 0,
     opacity: 0,
   },
   open: {
+    overflow: 'visible',
     height: 'auto',
     opacity: 1,
   },
@@ -66,7 +68,7 @@ const Section = ({
       <legend
         className={toggleable ? 'toggleable' : ''}
       >
-        { toggleable && (
+        {toggleable && (
           <Toggle
             input={{
               value: isOpen,
@@ -81,18 +83,19 @@ const Section = ({
         )}
       </legend>
       <div className="summary">
-        { summary }
+        {summary}
       </div>
-      { id && (
+      {id && (
         <IssueAnchor fieldName={id} description={title} />
       )}
       <AnimatePresence initial={false}>
-        { (isOpen || !toggleable) && (
+        {(isOpen || !toggleable) && (
           <motion.div
             variants={animations}
             initial="collapsed"
             animate="open"
             exit="collapsed"
+            transition={{ duration: 0.2, type: 'easeInOut' }}
           >
             {children}
           </motion.div>

@@ -1,6 +1,8 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .variable-spotlight {
   position: relative;
-  margin-top: unit(12);
+  margin-top: units.unit(12);
   width: 45rem;
   display: flex;
   flex-direction: column;
@@ -16,10 +18,10 @@
     flex: 1 100%;
     display: flex;
     align-items: center;
-    padding: unit(2) unit(4);
+    padding: units.unit(2) units.unit(4);
 
     .icon {
-      margin-right: unit(1);
+      margin-right: units.unit(1);
       flex: 0 0 auto;
 
       &[name='info'] {
@@ -43,15 +45,16 @@
 
     > legend {
       @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
+
       text-align: center;
       color: var(--transparent--md);
-      padding: unit(1) unit(2);
+      padding: units.unit(1) units.unit(2);
     }
   }
 
   &__header {
-    flex: 0 0 unit(5);
-    padding: unit(2) unit(4);
+    flex: 0 0 units.unit(5);
+    padding: units.unit(2) units.unit(4);
 
     .form-field,
     .form-field-container {
@@ -64,7 +67,7 @@
     flex: 1 auto;
     max-height: 60vh;
     overflow: hidden;
-    padding-bottom: unit(1);
+    padding-bottom: units.unit(1);
 
     ol {
       list-style: none;
@@ -77,7 +80,7 @@
 .spotlight-list-item {
   display: flex;
   justify-content: space-between;
-  padding: unit(1) unit(4);
+  padding: units.unit(1) units.unit(4);
   align-items: center;
 
   .variable-pill {
@@ -85,9 +88,9 @@
   }
 
   kbd {
-    margin-left: unit(2);
+    margin-left: units.unit(2);
     background: var(--color-platinum);
-    padding: unit(.5) unit(1);
+    padding: units.unit(.5) units.unit(1);
     border: 1px solid var(--color-charcoal);
     border-radius: 5px;
     display: flex;
@@ -115,12 +118,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: unit(1) unit(2);
+    padding: units.unit(1) units.unit(2);
     font-weight: 500;
 
     .icon {
-      height: unit(3);
-      margin-right: unit(2);
+      height: units.unit(3);
+      margin-right: units.unit(2);
 
 
       .cls-1,

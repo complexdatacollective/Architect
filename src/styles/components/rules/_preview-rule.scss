@@ -1,23 +1,7 @@
-.stage-editor-section {
-  --variable-pill-background: var(--color-platinum);
-  --variable-pill-shadow-color: rgb(212, 212, 212); //sass-lint:disable-line no-color-literals
-
-  .preview-edge {
-    background: var(--variable-pill-background);
-  }
-
-  .stage-editor-section {
-    --variable-pill-background: var(--color-white);
-    --variable-pill-shadow-color: var(--color-platinum--dark);
-
-    .preview-edge {
-      background: var(--variable-pill-background);
-    }
-  }
-}
+@use '~@codaco/ui/src/styles/global/core/units';
 
 .rules-preview-rule {
-  padding: unit(1) unit(2);
+  padding: units.unit(1) units.unit(2);
   cursor: pointer;
   display: flex;
   border-radius: var(--border-radius);
@@ -28,6 +12,7 @@
 
   &__text {
     --base-node-size: 7rem;
+
     flex-grow: 1;
     color: var(--text-dark);
     display: flex;
@@ -51,12 +36,12 @@
 
   &__delete {
     flex-grow: 0;
-    flex-basis: unit(3);
+    flex-basis: units.unit(3);
     border: 0;
-    width: unit(3);
-    height: unit(3);
-    margin: 0 0 0 unit(1);
-    border-radius: unit(3);
+    width: units.unit(3);
+    height: units.unit(3);
+    margin: 0 0 0 units.unit(1);
+    border-radius: units.unit(3);
     opacity: 0;
     transition: opacity var(--animation-duration-fast) var(--animation-easing);
     cursor: pointer;
@@ -67,8 +52,8 @@
     background: var(--error);
 
     .icon {
-      width: unit(2);
-      height: unit(2);
+      width: units.unit(2);
+      height: units.unit(2);
 
       .cls-1,
       .cls-2 {
@@ -79,6 +64,7 @@
 
   &:hover {
     --variable-pill-shadow-color: var(--color-rich-black);
+
     background-color: var(--background-dark);
 
     .rules-preview-rule__delete {
@@ -87,6 +73,24 @@
 
     .rules-preview-rule__text {
       color: var(--text-light);
+    }
+  }
+}
+
+.stage-editor-section {
+  --variable-pill-background: var(--color-platinum);
+  --variable-pill-shadow-color: rgb(212 212 212); // sass-lint:disable-line no-color-literals
+
+  .preview-edge {
+    background: var(--variable-pill-background);
+  }
+
+  .stage-editor-section {
+    --variable-pill-background: var(--color-white);
+    --variable-pill-shadow-color: var(--color-platinum--dark);
+
+    .preview-edge {
+      background: var(--variable-pill-background);
     }
   }
 }

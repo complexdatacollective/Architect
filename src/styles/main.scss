@@ -1,4 +1,5 @@
 $font-path: '~@codaco/ui/lib/assets/fonts';
+
 @import '~react-grid-layout/css/styles.css';
 @import '~react-resizable/css/styles.css';
 @import '~tippy.js/dist/tippy.css';
@@ -8,6 +9,7 @@ $font-path: '~@codaco/ui/lib/assets/fonts';
 @import './theme';
 @import './helpers';
 @import './mixins';
+@import './grid';
 @import './reset';
 @import './app';
 @import '../lib/ProtocolSummary/styles/all';

@@ -1,3 +1,5 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 $duration: var(--animation-duration-standard);
 
 .attributes-table-chooser {
@@ -14,11 +16,11 @@ $duration: var(--animation-duration-standard);
     justify-content: center;
     align-items: center;
     text-align: center;
-    flex: 0 0 calc(25% - #{unit(2)});
-    height: unit(12);
-    padding: unit(2);
-    margin: unit(1);
-    border-radius: unit(2);
+    flex: 0 0 calc(25% - #{units.unit(2)});
+    height: units.unit(12);
+    padding: units.unit(2);
+    margin: units.unit(1);
+    border-radius: units.unit(2);
     border: 3px solid var(--architect-table-chooser);
     background-color: transparent;
     cursor: pointer;

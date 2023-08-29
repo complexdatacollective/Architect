@@ -1,4 +1,4 @@
-// sass-lint:disable no-ids
+@use '~@codaco/ui/src/styles/global/core/units';
 
 .start {
   margin: 0 auto;
@@ -34,7 +34,7 @@
       font-size: 5.6vmin;
       font-weight: bold;
       margin-top: 0;
-      margin-bottom: unit(2);
+      margin-bottom: units.unit(2);
     }
 
     &-lead {
@@ -45,18 +45,17 @@
   }
 
   &__call-to-action {
-    padding: 0 0 unit(8);
+    padding: 0 0 units.unit(8);
 
     .button {
-      margin: 0 unit(2) 0 0;
+      margin: 0 units.unit(2) 0 0;
       padding: 1.8em;
-      width: unit(30);
+      width: units.unit(30);
       transition: transform 5s ease-in;
     }
   }
 
   &--hide {
-
     #create-new-protocol-button {
       transform: translateX(-100%);
     }

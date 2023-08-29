@@ -1,9 +1,13 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
+
 .form-dropzone {
   @include preset('copy-standard');
+
   cursor: pointer;
   position: relative;
-  border-radius: unit(2);
-  height: unit(12);
+  border-radius: units.unit(2);
+  height: units.unit(12);
   border-width: 2px;
   border-style: solid;
   transition-duration: var(--animation-duration-slow);
@@ -12,7 +16,7 @@
   border-color: transparent;
   background-color: var(--background-dark);
   overflow: hidden;
-  padding: unit(4);
+  padding: units.unit(4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,13 +41,13 @@
     transition-duration: var(--animation-duration-standard);
     transition-timing-function: var(--animation-easing);
     transition-property: opacity;
-    line-height: unit(2);
+    line-height: units.unit(2);
   }
 
   &__link {
     display: inline-block;
     border-bottom: 2px solid var(--notice);
-    line-height: unit(2);
+    line-height: units.unit(2);
     cursor: pointer;
   }
 
@@ -93,10 +97,10 @@
   }
 
   &__error {
-    margin-top: unit(1);
+    margin-top: units.unit(1);
     overflow: hidden;
-    padding: unit(1) unit(2);
-    border-radius: unit(1);
+    padding: units.unit(1) units.unit(2);
+    border-radius: units.unit(1);
     background-color: var(--warning);
     opacity: 0;
     transform-origin: top center;
@@ -104,12 +108,13 @@
     transition-property: opacity;
     display: flex;
     align-items: center;
+
     // justify-content: flex-end;
 
     .icon {
-      width: unit(2);
-      height: unit(2);
-      margin-right: unit(1);
+      width: units.unit(2);
+      height: units.unit(2);
+      margin-right: units.unit(1);
     }
 
     &--show {

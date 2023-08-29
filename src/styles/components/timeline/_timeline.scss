@@ -1,6 +1,9 @@
-$stage-height: (9 / 16) * 15vw;
-$stage-padding: unit(5);
-$bottom-spacing: unit(12);
+@use '~@codaco/ui/src/styles/global/core/units';
+@use "sass:math";
+
+$stage-height: math.div(9, 16) * 15vw;
+$stage-padding: units.unit(5);
+$bottom-spacing: units.unit(12);
 
 .timeline {
   position: relative;
@@ -11,10 +14,11 @@ $bottom-spacing: unit(12);
   &__insert {
     cursor: pointer;
     position: absolute;
+
     // position: relative;
     left: 50%;
-    padding-left: unit(6);
-    height: unit(5);
+    padding-left: units.unit(6);
+    height: units.unit(5);
     display: inline-flex;
     align-items: center;
     font-family: var(--heading-font-family);
@@ -32,9 +36,9 @@ $bottom-spacing: unit(12);
       position: absolute;
       left: 0;
       top: 0;
-      width: unit(5);
-      height: unit(5);
-      border-radius: unit(5);
+      width: units.unit(5);
+      height: units.unit(5);
+      border-radius: units.unit(5);
       background-color: var(--architect-timeline-line);
       display: inline-flex;
       justify-content: center;
@@ -81,7 +85,7 @@ $bottom-spacing: unit(12);
     }
 
     &--new {
-      margin-top: unit(3);
+      margin-top: units.unit(3);
       position: relative;
     }
   }
@@ -96,15 +100,13 @@ $bottom-spacing: unit(12);
     top: 0;
     left: 50%;
     width: 0;
-    height: calc(100% - #{unit(5)});
-    border-left-width: unit(.6);
-    border-left-color: var(--architect-timeline-line);
-    border-left-style: solid;
+    height: calc(100% - #{units.unit(5)});
+    border-left: units.unit(.6) solid var(--architect-timeline-line);
   }
 
   &__stages {
     position: relative;
-    padding: unit(6) 0 0;
+    padding: units.unit(6) 0 0;
 
     &--show {
       opacity: 1;

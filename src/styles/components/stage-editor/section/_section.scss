@@ -1,11 +1,12 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 :root {
   --section-background-color: var(--architect-panel-grey);
 }
 
 .stage-editor-section {
-  overflow: hidden;
-  margin: unit(4) unit(8);
-  padding: unit(2) unit(4);
+  margin: units.unit(4) units.unit(8);
+  padding: units.unit(2) units.unit(4);
   background: var(--section-background-color);
   border-radius: var(--border-radius);
   position: relative;
@@ -14,7 +15,7 @@
   &--toggleable {
     &:not(.stage-editor-section--open) {
       .summary {
-        margin-top: -#{unit(2)};
+        margin-top: -#{units.unit(2)};
       }
     }
   }
@@ -25,11 +26,12 @@
 
   > legend {
     @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
+
     --input-background: transparent;
 
     font-family: var(--heading-font-family);
     font-size: 1rem;
-    padding: unit(1) unit(3);
+    padding: units.unit(1) units.unit(3);
     background: var(--section-background-color);
     border-radius: var(--border-radius);
     display: flex;
@@ -47,9 +49,9 @@
     }
 
     .icon {
-      height: unit(1);
-      width: unit(1);
-      margin-right: unit(1);
+      height: units.unit(1);
+      width: units.unit(1);
+      margin-right: units.unit(1);
 
       .cls-2 {
         fill: var(--color-charcoal);
@@ -72,7 +74,8 @@
     --variable-pill-shadow-color: #c7ced0; // sass-lint:disable-line no-color-literals
     --input-background: var(--color-platinum--dark);
     --slider-color: var(--color-charcoal);
-    margin: unit(4) 0;
+
+    margin: units.unit(4) 0;
 
     .form-field-slider {
       --slider-color: var(--color-charcoal);
@@ -81,7 +84,7 @@
 
   > .stage-editor-section {
     background: var(--section-background-color);
-    border-radius: unit(1);
+    border-radius: units.unit(1);
   }
 
   &--compact-next {

@@ -1,10 +1,12 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .thumbnail {
   background-color: var(--color-cyber-grape);
   color: var(--text-light);
   border-radius: var(--border-radius);
   display: inline-flex;
   align-items: center;
-  padding: unit(2);
+  padding: units.unit(2);
   transition-property: background-color;
   transition-duration: var(--animation-duration-standard);
   transition-timing-function: var(--animation-easing);
@@ -12,7 +14,7 @@
 
   &__icon {
     flex: 0 0 25px;
-    margin: 0 unit(2) 0 0;
+    margin: 0 units.unit(2) 0 0;
   }
 
   &__label {

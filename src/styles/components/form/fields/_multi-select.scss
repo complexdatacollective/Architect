@@ -9,9 +9,10 @@ $component-name: 'form-fields-multi-select';
 
   &__label {
     @include preset('title-4');
+
     font-weight: 600;
     display: block;
-    margin: 0 0 unit(1);
+    margin: 0 0 units.unit(1);
   }
 
   button {
@@ -19,39 +20,39 @@ $component-name: 'form-fields-multi-select';
   }
 
   &__rules {
-    margin: 0 0 unit(2);
+    margin: 0 0 units.unit(2);
   }
 
   &__rule {
     display: flex;
     background-color: var(--form-control);
     color: var(--architect-sortable-text);
-    border-radius: unit(1);
+    border-radius: units.unit(1);
     z-index: var(--z-fx);
     transition: background-color var(--animation-easing) var(--animation-duration-standard);
 
     &:not(:last-of-type) {
-      margin-bottom: unit(1);
+      margin-bottom: units.unit(1);
     }
 
     &-control {
       flex-grow: 0;
       display: flex;
       align-items: center;
-      padding: 0 unit(2);
+      padding: 0 units.unit(2);
     }
 
     &-options {
       flex: 1;
       display: flex;
       align-items: flex-start;
-      padding: unit(1) unit(2);
+      padding: units.unit(1) units.unit(2);
     }
 
     &-option {
       display: flex;
       align-items: center;
-      margin-left: unit(1);
+      margin-left: units.unit(1);
       flex: 1 1 100%;
 
       &:first-child {
@@ -59,7 +60,7 @@ $component-name: 'form-fields-multi-select';
       }
 
       &-label {
-        margin-right: unit(1);
+        margin-right: units.unit(1);
         transition: color var(--animation-easing) var(--animation-duration-standard);
       }
 
@@ -94,17 +95,17 @@ $component-name: 'form-fields-multi-select';
   &__add,
   &__handle {
     cursor: pointer;
-    background-color: transparent; //var(--form-control);
-    width: unit(3);
-    height: unit(3);
+    background-color: transparent;
+    width: units.unit(3);
+    height: units.unit(3);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--architect-sortable-text);
 
     .icon {
-      width: unit(2);
-      height: unit(2);
+      width: units.unit(2);
+      height: units.unit(2);
 
       .cls-1,
       .cls-2 {
@@ -120,21 +121,21 @@ $component-name: 'form-fields-multi-select';
   &__add {
     display: inline-flex;
     width: auto;
-    height: unit(4);
-    border-radius: unit(2);
-    padding: 0 unit(2);
+    height: units.unit(4);
+    border-radius: units.unit(2);
+    padding: 0 units.unit(2);
 
     .icon {
-      width: unit(2);
-      height: unit(2);
-      margin-right: unit(1);
+      width: units.unit(2);
+      height: units.unit(2);
+      margin-right: units.unit(1);
     }
   }
 
   &__field--has-error {
     .form-field-error {
-      margin: unit(1) 0;
-      border-radius: unit(1);
+      margin: units.unit(1) 0;
+      border-radius: units.unit(1);
     }
 
     .#{$component-name}__rule {

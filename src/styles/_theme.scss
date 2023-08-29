@@ -1,10 +1,10 @@
 // sass-lint:disable no-color-literals
 
 :root {
-  --color-shadow: rgba(0, 0, 0, .15);
-  --modal-overlay: rgba(0, 0, 0, .5);
-  --color-mid-grey: rgb(128, 128, 128);
-  --text-light-muted: rgba(255, 255, 255, .5);
+  --color-shadow: rgb(0 0 0 / 15%);
+  --modal-overlay: rgb(0 0 0 / 50%);
+  --color-mid-grey: rgb(128 128 128);
+  --text-light-muted: rgb(255 255 255 / 50%);
 
   // UI overwrites
   --background: var(--color-platinum);
@@ -22,18 +22,17 @@
   --background-light: var(--color-white);
   --background-alt: var(--color-platinum);
   --architect-wave: var(--color-sea-green);
-  --architect-control-bar-shadow: rgba(20, 0, 0, .3);
+  --architect-control-bar-shadow: rgb(20 0 0 / 30%);
   --architect-titlebar: var(--color-sea-green--dark);
 
   // Errors
   --architect-error-background: var(--color-cyber-grape);
   --architect-error-code-background: var(--color-navy-taupe);
   --architect-warning: var(--color-tomato);
-
   --architect-media-background: var(--color-rich-black);
 
   // App-wide
-  --architect-row-background: rgba(242, 246, 247, .5);
+  --architect-row-background: rgb(242 246 247 / 50%);
   --architect-background: var(--color-white);
   --architect-text: var(--color-charcoal);
   --architect-shadow: var(--color-shadow);
@@ -70,16 +69,13 @@
   // TODO: review below
   --architect-edit-button-background: var(--primary);
   --architect-edit-button-fill: var(--color-white);
-
   --architect-ui-button: var(--color-sea-green);
   --architect-ui-button-text: var(--color-white);
   --architect-ui-radio-border: var(--color-cyber-grape);
   --architect-ui-radio-dot: var(--color-sea-green);
   --architect-button-background--dark: var(--color-navy-taupe);
   --architect-button-background--dark--hover: var(--color-cyber-grape);
-
   --architect-drawer-background: var(--color-platinum);
-
   --architect-panel-background: var(--color-platinum);
   --architect-panel-shadow: var(--color-shadow);
   --architect-panel-text: var(--color-charcoal);
@@ -90,8 +86,7 @@
   --architect-intent--inactive: var(--color-charcoal);
   --architect-intent: var(--color-mustard);
   --architect-intent-border: var(--color-mustard--dark);
-
-  --architect-timeline-highlight: rgba(216, 216, 216, .2);
+  --architect-timeline-highlight: rgb(216 216 216 / 20%);
   --architect-timeline-line: var(--color-neon-coral);
   --architect-timeline-screen: var(--color-navy-taupe);
 
@@ -104,7 +99,6 @@
   --architect-variant--2: var(--color-mustard--dark);
   --architect-variant--3: var(--color-sea-green);
   --architect-variant--4: var(--color-sea-green--dark);
-
   --architect-asset-background: var(--color-charcoal);
 
   .form-field-slider {

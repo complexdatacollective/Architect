@@ -1,19 +1,28 @@
-.protocol-summary-contents {
+@use '~@codaco/ui/src/styles/global/core/units';
 
+.protocol-summary-contents {
   .heading {
     @extend .small-heading;
-    margin: unit(2) 0;
+
+    margin: units.unit(2) 0;
   }
 
   &__section {
+    li {
+      margin: units.unit(1) 0;
+    }
+
     > ol {
       padding-inline-start: 0;
+
       // Top level
       > li {
         list-style: none;
+
         @extend .small-heading;
+
         font-size: 14px !important;
-        margin: unit(2) 0;
+        margin: units.unit(2) 0;
       }
     }
 
@@ -25,8 +34,6 @@
       }
     }
 
-    li {
-      margin: unit(1) 0;
-    }
+
   }
 }

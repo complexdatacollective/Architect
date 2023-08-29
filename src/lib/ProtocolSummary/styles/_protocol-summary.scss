@@ -1,3 +1,5 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 @page {
   margin: 2cm;
 }
@@ -8,7 +10,6 @@
   --page-size-width: 21cm;
 
   font-size: var(--base-font-size) !important;
-
   overflow: visible;
   height: auto;
   width: auto;
@@ -44,6 +45,7 @@
 .protocol-summary-rules {
   .protocol-summary-rules__rule {
     --base-node-size: 5.6rem;
+
     display: flex;
     align-items: center;
     width: 100%;
@@ -51,7 +53,7 @@
   }
 
   &__rule:not(:last-child) {
-    margin-bottom: unit(1);
+    margin-bottom: units.unit(1);
   }
 }
 
@@ -59,26 +61,26 @@
 
 .section {
   border: 2px solid var(--color-platinum);
-  padding: unit(1) unit(2);
+  padding: units.unit(1) units.unit(2);
   border-radius: var(--border-radius);
   position: relative;
-  padding-top: unit(4);
+  padding-top: units.unit(4);
 
   h2.section-heading {
     @extend .small-heading;
+
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     margin: 0;
-    padding: unit(1) unit(2);
+    padding: units.unit(1) units.unit(2);
     background: var(--color-platinum);
   }
 }
 
 /* This will show only on screen (always) */
 .page-break-marker {
-
   @media print {
     page-break-before: always;
   }
@@ -94,8 +96,9 @@
     margin: 1cm auto;
     border: 1px var(--color-platinum--dark) solid;
     border-radius: 5px;
+
     // box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 4px 5px rgba(75, 75, 75, 0.2);
+    box-shadow: 0 4px 5px rgb(75 75 75 / 20%);
   }
 }
 
@@ -110,13 +113,13 @@
     color: #000;
   }
 
-  [data-print=no] {
+  [data-print="no"] {
     @media print {
       display: none;
     }
   }
 
-  [data-print=only] {
+  [data-print="only"] {
     @media screen {
       display: none;
     }
@@ -146,7 +149,7 @@
 
   &__print-buttons {
     > :first-child {
-      margin-right: unit(2);
+      margin-right: units.unit(2);
     }
   }
 

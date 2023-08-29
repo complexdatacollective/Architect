@@ -1,25 +1,4 @@
-@mixin form-field {
-  &__label {
-    // @include preset(copy-standard, font-size);
-    // font-weight: 200;
-    display: block;
-    margin: 0 0 unit(1);
-  }
-
-  &__error {
-    opacity: 0;
-    color: var(--form-error-text);
-    transition: opacity var(--animation-easing) var(--animation-duration-standard),
-    max-height var(--animation-easing) var(--animation-duration-standard);
-  }
-}
-
-.form-field-container {
-  h4 {
-    font-weight: 600;
-  }
-}
-
+@use '~@codaco/ui/src/styles/global/core/units';
 @import './fields/native-select';
 @import './fields/variable-select';
 @import './fields/entity-select';
@@ -37,3 +16,25 @@
 @import './fields/multi-select';
 @import './fields/color-picker';
 @import './fields/field-preview';
+
+@mixin form-field {
+  &__label {
+    // @include preset(copy-standard, font-size);
+    // font-weight: 200;
+    display: block;
+    margin: 0 0 units.unit(1);
+  }
+
+  &__error {
+    opacity: 0;
+    color: var(--form-error-text);
+    transition: opacity var(--animation-easing) var(--animation-duration-standard),
+    max-height var(--animation-easing) var(--animation-duration-standard);
+  }
+}
+
+.form-field-container {
+  h4 {
+    font-weight: 600;
+  }
+}

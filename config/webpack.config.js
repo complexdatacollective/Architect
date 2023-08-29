@@ -17,9 +17,6 @@
  * - [output](https://webpack.js.org/configuration/output/)
  */
 
-const autoprefixer = require('autoprefixer');
-const postUrl = require('postcss-url');
-const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -39,89 +36,8 @@ const publicUrl = publicPath.slice(0, -1);
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
-// style files regexes
-const cssRegex = /\.css$/;
-// const cssModuleRegex = /\.module\.css$/;
-const sassRegex = /\.(scss|sass)$/;
-// const sassModuleRegex = /\.module\.(scss|sass)$/;
-
 const isProduction = env.stringified['process.env'].NODE_ENV === '"production"';
-const shouldUseSourceMap = isProduction && (process.env.GENERATE_SOURCEMAP !== 'false');
-
 const cssFilenameTemplate = 'static/css/[name].[contenthash:8].css';
-
-// common function to get style loaders
-const getStyleLoaders = (preProcessor) => {
-  // importLoaders: See https://webpack.js.org/loaders/css-loader/#importloaders
-  let importLoaders = 1; // for postcss-loader
-  if (preProcessor) {
-    importLoaders += 1; // for preProcessor
-  }
-
-  let inlineStyleLoader = require.resolve('style-loader');
-  if (isProduction) {
-    // Output CSS files, and rewrite paths relative from CSS dir
-    const cssRelativePath = Array(cssFilenameTemplate.split('/').length).join('../');
-    inlineStyleLoader = {
-      loader: MiniCssExtractPlugin.loader,
-      options: { publicPath: cssRelativePath },
-    };
-  }
-
-  const loaders = [
-    inlineStyleLoader,
-    {
-      loader: require.resolve('css-loader'),
-      options: { importLoaders },
-    },
-    {
-      // Options for PostCSS as we reference these options twice
-      // Adds vendor prefixing based on your specified browser support in
-      // package.json
-      loader: require.resolve('postcss-loader'),
-      options: {
-        postcssOptions: {
-          plugins: [
-            [
-              'autoprefixer',
-              {
-                flexbox: 'no-2009',
-              },
-            ],
-            [
-              'postcss-url',
-              {
-                url: ({ url }) => {
-                  /**
-                   * If file exists in the Network Canvas submodule, update path to
-                   * resolve there relatively from Architect.
-                   */
-                  const ncPath = path.resolve('src', 'network-canvas', 'src', 'styles', url);
-                  const ncCSSPath = `../network-canvas/src/styles/${url}`;
-
-                  try {
-                    fs.accessSync(ncPath, fs.constants.R_OK);
-                    return ncCSSPath;
-                  } catch (err) {
-                    return url;
-                  }
-                },
-              },
-            ],
-          ],
-        },
-        sourceMap: shouldUseSourceMap,
-      },
-    },
-  ];
-  if (preProcessor) {
-    loaders.push({
-      loader: require.resolve(preProcessor),
-    });
-    // loaders.push(require.resolve(preProcessor));
-  }
-  return loaders;
-};
 
 const loaderRules = Object.freeze([
   // Disable require.ensure as it's not a standard language feature.
@@ -198,25 +114,9 @@ const loaderRules = Object.freeze([
           },
         }],
       },
-      // "postcss" loader applies autoprefixer to our CSS.
-      // "css" loader resolves paths in CSS and adds assets as dependencies.
-      // "style" loader turns CSS into JS modules that inject <style> tags.
-      // In production, we use a plugin to extract that CSS to a file, but
-      // in development "style" loader enables hot editing of CSS.
-      // By default we support CSS Modules with the extension .module.css
       {
-        test: cssRegex,
-        use: getStyleLoaders(),
-      },
-      // Opt-in support for SASS (using .scss or .sass extensions).
-      // Chains the sass-loader with the css-loader and the style-loader
-      // to immediately apply all styles to the DOM.
-      // By default we support SASS Modules with the
-      // extensions .module.scss or .module.sass
-      {
-        test: sassRegex,
-        include: paths.appStyles,
-        use: getStyleLoaders('sass-loader'),
+        test: /\.s?css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
       },
       {
         loader: require.resolve('file-loader'),
@@ -255,6 +155,7 @@ const webpackPlugins = [
   // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
   // You can remove this if you don't use Moment.js:
   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+  new MiniCssExtractPlugin(),
 ];
 
 if (isProduction) {

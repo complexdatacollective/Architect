@@ -26,7 +26,7 @@
       // sass-lint:disable-block no-vendor-prefixes
       &::-webkit-inner-spin-button,
       &::-webkit-outer-spin-button {
-        -webkit-appearance: none;
+        appearance: none;
         margin: 0;
       }
     }

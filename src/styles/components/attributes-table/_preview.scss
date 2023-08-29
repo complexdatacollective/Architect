@@ -1,3 +1,5 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .attributes-table-preview {
   display: flex;
   flex-direction: row;
@@ -6,11 +8,11 @@
   &__value,
   &__error,
   &__delete {
-    padding: 0 unit(2);
+    padding: 0 units.unit(2);
   }
 
   &__name {
-    flex: 0 0 unit(25);
+    flex: 0 0 units.unit(25);
     font-weight: 600;
   }
 
@@ -25,15 +27,15 @@
   }
 
   &__delete {
-    flex: 0 0 unit(4);
+    flex: 0 0 units.unit(4);
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
 
     .icon {
-      width: unit(2);
-      height: unit(2);
+      width: units.unit(2);
+      height: units.unit(2);
 
       .cls-1,
       .cls-2 {
