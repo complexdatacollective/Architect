@@ -1,14 +1,17 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .rules-rules {
   &__join {
     --input-border: var(--text);
-    margin-top: unit(4);
+
+    margin-top: units.unit(4);
   }
 
   &__add-new {
-    margin-top: unit(2);
+    margin-top: units.unit(2);
 
     button {
-      margin: 0 unit(2) 0 0;
+      margin: 0 units.unit(2) 0 0;
     }
   }
 

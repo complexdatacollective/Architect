@@ -1,9 +1,4 @@
-// Destined for network canvas UI
 @use "sass:math";
-
-@function unit($units: 1) {
-  @return .6rem * $units;
-}
 
 @function px($px: 1) {
   @return math.div($px * 1px, $base-font-size) * 1rem;

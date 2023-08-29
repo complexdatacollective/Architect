@@ -1,30 +1,30 @@
-// sass-lint:disable no-color-literals
+@use '~@codaco/ui/src/styles/global/core/units';
 
 .tip {
   background-color: var(--color-mid-grey);
   border-radius: var(--border-radius);
-  padding: unit(.5) unit(4);
-  margin: unit(2) 0;
+  padding: units.unit(.5) units.unit(4);
+  margin: units.unit(2) 0;
   font-size: .9rem;
   display: flex;
   align-items: center;
 
   .icon {
-    flex: 0 0 unit(4);
-    height: unit(4);
-    width: unit(4);
+    flex: 0 0 units.unit(4);
+    height: units.unit(4);
+    width: units.unit(4);
   }
 
   &__content {
-    margin-left: unit(2);
+    margin-left: units.unit(2);
   }
 
   &__info {
-    background-color: rgba(15, 178, 226, .14);
+    background-color: rgb(15 178 226 / 14%);
   }
 
   &__warning {
-    background-color: rgba(242, 183, 0, .36);
+    background-color: rgb(242 183 0 / 36%);
   }
 
   &__error {

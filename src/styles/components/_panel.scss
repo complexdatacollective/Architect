@@ -1,3 +1,5 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .panel {
   background-color: var(--architect-panel-background);
   color: var(--architect-panel-text);
@@ -6,7 +8,7 @@
   min-height: 40vh;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: unit(1) unit(1) 0 0 var(--architect-panel-shadow);
+  box-shadow: units.unit(1) units.unit(1) 0 0 var(--architect-panel-shadow);
 
   &__title {
     text-align: center;
@@ -14,15 +16,15 @@
 
   &__groups {
     columns: 2;
-    column-gap: unit(2);
+    column-gap: units.unit(2);
     break-inside: avoid-column;
   }
 
   &__group {
-    margin: 0 0 unit(2);
+    margin: 0 0 units.unit(2);
     border: 1px solid var(--architect-panel-divider);
-    padding: unit(2);
-    border-radius:  unit(1);
+    padding: units.unit(2);
+    border-radius:  units.unit(1);
     min-height: 200px;
   }
 

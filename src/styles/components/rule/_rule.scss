@@ -1,6 +1,8 @@
+/* stylelint-disable no-descending-specificity */
 .rule {
   @include flex-inline;
   @include flex-align(left, middle);
+
   color: var(--text-light);
   position: relative;
   z-index: var(--z-default);
@@ -10,6 +12,7 @@
   .rule-drag-handle {
     @include flex-inline;
     @include flex-align(center, middle);
+
     background-color: var(--architect-rule-control);
     color: var(--text-light);
     border: 0;
@@ -27,6 +30,7 @@
   &__delete {
     @include flex-inline;
     @include flex-align(center, middle);
+
     background-color: var(--architect-rule-delete);
     color: var(--text-light);
     border: 0;
@@ -50,6 +54,7 @@
   &__options {
     @include flex-inline;
     @include flex-align(left, middle);
+
     padding: 0;
     border-radius: 20px;
     height: 40px;
@@ -58,6 +63,7 @@
   &__option {
     @include flex-inline;
     @include flex-align(left, middle);
+
     height: 100%;
     padding: 0 20px;
     position: relative;

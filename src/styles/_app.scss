@@ -1,4 +1,7 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 $component-name: app;
+
 
 .electron-titlebar {
   display: block;
@@ -9,7 +12,7 @@ $component-name: app;
   top: 0;
   left: 0;
   right: 0;
-  height: unit(2.5);
+  height: units.unit(2.5);
   width: 100%;
   -webkit-app-region: drag;
 }

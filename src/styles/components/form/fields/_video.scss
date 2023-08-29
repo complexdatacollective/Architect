@@ -8,8 +8,8 @@ $component-name: form-fields-video;
   overflow: hidden;
 
   &__name {
-    padding: unit(2);
-    border-radius: unit(2);
+    padding: units.unit(2);
+    border-radius: units.unit(2);
     word-break: break-all;
     position: absolute;
     z-index: 2;

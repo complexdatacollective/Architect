@@ -1,3 +1,5 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .issues {
   position: sticky;
   bottom: 0;
@@ -11,7 +13,7 @@
 
   &__title-bar {
     background-color: var(--color-sea-serpent--dark);
-    padding: unit(1) unit(2);
+    padding: units.unit(1) units.unit(2);
     cursor: pointer;
     display: flex;
     flex-direction: row;
@@ -21,22 +23,23 @@
     &-icon {
       .icon {
         position: relative;
-        top: unit(.25);
-        height: unit(4);
-        width: unit(4);
+        top: units.unit(.25);
+        height: units.unit(4);
+        width: units.unit(4);
       }
     }
 
     &-text {
       @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
-      margin: 0 unit(2);
+
+      margin: 0 units.unit(2);
       flex: 1 0 auto;
     }
 
     &-toggle {
       .issues-toggle {
-        height: unit(2);
-        width: unit(2);
+        height: units.unit(2);
+        width: units.unit(2);
       }
     }
   }
@@ -63,14 +66,14 @@
     a {
       display: block;
       width: 100%;
-      padding: unit(2) unit(4);
+      padding: units.unit(2) units.unit(4);
       text-decoration: none;
       color: var(--text-light);
 
       &::before {
         counter-increment: issue;
         content: counter(issue) '.';
-        margin-right: unit(2);
+        margin-right: units.unit(2);
       }
     }
 

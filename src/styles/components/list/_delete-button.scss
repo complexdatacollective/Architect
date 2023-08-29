@@ -1,13 +1,15 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .list-delete-button {
   transform-origin: center center;
-  width: unit(4);
-  height: unit(4);
+  width: units.unit(4);
+  height: units.unit(4);
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
 
   .icon {
-    width: unit(2);
+    width: units.unit(2);
   }
 }

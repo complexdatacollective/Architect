@@ -1,3 +1,5 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .grid {
   .layout {
     height: 450px;
@@ -30,13 +32,13 @@
     color: var(--text-light);
     border-radius: .5rem;
     max-height: 0;
-    margin-top: unit(2);
+    margin-top: units.unit(2);
     padding: .5rem;
     transition: opacity var(--animation-easing) var(--animation-duration-standard),
     max-height var(--animation-easing) var(--animation-duration-standard);
 
     .icon {
-      height: unit(2);
+      height: units.unit(2);
     }
   }
 
@@ -81,8 +83,8 @@
     padding: .5rem;
 
     .icon {
-      height: unit(2);
-      width: unit(2);
+      height: units.unit(2);
+      width: units.unit(2);
     }
   }
 

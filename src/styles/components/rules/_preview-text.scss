@@ -1,16 +1,19 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .rules-preview-text {
   &__join {
-    padding: unit(2) unit(4);
+    padding: units.unit(2) units.unit(4);
     border-top: 4px solid var(--section-background-color);
     width: 100%;
     height: 0;
 
     > legend {
       @extend .small-heading; // sass-lint:disable-line placeholder-in-extend
+
       text-align: center;
       font-style: italic;
       color: var(--text);
-      padding: unit(1) unit(2);
+      padding: units.unit(1) units.unit(2);
     }
   }
 

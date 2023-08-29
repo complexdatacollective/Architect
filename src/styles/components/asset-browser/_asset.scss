@@ -1,3 +1,5 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .asset-browser-asset {
   width: 100%;
   height: 100%;
@@ -19,6 +21,7 @@
 
   &__name {
     @include typography('title-2');
+
     position: absolute;
     top: 0;
     left: 0;
@@ -35,8 +38,8 @@
     transition: opacity var(--animation-easing) var(--animation-duration-standard);
     position: absolute;
     opacity: 0;
-    top: unit(1);
-    right: unit(1);
+    top: units.unit(1);
+    right: units.unit(1);
     padding: .5rem .75rem .25rem;
     display: flex;
     justify-content: center;
@@ -64,8 +67,8 @@
     content: 'Unused';
     position: absolute;
     margin: 0;
-    bottom: unit(.75);
-    left: unit(.75);
+    bottom: units.unit(.75);
+    left: units.unit(.75);
     background: var(--error);
   }
 

@@ -1,10 +1,12 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 .control-bar {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: unit(2) unit(4);
+  padding: units.unit(2) units.unit(4);
   color: var(--text-light);
   background-color: var(--architect-control-bar-background);
 
@@ -25,7 +27,7 @@
     flex: 1 auto;
 
     >:not(:last-child) {
-      margin-right: unit(2);
+      margin-right: units.unit(2);
     }
   }
 
@@ -36,7 +38,7 @@
     flex: 1 auto;
 
     >:not(:last-child) {
-      margin-right: unit(2);
+      margin-right: units.unit(2);
     }
   }
 }

@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 .protocol-summary-variables {
   &__data {
     width: 100%;
@@ -15,9 +16,6 @@
         & > th {
           padding: .75rem;
           vertical-align: top;
-        }
-
-        & > th {
           padding-right: 1rem;
           background: var(--color-platinum);
         }
@@ -25,11 +23,11 @@
     }
 
     & > tbody {
-
       & > tr {
         & > td {
           padding: .75rem;
           vertical-align: top;
+          border-top: var(--color-platinum--dark) 1px solid;
 
           // Variable name column can contain long and hard to break strings
           &:first-of-type {
@@ -37,10 +35,6 @@
             hyphens: auto;
           }
 
-        }
-
-        & > td {
-          border-top: var(--color-platinum--dark) 1px solid;
         }
       }
     }

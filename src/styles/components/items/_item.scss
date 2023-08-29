@@ -1,3 +1,5 @@
+@use '~@codaco/ui/src/styles/global/core/units';
+
 $component-name: items-item;
 
 .#{$component-name} {
@@ -7,10 +9,10 @@ $component-name: items-item;
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  border-radius: unit(1.5);
+  border-radius: units.unit(1.5);
 
   &__control {
-    padding: unit(2);
+    padding: units.unit(2);
     flex-grow: 0;
 
     .icon {
@@ -22,7 +24,7 @@ $component-name: items-item;
   }
 
   &__content {
-    padding: unit(4) unit(2);
+    padding: units.unit(4) units.unit(2);
     flex-grow: 1;
   }
 }
