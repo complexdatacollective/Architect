@@ -43,30 +43,6 @@ Note: for Apple Silicon users, you need to install the `electron` package manual
   npm install electron --arch=x86
 ```
 
-4. To start the webpack development server run the following command:
-
-```sh
-npm run start:architect:electron
-```
-
-5. Run the following command to start network canvas submodule:
-
-```sh
-npm run start:network-canvas:electron
-```
-
-6. Create a development instance of the application in `/electron-dev` directory by running the following command:
-
-```sh
-npm run preelectron:dev
-```
-
-7. Launch Electron pointing to the development server using the following command:
-
-```sh
-npm run dev:electron
-``
-
 # Operation
 
 | `npm run <script>`              | Description                                                                                                                    |
@@ -106,28 +82,26 @@ There are two additional tasks to enable development within an electron app nati
 
 - Note: must be running on port 3000.
 
-2. `npm run electron:dev` (in another terminal session)
-1. Copies the electron source to `./electron-dev`
-1. Runs the electron app from there
+2. `npm run preelectron:dev` (in another terminal session)
+
+- Copies the electron source to `./electron-dev`
+
+3. `npm run dev:electron` Runs the electron app from there
 
 ## Application Structure
 
 ```
-
 .
-├── build # Prod assets
-├── config # Project and build configurations (webpack, env config)
-├── public # Static public assets
-│ └── index.html # Static entry point
-├── src # Application source code
-│ ├── index.js # Application bootstrap and rendering
-│ ├── routes.js # App Route Definitions
-│ ├── components # Contains directories for components
-│ ├── containers # Contains directories for containers for native and base classes
-│ ├── reducers # Reducers for data stores
-│ ├── ducks # Middleware, modules (ducks-style with actions, reducers, and action creators), and store
-│ └── utils # Helpers and utils
-
-```
-
+├── build                    # Prod assets
+├── config                   # Project and build configurations (webpack, env config)
+├── public                   # Static public assets
+│   └── index.html           # Static entry point
+├── src                      # Application source code
+│   ├── index.js             # Application bootstrap and rendering
+│   ├── routes.js            # App Route Definitions
+│   ├── components           # Contains directories for components
+│   ├── containers           # Contains directories for containers for native and base classes
+│   ├── reducers             # Reducers for data stores
+│   ├── ducks                # Middleware, modules (ducks-style with actions, reducers, and action creators), and store
+│   └── utils                # Helpers and utils
 ```
