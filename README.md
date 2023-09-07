@@ -33,9 +33,9 @@ git submodule update --init --recursive -f
 
 3. Install NPM packages
 
-  ```sh
-  npm install
-  ```
+```sh
+npm install
+```
 
 Note: for Apple Silicon users, you need to install the `electron` package manually:
 
@@ -45,20 +45,21 @@ Note: for Apple Silicon users, you need to install the `electron` package manual
 
 # Operation
 
-|`npm run <script>`|Description|
-|------------------|-----------|
-|`start:architect:electron`|Serves your app for consumption by electron.|
-|`start:network-canvas:electron`|Serves network canvas for consumption by previewer.|
-|`electron:dev`|Runs electron window with contents of `start:architect:electron`  and `start:network-canvas:electron`(must be run concurrently)|
-|`build`|Compiles assets and prepares app for production in the /build directory.|
-|`lint`|Lints js/scss|
-|`test`|Runs testing suite|
-|`preflight`|Runs linting & testing. Useful as a prepush/build hook|
-|`dist:mac`|Build and publish OS X verison|
-|`dist:linux`|Build and publish Linux version|
-|`dist:win`|Build and publish Windows version|
-|`dist:all`|Build and publish all platforms|
-|`update-submodules`|Update git submodules|
+| `npm run <script>`              | Description                                                                                                                                  |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `start:architect:electron`      | Serves your app for consumption by electron.                                                                                                 |
+| `start:network-canvas:electron` | Serves network canvas for consumption by previewer.                                                                                          |
+| `preelectron:dev`               | Copies the electron source to `./electron-dev` (must be run only when setting up the repo for the first time, or bumping the version number) |
+| `dev:electron`                  | Runs electron window with contents of `start:architect:electron` and `start:network-canvas:electron`(must be run concurrently)               |
+| `build`                         | Compiles assets and prepares app for production in the /build directory.                                                                     |
+| `lint`                          | Lints js/scss                                                                                                                                |
+| `test`                          | Runs testing suite                                                                                                                           |
+| `preflight`                     | Runs linting & testing. Useful as a prepush/build hook                                                                                       |
+| `dist:mac`                      | Build and publish OS X verison                                                                                                               |
+| `dist:linux`                    | Build and publish Linux version                                                                                                              |
+| `dist:win`                      | Build and publish Windows version                                                                                                            |
+| `dist:all`                      | Build and publish all platforms                                                                                                              |
+| `update-submodules`             | Update git submodules                                                                                                                        |
 
 ### Bump version
 
@@ -75,13 +76,18 @@ e.g.
 There are two additional tasks to enable development within an electron app natively:
 
 1. `npm run start:architect:electron`: to start the webpack dev server
-  - Note: must be running on port 3003.
-1. `npm run start:network-canvas:electron`: to start the webpack dev server
-  - Note: must be running on port 3000.
-2. `npm run electron:dev` (in another terminal session)
-  1. Copies the electron source to `./electron-dev`
-  2. Runs the electron app from there
 
+- Note: must be running on port 3003.
+
+1. `npm run start:network-canvas:electron`: to start the webpack dev server
+
+- Note: must be running on port 3000.
+
+2. `npm run preelectron:dev` Copies the electron source to `./electron-dev` (in another terminal session)
+
+- Note: This step only needs to be taken when setting up the repo for the first time, or when bumping the version number.
+
+3. `npm run dev:electron` Runs the electron app from there
 
 ## Application Structure
 
