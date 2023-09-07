@@ -71,7 +71,7 @@
     "decompress": "^4.2.1",
     "dmg-builder": "~23.6.0",
     "dotenv": "4.0.0",
-    "electron": "^9.4.4",
+    "electron": "^22.3.21",
     "electron-builder": "^22.7.0",
     "electron-devtools-installer": "^3.2.0",
     "electron-log": "^4.2.2",
