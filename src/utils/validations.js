@@ -94,7 +94,7 @@ export const uniqueByList = (list = [], message) => (value) => {
     .some((existingValue) => isRoughlyEqual(existingValue, value));
 
   if (existsAlready) {
-    return messageWithDefault(message, `"${value}" is already used elsewhere in your protocol`);
+    return messageWithDefault(message, `"${value}" is already in use`);
   }
 
   return undefined;
@@ -104,7 +104,7 @@ export const ISODate = (dateFormat, message) => (value) => {
   const dt = DateTime.fromISO(value);
   if (
     (value && dateFormat.length !== value.length)
-      || (value && !dt.isValid)
+    || (value && !dt.isValid)
   ) {
     return messageWithDefault(message, `Date is not valid (${dateFormat.toUpperCase()})`);
   }

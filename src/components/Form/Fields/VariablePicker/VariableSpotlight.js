@@ -20,7 +20,7 @@ const ListItem = ({
   onSelect,
   children,
   setSelected,
-  removeSelected = () => {},
+  removeSelected = () => { },
 }) => {
   const ref = useRef(null);
 
@@ -49,7 +49,7 @@ const ListItem = ({
         onClick={onSelect}
       >
         {children}
-        { selected && (
+        {selected && (
           <kbd>
             Enter&nbsp;&#8629;
           </kbd>
@@ -73,8 +73,8 @@ ListItem.defaultProps = {
   selected: false,
   onSelect: null,
   children: null,
-  setSelected: () => {},
-  removeSelected: () => {},
+  setSelected: () => { },
+  removeSelected: () => { },
 };
 
 const Divider = ({ legend }) => (
@@ -118,7 +118,7 @@ const VariableSpotlight = (props) => {
     options.sort(sortByLabel);
 
     if (!filterTerm) { return options; }
-    return options.filter((item) => item.label.includes(filterTerm));
+    return options.filter((item) => item.label.toLowerCase().includes(filterTerm.toLowerCase()));
   }, [filterTerm, options]);
 
   const existingVariables = useSelector(
@@ -143,29 +143,29 @@ const VariableSpotlight = (props) => {
   const renderResults = () => (
     <Scroller>
       <ol>
-        { filterTerm && options.filter((item) => item.label === filterTerm).length !== 1 && (
+        {filterTerm && options.filter((item) => item.label === filterTerm).length !== 1 && (
           <>
             {
               disallowCreation
               && hasFilterTerm
               && !hasFilterResults
               && (
-              <div className="variable-spotlight__empty">
-                <Icon name="warning" />
-                <div>
-                  <p>
-                    You cannot create a new
-                    variable from here. Please create one or more variables elsewhere
-                    in your protocol, and return here to select them.
-                  </p>
+                <div className="variable-spotlight__empty">
+                  <Icon name="warning" />
+                  <div>
+                    <p>
+                      You cannot create a new
+                      variable from here. Please create one or more variables elsewhere
+                      in your protocol, and return here to select them.
+                    </p>
+                  </div>
                 </div>
-              </div>
               )
             }
-            { !disallowCreation && (
+            {!disallowCreation && (
               <>
                 <Divider legend="Create" />
-                { !invalidVariableName ? (
+                {!invalidVariableName ? (
                   <ListItem
                     onSelect={handleCreateOption}
                     selected={showCursor && cursor === -1}
@@ -199,12 +199,12 @@ const VariableSpotlight = (props) => {
             )}
           </>
         )}
-        { hasFilterResults && (
+        {hasFilterResults && (
           <Divider
             legend={hasFilterTerm ? `Existing Variables Containing "${filterTerm}"` : 'Existing Variables'}
           />
         )}
-        { sortedAndFilteredItems.map(({ value, label, type: optionType }, index) => (
+        {sortedAndFilteredItems.map(({ value, label, type: optionType }, index) => (
           <ListItem
             key={value}
             onSelect={() => onSelect(value)}
@@ -340,7 +340,7 @@ const VariableSpotlight = (props) => {
         variants={resultsVariants}
         transition={{ duration: 0.2, ease: 'easeInOut' }}
       >
-        { !disallowCreation && !hasOptions && (
+        {!disallowCreation && !hasOptions && (
           <div className="variable-spotlight__empty">
             <Icon name="info" />
             <div>
@@ -353,7 +353,7 @@ const VariableSpotlight = (props) => {
             </div>
           </div>
         )}
-        { disallowCreation && !hasFilterTerm && !hasOptions && (
+        {disallowCreation && !hasFilterTerm && !hasOptions && (
           <div className="variable-spotlight__empty">
             <Icon name="warning" />
             <div>
@@ -365,7 +365,7 @@ const VariableSpotlight = (props) => {
             </div>
           </div>
         )}
-        { renderResults() }
+        {renderResults()}
       </motion.main>
     </motion.div>
   );
