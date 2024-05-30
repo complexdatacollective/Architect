@@ -12,9 +12,6 @@ const validate = (validations) => {
 
   const check = values.reduce(
     (acc, [key, value]) => {
-      // 'unique' validation is a special case where there is no value
-      if (key === 'unique') { return acc; }
-
       if (!isNull(value)) { return acc; }
       return [...acc, key];
     },
