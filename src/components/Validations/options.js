@@ -78,6 +78,13 @@ const VALIDATIONS_WITH_LIST_VALUES = [
   // 'greaterThanVariable',
 ];
 
+const VALIDATIONS_WITHOUT_VALUES = [
+  'required',
+  'unique',
+];
+
+const isValidationWithoutValue = (validation) => VALIDATIONS_WITHOUT_VALUES.includes(validation);
+
 const isValidationWithNumberValue = (validation) => (
   VALIDATIONS_WITH_NUMBER_VALUES.includes(validation));
 const isValidationWithListValue = (validation) => VALIDATIONS_WITH_LIST_VALUES.includes(validation);
@@ -97,6 +104,7 @@ export {
   getValidationOptionsForVariableType,
   isValidationWithNumberValue,
   isValidationWithListValue,
+  isValidationWithoutValue,
   VALIDATIONS,
 };
 

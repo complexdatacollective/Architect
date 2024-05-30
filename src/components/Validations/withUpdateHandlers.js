@@ -1,6 +1,6 @@
 import { omit } from 'lodash';
 import { withHandlers } from 'recompose';
-import { isValidationWithListValue, isValidationWithNumberValue } from './options';
+import { isValidationWithListValue, isValidationWithNumberValue, isValidationWithoutValue } from './options';
 
 /**
  * Function called when a validation is added or updated. Returns a value
@@ -12,8 +12,8 @@ import { isValidationWithListValue, isValidationWithNumberValue } from './option
  * @returns {string} The new value.
  */
 const getAutoValue = (type, oldType, value) => {
-  // Required is special - always return true.
-  if (type === 'required') {
+  // If the validation type doesn't require a value, return true.
+  if (isValidationWithoutValue(type)) {
     return true;
   }
 
