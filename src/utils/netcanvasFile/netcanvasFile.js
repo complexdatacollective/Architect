@@ -159,8 +159,9 @@ const migrateNetcanvas = (
 ) => importNetcanvas(filePath)
   .then((workingPath) => readProtocol(workingPath)
     .then((protocol) => migrateProtocol(protocol, targetVersion))
-    .then(([updatedProtocol, migrationSteps]) => {
-      log.info('Migrated protocol', { migrationSteps, updatedProtocol });
+    .then((updatedProtocol) => {
+      log.info('Migrated protocol', { updatedProtocol });
+
       return saveNetcanvas(workingPath, updatedProtocol, newFilePath);
     }))
   .catch(handleError(errors.MigrationFailed));
