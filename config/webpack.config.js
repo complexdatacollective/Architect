@@ -106,6 +106,17 @@ const loaderRules = Object.freeze([
         ],
       },
       {
+        test: /\.js$/,
+        exclude: /node_modules\/(?!(@codaco\/protocol-validation)\/).*/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+            plugins: ['@babel/plugin-proposal-nullish-coalescing-operator'],
+          },
+        },
+      },
+      {
         test: /\.woff2?$|\.woff$/,
         use: [{
           loader: 'file-loader',
