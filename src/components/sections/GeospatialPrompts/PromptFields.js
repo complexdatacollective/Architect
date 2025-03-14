@@ -12,13 +12,15 @@ import withVariableHandlers from '@components/sections/CategoricalBinPrompts/wit
 import withVariableOptions from '@components/sections/CategoricalBinPrompts/withVariableOptions';
 import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
 
+const VARIABLE_TYPE = 'location';
+
 const PromptFields = ({
   variable, variableOptions, entity, type, changeForm, form,
 }) => {
   const newVariableWindowInitialProps = {
     entity,
     type,
-    initialValues: { name: null, type: 'text' },
+    initialValues: { name: null, type: VARIABLE_TYPE },
   };
 
   const handleCreatedNewVariable = (id, { field }) => changeForm(form, field, id);
@@ -29,13 +31,13 @@ const PromptFields = ({
   );
   const handleNewVariable = (name) => {
     openNewVariableWindow(
-      { initialValues: { name, type: 'text' } },
+      { initialValues: { name, type: VARIABLE_TYPE } },
       { field: 'variable' },
     );
   };
 
   const geoVariableOptions = variableOptions
-    .filter(({ type: variableType }) => variableType === 'text');
+    .filter(({ type: variableType }) => variableType === VARIABLE_TYPE);
 
   return (
     <>
