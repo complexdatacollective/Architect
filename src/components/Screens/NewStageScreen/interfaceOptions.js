@@ -64,11 +64,19 @@ export const INTERFACE_TYPES = [
   },
   {
     category: CATEGORIES.GENERATORS,
+    tags: [TAGS.CREATE_EDGES],
+    keywords: 'edge tie generator edges create add',
+    type: 'OneToManyDyadCensus',
+    title: 'One to Many Dyad Census',
+    description: 'A name interpreter interface that creates edges by systematically surveying one alter against many others in the interview network.',
+  },
+  {
+    category: CATEGORIES.GENERATORS,
     tags: [TAGS.CREATE_EDGES, TAGS.EDGE_ATTRIBUTES],
     keywords: 'edge tie generator census dyad edges create strength ordinal',
     type: 'TieStrengthCensus',
     title: 'Tie-Strength Census',
-    description: 'Combines a dyad census with an ordinal variable to simultaneously capture the strength of ties between alters. ',
+    description: 'Combines a dyad census with an ordinal variable to simultaneously capture the strength of ties between alters.',
   },
   {
     category: CATEGORIES.SOCIOGRAMS,

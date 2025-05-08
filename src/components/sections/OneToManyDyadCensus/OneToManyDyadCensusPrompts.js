@@ -5,7 +5,6 @@ import withSubject from '../../enhancers/withSubject';
 import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
 import PromptPreview from './PromptPreview';
 import PromptFields from './PromptFields';
-import withVariableHandlers from '../CategoricalBinPrompts/withVariableHandlers';
 
 const OneToManyDyadCensusPrompts = (props) => (
   <EditableList

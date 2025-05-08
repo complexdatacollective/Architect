@@ -6,69 +6,74 @@ import { getFieldId } from '@app/utils/issues';
 import Tip from '@components/Tip';
 import ValidatedField from '@components/Form/ValidatedField';
 import { compose } from 'recompose';
+import { formValueSelector } from 'redux-form';
+import { useSelector } from 'react-redux';
 import EntitySelectField from '../fields/EntitySelectField/EntitySelectField';
 import BucketSortOrderSection from '../BucketSortOrderSection';
 import BinSortOrderSection from '../BinSortOrderSection';
 import { getSortOrderOptionGetter } from '../CategoricalBinPrompts/optionGetters';
-import withVariableHandlers from '../CategoricalBinPrompts/withVariableHandlers';
 import withVariableOptions from '../CategoricalBinPrompts/withVariableOptions';
 
 const PromptFields = ({
   form,
-  variable,
   variableOptions,
 }) => {
   const sortMaxItems = getSortOrderOptionGetter(variableOptions)('property').length;
+  const getFormValue = formValueSelector(form);
+  const edgeVariable = useSelector((state) => getFormValue(state, 'createEdge'));
 
   return (
-    <Section
-      title="One to Many Dyad Census Prompts"
-    >
-      <Row>
-        <div id={getFieldId('text')} data-title="Dyad Census Prompts" />
-        <p>
-          One to Many Dyad Census prompts guide your participant in evaluating relationships
-          between a single focal node and several target nodes.
-          (for example, &apos;friendship&apos;, &apos;material
-          support&apos; or &apos;conflict&apos;). Enter prompt text below, and select an
-          edge type that will be created when the participant selects a target node.
-        </p>
-        <Tip type="info">
+    <>
+      <Section
+        title="One to Many Dyad Census Prompts"
+      >
+        <Row>
+          <div id={getFieldId('text')} data-title="Dyad Census Prompts" />
           <p>
-            Remember to write your prompt text so that it clearly indicates the participant
-            is evaluating the relationship between one specific individual and each of the others
-            shown. Use phrases such
-            as &apos;
-            <strong>which of the following people</strong>
-            &apos;,
-            or &apos;
-            <strong>select all people with whom this person</strong>
-            &apos; to
-            indicate that the participant should focus on selecting from the group.
+            One to Many Dyad Census prompts guide your participant in evaluating relationships
+            between a single focal node and several target nodes.
+            (for example, &apos;friendship&apos;, &apos;material
+            support&apos; or &apos;conflict&apos;). Enter prompt text below, and select an
+            edge type that will be created when the participant selects a target node.
           </p>
-        </Tip>
-        <ValidatedField
-          name="text"
-          component={RichText}
-          inline
-          className="stage-editor-section-prompt__textarea"
-          label="Prompt Text"
-          placeholder="Enter text for the prompt here..."
-          validation={{ required: true, maxLength: 220 }}
-        />
-      </Row>
-      <Row>
-        <ValidatedField
-          entityType="edge"
-          name="createEdge"
-          component={EntitySelectField}
-          label="Create edges of the following type"
-          validation={{ required: true }}
-        />
-      </Row>
+          <Tip type="info">
+            <p>
+              Remember to write your prompt text so that it clearly indicates the participant
+              is evaluating the relationship between one specific individual and each of the others
+              shown. Use phrases such
+              as &apos;
+              <strong>which of the following people</strong>
+              &apos;,
+              or &apos;
+              <strong>select all people with whom this person</strong>
+              &apos; to
+              indicate that the participant should focus on selecting from the group.
+            </p>
+          </Tip>
+          <ValidatedField
+            name="text"
+            component={RichText}
+            inline
+            className="stage-editor-section-prompt__textarea"
+            label="Prompt Text"
+            placeholder="Enter text for the prompt here..."
+            validation={{ required: true, maxLength: 220 }}
+          />
+        </Row>
+        <Row>
+          <ValidatedField
+            entityType="edge"
+            name="createEdge"
+            component={EntitySelectField}
+            label="Create edges of the following type"
+            validation={{ required: true }}
+          />
+        </Row>
+      </Section>
+
       <BucketSortOrderSection
         form={form}
-        disabled={!variable}
+        disabled={!edgeVariable}
         maxItems={sortMaxItems}
         optionGetter={getSortOrderOptionGetter(variableOptions)}
         summary={(
@@ -83,7 +88,7 @@ const PromptFields = ({
       />
       <BinSortOrderSection
         form={form}
-        disabled={!variable}
+        disabled={!edgeVariable}
         maxItems={sortMaxItems}
         optionGetter={getSortOrderOptionGetter(variableOptions)}
         summary={(
@@ -93,7 +98,8 @@ const PromptFields = ({
           </p>
         )}
       />
-    </Section>
+
+    </>
   );
 };
 
@@ -107,17 +113,14 @@ const selectOptionProps = PropTypes.shape({
 });
 
 PromptFields.propTypes = {
-  variable: PropTypes.string,
   variableOptions: PropTypes.arrayOf(selectOptionProps),
   form: PropTypes.string.isRequired,
 };
 
 PromptFields.defaultProps = {
-  variable: null,
   variableOptions: [],
 };
 
 export default compose(
   withVariableOptions,
-  withVariableHandlers,
 )(PromptFields);
