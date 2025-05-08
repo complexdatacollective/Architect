@@ -150,6 +150,14 @@ export const INTERFACE_TYPES = [
     title: 'Information',
     description: 'A general purpose screen that can be used to present information to participants using a variety of text and media resources.',
   },
+  {
+    category: CATEGORIES.UTILITIES,
+    tags: [TAGS.PROVIDE_INFORMATION], // todo: add appropriate tags
+    keywords: 'instruction text participant guide intro image video audio media resource',
+    type: 'Anonymisation',
+    title: 'Anonymisation Interface',
+    description: 'An interface that allows the participant to set a passphrase for node anonymisation.',
+  },
 ];
 
 export const PropTypes = {

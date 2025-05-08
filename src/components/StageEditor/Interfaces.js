@@ -31,6 +31,8 @@ import {
   Title,
   MapOptions,
   GeospatialPrompts,
+  AnonymisationExplanation,
+  AnonymisationValidation,
 } from '@components/sections';
 import { FilteredNodeType } from '@components/sections/NodeType';
 
@@ -216,6 +218,15 @@ const Geospatial = {
   documentation: 'https://documentation.networkcanvas.com/interface-documentation/geospatial/',
 };
 
+const Anonymisation = {
+  sections: [
+    AnonymisationExplanation,
+    AnonymisationValidation,
+    InterviewScript,
+  ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/anonymisation/',
+};
+
 const interfaces = {
   AlterEdgeForm,
   AlterForm,
@@ -232,6 +243,7 @@ const interfaces = {
   Sociogram,
   TieStrengthCensus,
   Geospatial,
+  Anonymisation,
 };
 
 const emptyInterface = {
