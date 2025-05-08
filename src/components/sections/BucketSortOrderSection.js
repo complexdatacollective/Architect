@@ -11,6 +11,7 @@ const BucketSortOrderSection = ({
   disabled,
   maxItems,
   optionGetter,
+  summary,
 }) => {
   const dispatch = useDispatch();
   const getFormValue = formValueSelector(form);
@@ -27,14 +28,7 @@ const BucketSortOrderSection = ({
   return (
     <Section
       title="Bucket Sort Order"
-      summary={(
-        <p>
-          Nodes are stacked in the bucket before they are placed by the participant. You may
-          optionally configure a list of rules to determine how nodes are sorted in the bucket
-          when the task starts, which will determine the order that your participant places them
-          into bins. Interviewer will default to using the order in which nodes were named.
-        </p>
-      )}
+      summary={summary}
       toggleable
       disabled={disabled}
       startExpanded={!!hasBucketSortOrder}
@@ -65,11 +59,20 @@ BucketSortOrderSection.propTypes = {
   disabled: PropTypes.bool,
   maxItems: PropTypes.number,
   optionGetter: PropTypes.func.isRequired,
+  summary: PropTypes.node,
 };
 
 BucketSortOrderSection.defaultProps = {
   disabled: false,
   maxItems: 5,
+  summary: (
+    <p>
+      Nodes are stacked in the bucket before they are placed by the participant. You may
+      optionally configure a list of rules to determine how nodes are sorted in the bucket
+      when the task starts, which will determine the order that your participant places them
+      into bins. Interviewer will default to using the order in which nodes were named.
+    </p>
+  ),
 };
 
 export default BucketSortOrderSection;

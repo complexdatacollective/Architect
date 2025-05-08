@@ -6,6 +6,8 @@ import {
   CategoricalBinPrompts,
   ContentGrid,
   DyadCensusPrompts,
+  OneToManyDyadCensusPrompts,
+  RemoveAfterConsideration,
   ExternalDataSource,
   AutomaticLayout,
   FilteredEdgeType,
@@ -74,6 +76,17 @@ const DyadCensus = {
     InterviewScript,
   ],
   documentation: 'https://documentation.networkcanvas.com/interface-documentation/dyad-census/',
+};
+
+const OneToManyDyadCensus = {
+  sections: [
+    FilteredNodeType,
+    RemoveAfterConsideration,
+    OneToManyDyadCensusPrompts,
+    SkipLogic,
+    InterviewScript,
+  ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/one-to-many-dyad-census/',
 };
 
 const EgoForm = {
@@ -198,6 +211,7 @@ const Geospatial = {
     MapOptions,
     GeospatialPrompts,
     SkipLogic,
+    InterviewScript,
   ],
   documentation: 'https://documentation.networkcanvas.com/interface-documentation/geospatial/',
 };
@@ -207,6 +221,7 @@ const interfaces = {
   AlterForm,
   CategoricalBin,
   DyadCensus,
+  OneToManyDyadCensus,
   EgoForm,
   Information,
   NameGenerator,
