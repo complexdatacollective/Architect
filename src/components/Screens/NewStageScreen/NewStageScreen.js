@@ -2,7 +2,7 @@ import React, {
   useState, useEffect, useCallback, useMemo,
 } from 'react';
 import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, connect } from 'react-redux';
 import { get } from 'lodash';
 import cx from 'classnames';
 import Fuse from 'fuse.js';
@@ -11,6 +11,7 @@ import Button from '@codaco/ui/lib/components/Button';
 import Screen from '@components/Screen/Screen';
 import { actionCreators as uiActions } from '@modules/ui';
 import Tag from '@components/Tag';
+import { getExperiments } from '@selectors/protocol';
 import Row from '../../EditorLayout/Row';
 import { INTERFACE_TYPES, TAGS, TAG_COLORS } from './interfaceOptions';
 import InterfaceList from './InterfaceList';
@@ -45,6 +46,7 @@ const search = (query) => {
 const NewStageScreen = ({
   insertAtIndex,
   onComplete,
+  experiments,
 }) => {
   const dispatch = useDispatch();
   const [selectedTags, setSelectedTags] = useState([]);
@@ -57,13 +59,17 @@ const NewStageScreen = ({
     (state) => state.protocol.timeline[state.protocol.timeline.length - 1],
   );
 
-  const filteredInterfaces = useMemo(
-    () => search(query, selectedTags)
-      .filter(
-        ({ tags: interfaceTags }) => interfaceHasAllSelectedTags(selectedTags, interfaceTags),
-      ),
-    [query, selectedTags],
-  );
+  const filteredInterfaces = useMemo(() => {
+    let interfaces = search(query, selectedTags).filter(({ tags: interfaceTags }) =>
+      // eslint-disable-next-line implicit-arrow-linebreak
+      interfaceHasAllSelectedTags(selectedTags, interfaceTags));
+
+    if (!experiments.encryptedVariables) {
+      interfaces = interfaces.filter(({ type }) => type !== 'Anonymisation');
+    }
+
+    return interfaces;
+  }, [query, selectedTags, experiments]);
 
   const filteredInterfaceTags = useMemo(
     () => filteredInterfaces.reduce((acc, { tags }) => [...acc, ...tags], []),
@@ -261,9 +267,21 @@ const NewStageScreen = ({
   );
 };
 
+const mapStateToProps = (state) => ({
+
+  experiments: getExperiments(state),
+});
+
 NewStageScreen.propTypes = {
   insertAtIndex: PropTypes.number.isRequired,
   onComplete: PropTypes.func.isRequired,
+  experiments: PropTypes.shape({
+    encryptedVariables: PropTypes.bool,
+  }),
 };
 
-export default NewStageScreen;
+NewStageScreen.defaultProps = {
+  experiments: [],
+};
+
+export default connect(mapStateToProps)(NewStageScreen);

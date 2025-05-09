@@ -152,7 +152,7 @@ export const INTERFACE_TYPES = [
   },
   {
     category: CATEGORIES.UTILITIES,
-    tags: [TAGS.PROVIDE_INFORMATION], // todo: add appropriate tags
+    tags: [TAGS.NODE_ATTRIBUTES],
     keywords: 'instruction text participant guide intro image video audio media resource',
     type: 'Anonymisation',
     title: 'Anonymisation Interface',

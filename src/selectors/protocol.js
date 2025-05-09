@@ -67,3 +67,10 @@ export const getNetworkAssets = createSelector(
     {},
   ),
 );
+
+export const getExperiments = (state) => {
+  const protocol = getProtocol(state);
+  const experiments = protocol ? protocol.experiments : [];
+
+  return experiments;
+};
