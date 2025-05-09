@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Section, Row } from '@components/EditorLayout';
+import { Section } from '@components/EditorLayout';
 import { getNodeTypes } from '@selectors/codebook';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -51,7 +51,7 @@ const EncryptedVariables = () => {
             <div className="codebook__entity-icon">
               <EntityIcon entity="node" color={nodeType.color} />
             </div>
-            <h3 style={{ marginLeft: '18px', cursor: 'pointer' }}>
+            <h3 style={{ marginLeft: '18px' }}>
               {nodeType.name}
             </h3>
             <Button
@@ -65,23 +65,27 @@ const EncryptedVariables = () => {
 
           </div>
           {expandedNodeTypes[nodeTypeId] && (
-          <div style={{ maxHeight: '300px', overflowY: 'auto', padding: '1rem' }}>
-            {Object.entries(nodeType.variables || {}).map(([variableId, variable]) => {
-              // Skip layout variables
-              if (variable.type === 'layout') return null;
-
-              return (
-                <Row key={variableId}>
-                  <Fields.Checkbox
-                    label={variable.name}
-                    input={{
-                      value: variable.encrypted || false,
-                      onChange: () => handleEncryptionToggle(variableId, !variable.encrypted),
-                    }}
-                  />
-                </Row>
-              );
-            })}
+          <div style={{ maxHeight: '300px', overflowY: 'auto', paddingTop: '1rem' }}>
+            <Fields.CheckboxGroup
+              options={Object.entries(nodeType.variables || {})
+                .map(([variableId, variable]) => ({
+                  value: variableId,
+                  label: variable.name,
+                }))}
+              input={{
+                value: Object.entries(nodeType.variables || {})
+                  .filter(([, variable]) => variable.encrypted)
+                  .map(([variableId]) => variableId),
+                onChange: (selectedValues) => {
+                  Object.entries(nodeType.variables || {}).forEach(([variableId, variable]) => {
+                    const shouldEncrypt = selectedValues.includes(variableId);
+                    if (variable.encrypted !== shouldEncrypt) {
+                      handleEncryptionToggle(variableId, shouldEncrypt);
+                    }
+                  });
+                },
+              }}
+            />
           </div>
           )}
         </div>

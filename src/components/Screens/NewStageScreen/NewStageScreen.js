@@ -281,7 +281,7 @@ NewStageScreen.propTypes = {
 };
 
 NewStageScreen.defaultProps = {
-  experiments: [],
+  experiments: {},
 };
 
 export default connect(mapStateToProps)(NewStageScreen);
