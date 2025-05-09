@@ -33,6 +33,7 @@ import {
   GeospatialPrompts,
   AnonymisationExplanation,
   AnonymisationValidation,
+  EncryptedVariables,
 } from '@components/sections';
 import { FilteredNodeType } from '@components/sections/NodeType';
 
@@ -89,6 +90,11 @@ const OneToManyDyadCensus = {
     InterviewScript,
   ],
   documentation: 'https://documentation.networkcanvas.com/interface-documentation/one-to-many-dyad-census/',
+  template: {
+    behaviours: {
+      removeAfterConsideration: true,
+    },
+  },
 };
 
 const EgoForm = {
@@ -222,6 +228,7 @@ const Anonymisation = {
   sections: [
     AnonymisationExplanation,
     AnonymisationValidation,
+    EncryptedVariables,
     InterviewScript,
   ],
   documentation: 'https://documentation.networkcanvas.com/interface-documentation/anonymisation/',

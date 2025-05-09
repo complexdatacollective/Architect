@@ -31,3 +31,4 @@ export { default as MapOptions } from './MapOptions';
 export { default as GeospatialPrompts } from './GeospatialPrompts/GeospatialPrompts';
 export { default as AnonymisationExplanation } from './Anonymisation/AnonymisationExplanation';
 export { default as AnonymisationValidation } from './Anonymisation/AnonymisationValidation';
+export { default as EncryptedVariables } from './Anonymisation/EncryptedVariables';
