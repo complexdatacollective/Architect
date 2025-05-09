@@ -3,7 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Section, Row } from '@components/EditorLayout';
 import { getNodeTypes } from '@selectors/codebook';
 import * as Fields from '@codaco/ui/lib/components/Fields';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import { Button } from '@codaco/ui';
 import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
+import EntityIcon from '../../Codebook/EntityIcon';
 
 const EncryptedVariables = () => {
   const dispatch = useDispatch();
@@ -33,30 +37,52 @@ const EncryptedVariables = () => {
       )}
     >
       {Object.entries(nodeTypes).map(([nodeTypeId, nodeType]) => (
-        <div key={nodeTypeId}>
-          <h3 onClick={() => handleNodeTypeToggle(nodeTypeId)}>
-            {nodeType.name}
-          </h3>
-
-          {expandedNodeTypes[nodeTypeId] && (
-            <div>
-              {Object.entries(nodeType.variables || {}).map(([variableId, variable]) => {
-                // Skip layout variables
-                if (variable.type === 'layout') return null;
-
-                return (
-                  <Row key={variableId}>
-                    <Fields.Checkbox
-                      label={variable.name}
-                      input={{
-                        value: variable.encrypted || false,
-                        onChange: () => handleEncryptionToggle(variableId, !variable.encrypted),
-                      }}
-                    />
-                  </Row>
-                );
-              })}
+        <div
+          key={nodeTypeId}
+          style={{
+            overflow: 'hidden',
+            margin: '2.4rem auto',
+            padding: '2.4rem',
+            background: 'var(--architect-panel-grey--dark)',
+            borderRadius: 'var(--border-radius)',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div className="codebook__entity-icon">
+              <EntityIcon entity="node" color={nodeType.color} />
             </div>
+            <h3 style={{ marginLeft: '18px', cursor: 'pointer' }}>
+              {nodeType.name}
+            </h3>
+            <Button
+              onClick={() => handleNodeTypeToggle(nodeTypeId)}
+              style={{ marginLeft: 'auto' }}
+              icon={
+                expandedNodeTypes[nodeTypeId] ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />
+              }
+              size="small"
+            />
+
+          </div>
+          {expandedNodeTypes[nodeTypeId] && (
+          <div style={{ maxHeight: '300px', overflowY: 'auto', padding: '1rem' }}>
+            {Object.entries(nodeType.variables || {}).map(([variableId, variable]) => {
+              // Skip layout variables
+              if (variable.type === 'layout') return null;
+
+              return (
+                <Row key={variableId}>
+                  <Fields.Checkbox
+                    label={variable.name}
+                    input={{
+                      value: variable.encrypted || false,
+                      onChange: () => handleEncryptionToggle(variableId, !variable.encrypted),
+                    }}
+                  />
+                </Row>
+              );
+            })}
+          </div>
           )}
         </div>
       ))}
