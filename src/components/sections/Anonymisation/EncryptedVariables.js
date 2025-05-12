@@ -6,6 +6,7 @@ import * as Fields from '@codaco/ui/lib/components/Fields';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 
 import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
+import DetachedField from '../../DetachedField';
 
 const EncryptedVariables = () => {
   const dispatch = useDispatch();
@@ -50,7 +51,8 @@ const EncryptedVariables = () => {
       title="Encrypted Variables"
       summary={(
         <p>
-          Select the variables that should be encrypted.
+          You may encrypt one or more variables.
+          Select the variables for each node type that should be encrypted.
         </p>
       )}
     >
@@ -71,31 +73,30 @@ const EncryptedVariables = () => {
               style={{
                 maxHeight: '300px',
                 overflowY: 'auto',
-                paddingTop: '1rem',
               }}
             >
-              <Fields.CheckboxGroup
+              <DetachedField
+                component={Fields.CheckboxGroup}
                 options={Object.entries(nodeType.variables || {}).map(
                   ([variableId, variable]) => ({
                     value: variableId,
                     label: variable.name,
                   }),
                 )}
-                input={{
-                  value: Object.entries(nodeType.variables || {})
-                    .filter(([, variable]) => variable.encrypted)
-                    .map(([variableId]) => variableId),
-                  onChange: (selectedValues) => {
-                    Object.entries(nodeType.variables || {}).forEach(
-                      ([variableId, variable]) => {
-                        const shouldEncrypt = selectedValues.includes(variableId);
-                        if (variable.encrypted !== shouldEncrypt) {
-                          handleEncryptionToggle(variableId, shouldEncrypt);
-                        }
-                      },
-                    );
-                  },
+                value={Object.entries(nodeType.variables || {})
+                  .filter(([, variable]) => variable.encrypted)
+                  .map(([variableId]) => variableId)}
+                onChange={(selectedValues) => {
+                  Object.entries(nodeType.variables || {}).forEach(
+                    ([variableId, variable]) => {
+                      const shouldEncrypt = selectedValues.includes(variableId);
+                      if (variable.encrypted !== shouldEncrypt) {
+                        handleEncryptionToggle(variableId, shouldEncrypt);
+                      }
+                    },
+                  );
                 }}
+                label={`Encrypt the following ${nodeType.name} variable(s)`}
               />
             </div>
           </Section>
