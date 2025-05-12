@@ -7,6 +7,7 @@ import { actionCreators as dialogActions } from '@modules/dialogs';
 
 import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
 import DetachedField from '../../DetachedField';
+import Tip from '../../Tip';
 
 const EncryptedVariables = () => {
   const dispatch = useDispatch();
@@ -50,10 +51,17 @@ const EncryptedVariables = () => {
     <Section
       title="Encrypted Variables"
       summary={(
-        <p>
-          You may encrypt one or more variables.
-          Select the variables for each node type that should be encrypted.
-        </p>
+        <>
+          <p>
+            You may encrypt one or more variables.
+            Select the variables for each node type that should be encrypted.
+          </p>
+          <Tip>
+            <p>
+              Values for encrypted variables are not stored in the database.
+            </p>
+          </Tip>
+        </>
       )}
     >
       {Object.entries(nodeTypes).map(([nodeTypeId, nodeType]) => {
@@ -68,6 +76,11 @@ const EncryptedVariables = () => {
             startExpanded={hasEncryptedVariable}
             // eslint-disable-next-line max-len
             handleToggleChange={(newState) => handleToggleChange(hasEncryptedVariable, nodeType, newState)}
+            summary={(
+              <p>
+                Which variables should be encrypted?
+              </p>
+            )}
           >
             <div
               style={{
@@ -96,7 +109,6 @@ const EncryptedVariables = () => {
                     },
                   );
                 }}
-                label={`Encrypt the following ${nodeType.name} variable(s)`}
               />
             </div>
           </Section>
