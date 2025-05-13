@@ -12,6 +12,8 @@ import AlterForm from './stage--AlterForm.png';
 import AlterEdgeForm from './stage--AlterEdgeForm.png';
 import EgoForm from './stage--EgoForm.png';
 import Geospatial from './stage--Geospatial.png';
+import Anonymisation from './stage--Anonymisation.png';
+import OneToManyDyadCensus from './stage--OneToManyDyadCensus.png';
 import Default from './stage--Default.png';
 
 export default {
@@ -29,5 +31,7 @@ export default {
   AlterEdgeForm,
   EgoForm,
   Geospatial,
+  Anonymisation,
+  OneToManyDyadCensus,
   Default,
 };

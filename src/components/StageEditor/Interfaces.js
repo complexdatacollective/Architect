@@ -6,6 +6,8 @@ import {
   CategoricalBinPrompts,
   ContentGrid,
   DyadCensusPrompts,
+  OneToManyDyadCensusPrompts,
+  RemoveAfterConsideration,
   ExternalDataSource,
   AutomaticLayout,
   FilteredEdgeType,
@@ -29,6 +31,9 @@ import {
   Title,
   MapOptions,
   GeospatialPrompts,
+  AnonymisationExplanation,
+  AnonymisationValidation,
+  EncryptedVariables,
 } from '@components/sections';
 import { FilteredNodeType } from '@components/sections/NodeType';
 
@@ -74,6 +79,22 @@ const DyadCensus = {
     InterviewScript,
   ],
   documentation: 'https://documentation.networkcanvas.com/interface-documentation/dyad-census/',
+};
+
+const OneToManyDyadCensus = {
+  sections: [
+    FilteredNodeType,
+    RemoveAfterConsideration,
+    OneToManyDyadCensusPrompts,
+    SkipLogic,
+    InterviewScript,
+  ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/one-to-many-dyad-census/',
+  template: {
+    behaviours: {
+      removeAfterConsideration: true,
+    },
+  },
 };
 
 const EgoForm = {
@@ -198,8 +219,19 @@ const Geospatial = {
     MapOptions,
     GeospatialPrompts,
     SkipLogic,
+    InterviewScript,
   ],
   documentation: 'https://documentation.networkcanvas.com/interface-documentation/geospatial/',
+};
+
+const Anonymisation = {
+  sections: [
+    AnonymisationExplanation,
+    AnonymisationValidation,
+    EncryptedVariables,
+    InterviewScript,
+  ],
+  documentation: 'https://documentation.networkcanvas.com/interface-documentation/anonymisation/',
 };
 
 const interfaces = {
@@ -207,6 +239,7 @@ const interfaces = {
   AlterForm,
   CategoricalBin,
   DyadCensus,
+  OneToManyDyadCensus,
   EgoForm,
   Information,
   NameGenerator,
@@ -217,6 +250,7 @@ const interfaces = {
   Sociogram,
   TieStrengthCensus,
   Geospatial,
+  Anonymisation,
 };
 
 const emptyInterface = {

@@ -60,6 +60,10 @@ const VALIDATIONS = {
     'differentFrom',
     'sameAs',
   ],
+  passphrase: [
+    'minLength',
+    'maxLength',
+  ],
 };
 
 const VALIDATIONS_WITH_NUMBER_VALUES = [
