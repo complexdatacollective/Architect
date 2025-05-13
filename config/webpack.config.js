@@ -87,8 +87,10 @@ const loaderRules = Object.freeze([
       // Process JS with Babel.
       {
         test: /\.(js|jsx)$/,
-        include: paths.appSrc,
-        exclude: /node_modules\/(?!(@codaco\/protocol-validation)\/).*/,
+        include: [
+          paths.appSrc,
+          /node_modules\/@codaco\/protocol-validation/,
+        ],
         use: [
           {
             loader: require.resolve('thread-loader'),
