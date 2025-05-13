@@ -1,30 +1,73 @@
-import React from 'react';
 import { Section, Row } from '@components/EditorLayout';
-import ValidatedField from '@components/Form/ValidatedField';
 import * as Fields from '@codaco/ui/lib/components/Fields';
+import React, { useState } from 'react';
+import { change, formValueSelector } from 'redux-form';
+import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import DetachedField from '../../DetachedField';
 
-const RemoveAfterConsideration = () => (
-  <Section
-    title="Remove After Consideration"
-    summary={(
-      <p>
-        This toggle determines if a node should continue to be shown in the bin after
-        it has been the main focal node. If it is set to true, the node will be removed
-        from the pool after it has been shown in the primary position for consideration.
-      </p>
+const FORM_PROPERTY = 'behaviours.removeAfterConsideration';
+
+const RemoveAfterConsideration = ({ form }) => {
+  const dispatch = useDispatch();
+  const formValue = useSelector((state) => !!formValueSelector(form)(state, FORM_PROPERTY));
+
+  const [removeAfterConsideration, setRemoveAfterConsideration] = useState(formValue);
+
+  const handleChooseRemoveAfterConsideration = () => {
+    if (removeAfterConsideration) {
+      dispatch(change('edit-stage', FORM_PROPERTY, false));
+      setRemoveAfterConsideration(false);
+      return;
+    }
+
+    dispatch(change('edit-stage', FORM_PROPERTY, true));
+    setRemoveAfterConsideration(true);
+  };
+  return (
+    <Section
+      title="Remove After Consideration"
+      summary={(
+        <p>
+          This toggle determines if a node should continue to be shown in the bin after
+          it has been the main focal node. If it is set to true, the node will be removed
+          from the pool after it has been shown in the primary position for consideration.
+        </p>
     )}
-  >
-    <Row>
-      <ValidatedField
-        entityType="edge"
-        name="behaviours.removeAfterConsideration"
-        component={Fields.Boolean}
-        label="Remove after consideration?"
-        validation={{ required: true }}
-        noReset
-      />
-    </Row>
-  </Section>
-);
+    >
+      <Row>
+        <DetachedField
+          component={Fields.Boolean}
+          onChange={handleChooseRemoveAfterConsideration}
+          value={removeAfterConsideration}
+          validation={{ required: true }}
+          options={[
+            {
+              value: true,
+              label: () => (
+                <div>
+                  <h4>Yes</h4>
+                </div>
+              ),
+            },
+            {
+              value: false,
+              label: () => (
+                <div>
+                  <h4>No</h4>
+                </div>
+              ),
+            },
+          ]}
+          noReset
+        />
+      </Row>
+    </Section>
+  );
+};
+
+RemoveAfterConsideration.propTypes = {
+  form: PropTypes.string.isRequired,
+};
 
 export default RemoveAfterConsideration;
