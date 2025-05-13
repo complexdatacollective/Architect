@@ -88,12 +88,13 @@ const loaderRules = Object.freeze([
       {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
+        exclude: /node_modules\/(?!(@codaco\/protocol-validation)\/).*/,
         use: [
           {
             loader: require.resolve('thread-loader'),
             options: {
               // In dev, keep workers alive for more effective watch mode
-              poolTimeout: isProduction ? 500 : Infinity,
+              poolTimeout: isProduction ? 500 : Number.POSITIVE_INFINITY,
             },
           },
           {
@@ -101,20 +102,11 @@ const loaderRules = Object.freeze([
             options: {
               compact: isProduction,
               cacheDirectory: !isProduction,
+              presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-nullish-coalescing-operator'],
             },
           },
         ],
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules\/(?!(@codaco\/protocol-validation)\/).*/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-            plugins: ['@babel/plugin-proposal-nullish-coalescing-operator'],
-          },
-        },
       },
       {
         test: /\.woff2?$|\.woff$/,
