@@ -48,7 +48,7 @@
     "@babel/eslint-plugin": "^7.13.10",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/preset-react": "^7.12.1",
-    "@codaco/protocol-validation": "^4.0.0-alpha.10",
+    "@codaco/protocol-validation": "^4.0.0-alpha.11",
     "@codaco/ui": "^5.8.5",
     "@electron/notarize": "^2.3.0",
     "@material-ui/icons": "^4.11.2",
