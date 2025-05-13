@@ -7,7 +7,8 @@ import { change, Field, formValueSelector } from 'redux-form';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
 import Tip from '../../Tip';
-import { getEdgesForSubject } from './selectors';
+import { getEdgeFilters, getEdgesForSubject } from './selectors';
+import getEdgeFilteringWarning from './utils';
 
 const DisplayEdges = ({ form, entity, type }) => {
   const dispatch = useDispatch();
@@ -29,6 +30,9 @@ const DisplayEdges = ({ form, entity, type }) => {
     const displayEdgesWithCreatedEdge = union(displayEdges, [createEdge]);
     dispatch(change(form, 'edges.display', displayEdgesWithCreatedEdge));
   }, [createEdge]);
+
+  const edgeFilters = useSelector((state) => getEdgeFilters(state));
+  const shouldShowNetworkFilterWarning = getEdgeFilteringWarning(edgeFilters, displayEdges);
 
   return (
     <>
@@ -59,6 +63,17 @@ const DisplayEdges = ({ form, entity, type }) => {
         }}
       >
         <Row>
+          {shouldShowNetworkFilterWarning && (
+          <Tip type="warning">
+            <p>
+              Stage level network filtering is enabled, but one or more of the edge types
+              you have configured to display on this prompt are not currently included in the
+              filter. This means that these edges may not be displayed. Either remove the
+              stage-level network filtering, or add these edge types to the filter to resolve this
+              issue.
+            </p>
+          </Tip>
+          )}
           { hasDisabledEdgeOption && (
             <Tip>
               <p>

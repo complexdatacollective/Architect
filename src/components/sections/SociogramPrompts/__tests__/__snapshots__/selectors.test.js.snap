@@ -1,5 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`SociogramPrompts selectors get edge filters 1`] = `
+Array [
+  Object {
+    "color": "blue",
+    "label": "an edge",
+    "value": "1234-5",
+  },
+]
+`;
+
 exports[`SociogramPrompts selectors get edges for node type 1`] = `
 Array [
   Object {

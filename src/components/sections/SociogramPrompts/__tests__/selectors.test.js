@@ -1,7 +1,6 @@
 /* eslint-env jest */
 
 import mockState from '../../../../__tests__/testState.json';
-
 import {
   getLayoutVariablesForSubject,
   getHighlightVariablesForSubject,
@@ -38,6 +37,12 @@ describe('SociogramPrompts', () => {
     });
 
     it('get edges for node type', () => {
+      const result = getEdgesForSubject(mockState, subject);
+
+      expect(result).toMatchSnapshot();
+    });
+
+    it('get edge filters', () => {
       const result = getEdgesForSubject(mockState, subject);
 
       expect(result).toMatchSnapshot();

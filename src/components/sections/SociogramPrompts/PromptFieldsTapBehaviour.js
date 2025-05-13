@@ -5,11 +5,13 @@ import { change, formValueSelector } from 'redux-form';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
 import ValidatedField from '@components/Form/ValidatedField';
+import Tip from '@components/Tip';
 import EntitySelectField from '../fields/EntitySelectField/EntitySelectField';
 import DetachedField from '../../DetachedField';
 import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
-import { getHighlightVariablesForSubject } from './selectors';
+import { getHighlightVariablesForSubject, getEdgeFilters } from './selectors';
 import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
+import getEdgeFilteringWarning from './utils';
 
 // TODO: Move this somewhere else!
 // This was created as part of removing the HOC pattern used throughout the app.
@@ -101,6 +103,11 @@ const TapBehaviour = ({
     return true;
   };
 
+  const selectedValue = useSelector((state) => getFormValue(state, 'edges.create'));
+
+  const edgeFilters = useSelector(getEdgeFilters);
+  const showNetworkFilterWarning = getEdgeFilteringWarning(edgeFilters, [selectedValue]);
+
   return (
     <Section
       group
@@ -168,6 +175,18 @@ const TapBehaviour = ({
           />
         )}
         { tapBehaviour === TAP_BEHAVIOURS.CREATE_EDGES && (
+        <>
+          {showNetworkFilterWarning && (
+          <Tip type="warning">
+            <p>
+              Stage level network filtering is enabled, but the edge type you want to create
+              on this prompt is not currently included in the filter. This means that these
+              edges may not be displayed. Either remove the stage-level network filtering,
+              or add these edge types to the filter to resolve this issue.
+            </p>
+          </Tip>
+          )}
+
           <ValidatedField
             entityType="edge"
             name="edges.create"
@@ -175,6 +194,7 @@ const TapBehaviour = ({
             label="Create edges of the following type"
             validation={{ required: true }}
           />
+        </>
         )}
       </Row>
     </Section>

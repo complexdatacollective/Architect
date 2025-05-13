@@ -10,9 +10,9 @@ const entityRuleTypes = {
   TYPE_RULE,
 };
 
-const entityRuleTypeOptions = [
-  { label: 'Attribute - rule based on the value of this alter type\'s attributes.', value: VARIABLE_RULE },
-  { label: 'Presence - based on the presence or absence of this alter type in the interview network.', value: TYPE_RULE },
+const entityRuleTypeOptions = (entityType) => [
+  { label: `Attribute - rule based on the value of this ${entityType} type's attributes.`, value: VARIABLE_RULE },
+  { label: `Presence - based on the presence or absence of this ${entityType} type in the interview network.`, value: TYPE_RULE },
 ];
 
 const withEntityRuleType = compose(
