@@ -48,7 +48,7 @@ const Filter = () => {
   const shouldShowWarning = useMemo(() => {
     if (edgeCreationValues.length > 0 || edgeDisplayValues.length > 0) {
       return getEdgeFilteringWarning(
-        currentValue.rules,
+        (currentValue && currentValue.rules) || [],
         [...edgeCreationValues, ...edgeDisplayValues],
       );
     }
