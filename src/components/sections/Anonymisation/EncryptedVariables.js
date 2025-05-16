@@ -5,6 +5,7 @@ import { getNodeTypes } from '@selectors/codebook';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 
+import { omit } from 'lodash';
 import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
 import DetachedField from '../../DetachedField';
 import Tip from '../../Tip';
@@ -17,9 +18,12 @@ const EncryptedVariables = () => {
   );
   const nodeTypes = useSelector((state) => getNodeTypes(state));
 
-  const handleEncryptionToggle = (variableId, encrypted) => {
-    const action = codebookActions.updateVariableByUUID(variableId, { encrypted }, true);
-    dispatch(action);
+  const handleEncryptionToggle = (variableId, encrypted, variable) => {
+    const properties = encrypted
+      ? { ...variable, encrypted: true }
+      : omit(variable, 'encrypted');
+
+    dispatch(codebookActions.updateVariableByUUID(variableId, properties, false));
   };
   const handleToggleChange = useCallback(
     async (hasEncryptedVariable, nodeType, newState) => {
@@ -37,7 +41,7 @@ const EncryptedVariables = () => {
       if (confirm) {
         Object.entries(nodeType.variables || {}).forEach(([variableId, variable]) => {
           if (variable.encrypted) {
-            handleEncryptionToggle(variableId, false);
+            handleEncryptionToggle(variableId, false, variable);
           }
         });
         return true;
@@ -104,7 +108,7 @@ const EncryptedVariables = () => {
                     ([variableId, variable]) => {
                       const shouldEncrypt = selectedValues.includes(variableId);
                       if (variable.encrypted !== shouldEncrypt) {
-                        handleEncryptionToggle(variableId, shouldEncrypt);
+                        handleEncryptionToggle(variableId, shouldEncrypt, variable);
                       }
                     },
                   );
