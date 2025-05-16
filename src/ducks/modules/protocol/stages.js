@@ -1,8 +1,11 @@
 import uuid from 'uuid/v1';
-import { get, compact } from 'lodash';
+import { get, compact, omit } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 import prune from '@app/utils/prune';
+import { getStage } from '@selectors/protocol';
 import { saveableChange } from '../session';
+
+import { getNodeTypes } from '../../../selectors/codebook';
 
 const CREATE_STAGE = 'PROTOCOL/CREATE_STAGE';
 const UPDATE_STAGE = 'PROTOCOL/UPDATE_STAGE';
@@ -105,7 +108,38 @@ const createStageThunk = (options, index) => (dispatch) => {
 
 const moveStageThunk = saveableChange(moveStage);
 const updateStageThunk = saveableChange(updateStage);
-const deleteStageThunk = saveableChange(deleteStage);
+const deleteStageThunk = (stageId) => (dispatch, getState) => {
+  const state = getState();
+  const stage = getStage(state, stageId);
+  if (stage.type === 'Anonymisation') {
+    // Remove encrypted from all variables
+    const nodeTypes = getNodeTypes(state);
+    const encryptedVariables = Object.values(nodeTypes).reduce((acc, nodeType) => {
+      const nodeTypeVariables = Object.entries(nodeType.variables)
+        .filter(([, variable]) => variable.encrypted)
+        .map(([variableId, variable]) => ({ ...variable, id: variableId }));
+
+      return [...acc, ...nodeTypeVariables];
+    }, []);
+    encryptedVariables.forEach((variable) => {
+      const properties = omit(variable, 'encrypted');
+
+      dispatch({
+        type: 'PROTOCOL/UPDATE_VARIABLE',
+        meta: {
+          variable: variable.id,
+        },
+        configuration: properties,
+        merge: false,
+      });
+    });
+    return dispatch(saveableChange(deleteStage)(stageId));
+  }
+
+  // Delete stage
+  return dispatch(saveableChange(deleteStage)(stageId));
+};
+
 const deletePromptThunk = saveableChange(deletePrompt);
 
 const actionCreators = {
