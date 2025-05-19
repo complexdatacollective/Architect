@@ -34,7 +34,7 @@ import {
 
 jest.mock('fs-extra');
 jest.mock('@app/utils/protocols/lib/archive');
-jest.mock('@app/protocol-validation/migrations/migrateProtocol');
+jest.mock('@codaco/protocol-validation');
 jest.mock('@app/utils/pruneProtocolAssets');
 jest.mock('@app/utils/prune');
 jest.mock('../lib');

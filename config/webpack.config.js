@@ -105,7 +105,7 @@ const loaderRules = Object.freeze([
               compact: isProduction,
               cacheDirectory: !isProduction,
               presets: ['@babel/preset-env'],
-              plugins: ['@babel/plugin-proposal-nullish-coalescing-operator'],
+              plugins: ['@babel/plugin-transform-nullish-coalescing-operator'],
             },
           },
         ],
