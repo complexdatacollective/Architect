@@ -47,6 +47,9 @@
     "@babel/eslint-parser": "^7.13.10",
     "@babel/eslint-plugin": "^7.13.10",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-transform-private-methods": "^7.27.1",
+    "@babel/plugin-transform-private-property-in-object": "^7.27.1",
+    "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.12.1",
     "@codaco/protocol-validation": "^4.0.0-alpha.11",
     "@codaco/ui": "^5.8.5",
@@ -258,8 +261,7 @@
       "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
     "transformIgnorePatterns": [
-      "/node_modules/(?!@codaco/ui).+\\.(js|jsx)$",
-      "/node_modules/(?!@codaco/protocol-validation).+\\.(js|jsx)$"
+      "/node_modules/(?!(@codaco/protocol-validation|@codaco/ui)/).*"
     ],
     "testRegex": "(/__tests__/.*|(\\.|/))\\.test\\.[jt]sx?$",
     "moduleNameMapper": {
