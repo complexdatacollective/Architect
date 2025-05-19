@@ -462,14 +462,14 @@ describe('protocol.codebook', () => {
         await actionCreators.deleteType('node', 'foo', true)(dispatch, getState);
 
         expect(dispatch).toHaveBeenCalledWith(test.deleteType('node', 'foo'));
-        expect(dispatch).toHaveBeenNthCalledWith(3, stageActions.deleteStage('bazz'));
+        expect(dispatch).toHaveBeenNthCalledWith(4, stageActions.deleteStage('bazz'));
         expect(dispatch).toHaveBeenNthCalledWith(
-          6,
+          7,
           stageActions.deletePrompt('buzz', 'fizz', true),
         );
 
         expect(dispatch).toHaveBeenNthCalledWith(
-          9,
+          10,
           {
             type: 'SESSION/PROTOCOL_CHANGED',
             protocolIsValid: false,
