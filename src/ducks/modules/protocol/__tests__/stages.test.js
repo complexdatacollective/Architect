@@ -139,9 +139,9 @@ describe('protocol.stages', () => {
     });
 
     it('deleteStage', async () => {
-      const [dispatch] = getThunkMocks();
+      const [dispatch, getState] = getThunkMocks(mockState);
 
-      await actionCreators.deleteStage(9)(dispatch);
+      await actionCreators.deleteStage(9)(dispatch, getState);
 
       expect(dispatch).toHaveDispatched([
         { type: 'PROTOCOL/DELETE_STAGE', id: 9 },
