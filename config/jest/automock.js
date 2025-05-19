@@ -7,3 +7,5 @@ jest.mock('archiver');
 jest.mock('decompress');
 jest.mock('electron');
 jest.mock('electron-log');
+jest.mock('mapbox-gl/dist/mapbox-gl-unminified');
+jest.mock('mapbox-gl/dist/mapbox-gl.css', () => {});
