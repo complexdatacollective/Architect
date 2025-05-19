@@ -4,7 +4,7 @@ import fse from 'fs-extra';
 import uuid from 'uuid';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import { extract, archive } from '@app/utils/protocols/lib/archive';
-import { migrateProtocol } from '@codaco/protocol-validation';
+import { canUpgrade, migrateProtocol } from '@codaco/protocol-validation';
 import validateProtocol from '@app/utils/validateProtocol';
 import { pruneProtocol } from '@app/utils/prune';
 import {
@@ -159,13 +159,15 @@ describe('netcanvasFile/netcanvasFile', () => {
 
     it('returns [, schemaVersionStates.UPGRADE_PROTOCOL] if protocol can upgrade', async () => {
       readProtocol.mockResolvedValueOnce({ schemaVersion: 2 });
+      canUpgrade.mockReturnValue(true);
 
       await expect(checkSchemaVersion('/dev/null/netcanvas/file', 3))
         .resolves.toEqual([2, schemaVersionStates.UPGRADE_PROTOCOL]);
     });
 
-    it('returns [, schemaVersionStates.UPGRADE_AGG] if protocol cannot upgrade', async () => {
+    it('returns [, schemaVersionStates.UPGRADE_APP] if protocol cannot upgrade', async () => {
       readProtocol.mockResolvedValueOnce({ schemaVersion: 4 });
+      canUpgrade.mockReturnValue(false);
 
       await expect(checkSchemaVersion('/dev/null/netcanvas/file', 3))
         .resolves.toEqual([4, schemaVersionStates.UPGRADE_APP]);
