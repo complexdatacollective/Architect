@@ -4,7 +4,7 @@ import fse from 'fs-extra';
 import uuid from 'uuid';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import { extract, archive } from '@app/utils/protocols/lib/archive';
-import migrateProtocol from '@codaco/protocol-validation';
+import { migrateProtocol } from '@codaco/protocol-validation';
 import validateProtocol from '@app/utils/validateProtocol';
 import { pruneProtocol } from '@app/utils/prune';
 import {
@@ -133,7 +133,7 @@ describe('netcanvasFile/netcanvasFile', () => {
         .mockResolvedValueOnce({ ...mockProtocol, schemaVersion: 4 });
 
       migrateProtocol.mockResolvedValueOnce(
-        [{ ...mockProtocol, schemaVersion: 4 }, []],
+        { ...mockProtocol, schemaVersion: 4 },
       );
 
       const result = await migrateNetcanvas('/dev/null/original/path', '/dev/null/destination/path2');
