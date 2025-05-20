@@ -472,7 +472,7 @@ describe('protocol.codebook', () => {
           10,
           {
             type: 'SESSION/PROTOCOL_CHANGED',
-            protocolIsValid: false,
+            protocolIsValid: true,
             ipc: true,
           },
         );
