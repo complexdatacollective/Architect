@@ -12,7 +12,8 @@ import { makeScreenMessageListener } from '../../selectors/ui';
 
 // List of fields that are independent of the stage subject, and so do not need to be
 // reset when the subject changes.
-export const SUBJECT_INDEPENDENT_FIELDS = ['id', 'type', 'label', 'interviewScript', 'introductionPanel'];
+// TODO: remove this. Should be part of stage configuration, not hardcoded.
+export const SUBJECT_INDEPENDENT_FIELDS = ['id', 'type', 'label', 'interviewScript', 'introductionPanel', 'behaviours'];
 
 const NodeType = (props) => {
   const {
