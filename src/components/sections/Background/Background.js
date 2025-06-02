@@ -75,7 +75,7 @@ class Background extends PureComponent {
               />
             </Row>
             <Row>
-              <IssueAnchor fieldName="background.skewedTowardCenter" description='Background &gt; Skewed toward center' />
+              <IssueAnchor fieldName="background.skewedTowardCenter" description="Background &gt; Skewed toward center" />
               <Field
                 name="background.skewedTowardCenter"
                 component={Fields.Toggle}

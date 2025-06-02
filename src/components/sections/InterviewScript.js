@@ -51,7 +51,7 @@ const InterviewerScript = () => {
       startExpanded={!!currentValue}
       handleToggleChange={handleToggleChange}
     >
-      <IssueAnchor fieldName='interviewScript' description='Interview script'>
+      <IssueAnchor fieldName="interviewScript" description="Interview script">
         <Field
           name="interviewScript"
           component={RichText}

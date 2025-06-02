@@ -1,11 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { submit } from 'redux-form';
 import { AnimatePresence, motion } from 'framer-motion';
-import window from '@codaco/ui/lib/components/window';
-import { compose } from 'recompose';
 import Button from '@codaco/ui/lib/components/Button';
+import { createPortal } from 'react-dom';
 import { Layout } from '@components/EditorLayout';
 import Form from './Form';
 
@@ -28,25 +27,29 @@ const item = {
   visible: { opacity: 1 },
 };
 
-const InlineEditScreen = ({
+const InlineEditScreen = forwardRef(({
   show,
   form,
-  submitForm,
   title,
   layoutId,
   onSubmit,
   onCancel,
   children,
   ...rest
-}) => {
+}, ref) => {
+  const dispatch = useDispatch();
+  const submitForm = useCallback(() => {
+    dispatch(submit(form));
+  }, [dispatch, form]);
+
   const handleSubmit = useCallback(() => {
     submitForm(form);
   }, [form, submitForm]);
 
-  return (
+  return createPortal(
     <AnimatePresence>
       { show && (
-        <div className="inline-edit-screen" onClick={(e) => e.stopPropagation()}>
+        <div className="inline-edit-screen" onClick={(e) => e.stopPropagation()} ref={ref}>
           <motion.div
             className="inline-edit-screen__container"
             variants={screenVariants}
@@ -76,9 +79,9 @@ const InlineEditScreen = ({
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>, document.body,
   );
-};
+});
 
 InlineEditScreen.propTypes = {
   children: PropTypes.node,
@@ -87,7 +90,6 @@ InlineEditScreen.propTypes = {
   onCancel: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   show: PropTypes.bool,
-  submitForm: PropTypes.func.isRequired,
   title: PropTypes.string,
 };
 
@@ -98,11 +100,4 @@ InlineEditScreen.defaultProps = {
   title: null,
 };
 
-const mapDispatchToProps = {
-  submitForm: submit,
-};
-
-export default compose(
-  window,
-  connect(null, mapDispatchToProps),
-)(InlineEditScreen);
+export default InlineEditScreen;

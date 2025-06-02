@@ -14,7 +14,7 @@ const Title = () => (
   >
     <ValidatedField
       name="title"
-      issueDescription={'Page Heading'}
+      issueDescription="Page Heading"
       component={Fields.Text}
       placeholder="Enter your title here..."
       className="stage-editor-section-title"

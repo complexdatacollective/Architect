@@ -94,7 +94,7 @@ const Filter = () => {
         </p>
       </Tip>
       )}
-      <IssueAnchor fieldName='filter' description="Filter text" >
+      <IssueAnchor fieldName="filter" description="Filter text">
         <Field
           name="filter"
           component={FilterField}

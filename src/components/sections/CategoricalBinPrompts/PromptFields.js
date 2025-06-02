@@ -111,7 +111,7 @@ const PromptFields = ({
               </p>
             </Tip>
           )}
-          <IssueAnchor fieldName='options' description="Variable options">
+          <IssueAnchor fieldName="options" description="Variable options">
             <Options
               name="variableOptions"
               label="Options"

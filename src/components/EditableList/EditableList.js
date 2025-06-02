@@ -1,7 +1,6 @@
 import React, { useCallback, useRef } from 'react';
 import { compose, defaultProps } from 'recompose';
 import PropTypes from 'prop-types';
-import { startCase } from 'lodash';
 import { AnimateSharedLayout } from 'framer-motion';
 import { Button } from '@codaco/ui';
 import { scrollToFirstIssue } from '@app/utils/issues';
@@ -53,6 +52,7 @@ const EditableList = ({
   const ref = useRef();
 
   const handleSubmitFail = useCallback((issues) => {
+    // Map issues to field names
     scrollToFirstIssue(issues, ref.current);
   }, [ref.current]);
 
@@ -63,7 +63,6 @@ const EditableList = ({
       summary={sectionSummary}
       id={fieldName}
       title={sectionTitle}
-      ref={ref}
     >
       <AnimateSharedLayout>
         {children}
@@ -84,6 +83,7 @@ const EditableList = ({
           <Button onClick={handleAddNew} size="small" icon="add">Create new</Button>
         </div>
         <InlineEditScreen
+          ref={ref}
           show={!!editField}
           initialValues={initialValues}
           title={title}

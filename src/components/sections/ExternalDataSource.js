@@ -34,7 +34,7 @@ const ExternalDataSource = (props) => {
     >
       <Row>
         <ValidatedField
-          issueDescription={'Data source for Roster'}
+          issueDescription="Data source for Roster"
           component={DataSource}
           name="dataSource"
           id="dataSource"
