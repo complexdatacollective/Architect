@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
 import { Section, Row } from '@components/EditorLayout';
-import { getFieldId } from '@app/utils/issues';
 import Tip from '@components/Tip';
 import ValidatedField from '@components/Form/ValidatedField';
 import { compose } from 'recompose';
@@ -28,7 +27,6 @@ const PromptFields = ({
         title="One to Many Dyad Census Prompts"
       >
         <Row>
-          <div id={getFieldId('text')} data-title="Dyad Census Prompts" />
           <p>
             One to Many Dyad Census prompts guide your participant in evaluating relationships
             between a single focal node and several target nodes.
@@ -58,6 +56,7 @@ const PromptFields = ({
             label="Prompt Text"
             placeholder="Enter text for the prompt here..."
             validation={{ required: true, maxLength: 220 }}
+            issueDescription="text"
           />
         </Row>
         <Row>

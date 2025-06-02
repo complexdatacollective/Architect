@@ -8,7 +8,6 @@ import { actionCreators as dialogActions } from '@modules/dialogs';
 import { useDispatch, useSelector } from 'react-redux';
 import { Number } from '@codaco/ui/lib/components/Fields';
 import { ValidatedField } from '../Form';
-import IssueAnchor from '../IssueAnchor';
 import Tip from '../Tip';
 
 const maxValidation = (value, allValues) => {
@@ -114,9 +113,10 @@ const MinMaxAlterLimits = () => {
         </Tip>
       )}
       <FormSection name="behaviours">
-        <IssueAnchor fieldName="behaviours.minNodes" description="Minimum alters" />
         <ValidatedField
           name="minNodes"
+          issueFieldName="behaviours.minNodes"
+          issueDescription="Minimum Alters"
           label="Minimum Number of Alters. (0 = no minimum)"
           component={Number}
           placeholder="0"
@@ -125,9 +125,10 @@ const MinMaxAlterLimits = () => {
             positiveNumber: true,
           }}
         />
-        <IssueAnchor fieldName="behaviours.maxNodes" description="Maximum alters" />
         <ValidatedField
           name="maxNodes"
+          issueFieldName="behaviours.maxNodes"
+          issueDescription="Maximum Alters"
           label="Maximum Number of Alters. _(Leave empty for no maximum)_"
           component={Number}
           placeholder="Infinity"

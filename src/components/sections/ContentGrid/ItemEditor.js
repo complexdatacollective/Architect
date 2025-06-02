@@ -4,7 +4,6 @@ import { get } from 'lodash';
 import RadioGroup from '@codaco/ui/lib/components/Fields/RadioGroup';
 import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
 import { Section, Row } from '@components/EditorLayout';
-import { getFieldId } from '../../../utils/issues';
 import ValidatedField from '../../Form/ValidatedField';
 import Image from '../../Form/Fields/Image';
 import Audio from '../../Form/Fields/Audio';
@@ -30,9 +29,9 @@ const ItemEditor = ({
       title="Type"
     >
       <Row>
-        <div id={getFieldId('type')} data-name="Content Type" />
         <ValidatedField
           name="type"
+          issueDescription="Content type"
           component={RadioGroup}
           options={typeOptions}
           validation={{ required: true }}
@@ -45,9 +44,9 @@ const ItemEditor = ({
         title="Content"
       >
         <Row disabled={!type}>
-          <div id={getFieldId('content')} />
           <ValidatedField
             name="content"
+            issueDescription="Content"
             component={getInputComponent(type)}
             validation={{ required: true }}
           />

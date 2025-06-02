@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 import { Section } from '@components/EditorLayout';
-import { getFieldId } from '@app/utils/issues';
 import { change, Field, formValueSelector } from 'redux-form';
 import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import { useDispatch, useSelector } from 'react-redux';
+import IssueAnchor from '../IssueAnchor';
 
 const InterviewerScript = () => {
   const getFormValue = formValueSelector('edit-stage');
@@ -40,7 +40,6 @@ const InterviewerScript = () => {
 
   return (
     <Section
-      id={getFieldId('interviewScript')}
       className="interview-script"
       title="Interviewer Script"
       summary={(
@@ -52,11 +51,13 @@ const InterviewerScript = () => {
       startExpanded={!!currentValue}
       handleToggleChange={handleToggleChange}
     >
-      <Field
-        name="interviewScript"
-        component={RichText}
-        placeholder="Enter text for the interviewer here."
-      />
+      <IssueAnchor fieldName='interviewScript' description='Interview script'>
+        <Field
+          name="interviewScript"
+          component={RichText}
+          placeholder="Enter text for the interviewer here."
+        />
+      </IssueAnchor>
     </Section>
   );
 };

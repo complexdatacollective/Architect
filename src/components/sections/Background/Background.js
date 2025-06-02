@@ -6,11 +6,11 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
-import { getFieldId } from '../../../utils/issues';
 import DetachedField from '../../DetachedField';
 import ValidatedField from '../../Form/ValidatedField';
 import Image from '../../Form/Fields/Image';
 import withBackgroundChangeHandler from './withBackgroundChangeHandler';
+import IssueAnchor from '../../IssueAnchor';
 
 class Background extends PureComponent {
   render() {
@@ -32,6 +32,7 @@ class Background extends PureComponent {
       >
         <Row>
           <DetachedField
+            name="background.useImage"
             component={Fields.Boolean}
             value={useImage}
             options={[
@@ -63,9 +64,9 @@ class Background extends PureComponent {
           && (
           <>
             <Row>
-              <div id={getFieldId('background.concentricCircles')} data-name="Background &gt; Concentric Circles" />
               <ValidatedField
                 name="background.concentricCircles"
+                issueDescription="Background &gt; Concentric Circles"
                 component={Fields.Number}
                 label="Number of concentric circles to use:"
                 type="number"
@@ -74,6 +75,7 @@ class Background extends PureComponent {
               />
             </Row>
             <Row>
+              <IssueAnchor fieldName="background.skewedTowardCenter" description='Background &gt; Skewed toward center' />
               <Field
                 name="background.skewedTowardCenter"
                 component={Fields.Toggle}
@@ -85,9 +87,9 @@ class Background extends PureComponent {
         { (useImage)
           && (
           <Row>
-            <div id={getFieldId('background.image')} data-name="Background &gt; Image" />
             <ValidatedField
               name="background.image"
+              issueDescription="Background &gt; Image"
               component={Image}
               label="Background image"
               validation={{ required: true }}

@@ -1,19 +1,25 @@
-import anime from 'animejs';
 import scrollparent from 'scrollparent';
-import { getCSSVariableAsObject, getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
 
-const scrollTo = (destination, offset = 0) => {
-  if (!destination) { return; }
-  const scroller = scrollparent(destination);
-  const scrollStart = scroller.scrollTop;
-  const destinationOffset = parseInt(destination.getBoundingClientRect().top, 10);
-  const scrollEnd = scrollStart + destinationOffset + offset;
+const scrollTo = (target, offset = -200) => {
+  if (!target) { return; }
+  const scroller = scrollparent(target);
+  
+  // Get the target's position relative to the viewport
+  const targetRect = target.getBoundingClientRect();
+  
+  // Get the scroller's position relative to the viewport
+  const scrollerRect = scroller.getBoundingClientRect();
+  
+  // Calculate the target's position relative to the scroller's content
+  // This accounts for the scroller's current scroll position and the target's viewport position
+  const targetPositionInScroller = targetRect.top - scrollerRect.top + scroller.scrollTop;
+  
+  // Apply the offset and scroll to the final position (negative offset creates margin above the target)
+  const scrollEnd = targetPositionInScroller + offset;
 
-  anime({
-    targets: scroller,
-    scrollTop: scrollEnd,
-    easing: getCSSVariableAsObject('--animation-easing-js'),
-    duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
+  scroller.scrollTo({
+    top: scrollEnd,
+    behavior: 'smooth',
   });
 };
 

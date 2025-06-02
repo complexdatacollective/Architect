@@ -6,6 +6,7 @@ import stopPropagationFromHandler from '@app/utils/stopPropagationFromHandler';
 const formOptions = {
   touchOnBlur: false,
   touchOnChange: true,
+
 };
 
 /**

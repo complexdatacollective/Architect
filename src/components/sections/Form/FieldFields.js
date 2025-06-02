@@ -4,7 +4,6 @@ import { compose } from 'recompose';
 import { omit } from 'lodash';
 import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
 import { isOrdinalOrCategoricalType, isVariableTypeWithParameters, isBooleanWithOptions } from '@app/config/variables';
-import { getFieldId } from '@app/utils/issues';
 import ValidatedField from '@components/Form/ValidatedField';
 import NativeSelect from '@components/Form/Fields/NativeSelect';
 import Options from '@components/Options';
@@ -35,7 +34,7 @@ const PromptFields = ({
   type,
 }) => (
   <>
-    <Section id={getFieldId('variable')} title="Variable">
+    <Section title="Variable">
       <Row>
         {variable && !isNewVariable
           && (
@@ -56,12 +55,12 @@ const PromptFields = ({
           onCreateOption={handleNewVariable} // reset later fields, create variable of no type?
           onChange={handleChangeVariable} // read/reset component options validation
           validation={{ required: true }}
+          issueDescription="variable"
         />
       </Row>
     </Section>
     <Section
       title="Question Prompt"
-      id={getFieldId('prompt')}
       summary={(
         <p>Enter question for the participant. e.g. What is this person&apos;s name?</p>
       )}
@@ -73,13 +72,13 @@ const PromptFields = ({
           inline
           placeholder="What is this person's name?"
           validation={{ required: true }}
+          issueDescription="prompt"
         />
       </Row>
     </Section>
     <Section
       disabled={!variable}
       title="Input Control"
-      id={getFieldId('component')}
       summary={(
         <p>
           Choose an input control that should be used to collect the answer. For
@@ -99,6 +98,7 @@ const PromptFields = ({
           validation={{ required: true }}
           onChange={handleChangeComponent}
           sortOptionsByLabel={!isNewVariable}
+          issueDescription="component"
         />
         {isNewVariable && variableType
           && (
@@ -145,7 +145,7 @@ const PromptFields = ({
     {isOrdinalOrCategoricalType(variableType)
       && (
         <Section
-          id={getFieldId('options')}
+          id="options"
           title="Categorical/Ordinal options"
           summary={(
             <p>
@@ -166,7 +166,7 @@ const PromptFields = ({
       )}
     {isBooleanWithOptions(component)
       && (
-        <Section id={getFieldId('parameters')} title="BooleanChoice Options">
+        <Section id="parameters" title="BooleanChoice Options">
           <Row>
             <BooleanChoice form={form} />
           </Row>
@@ -174,7 +174,7 @@ const PromptFields = ({
       )}
     {isVariableTypeWithParameters(variableType)
       && (
-        <Section title="Input Options" id={getFieldId('parameters')}>
+        <Section title="Input Options" id="parameters">
           <Row>
             <Parameters
               type={variableType}

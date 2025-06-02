@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { change, formValueSelector } from 'redux-form';
 import { capitalize, toPairs } from 'lodash';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
 import { Layout, Section } from '@components/EditorLayout';
 import { getCodebook } from '@selectors/protocol';
@@ -66,7 +65,6 @@ const TypeEditor = ({
         </Section>
         <Section
           title="Color"
-          id={getFieldId('color')}
           summary={(
             <p>
               Choose a color for this
@@ -83,13 +81,13 @@ const TypeEditor = ({
             palette={paletteName}
             paletteRange={paletteSize}
             validation={{ required: true }}
+            issueDescription="color"
           />
         </Section>
         {entity === 'node'
           && (
             <Section
               title="Icon"
-              id={getFieldId('iconVariant')}
               summary={(
                 <p>
                   Choose an icon to display on interfaces that create this
@@ -105,6 +103,7 @@ const TypeEditor = ({
                 options={ICON_OPTIONS}
                 optionComponent={IconOption}
                 validation={{ required: true }}
+                issueDescription="iconVariant"
               />
             </Section>
           )}

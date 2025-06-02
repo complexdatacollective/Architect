@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
 import ColorPicker from '@components/Form/Fields/ColorPicker';
 import { Section, Row } from '@components/EditorLayout';
@@ -54,7 +53,6 @@ const PromptFields = ({
       <PromptText />
       <Section title="Ordinal Variable">
         <Row>
-          <div id={getFieldId('variable')} />
           <ValidatedField
             name="variable"
             component={VariablePicker}
@@ -64,6 +62,7 @@ const PromptFields = ({
             onCreateOption={handleNewVariable}
             validation={{ required: true }}
             variable={variable}
+            issueDescription="variable"
           />
         </Row>
       </Section>
@@ -71,6 +70,7 @@ const PromptFields = ({
         && (
         <Section
           title="Variable Options"
+          id="variableOptions"
           summary={(
             <p>
               Create
@@ -82,7 +82,6 @@ const PromptFields = ({
           )}
         >
           <Row>
-            <div id={getFieldId('variableOptions')} />
             { showVariableOptionsTip
             && (
             <Tip type="error">
@@ -116,7 +115,6 @@ const PromptFields = ({
         )}
       >
         <Row>
-          <div id={getFieldId('color')} data-name="Gradient color" />
           <ValidatedField
             label="Which color would you like to use for this scale?"
             component={ColorPicker}
@@ -124,6 +122,7 @@ const PromptFields = ({
             palette="ord-color-seq"
             paletteRange={8}
             validation={{ required: true }}
+            issueDescription="color"
           />
         </Row>
       </Section>

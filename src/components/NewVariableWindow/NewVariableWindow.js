@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { isOrdinalOrCategoricalType, VARIABLE_OPTIONS } from '@app/config/variables';
-import { getFieldId } from '@app/utils/issues';
 import { required, uniqueByList, allowedVariableName } from '@app/utils/validations';
 import safeName from '@app/utils/safeName';
 import ValidatedField from '@components/Form/ValidatedField';
@@ -59,8 +58,8 @@ class NewVariableWindow extends Component {
               the variable elsewhere, including in exported data.
             </p>
           )}
+          id="name"
         >
-          <div id={getFieldId('name')} />
           <Field
             name="name"
             component={Fields.Text}
@@ -75,7 +74,6 @@ class NewVariableWindow extends Component {
             <p>Choose a variable type</p>
           )}
         >
-          <div id={getFieldId('type')} />
           <ValidatedField
             name="type"
             component={Select}
@@ -92,8 +90,8 @@ class NewVariableWindow extends Component {
             summary={(
               <p>Create some options for this input control</p>
             )}
+            id="options"
           >
-            <div id={getFieldId('options')} />
             <Options
               name="options"
               label="Options"

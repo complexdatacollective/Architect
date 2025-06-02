@@ -4,7 +4,6 @@ import TextField from '@codaco/ui/lib/components/Fields/Text';
 import { Section, Row } from '@components/EditorLayout';
 import PropTypes from 'prop-types';
 import { ValidatedField } from '../Form';
-import IssueAnchor from '../IssueAnchor';
 
 const Name = ({ interfaceType }) => {
   const summaryText = interfaceType === 'Geospatial'
@@ -14,12 +13,9 @@ const Name = ({ interfaceType }) => {
   return (
     <Section title="Introduction Panel" summary={<p>{summaryText}</p>}>
       <Row>
-        <IssueAnchor
-          fieldName="introductionPanel.title"
-          description="Title (Introduction panel)"
-        />
         <ValidatedField
           name="introductionPanel.title"
+          issueDescription="Title (Introduction panel)"
           label="Title"
           component={TextField}
           maxLength="50"
@@ -27,10 +23,6 @@ const Name = ({ interfaceType }) => {
         />
       </Row>
       <Row>
-        <IssueAnchor
-          fieldName="introductionPanel.text"
-          description="Text (Introduction panel)"
-        />
         <ValidatedField
           name="introductionPanel.text"
           label="Introduction text"

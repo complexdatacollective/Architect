@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { change, formValueSelector } from 'redux-form';
 import { compose } from 'recompose';
-import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
 import MultiSelect from '@components/Form/MultiSelect';
 import withCreateVariableHandlers from '@components/enhancers/withCreateVariableHandler';
@@ -47,7 +46,6 @@ const PromptFields = ({
       group
     >
       <Row>
-        <div id={getFieldId('layout.layoutVariable')} data-name="Layout Variable" />
         <Tip type="info">
           <p>
             If you use the same layout variable across all prompts, the position of nodes will
@@ -64,6 +62,7 @@ const PromptFields = ({
           options={layoutVariablesForSubject}
           onCreateOption={(value) => handleCreateVariable(value, 'layout', 'layout.layoutVariable')}
           variable={layoutVariable}
+          issueDescription="layout.layoutVariable"
         />
       </Row>
       { allowPositioning

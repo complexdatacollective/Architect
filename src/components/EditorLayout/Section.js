@@ -1,4 +1,6 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, {
+  useState, useCallback, useEffect, forwardRef,
+} from 'react';
 import PropTypes from 'prop-types';
 import { AnimatePresence, motion } from 'framer-motion';
 import cx from 'classnames';
@@ -18,7 +20,7 @@ const animations = {
   },
 };
 
-const Section = ({
+const Section = forwardRef(({
   id,
   title,
   summary,
@@ -29,7 +31,7 @@ const Section = ({
   toggleable,
   startExpanded,
   handleToggleChange,
-}) => {
+}, ref) => {
   const [isOpen, setIsOpen] = useState(startExpanded);
 
   // If the startExpanded prop changes, update the state.
@@ -64,7 +66,7 @@ const Section = ({
   );
 
   return (
-    <fieldset className={sectionClasses}>
+    <fieldset className={sectionClasses} ref={ref}>
       <legend
         className={toggleable ? 'toggleable' : ''}
       >
@@ -103,7 +105,7 @@ const Section = ({
       </AnimatePresence>
     </fieldset>
   );
-};
+});
 
 Section.propTypes = {
   id: PropTypes.string,

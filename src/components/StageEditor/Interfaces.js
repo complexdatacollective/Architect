@@ -7,7 +7,7 @@ import {
   ContentGrid,
   DyadCensusPrompts,
   OneToManyDyadCensusPrompts,
-  RemoveAfterConsideration,
+  OneToManyDyadCensusBehaviours,
   ExternalDataSource,
   AutomaticLayout,
   FilteredEdgeType,
@@ -84,7 +84,7 @@ const DyadCensus = {
 const OneToManyDyadCensus = {
   sections: [
     FilteredNodeType,
-    RemoveAfterConsideration,
+    OneToManyDyadCensusBehaviours,
     OneToManyDyadCensusPrompts,
     SkipLogic,
     InterviewScript,

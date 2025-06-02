@@ -4,7 +4,6 @@ import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
 import { change, formValueSelector } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFieldId } from '../../utils/issues';
 import DetachedField from '../DetachedField';
 
 const FORM_PROPERTY = 'behaviours.automaticLayout.enabled';
@@ -37,7 +36,6 @@ const AutomaticLayout = ({ form }) => {
       )}
     >
       <Row>
-        <div id={getFieldId('behaviours.automaticLayout.enabled')} data-name="Layout mode" />
         <p>
           <strong>Automatic mode</strong>
           {' '}
@@ -56,6 +54,8 @@ const AutomaticLayout = ({ form }) => {
       </Row>
       <Row>
         <DetachedField
+          name="behaviours.automaticLayout.enabled"
+          issueDescription="Layout mode"
           component={Fields.Boolean}
           onChange={handleChooseLayoutMode}
           value={useAutomaticLayout}

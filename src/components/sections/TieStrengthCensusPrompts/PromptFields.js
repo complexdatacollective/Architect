@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import NativeSelect from '@components/Form/Fields/NativeSelect';
 import RichText from '@codaco/ui/lib/components/Fields/RichText/Field';
 import { Section, Row } from '@components/EditorLayout';
-import { getFieldId } from '@app/utils/issues';
 import NewVariableWindow, { useNewVariableWindowState } from '@components/NewVariableWindow';
 import ValidatedField from '@components/Form/ValidatedField';
 import Tip from '@components/Tip';
@@ -47,7 +46,6 @@ const PromptFields = ({
     <>
       <Section
         title="Tie-Strength Census Prompt"
-        id={getFieldId('text')}
       >
         <Row>
           <p>
@@ -75,12 +73,13 @@ const PromptFields = ({
             label="Prompt Text"
             placeholder="Enter text for the prompt here..."
             validation={{ required: true, maxLength: 220 }}
+            issueDescription="text"
           />
         </Row>
       </Section>
       <Section
         title="Tie-Strength Configuration"
-        id={getFieldId('set-ordinal-value')}
+        id="set-ordinal-value"
         summary={(
           <>
             <p>This interface works by presenting the user with a choice to either:</p>
@@ -144,7 +143,7 @@ const PromptFields = ({
             </Row>
             { edgeVariable && (
             <Row>
-              <h3 id={getFieldId('variableOptions')}>Variable Options</h3>
+              <h3 id="variableOptions">Variable Options</h3>
               <p>
                 The following choices or &apos;options&apos; are configured for this variable.
                 We suggest no more than four options should be used on this interface.
@@ -181,7 +180,6 @@ const PromptFields = ({
               . This option will be shown on the far right of the screen.
             </p>
           )}
-          id={getFieldId('negativeLabel')}
         >
           <ValidatedField
             name="negativeLabel"
@@ -191,6 +189,7 @@ const PromptFields = ({
             label="Label for the decline option"
             placeholder="Enter text for the negative label here..."
             validation={{ required: true, maxLength: 220 }}
+            issueDescription="negativeLabel"
           />
         </Section>
       </Section>

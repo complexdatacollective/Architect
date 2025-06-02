@@ -8,7 +8,6 @@ import Filter from './Filter';
 import { ValidatedField } from '../Form';
 import EntitySelectField from './fields/EntitySelectField/EntitySelectField';
 import { SUBJECT_INDEPENDENT_FIELDS } from './NodeType';
-import IssueAnchor from '../IssueAnchor';
 import { makeScreenMessageListener } from '../../selectors/ui';
 
 const FilteredEdgeType = (props) => {
@@ -47,13 +46,10 @@ const FilteredEdgeType = (props) => {
   return (
     <Section title="Edge Type">
       <Row>
-        <IssueAnchor
-          fieldName="subject"
-          description="Edge Type"
-        />
         <ValidatedField
           name="subject"
           entityType="edge"
+          issueDescription="Edge Type"
           promptBeforeChange="You attempted to change the edge type of a stage that you have already configured. Before you can proceed the stage must be reset, which will remove any existing configuration. Do you want to reset the stage now?"
           component={EntitySelectField}
           onChange={handleResetStage}

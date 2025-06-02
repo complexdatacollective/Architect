@@ -5,7 +5,7 @@ export { default as CategoricalBinPrompts } from './CategoricalBinPrompts';
 export { default as ContentGrid } from './ContentGrid';
 export { default as DyadCensusPrompts } from './DyadCensusPrompts';
 export { default as OneToManyDyadCensusPrompts } from './OneToManyDyadCensus';
-export { default as RemoveAfterConsideration } from './OneToManyDyadCensus/RemoveAfterConsideration';
+export { default as OneToManyDyadCensusBehaviours } from './OneToManyDyadCensus/Behaviours';
 export { default as TieStrengthCensusPrompts } from './TieStrengthCensusPrompts';
 export { default as ExternalDataSource } from './ExternalDataSource';
 export { default as Filter } from './Filter';

@@ -61,13 +61,14 @@ const NodePanels = ({
       handleToggleChange={handleToggleChange}
     >
       <div className="stage-editor-section-content-items">
-        <IssueAnchor fieldName="panels" description="Panel Configuration" />
-        <Field
-          name="panels"
-          component={OrderedList}
-          item={NodePanel}
-          form={form}
-        />
+        <IssueAnchor fieldName="panels" description="Panel Configuration">
+          <Field
+            name="panels"
+            component={OrderedList}
+            item={NodePanel}
+            form={form}
+          />
+        </IssueAnchor>
 
         { !isFull
           && (

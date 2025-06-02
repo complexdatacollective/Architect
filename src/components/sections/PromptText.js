@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
-import { getFieldId } from '@app/utils/issues';
 import { Section, Row } from '@components/EditorLayout';
 import ValidatedField from '@components/Form/ValidatedField';
 
 const PromptText = ({ name }) => (
   <Section
-    id={getFieldId(name)}
     title="Prompt Text"
     summary={(
       <p>
@@ -19,6 +17,7 @@ const PromptText = ({ name }) => (
     <Row>
       <ValidatedField
         name={name}
+        issueDescription="Prompt text"
         component={RichText}
         inline
         className="stage-editor-section-prompt__textarea"

@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { Button } from '@codaco/ui/lib/components';
 import { Section } from '@components/EditorLayout';
 import InlineEditScreen from '@components/InlineEditScreen';
-import { getFieldId, scrollToFirstIssue } from '../../utils/issues';
+import { scrollToFirstIssue } from '../../utils/issues';
 import ValidatedFieldArray from '../Form/ValidatedFieldArray';
 import Grid from './Grid';
 import withEditHandlers from './withEditHandlers';
@@ -59,8 +59,8 @@ const GridManager = ({
     )}
     disabled={disabled}
     contentId={contentId}
+    id={fieldName}
   >
-    <div id={getFieldId(`${fieldName}._error`)} data-name={fieldName} />
     {children}
     <div className="grid-manager">
       <div className="grid-manager__items">

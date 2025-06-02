@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 import { compose, defaultProps } from 'recompose';
 import PropTypes from 'prop-types';
 import { startCase } from 'lodash';
 import { AnimateSharedLayout } from 'framer-motion';
 import { Button } from '@codaco/ui';
-import { getFieldId, scrollToFirstIssue } from '@app/utils/issues';
+import { scrollToFirstIssue } from '@app/utils/issues';
 import { Section } from '@components/EditorLayout';
 import InlineEditScreen from '@components/InlineEditScreen';
 import OrderedList from '@components/OrderedList';
@@ -20,10 +20,6 @@ const sortModes = [
 const notEmpty = (value) => (
   value && value.length > 0 ? undefined : 'You must create at least one item.'
 );
-
-const handleSubmitFail = (issues) => {
-  scrollToFirstIssue(issues);
-};
 
 const withDefaultFieldName = defaultProps({
   fieldName: 'prompts',
@@ -53,53 +49,66 @@ const EditableList = ({
   previewComponent: PreviewComponent,
   editProps,
   ...rest
-}) => (
-  <Section disabled={disabled} contentId={contentId} summary={sectionSummary} title={sectionTitle}>
-    <AnimateSharedLayout>
-      <div id={getFieldId(`${fieldName}._error`)} data-name={startCase(fieldName)} />
-      {children}
-      <div className="editable-list">
-        <div className="editable-list__items">
-          <ValidatedField
-            name={fieldName}
-            component={OrderedList}
-            item={PreviewComponent}
-            validation={validation}
-            onClickItem={handleEditField}
-            editField={editField}
-            form={formName}
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            // {...rest}
-          />
-        </div>
-        <Button onClick={handleAddNew} size="small" icon="add">Create new</Button>
-      </div>
+}) => {
+  const ref = useRef();
 
-      <InlineEditScreen
-        show={!!editField}
-        initialValues={initialValues}
-        title={title}
-        onSubmit={handleUpdate}
-        onSubmitFail={handleSubmitFail}
-        onCancel={handleCancelEditField}
-        layoutId={editField}
-        form={formName}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...editProps}
-      >
-        <EditComponent
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          {...rest}
+  const handleSubmitFail = useCallback((issues) => {
+    scrollToFirstIssue(issues, ref.current);
+  }, [ref.current]);
+
+  return (
+    <Section
+      disabled={disabled}
+      contentId={contentId}
+      summary={sectionSummary}
+      id={fieldName}
+      title={sectionTitle}
+      ref={ref}
+    >
+      <AnimateSharedLayout>
+        {children}
+        <div className="editable-list">
+          <div className="editable-list__items">
+            <ValidatedField
+              name={fieldName}
+              component={OrderedList}
+              item={PreviewComponent}
+              validation={validation}
+              onClickItem={handleEditField}
+              editField={editField}
+              form={formName}
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...rest}
+            />
+          </div>
+          <Button onClick={handleAddNew} size="small" icon="add">Create new</Button>
+        </div>
+        <InlineEditScreen
+          show={!!editField}
+          initialValues={initialValues}
+          title={title}
+          onSubmit={handleUpdate}
+          onSubmitFail={handleSubmitFail}
+          onCancel={handleCancelEditField}
+          layoutId={editField}
+          form={formName}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...editProps}
-          form={formName}
-          initialValues={initialValues}
-          fieldId={editField}
-        />
-      </InlineEditScreen>
-    </AnimateSharedLayout>
-  </Section>
-);
+        >
+          <EditComponent
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...rest}
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...editProps}
+            form={formName}
+            initialValues={initialValues}
+            fieldId={editField}
+          />
+        </InlineEditScreen>
+      </AnimateSharedLayout>
+    </Section>
+  );
+};
 
 EditableList.propTypes = {
   sectionTitle: PropTypes.string.isRequired,

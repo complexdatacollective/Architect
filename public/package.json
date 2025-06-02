@@ -1,24 +1,24 @@
 {
-  "name": "network-canvas-architect",
-  "version": "7.0.0-alpha.2",
-  "productName": "Network Canvas Architect",
-  "description": "A tool for building Network Canvas interviews.",
-  "author": "Complex Data Collective",
-  "private": true,
-  "engines": {
-    "node": "12.14.1",
-    "npm": "6.13.4"
-  },
-  "homepage": ".",
-  "main": "electron-starter.js",
-  "dependencies": {
-    "fs-extra": "^8.1.0",
-    "archiver": "^3.1.1",
-    "electron-log": "^3.0.7",
-    "electron-devtools-installer": "^2.2.4"
-  },
-  "browser": {
-    "canvas": false,
-    "jsdom": false
-  }
+    "name": "network-canvas-architect",
+    "version": "7.0.0-alpha.3",
+    "productName": "Network Canvas Architect",
+    "description": "A tool for building Network Canvas interviews.",
+    "author": "Complex Data Collective",
+    "private": true,
+    "engines": {
+        "node": "12.14.1",
+        "npm": "6.13.4"
+    },
+    "homepage": ".",
+    "main": "electron-starter.js",
+    "dependencies": {
+        "fs-extra": "^8.1.0",
+        "archiver": "^3.1.1",
+        "electron-log": "^3.0.7",
+        "electron-devtools-installer": "^2.2.4"
+    },
+    "browser": {
+        "canvas": false,
+        "jsdom": false
+    }
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import TextField from '@codaco/ui/lib/components/Fields/Text';
-import { getFieldId } from '@app/utils/issues';
 import ValidatedField from '@components/Form/ValidatedField';
 import EditableList from '@components/EditableList';
 import withSubject from '@components/enhancers/withSubject';
@@ -28,7 +27,6 @@ const Form = ({
     title="Form"
     summary={(
       <>
-        <div id={getFieldId('form.title')} data-name="Form title" />
         <p>
           Use this section to define the fields to collect when this form is shown.
         </p>
@@ -44,6 +42,7 @@ const Form = ({
       placeholder="Enter your title here"
       className="stage-editor-section-title"
       validation={{ required: true }}
+      issueDescription="Form title"
     />
     )}
     <EditableList
@@ -62,7 +61,6 @@ const Form = ({
       sectionTitle="Fields"
       sectionSummary={(
         <>
-          <div id={getFieldId('form.title')} data-name="Form fields" />
           <p>
             Add one or more fields to your form to collect attributes about each
             node the participant creates. Use the drag handle on the left of each

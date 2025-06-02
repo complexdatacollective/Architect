@@ -1,7 +1,6 @@
 import React from 'react';
 import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
 import { Section, Row } from '@components/EditorLayout';
-import { getFieldId } from '@app/utils/issues';
 import Tip from '@components/Tip';
 import ValidatedField from '@components/Form/ValidatedField';
 import EntitySelectField from '../fields/EntitySelectField/EntitySelectField';
@@ -11,7 +10,7 @@ const PromptFields = () => (
     title="Dyad Census Prompts"
   >
     <Row>
-      <div id={getFieldId('text')} data-title="Dyad Census Prompts" />
+      <div />
       <p>
         Dyad Census prompts explain to your participant which relationship they should
         evaluate (for example, &apos;friendship&apos;, &apos;material
@@ -38,6 +37,7 @@ const PromptFields = () => (
       </Tip>
       <ValidatedField
         name="text"
+        issueDescription="Dyad census prompts"
         component={RichText}
         inline
         className="stage-editor-section-prompt__textarea"
@@ -50,6 +50,7 @@ const PromptFields = () => (
       <ValidatedField
         entityType="edge"
         name="createEdge"
+        issueDescription="Edge type for dyad census"
         component={EntitySelectField}
         label="Create edges of the following type"
         validation={{ required: true }}

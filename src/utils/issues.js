@@ -79,7 +79,7 @@ const asOffsetIdPair = ({ field }) => {
   return [top, fieldId];
 };
 
-const scrollToFirstIssue = (issues) => {
+const scrollToFirstIssue = (issues, container = document) => {
   const issueOffsets = flattenIssues(issues)
     .map(asOffsetIdPair);
 
@@ -91,8 +91,7 @@ const scrollToFirstIssue = (issues) => {
     }, []);
 
   if (!firstIssueField) { return; }
-
-  const target = document.getElementById(firstIssueField);
+  const target = container.querySelector(`#${firstIssueField}`);
 
   if (!target) { return; }
 

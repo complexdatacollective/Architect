@@ -2,7 +2,6 @@ import React from 'react';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
 import { ValidatedField } from '../../Form';
-import IssueAnchor from '../../IssueAnchor';
 
 const AnonymisationExplanation = () => (
   <Section
@@ -14,12 +13,9 @@ const AnonymisationExplanation = () => (
     )}
   >
     <Row>
-      <IssueAnchor
-        fieldName="explanationText.title"
-        description="Title (Anonymisation explanation panel)"
-      />
       <ValidatedField
         label="Title"
+        issueDescription="Title (Anonymisation explanation panel)"
         name="explanationText.title"
         component={Fields.Text}
         placeholder="This interview uses enhanced privacy protection"
@@ -28,20 +24,15 @@ const AnonymisationExplanation = () => (
       />
     </Row>
     <Row>
-      <IssueAnchor
-        fieldName="explanationText.body"
-        description="Body (Anonymisation explanation panel)"
-      />
       <ValidatedField
         label="Body"
+        issueDescription="Body (Anonymisation explanation panel)"
         name="explanationText.body"
         component={Fields.RichText}
         placeholder="Enter your passphrase below, and click the 'continue' button."
         validation={{ required: true }}
       />
-
     </Row>
-
   </Section>
 );
 

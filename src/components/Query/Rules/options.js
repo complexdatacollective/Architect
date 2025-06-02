@@ -7,16 +7,14 @@ const disallowedVariableTypes = ['scalar', 'layout'];
 
 export const validTypes = new Set(Object.keys(omit(VARIABLE_TYPES, disallowedVariableTypes)));
 
-// Todo: commented out options below to be reinstated when we switch to schema 8
-
 // List of operators
 export const operators = {
   EXACTLY: 'EXACTLY',
   EXISTS: 'EXISTS',
   INCLUDES: 'INCLUDES',
   EXCLUDES: 'EXCLUDES',
-  // CONTAINS: 'CONTAINS',
-  // DOES_NOT_CONTAIN: 'DOES_NOT_CONTAIN',
+  CONTAINS: 'CONTAINS',
+  DOES_NOT_CONTAIN: 'DOES_NOT_CONTAIN',
   NOT_EXISTS: 'NOT_EXISTS',
   NOT: 'NOT',
   GREATER_THAN: 'GREATER_THAN',
@@ -39,8 +37,8 @@ export const operatorsAsOptions = [
   [operators.GREATER_THAN_OR_EQUAL, 'is greater than or exactly'],
   [operators.LESS_THAN, 'is less than'],
   [operators.LESS_THAN_OR_EQUAL, 'is less than or exactly'],
-  // [operators.CONTAINS, 'contains'],
-  // [operators.DOES_NOT_CONTAIN, 'does not contain'],
+  [operators.CONTAINS, 'contains'],
+  [operators.DOES_NOT_CONTAIN, 'does not contain'],
   [operators.INCLUDES, 'includes'],
   [operators.EXCLUDES, 'excludes'],
   [operators.OPTIONS_GREATER_THAN, 'number of selected options is greater than'],
@@ -61,10 +59,10 @@ export const operatorsWithValue = new Set([
   operators.EXCLUDES,
 ]);
 
-// export const operatorsWithRegExp = new Set([
-//   operators.CONTAINS,
-//   operators.DOES_NOT_CONTAIN,
-// ]);
+export const operatorsWithRegExp = new Set([
+  operators.CONTAINS,
+  operators.DOES_NOT_CONTAIN,
+]);
 
 // Operators that also require a count of options
 export const operatorsWithOptionCount = new Set([
@@ -78,8 +76,8 @@ export const operatorsByType = {
   text: new Set([
     'EXACTLY',
     'NOT',
-    // 'CONTAINS',
-    // 'DOES_NOT_CONTAIN',
+    'CONTAINS',
+    'DOES_NOT_CONTAIN',
   ]),
   number: new Set(['EXACTLY', 'NOT', 'GREATER_THAN', 'GREATER_THAN_OR_EQUAL', 'LESS_THAN', 'LESS_THAN_OR_EQUAL']),
   boolean: new Set(['EXACTLY', 'NOT']),

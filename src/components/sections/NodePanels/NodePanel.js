@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import DataSource from '@components/Form/Fields/DataSource';
 import ValidatedField from '@components/Form/ValidatedField';
-import { getFieldId } from '@app/utils/issues';
 import NetworkFilter from '@components/sections/fields/NetworkFilter';
 import Section from '../../EditorLayout/Section';
 
@@ -14,13 +13,13 @@ const NodePanel = ({ fieldId, form }) => (
       summary={(
         <p>The panel title will be shown above the list of nodes within the panel.</p>
       )}
-      id={getFieldId(`${fieldId}.title`)}
     >
       <ValidatedField
         name={`${fieldId}.title`}
         component={Fields.Text}
         placeholder="Panel title"
         validation={{ required: true }}
+        issueDescription="Panel title"
       />
     </Section>
     <Section
@@ -32,13 +31,13 @@ const NodePanel = ({ fieldId, form }) => (
           that you have added).
         </p>
       )}
-      id={getFieldId(`${fieldId}.dataSource`)}
     >
       <ValidatedField
         component={DataSource}
         name={`${fieldId}.dataSource`}
         validation={{ required: true }}
         canUseExisting
+        issueDescription="Panel data source"
       />
     </Section>
     <NetworkFilter

@@ -6,7 +6,7 @@ import DetachedField from '@components/DetachedField';
 import NativeSelect from '@components/Form/Fields/NativeSelect';
 import {
   operatorsWithValue,
-  // operatorsWithRegExp,
+  operatorsWithRegExp,
   operatorsWithOptionCount,
 } from './options';
 import EditValue from './EditValue';
@@ -32,7 +32,7 @@ const EditEgoRule = ({
   const options = rule && rule.options;
   const optionsWithDefaults = { ...defaultOptions, ...options };
   const operatorNeedsValue = operatorsWithValue.has(optionsWithDefaults.operator);
-  // const operatorNeedsRegExp = operatorsWithRegExp.has(optionsWithDefaults.operator);
+  const operatorNeedsRegExp = operatorsWithRegExp.has(optionsWithDefaults.operator);
   const operatorNeedsOptionCount = operatorsWithOptionCount.has(optionsWithDefaults.operator);
   const countFriendlyValue = !isNil(optionsWithDefaults.value) ? optionsWithDefaults.value : '';
   const optionsWithCounts = {
@@ -83,7 +83,7 @@ const EditEgoRule = ({
             />
           </Section>
         )}
-      {/* { operatorNeedsRegExp
+      { operatorNeedsRegExp
         && (
         <Section
           title="Attribute Value"
@@ -97,7 +97,7 @@ const EditEgoRule = ({
             validation={{ required: true, validRegExp: true }}
           />
         </Section>
-        )} */}
+        )}
       {operatorNeedsOptionCount
         && (
           <Section

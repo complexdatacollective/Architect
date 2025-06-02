@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { getFieldId } from '@app/utils/issues';
 import RichTextField from '@codaco/ui/lib/components/Fields/RichText';
 import { ValidatedField } from '@components/Form';
 import Options from '@components/Options';
@@ -15,6 +14,7 @@ import withVariableHandlers from './withVariableHandlers';
 import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
 import BucketSortOrderSection from '../BucketSortOrderSection';
 import BinSortOrderSection from '../BinSortOrderSection';
+import IssueAnchor from '../../IssueAnchor';
 
 const PromptFields = ({
   changeForm,
@@ -70,10 +70,11 @@ const PromptFields = ({
   return (
     <>
       <PromptText />
-      <Section title="Categorical Variable" id={getFieldId('variable')}>
+      <Section title="Categorical Variable">
         <Row>
           <ValidatedField
             name="variable"
+            description="Categorical variable"
             component={VariablePicker}
             type={type}
             entity={entity}
@@ -85,7 +86,7 @@ const PromptFields = ({
         </Row>
         { variable && (
         <Row>
-          <h3 id={getFieldId('options')}>Variable Options</h3>
+          <h3>Variable Options</h3>
           <p>
             Create
             {' '}
@@ -110,10 +111,12 @@ const PromptFields = ({
               </p>
             </Tip>
           )}
-          <Options
-            name="variableOptions"
-            label="Options"
-          />
+          <IssueAnchor fieldName='options' description="Variable options">
+            <Options
+              name="variableOptions"
+              label="Options"
+            />
+          </IssueAnchor>
         </Row>
         )}
       </Section>
@@ -136,6 +139,7 @@ const PromptFields = ({
         <Row>
           <ValidatedField
             name="otherVariable"
+            issueDescription="Other variable"
             component={VariablePicker}
             entity={entity}
             type={type}
@@ -148,6 +152,7 @@ const PromptFields = ({
         <Row>
           <ValidatedField
             name="otherOptionLabel"
+            issueDescription="Label for Bin"
             component={RichTextField}
             inline
             placeholder="Enter a label (such as &quot;other&quot;) for this bin..."
@@ -158,6 +163,7 @@ const PromptFields = ({
         <Row>
           <ValidatedField
             name="otherVariablePrompt"
+            issueDescription="Prompt for Dialog"
             component={RichTextField}
             inline
             placeholder="Enter a question prompt to show when the other option is triggered..."

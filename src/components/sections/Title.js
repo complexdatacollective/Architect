@@ -2,7 +2,6 @@ import React from 'react';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Section } from '@components/EditorLayout';
 import { ValidatedField } from '../Form';
-import { getFieldId } from '../../utils/issues';
 
 const Title = () => (
   <Section
@@ -13,9 +12,9 @@ const Title = () => (
       </p>
     )}
   >
-    <div id={getFieldId('title')} data-name="Page Heading" />
     <ValidatedField
       name="title"
+      issueDescription={'Page Heading'}
       component={Fields.Text}
       placeholder="Enter your title here..."
       className="stage-editor-section-title"

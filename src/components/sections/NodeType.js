@@ -8,7 +8,6 @@ import Row from '../EditorLayout/Row';
 import Filter from './Filter';
 import EntitySelectField from './fields/EntitySelectField/EntitySelectField';
 import ValidatedField from '../Form/ValidatedField';
-import IssueAnchor from '../IssueAnchor';
 import { makeScreenMessageListener } from '../../selectors/ui';
 
 // List of fields that are independent of the stage subject, and so do not need to be
@@ -54,12 +53,9 @@ const NodeType = (props) => {
       title="Node Type"
     >
       <Row>
-        <IssueAnchor
-          fieldName="subject"
-          description="Node Type"
-        />
         <ValidatedField
           name="subject"
+          issueDescription="Node Type"
           entityType="node"
           promptBeforeChange="You attempted to change the node type of a stage that you have already configured. Before you can proceed the stage must be reset, which will remove any existing configuration. Do you want to reset the stage now?"
           component={EntitySelectField}

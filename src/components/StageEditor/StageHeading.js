@@ -7,7 +7,6 @@ import * as Fields from '@codaco/ui/lib/components/Fields';
 import timelineImages from '@app/images/timeline';
 import { getStageIndex } from '@selectors/protocol';
 import { ValidatedField } from '../Form';
-import { getFieldId } from '../../utils/issues';
 import ExternalLink from '../ExternalLink';
 import { getInterface } from './Interfaces';
 
@@ -87,7 +86,6 @@ const StageHeading = ({
         )
       }
       <div className="stage-name-container">
-        <div id={getFieldId('label')} data-name="Stage name" />
         <h2>Stage Name</h2>
         <ValidatedField
           name="label"
@@ -97,6 +95,7 @@ const StageHeading = ({
           maxLength="50"
           validation={{ required: true }}
           autoFocus
+          issueDescription="Stage name"
         />
       </div>
     </div>

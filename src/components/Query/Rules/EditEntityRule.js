@@ -9,7 +9,7 @@ import EditValue from './EditValue';
 import Section from '../../EditorLayout/Section';
 import {
   operatorsWithValue,
-  // operatorsWithRegExp,
+  operatorsWithRegExp,
   operatorsWithOptionCount,
 } from './options';
 import withRuleChangeHandler from './withRuleChangeHandler';
@@ -21,7 +21,6 @@ import {
 } from './withEntityRuleType';
 import { makeGetOptionsWithDefaults } from './defaultRule';
 import EntitySelectField from '../../sections/fields/EntitySelectField/EntitySelectField';
-import IssueAnchor from '../../IssueAnchor';
 
 const EditEntityRule = ({
   entityRuleType,
@@ -42,7 +41,7 @@ const EditEntityRule = ({
   );
   const optionsWithDefaults = getOptionsWithDefaults(options);
   const operatorNeedsValue = operatorsWithValue.has(optionsWithDefaults.operator);
-  // const operatorNeedsRegExp = operatorsWithRegExp.has(optionsWithDefaults.operator);
+  const operatorNeedsRegExp = operatorsWithRegExp.has(optionsWithDefaults.operator);
   const isVariableRule = entityRuleType === entityRuleTypes.VARIABLE_RULE;
   const isTypeRule = entityRuleType === entityRuleTypes.TYPE_RULE;
   const operatorNeedsOptionCount = operatorsWithOptionCount.has(optionsWithDefaults.operator);
@@ -67,14 +66,11 @@ const EditEntityRule = ({
           </p>
         )}
       >
-        <IssueAnchor
-          fieldName="type"
-          description={`${entityType} Type`}
-        />
         <DetachedField
           component={EntitySelectField}
           entityType={entityType === 'alter' ? 'node' : 'edge'}
           name="type"
+          issueDescription={`${entityType} Type`}
           options={typeOptions}
           onChange={handleRuleChange}
           value={optionsWithDefaults.type}
@@ -157,7 +153,7 @@ const EditEntityRule = ({
             />
           </Section>
         )}
-      {/* { isVariableRule && operatorNeedsRegExp
+      { isVariableRule && operatorNeedsRegExp
         && (
         <Section
           title="Attribute Value"
@@ -171,7 +167,7 @@ const EditEntityRule = ({
             validation={{ required: true, validRegExp: true }}
           />
         </Section>
-        )} */}
+        )}
       {isVariableRule && operatorNeedsOptionCount
         && (
           <Section

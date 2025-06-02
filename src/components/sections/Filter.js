@@ -3,12 +3,12 @@ import { change, Field, formValueSelector } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Section } from '@components/EditorLayout';
 import { actionCreators as dialogActions } from '@modules/dialogs';
-import { getFieldId } from '../../utils/issues';
 import {
   Filter as FilterQuery, withFieldConnector, withStoreConnector, ruleValidator,
 } from '../Query';
 import Tip from '../Tip';
 import getEdgeFilteringWarning from './SociogramPrompts/utils';
+import IssueAnchor from '../IssueAnchor';
 
 const FilterField = withFieldConnector(withStoreConnector(FilterQuery));
 
@@ -94,12 +94,13 @@ const Filter = () => {
         </p>
       </Tip>
       )}
-      <div id={getFieldId('filter')} data-name="Filter text" />
-      <Field
-        name="filter"
-        component={FilterField}
-        validate={ruleValidator}
-      />
+      <IssueAnchor fieldName='filter' description="Filter text" >
+        <Field
+          name="filter"
+          component={FilterField}
+          validate={ruleValidator}
+        />
+      </IssueAnchor>
     </Section>
   );
 };

@@ -14,7 +14,7 @@ const getEdgeFilteringWarning = (filters, edges) => {
   const doesNotExistFilters = filters.filter((rule) => rule.options.operator === 'NOT_EXISTS');
 
   // if any edge should show a warning, return true
-  return edges.some((edge) => {
+  return edges?.some((edge) => {
     const isEdgeInExistFilters = existFilters.some((rule) => rule.options.type === edge);
     const isEdgeInDoesNotExistFilters = doesNotExistFilters.some(
       (rule) => rule.options.type === edge,
@@ -37,7 +37,7 @@ const getEdgeFilteringWarning = (filters, edges) => {
 
     // No warning in other cases
     return false;
-  });
+  }) ?? false;
 };
 
 export default getEdgeFilteringWarning;

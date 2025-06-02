@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
 import { compose, defaultProps } from 'recompose';
 import { getValidations } from '@app/utils/validations';
+import IssueAnchor from './IssueAnchor';
 
 const getValue = (eventOrValue) => {
   if (!eventOrValue || !eventOrValue.target) {
@@ -86,6 +87,8 @@ class DetachedField extends Component {
       value,
       name,
       meta,
+      issueDescription,
+      label,
       ...props
     } = this.props;
 
@@ -96,25 +99,31 @@ class DetachedField extends Component {
     };
 
     return (
-      <FieldComponent
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...props}
-        input={input}
-        meta={{
-          ...meta,
-          ...this.state,
-        }}
-      />
+      <IssueAnchor
+        fieldName={name}
+        description={issueDescription || `Field: ${label}` || `Field: ${name}`}
+      >
+        <FieldComponent
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...props}
+          input={input}
+          meta={{
+            ...meta,
+            ...this.state,
+          }}
+        />
+      </IssueAnchor>
     );
   }
 }
 
 DetachedField.propTypes = {
+  issueDescription: PropTypes.string,
+  label: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   value: PropTypes.any,
-  // eslint-disable-next-line react/forbid-prop-types
-  name: PropTypes.any,
+  name: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   validation: PropTypes.object.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
@@ -124,7 +133,8 @@ DetachedField.propTypes = {
 };
 
 DetachedField.defaultProps = {
-  name: null,
+  issueDescription: null,
+  label: null,
   meta: {},
   value: null,
 };

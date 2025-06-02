@@ -4,7 +4,6 @@ import { Section, Row } from '@components/EditorLayout';
 import { change } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { getFieldId } from '../../utils/issues';
 import DataSource from '../Form/Fields/DataSource';
 import ValidatedField from '../Form/ValidatedField';
 import withSubject from '../enhancers/withSubject';
@@ -34,8 +33,8 @@ const ExternalDataSource = (props) => {
       {...props}
     >
       <Row>
-        <div id={getFieldId('dataSource')} data-name="Roster data-source" />
         <ValidatedField
+          issueDescription={'Data source for Roster'}
           component={DataSource}
           name="dataSource"
           id="dataSource"
