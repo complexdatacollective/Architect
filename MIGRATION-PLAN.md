@@ -21,5 +21,7 @@ This app is currently using an extremely old version of Electron, which must be 
 - I see the project has /app, /electron-dev and  /www directories. Please investigate what these are used for, and ideally consolidate or remove them as necessary. The goal is to have a clean and organized project structure.
 - Ensure that you take the opportunity to remove any unused code, dependencies, during your refactoring. Take the opportunity to merge and consolidate files, and provide clearer organization of the codebase.
 - The protocol summary functionality is particularly complicated and should be removed from the project entirely.
-- Ignore tests for now. There is no need to remove or refactor the test files at all.
+- Ignore tests for now. Do not run tests to verify functionality, as they will likely be broken by other tasks. There is no need to remove or refactor the test files at all.
 - Because this is a complex task that will involve substantial changes to dependencies and refactoring, I want you to confirm your plan at each step before proceeding. This will ensure that we are on the right track and can adjust as necessary. Always prefer modern approaches and best practices, and avoid using deprecated or old methods.
+- Do not attempt to run the app as part of this process. Instead, instruct me to run the app for you along with whatever information you need. I will provide this to you.
+- Refer back to this migration plan after each step to ensure you are remaining on track.

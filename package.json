@@ -6,30 +6,10 @@
   "author": "Complex Data Collective <info@networkcanvas.com>",
   "private": true,
   "scripts": {
-    "pack": "electron-builder --dir",
-    "start": "echo 'Webpack removed - Vite not yet configured'",
-    "start:electron": "echo 'Webpack removed - Vite not yet configured'",
-    "start:architect:electron": "echo 'Webpack removed - Vite not yet configured'",
-    "preelectron:dev": "echo 'Webpack removed - Vite not yet configured'",
-    "dev:electron": "echo 'Webpack removed - Vite not yet configured'",
-    "build": "npm run build:architect",
-    "build:architect": "echo 'Webpack removed - Vite not yet configured'",
-    "lint": "npm run lint:js && npm run sass-lint",
-    "lint:js": "eslint src/renderer",
-    "sass-lint": "stylelint **/*.scss",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "build-docs": "jsdoc src/renderer -r -d docs-build -c ./jsdoc.conf.json --verbose",
-    "electron": "env NODE_ENV=build electron .",
-    "generate-icons": "node scripts/generate-app-icons.js",
-    "dist": "electron-builder",
-    "dist:mac": "npm run build && electron-builder -m --x64",
-    "dist:linux": "npm run build && electron-builder -l",
-    "dist:win": "npm run build && electron-builder -w",
-    "dist:all": "npm run build && electron-builder -mlw",
-    "bump": "node scripts/bump.js",
-    "preflight": "npm run lint:js && npm run sass-lint -- --max-warnings 0 && npm test -- --coverage"
+    "start": "electron-vite preview",
+    "dev": "electron-vite dev",
+    "prebuild": "electron-vite build",
+    "bump": "node scripts/bump.js"
   },
   "repository": {
     "type": "git"
@@ -49,9 +29,11 @@
     "@babel/preset-react": "^7.12.1",
     "@codaco/protocol-validation": "^4.0.0-alpha.11",
     "@codaco/ui": "^5.8.5",
+    "@electron-toolkit/utils": "^4.0.0",
     "@electron/notarize": "^2.3.0",
     "@material-ui/icons": "^4.11.2",
     "@tippyjs/react": "^4.2.5",
+    "@vitejs/plugin-react": "^4.5.1",
     "animejs": "^2.2.0",
     "archiver": "^3.1.1",
     "autoprefixer": "^9.8.8",
@@ -71,6 +53,7 @@
     "electron-builder": "^26.0.12",
     "electron-devtools-installer": "^3.2.0",
     "electron-log": "^5.4.0",
+    "electron-vite": "^3.1.0",
     "emoji-dictionary": "^1.0.9",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.4",
@@ -101,8 +84,8 @@
     "postcss-preset-env": "^9.1.2",
     "postcss-url": "^8.0.0",
     "prop-types": "^15.6.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-flip-toolkit": "^6.5.4",
     "react-grid-layout": "^0.16.6",
     "react-redux": "^7.2.1",
@@ -126,121 +109,17 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^3.0.0",
     "rxjs": "^6.6.6",
-    "sass": "^1.56.1",
+    "sass": "^1.89.1",
     "scrollparent": "^2.0.1",
     "stylelint": "^15.10.3",
     "stylelint-config-standard": "^34.0.0",
     "stylelint-config-standard-scss": "^10.0.0",
     "svg2png": "^3.0.1",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "vite": "^6.3.5",
+    "vite-plugin-electron": "^0.29.0",
+    "vite-plugin-electron-renderer": "^0.14.6"
   },
   "homepage": ".",
-  "main": "src/main/electron-starter.js",
-  "build": {
-    "extends": null,
-    "appId": "NetworkCanvasArchitect",
-    "afterSign": "./build-resources/scripts/afterSignHook.js",
-    "directories": {
-      "buildResources": "build-resources",
-      "output": "release-builds"
-    },
-    "mac": {
-      "category": "public.app-category.education",
-      "hardenedRuntime": true,
-      "entitlements": "./build-resources/entitlements.mac.inherit.plist"
-    },
-    "win": {
-      "target": "nsis",
-      "certificateSha1": "8F1243989C0B23B29B50E872282AAB00A4302CCD"
-    },
-    "linux": {
-      "maintainer": "Joshua Melville <joshmelville@gmail.com>",
-      "target": [
-        {
-          "target": "deb",
-          "arch": [
-            "x64",
-            "arm64"
-          ]
-        },
-        {
-          "target": "rpm",
-          "arch": [
-            "x64",
-            "arm64"
-          ]
-        },
-        {
-          "target": "AppImage",
-          "arch": [
-            "x64",
-            "arm64"
-          ]
-        },
-        {
-          "target": "tar.gz",
-          "arch": [
-            "x64",
-            "arm64"
-          ]
-        }
-      ]
-    },
-    "fileAssociations": {
-      "ext": "netcanvas",
-      "description": "Network Canvas interview protocol",
-      "icon": "file",
-      "role": "Editor"
-    },
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "complexdatacollective",
-        "repo": "architect"
-      }
-    ]
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/renderer/**/*.{js,jsx}",
-      "!src/renderer/protocol-validation/**",
-      "!release-builds/**"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
-    "setupFiles": [
-      "jest-date-mock",
-      "<rootDir>/config/polyfills.js",
-      "<rootDir>/config/jest/polyfills.js",
-      "<rootDir>/config/jest/enzyme.js",
-      "<rootDir>/config/jest/automock.js"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>[/\\\\](www|docs|node_modules|scripts)[/\\\\]"
-    ],
-    "modulePathIgnorePatterns": [
-      "<rootDir>[/\\\\](src/renderer/protocol-validation)[/\\\\]",
-      "<rootDir>[/\\\\](release-builds)[/\\\\]"
-    ],
-    "testEnvironment": "node",
-    "testURL": "http://localhost",
-    "transform": {
-      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-    },
-    "transformIgnorePatterns": [
-      "/node_modules/(?!(@codaco/protocol-validation|@codaco/ui)/).*"
-    ],
-    "testRegex": "(/__tests__/.*|(\\.|/))\\.test\\.[jt]sx?$",
-    "moduleNameMapper": {
-      "@app/(.*)$": "<rootDir>/src/renderer/$1",
-      "@components/(.*)$": "<rootDir>/src/renderer/components/$1",
-      "@selectors/(.*)$": "<rootDir>/src/renderer/selectors/$1",
-      "@hooks/(.*)$": "<rootDir>/src/renderer/hooks/$1",
-      "@modules/(.*)$": "<rootDir>/src/renderer/ducks/modules/$1",
-      "@utils/(.*)$": "<rootDir>/src/renderer/utils/$1"
-    }
-  }
+  "main": "./out/main/index.js"
 }

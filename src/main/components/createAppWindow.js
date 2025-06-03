@@ -10,23 +10,23 @@ const titlebarParameters = isMacOS() ? { titleBarStyle: 'hidden', frame: false }
 global.appWindow = null;
 
 function getAppUrl() {
-  if (process.env.NODE_ENV === 'development' && process.env.WEBPACK_DEV_SERVER_PORT) {
+  if (process.env.NODE_ENV === 'development') {
     const appUrl = url.format({
-      host: `localhost:${process.env.WEBPACK_DEV_SERVER_PORT}/`,
+      host: 'localhost:3000/',
       protocol: 'http',
     });
 
-    log.info('appUrl [host]', appUrl);
+    log.info('appUrl [development]', appUrl);
 
     return appUrl;
   }
 
   const appUrl = url.format({
-    pathname: path.join(__dirname, '../', 'index.html'),
+    pathname: path.join(__dirname, '../../dist/renderer/index.html'),
     protocol: 'file:',
   });
 
-  log.info('appUrl [path]', appUrl);
+  log.info('appUrl [production]', appUrl);
 
   return appUrl;
 }
@@ -45,7 +45,11 @@ function createAppWindow() {
       title: 'Network Canvas Architect',
       show: true,
       webPreferences: {
-        nodeIntegration: true,
+        nodeIntegration: false,
+        contextIsolation: true,
+        enableRemoteModule: false,
+        preload: path.join(__dirname, '../../dist/preload/index.js'),
+        webSecurity: true,
       },
     }, titlebarParameters);
 

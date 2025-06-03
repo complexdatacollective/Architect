@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './ducks/store';
@@ -14,16 +14,21 @@ initIPCListeners();
 initPreventFileDrop();
 
 const startApp = () => {
-  ReactDOM.render(
-    <>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <ViewManager />
-        </PersistGate>
-      </Provider>
-    </>,
-    document.getElementById('root'),
+  const container = document.getElementById('root');
+  const root = createRoot(container);
+  
+  root.render(
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ViewManager />
+      </PersistGate>
+    </Provider>
   );
+  
+  // Signal to main process that renderer is ready
+  if (window.electronAPI) {
+    window.electronAPI.ready();
+  }
 };
 
 window.addEventListener('load', () => {
