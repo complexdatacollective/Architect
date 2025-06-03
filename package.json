@@ -1,281 +1,264 @@
 {
-    "name": "network-canvas-architect",
-    "version": "7.0.0-alpha.3",
-    "productName": "Network Canvas Architect",
-    "description": "A tool for building Network Canvas interviews.",
-    "author": "Complex Data Collective <info@networkcanvas.com>",
-    "private": true,
-    "engines": {
-        "node": "14.21.3",
-        "npm": "8.19.4"
+  "name": "network-canvas-architect",
+  "version": "7.0.0-alpha.3",
+  "productName": "Network Canvas Architect",
+  "description": "A tool for building Network Canvas interviews.",
+  "author": "Complex Data Collective <info@networkcanvas.com>",
+  "private": true,
+  "scripts": {
+    "pack": "electron-builder --dir",
+    "start": "webpack serve --config webpack/webpack.dev.js",
+    "start:electron": "npm run start:architect:electron",
+    "start:architect:electron": "webpack serve --config webpack/webpack.electron.js",
+    "preelectron:dev": "webpack --config webpack/webpack.electron-dev.js",
+    "dev:electron": "cross-env NODE_ENV=development WEBPACK_NC_DEV_SERVER_PORT=3000 WEBPACK_DEV_SERVER_PORT=3003 electron electron-dev/",
+    "build": "npm run build:architect",
+    "build:architect": "webpack --config webpack/webpack.prod.js",
+    "lint": "npm run lint:js && npm run sass-lint",
+    "lint:js": "eslint src",
+    "sass-lint": "stylelint **/*.scss",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "build-docs": "jsdoc src -r -d docs-build -c ./jsdoc.conf.json --verbose",
+    "electron": "env NODE_ENV=build electron ./app",
+    "generate-icons": "node scripts/generate-app-icons.js",
+    "dist": "electron-builder",
+    "dist:mac": "npm run build && electron-builder -m --x64",
+    "dist:linux": "npm run build && electron-builder -l",
+    "dist:win": "npm run build && electron-builder -w",
+    "dist:all": "npm run build && electron-builder -mlw",
+    "bump": "node scripts/bump.js",
+    "preflight": "npm run lint:js && npm run sass-lint -- --max-warnings 0 && npm test -- --coverage"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/eslint-parser": "^7.13.10",
+    "@babel/eslint-plugin": "^7.13.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-syntax-import-meta": "^7.10.4",
+    "@babel/plugin-transform-class-properties": "^7.25.9",
+    "@babel/plugin-transform-nullish-coalescing-operator": "^7.27.1",
+    "@babel/plugin-transform-private-methods": "^7.27.1",
+    "@babel/plugin-transform-private-property-in-object": "^7.27.1",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.12.1",
+    "@codaco/protocol-validation": "^4.0.0-alpha.11",
+    "@codaco/ui": "^5.8.5",
+    "@electron/notarize": "^2.3.0",
+    "@material-ui/icons": "^4.11.2",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
+    "@tippyjs/react": "^4.2.5",
+    "animejs": "^2.2.0",
+    "archiver": "^3.1.1",
+    "autoprefixer": "^9.8.8",
+    "axios": "^0.27.2",
+    "babel-jest": "^26.6.3",
+    "babel-loader": "^9.2.1",
+    "chalk": "1.1.3",
+    "change-case": "^3.0.1",
+    "classnames": "^2.2.6",
+    "clean-webpack-plugin": "^4.0.0",
+    "compare-versions": "^3.6.0",
+    "copy-webpack-plugin": "^12.0.2",
+    "cross-env": "^5.2.0",
+    "css-loader": "^7.1.2",
+    "css-minimizer-webpack-plugin": "^7.0.0",
+    "csv-parse": "^4.10.1",
+    "csvtojson": "^2.0.10",
+    "decompress": "^4.2.1",
+    "dmg-builder": "~23.6.0",
+    "dotenv": "4.0.0",
+    "dotenv-webpack": "^8.1.0",
+    "electron": "^9.4.4",
+    "electron-builder": "^22.7.0",
+    "electron-devtools-installer": "^3.2.0",
+    "electron-log": "^4.2.2",
+    "emoji-dictionary": "^1.0.9",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.4",
+    "enzyme-to-json": "^3.6.1",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-webpack-plugin": "^4.2.0",
+    "faker": "^4.1.0",
+    "framer-motion": "^5.5.6",
+    "fs-extra": "^8.1.0",
+    "fuse.js": "^3.6.1",
+    "history": "^4.7.2",
+    "html-webpack-plugin": "^5.6.3",
+    "icon-gen": "^1.0.5",
+    "jest": "^26.4.2",
+    "jest-date-mock": "^1.0.8",
+    "jszip": "^3.10.1",
+    "lodash": "^4.17.19",
+    "luxon": "^1.24.1",
+    "mapbox-gl": "^3.9.3",
+    "mini-css-extract-plugin": "^2.9.2",
+    "object-hash": "^1.3.0",
+    "path-to-regexp": "^2.4.0",
+    "postcss": "^8.4.28",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-loader": "^8.1.1",
+    "postcss-preset-env": "^9.1.2",
+    "postcss-url": "^8.0.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-flip-toolkit": "^6.5.4",
+    "react-grid-layout": "^0.16.6",
+    "react-redux": "^7.2.1",
+    "react-refresh": "^0.14.2",
+    "react-router-dom": "~5.2.0",
+    "react-router-hash-link": "^2.4.1",
+    "react-select": "^3.1.0",
+    "react-sortable-hoc": "^2.0.0",
+    "react-table": "^7.7.0",
+    "react-test-renderer": "^16.13.1",
+    "react-transform-hmr": "^1.0.4",
+    "react-transition-group": "^4.4.1",
+    "react-virtualized-auto-sizer": "^1.0.6",
+    "react-window": "^1.8.6",
+    "recompose": "^0.30.0",
+    "redux": "^4.0.5",
+    "redux-form": "^8.3.6",
+    "redux-logger": "^2.7.4",
+    "redux-mock-store": "^1.5.4",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^3.0.0",
+    "rxjs": "^6.6.6",
+    "sass": "^1.56.1",
+    "sass-loader": "^16.0.4",
+    "scrollparent": "^2.0.1",
+    "style-loader": "^4.0.0",
+    "stylelint": "^15.10.3",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-config-standard-scss": "^10.0.0",
+    "svg2png": "^3.0.1",
+    "terser-webpack-plugin": "^5.3.11",
+    "uuid": "^3.4.0",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.2.0",
+    "webpack-merge": "^6.0.1"
+  },
+  "homepage": ".",
+  "main": "www/electron-starter.js",
+  "build": {
+    "extends": null,
+    "appId": "NetworkCanvasArchitect",
+    "afterSign": "./build-resources/scripts/afterSignHook.js",
+    "directories": {
+      "buildResources": "build-resources",
+      "output": "release-builds"
     },
-    "scripts": {
-        "postinstall": "cd network-canvas && npm install && cd ../",
-        "pack": "electron-builder --dir",
-        "update-submodules": "git submodule update --init --recursive",
-        "start": "webpack serve --config webpack/webpack.dev.js",
-        "start:electron": "npm run start:architect:electron",
-        "start:architect:electron": "webpack serve --config webpack/webpack.electron.js",
-        "start:network-canvas:electron": "cd network-canvas && npm run start:electron",
-        "preelectron:dev": "webpack --config webpack/webpack.electron-dev.js",
-        "dev:electron": "cross-env NODE_ENV=development WEBPACK_NC_DEV_SERVER_PORT=3000 WEBPACK_DEV_SERVER_PORT=3003 electron electron-dev/",
-        "build": "npm run build:architect && npm run build:network-canvas",
-        "build:architect": "webpack --config webpack/webpack.prod.js",
-        "build:network-canvas": "cd network-canvas && npm install && npm run build:electron && cd ../ && node scripts/move-network-canvas-build.js",
-        "lint": "npm run lint:js && npm run sass-lint",
-        "lint:js": "eslint src",
-        "sass-lint": "stylelint **/*.scss",
-        "test": "jest",
-        "test:watch": "jest --watch",
-        "test:coverage": "jest --coverage",
-        "build-docs": "jsdoc src -r -d docs-build -c ./jsdoc.conf.json --verbose",
-        "electron": "env NODE_ENV=build electron ./app",
-        "generate-icons": "node scripts/generate-app-icons.js",
-        "dist": "electron-builder",
-        "dist:mac": "npm run build && electron-builder -m --x64",
-        "dist:linux": "npm run build && electron-builder -l",
-        "dist:win": "npm run build && electron-builder -w",
-        "dist:all": "npm run build && electron-builder -mlw",
-        "bump": "node scripts/bump.js",
-        "preflight": "npm run lint:js && npm run sass-lint -- --max-warnings 0 && npm test -- --coverage"
+    "mac": {
+      "category": "public.app-category.education",
+      "hardenedRuntime": true,
+      "entitlements": "./build-resources/entitlements.mac.inherit.plist"
     },
-    "repository": {
-        "type": "git"
+    "win": {
+      "target": "nsis",
+      "certificateSha1": "8F1243989C0B23B29B50E872282AAB00A4302CCD"
     },
-    "devDependencies": {
-        "@babel/cli": "^7.12.1",
-        "@babel/core": "^7.12.3",
-        "@babel/eslint-parser": "^7.13.10",
-        "@babel/eslint-plugin": "^7.13.10",
-        "@babel/plugin-proposal-class-properties": "^7.12.1",
-        "@babel/plugin-transform-class-properties": "^7.25.9",
-        "@babel/plugin-syntax-import-meta": "^7.10.4",
-        "@babel/plugin-transform-nullish-coalescing-operator": "^7.27.1",
-        "@babel/plugin-transform-private-methods": "^7.27.1",
-        "@babel/plugin-transform-private-property-in-object": "^7.27.1",
-        "@babel/preset-env": "^7.27.2",
-        "@babel/preset-react": "^7.12.1",
-        "@codaco/protocol-validation": "^4.0.0-alpha.11",
-        "@codaco/ui": "^5.8.5",
-        "@electron/notarize": "^2.3.0",
-        "@material-ui/icons": "^4.11.2",
-        "@tippyjs/react": "^4.2.5",
-        "animejs": "^2.2.0",
-        "archiver": "^3.1.1",
-        "autoprefixer": "^9.8.8",
-        "axios": "^0.27.2",
-        "babel-jest": "^26.6.3",
-        "chalk": "1.1.3",
-        "change-case": "^3.0.1",
-        "classnames": "^2.2.6",
-        "compare-versions": "^3.6.0",
-        "cross-env": "^5.2.0",
-        "csv-parse": "^4.10.1",
-        "csvtojson": "^2.0.10",
-        "decompress": "^4.2.1",
-        "dmg-builder": "~23.6.0",
-        "dotenv": "4.0.0",
-        "electron": "^9.4.4",
-        "electron-builder": "^22.7.0",
-        "electron-devtools-installer": "^3.2.0",
-        "electron-log": "^4.2.2",
-        "emoji-dictionary": "^1.0.9",
-        "enzyme": "^3.11.0",
-        "enzyme-adapter-react-16": "^1.15.4",
-        "enzyme-to-json": "^3.6.1",
-        "eslint": "^8.57.1",
-        "eslint-config-airbnb": "^19.0.4",
-        "eslint-config-react-app": "^7.0.1",
-        "eslint-import-resolver-alias": "^1.1.2",
-        "eslint-plugin-import": "^2.31.0",
-        "eslint-plugin-jsx-a11y": "^6.10.2",
-        "eslint-plugin-react": "^7.37.2",
-        "faker": "^4.1.0",
-        "framer-motion": "^5.5.6",
-        "fs-extra": "^8.1.0",
-        "fuse.js": "^3.6.1",
-        "history": "^4.7.2",
-        "icon-gen": "^1.0.5",
-        "jest": "^26.4.2",
-        "jest-date-mock": "^1.0.8",
-        "jszip": "^3.10.1",
-        "lodash": "^4.17.19",
-        "luxon": "^1.24.1",
-        "mapbox-gl": "^3.9.3",
-        "object-hash": "^1.3.0",
-        "path-to-regexp": "^2.4.0",
-        "postcss": "^8.4.28",
-        "postcss-preset-env": "^9.1.2",
-        "postcss-url": "^8.0.0",
-        "prop-types": "^15.6.2",
-        "react": "^16.13.1",
-        "react-dom": "^16.13.1",
-        "react-flip-toolkit": "^6.5.4",
-        "react-grid-layout": "^0.16.6",
-        "react-redux": "^7.2.1",
-        "react-router-dom": "~5.2.0",
-        "react-router-hash-link": "^2.4.1",
-        "react-select": "^3.1.0",
-        "react-sortable-hoc": "^2.0.0",
-        "react-table": "^7.7.0",
-        "react-test-renderer": "^16.13.1",
-        "react-transform-hmr": "^1.0.4",
-        "react-transition-group": "^4.4.1",
-        "react-virtualized-auto-sizer": "^1.0.6",
-        "react-window": "^1.8.6",
-        "recompose": "^0.30.0",
-        "redux": "^4.0.5",
-        "redux-form": "^8.3.6",
-        "redux-logger": "^2.7.4",
-        "redux-mock-store": "^1.5.4",
-        "redux-persist": "^6.0.0",
-        "redux-thunk": "^2.3.0",
-        "reselect": "^3.0.0",
-        "rxjs": "^6.6.6",
-        "sass": "^1.56.1",
-        "scrollparent": "^2.0.1",
-        "stylelint": "^15.10.3",
-        "stylelint-config-standard": "^34.0.0",
-        "stylelint-config-standard-scss": "^10.0.0",
-        "svg2png": "^3.0.1",
-        "uuid": "^3.4.0",
-        "webpack": "^5.97.1",
-        "webpack-cli": "^5.1.4",
-        "webpack-dev-server": "^5.2.0",
-        "webpack-merge": "^6.0.1",
-        "html-webpack-plugin": "^5.6.3",
-        "babel-loader": "^9.2.1",
-        "css-loader": "^7.1.2",
-        "sass-loader": "^16.0.4",
-        "style-loader": "^4.0.0",
-        "postcss-loader": "^8.1.1",
-        "mini-css-extract-plugin": "^2.9.2",
-        "copy-webpack-plugin": "^12.0.2",
-        "clean-webpack-plugin": "^4.0.0",
-        "terser-webpack-plugin": "^5.3.11",
-        "css-minimizer-webpack-plugin": "^7.0.0",
-        "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
-        "react-refresh": "^0.14.2",
-        "eslint-webpack-plugin": "^4.2.0",
-        "postcss-flexbugs-fixes": "^5.0.2",
-        "dotenv-webpack": "^8.1.0"
-    },
-    "homepage": ".",
-    "main": "www/electron-starter.js",
-    "build": {
-        "extends": null,
-        "appId": "NetworkCanvasArchitect",
-        "afterSign": "./build-resources/scripts/afterSignHook.js",
-        "directories": {
-            "buildResources": "build-resources",
-            "output": "release-builds"
+    "linux": {
+      "maintainer": "Joshua Melville <joshmelville@gmail.com>",
+      "target": [
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         },
-        "mac": {
-            "category": "public.app-category.education",
-            "hardenedRuntime": true,
-            "entitlements": "./build-resources/entitlements.mac.inherit.plist"
+        {
+          "target": "rpm",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         },
-        "win": {
-            "target": "nsis",
-            "certificateSha1": "8F1243989C0B23B29B50E872282AAB00A4302CCD"
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         },
-        "linux": {
-            "maintainer": "Joshua Melville <joshmelville@gmail.com>",
-            "target": [
-                {
-                    "target": "deb",
-                    "arch": [
-                        "x64",
-                        "arm64"
-                    ]
-                },
-                {
-                    "target": "rpm",
-                    "arch": [
-                        "x64",
-                        "arm64"
-                    ]
-                },
-                {
-                    "target": "AppImage",
-                    "arch": [
-                        "x64",
-                        "arm64"
-                    ]
-                },
-                {
-                    "target": "tar.gz",
-                    "arch": [
-                        "x64",
-                        "arm64"
-                    ]
-                }
-            ]
-        },
-        "fileAssociations": {
-            "ext": "netcanvas",
-            "description": "Network Canvas interview protocol",
-            "icon": "file",
-            "role": "Editor"
-        },
-        "publish": [
-            {
-                "provider": "github",
-                "owner": "complexdatacollective",
-                "repo": "architect"
-            }
-        ]
-    },
-    "jest": {
-        "collectCoverageFrom": [
-            "src/**/*.{js,jsx}",
-            "!src/protocol-validation/**",
-            "!network-canvas/**",
-            "!app/**",
-            "!electron-dev/**",
-            "!release-builds/**"
-        ],
-        "snapshotSerializers": [
-            "enzyme-to-json/serializer"
-        ],
-        "setupFiles": [
-            "jest-date-mock",
-            "<rootDir>/config/polyfills.js",
-            "<rootDir>/config/jest/polyfills.js",
-            "<rootDir>/config/jest/enzyme.js",
-            "<rootDir>/config/jest/automock.js"
-        ],
-        "testPathIgnorePatterns": [
-            "<rootDir>[/\\\\](www|docs|node_modules|scripts)[/\\\\]",
-            "<rootDir>[/\\\\](network-canvas)[/\\\\]",
-            "<rootDir>[/\\\\](electron-dev)[/\\\\]",
-            "<rootDir>[/\\\\](app)[/\\\\]"
-        ],
-        "modulePathIgnorePatterns": [
-            "<rootDir>[/\\\\](network-canvas)[/\\\\]",
-            "<rootDir>[/\\\\](electron-dev)[/\\\\]",
-            "<rootDir>[/\\\\](app)[/\\\\]",
-            "<rootDir>[/\\\\](src/protocol-validation)[/\\\\]",
-            "<rootDir>[/\\\\](release-builds)[/\\\\]"
-        ],
-        "testEnvironment": "node",
-        "testURL": "http://localhost",
-        "transform": {
-            "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
-            "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-            "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-        },
-        "transformIgnorePatterns": [
-            "/node_modules/(?!(@codaco/protocol-validation|@codaco/ui)/).*"
-        ],
-        "testRegex": "(/__tests__/.*|(\\.|/))\\.test\\.[jt]sx?$",
-        "moduleNameMapper": {
-            "@app/(.*)$": "<rootDir>/src/$1",
-            "@components/(.*)$": "<rootDir>/src/components/$1",
-            "@selectors/(.*)$": "<rootDir>/src/selectors/$1",
-            "@hooks/(.*)$": "<rootDir>/src/hooks/$1",
-            "@modules/(.*)$": "<rootDir>/src/ducks/modules/$1",
-            "@utils/(.*)$": "<rootDir>/src/utils/$1"
+        {
+          "target": "tar.gz",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         }
+      ]
+    },
+    "fileAssociations": {
+      "ext": "netcanvas",
+      "description": "Network Canvas interview protocol",
+      "icon": "file",
+      "role": "Editor"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "complexdatacollective",
+        "repo": "architect"
+      }
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/protocol-validation/**",
+      "!release-builds/**"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "setupFiles": [
+      "jest-date-mock",
+      "<rootDir>/config/polyfills.js",
+      "<rootDir>/config/jest/polyfills.js",
+      "<rootDir>/config/jest/enzyme.js",
+      "<rootDir>/config/jest/automock.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>[/\\\\](www|docs|node_modules|scripts)[/\\\\]"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>[/\\\\](src/protocol-validation)[/\\\\]",
+      "<rootDir>[/\\\\](release-builds)[/\\\\]"
+    ],
+    "testEnvironment": "node",
+    "testURL": "http://localhost",
+    "transform": {
+      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(@codaco/protocol-validation|@codaco/ui)/).*"
+    ],
+    "testRegex": "(/__tests__/.*|(\\.|/))\\.test\\.[jt]sx?$",
+    "moduleNameMapper": {
+      "@app/(.*)$": "<rootDir>/src/$1",
+      "@components/(.*)$": "<rootDir>/src/components/$1",
+      "@selectors/(.*)$": "<rootDir>/src/selectors/$1",
+      "@hooks/(.*)$": "<rootDir>/src/hooks/$1",
+      "@modules/(.*)$": "<rootDir>/src/ducks/modules/$1",
+      "@utils/(.*)$": "<rootDir>/src/utils/$1"
     }
+  }
 }

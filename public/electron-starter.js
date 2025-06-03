@@ -1,13 +1,9 @@
 const { app, protocol } = require('electron');
 const log = require('./components/log');
 const createAppWindow = require('./components/createAppWindow');
-const createPreviewWindow = require('./components/createPreviewWindow');
 const AppManager = require('./components/appManager');
-const PreviewManager = require('./components/previewManager');
 const loadDevTools = require('./components/loadDevTools');
 const registerAssetProtocol = require('./components/assetProtocol').registerProtocol;
-
-global.NETWORK_CANVAS_PREVIEW = true;
 
 protocol.registerSchemesAsPrivileged([{
   scheme: 'asset',
@@ -22,7 +18,6 @@ protocol.registerSchemesAsPrivileged([{
 log.info('App starting...');
 
 const appManager = new AppManager();
-const previewManager = new PreviewManager(); // eslint-disable-line
 
 const gotTheLock = app.requestSingleInstanceLock();
 if (!gotTheLock) {
@@ -50,13 +45,11 @@ app.on('ready', () => {
 
   Promise.all([
     createAppWindow(),
-    createPreviewWindow(),
     loadDevTools(),
   ])
     .then(() => {
       log.info('Windows initialized');
       appManager.start();
-      previewManager.start();
     })
     .catch((e) => {
       log.error(e);
@@ -65,9 +58,7 @@ app.on('ready', () => {
 
 app.on('window-all-closed', () => {
   AppManager.quit();
-  PreviewManager.quit();
   global.appWindow = null;
-  global.previewWindow = null;
   global.summaryWindow = null;
   app.quit();
 });

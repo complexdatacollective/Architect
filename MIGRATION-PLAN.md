@@ -1,0 +1,25 @@
+This app is currently using an extremely old version of Electron, which must be updated. There are several steps involved in this:
+
+- Replace webpack with vite.
+  - Analyse the existing webpack configuration and identify the necessary plugins and loaders that need to be replaced or reconfigured for Vite.
+  - Migrate the existing webpack configuration to Vite, ensuring that all necessary features are retained.
+  - Remove all webpack dependencies, plugins, and configurations from the project.
+- Upgrade uuid to the latest version, replacing all uses throughout the codebase.
+- The key challenge is to remove calls to native node modules (fs, path, remote, and others) in the renderer process with the correct use of the secure IPC bridge that connects to an API in the main thread via preload scripts. This will require extremely careful planning, in order to take advantage of the opportunity to develop cleaner APIs. Steps will include:
+  - Full mapping of all current uses of either native node modules or npm packages that are not compatible with the browser in the renderer process.
+  - Planning out how to refactor these calls to use the IPC bridge, or if functionality should instead be replaced with a different approach.
+  - Opening protocols files. Unzipping and decompressing should happen in the main process, and the renderer should simply be passed the parsed protocol data.
+  - Saving protocol files should work similarly, with the renderer sending the data to the main process for saving.
+  - ALL other uses of node modules that are not compatible with the browser must be removed.
+  - Do not refactor the code to use the current electron version's APIs. Instead, update the electron dependency, and THEN conduct the refactoring work.
+  - Remove all electron tools and dependencies that may conflict with the new version of Electron, such as electron-builder, electron-log, and others that are not compatible with the latest version. Remove references to these in the codebase and package.json.
+  - Do not add polyfills or shims for node modules in the renderer process. Instead, refactor the code to use the IPC bridge or other modern approaches, and remove any references to these modules in the renderer process.
+- The /network-canvas directory is a submodule that is used for a "preview mode". This entire feature is complex and must be reimplemented from scratch. Please remove the submodule and all references to the preview mode as part of the refactoring process. Where buttons or other UI elements reference the preview mode, they should be replaced with a placeholder that indicates that this feature is not yet implemented.
+- There are several systems that were built around electron for window management and other features. These should be replaced with a more modern approach. Delete and remove all references to these systems, and recreate only the features that are absolutely necessary for the app to function. This will likely involve using the latest Electron APIs for window management and other features.
+- Remove the /development-protocol submodule/folder and all references to it.
+- I want to reorganize code around the main and renderer processes. New directories in the src should be created for this, and all code in the src directory should be moved to either of these.
+- I see the project has /app, /electron-dev and  /www directories. Please investigate what these are used for, and ideally consolidate or remove them as necessary. The goal is to have a clean and organized project structure.
+- Ensure that you take the opportunity to remove any unused code, dependencies, during your refactoring. Take the opportunity to merge and consolidate files, and provide clearer organization of the codebase.
+- The protocol summary functionality is particularly complicated and should be removed from the project entirely.
+- Ignore tests for now. There is no need to remove or refactor the test files at all.
+- Because this is a complex task that will involve substantial changes to dependencies and refactoring, I want you to confirm your plan at each step before proceeding. This will ensure that we are on the right track and can adjust as necessary. Always prefer modern approaches and best practices, and avoid using deprecated or old methods.
