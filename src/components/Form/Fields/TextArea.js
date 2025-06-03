@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import uuid from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 import cx from 'classnames';
 import { fieldPropTypes } from 'redux-form';
 
@@ -8,7 +8,7 @@ const TextArea = ({
   label,
   input,
 }) => {
-  const id = useRef(uuid());
+  const id = useRef(uuidv4());
 
   const {
     active,

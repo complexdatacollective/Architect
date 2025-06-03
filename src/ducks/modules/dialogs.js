@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 const OPEN_DIALOG = 'PROTOCOL/OPEN_DIALOG';
 const CLOSE_DIALOG = 'PROTOCOL/CLOSE_DIALOG';
@@ -51,7 +51,7 @@ const openDialog = (dialog) => (dispatch) => new Promise((resolve) => {
   };
 
   dispatch({
-    id: uuid(),
+    id: uuidv4(),
     type: OPEN_DIALOG,
     dialog: {
       ...dialog,

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 const Switch = ({
   label,
@@ -10,7 +10,7 @@ const Switch = ({
   className,
   onChange,
 }) => {
-  const id = useRef(uuid());
+  const id = useRef(uuidv4());
 
   const classes = cx(
     'switch',

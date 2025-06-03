@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import {
   compose,
   defaultProps,
@@ -24,7 +24,7 @@ const mapStateToProps = (
   const items = formValueSelector(form)(state, fieldName) || [];
   const itemCount = items ? items.length : 0;
   const item = itemSelector(state, { form, editField });
-  const initialValues = item || { ...template(), id: uuid() };
+  const initialValues = item || { ...template(), id: uuidv4() };
   const hasSpace = getRemainingSpace(items, capacity) > 0;
 
   return {

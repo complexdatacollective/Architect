@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { compose, withHandlers } from 'recompose';
 import validateRule from './validateRule';
 
@@ -14,7 +14,7 @@ const withRulesChangeHandlers = compose(
       if (!rule.id) {
         updatedRules = [
           ...rules,
-          { ...rule, id: uuid() },
+          { ...rule, id: uuidv4() },
         ];
       } else {
         updatedRules = rules.map(

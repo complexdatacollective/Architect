@@ -1,7 +1,7 @@
 import fse from 'fs-extra';
 import log from 'electron-log';
 import path from 'path';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { isEqual } from 'lodash';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import { saveDialog } from '@app/utils/dialogs';
@@ -47,7 +47,7 @@ const ProtocolsDidNotMatchError = new Error('Protocols did not match');
  */
 const createNetcanvas = (destinationUserPath) => getTempDir('new')
   .then((newDir) => {
-    const workingPath = path.join(newDir, uuid());
+    const workingPath = path.join(newDir, uuidv4());
     const assetPath = path.join(workingPath, 'assets');
 
     return fse.mkdirp(assetPath)

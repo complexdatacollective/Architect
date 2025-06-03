@@ -1,13 +1,13 @@
 /* eslint-env jest */
 
 import { times } from 'lodash';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import crypto from 'crypto';
 import createTimeline, { actionCreators } from '../timeline';
 
-jest.mock('uuid');
+jest.mock('uuid', () => ({ v4: jest.fn() }));
 
-uuid.mockImplementation(() => crypto.randomBytes(20).toString('hex'));
+uuidv4.mockImplementation(() => crypto.randomBytes(20).toString('hex'));
 
 const defaultReducer = jest.fn(() => ({
   dummyState: true,

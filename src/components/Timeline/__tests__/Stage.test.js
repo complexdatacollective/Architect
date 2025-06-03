@@ -1,14 +1,14 @@
 /* eslint-env jest */
 
 import React from 'react';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { shallow } from 'enzyme';
 import { UnconnectedStage } from '../Stage';
 
 jest.mock('@codaco/ui/lib/utils/CSSVariables');
 
 const mockProps = {
-  id: uuid(),
+  id: uuidv4(),
   stageNumber: 1,
   type: 'Foo',
   onEditStage: () => {},

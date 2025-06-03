@@ -1,4 +1,4 @@
-import uuid from 'uuid/v1';
+import { v4 as uuidv4 } from 'uuid';
 import { get, compact, omit } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 import prune from '@app/utils/prune';
@@ -100,7 +100,7 @@ const deletePrompt = (stageId, promptId, deleteEmptyStage = false) => ({
 });
 
 const createStageThunk = (options, index) => (dispatch) => {
-  const stageId = uuid();
+  const stageId = uuidv4();
   const stage = { ...initialStage, ...options, id: stageId };
   return dispatch(saveableChange(createStage)(stage, index))
     .then(() => stage);

@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { omit } from 'lodash';
 import path from 'path';
 import log from 'electron-log';
@@ -34,7 +34,7 @@ const importAsset = (filename) => ({
  * @param {string} fileType - File MIME type
  */
 export const importAssetComplete = (filename, name, assetType) => ({
-  id: uuid(),
+  id: uuidv4(),
   type: IMPORT_ASSET_COMPLETE,
   name,
   filename,
@@ -94,7 +94,7 @@ const importAssetThunk = (filePath) => (dispatch, getState) => {
  */
 export const addApiKeyAsset = (name, value) => ({
   type: ADD_API_KEY_ASSET,
-  id: uuid(),
+  id: uuidv4(),
   name,
   value,
 });

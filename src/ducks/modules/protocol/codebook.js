@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import {
   omit, get, has, isEmpty, find,
 } from 'lodash';
@@ -86,7 +86,7 @@ const deleteVariable = (entity, type, variable) => ({
 });
 
 const createTypeThunk = (entity, configuration) => (dispatch) => {
-  const type = uuid();
+  const type = uuidv4();
 
   return dispatch(saveableChange(createType)(entity, type, configuration))
     .then(() => ({
@@ -108,7 +108,7 @@ const createEdgeThunk = (configuration) => (dispatch, getState) => {
   const state = getState();
   const protocol = state.protocol.present;
   const color = configuration.color || getNextCategoryColor(protocol, entity);
-  const type = uuid();
+  const type = uuidv4();
 
   dispatch(saveableChange(createType)(entity, type, { ...configuration, color }));
 
@@ -145,7 +145,7 @@ const createVariableThunk = (entity, type, configuration) => (dispatch, getState
     throw new Error(`Variable with name "${safeConfiguration.name}" already exists`);
   }
 
-  const variable = uuid();
+  const variable = uuidv4();
 
   return dispatch(saveableChange(createVariable)(entity, type, variable, safeConfiguration))
     .then(() => ({

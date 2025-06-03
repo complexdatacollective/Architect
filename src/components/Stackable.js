@@ -6,7 +6,7 @@ import {
   compose,
   withState,
 } from 'recompose';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { actionCreators as stackActions } from '../ducks/modules/stacks';
 
 const withStackableId = withState('stackableId', 'setStackableId', null);
@@ -17,7 +17,7 @@ class Stackable extends Component {
   constructor(props) {
     super(props);
     const { group, registerStackable, setStackableId } = this.props;
-    const id = uuid();
+    const id = uuidv4();
     registerStackable(id, group);
     setStackableId(id);
   }

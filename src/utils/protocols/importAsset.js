@@ -1,5 +1,5 @@
 import path from 'path';
-import uuid from 'uuid/v1';
+import { v4 as uuidv4 } from 'uuid';
 import { findKey, toLower } from 'lodash';
 import { copy } from 'fs-extra';
 import { SUPPORTED_EXTENSION_TYPE_MAP } from '@app/config';
@@ -28,7 +28,7 @@ export const getSupportedAssetType = (filePath) => {
  * @param {string} filePath - The file buffer to copy.
  */
 const importAsset = (protocolPath, filePath) => new Promise((resolve) => {
-  const destinationName = `${uuid()}${path.extname(filePath)}`;
+  const destinationName = `${uuidv4()}${path.extname(filePath)}`;
   const destinationPath = path.join(protocolPath, 'assets', destinationName);
   const assetType = getSupportedAssetType(filePath);
 

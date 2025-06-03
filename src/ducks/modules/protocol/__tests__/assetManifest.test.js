@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { getThunkMocks, toHaveDispatched } from '@app/__tests__/helpers';
 import testState from '@app/__tests__/testState.json';
 import { importAsset } from '@app/utils/protocols';
@@ -17,8 +17,8 @@ describe('protocol/assetManifest', () => {
     it('IMPORT_ASSET_COMPLETE correctly updates state', () => {
       const result = reducer(null, test.importAssetComplete('uuid-file-location-in-protocol', 'my-original-filename.jpg', 'image'));
       expect(result).toMatchObject({
-        [uuid()]: {
-          id: uuid(),
+        [uuidv4()]: {
+          id: uuidv4(),
           name: 'my-original-filename.jpg',
           source: 'uuid-file-location-in-protocol',
           type: 'image',
@@ -28,14 +28,14 @@ describe('protocol/assetManifest', () => {
 
     it('DELETE_ASSET correctly updates state', () => {
       const state = {
-        [uuid()]: {
-          id: uuid(),
+        [uuidv4()]: {
+          id: uuidv4(),
           name: 'my-original-filename.jpg',
           source: 'uuid-file-location-in-protocol',
           type: 'image',
         },
       };
-      const result = reducer(state, test.deleteAsset(uuid()));
+      const result = reducer(state, test.deleteAsset(uuidv4()));
       expect(result).toEqual({});
     });
   });
@@ -57,7 +57,7 @@ describe('protocol/assetManifest', () => {
 
       expect(dispatch).toHaveDispatched([
         { type: 'PROTOCOL/IMPORT_ASSET', filename: 'bazz.jpg' },
-        { type: 'PROTOCOL/IMPORT_ASSET_COMPLETE', name: 'bazz.jpg', id: uuid() },
+        { type: 'PROTOCOL/IMPORT_ASSET_COMPLETE', name: 'bazz.jpg', id: uuidv4() },
         { type: 'SESSION/PROTOCOL_CHANGED' },
       ]);
 
@@ -85,10 +85,10 @@ describe('protocol/assetManifest', () => {
     it('deleteAsset() dispatches correct actions', async () => {
       const [dispatch, getState] = getThunkMocks(testState);
 
-      await actionCreators.deleteAsset(uuid())(dispatch, getState);
+      await actionCreators.deleteAsset(uuidv4())(dispatch, getState);
 
       expect(dispatch).toHaveDispatched([
-        { type: 'PROTOCOL/DELETE_ASSET', id: uuid() },
+        { type: 'PROTOCOL/DELETE_ASSET', id: uuidv4() },
         { type: 'SESSION/PROTOCOL_CHANGED' },
       ]);
     });

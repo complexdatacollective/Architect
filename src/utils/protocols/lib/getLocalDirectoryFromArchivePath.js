@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { remote } from 'electron';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
 
 /**
@@ -9,6 +9,6 @@ import path from 'path';
  *
  * @returns The destination path in /tmp/.
  */
-const getLocalDirectoryFromArchivePath = () => path.join(remote.app.getPath('temp'), 'protocols', uuid());
+const getLocalDirectoryFromArchivePath = () => path.join(remote.app.getPath('temp'), 'protocols', uuidv4());
 
 export default getLocalDirectoryFromArchivePath;

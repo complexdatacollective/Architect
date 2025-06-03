@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 const ADD_TOAST = Symbol('PROTOCOL/ADD_TOAST');
 const UPDATE_TOAST = Symbol('PROTOCOL/UPDATE_TOAST');
@@ -7,7 +7,7 @@ const REMOVE_TOAST = Symbol('PROTOCOL/REMOVE_TOAST');
 const initialState = [];
 
 const addToast = (toast) => (dispatch) => {
-  const id = toast.id || uuid();
+  const id = toast.id || uuidv4();
   dispatch({
     type: ADD_TOAST,
     toast: {

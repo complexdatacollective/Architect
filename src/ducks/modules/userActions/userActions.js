@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import path from 'path';
-import uuid from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 import { remote } from 'electron';
 import { remove, rename, outputFile } from 'fs-extra';
 import axios from 'axios';
@@ -189,7 +189,7 @@ const importSampleProtocol = () => (dispatch) => {
   let userFilePath; // Path to save the file, chosen by user
   let tempFilePath; // Temp file path for downloading to
   let userCancelled = false; // Flag to determine if the user cancels
-  const importUUID = uuid(); // Identifier to avoid file name collisions
+  const importUUID = uuidv4(); // Identifier to avoid file name collisions
   const controller = new AbortController(); // Abort controller for axios
 
   // Utility that attempts to clean up temp files, and

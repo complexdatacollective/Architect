@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import {
   compose,
   defaultProps,
@@ -31,7 +31,7 @@ const mapItemStateToProps = (state, {
   form, itemSelector, editField, template,
 }) => {
   const item = itemSelector(state, { form, editField });
-  const initialValues = item || { ...template(), id: uuid() };
+  const initialValues = item || { ...template(), id: uuidv4() };
 
   return { initialValues };
 };

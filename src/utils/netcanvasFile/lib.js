@@ -1,7 +1,7 @@
 import { remote } from 'electron';
 import fse from 'fs-extra';
 import path from 'path';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { pruneProtocol } from '@app/utils/prune';
 import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
 import { archive, extract } from '@app/utils/protocols/lib/archive';
@@ -115,7 +115,7 @@ const createNetcanvasExport = (workingPath, protocol) => {
   return writeProtocol(workingPath, protocol)
     .then(() => getTempDir('exports'))
     .then((exportDir) => {
-      const exportPath = path.join(exportDir, uuid());
+      const exportPath = path.join(exportDir, uuidv4());
 
       return archive(workingPath, exportPath)
         .then(() => exportPath);
@@ -131,7 +131,7 @@ const createNetcanvasExport = (workingPath, protocol) => {
  */
 const importNetcanvas = (filePath) => getTempDir('protocols')
   .then((protocolsDir) => {
-    const destinationPath = path.join(protocolsDir, uuid());
+    const destinationPath = path.join(protocolsDir, uuidv4());
 
     return fse.access(filePath, fse.constants.W_OK)
       .then(() => extract(filePath, destinationPath))

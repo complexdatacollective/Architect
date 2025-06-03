@@ -3,7 +3,7 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { fieldPropTypes } from 'redux-form';
 
 const Radio = ({
@@ -14,7 +14,7 @@ const Radio = ({
   fieldLabel,
   ...rest
 }) => {
-  const id = useRef(uuid());
+  const id = useRef(uuidv4());
 
   const componentClasses = cx(
     'form-field-radio',

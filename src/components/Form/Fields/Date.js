@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { Icon } from '@codaco/ui';
 
 const dashIndex = [4, 7];
@@ -49,7 +49,7 @@ const TextInput = ({
   hidden,
   dateFormat,
 }) => {
-  const id = useRef(uuid());
+  const id = useRef(uuidv4());
 
   useEffect(() => {
     const newValue = getParsedValue(dateFormat)(input.value);

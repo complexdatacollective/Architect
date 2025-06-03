@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { get } from 'lodash';
 
 const defaultOptions = {
@@ -65,7 +65,7 @@ const createTimelineReducer = (reducer, customOptions) => {
 
     // This is the first run or we are resetting
     if (timeline.length === 0 || get(action, 'type') === RESET) {
-      const locus = uuid();
+      const locus = uuidv4();
 
       return {
         past: [],
@@ -89,7 +89,7 @@ const createTimelineReducer = (reducer, customOptions) => {
       };
     }
 
-    const locus = uuid();
+    const locus = uuidv4();
 
     return {
       past: [...past, present].slice(-options.limit),

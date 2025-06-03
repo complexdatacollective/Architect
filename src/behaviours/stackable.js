@@ -4,7 +4,7 @@ import {
   compose,
   lifecycle,
 } from 'recompose';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { actionCreators as stackActions } from '../ducks/modules/stacks';
 
 const stackableHandlers = connect(
@@ -18,7 +18,7 @@ const stackableHandlers = connect(
 const stackableLifecycle = lifecycle({
   componentWillMount() {
     const { group } = this.props;
-    const id = uuid();
+    const id = uuidv4();
     this.props.registerStackable(id, group);
     this.setState({ stackableId: id });
   },

@@ -5,7 +5,7 @@ import { connect, useDispatch } from 'react-redux';
 import {
   formValueSelector, arrayPush, Field, change,
 } from 'redux-form';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { has } from 'lodash';
 import { Button } from '@codaco/ui';
 import { Section } from '@components/EditorLayout';
@@ -108,7 +108,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, { form }) => ({
   createNewPanel: bindActionCreators(
     () => arrayPush(form, 'panels', {
-      id: uuid(), title: null, dataSource: 'existing', filter: null,
+      id: uuidv4(), title: null, dataSource: 'existing', filter: null,
     }),
     dispatch,
   ),

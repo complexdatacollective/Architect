@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { set } from 'lodash';
@@ -9,7 +9,7 @@ import { test as stageActions } from '../stages';
 import reducer, { actionTypes, actionCreators, test } from '../codebook';
 import testState from '../../../../__tests__/testState.json';
 
-jest.mock('uuid');
+jest.mock('uuid', () => ({ v4: jest.fn() }));
 
 const mockStore = configureStore([thunk]);
 
@@ -205,7 +205,7 @@ describe('protocol.codebook', () => {
             type: actionTypes.CREATE_TYPE,
             meta: {
               entity: 'node',
-              type: uuid(),
+              type: uuidv4(),
             },
             configuration: {
               color: '',
@@ -300,7 +300,7 @@ describe('protocol.codebook', () => {
             meta: {
               entity: 'node',
               type: 'foo',
-              variable: uuid(),
+              variable: uuidv4(),
             },
             configuration: {
               fizz: 'buzz',
@@ -335,7 +335,7 @@ describe('protocol.codebook', () => {
             type: actionTypes.CREATE_VARIABLE,
             meta: {
               entity: 'ego',
-              variable: uuid(),
+              variable: uuidv4(),
             },
             configuration: {
               fizz: 'buzz',

@@ -1,7 +1,7 @@
 /* eslint-env jest */
 
 import fse from 'fs-extra';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import { extract, archive } from '@app/utils/protocols/lib/archive';
 import { canUpgrade, migrateProtocol } from '@codaco/protocol-validation';
@@ -48,7 +48,7 @@ describe('netcanvasFile/netcanvasFile', () => {
   beforeEach(() => {
     jest.resetAllMocks();
 
-    uuid.mockImplementation(jest.fn(() => '809895df-bbd7-4c76-ac58-e6ada2625f9b'));
+    uuidv4.mockImplementation(jest.fn(() => '809895df-bbd7-4c76-ac58-e6ada2625f9b'));
 
     fse.access.mockResolvedValue(Promise.resolve());
     archive.mockImplementation(() => Promise.resolve());
