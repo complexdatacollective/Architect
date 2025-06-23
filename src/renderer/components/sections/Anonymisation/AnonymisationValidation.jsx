@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { change, formValueSelector } from 'redux-form';
-import { Section, Row } from '@components/EditorLayout';
-import Validations from '@components/Validations';
+import { Section, Row } from '~/components/EditorLayout';
+import Validations from '~/components/Validations';
 
 const AnonymisationValidation = ({
   form,

@@ -3,10 +3,10 @@ import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Markdown } from '@codaco/ui/lib/components/Fields';
-import { getColorForType } from '@app/config/variables';
-import { getVariablesForSubject } from '@selectors/codebook';
-import withSubject from '@components/enhancers/withSubject';
-import Badge from '@components/Badge';
+import { getColorForType } from '~/app/config/variables';
+import { getVariablesForSubject } from '~/selectors/codebook';
+import withSubject from '~/components/enhancers/withSubject';
+import Badge from '~/components/Badge';
 
 const FieldPreview = ({
   variable,

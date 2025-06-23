@@ -5,8 +5,8 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { find, get } from 'lodash';
-import timelineImages from '@app/images/timeline';
-import Tag from '@components/Tag';
+import timelineImages from '~/app/images/timeline';
+import Tag from '~/components/Tag';
 import { INTERFACE_TYPES, TAG_COLORS } from './interfaceOptions';
 
 const getTimelineImage = (type) => get(timelineImages, type);

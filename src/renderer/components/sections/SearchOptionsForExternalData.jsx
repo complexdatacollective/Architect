@@ -4,12 +4,12 @@ import { compose } from 'recompose';
 import { useSelector, useDispatch } from 'react-redux';
 import { change, formValueSelector } from 'redux-form';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import Tip from '@components/Tip';
-import { Section } from '@components/EditorLayout';
-import ValidatedField from '@components/Form/ValidatedField';
-import withDisabledAssetRequired from '@components/enhancers/withDisabledAssetRequired';
-import withMapFormToProps from '@components/enhancers/withMapFormToProps';
-import useVariablesFromExternalData from '@hooks/useVariablesFromExternalData';
+import Tip from '~/components/Tip';
+import { Section } from '~/components/EditorLayout';
+import ValidatedField from '~/components/Form/ValidatedField';
+import withDisabledAssetRequired from '~/components/enhancers/withDisabledAssetRequired';
+import withMapFormToProps from '~/components/enhancers/withMapFormToProps';
+import useVariablesFromExternalData from '~/hooks/useVariablesFromExternalData';
 
 const SearchOptions = ({
   dataSource,

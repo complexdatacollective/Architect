@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 import { omit } from 'lodash';
-import { actionCreators as stageActions } from '@modules/protocol/stages';
+import { actionCreators as stageActions } from '~/modules/protocol/stages';
 
 const mapDispatchToProps = {
   updateStage: stageActions.updateStage,

@@ -6,7 +6,7 @@ import cx from 'classnames';
 import { Button } from '@codaco/ui';
 import { motion } from 'framer-motion';
 import DeleteIcon from '@material-ui/icons/DeleteRounded';
-import getAbsoluteBoundingRect from '@app/utils/getAbsoluteBoundingRect';
+import getAbsoluteBoundingRect from '~/app/utils/getAbsoluteBoundingRect';
 import EditStageButton from './EditStageButton';
 
 const findPos = (node) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import withAssetUrl from '@components/Assets/withAssetUrl';
+import withAssetUrl from '~/components/Assets/withAssetUrl';
 
 const ImageThumbnail = ({ url, contain, ...props }) => {
   const className = cx(

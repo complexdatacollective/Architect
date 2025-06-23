@@ -2,8 +2,8 @@ import React, { useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
-import { getScreensStack } from '@selectors/ui';
-import { actionCreators as uiActions } from '@modules/ui';
+import { getScreensStack } from '~/selectors/ui';
+import { actionCreators as uiActions } from '~/modules/ui';
 import { getScreenComponent } from './screenIndex';
 
 export const screenVariants = {

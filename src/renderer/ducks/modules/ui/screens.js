@@ -1,4 +1,4 @@
-import { actionTypes as sessionActionTypes } from '@modules/session';
+import { actionTypes as sessionActionTypes } from '~/modules/session';
 
 const OPEN_SCREEN = 'UI/OPEN_SCREEN';
 const UPDATE_SCREEN = 'UI/UPDATE_SCREEN';

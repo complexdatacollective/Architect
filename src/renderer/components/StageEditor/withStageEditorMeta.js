@@ -5,7 +5,7 @@ import {
   getFormValues,
 } from 'redux-form';
 import { has } from 'lodash';
-import { getStage, getStageIndex } from '@selectors/protocol';
+import { getStage, getStageIndex } from '~/selectors/protocol';
 import { getInterface } from './Interfaces';
 import { formName } from './configuration';
 

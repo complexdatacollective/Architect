@@ -9,7 +9,7 @@ import { isPlainObject, isArray } from 'lodash';
 import { connect } from 'react-redux';
 import { arrayMove, arrayRemove } from 'redux-form';
 import { SortableContainer } from 'react-sortable-hoc';
-import { actionCreators as dialogActions } from '@modules/dialogs';
+import { actionCreators as dialogActions } from '~/modules/dialogs';
 import ListItem from './ListItem';
 
 const OrderedList = memo((props) => {

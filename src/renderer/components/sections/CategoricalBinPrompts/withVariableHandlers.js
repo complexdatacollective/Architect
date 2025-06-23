@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { change, getFormValues } from 'redux-form';
 import { compose, withHandlers } from 'recompose';
-import { actionCreators as codebookActions } from '@modules/protocol/codebook';
+import { actionCreators as codebookActions } from '~/modules/protocol/codebook';
 
 const mapStateToProps = (state, props) => ({
   formValues: getFormValues(props.form)(state),

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FieldArray } from 'redux-form';
-import useValidate from '@app/hooks/useValidate';
+import useValidate from '~/app/hooks/useValidate';
 
 const ValidatedFieldArray = ({
   validation,

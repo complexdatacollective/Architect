@@ -4,7 +4,7 @@ import React, {
 import PropTypes from 'prop-types';
 import { Icon, Scroller } from '@codaco/ui';
 import cx from 'classnames';
-import { uniqueByList, allowedVariableName } from '@app/utils/validations';
+import { uniqueByList, allowedVariableName } from '~/app/utils/validations';
 import Search from '@codaco/ui/lib/components/Fields/Search';
 import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';

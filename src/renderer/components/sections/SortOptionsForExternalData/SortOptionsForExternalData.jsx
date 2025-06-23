@@ -2,13 +2,13 @@ import React from 'react';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import { Text } from '@codaco/ui/lib/components/Fields';
-import { Section, Row } from '@components/EditorLayout';
+import { Section, Row } from '~/components/EditorLayout';
 import { useDispatch, useSelector } from 'react-redux';
 import { change, formValueSelector } from 'redux-form';
-import MultiSelect from '@components/Form/MultiSelect';
-import withMapFormToProps from '@components/enhancers/withMapFormToProps';
-import withDisabledAssetRequired from '@components/enhancers/withDisabledAssetRequired';
-import useVariablesFromExternalData from '@hooks/useVariablesFromExternalData';
+import MultiSelect from '~/components/Form/MultiSelect';
+import withMapFormToProps from '~/components/enhancers/withMapFormToProps';
+import withDisabledAssetRequired from '~/components/enhancers/withDisabledAssetRequired';
+import useVariablesFromExternalData from '~/hooks/useVariablesFromExternalData';
 import getVariableOptionsGetter from './getVariableOptionsGetter';
 import getSortOrderOptionGetter from './getSortOrderOptionGetter';
 

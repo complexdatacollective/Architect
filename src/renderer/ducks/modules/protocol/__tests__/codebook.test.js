@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { set } from 'lodash';
-import { getThunkMocks } from '@app/__tests__/helpers';
+import { getThunkMocks } from '~/app/__tests__/helpers';
 import { test as stageActions } from '../stages';
 import reducer, { actionTypes, actionCreators, test } from '../codebook';
 import testState from '../../../../__tests__/testState.json';

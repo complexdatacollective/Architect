@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   omit, get, has, isEmpty, find,
 } from 'lodash';
-import prune from '@app/utils/prune';
+import prune from '~/utils/prune';
 import { getAllVariableUUIDsByEntity, getVariablesForSubject } from '../../../selectors/codebook';
 import { makeGetUsageForType } from '../../../selectors/usage';
 import { makeGetIsUsed } from '../../../selectors/codebook/isUsed';

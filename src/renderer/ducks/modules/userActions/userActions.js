@@ -1,35 +1,31 @@
 /* eslint-disable import/prefer-default-export */
-import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
-import { remote } from 'electron';
-import { remove, rename, outputFile } from 'fs-extra';
 import axios from 'axios';
-import { APP_SCHEMA_VERSION, SAMPLE_PROTOCOL_URL } from '@app/config';
-import * as netcanvasFile from '@app/utils/netcanvasFile';
-import validateProtocol from '@app/utils/validateProtocol';
+import { APP_SCHEMA_VERSION, SAMPLE_PROTOCOL_URL } from '~/app/config';
+import { netcanvasFile, path, fileSystem, app } from '~/app/api';
+import validateProtocol from '~/utils/validateProtocol';
 import { getMigrationNotes } from '@codaco/protocol-validation';
-import { getHasUnsavedChanges } from '@selectors/session';
-import { getProtocol } from '@selectors/protocol';
+import { getHasUnsavedChanges } from '~/selectors/session';
+import { getProtocol } from '~/selectors/protocol';
 import {
   openDialog,
   saveCopyDialog,
   saveDialog,
   createDialogOptions,
-} from '@app/utils/dialogs';
-import { UnsavedChanges } from '@components/Dialogs';
-import { actionCreators as sessionActions, actionTypes as sessionActionTypes } from '@modules/session';
-import { actionCreators as dialogsActions } from '@modules/dialogs';
-import { actionCreators as toastActions } from '@modules/toasts';
+} from '~/app/utils/dialogs';
+import { UnsavedChanges } from '~/components/Dialogs';
+import { actionCreators as sessionActions, actionTypes as sessionActionTypes } from '~/modules/session';
+import { actionCreators as dialogsActions } from '~/modules/dialogs';
+import { actionCreators as toastActions } from '~/modules/toasts';
 import {
   validationErrorDialog,
   importErrorDialog,
   appUpgradeRequiredDialog,
   mayUpgradeProtocolDialog,
   netcanvasFileErrorHandler,
-} from '@modules/userActions/dialogs';
-import { createLock } from '@modules/ui/status';
-import CancellationError from '@utils/cancellationError';
-import { getNewFileName } from '@utils/netcanvasFile/netcanvasFile';
+} from '~/modules/userActions/dialogs';
+import { createLock } from '~/modules/ui/status';
+import CancellationError from '~/utils/cancellationError';
 import { createImportToast, updateDownloadProgress } from './userActionToasts';
 
 const protocolsLock = createLock('PROTOCOLS');
@@ -78,9 +74,9 @@ const upgradeProtocol = (filePath, protocolSchemaVersion) => (dispatch) => {
     .then((confirm) => {
       if (!confirm) { return Promise.resolve(null); }
 
-      return getNewFileName(filePath)
-        .then(({ canceled, filePath: newFilePath }) => {
-          if (canceled || !newFilePath) { return Promise.resolve(null); }
+      return netcanvasFile.getNewFileName(filePath)
+        .then((newFilePath) => {
+          if (!newFilePath) { return Promise.resolve(null); }
 
           return netcanvasFile.migrateNetcanvas(filePath, newFilePath, APP_SCHEMA_VERSION)
             .then((migratedFilePath) => dispatch(validateAndOpenNetcanvas(migratedFilePath)));
@@ -200,12 +196,10 @@ const importSampleProtocol = () => (dispatch) => {
 
     if (tempFilePath) {
       // Cleanup
-      try {
-        remove(tempFilePath);
-      } catch (e) {
+      fileSystem.remove(tempFilePath).catch((e) => {
         // eslint-disable-next-line no-console
         console.error('Error removing temp file path: ', e);
-      }
+      });
     }
   };
 
@@ -260,12 +254,13 @@ const importSampleProtocol = () => (dispatch) => {
     }))
     .then((response) => response.data)
     .then(checkIfUserCancelled)
-    .then((data) => {
-      tempFilePath = path.join(remote.app.getPath('temp'), 'architect', importUUID);
-      return outputFile(tempFilePath, Buffer.from(data));
+    .then(async (data) => {
+      const tempDir = await app.getTempPath();
+      tempFilePath = await path.join(tempDir, 'architect', importUUID);
+      return fileSystem.outputFile(tempFilePath, Buffer.from(data));
     })
     .then(checkIfUserCancelled)
-    .then(() => rename(tempFilePath, userFilePath))
+    .then(() => fileSystem.rename(tempFilePath, userFilePath))
     .then(checkIfUserCancelled)
     .then(() => handleCleanup())
     .then(() => dispatch(openNetcanvas(userFilePath)))

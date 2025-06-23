@@ -1,6 +1,6 @@
 import path from 'path';
 import { get } from 'lodash';
-import { getNetworkVariables, getGeoJsonVariables } from '@app/utils/protocols/assetTools';
+import { getNetworkVariables, getGeoJsonVariables } from '~/app/utils/protocols/assetTools';
 import { getWorkingPath } from './session';
 import { getAssetManifest } from './protocol';
 

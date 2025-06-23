@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import { Section, Row } from '@components/EditorLayout';
+import { Section, Row } from '~/components/EditorLayout';
 import { change, formValueSelector } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux';
 import DetachedField from '../DetachedField';

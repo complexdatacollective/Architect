@@ -5,13 +5,13 @@ import * as Fields from '@codaco/ui/lib/components/Fields';
 
 import { createPortal } from 'react-dom';
 import Button from '@codaco/ui/lib/components/Button';
-import { Layout, Section } from '@components/EditorLayout';
-import ControlBar from '@components/ControlBar';
-import Screen from '@components/Screen/Screen';
-import { screenVariants } from '@components/Screens/Screens';
-import ValidatedField from '@components/Form/ValidatedField';
-import Assets from '@components/AssetBrowser/Assets';
-import useExternalDataPreview from '@components/AssetBrowser/useExternalDataPreview';
+import { Layout, Section } from '~/components/EditorLayout';
+import ControlBar from '~/components/ControlBar';
+import Screen from '~/components/Screen/Screen';
+import { screenVariants } from '~/components/Screens/Screens';
+import ValidatedField from '~/components/Form/ValidatedField';
+import Assets from '~/components/AssetBrowser/Assets';
+import useExternalDataPreview from '~/components/AssetBrowser/useExternalDataPreview';
 
 import { useDispatch } from 'react-redux';
 

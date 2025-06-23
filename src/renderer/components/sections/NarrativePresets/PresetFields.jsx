@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { change, Field, formValueSelector } from 'redux-form';
 import Text from '@codaco/ui/lib/components/Fields/Text';
 import CheckboxGroup from '@codaco/ui/lib/components/Fields/CheckboxGroup';
-import ValidatedField from '@components/Form/ValidatedField';
+import ValidatedField from '~/components/Form/ValidatedField';
 import Section from '../../EditorLayout/Section';
 import Row from '../../EditorLayout/Row';
 import withPresetProps from './withPresetProps';

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withHandlers, compose } from 'recompose';
-import { actionCreators as codebookActions } from '@modules/protocol/codebook';
+import { actionCreators as codebookActions } from '~/modules/protocol/codebook';
 
 const mapDispatchToProps = {
   createEdge: codebookActions.createEdge,

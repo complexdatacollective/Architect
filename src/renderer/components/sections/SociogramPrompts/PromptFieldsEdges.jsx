@@ -5,7 +5,7 @@ import { union } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { change, Field, formValueSelector } from 'redux-form';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import { Section, Row } from '@components/EditorLayout';
+import { Section, Row } from '~/components/EditorLayout';
 import Tip from '../../Tip';
 import { getEdgeFilters, getEdgesForSubject } from './selectors';
 import getEdgeFilteringWarning from './utils';

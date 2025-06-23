@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
 import { compose, defaultProps } from 'recompose';
-import { getValidations } from '@app/utils/validations';
+import { getValidations } from '~/app/utils/validations';
 import IssueAnchor from './IssueAnchor';
 
 const getValue = (eventOrValue) => {

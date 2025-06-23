@@ -1,15 +1,15 @@
-import PromptText from '@components/sections/PromptText';
+import PromptText from '~/components/sections/PromptText';
 import React from 'react';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 
-import { ValidatedField } from '@components/Form';
-import { Section, Row } from '@components/EditorLayout';
+import { ValidatedField } from '~/components/Form';
+import { Section, Row } from '~/components/EditorLayout';
 import NewVariableWindow, {
   useNewVariableWindowState,
-} from '@components/NewVariableWindow';
-import withVariableHandlers from '@components/sections/CategoricalBinPrompts/withVariableHandlers'; // TODO: should these be moved somewhere more general?
-import withVariableOptions from '@components/sections/CategoricalBinPrompts/withVariableOptions';
+} from '~/components/NewVariableWindow';
+import withVariableHandlers from '~/components/sections/CategoricalBinPrompts/withVariableHandlers'; // TODO: should these be moved somewhere more general?
+import withVariableOptions from '~/components/sections/CategoricalBinPrompts/withVariableOptions';
 import VariablePicker from '../../Form/Fields/VariablePicker/VariablePicker';
 
 const VARIABLE_TYPE = 'location';

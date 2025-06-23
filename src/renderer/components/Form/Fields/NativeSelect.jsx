@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Icon from '@codaco/ui/lib/components/Icon';
-import { getValidator } from '@app/utils/validations';
+import { getValidator } from '~/app/utils/validations';
 import { Text } from '@codaco/ui/lib/components/Fields';
 import { Button } from '@codaco/ui';
 import { sortBy } from 'lodash';

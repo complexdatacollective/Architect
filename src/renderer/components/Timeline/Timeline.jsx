@@ -7,10 +7,10 @@ import { compose, withStateHandlers, defaultProps } from 'recompose';
 import { SortableContainer } from 'react-sortable-hoc';
 import cx from 'classnames';
 import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
-import { getStageList } from '@selectors/protocol';
-import { actionCreators as stageActions } from '@modules/protocol/stages';
-import { actionCreators as dialogsActions } from '@modules/dialogs';
-import { actionCreators as uiActions } from '@modules/ui';
+import { getStageList } from '~/selectors/protocol';
+import { actionCreators as stageActions } from '~/modules/protocol/stages';
+import { actionCreators as dialogsActions } from '~/modules/dialogs';
+import { actionCreators as uiActions } from '~/modules/ui';
 import Stage from './Stage';
 import InsertButton from './InsertButton';
 

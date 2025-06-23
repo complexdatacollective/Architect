@@ -1,0 +1,103 @@
+
+> network-canvas-architect@7.0.0-alpha.3 prebuild
+> electron-vite build
+
+vite v6.3.5 building SSR bundle for production...
+transforming...
+"Menu" is imported from external module "electron" but never used in "node_modules/@electron-toolkit/utils/dist/index.mjs", "src/main/ipc/legacyHandlers.js", "src/main/ipc/appHandlers.js", "src/main/ipc/dialogHandlers.js", "src/main/ipc/protocolHandlers.js", "src/main/ipc/fileHandlers.js", "src/main/ipc/csvHandlers.js" and "src/main/index.js".
+✓ 450 modules transformed.
+rendering chunks...
+out/main/index.js  1,224.31 kB
+✓ built in 1.13s
+vite v6.3.5 building SSR bundle for production...
+transforming...
+✓ 1 modules transformed.
+rendering chunks...
+out/preload/index.js  5.15 kB
+✓ built in 10ms
+vite v6.3.5 building for production...
+transforming...
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+6 │ @import '~@codaco/ui/lib/styles/all';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/renderer/styles/main.scss 6:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+7 │ @import './hotfix';
+  │         ^^^^^^^^^^
+  ╵
+    src/renderer/styles/main.scss 7:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+8 │ @import './ui';
+  │         ^^^^^^
+  ╵
+    src/renderer/styles/main.scss 8:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+9 │ @import './theme';
+  │         ^^^^^^^^^
+  ╵
+    src/renderer/styles/main.scss 9:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+10 │ @import './helpers';
+   │         ^^^^^^^^^^^
+   ╵
+    src/renderer/styles/main.scss 10:9  root stylesheet
+
+✓ 6 modules transformed.
+✗ Build failed in 133ms
+error during build:
+[vite:css] [sass] Can't find stylesheet to import.
+  ╷
+6 │ @import '~@codaco/ui/lib/styles/all';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/renderer/styles/main.scss 6:9  root stylesheet
+file: /Users/jmh629/Projects/Architect/src/renderer/styles/main.scss
+
+[sass] Can't find stylesheet to import.
+  ╷
+6 │ @import '~@codaco/ui/lib/styles/all';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/renderer/styles/main.scss 6:9  root stylesheet
+
+Error: Can't find stylesheet to import.
+  ╷
+6 │ @import '~@codaco/ui/lib/styles/all';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/renderer/styles/main.scss 6:9  root stylesheet
+    at Object.wrapException (/Users/jmh629/Projects/Architect/node_modules/sass/sass.dart.js:2302:47)
+    at /Users/jmh629/Projects/Architect/node_modules/sass/sass.dart.js:87480:25
+    at _wrapJsFunctionForAsync_closure.$protected (/Users/jmh629/Projects/Architect/node_modules/sass/sass.dart.js:4921:15)
+    at _wrapJsFunctionForAsync_closure.call$2 (/Users/jmh629/Projects/Architect/node_modules/sass/sass.dart.js:38012:12)
+    at _awaitOnObject_closure.call$1 (/Users/jmh629/Projects/Architect/node_modules/sass/sass.dart.js:38000:32)
+    at Object._rootRunUnary (/Users/jmh629/Projects/Architect/node_modules/sass/sass.dart.js:5339:18)
+    at StaticClosure.<anonymous> (/Users/jmh629/Projects/Architect/node_modules/sass/sass.dart.js:124453:16)
+    at _CustomZone.runUnary$2$2 (/Users/jmh629/Projects/Architect/node_modules/sass/sass.dart.js:39444:39)
+    at _Future__propagateToListeners_handleValueCallback.call$0 (/Users/jmh629/Projects/Architect/node_modules/sass/sass.dart.js:38502:51)
+    at Object._Future__propagateToListeners (/Users/jmh629/Projects/Architect/node_modules/sass/sass.dart.js:5131:93)

@@ -3,7 +3,7 @@
 import React from 'react';
 import { withProps } from 'recompose';
 import PropTypes from 'prop-types';
-import DetachedField from '@components/DetachedField';
+import DetachedField from '~/components/DetachedField';
 import {
   Text,
   Toggle,

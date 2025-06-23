@@ -7,8 +7,8 @@ import { SortableElement, SortableHandle } from 'react-sortable-hoc';
 import { Icon } from '@codaco/ui';
 import TextField from '@codaco/ui/lib/components/Fields/Text';
 import RichTextField from '@codaco/ui/lib/components/Fields/RichText';
-import ValidatedField from '@components/Form/ValidatedField';
-import { actionCreators as dialogsActions } from '@modules/dialogs';
+import ValidatedField from '~/components/Form/ValidatedField';
+import { actionCreators as dialogsActions } from '~/modules/dialogs';
 
 const isNumberLike = (value) =>
   parseInt(value, 10) == value; // eslint-disable-line

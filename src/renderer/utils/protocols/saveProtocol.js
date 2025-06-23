@@ -1,7 +1,6 @@
-import path from 'path';
 import log from 'electron-log';
-import { writeFile } from 'fs-extra';
-import pruneAssets from '@app/utils/protocols/pruneAssets';
+import { path, fileSystem } from '~/app/api';
+import pruneAssets from '~/app/utils/protocols/pruneAssets';
 
 const getStringifiedProtocol = (protocol) => new Promise((resolve, reject) => {
   try {
@@ -18,15 +17,15 @@ const getStringifiedProtocol = (protocol) => new Promise((resolve, reject) => {
  * @param {string} workingPath - working path in application /tmp/ dir
  * @param {object} protocol - The protocol object.
  */
-const saveProtocol = (workingPath, protocol) => {
+const saveProtocol = async (workingPath, protocol) => {
   // save json to temp dir
-  const destinationPath = path.join(workingPath, 'protocol.json');
+  const destinationPath = await path.join(workingPath, 'protocol.json');
   log.info(`Save protocol to ${destinationPath}`);
 
-  return getStringifiedProtocol(protocol)
-    .then((protocolData) => writeFile(destinationPath, protocolData))
-    .then(() => pruneAssets(workingPath))
-    .then(() => destinationPath);
+  const protocolData = await getStringifiedProtocol(protocol);
+  await fileSystem.writeFile(destinationPath, protocolData);
+  await pruneAssets(workingPath);
+  return destinationPath;
 };
 
 export default saveProtocol;

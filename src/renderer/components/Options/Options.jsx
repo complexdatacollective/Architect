@@ -5,7 +5,7 @@ import { compose, defaultProps, withHandlers } from 'recompose';
 import { SortableContainer } from 'react-sortable-hoc';
 import { FieldArray } from 'redux-form';
 import { Button } from '@codaco/ui';
-import FieldError from '@components/Form/FieldError';
+import FieldError from '~/components/Form/FieldError';
 import Option from './Option';
 
 const minTwoOptions = (value) => (

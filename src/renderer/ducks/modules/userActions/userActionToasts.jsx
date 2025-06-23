@@ -1,6 +1,6 @@
 import React from 'react';
 import { Spinner, ProgressBar } from '@codaco/ui';
-import { actionCreators as toastActions } from '@modules/toasts';
+import { actionCreators as toastActions } from '~/modules/toasts';
 
 export const createImportToast = (toastUUID, handleCancel) => (dispatch) => {
   // Create a toast to show the status as it updates

@@ -5,7 +5,7 @@ import { submit } from 'redux-form';
 import { AnimatePresence, motion } from 'framer-motion';
 import Button from '@codaco/ui/lib/components/Button';
 import { createPortal } from 'react-dom';
-import { Layout } from '@components/EditorLayout';
+import { Layout } from '~/components/EditorLayout';
 import Form from './Form';
 
 const screenVariants = {

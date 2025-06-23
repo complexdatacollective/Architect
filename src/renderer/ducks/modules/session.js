@@ -1,8 +1,8 @@
-import * as netcanvasFile from '@app/utils/netcanvasFile';
-import { getProtocol } from '@selectors/protocol';
-import validateProtocol from '@app/utils/validateProtocol';
-import { actionCreators as timelineActions } from '@app/ducks/middleware/timeline';
-import { actionCreators as previewActions } from '@modules/preview';
+import { netcanvasFile } from '~/app/api';
+import { getProtocol } from '~/selectors/protocol';
+import validateProtocol from '~/utils/validateProtocol';
+import { actionCreators as timelineActions } from '~/app/ducks/middleware/timeline';
+import { actionCreators as previewActions } from '~/modules/preview';
 
 const RESET_SESSION = 'SESSION/RESET';
 const PROTOCOL_CHANGED = 'SESSION/PROTOCOL_CHANGED';

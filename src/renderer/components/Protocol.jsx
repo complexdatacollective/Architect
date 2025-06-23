@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { motion, useElementScroll } from 'framer-motion';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { getHasUnsavedChanges } from '@selectors/session';
-import { selectors as statusSelectors } from '@modules/ui/status';
-import { actionCreators as dialogActions } from '@modules/dialogs';
-import { actionLocks as protocolsLocks } from '@modules/userActions';
-import Overview from '@components/Overview';
-import Timeline from '@components/Timeline';
-import ProtocolControlBar from '@components/ProtocolControlBar';
+import { getHasUnsavedChanges } from '~/selectors/session';
+import { selectors as statusSelectors } from '~/modules/ui/status';
+import { actionCreators as dialogActions } from '~/modules/dialogs';
+import { actionLocks as protocolsLocks } from '~/modules/userActions';
+import Overview from '~/components/Overview';
+import Timeline from '~/components/Timeline';
+import ProtocolControlBar from '~/components/ProtocolControlBar';
 
 const Protocol = ({
   isLoading,

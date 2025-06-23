@@ -4,7 +4,7 @@ import cx from 'classnames';
 import PreviewIcon from '@material-ui/icons/Visibility';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DownloadIcon from '@material-ui/icons/GetApp';
-import * as Thumbnails from '@components/Thumbnail';
+import * as Thumbnails from '~/components/Thumbnail';
 
 const FallBackAssetComponent = () => (
   <div>No preview component available for this asset type.</div>

@@ -1,9 +1,9 @@
 /* eslint-env jest */
 
 import fse from 'fs-extra';
-import { pruneProtocol } from '@app/utils/prune';
-import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
-import { archive, extract } from '@app/utils/protocols/lib/archive';
+import { pruneProtocol } from '~/app/utils/prune';
+import pruneProtocolAssets from '~/app/utils/pruneProtocolAssets';
+import { archive, extract } from '~/app/utils/protocols/lib/archive';
 import {
   readProtocol,
   deployNetcanvas,
@@ -17,10 +17,10 @@ import { errors } from '../errors';
 import { mockProtocolPath } from './helpers';
 
 jest.mock('fs-extra');
-jest.mock('@app/utils/protocols/lib/archive');
+jest.mock('~/app/utils/protocols/lib/archive');
 jest.mock('@codaco/protocol-validation');
-jest.mock('@app/utils/pruneProtocolAssets');
-jest.mock('@app/utils/prune');
+jest.mock('~/app/utils/pruneProtocolAssets');
+jest.mock('~/app/utils/prune');
 
 describe('netcanvasFile/lib', () => {
   beforeEach(() => {

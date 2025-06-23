@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import DataSource from '@components/Form/Fields/DataSource';
-import ValidatedField from '@components/Form/ValidatedField';
-import NetworkFilter from '@components/sections/fields/NetworkFilter';
+import DataSource from '~/components/Form/Fields/DataSource';
+import ValidatedField from '~/components/Form/ValidatedField';
+import NetworkFilter from '~/components/sections/fields/NetworkFilter';
 import Section from '../../EditorLayout/Section';
 
 const NodePanel = ({ fieldId, form }) => (

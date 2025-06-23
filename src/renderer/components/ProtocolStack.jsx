@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { Flipped } from 'react-flip-toolkit';
-import { actionCreators as userActions } from '@modules/userActions';
-import protocolCover from '@app/images/NC-File.svg';
+import { actionCreators as userActions } from '~/modules/userActions';
+import protocolCover from '~/app/images/NC-File.svg';
 
 const getFilename = (path = '') => get(path.match(/([^/\\]+)$/), 1, path);
 

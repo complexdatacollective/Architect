@@ -1,8 +1,8 @@
 import React from 'react';
 import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
-import { Section, Row } from '@components/EditorLayout';
-import Tip from '@components/Tip';
-import ValidatedField from '@components/Form/ValidatedField';
+import { Section, Row } from '~/components/EditorLayout';
+import Tip from '~/components/Tip';
+import ValidatedField from '~/components/Form/ValidatedField';
 import EntitySelectField from '../fields/EntitySelectField/EntitySelectField';
 
 const PromptFields = () => (

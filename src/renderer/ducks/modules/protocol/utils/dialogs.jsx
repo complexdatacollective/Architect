@@ -1,6 +1,6 @@
 import React from 'react'; import path from 'path';
-import { actionCreators as dialogActions } from '@modules/dialogs';
-import ExternalLink from '@components/ExternalLink';
+import { actionCreators as dialogActions } from '~/modules/dialogs';
+import ExternalLink from '~/components/ExternalLink';
 import { Button } from '@codaco/ui';
 
 const genericAssetMessage = (

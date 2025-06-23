@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import withAssetMeta from '@components/Assets/withAssetMeta';
+import withAssetMeta from '~/components/Assets/withAssetMeta';
 import Icon from '@codaco/ui/lib/components/Icon';
 
 const GeoJSONThumbnail = ({ id, meta }) => (

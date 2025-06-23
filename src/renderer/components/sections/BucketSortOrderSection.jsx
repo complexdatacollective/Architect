@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { change, formValueSelector } from 'redux-form';
-import MultiSelect from '@components/Form/MultiSelect';
-import { Section, Row } from '@components/EditorLayout';
-import Tip from '@components/Tip';
+import MultiSelect from '~/components/Form/MultiSelect';
+import { Section, Row } from '~/components/EditorLayout';
+import Tip from '~/components/Tip';
 
 const BucketSortOrderSection = ({
   form,

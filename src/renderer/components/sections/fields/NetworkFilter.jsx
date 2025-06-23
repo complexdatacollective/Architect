@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import { get } from 'lodash';
 import { Field, change, getFormValues } from 'redux-form';
 import { compose, defaultProps } from 'recompose';
-import { actionCreators as dialogActions } from '@modules/dialogs';
+import { actionCreators as dialogActions } from '~/modules/dialogs';
 import {
   Filter as FilterQuery,
   withFieldConnector,
   withStoreConnector,
   ruleValidator,
-} from '@components/Query';
+} from '~/components/Query';
 import { handleFilterDeactivate } from '../Filter';
 import Section from '../../EditorLayout/Section';
 

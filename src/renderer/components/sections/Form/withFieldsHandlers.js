@@ -11,9 +11,9 @@ import {
   getComponentsForType,
   VARIABLE_TYPES_WITH_COMPONENTS,
   INPUT_OPTIONS,
-} from '@app/config/variables';
-import { actionCreators as codebookActions } from '@modules/protocol/codebook';
-import { getVariablesForSubject, getVariableOptionsForSubject } from '@selectors/codebook';
+} from '~/app/config/variables';
+import { actionCreators as codebookActions } from '~/modules/protocol/codebook';
+import { getVariablesForSubject, getVariableOptionsForSubject } from '~/selectors/codebook';
 
 const mapStateToProps = (state, { form, entity, type }) => {
   const formSelector = formValueSelector(form);

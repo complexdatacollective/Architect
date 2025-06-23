@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import cx from 'classnames';
 import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
-import Stackable from '@components/Stackable';
-import window from '@app/behaviours/window';
+import Stackable from '~/components/Stackable';
+import window from '~/app/behaviours/window';
 
 const Window = ({
   show,

@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 import { get, compact, omit } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
-import prune from '@app/utils/prune';
-import { getStage } from '@selectors/protocol';
+import prune from '~/utils/prune';
+import { getStage } from '~/selectors/protocol';
 import { saveableChange } from '../session';
 
 import { getNodeTypes } from '../../../selectors/codebook';

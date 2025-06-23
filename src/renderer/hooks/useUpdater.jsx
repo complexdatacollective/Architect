@@ -5,7 +5,7 @@ import { Button } from '@codaco/ui';
 import { find } from 'lodash';
 import compareVersions from 'compare-versions';
 import { Markdown } from '@codaco/ui/lib/components/Fields';
-import { isMacOS, isWindows, isLinux } from '@app/utils/platform';
+import { isMacOS, isWindows, isLinux } from '~/utils/platform';
 import { remote } from 'electron';
 import { actionCreators as toastActions } from '../ducks/modules/toasts';
 import { actionCreators as dialogActions } from '../ducks/modules/dialogs';

@@ -8,9 +8,9 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import { has } from 'lodash';
 import { Button } from '@codaco/ui';
-import { Section } from '@components/EditorLayout';
-import OrderedList from '@components/OrderedList';
-import { actionCreators as dialogActions } from '@modules/dialogs';
+import { Section } from '~/components/EditorLayout';
+import OrderedList from '~/components/OrderedList';
+import { actionCreators as dialogActions } from '~/modules/dialogs';
 import NodePanel from './NodePanel';
 import IssueAnchor from '../../IssueAnchor';
 

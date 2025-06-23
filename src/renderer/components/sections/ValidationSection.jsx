@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { change, formValueSelector } from 'redux-form';
 import { get, pickBy } from 'lodash';
-import { Section, Row } from '@components/EditorLayout';
-import Validations from '@components/Validations';
+import { Section, Row } from '~/components/EditorLayout';
+import Validations from '~/components/Validations';
 import { getFieldId } from '../../utils/issues';
 
 const ValidationSection = ({

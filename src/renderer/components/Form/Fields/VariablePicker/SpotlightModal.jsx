@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
-import window from '@app/behaviours/window';
+import window from '~/app/behaviours/window';
 
 class SpotlightModal extends Component {
   render() {

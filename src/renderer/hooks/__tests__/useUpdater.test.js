@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import * as Env from '@app/utils/platform';
+import * as Env from '~/utils/platform';
 import { checkEndpoint, getPlatformSpecificContent } from '../useUpdater';
 
 jest.useFakeTimers();

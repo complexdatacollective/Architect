@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@codaco/ui/lib/components';
-import Codebook from '@components/Codebook/Codebook';
-import Screen from '@components/Screen/Screen';
-import { Layout } from '@components/EditorLayout';
+import Codebook from '~/components/Codebook/Codebook';
+import Screen from '~/components/Screen/Screen';
+import { Layout } from '~/components/EditorLayout';
 import ControlBar from '../ControlBar';
 import CollapsableHeader from '../Screen/CollapsableHeader';
 

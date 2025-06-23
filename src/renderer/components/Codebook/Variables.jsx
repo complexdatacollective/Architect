@@ -10,8 +10,8 @@ import {
 } from 'recompose';
 import { get, isString } from 'lodash';
 import cx from 'classnames';
-import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
-import { actionCreators as dialogActionCreators } from '@modules/dialogs';
+import { actionCreators as codebookActionCreators } from '~/modules/protocol/codebook';
+import { actionCreators as dialogActionCreators } from '~/modules/dialogs';
 import UsageColumn from './UsageColumn';
 import ControlsColumn from './ControlsColumn';
 import EditableVariablePill from '../Form/Fields/VariablePicker/VariablePill';

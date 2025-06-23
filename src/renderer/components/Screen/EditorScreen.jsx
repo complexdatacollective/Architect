@@ -6,9 +6,9 @@ import {
   submit, isDirty, startSubmit, isSubmitting,
 } from 'redux-form';
 import { Button } from '@codaco/ui';
-import { actionCreators as timelineActions } from '@app/ducks/middleware/timeline';
-import { actionCreators as dialogActions } from '@modules/dialogs';
-import { hasChanges as timelineHasChanges } from '@selectors/timeline';
+import { actionCreators as timelineActions } from '~/app/ducks/middleware/timeline';
+import { actionCreators as dialogActions } from '~/modules/dialogs';
+import { hasChanges as timelineHasChanges } from '~/selectors/timeline';
 import Screen from './Screen';
 import ControlBar from '../ControlBar';
 

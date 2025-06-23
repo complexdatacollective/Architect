@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { get, first } from 'lodash';
 import { GraphicButton } from '@codaco/ui';
 import { ProtocolCard } from '@codaco/ui/lib/components/Cards';
-import { actionCreators as userActions } from '@modules/userActions';
-import createButtonGraphic from '@app/images/home/create-button.svg';
-import openButtonGraphic from '@app/images/home/open-button.svg';
+import { actionCreators as userActions } from '~/modules/userActions';
+import createButtonGraphic from '~/app/images/home/create-button.svg';
+import openButtonGraphic from '~/app/images/home/open-button.svg';
 import Section from './Section';
 import Group from './Group';
 

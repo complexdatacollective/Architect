@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Section, Row } from '@components/EditorLayout';
+import { Section, Row } from '~/components/EditorLayout';
 import { change } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';

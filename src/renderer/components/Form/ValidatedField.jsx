@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import useValidate from '@app/hooks/useValidate';
+import useValidate from '~/app/hooks/useValidate';
 import IssueAnchor from '../IssueAnchor';
 
 const ValidatedField = ({

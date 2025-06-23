@@ -1,19 +1,33 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, Menu } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import { registerAllIPCHandlers } from './ipc'
+import { setMainWindow } from './ipc/legacyHandlers'
+
+// Keep a global reference of the window object
+let mainWindow = null
 
 function createWindow() {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+  mainWindow = new BrowserWindow({
+    width: 1440,
+    height: 900,
+    minWidth: 1280,
+    minHeight: 800,
     show: false,
-    autoHideMenuBar: true,
+    autoHideMenuBar: false,
+    titleBarStyle: process.platform === 'darwin' ? 'hidden' : 'default',
+    frame: process.platform !== 'darwin',
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,
+      contextIsolation: true,
+      nodeIntegration: false
     }
   })
+
+  // Set the main window reference for legacy handlers
+  setMainWindow(mainWindow)
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
@@ -22,6 +36,20 @@ function createWindow() {
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
     return { action: 'deny' }
+  })
+
+  // Handle window closed
+  mainWindow.on('closed', () => {
+    mainWindow = null
+  })
+
+  // Handle close event for unsaved changes check
+  mainWindow.on('close', (e) => {
+    // Send close confirmation request to renderer
+    if (mainWindow && !mainWindow.isDestroyed()) {
+      e.preventDefault()
+      mainWindow.webContents.send('CONFIRM_CLOSE')
+    }
   })
 
   // HMR for renderer base on electron-vite cli.
@@ -38,7 +66,7 @@ function createWindow() {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   // Set app user model id for windows
-  electronApp.setAppUserModelId('com.electron')
+  electronApp.setAppUserModelId('com.networkcanvas.architect')
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.
@@ -47,8 +75,8 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  // IPC test
-  ipcMain.on('ping', () => console.log('pong'))
+  // Register all IPC handlers
+  registerAllIPCHandlers()
 
   createWindow()
 

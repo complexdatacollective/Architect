@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Spinner } from '@codaco/ui';
-import { selectors as statusSelectors } from '@modules/ui/status';
-import { actionLocks as protocolsLocks } from '@modules/userActions';
+import { selectors as statusSelectors } from '~/modules/ui/status';
+import { actionLocks as protocolsLocks } from '~/modules/userActions';
 
 const variants = {
   hidden: { opacity: 0, transition: { delay: 0.5, duration: 0.5 } },

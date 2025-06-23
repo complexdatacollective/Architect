@@ -1,6 +1,6 @@
 import { map } from 'lodash';
-import { getCodebook } from '@selectors/protocol';
-import { getVariableOptionsForSubject } from '@selectors/codebook';
+import { getCodebook } from '~/selectors/protocol';
+import { getVariableOptionsForSubject } from '~/selectors/codebook';
 
 export const getNarrativeVariables = (state, subject) => {
   const variables = getVariableOptionsForSubject(state, subject);

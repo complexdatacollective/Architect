@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { map, isEmpty, reduce } from 'lodash';
-import { getCodebook } from '@selectors/codebook';
-import { getNodeIndex, getEdgeIndex, utils } from '@selectors/indexes';
-import { getNetworkAssets } from '@selectors/protocol';
+import { getCodebook } from '~/selectors/codebook';
+import { getNodeIndex, getEdgeIndex, utils } from '~/selectors/indexes';
+import { getNetworkAssets } from '~/selectors/protocol';
 import PropTypes from 'prop-types';
 import EntityType from './EntityType';
 import ExternalEntity from './ExternalEntity';

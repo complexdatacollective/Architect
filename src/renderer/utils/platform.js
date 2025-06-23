@@ -1,7 +1,10 @@
 /* eslint-disable import/prefer-default-export */
 
-export const isMacOS = () => process.platform === 'darwin';
+// Platform is exposed synchronously through preload script
+const { platform } = window.electronAPI;
 
-export const isWindows = () => process.platform === 'win32';
+export const isMacOS = () => platform === 'darwin';
 
-export const isLinux = () => process.platform === 'linux';
+export const isWindows = () => platform === 'win32';
+
+export const isLinux = () => platform === 'linux';

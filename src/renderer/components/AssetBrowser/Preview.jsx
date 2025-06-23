@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import cx from 'classnames';
 import { Button } from '@codaco/ui';
-import Window from '@components/Window';
+import Window from '~/components/Window';
 import ContentCopyIcon from '@material-ui/icons/FileCopy';
 import DownloadIcon from '@material-ui/icons/GetApp';
-import withAssetMeta from '@components/Assets/withAssetMeta';
-import withAssetPath from '@components/Assets/withAssetPath';
-import * as Assets from '@components/Assets';
+import withAssetMeta from '~/components/Assets/withAssetMeta';
+import withAssetPath from '~/components/Assets/withAssetPath';
+import * as Assets from '~/components/Assets';
 
 const getRenderer = (meta) => {
   switch (meta.type) {

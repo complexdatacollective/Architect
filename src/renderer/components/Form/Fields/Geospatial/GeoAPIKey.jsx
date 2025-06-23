@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { fieldPropTypes } from 'redux-form';
 import Button from '@codaco/ui/lib/components/Button';
-import APIKeyThumbnail from '@components/Thumbnail/APIKey';
+import APIKeyThumbnail from '~/components/Thumbnail/APIKey';
 import cx from 'classnames';
 import APIKeyBrowser from './APIKeyBrowser';
 

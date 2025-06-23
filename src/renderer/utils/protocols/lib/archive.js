@@ -1,5 +1,5 @@
 import log from 'electron-log';
-import fse from 'fs-extra';
+import { fileSystem } from '~/app/api';
 import decompress from 'decompress';
 import archiver from 'archiver';
 
@@ -26,33 +26,23 @@ const extract = (sourcePath, destinationPath) => decompress(
  * @param {string} destinationPath
  * @return Returns a promise that resolves to (sourcePath, destinationPath)
  */
-const archive = (sourcePath, destinationPath) => new Promise((resolve, reject) => {
+// Note: We'll use the protocol handlers for archive operations
+// since streams are complex to handle over IPC
+const archive = async (sourcePath, destinationPath) => {
   log.debug('archive()', sourcePath, destinationPath);
-  const output = fse.createWriteStream(destinationPath);
-  const zip = archiver('zip', archiveOptions);
-
-  const handleError = (e) => {
-    log.error(e);
-    reject(e);
-  };
-
-  output.on('close', () => {
+  
+  // Use the IPC-based export function instead of direct archiver
+  const { fileSystemAPI } = window;
+  
+  try {
+    await fileSystemAPI.exportNetcanvas(sourcePath, destinationPath);
     log.debug('archive complete');
-    resolve(sourcePath, destinationPath);
-  });
-
-  output.on('warning', handleError);
-  output.on('error', handleError);
-
-  zip.pipe(output);
-
-  zip.on('warning', handleError);
-  zip.on('error', handleError);
-
-  zip.directory(sourcePath, false);
-
-  zip.finalize();
-});
+    return destinationPath;
+  } catch (error) {
+    log.error('Archive failed:', error);
+    throw error;
+  }
+};
 
 export {
   extract,

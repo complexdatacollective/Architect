@@ -1,4 +1,4 @@
-import { remote } from 'electron';
+import { dialog } from '~/app/api';
 
 const defaultOpenDialogOptions = {
   buttonLabel: 'Open',
@@ -39,10 +39,7 @@ const openDialog = (openDialogOptions = {}) => {
     ...openDialogOptions,
   };
 
-  return remote.dialog.showOpenDialog(
-    remote.getCurrentWindow(),
-    options,
-  );
+  return dialog.showOpenDialog(options);
 };
 
 /**
@@ -55,10 +52,7 @@ const saveDialog = (saveDialogOptions = {}) => {
     ...saveDialogOptions,
   };
 
-  return remote.dialog.showSaveDialog(
-    remote.getCurrentWindow(),
-    options,
-  );
+  return dialog.showSaveDialog(options);
 };
 
 const saveCopyDialog = (saveCopyOptions = {}) => {

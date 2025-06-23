@@ -1,7 +1,7 @@
 import { ipcRenderer } from 'electron';
-import { store } from '@app/ducks/store';
-import { getActiveProtocol } from '@selectors/session';
-import { actionCreators as userActions } from '@modules/userActions';
+import { store } from '~/app/ducks/store';
+import { getActiveProtocol } from '~/selectors/session';
+import { actionCreators as userActions } from '~/modules/userActions';
 
 const initFileOpener = () => {
   ipcRenderer.on('OPEN_FILE', (event, protocolPath) => {

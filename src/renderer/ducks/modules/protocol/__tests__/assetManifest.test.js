@@ -1,16 +1,16 @@
 /* eslint-env jest */
 
 import { v4 as uuidv4 } from 'uuid';
-import { getThunkMocks, toHaveDispatched } from '@app/__tests__/helpers';
-import testState from '@app/__tests__/testState.json';
-import { importAsset } from '@app/utils/protocols';
+import { getThunkMocks, toHaveDispatched } from '~/app/__tests__/helpers';
+import testState from '~/app/__tests__/testState.json';
+import { importAsset } from '~/app/utils/protocols';
 import reducer, { actionCreators, test } from '../assetManifest';
 
 expect.extend({
   toHaveDispatched,
 });
 
-jest.mock('@app/utils/protocols');
+jest.mock('~/app/utils/protocols');
 
 describe('protocol/assetManifest', () => {
   describe('reducer', () => {

@@ -4,8 +4,8 @@ import React, {
 import PropTypes from 'prop-types';
 import { ipcRenderer } from 'electron';
 import { compose, defaultProps } from 'recompose';
-import Editor from '@components/Editor';
-import { Layout } from '@components/EditorLayout';
+import Editor from '~/components/Editor';
+import { Layout } from '~/components/EditorLayout';
 import { getInterface } from './Interfaces';
 import CodeView from '../CodeView';
 import withStageEditorHandlers from './withStageEditorHandlers';

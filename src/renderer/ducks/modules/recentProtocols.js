@@ -1,6 +1,6 @@
 import path from 'path';
 import { uniqBy } from 'lodash';
-import { actionTypes as sessionActionTypes } from '@modules/session';
+import { actionTypes as sessionActionTypes } from '~/modules/session';
 
 const initialState = [];
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import { Section } from '@components/EditorLayout';
+import { Section } from '~/components/EditorLayout';
 import { ValidatedField } from '../Form';
 
 const Title = () => (

@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
-import { Section } from '@components/EditorLayout';
+import { Section } from '~/components/EditorLayout';
 import { change, Field, formValueSelector } from 'redux-form';
 import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
-import { actionCreators as dialogActions } from '@modules/dialogs';
+import { actionCreators as dialogActions } from '~/modules/dialogs';
 import { useDispatch, useSelector } from 'react-redux';
 import IssueAnchor from '../IssueAnchor';
 

@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { isArray, isNil } from 'lodash';
-import DetachedField from '@components/DetachedField';
-import NativeSelect from '@components/Form/Fields/NativeSelect';
+import DetachedField from '~/components/DetachedField';
+import NativeSelect from '~/components/Form/Fields/NativeSelect';
 import {
   operatorsWithValue,
   operatorsWithRegExp,

@@ -1,6 +1,6 @@
-import { getCodebook } from '@selectors/protocol';
-import { getVariableOptionsForSubject } from '@selectors/codebook';
-import { asOptions } from '@selectors/utils';
+import { getCodebook } from '~/selectors/protocol';
+import { getVariableOptionsForSubject } from '~/selectors/codebook';
+import { asOptions } from '~/selectors/utils';
 import { formValueSelector } from 'redux-form';
 
 export const getLayoutVariablesForSubject = (state, { entity, type }) => {

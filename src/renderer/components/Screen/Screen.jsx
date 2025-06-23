@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { motion, useElementScroll } from 'framer-motion';
-import { ScreenErrorBoundary } from '@components/Errors';
+import { ScreenErrorBoundary } from '~/components/Errors';
 
 export const ScreenContext = React.createContext({
   scrollY: 0,

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Section, Row } from '@components/EditorLayout';
+import { Section, Row } from '~/components/EditorLayout';
 import { difference, keys, get } from 'lodash';
 import { change, getFormValues } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux';

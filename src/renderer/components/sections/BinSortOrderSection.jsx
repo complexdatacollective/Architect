@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { change, formValueSelector } from 'redux-form';
-import MultiSelect from '@components/Form/MultiSelect';
-import { Section, Row } from '@components/EditorLayout';
+import MultiSelect from '~/components/Form/MultiSelect';
+import { Section, Row } from '~/components/EditorLayout';
 
 const BinSortOrderSection = ({
   form,

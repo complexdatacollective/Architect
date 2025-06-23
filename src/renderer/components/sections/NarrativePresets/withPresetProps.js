@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 import { change, formValueSelector } from 'redux-form';
-import { actionCreators as codebookActions } from '@modules/protocol/codebook';
+import { actionCreators as codebookActions } from '~/modules/protocol/codebook';
 import {
   getNarrativeVariables,
   getEdgesForSubject,

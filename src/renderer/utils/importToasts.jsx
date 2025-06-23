@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProgressBar, Spinner } from '@codaco/ui';
-import { actionCreators as toastActions } from '@modules/toasts';
+import { actionCreators as toastActions } from '~/modules/toasts';
 
 export const showCancellationToast = () => (dispatch) => {
   dispatch(toastActions.addToast({

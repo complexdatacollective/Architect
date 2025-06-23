@@ -1,8 +1,6 @@
-import { remote } from 'electron';
-import fse from 'fs-extra';
-import path from 'path';
-import { APP_SCHEMA_VERSION } from '@app/config';
-import { saveDialog } from '@app/utils/dialogs';
+import { fileSystem, path, app } from '~/app/api';
+import { APP_SCHEMA_VERSION } from '~/app/config';
+import { saveDialog } from '~/app/utils/dialogs';
 import getLocalDirectoryFromArchivePath from './lib/getLocalDirectoryFromArchivePath';
 
 const saveDialogOptions = {
@@ -16,13 +14,13 @@ const saveDialogOptions = {
  * Creates an blank protocol directory at destinationPath, with correct directory structure.
  * @param {string} destinationPath - destination for skeleton protocol.
  */
-const createProtocolWorkingPath = (destinationPath) => new Promise((resolve) => {
-  const appPath = remote.app.getAppPath();
-  const templatePath = path.join(appPath, 'template');
-  fse.copySync(templatePath, destinationPath);
+const createProtocolWorkingPath = async (destinationPath) => {
+  const appPath = await app.getAppPath();
+  const templatePath = await path.join(appPath, 'template');
+  await fileSystem.copy(templatePath, destinationPath);
 
-  const protocolTemplate = fse.readJsonSync(
-    path.join(templatePath, 'protocol.json'),
+  const protocolTemplate = await fileSystem.readJson(
+    await path.join(templatePath, 'protocol.json'),
   );
 
   const protocol = {
@@ -30,15 +28,15 @@ const createProtocolWorkingPath = (destinationPath) => new Promise((resolve) => 
     ...protocolTemplate,
   };
 
-  fse.writeJsonSync(
-    path.join(destinationPath, 'protocol.json'),
+  await fileSystem.writeJson(
+    await path.join(destinationPath, 'protocol.json'),
     protocol,
   );
 
   // TODO: update protocol with version number
 
-  resolve(destinationPath);
-});
+  return destinationPath;
+};
 
 /**
  * Creates a blank protocol in a tempory path

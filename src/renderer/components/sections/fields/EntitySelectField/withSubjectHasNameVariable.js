@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { toPairs } from 'lodash';
-import { getVariablesForSubject } from '@selectors/codebook';
+import { getVariablesForSubject } from '~/selectors/codebook';
 
 const withSubjectNameVariablesState = connect(
   (state) => {

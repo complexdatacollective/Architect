@@ -5,7 +5,7 @@ import {
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import { Section, Row } from '@components/EditorLayout';
+import { Section, Row } from '~/components/EditorLayout';
 import DetachedField from '../../DetachedField';
 import ValidatedField from '../../Form/ValidatedField';
 import Image from '../../Form/Fields/Image';

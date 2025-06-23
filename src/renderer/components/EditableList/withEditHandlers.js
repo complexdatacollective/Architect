@@ -8,8 +8,8 @@ import {
   withHandlers,
 } from 'recompose';
 import { formValueSelector, change } from 'redux-form';
-import { getLocus } from '@selectors/timeline';
-import { actionCreators as timelineActions } from '@app/ducks/middleware/timeline';
+import { getLocus } from '~/selectors/timeline';
+import { actionCreators as timelineActions } from '~/app/ducks/middleware/timeline';
 
 const mapStateToProps = (state, { form, fieldName }) => {
   const items = formValueSelector(form)(state, fieldName);

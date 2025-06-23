@@ -1,23 +1,18 @@
-import React from 'react';
-import {
-  compose,
-  defaultProps,
-  withState,
-} from 'recompose';
-import PropTypes from 'prop-types';
-import { Button } from '@codaco/ui/lib/components';
-import { Section } from '@components/EditorLayout';
-import InlineEditScreen from '@components/InlineEditScreen';
-import { scrollToFirstIssue } from '../../utils/issues';
-import ValidatedFieldArray from '../Form/ValidatedFieldArray';
-import Grid from './Grid';
-import withEditHandlers from './withEditHandlers';
+import React from "react";
+import { compose, defaultProps, withState } from "recompose";
+import PropTypes from "prop-types";
+import { Button } from "@codaco/ui/lib/components";
+import { Section } from "@components/EditorLayout";
+import InlineEditScreen from "@components/InlineEditScreen";
+import { scrollToFirstIssue } from "../../utils/issues";
+import ValidatedFieldArray from "../Form/ValidatedFieldArray";
+import Grid from "./Grid";
+import withEditHandlers from "./withEditHandlers";
 
-const formName = 'editable-list-form';
+const formName = "editable-list-form";
 
-const notEmpty = (value) => (
-  value && value.length > 0 ? undefined : 'You must create at least one item'
-);
+const notEmpty = (value) =>
+  value && value.length > 0 ? undefined : "You must create at least one item";
 
 const handleSubmitFail = (issues) => {
   scrollToFirstIssue(issues);
@@ -51,12 +46,12 @@ const GridManager = ({
 }) => (
   <Section
     title="Items"
-    summary={(
+    summary={
       <p>
-        Add up to four content blocks (depending on size) below.
-        You can resize a content block by dragging the bottom right corner.
+        Add up to four content blocks (depending on size) below. You can resize
+        a content block by dragging the bottom right corner.
       </p>
-    )}
+    }
     disabled={disabled}
     contentId={contentId}
     id={fieldName}
@@ -76,14 +71,13 @@ const GridManager = ({
           {...rest}
         />
       </div>
-      { hasSpace
-        && (
+      {hasSpace && (
         <div className="grid-manager__add">
           <Button onClick={handleAddNew} size="small" icon="add">
             Add new item
           </Button>
         </div>
-        )}
+      )}
     </div>
     <InlineEditScreen
       show={!!editField}
@@ -151,15 +145,15 @@ GridManager.defaultProps = {
 };
 
 const withDefaultFieldName = defaultProps({
-  fieldName: 'items',
+  fieldName: "items",
 });
 
-const withEditingState = withState('editField', 'setEditField', null);
+const withEditingState = withState("editField", "setEditField", null);
 
 export { GridManager };
 
 export default compose(
   withDefaultFieldName,
   withEditingState,
-  withEditHandlers,
+  withEditHandlers
 )(GridManager);

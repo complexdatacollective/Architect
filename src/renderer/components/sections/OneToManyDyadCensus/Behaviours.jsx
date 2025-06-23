@@ -1,4 +1,4 @@
-import { Section, Row } from '@components/EditorLayout';
+import { Section, Row } from '~/components/EditorLayout';
 import React from 'react';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Field } from 'redux-form';

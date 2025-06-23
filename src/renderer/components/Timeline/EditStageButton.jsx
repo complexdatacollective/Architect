@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
-import timelineImages from '@app/images/timeline';
-import filterIcon from '@app/images/timeline/filter-icon.svg';
-import skipLogicIcon from '@app/images/timeline/skip-logic-icon.svg';
+import timelineImages from '~/app/images/timeline';
+import filterIcon from '~/app/images/timeline/filter-icon.svg';
+import skipLogicIcon from '~/app/images/timeline/skip-logic-icon.svg';
 
 const getTimelineImage = (type) => get(timelineImages, type, timelineImages.Default);
 

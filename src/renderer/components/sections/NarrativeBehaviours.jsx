@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormSection, Field } from 'redux-form';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import { Section } from '@components/EditorLayout';
+import { Section } from '~/components/EditorLayout';
 import IssueAnchor from '../IssueAnchor';
 
 const NarrativeBehaviours = () => (

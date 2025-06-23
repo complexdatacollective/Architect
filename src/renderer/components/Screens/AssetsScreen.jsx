@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@codaco/ui/lib/components/Button';
-import Screen from '@components/Screen/Screen';
-import AssetBrowser from '@components/AssetBrowser';
-import Layout from '@components/EditorLayout/Layout';
-import ExternalLink from '@components/ExternalLink';
+import Screen from '~/components/Screen/Screen';
+import AssetBrowser from '~/components/AssetBrowser';
+import Layout from '~/components/EditorLayout/Layout';
+import ExternalLink from '~/components/ExternalLink';
 import ControlBar from '../ControlBar';
 import CollapsableHeader from '../Screen/CollapsableHeader';
 

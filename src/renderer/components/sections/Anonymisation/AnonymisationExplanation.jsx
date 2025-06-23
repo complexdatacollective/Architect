@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import { Section, Row } from '@components/EditorLayout';
+import { Section, Row } from '~/components/EditorLayout';
 import { ValidatedField } from '../../Form';
 
 const AnonymisationExplanation = () => (

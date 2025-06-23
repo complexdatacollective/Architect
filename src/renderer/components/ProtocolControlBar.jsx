@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { UnsavedChanges } from '@components/Dialogs';
+import { UnsavedChanges } from '~/components/Dialogs';
 import { Button, Spinner } from '@codaco/ui';
-import { getHasUnsavedChanges, getIsProtocolValid } from '@selectors/session';
-import { actionCreators as dialogActions } from '@modules/dialogs';
-import { actionCreators as userActions, actionLocks as protocolsLocks } from '@modules/userActions';
-import { actionCreators as sessionActions } from '@modules/session';
-import { selectors as statusSelectors } from '@modules/ui/status';
-import logoutIcon from '@app/images/home/log-out.svg';
-import ControlBar from '@components/ControlBar';
+import { getHasUnsavedChanges, getIsProtocolValid } from '~/selectors/session';
+import { actionCreators as dialogActions } from '~/modules/dialogs';
+import { actionCreators as userActions, actionLocks as protocolsLocks } from '~/modules/userActions';
+import { actionCreators as sessionActions } from '~/modules/session';
+import { selectors as statusSelectors } from '~/modules/ui/status';
+import logoutIcon from '~/app/images/home/log-out.svg';
+import ControlBar from '~/components/ControlBar';
 
 const unsavedChangesDialog = UnsavedChanges({
   message: (

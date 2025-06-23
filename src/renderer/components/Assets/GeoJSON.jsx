@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import { get } from 'lodash';
-import fs from 'fs-extra';
+import { fileSystem } from '~/app/api';
 import Table from './Table';
 import withAssetPath from './withAssetPath';
 
@@ -11,7 +11,7 @@ const initialContent = {
   columns: [],
 };
 
-const getGeoJSON = (assetPath) => fs.readJson(assetPath);
+const getGeoJSON = (assetPath) => fileSystem.readJson(assetPath);
 
 const getRows = (geojson) => get(geojson, ['features'], []).map(
   ({ properties }) => properties,

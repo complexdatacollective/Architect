@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Icon from '@codaco/ui/lib/components/Icon';
 import { compose } from 'recompose';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import ValidatedField from '@components/Form/ValidatedField';
+import ValidatedField from '~/components/Form/ValidatedField';
 import withAttributeHandlers from './withAttributeHandlers';
 import withCreateVariableHandler from '../enhancers/withCreateVariableHandler';
 import VariablePicker from '../Form/Fields/VariablePicker/VariablePicker';

@@ -1,8 +1,7 @@
-import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { findKey, toLower } from 'lodash';
-import { copy } from 'fs-extra';
-import { SUPPORTED_EXTENSION_TYPE_MAP } from '@app/config';
+import { path, fileSystem } from '~/app/api';
+import { SUPPORTED_EXTENSION_TYPE_MAP } from '~/app/config';
 
 /**
  * Function that determines the type of an asset file when importing. Types are defined
@@ -14,8 +13,8 @@ import { SUPPORTED_EXTENSION_TYPE_MAP } from '@app/config';
  * @return {string} Returns one of network, image, audio, video, geojson, env, or returns false if
  * type is unsupported
  */
-export const getSupportedAssetType = (filePath) => {
-  const extension = toLower(path.extname(filePath));
+export const getSupportedAssetType = async (filePath) => {
+  const extension = toLower(await path.extname(filePath));
 
   const typeFromMap = findKey(SUPPORTED_EXTENSION_TYPE_MAP, (type) => type.includes(extension));
 
@@ -27,14 +26,13 @@ export const getSupportedAssetType = (filePath) => {
  * @param {string} protocolPath - The destination directory.
  * @param {string} filePath - The file buffer to copy.
  */
-const importAsset = (protocolPath, filePath) => new Promise((resolve) => {
-  const destinationName = `${uuidv4()}${path.extname(filePath)}`;
-  const destinationPath = path.join(protocolPath, 'assets', destinationName);
-  const assetType = getSupportedAssetType(filePath);
+const importAsset = async (protocolPath, filePath) => {
+  const destinationName = `${uuidv4()}${await path.extname(filePath)}`;
+  const destinationPath = await path.join(protocolPath, 'assets', destinationName);
+  const assetType = await getSupportedAssetType(filePath);
 
-  copy(filePath, destinationPath)
-    .then(() => ({ filePath: destinationName, assetType }))
-    .then(resolve);
-});
+  await fileSystem.copy(filePath, destinationPath);
+  return { filePath: destinationName, assetType };
+};
 
 export default importAsset;

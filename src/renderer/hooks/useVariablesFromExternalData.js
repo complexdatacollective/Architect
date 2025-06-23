@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { makeGetNetworkAssetVariables, makeGetGeoJsonAssetVariables } from '@selectors/assets';
+import { makeGetNetworkAssetVariables, makeGetGeoJsonAssetVariables } from '~/selectors/assets';
 
 const initialState = {
   isVariablesLoading: false,

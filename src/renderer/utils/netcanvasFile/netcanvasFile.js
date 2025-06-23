@@ -3,12 +3,12 @@ import log from 'electron-log';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { isEqual } from 'lodash';
-import { APP_SCHEMA_VERSION } from '@app/config';
-import { saveDialog } from '@app/utils/dialogs';
+import { APP_SCHEMA_VERSION } from '~/app/config';
+import { saveDialog } from '~/app/utils/dialogs';
 import { canUpgrade, migrateProtocol } from '@codaco/protocol-validation';
-import validateProtocol from '@app/utils/validateProtocol';
-import { pruneProtocol } from '@app/utils/prune';
-import protocolTemplate from '@app/utils/protocolTemplate.json';
+import validateProtocol from '~/app/utils/validateProtocol';
+import { pruneProtocol } from '~/app/utils/prune';
+import protocolTemplate from '~/app/utils/protocolTemplate.json';
 import {
   errors,
   handleError,

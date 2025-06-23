@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { AnimatePresence, motion } from 'framer-motion';
 import { createPortal } from 'react-dom';
 import Button from '@codaco/ui/lib/components/Button';
-import { Layout } from '@components/EditorLayout';
+import { Layout } from '~/components/EditorLayout';
 import ControlBar from '../ControlBar';
 import Screen from '../Screen/Screen';
 import AssetBrowser from './AssetBrowser';

@@ -1,18 +1,18 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import cx from 'classnames';
-import { isMacOS } from '@app/utils/platform';
-import { AppErrorBoundary } from '@components/Errors';
-import DialogManager from '@components/DialogManager';
-import Routes from '@components/Routes';
-import ToastManager from '@components/ToastManager';
-import useUpdater from '@hooks/useUpdater';
+import React from "react";
+import { motion } from "framer-motion";
+import cx from "classnames";
+import { isMacOS } from "~/utils/platform.js";
+import { AppErrorBoundary } from "~/components/Errors";
+import DialogManager from "~/components/DialogManager";
+import Routes from "~/components/Routes";
+import ToastManager from "~/components/ToastManager";
+import useUpdater from "~/hooks/useUpdater";
 
 const appVariants = {
   show: {
     opacity: 1,
     transition: {
-      when: 'beforeChildren',
+      when: "beforeChildren",
     },
   },
   hide: {
@@ -21,19 +21,18 @@ const appVariants = {
 };
 
 const AppView = () => {
-  const appClasses = cx(
-    'app',
-    {
-      'app--macos': isMacOS(),
-    },
-  );
+  const appClasses = cx("app", {
+    "app--macos": isMacOS(),
+  });
 
-  useUpdater('https://api.github.com/repos/complexdatacollective/Architect/releases/latest', 2500);
+  useUpdater(
+    "https://api.github.com/repos/complexdatacollective/Architect/releases/latest",
+    2500
+  );
 
   return (
     <>
-      {isMacOS()
-        && <div className="electron-titlebar" />}
+      {isMacOS() && <div className="electron-titlebar" />}
       <motion.div
         className={appClasses}
         variants={appVariants}

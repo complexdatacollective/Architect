@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@codaco/ui';
-import useVariablesFromExternalData from '@hooks/useVariablesFromExternalData';
-import useExternalDataPreview from '@components/AssetBrowser/useExternalDataPreview';
-import useExternalDataDownload from '@components/AssetBrowser/useExternalDataDownload';
+import useVariablesFromExternalData from '~/hooks/useVariablesFromExternalData';
+import useExternalDataPreview from '~/components/AssetBrowser/useExternalDataPreview';
+import useExternalDataDownload from '~/components/AssetBrowser/useExternalDataDownload';
 import VariableList from './VariableList';
 import EntityIcon from './EntityIcon';
 

@@ -3,11 +3,11 @@ import { compose, defaultProps } from 'recompose';
 import PropTypes from 'prop-types';
 import { AnimateSharedLayout } from 'framer-motion';
 import { Button } from '@codaco/ui';
-import { scrollToFirstIssue } from '@app/utils/issues';
-import { Section } from '@components/EditorLayout';
-import InlineEditScreen from '@components/InlineEditScreen';
-import OrderedList from '@components/OrderedList';
-import ValidatedField from '@components/Form/ValidatedField';
+import { scrollToFirstIssue } from '~/app/utils/issues';
+import { Section } from '~/components/EditorLayout';
+import InlineEditScreen from '~/components/InlineEditScreen';
+import OrderedList from '~/components/OrderedList';
+import ValidatedField from '~/components/Form/ValidatedField';
 import withEditHandlers from './withEditHandlers';
 
 const formName = 'editable-list-form';

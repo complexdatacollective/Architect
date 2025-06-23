@@ -1,9 +1,10 @@
 import React from 'react';
-import path from 'path';
 import { Markdown } from '@codaco/ui/lib/components/Fields';
-import { errors as netcanvasFileErrors } from '@app/utils/netcanvasFile';
-import ExternalLink from '@components/ExternalLink';
-import { actionCreators as dialogActions } from '@modules/dialogs';
+import { path, netcanvasFile } from '~/app/api';
+import ExternalLink from '~/components/ExternalLink';
+import { actionCreators as dialogActions } from '~/modules/dialogs';
+
+const { errors: netcanvasFileErrors } = netcanvasFile;
 
 const getFriendlyMessage = (e, meta = {}) => {
   const collectedMeta = {
@@ -11,8 +12,10 @@ const getFriendlyMessage = (e, meta = {}) => {
     ...meta,
   };
 
+  // Note: We can't use async path.basename here because this is a React component
+  // For now, we'll use a simple string manipulation
   const fileName = collectedMeta.filePath
-    ? (<em>{path.basename(collectedMeta.filePath)}</em>)
+    ? (<em>{collectedMeta.filePath.split(/[/\\]/).pop()}</em>)
     : 'file';
 
   switch (e.friendlyCode) {

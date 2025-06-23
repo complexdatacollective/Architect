@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import withDisabledAPIKeyRequired from '@components/enhancers/withDisabledAPIKeyRequired';
-import NativeSelect from '@components/Form/Fields/NativeSelect';
+import withDisabledAPIKeyRequired from '~/components/enhancers/withDisabledAPIKeyRequired';
+import NativeSelect from '~/components/Form/Fields/NativeSelect';
 
-import withMapFormToProps from '@components/enhancers/withMapFormToProps';
+import withMapFormToProps from '~/components/enhancers/withMapFormToProps';
 import { Section, Row } from '../EditorLayout';
 import ValidatedField from '../Form/ValidatedField';
 

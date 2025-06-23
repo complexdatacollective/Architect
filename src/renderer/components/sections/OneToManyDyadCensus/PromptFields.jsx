@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
-import { Section, Row } from '@components/EditorLayout';
-import Tip from '@components/Tip';
-import ValidatedField from '@components/Form/ValidatedField';
+import { Section, Row } from '~/components/EditorLayout';
+import Tip from '~/components/Tip';
+import ValidatedField from '~/components/Form/ValidatedField';
 import { compose } from 'recompose';
 import { formValueSelector } from 'redux-form';
 import { useSelector } from 'react-redux';

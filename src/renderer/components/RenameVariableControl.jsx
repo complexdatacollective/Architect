@@ -5,12 +5,12 @@ import { Field } from 'redux-form';
 import { get, values } from 'lodash';
 import { Button } from '@codaco/ui';
 import TextField from '@codaco/ui/lib/components/Fields/Text';
-import { getType, getVariablesForSubject } from '@selectors/codebook';
-import { actionCreators as codebookActions } from '@modules/protocol/codebook';
-import BasicForm from '@components/BasicForm';
-import ContextualDialog, { Controls, Title } from '@components/ContextualDialog';
-import { required, uniqueByList, allowedVariableName } from '@app/utils/validations';
-import safeName from '@app/utils/safeName';
+import { getType, getVariablesForSubject } from '~/selectors/codebook';
+import { actionCreators as codebookActions } from '~/modules/protocol/codebook';
+import BasicForm from '~/components/BasicForm';
+import ContextualDialog, { Controls, Title } from '~/components/ContextualDialog';
+import { required, uniqueByList, allowedVariableName } from '~/app/utils/validations';
+import safeName from '~/app/utils/safeName';
 
 const isRequired = required();
 

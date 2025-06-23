@@ -1,10 +1,10 @@
 import React, { useCallback, useMemo } from 'react';
 import { get, isNull, isUndefined } from 'lodash';
-import { Section } from '@components/EditorLayout';
+import { Section } from '~/components/EditorLayout';
 import {
   change, FormSection, formValueSelector,
 } from 'redux-form';
-import { actionCreators as dialogActions } from '@modules/dialogs';
+import { actionCreators as dialogActions } from '~/modules/dialogs';
 import { useDispatch, useSelector } from 'react-redux';
 import { Number } from '@codaco/ui/lib/components/Fields';
 import { ValidatedField } from '../Form';

@@ -27,18 +27,6 @@
       "jsx-a11y/click-events-have-key-events": "off",
       "jsx-a11y/anchor-is-valid": "off"
     },
-    "settings": {
-      "import/resolver": {
-        "alias": [
-          ["@app", "./src"],
-          ["@components", "./src/components"],
-          ["@modules", "./src/ducks/modules"],
-          ["@selectors", "./src/selectors"],
-          ["@hooks", "./src/hooks"],
-          ["@utils", "./src/utils"]
-        ]
-      }
-    },
     "overrides": [
       {
         "files": "*.test.js",

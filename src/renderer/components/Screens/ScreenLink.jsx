@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { actionCreators as screenActions } from '@modules/ui/screens';
-import InternalLink from '@components/Link';
+import { actionCreators as screenActions } from '~/modules/ui/screens';
+import InternalLink from '~/components/Link';
 
 const ScreenLink = ({
   children,

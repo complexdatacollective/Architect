@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withHandlers, compose } from 'recompose';
 import { change } from 'redux-form';
-import { actionCreators as codebookActions } from '@modules/protocol/codebook';
+import { actionCreators as codebookActions } from '~/modules/protocol/codebook';
 
 // TODO: withCreateEdgeType
 

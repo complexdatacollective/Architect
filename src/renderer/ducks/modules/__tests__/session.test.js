@@ -6,10 +6,10 @@ import {
   importNetcanvas,
   readProtocol,
   saveNetcanvas,
-} from '@app/utils/netcanvasFile';
+} from '~/app/utils/netcanvasFile';
 import reducer, { actionCreators } from '../session';
 
-jest.mock('@app/utils/netcanvasFile');
+jest.mock('~/app/utils/netcanvasFile');
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);

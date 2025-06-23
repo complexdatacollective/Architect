@@ -2,10 +2,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { omit } from 'lodash';
 import path from 'path';
 import log from 'electron-log';
-import { importAsset as fsImportAsset } from '@app/utils/protocols';
-import { getWorkingPath } from '@selectors/session';
-import { validateAsset } from '@app/utils/protocols/assetTools';
-import { invalidAssetErrorDialog, importAssetErrorDialog } from '@modules/protocol/utils/dialogs';
+import { importAsset as fsImportAsset } from '~/utils/protocols';
+import { getWorkingPath } from '~/selectors/session';
+import { validateAsset } from '~/utils/protocols/assetTools';
+import { invalidAssetErrorDialog, importAssetErrorDialog } from '~/modules/protocol/utils/dialogs';
 import { saveableChange } from '../session';
 
 const IMPORT_ASSET = 'PROTOCOL/IMPORT_ASSET';

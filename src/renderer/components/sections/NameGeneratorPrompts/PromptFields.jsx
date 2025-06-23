@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { change, formValueSelector } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { Section, Row } from '@components/EditorLayout';
-import PromptText from '@components/sections/PromptText';
-import AssignAttributes from '@components/AssignAttributes';
-import Tip from '@components/Tip';
+import { Section, Row } from '~/components/EditorLayout';
+import PromptText from '~/components/sections/PromptText';
+import AssignAttributes from '~/components/AssignAttributes';
+import Tip from '~/components/Tip';
 
 const PromptFields = ({
   form,

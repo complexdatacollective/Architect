@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withState } from 'recompose';
 import { fieldPropTypes } from 'redux-form';
 import Radio from '@codaco/ui/lib/components/Fields/Radio';
-import NetworkThumbnail from '@components/Thumbnail/Network';
+import NetworkThumbnail from '~/components/Thumbnail/Network';
 import File from './File';
 
 const withSelectNetworkAsset = withState('selectNetworkAsset', 'setSelectNetworkAsset', false);

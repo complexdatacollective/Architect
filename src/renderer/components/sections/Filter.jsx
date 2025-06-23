@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
 import { change, Field, formValueSelector } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { Section } from '@components/EditorLayout';
-import { actionCreators as dialogActions } from '@modules/dialogs';
+import { Section } from '~/components/EditorLayout';
+import { actionCreators as dialogActions } from '~/modules/dialogs';
 import {
   Filter as FilterQuery, withFieldConnector, withStoreConnector, ruleValidator,
 } from '../Query';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@codaco/ui';
-import { appVersion } from '@app/utils/appVersion';
+import { appVersion } from '~/app/utils/appVersion';
 import { motion, AnimatePresence } from 'framer-motion';
 import Section from './Section';
 import Group from './Group';

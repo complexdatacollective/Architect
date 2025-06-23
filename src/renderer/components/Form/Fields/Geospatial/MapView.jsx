@@ -2,14 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl-unminified';
 import { useSelector } from 'react-redux';
-import { Layout, Section } from '@components/EditorLayout';
+import { Layout, Section } from '~/components/EditorLayout';
 import { AnimatePresence, motion } from 'framer-motion';
-import ControlBar from '@components/ControlBar';
-import Screen from '@components/Screen/Screen';
+import ControlBar from '~/components/ControlBar';
+import Screen from '~/components/Screen/Screen';
 import Button from '@codaco/ui/lib/components/Button';
-import { screenVariants } from '@components/Screens/Screens';
+import { screenVariants } from '~/components/Screens/Screens';
 import { get } from 'lodash';
-import { getAssetManifest } from '@selectors/protocol';
+import { getAssetManifest } from '~/selectors/protocol';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 const MapView = ({ mapOptions, onChange, close }) => {

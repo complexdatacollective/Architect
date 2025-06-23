@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
-import { Section, Row } from '@components/EditorLayout';
-import ValidatedField from '@components/Form/ValidatedField';
+import { Section, Row } from '~/components/EditorLayout';
+import ValidatedField from '~/components/Form/ValidatedField';
 
 const PromptText = ({ name }) => (
   <Section

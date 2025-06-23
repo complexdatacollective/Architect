@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { change, formValueSelector } from 'redux-form';
 import { compose, lifecycle } from 'recompose';
 import { get } from 'lodash';
-import { getVariableOptionsForSubject, getVariablesForSubject } from '@selectors/codebook';
+import { getVariableOptionsForSubject, getVariablesForSubject } from '~/selectors/codebook';
 
 const mapStateToProps = (state, { form, type, entity }) => {
   const variableOptions = getVariableOptionsForSubject(

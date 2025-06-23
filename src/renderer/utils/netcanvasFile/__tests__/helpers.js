@@ -1,6 +1,6 @@
 /* eslint-env jest */
 import path from 'path';
-import { APP_SCHEMA_VERSION } from '@app/config';
+import { APP_SCHEMA_VERSION } from '~/app/config';
 
 const mockProtocolPath = path.join(__dirname, '..', '..', 'network-canvas', 'integration-tests', 'data', 'mock.netcanvas');
 const mockProtocol = { description: 'test protocol', schemaVersion: APP_SCHEMA_VERSION };

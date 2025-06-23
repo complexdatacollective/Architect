@@ -6,7 +6,7 @@ import { formValueSelector, change, Field } from 'redux-form';
 import { DATE_FORMATS } from '@codaco/ui/lib/components/Fields/DatePicker';
 import Number from '@codaco/ui/lib/components/Fields/Number';
 import Toggle from '@codaco/ui/lib/components/Fields/Toggle';
-import ValidatedField from '@components/Form/ValidatedField';
+import ValidatedField from '~/components/Form/ValidatedField';
 import { DatePicker } from '@codaco/ui/lib/components/Fields';
 
 const RelativeDatePickerParameters = ({ name, anchorValue, resetField }) => {

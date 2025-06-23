@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { Section } from '@components/EditorLayout';
-import useExternalDataPreview from '@components/AssetBrowser/useExternalDataPreview';
-import useExternalDataDownload from '@components/AssetBrowser/useExternalDataDownload';
+import { Section } from '~/components/EditorLayout';
+import useExternalDataPreview from '~/components/AssetBrowser/useExternalDataPreview';
+import useExternalDataDownload from '~/components/AssetBrowser/useExternalDataDownload';
 import Assets from './Assets';
 import NewAsset from './NewAsset';
 import withAssetActions from './withAssetActions';

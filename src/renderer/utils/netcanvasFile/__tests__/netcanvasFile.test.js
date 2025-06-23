@@ -2,11 +2,11 @@
 
 import fse from 'fs-extra';
 import { v4 as uuidv4 } from 'uuid';
-import { APP_SCHEMA_VERSION } from '@app/config';
-import { extract, archive } from '@app/utils/protocols/lib/archive';
+import { APP_SCHEMA_VERSION } from '~/app/config';
+import { extract, archive } from '~/app/utils/protocols/lib/archive';
 import { canUpgrade, migrateProtocol } from '@codaco/protocol-validation';
-import validateProtocol from '@app/utils/validateProtocol';
-import { pruneProtocol } from '@app/utils/prune';
+import validateProtocol from '~/app/utils/validateProtocol';
+import { pruneProtocol } from '~/app/utils/prune';
 import {
   checkSchemaVersion,
   importNetcanvas,
@@ -33,12 +33,12 @@ import {
 } from './helpers';
 
 jest.mock('fs-extra');
-jest.mock('@app/utils/protocols/lib/archive');
+jest.mock('~/app/utils/protocols/lib/archive');
 jest.mock('@codaco/protocol-validation');
-jest.mock('@app/utils/pruneProtocolAssets');
-jest.mock('@app/utils/prune');
+jest.mock('~/app/utils/pruneProtocolAssets');
+jest.mock('~/app/utils/prune');
 jest.mock('../lib');
-jest.mock('@app/utils/validateProtocol');
+jest.mock('~/app/utils/validateProtocol');
 
 const {
   verifyNetcanvas,

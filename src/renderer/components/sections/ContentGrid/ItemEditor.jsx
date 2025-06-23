@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import RadioGroup from '@codaco/ui/lib/components/Fields/RadioGroup';
 import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
-import { Section, Row } from '@components/EditorLayout';
+import { Section, Row } from '~/components/EditorLayout';
 import ValidatedField from '../../Form/ValidatedField';
 import Image from '../../Form/Fields/Image';
 import Audio from '../../Form/Fields/Audio';

@@ -11,8 +11,8 @@ import {
 import { get } from 'lodash';
 import cx from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as codebookActions } from '@modules/protocol/codebook';
-import { required as requiredValidation, uniqueByList, allowedVariableName } from '@app/utils/validations';
+import { actionCreators as codebookActions } from '~/modules/protocol/codebook';
+import { required as requiredValidation, uniqueByList, allowedVariableName } from '~/app/utils/validations';
 import TextInput from '@codaco/ui/lib/components/Fields/Text';
 import { makeGetVariableWithEntity, getVariablesForSubject } from '../../../../selectors/codebook';
 import { getColorForType, getIconForType } from '../../../../config/variables';

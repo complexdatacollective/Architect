@@ -34,8 +34,8 @@ import {
   AnonymisationExplanation,
   AnonymisationValidation,
   EncryptedVariables,
-} from '@components/sections';
-import { FilteredNodeType } from '@components/sections/NodeType';
+} from '~/components/sections';
+import { FilteredNodeType } from '~/components/sections/NodeType';
 
 const AlterEdgeForm = {
   sections: [

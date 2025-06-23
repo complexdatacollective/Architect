@@ -1,10 +1,10 @@
 import {
   reduce, get, compact, uniq, map,
 } from 'lodash';
-import { getType, getAllVariablesByUUID } from '@selectors/codebook';
-import { makeGetIsUsed } from '@selectors/codebook/isUsed';
-import { getVariableIndex } from '@selectors/indexes';
-import { getProtocol, getCodebook } from '@selectors/protocol';
+import { getType, getAllVariablesByUUID } from '~/selectors/codebook';
+import { makeGetIsUsed } from '~/selectors/codebook/isUsed';
+import { getVariableIndex } from '~/selectors/indexes';
+import { getProtocol, getCodebook } from '~/selectors/protocol';
 
 const getIsUsed = makeGetIsUsed({ formNames: [] });
 
