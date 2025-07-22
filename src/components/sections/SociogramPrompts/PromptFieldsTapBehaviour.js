@@ -128,6 +128,7 @@ const TapBehaviour = ({
     >
       <Row>
         <DetachedField
+          name="tapBehaviour"
           component={Fields.Boolean}
           onChange={handleChangeTapBehaviour}
           value={tapBehaviour}

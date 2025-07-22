@@ -82,6 +82,7 @@ const EditEntityRule = ({
         disabled={!optionsWithDefaults.type}
       >
         <DetachedField
+          name="entityRuleType"
           component={RadioGroup}
           options={entityRuleTypeOptions(entityType)}
           value={entityRuleType}

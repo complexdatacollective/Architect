@@ -100,6 +100,7 @@ const Rules = ({
         <div className="rules-rules__join">
           <h4>Must match</h4>
           <DetachedField
+            name="join"
             component={RadioGroup}
             options={[
               { label: 'All rules', value: 'AND' },

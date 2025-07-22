@@ -93,6 +93,7 @@ const EncryptedVariables = () => {
               }}
             >
               <DetachedField
+                name={`encryptedVariables-${nodeTypeId}`}
                 component={Fields.CheckboxGroup}
                 options={Object.entries(nodeType.variables || {}).map(
                   ([variableId, variable]) => ({

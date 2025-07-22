@@ -27,7 +27,7 @@ class CardErrorBoundary extends Component {
 
     if (error) {
       return (
-        <div className="error">
+        <div className="error" style={{ position: 'relative' }}>
           <div className="error__layout">
             <h1 className="error__title">Something went wrong.</h1>
             <div className="error__message">

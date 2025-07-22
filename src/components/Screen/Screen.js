@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { motion, useElementScroll } from 'framer-motion';
 import { ScreenErrorBoundary } from '@components/Errors';
+import { useDispatch } from 'react-redux';
+import { actionCreators as screenActions } from '@modules/ui/screens';
 
 export const ScreenContext = React.createContext({
   scrollY: 0,
@@ -38,6 +40,12 @@ const Screen = ({
 }) => {
   const classes = cx('screen', className);
   const [currentScroll, setCurrentScroll] = React.useState(0);
+  const dispatch = useDispatch();
+
+  const closeStageScreen = () => {
+    dispatch(screenActions.closeScreen('stage'));
+    onComplete();
+  };
 
   const ref = useRef(null);
   const { scrollY } = useElementScroll(ref);
@@ -72,7 +80,7 @@ const Screen = ({
           // layoutId={layoutId}
           variants={screenVariants}
         >
-          <ScreenErrorBoundary>
+          <ScreenErrorBoundary onAcknowledge={closeStageScreen}>
             <motion.header variants={item} className="screen__header">
               {header}
             </motion.header>

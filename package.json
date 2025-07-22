@@ -1,6 +1,6 @@
 {
     "name": "network-canvas-architect",
-    "version": "7.0.0-alpha.3",
+    "version": "7.0.0-alpha.4",
     "productName": "Network Canvas Architect",
     "description": "A tool for building Network Canvas interviews.",
     "author": "Complex Data Collective <info@networkcanvas.com>",
@@ -52,7 +52,7 @@
         "@babel/plugin-transform-private-property-in-object": "^7.27.1",
         "@babel/preset-env": "^7.27.2",
         "@babel/preset-react": "^7.12.1",
-        "@codaco/protocol-validation": "^4.0.0-alpha.11",
+        "@codaco/protocol-validation": "^5.0.2",
         "@codaco/ui": "^5.8.5",
         "@electron/notarize": "^2.3.0",
         "@material-ui/icons": "^4.11.2",
