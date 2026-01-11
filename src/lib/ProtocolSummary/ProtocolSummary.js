@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@codaco/ui/lib/components/Button';
-import { remote } from 'electron';
-import path from 'path';
-import fs from 'fs-extra';
+import { electronAPI } from '@utils/electronBridge';
 import { saveDialog } from '@app/utils/dialogs';
 import Cover from './components/Cover';
 import Contents from './components/Contents';
@@ -13,20 +11,29 @@ import AssetManifest from './components/AssetManifest';
 import SummaryContext from './components/SummaryContext';
 import { getCodebookIndex } from './helpers';
 
-const closeWindow = () => remote.getCurrentWindow().hide();
+const closeWindow = () => electronAPI.window.hide();
 
 // Create a formatted date string that can be used in a filename (no illegal chars)
 const dateWithSafeChars = (date, replaceWith = '-') => date.replace(/[^a-zA-Z\d\s]/gi, replaceWith).toLowerCase();
 
 const ProtocolSummary = ({ data }) => {
+  const [fileName, setFileName] = useState('');
+
+  useEffect(() => {
+    const computeFileName = async () => {
+      if (!data || !data.filePath) return;
+      const now = new Date();
+      const dateString = `${dateWithSafeChars(now.toLocaleDateString(), '-')} ${dateWithSafeChars(now.toLocaleTimeString(), '.')}`;
+      const baseName = await electronAPI.path.basename(data.filePath, '.netcanvas');
+      setFileName(`${baseName} Protocol Summary (Created ${dateString}).pdf`);
+    };
+    computeFileName();
+  }, [data]);
+
   if (!data) { return null; }
 
   const { protocol, filePath, ...rest } = data;
-
   const index = getCodebookIndex(protocol);
-  const now = new Date();
-  const dateString = `${dateWithSafeChars(now.toLocaleDateString(), '-')} ${dateWithSafeChars(now.toLocaleTimeString(), '.')}`;
-  const fileName = `${path.basename(filePath, '.netcanvas')} Protocol Summary (Created ${dateString}).pdf`;
 
   const printPDF = async () => {
     const options = {
@@ -34,8 +41,6 @@ const ProtocolSummary = ({ data }) => {
       // landscape: true,
       // marginsType: 1,
     };
-
-    const wc = remote.getCurrentWebContents();
 
     try {
       const { canceled, filePath: userFilePath } = await saveDialog({
@@ -49,8 +54,8 @@ const ProtocolSummary = ({ data }) => {
         return;
       }
 
-      const pdf = await wc.printToPDF(options);
-      await fs.writeFile(userFilePath, pdf);
+      const pdf = await electronAPI.webContents.printToPDF(options);
+      await electronAPI.fs.writeFile(userFilePath, pdf);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log('Error saving file: ', error);

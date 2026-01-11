@@ -1,6 +1,6 @@
 import React from 'react';
-import path from 'path';
 import { Markdown } from '@codaco/ui/lib/components/Fields';
+import { pathSync } from '@utils/electronBridge';
 import { errors as netcanvasFileErrors } from '@app/utils/netcanvasFile';
 import ExternalLink from '@components/ExternalLink';
 import { actionCreators as dialogActions } from '@modules/dialogs';
@@ -12,7 +12,7 @@ const getFriendlyMessage = (e, meta = {}) => {
   };
 
   const fileName = collectedMeta.filePath
-    ? (<em>{path.basename(collectedMeta.filePath)}</em>)
+    ? (<em>{pathSync.basename(collectedMeta.filePath)}</em>)
     : 'file';
 
   switch (e.friendlyCode) {

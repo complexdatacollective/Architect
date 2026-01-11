@@ -1,7 +1,6 @@
-import path from 'path';
 import uuid from 'uuid/v1';
 import { findKey, toLower } from 'lodash';
-import { copy } from 'fs-extra';
+import { electronAPI } from '@utils/electronBridge';
 import { SUPPORTED_EXTENSION_TYPE_MAP } from '@app/config';
 
 /**
@@ -14,8 +13,8 @@ import { SUPPORTED_EXTENSION_TYPE_MAP } from '@app/config';
  * @return {string} Returns one of network, image, audio, video, geojson, env, or returns false if
  * type is unsupported
  */
-export const getSupportedAssetType = (filePath) => {
-  const extension = toLower(path.extname(filePath));
+export const getSupportedAssetType = async (filePath) => {
+  const extension = toLower(await electronAPI.path.extname(filePath));
 
   const typeFromMap = findKey(SUPPORTED_EXTENSION_TYPE_MAP, (type) => type.includes(extension));
 
@@ -27,14 +26,15 @@ export const getSupportedAssetType = (filePath) => {
  * @param {string} protocolPath - The destination directory.
  * @param {string} filePath - The file buffer to copy.
  */
-const importAsset = (protocolPath, filePath) => new Promise((resolve) => {
-  const destinationName = `${uuid()}${path.extname(filePath)}`;
-  const destinationPath = path.join(protocolPath, 'assets', destinationName);
-  const assetType = getSupportedAssetType(filePath);
+const importAsset = async (protocolPath, filePath) => {
+  const extname = await electronAPI.path.extname(filePath);
+  const destinationName = `${uuid()}${extname}`;
+  const destinationPath = await electronAPI.path.join(protocolPath, 'assets', destinationName);
+  const assetType = await getSupportedAssetType(filePath);
 
-  copy(filePath, destinationPath)
-    .then(() => ({ filePath: destinationName, assetType }))
-    .then(resolve);
-});
+  await electronAPI.fs.copy(filePath, destinationPath);
+
+  return { filePath: destinationName, assetType };
+};
 
 export default importAsset;

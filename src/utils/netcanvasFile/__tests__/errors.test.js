@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import log from 'electron-log';
+import log from '@utils/logger';
 import { errors, handleError } from '../errors';
 
 jest.mock('electron-log');

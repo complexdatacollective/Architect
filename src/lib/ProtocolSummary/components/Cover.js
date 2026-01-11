@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import path from 'path';
 import { DateTime } from 'luxon';
+import { pathSync } from '@utils/electronBridge';
 import ProtocolCard from '@codaco/ui/lib/components/Cards/ProtocolCard';
 import networkCanvasLogo from '@app/images/NC-Mark.svg';
 import SummaryContext from './SummaryContext';
@@ -25,7 +25,7 @@ const Cover = () => {
         </div>
       </div>
       <ProtocolCard
-        name={path.basename(filePath)}
+        name={pathSync.basename(filePath)}
         description={protocol.description}
         lastModified={lastModified}
         schemaVersion={protocol.schemaVersion}

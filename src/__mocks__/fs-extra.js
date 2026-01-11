@@ -1,4 +1,4 @@
-/* eslint-env jest */
+import { vi } from 'vitest';
 
 // TODO: error/reject by default!
 
@@ -11,25 +11,25 @@ const callbackOrPromise = (...args) => {
   return Promise.resolve();
 };
 
-export const access = jest.fn(() => Promise.resolve());
-export const copy = jest.fn(() => Promise.resolve());
-export const copySync = jest.fn();
+export const access = vi.fn(() => Promise.resolve());
+export const copy = vi.fn(() => Promise.resolve());
+export const copySync = vi.fn();
 export const createWriteStream = () => {};
-export const emptyDirSync = jest.fn();
-export const existsSync = jest.fn(() => true);
-export const mkdirp = jest.fn(() => Promise.resolve());
-export const pathExists = jest.fn(() => Promise.reject());
-export const readdir = jest.fn(() => Promise.resolve([]));
-export const readdirSync = jest.fn(() => ([]));
-export const readFile = jest.fn(callbackOrPromise);
-export const readJson = jest.fn(() => Promise.resolve());
-export const rename = jest.fn(() => Promise.resolve());
-export const stat = jest.fn(() => ({
+export const emptyDirSync = vi.fn();
+export const existsSync = vi.fn(() => true);
+export const mkdirp = vi.fn(() => Promise.resolve());
+export const pathExists = vi.fn(() => Promise.reject());
+export const readdir = vi.fn(() => Promise.resolve([]));
+export const readdirSync = vi.fn(() => ([]));
+export const readFile = vi.fn(callbackOrPromise);
+export const readJson = vi.fn(() => Promise.resolve());
+export const rename = vi.fn(() => Promise.resolve());
+export const stat = vi.fn(() => ({
   isFile: () => Promise.reject(new Error('stat.isFile')),
 }));
-export const writeFile = jest.fn((filename, content, cb) => cb());
-export const writeJson = jest.fn(() => Promise.reject(new Error('mock writeJson')));
-export const unlink = jest.fn(() => Promise.reject(new Error('mock unlink')));
+export const writeFile = vi.fn((filename, content, cb) => cb());
+export const writeJson = vi.fn(() => Promise.reject(new Error('mock writeJson')));
+export const unlink = vi.fn(() => Promise.reject(new Error('mock unlink')));
 
 export const constants = {
   R_OK: Symbol('R_OK'),

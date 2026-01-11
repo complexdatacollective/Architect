@@ -1,14 +1,37 @@
-import { remote } from 'electron';
 import { get } from 'lodash';
-
+import { electronAPI } from '@utils/electronBridge';
 import codenames from '../codenames.json';
 
-const appVersion = remote.app.getVersion();
-const codename = get(codenames, appVersion, '');
+let cachedVersion = null;
+let cachedCodename = null;
 
-export default appVersion;
+const getAppVersion = async () => {
+  if (cachedVersion === null) {
+    cachedVersion = await electronAPI.app.getVersion();
+    cachedCodename = get(codenames, cachedVersion, '');
+  }
+  return cachedVersion;
+};
+
+const getCodename = async () => {
+  if (cachedCodename === null) {
+    await getAppVersion();
+  }
+  return cachedCodename;
+};
+
+// For synchronous access after initialization
+const getAppVersionSync = () => cachedVersion || 'unknown';
+const getCodenameSync = () => cachedCodename || '';
+
+// Initialize on module load (async)
+getAppVersion();
+
+export default getAppVersionSync;
 
 export {
-  codename,
-  appVersion,
+  getCodename,
+  getAppVersion,
+  getAppVersionSync,
+  getCodenameSync,
 };

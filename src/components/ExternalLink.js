@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { shell } from 'electron';
+import { electronAPI } from '@utils/electronBridge';
 
 export const openExternalLink = (href) => {
-  shell.openExternal(href);
+  electronAPI.shell.openExternal(href);
 };
 
 const ExternalLink = ({ children, href }) => {

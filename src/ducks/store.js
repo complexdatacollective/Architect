@@ -25,7 +25,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
 
 const getMiddleware = () => {
-  if (process.env.TEST) {
+  // In test environment (set by Vitest), skip IPC middleware
+  if (import.meta.env?.MODE === 'test' || typeof window.electronAPI === 'undefined') {
     return [thunk];
   }
 

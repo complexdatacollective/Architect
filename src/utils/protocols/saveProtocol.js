@@ -1,16 +1,15 @@
-import path from 'path';
-import log from 'electron-log';
-import { writeFile } from 'fs-extra';
+import log from '@utils/logger';
+import { electronAPI } from '@utils/electronBridge';
 import pruneAssets from '@app/utils/protocols/pruneAssets';
 
-const getStringifiedProtocol = (protocol) => new Promise((resolve, reject) => {
+const getStringifiedProtocol = (protocol) => {
   try {
-    return resolve(JSON.stringify(protocol, null, 2));
+    return JSON.stringify(protocol, null, 2);
   } catch (e) {
     log.error(e);
-    return reject(e);
+    throw e;
   }
-});
+};
 
 /**
  * Save a protocol object to disk, and prune any unused assets from
@@ -18,15 +17,15 @@ const getStringifiedProtocol = (protocol) => new Promise((resolve, reject) => {
  * @param {string} workingPath - working path in application /tmp/ dir
  * @param {object} protocol - The protocol object.
  */
-const saveProtocol = (workingPath, protocol) => {
-  // save json to temp dir
-  const destinationPath = path.join(workingPath, 'protocol.json');
+const saveProtocol = async (workingPath, protocol) => {
+  const destinationPath = await electronAPI.path.join(workingPath, 'protocol.json');
   log.info(`Save protocol to ${destinationPath}`);
 
-  return getStringifiedProtocol(protocol)
-    .then((protocolData) => writeFile(destinationPath, protocolData))
-    .then(() => pruneAssets(workingPath))
-    .then(() => destinationPath);
+  const protocolData = getStringifiedProtocol(protocol);
+  await electronAPI.fs.writeFile(destinationPath, protocolData);
+  await pruneAssets(workingPath);
+
+  return destinationPath;
 };
 
 export default saveProtocol;

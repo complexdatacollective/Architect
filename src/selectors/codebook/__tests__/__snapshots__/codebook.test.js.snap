@@ -1,4 +1,70 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`codebook selectors > getAllVariablesByUUID() > handles missing codebook 1`] = `{}`;
+
+exports[`codebook selectors > getAllVariablesByUUID() > handles missing edgeTypes 1`] = `{}`;
+
+exports[`codebook selectors > getAllVariablesByUUID() > handles missing ego 1`] = `{}`;
+
+exports[`codebook selectors > getAllVariablesByUUID() > handles missing nodeTypes 1`] = `{}`;
+
+exports[`codebook selectors > getAllVariablesByUUID() > handles missing variables 1`] = `{}`;
+
+exports[`codebook selectors > getAllVariablesByUUID() > returns all variables by UUID 1`] = `{}`;
+
+exports[`codebook selectors > getVariableOptionsForSubject() > extracts variables for nodeType into options list for ego entity 1`] = `
+[
+  {
+    "isUsed": false,
+    "label": "SIERRA",
+    "type": "text",
+    "value": "sierra",
+  },
+  {
+    "isUsed": false,
+    "label": "TANGO",
+    "type": "text",
+    "value": "tango",
+  },
+]
+`;
+
+exports[`codebook selectors > getVariableOptionsForSubject() > extracts variables for nodeType into options list for node entity 1`] = `
+[
+  {
+    "isUsed": true,
+    "label": "ALPHA",
+    "type": "text",
+    "value": "alpha",
+  },
+  {
+    "isUsed": true,
+    "label": "BRAVO",
+    "type": "text",
+    "value": "bravo",
+  },
+  {
+    "isUsed": false,
+    "label": "CHARLIE",
+    "type": "location",
+    "value": "charlie",
+  },
+  {
+    "isUsed": true,
+    "label": "1234-1234-4",
+    "type": "text",
+    "value": "1234-1234-4",
+  },
+  {
+    "isUsed": true,
+    "label": "1234-1234-5",
+    "type": "text",
+    "value": "1234-1234-5",
+  },
+]
+`;
+
+exports[`codebook selectors > makeGetVariable() > returns a variable by UUID 1`] = `null`;
 
 exports[`codebook selectors getAllVariablesByUUID() handles missing codebook 1`] = `Object {}`;
 

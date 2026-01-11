@@ -1,5 +1,5 @@
-import path from 'path';
 import { get } from 'lodash';
+import { pathSync } from '@utils/electronBridge';
 import { getNetworkVariables, getGeoJsonVariables } from '@app/utils/protocols/assetTools';
 import { getWorkingPath } from './session';
 import { getAssetManifest } from './protocol';
@@ -17,7 +17,7 @@ export const getAssetPath = (state, dataSource) => {
 
   if (!asset) { return null; }
 
-  const assetPath = path.join(workingPath, 'assets', asset.source);
+  const assetPath = pathSync.join(workingPath, 'assets', asset.source);
   return assetPath;
 };
 

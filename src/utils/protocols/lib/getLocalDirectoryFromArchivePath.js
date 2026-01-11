@@ -1,7 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-import { remote } from 'electron';
 import uuid from 'uuid';
-import path from 'path';
+import { electronAPI } from '@utils/electronBridge';
 
 /**
  * Generates a path in the application /tmp/ to be used
@@ -9,6 +8,9 @@ import path from 'path';
  *
  * @returns The destination path in /tmp/.
  */
-const getLocalDirectoryFromArchivePath = () => path.join(remote.app.getPath('temp'), 'protocols', uuid());
+const getLocalDirectoryFromArchivePath = async () => {
+  const tempPath = await electronAPI.app.getPath('temp');
+  return electronAPI.path.join(tempPath, 'protocols', uuid());
+};
 
 export default getLocalDirectoryFromArchivePath;

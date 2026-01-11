@@ -1,7 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 
-export const isMacOS = () => process.platform === 'darwin';
+import { electronAPI } from '@utils/electronBridge';
 
-export const isWindows = () => process.platform === 'win32';
+export const isMacOS = () => electronAPI.platform === 'darwin';
 
-export const isLinux = () => process.platform === 'linux';
+export const isWindows = () => electronAPI.platform === 'win32';
+
+export const isLinux = () => electronAPI.platform === 'linux';

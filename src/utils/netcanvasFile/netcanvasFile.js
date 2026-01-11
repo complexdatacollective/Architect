@@ -1,8 +1,7 @@
-import fse from 'fs-extra';
-import log from 'electron-log';
-import path from 'path';
+import log from '@utils/logger';
 import uuid from 'uuid';
 import { isEqual } from 'lodash';
+import { electronAPI, pathSync } from '@utils/electronBridge';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import { saveDialog } from '@app/utils/dialogs';
 import { canUpgrade, migrateProtocol } from '@codaco/protocol-validation';
@@ -29,13 +28,15 @@ const schemaVersionStates = {
   OK: 'OK',
 };
 
-const getNewFileName = (filePath) => Promise.resolve(path.basename(filePath, '.netcanvas'))
-  .then((basename) => saveDialog({
+const getNewFileName = (filePath) => {
+  const basename = pathSync.basename(filePath, '.netcanvas');
+  return saveDialog({
     buttonLabel: 'Save',
     nameFieldLabel: 'Save:',
     defaultPath: `${basename} (schema version ${APP_SCHEMA_VERSION}).netcanvas`,
     filters: [{ name: 'Network Canvas', extensions: ['netcanvas'] }],
-  }));
+  });
+};
 
 const ProtocolsDidNotMatchError = new Error('Protocols did not match');
 
@@ -45,18 +46,22 @@ const ProtocolsDidNotMatchError = new Error('Protocols did not match');
  * @param destinationUserPath Destination path
  * @returns {Promise} Resolves to { savePath, backupPath }
  */
-const createNetcanvas = (destinationUserPath) => getTempDir('new')
-  .then((newDir) => {
-    const workingPath = path.join(newDir, uuid());
-    const assetPath = path.join(workingPath, 'assets');
+const createNetcanvas = async (destinationUserPath) => {
+  try {
+    const newDir = await getTempDir('new');
+    const workingPath = await electronAPI.path.join(newDir, uuid());
+    const assetPath = await electronAPI.path.join(workingPath, 'assets');
 
-    return fse.mkdirp(assetPath)
-      .then(() => ({ schemaVersion: APP_SCHEMA_VERSION, ...protocolTemplate }))
-      .then((protocol) => createNetcanvasExport(workingPath, protocol))
-      .then((netcanvasExportPath) => deployNetcanvas(netcanvasExportPath, destinationUserPath))
-      .then(() => destinationUserPath);
-  })
-  .catch(handleError(errors.CreateFailed));
+    await electronAPI.fs.mkdirp(assetPath);
+    const protocol = { schemaVersion: APP_SCHEMA_VERSION, ...protocolTemplate };
+    const netcanvasExportPath = await createNetcanvasExport(workingPath, protocol);
+    await deployNetcanvas(netcanvasExportPath, destinationUserPath);
+    return destinationUserPath;
+  } catch (e) {
+    handleError(errors.CreateFailed)(e);
+    throw e;
+  }
+};
 
 /**
  * Asseses a .netcanvas file schema version against the app schema version (or

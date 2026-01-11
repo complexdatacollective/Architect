@@ -1,9 +1,7 @@
 /* eslint-disable import/prefer-default-export */
-import path from 'path';
 import uuid from 'uuid/v4';
-import { remote } from 'electron';
-import { remove, rename, outputFile } from 'fs-extra';
 import axios from 'axios';
+import { electronAPI } from '@utils/electronBridge';
 import { APP_SCHEMA_VERSION, SAMPLE_PROTOCOL_URL } from '@app/config';
 import * as netcanvasFile from '@app/utils/netcanvasFile';
 import validateProtocol from '@app/utils/validateProtocol';
@@ -185,7 +183,7 @@ const printOverview = () => (dispatch, getState) => {
   dispatch({ ipc: true, type: 'PRINT_SUMMARY_DATA', payload });
 };
 
-const importSampleProtocol = () => (dispatch) => {
+const importSampleProtocol = () => async (dispatch) => {
   let userFilePath; // Path to save the file, chosen by user
   let tempFilePath; // Temp file path for downloading to
   let userCancelled = false; // Flag to determine if the user cancels
@@ -194,14 +192,12 @@ const importSampleProtocol = () => (dispatch) => {
 
   // Utility that attempts to clean up temp files, and
   // ensures import toast is removed
-  const handleCleanup = () => {
-    // eslint-disable-next-line no-console
+  const handleCleanup = async () => {
     dispatch(toastActions.removeToast(importUUID));
 
     if (tempFilePath) {
-      // Cleanup
       try {
-        remove(tempFilePath);
+        await electronAPI.fs.unlink(tempFilePath);
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error('Error removing temp file path: ', e);
@@ -217,34 +213,22 @@ const importSampleProtocol = () => (dispatch) => {
     handleCleanup();
   };
 
-  /**
-   *
-   * @param {*} parameters Any parameter to pass to next promise
-   * @returns Promise
-   *
-   * Utility function to be inserted between steps in the promise chain.
-   * Checks the value of the userCancelled token, and then throws our
-   * custom CancellationError() if it has, which we can handle separately
-   * in our catch block.
-   *
-   * Otherwise, transparently passes through promise parameters to next
-   * item in chain.
-   */
-  const checkIfUserCancelled = (parameters) => new Promise((resolve) => {
+  const checkIfUserCancelled = () => {
     if (userCancelled) { throw new CancellationError(); }
-    resolve(parameters);
-  });
+  };
 
-  return saveDialog({
-    defaultPath: '*/Sample Protocol',
-  })
-    .then(({ canceled, filePath }) => {
-      if (canceled) { throw new CancellationError(); }
-      userFilePath = filePath;
-    })
-    .then(checkIfUserCancelled)
-    .then(() => dispatch(createImportToast(importUUID, handleCancel)))
-    .then(() => axios.get(SAMPLE_PROTOCOL_URL, {
+  try {
+    const { canceled, filePath } = await saveDialog({
+      defaultPath: '*/Sample Protocol',
+    });
+
+    if (canceled) { throw new CancellationError(); }
+    userFilePath = filePath;
+
+    checkIfUserCancelled();
+    dispatch(createImportToast(importUUID, handleCancel));
+
+    const response = await axios.get(SAMPLE_PROTOCOL_URL, {
       signal: controller.signal,
       responseType: 'arraybuffer',
       onDownloadProgress: (progressEvent) => {
@@ -252,36 +236,35 @@ const importSampleProtocol = () => (dispatch) => {
         dispatch(updateDownloadProgress(importUUID, percentCompleted));
       },
     }).catch((error) => {
-      // Calling controller.abort() in handleCancel() causes axios to emit an error.
-      // In this special case, catch the error and reemit our CancellationError().
       if (error.code === 'ERR_CANCELED') { throw new CancellationError(); }
-
       throw new Error(error);
-    }))
-    .then((response) => response.data)
-    .then(checkIfUserCancelled)
-    .then((data) => {
-      tempFilePath = path.join(remote.app.getPath('temp'), 'architect', importUUID);
-      return outputFile(tempFilePath, Buffer.from(data));
-    })
-    .then(checkIfUserCancelled)
-    .then(() => rename(tempFilePath, userFilePath))
-    .then(checkIfUserCancelled)
-    .then(() => handleCleanup())
-    .then(() => dispatch(openNetcanvas(userFilePath)))
-    .catch((error) => {
-      handleCleanup();
-
-      // Detect our custom error type, and suppress any error message
-      // that would otherwise result.
-      if (error instanceof CancellationError) {
-        // eslint-disable-next-line no-console
-        console.info('User cancelled the protocol import');
-        return;
-      }
-
-      dispatch(importErrorDialog(error));
     });
+
+    checkIfUserCancelled();
+
+    const tempPath = await electronAPI.app.getPath('temp');
+    tempFilePath = await electronAPI.path.join(tempPath, 'architect', importUUID);
+    await electronAPI.fs.outputFile(tempFilePath, Buffer.from(response.data));
+
+    checkIfUserCancelled();
+
+    await electronAPI.fs.rename(tempFilePath, userFilePath);
+
+    checkIfUserCancelled();
+
+    await handleCleanup();
+    dispatch(openNetcanvas(userFilePath));
+  } catch (error) {
+    await handleCleanup();
+
+    if (error instanceof CancellationError) {
+      // eslint-disable-next-line no-console
+      console.info('User cancelled the protocol import');
+      return;
+    }
+
+    dispatch(importErrorDialog(error));
+  }
 };
 
 export const actionLocks = {

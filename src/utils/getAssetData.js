@@ -1,19 +1,11 @@
-import fs from 'fs-extra';
 import { memoize } from 'lodash';
+import { electronAPI } from '@utils/electronBridge';
 
 const resolver = (sourcePath) => sourcePath;
 
-const getAssetData = (sourcePath, type) => {
-  switch (type) {
-    default:
-      return new Promise((resolve, reject) => {
-        fs.readFile(sourcePath, 'utf8', (error, data) => {
-          if (error) { reject(error); return; }
-
-          resolve(JSON.parse(data));
-        });
-      });
-  }
+const getAssetData = async (sourcePath) => {
+  const data = await electronAPI.fs.readFile(sourcePath, 'utf8');
+  return JSON.parse(data);
 };
 
 export default memoize(getAssetData, resolver);

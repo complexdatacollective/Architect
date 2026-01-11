@@ -1,5 +1,5 @@
 @use "sass:math";
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 $preview-offset: units.unit(12);
 $preview-width: units.unit(26);

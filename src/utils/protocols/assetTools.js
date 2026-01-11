@@ -1,9 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 
-import path from 'path';
 import { get } from 'lodash';
 import csv from 'csvtojson';
-import fs from 'fs-extra';
+import { electronAPI } from '@utils/electronBridge';
 import { getVariableNamesFromNetwork, validateNames } from '@codaco/protocol-validation';
 import { getSupportedAssetType } from '@app/utils/protocols/importAsset';
 
@@ -13,20 +12,20 @@ import { getSupportedAssetType } from '@app/utils/protocols/importAsset';
 */
 const withExtensionSwitch = (
   configuration, fallback = () => Promise.resolve(),
-) => (filePath, ...rest) => {
+) => async (filePath, ...rest) => {
   if (!filePath) { return null; }
-  const extension = path.extname(filePath).substr(1); // e.g. 'csv'
+  const extension = (await electronAPI.path.extname(filePath)).substr(1); // e.g. 'csv'
 
   const f = get(configuration, [extension], fallback);
   return f(filePath, ...rest);
 };
 
-const readJsonNetwork = (assetPath) => fs.readJson(assetPath);
+const readJsonNetwork = (assetPath) => electronAPI.fs.readJson(assetPath);
 
 const readCsvNetwork = async (assetPath) => {
-  const data = await fs.readFile(assetPath);
+  const data = await electronAPI.fs.readFile(assetPath, 'utf8');
   const nodes = await csv({ checkColumn: true })
-    .fromString(data.toString('utf8'))
+    .fromString(data)
     .then(
       (rows) => rows.map((attributes) => ({ attributes })),
     )
@@ -89,7 +88,7 @@ const validateNetwork = async (filePath) => {
 * @param {buffer} file - The file to check.
 */
 export const validateAsset = async (filePath) => {
-  const assetType = getSupportedAssetType(filePath);
+  const assetType = await getSupportedAssetType(filePath);
 
   if (!assetType) {
     throw new Error('Asset type not supported');
@@ -104,6 +103,6 @@ export const validateAsset = async (filePath) => {
 
 export const getGeoJsonVariables = async (filePath) => {
   // process GeoJSON
-  const geoJson = await fs.readJson(filePath);
+  const geoJson = await electronAPI.fs.readJson(filePath);
   return Object.keys(geoJson.features[0].properties);
 };

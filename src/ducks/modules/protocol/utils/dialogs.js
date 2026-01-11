@@ -1,4 +1,5 @@
-import React from 'react'; import path from 'path';
+import React from 'react';
+import { pathSync } from '@utils/electronBridge';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import ExternalLink from '@components/ExternalLink';
 import { Button } from '@codaco/ui';
@@ -68,7 +69,7 @@ export const invalidAssetErrorDialog = (e, filePath) => {
 
   return dialogActions.openDialog({
     type: 'Error',
-    title: `Error: ${path.basename(filePath)} is not formatted correctly`,
+    title: `Error: ${pathSync.basename(filePath)} is not formatted correctly`,
     error: e,
   });
 };
@@ -78,7 +79,7 @@ export const importAssetErrorDialog = (e, filePath) => {
     <>
       The file
       {' '}
-      <strong>{path.basename(filePath)}</strong>
+      <strong>{pathSync.basename(filePath)}</strong>
       {' '}
       could not be imported.
     </>

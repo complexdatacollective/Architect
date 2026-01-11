@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ipcRenderer } from 'electron';
+import { electronAPI } from '@utils/electronBridge';
 import ProtocolSummary from '@app/lib/ProtocolSummary/ProtocolSummary';
 import ProtocolSummaryErrorBoundary from '../../Errors/ProtocolSummaryErrorBoundary';
 
@@ -15,7 +15,7 @@ const ProtocolSummaryView = () => {
   });
 
   useEffect(() => {
-    ipcRenderer.once('SUMMARY_DATA', (event, _data) => {
+    electronAPI.ipc.once('SUMMARY_DATA', (_data) => {
       setData(_data);
     });
   }, []);

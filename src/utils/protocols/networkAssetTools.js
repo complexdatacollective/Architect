@@ -1,43 +1,37 @@
 /* eslint-disable import/prefer-default-export */
 
-import path from 'path';
 import { first, get } from 'lodash';
 import csvParse from 'csv-parse';
-import { readFile } from 'fs-extra';
+import { electronAPI } from '@utils/electronBridge';
 import { getVariableNamesFromNetwork } from '@codaco/protocol-validation';
 
 /**
 * Generate a switching function that takes a filepath as an argument
 * and returns match from configuration object.
 */
-const withExtensionSwitch = (configuration, fallback = () => Promise.resolve()) => (filePath) => {
-  const extension = path.extname(filePath).substr(1); // e.g. 'csv'
+const withExtensionSwitch = (
+  configuration, fallback = () => Promise.resolve(),
+) => async (filePath) => {
+  const extname = await electronAPI.path.extname(filePath);
+  const extension = extname.substr(1); // e.g. 'csv'
 
   return get(configuration, [extension], fallback);
 };
 
-const readJsonVariables = (data) => new Promise((resolve, reject) => {
-  try {
-    const network = JSON.parse(data);
-
-    const variableNames = getVariableNamesFromNetwork(network);
-
-    return resolve(variableNames);
-  } catch (e) {
-    return reject(e);
-  }
-});
+const readJsonVariables = (data) => {
+  const network = JSON.parse(data);
+  return getVariableNamesFromNetwork(network);
+};
 
 const readCsvVariables = (data) => new Promise((resolve, reject) => {
-  try {
-    csvParse(data, { trim: true }, (err, tableData) => {
-      const firstRow = first(tableData);
-
-      return resolve(firstRow);
-    });
-  } catch (e) {
-    reject(e);
-  }
+  csvParse(data, { trim: true }, (err, tableData) => {
+    if (err) {
+      reject(err);
+      return;
+    }
+    const firstRow = first(tableData);
+    resolve(firstRow);
+  });
 });
 
 /**
@@ -54,9 +48,8 @@ const getVariableReader = withExtensionSwitch({
 * Gets node variables from an external data source
 * @param {buffer} file - The external data source
 */
-export const getAssetVariables = (filePath) => {
-  const variableReader = getVariableReader(filePath);
-
-  return readFile(filePath)
-    .then(variableReader);
+export const getAssetVariables = async (filePath) => {
+  const variableReader = await getVariableReader(filePath);
+  const data = await electronAPI.fs.readFile(filePath, 'utf8');
+  return variableReader(data);
 };

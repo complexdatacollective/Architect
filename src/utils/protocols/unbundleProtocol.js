@@ -1,5 +1,4 @@
-import path from 'path';
-import fs from 'fs-extra';
+import { electronAPI } from '@utils/electronBridge';
 import { extract } from './lib/archive';
 import getLocalDirectoryFromArchivePath from './lib/getLocalDirectoryFromArchivePath';
 
@@ -11,18 +10,20 @@ import getLocalDirectoryFromArchivePath from './lib/getLocalDirectoryFromArchive
  *
  * @returns A promise which resolves to the destination path.
  */
-const unbundleProtocol = (filePath) => {
-  const destinationPath = getLocalDirectoryFromArchivePath(filePath);
+const unbundleProtocol = async (filePath) => {
+  const destinationPath = await getLocalDirectoryFromArchivePath(filePath);
+  const extname = await electronAPI.path.extname(filePath);
 
-  return fs.access(filePath, fs.constants.R_OK)
-    .then(() => {
-      if (path.extname(filePath) === '.netcanvas') {
-        return extract(filePath, destinationPath);
-      }
+  // Check file is readable
+  await electronAPI.fs.access(filePath);
 
-      return fs.copy(filePath, destinationPath);
-    })
-    .then(() => destinationPath);
+  if (extname === '.netcanvas') {
+    await extract(filePath, destinationPath);
+  } else {
+    await electronAPI.fs.copy(filePath, destinationPath);
+  }
+
+  return destinationPath;
 };
 
 export default unbundleProtocol;

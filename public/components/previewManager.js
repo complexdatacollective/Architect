@@ -1,63 +1,47 @@
-const { ipcMain, Menu } = require('electron');
+const { ipcMain } = require('electron');
 const log = require('./log');
-const getPreviewMenu = require('./previewMenu');
 
+const PREVIEW_DISABLED_MESSAGE = 'Preview is currently unavailable. The network-canvas submodule requires modernization to support Electron security features.';
+
+/**
+ * PreviewManager is DISABLED.
+ *
+ * Preview functionality requires the network-canvas submodule to be
+ * modernized with Electron security features before it can be re-enabled.
+ */
 class PreviewManager {
   static showIndex() {
-    if (!global.previewWindow) { return; }
-    global.previewWindow.showIndex();
+    log.warn(PREVIEW_DISABLED_MESSAGE);
   }
 
-  static send(...args) {
-    if (!global.previewWindow) { return; }
-    global.previewWindow.webContents.send(...args);
+  static send() {
+    // No-op - preview is disabled
   }
 
   static quit() {
-    global.previewWindow.close();
-  }
-
-  constructor() {
-    this.menu = null;
+    // No-op - preview is disabled
   }
 
   start() {
-    log.info('Start previewManager');
-    this.menu = Menu.buildFromTemplate(getPreviewMenu(global.previewWindow));
+    log.info('PreviewManager: Preview mode is DISABLED');
+    log.warn(PREVIEW_DISABLED_MESSAGE);
 
-    global.previewWindow.on('focus', () => {
-      this.updateMenu();
-    });
-
-    ipcMain.on('preview:preview', (event, protocol, stageId) => {
-      PreviewManager.send('remote:preview', protocol, stageId);
-      global.previewWindow.show();
-      this.updateMenu();
+    // Register IPC handlers that return immediately (no-op)
+    ipcMain.on('preview:preview', () => {
+      log.warn(PREVIEW_DISABLED_MESSAGE);
     });
 
     ipcMain.on('preview:clear', () => {
-      PreviewManager.send('remote:reset');
-      global.previewWindow.hide();
+      // No-op
     });
 
     ipcMain.on('preview:close', () => {
-      global.previewWindow.hide();
+      // No-op
     });
 
     ipcMain.on('preview:reset', () => {
-      global.previewWindow.loadIndex();
-      PreviewManager.send('remote:reset');
+      // No-op
     });
-
-    PreviewManager.send('remote:reset');
-  }
-
-  updateMenu() {
-    if (process.platform === 'win32' || process.platform === 'linux') {
-      global.previewWindow.setMenu(this.menu);
-    } else {
-      Menu.setApplicationMenu(this.menu);
-    }
   }
 }
 

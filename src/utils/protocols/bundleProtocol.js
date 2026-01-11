@@ -1,6 +1,5 @@
-import log from 'electron-log';
-import path from 'path';
-import fse from 'fs-extra';
+import log from '@utils/logger';
+import { electronAPI } from '@utils/electronBridge';
 import { archive } from './lib/archive';
 
 /**
@@ -9,14 +8,16 @@ import { archive } from './lib/archive';
  * @param {string} workingPath - meta data about for protocol RE file system
  * @param {string} filePath - The protocol path.
  */
-const bundleProtocol = (workingPath, filePath) => {
-  if (path.extname(filePath) === '.netcanvas') {
+const bundleProtocol = async (workingPath, filePath) => {
+  const extname = await electronAPI.path.extname(filePath);
+
+  if (extname === '.netcanvas') {
     log.debug(`Save protocol ${filePath} as archive`);
     return archive(workingPath, filePath);
   }
 
   log.debug(`Save protocol ${filePath} as directory`);
-  return fse.copy(workingPath, filePath);
+  return electronAPI.fs.copy(workingPath, filePath);
 };
 
 export default bundleProtocol;

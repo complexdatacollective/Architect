@@ -1,6 +1,6 @@
-import path from 'path';
 import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
+import { pathSync } from '@utils/electronBridge';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
@@ -177,7 +177,7 @@ const mapDispatchToProps = {
 const mapStateToProps = (state) => {
   const protocol = getProtocol(state);
   const filePath = getActiveProtocol(state);
-  const fileName = filePath && path.basename(filePath);
+  const fileName = filePath && pathSync.basename(filePath);
   const protocolIsValid = getIsProtocolValid(state);
   const hasUnsavedChanges = getHasUnsavedChanges(state);
 

@@ -1,5 +1,5 @@
-import path from 'path';
 import { uniqBy } from 'lodash';
+import { pathSync } from '@utils/electronBridge';
 import { actionTypes as sessionActionTypes } from '@modules/session';
 
 const initialState = [];
@@ -17,7 +17,7 @@ export default function reducer(state = initialState, action = {}) {
       return addProtocol(state, {
         filePath,
         lastModified: protocol.lastModified,
-        name: path.basename(filePath, '.netcanvas'),
+        name: pathSync.basename(filePath, '.netcanvas'),
         description: protocol.description,
         schemaVersion: protocol.schemaVersion,
       });
@@ -29,7 +29,7 @@ export default function reducer(state = initialState, action = {}) {
       return addProtocol(state, {
         filePath,
         lastModified: new Date().getTime(),
-        name: path.basename(filePath, '.netcanvas'),
+        name: pathSync.basename(filePath, '.netcanvas'),
         description: protocol.description,
         schemaVersion: protocol.schemaVersion,
       });

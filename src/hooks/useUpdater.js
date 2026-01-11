@@ -6,7 +6,7 @@ import { find } from 'lodash';
 import compareVersions from 'compare-versions';
 import { Markdown } from '@codaco/ui/lib/components/Fields';
 import { isMacOS, isWindows, isLinux } from '@app/utils/platform';
-import { remote } from 'electron';
+import { electronAPI } from '@utils/electronBridge';
 import { actionCreators as toastActions } from '../ducks/modules/toasts';
 import { actionCreators as dialogActions } from '../ducks/modules/dialogs';
 import ExternalLink, { openExternalLink } from '../components/ExternalLink';
@@ -110,7 +110,7 @@ const useUpdater = (updateEndpoint, timeout = 0) => {
   };
 
   const checkForUpdate = async () => {
-    const version = remote.app.getVersion();
+    const version = await electronAPI.app.getVersion();
     const updateAvailable = await checkEndpoint(updateEndpoint, version);
     if (!updateAvailable) { return; }
 

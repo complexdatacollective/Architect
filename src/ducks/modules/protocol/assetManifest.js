@@ -1,7 +1,7 @@
 import uuid from 'uuid';
 import { omit } from 'lodash';
-import path from 'path';
-import log from 'electron-log';
+import log from '@utils/logger';
+import { pathSync } from '@utils/electronBridge';
 import { importAsset as fsImportAsset } from '@app/utils/protocols';
 import { getWorkingPath } from '@selectors/session';
 import { validateAsset } from '@app/utils/protocols/assetTools';
@@ -14,7 +14,7 @@ const IMPORT_ASSET_FAILED = 'PROTOCOL/IMPORT_ASSET_FAILED';
 const DELETE_ASSET = 'PROTOCOL/DELETE_ASSET';
 const ADD_API_KEY_ASSET = 'PROTOCOL/ADD_API_KEY_ASSET';
 
-const getNameFromFilename = (filename) => path.parse(filename).base;
+const getNameFromFilename = (filename) => pathSync.parse(filename).base;
 
 const deleteAsset = (id) => ({
   type: DELETE_ASSET,

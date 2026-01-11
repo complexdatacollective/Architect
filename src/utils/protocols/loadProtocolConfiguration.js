@@ -1,5 +1,4 @@
-import fs from 'fs-extra';
-import path from 'path';
+import { electronAPI } from '@utils/electronBridge';
 
 /**
  * Given a folder containing a `protocol.json`,
@@ -7,10 +6,10 @@ import path from 'path';
  * @param {string} protocolPath - The protocol directory.
  * @returns {object} The protocol as an object
  */
-const loadProtocolConfiguration = (protocolPath) => {
-  const protocolFile = path.join(protocolPath, 'protocol.json');
+const loadProtocolConfiguration = async (protocolPath) => {
+  const protocolFile = await electronAPI.path.join(protocolPath, 'protocol.json');
 
-  return fs.readJson(protocolFile);
+  return electronAPI.fs.readJson(protocolFile);
 };
 
 export default loadProtocolConfiguration;

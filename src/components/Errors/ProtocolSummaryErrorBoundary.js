@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Button from '@codaco/ui/lib/components/Button';
 import PropTypes from 'prop-types';
-import { remote } from 'electron';
+import { electronAPI } from '@utils/electronBridge';
 
-const closeWindow = () => remote.getCurrentWindow().hide();
+const closeWindow = () => electronAPI.window.hide();
 
 class ProtocolSummaryErrorBoundary extends Component {
   constructor(props) {

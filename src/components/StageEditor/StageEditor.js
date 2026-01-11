@@ -2,7 +2,7 @@ import React, {
   useEffect, useState, useCallback, useMemo,
 } from 'react';
 import PropTypes from 'prop-types';
-import { ipcRenderer } from 'electron';
+import { electronAPI } from '@utils/electronBridge';
 import { compose, defaultProps } from 'recompose';
 import Editor from '@components/Editor';
 import { Layout } from '@components/EditorLayout';
@@ -44,10 +44,10 @@ const StageEditor = (props) => {
   }, [handleKeyDown]);
 
   useEffect(() => {
-    ipcRenderer.on('REFRESH_PREVIEW', previewStage);
+    const cleanup = electronAPI.ipc.on('REFRESH_PREVIEW', previewStage);
 
-    return () => ipcRenderer.removeListener('REFRESH_PREVIEW', previewStage);
-  }, []);
+    return cleanup;
+  }, [previewStage]);
 
   const sections = useMemo(
     () => getInterface(interfaceType).sections,

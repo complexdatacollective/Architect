@@ -1,6 +1,4 @@
-import { remote } from 'electron';
-import fse from 'fs-extra';
-import path from 'path';
+import { electronAPI } from '@utils/electronBridge';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import { saveDialog } from '@app/utils/dialogs';
 import getLocalDirectoryFromArchivePath from './lib/getLocalDirectoryFromArchivePath';
@@ -16,48 +14,47 @@ const saveDialogOptions = {
  * Creates an blank protocol directory at destinationPath, with correct directory structure.
  * @param {string} destinationPath - destination for skeleton protocol.
  */
-const createProtocolWorkingPath = (destinationPath) => new Promise((resolve) => {
-  const appPath = remote.app.getAppPath();
-  const templatePath = path.join(appPath, 'template');
-  fse.copySync(templatePath, destinationPath);
+const createProtocolWorkingPath = async (destinationPath) => {
+  const appPath = await electronAPI.app.getAppPath();
+  const templatePath = await electronAPI.path.join(appPath, 'template');
 
-  const protocolTemplate = fse.readJsonSync(
-    path.join(templatePath, 'protocol.json'),
-  );
+  await electronAPI.fs.copy(templatePath, destinationPath);
+
+  const templateProtocolPath = await electronAPI.path.join(templatePath, 'protocol.json');
+  const protocolTemplate = await electronAPI.fs.readJson(templateProtocolPath);
 
   const protocol = {
     schemaVersion: APP_SCHEMA_VERSION,
     ...protocolTemplate,
   };
 
-  fse.writeJsonSync(
-    path.join(destinationPath, 'protocol.json'),
-    protocol,
-  );
+  const destProtocolPath = await electronAPI.path.join(destinationPath, 'protocol.json');
+  await electronAPI.fs.writeJson(destProtocolPath, protocol, { spaces: 2 });
 
-  // TODO: update protocol with version number
-
-  resolve(destinationPath);
-});
+  return destinationPath;
+};
 
 /**
  * Creates a blank protocol in a tempory path
  * @param {string} destinationPath - destination for protocol bundle.
  */
-export const createProtocolFiles = (destinationPath) => {
-  const tempPath = getLocalDirectoryFromArchivePath(destinationPath);
-
+export const createProtocolFiles = async (destinationPath) => {
+  const tempPath = await getLocalDirectoryFromArchivePath(destinationPath);
   return createProtocolWorkingPath(tempPath);
 };
 
 /**
  * Shows a save dialog and then creates a blank protocol there
  */
-const createProtocol = () => saveDialog(saveDialogOptions)
-  .then(({ canceled, filePath }) => {
-    if (canceled) { return null; }
-    return createProtocolFiles(filePath)
-      .then((tempPath) => ({ filePath, workingPath: tempPath }));
-  });
+const createProtocol = async () => {
+  const { canceled, filePath } = await saveDialog(saveDialogOptions);
+
+  if (canceled) {
+    return null;
+  }
+
+  const tempPath = await createProtocolFiles(filePath);
+  return { filePath, workingPath: tempPath };
+};
 
 export default createProtocol;

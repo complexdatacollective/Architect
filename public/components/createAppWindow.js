@@ -1,5 +1,4 @@
-const { BrowserWindow, Menu, MenuItem } = require('electron');
-const url = require('url');
+const { BrowserWindow, Menu, MenuItem, app } = require('electron');
 const path = require('path');
 const log = require('./log');
 
@@ -9,26 +8,10 @@ const titlebarParameters = isMacOS() ? { titleBarStyle: 'hidden', frame: false }
 
 global.appWindow = null;
 
-function getAppUrl() {
-  if (process.env.NODE_ENV === 'development' && process.env.WEBPACK_DEV_SERVER_PORT) {
-    const appUrl = url.format({
-      host: `localhost:${process.env.WEBPACK_DEV_SERVER_PORT}/`,
-      protocol: 'http',
-    });
-
-    log.info('appUrl [host]', appUrl);
-
-    return appUrl;
-  }
-
-  const appUrl = url.format({
-    pathname: path.join(__dirname, '../', 'index.html'),
-    protocol: 'file:',
-  });
-
-  log.info('appUrl [path]', appUrl);
-
-  return appUrl;
+function getPreloadPath() {
+  // electron-vite copies main process to dist/main/ before running (both dev and prod)
+  // __dirname is dist/main/components/, preload is at dist/main/preload/
+  return path.join(__dirname, '../preload/appPreload.js');
 }
 
 function createAppWindow() {
@@ -45,7 +28,9 @@ function createAppWindow() {
       title: 'Network Canvas Architect',
       show: true,
       webPreferences: {
-        nodeIntegration: true,
+        nodeIntegration: false,
+        contextIsolation: true,
+        preload: getPreloadPath(),
       },
     }, titlebarParameters);
 
@@ -77,10 +62,8 @@ function createAppWindow() {
       menu.popup();
     });
 
-    global.appWindow.webContents.on('new-window', (evt) => {
-      // A user may have tried to open a new window (shift|cmd-click); ignore action
-      evt.preventDefault();
-    });
+    // Prevent new windows from being opened (e.g., shift|cmd-click)
+    global.appWindow.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
 
     // For now, any navigation off the SPA is unneeded
     global.appWindow.webContents.on('will-navigate', (evt) => {
@@ -95,7 +78,18 @@ function createAppWindow() {
       resolve(global.appWindow);
     });
 
-    global.appWindow.loadURL(getAppUrl());
+    // Load the app URL based on environment
+    // electron-vite sets ELECTRON_RENDERER_URL in development
+    if (process.env.ELECTRON_RENDERER_URL) {
+      log.info('Loading renderer from dev server:', process.env.ELECTRON_RENDERER_URL);
+      global.appWindow.loadURL(process.env.ELECTRON_RENDERER_URL);
+    } else {
+      // Production: load from built files
+      // __dirname is dist/main/components, renderer is at dist/renderer
+      const indexPath = path.join(__dirname, '../../renderer/index.html');
+      log.info('Loading renderer from file:', indexPath);
+      global.appWindow.loadFile(indexPath);
+    }
 
     if (process.env.NODE_ENV === 'development') {
       global.appWindow.openDevTools();

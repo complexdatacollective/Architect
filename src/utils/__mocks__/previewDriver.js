@@ -1,8 +1,8 @@
-/* eslint-env jest */
+import { vi } from 'vitest';
 
-const preview = jest.fn();
+const preview = vi.fn();
 
-const close = jest.fn();
+const close = vi.fn();
 
 const driver = {
   preview,

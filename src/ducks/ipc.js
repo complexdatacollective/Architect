@@ -1,4 +1,4 @@
-import { ipcRenderer } from 'electron';
+import { electronAPI } from '@utils/electronBridge';
 
 /**
  * Connect a listener to the IPC channel 'ACTION'. These events are treated
@@ -13,7 +13,7 @@ import { ipcRenderer } from 'electron';
  * dispatch({ type: 'UPDATE_FOO', foo: 'bar', meta: { sender: referenceToIPCSender} });
  */
 const ipc = (store) => {
-  ipcRenderer.on('ACTION', (event, { target, ...action }) => {
+  electronAPI.ipc.on('ACTION', (event, { target, ...action }) => {
     const ipcAction = {
       ...action,
       meta: { ...action.meta, sender: event.sender },
@@ -24,7 +24,7 @@ const ipc = (store) => {
 
   return (next) => (action) => {
     if (action.ipc === true) {
-      ipcRenderer.send('ACTION', action);
+      electronAPI.ipc.send('ACTION', action);
     }
 
     return next(action);
