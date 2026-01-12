@@ -9,9 +9,8 @@ const titlebarParameters = isMacOS() ? { titleBarStyle: 'hidden', frame: false }
 global.appWindow = null;
 
 function getPreloadPath() {
-  // electron-vite copies main process to dist/main/ before running (both dev and prod)
-  // __dirname is dist/main/components/, preload is at dist/main/preload/
-  return path.join(__dirname, '../preload/appPreload.js');
+  // __dirname is dist/main/components/, preload is at dist/preload/
+  return path.join(__dirname, '../../preload/app.js');
 }
 
 function createAppWindow() {

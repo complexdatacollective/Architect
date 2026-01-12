@@ -1,9 +1,11 @@
 import { defineConfig, externalizeDepsPlugin } from 'electron-vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
-import { copyFileSync, mkdirSync, readdirSync, statSync, existsSync } from 'fs';
+import { copyFileSync, mkdirSync, readdirSync, existsSync } from 'fs';
 
-// Copy directory recursively
+/**
+ * Copy directory recursively
+ */
 function copyDir(src, dest) {
   mkdirSync(dest, { recursive: true });
   const entries = readdirSync(src, { withFileTypes: true });
@@ -18,26 +20,28 @@ function copyDir(src, dest) {
   }
 }
 
-// Plugin to copy main process files instead of bundling
+/**
+ * Plugin to copy main process CommonJS files to dist.
+ * The main process uses CommonJS and native modules that don't bundle well,
+ * so we copy them directly instead of bundling.
+ */
 function copyMainProcess() {
   return {
     name: 'copy-main-process',
-    buildStart() {
+    closeBundle() {
       const srcDir = resolve(__dirname, 'public');
       const destDir = resolve(__dirname, 'dist/main');
 
-      // Copy electron-starter.js as index.js
+      // Copy electron-starter.js as index.js (entry point)
       mkdirSync(destDir, { recursive: true });
-      copyFileSync(resolve(srcDir, 'electron-starter.js'), resolve(destDir, 'index.js'));
+      copyFileSync(
+        resolve(srcDir, 'electron-starter.js'),
+        resolve(destDir, 'index.js')
+      );
 
       // Copy components directory
       if (existsSync(resolve(srcDir, 'components'))) {
         copyDir(resolve(srcDir, 'components'), resolve(destDir, 'components'));
-      }
-
-      // Copy preload directory
-      if (existsSync(resolve(srcDir, 'preload'))) {
-        copyDir(resolve(srcDir, 'preload'), resolve(destDir, 'preload'));
       }
 
       // Copy icons directory
@@ -65,11 +69,11 @@ export default defineConfig({
   preload: {
     plugins: [externalizeDepsPlugin()],
     build: {
-      outDir: 'dist/main/preload',
+      outDir: 'dist/preload',
       rollupOptions: {
         input: {
-          appPreload: resolve(__dirname, 'public/preload/appPreload.js'),
-          summaryPreload: resolve(__dirname, 'public/preload/summaryPreload.js'),
+          app: resolve(__dirname, 'public/preload/appPreload.js'),
+          summary: resolve(__dirname, 'public/preload/summaryPreload.js'),
         },
       },
     },
@@ -84,7 +88,18 @@ export default defineConfig({
         },
       },
     },
-    plugins: [react()],
+    plugins: [
+      react({
+        include: ['src/**/*.js', 'src/**/*.jsx', '**/*.js', '**/*.jsx'],
+        babel: {
+          babelrc: false,
+          configFile: false,
+          presets: [
+            ['@babel/preset-react', { runtime: 'automatic' }],
+          ],
+        },
+      }),
+    ],
     resolve: {
       alias: {
         '@app': resolve(__dirname, 'src'),
@@ -96,9 +111,8 @@ export default defineConfig({
       },
     },
     esbuild: {
-      loader: 'jsx',
-      include: /src\/.*\.js$/,
-      exclude: [],
+      jsx: 'automatic',
+      jsxImportSource: 'react',
     },
     optimizeDeps: {
       esbuildOptions: {

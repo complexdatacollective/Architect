@@ -3,9 +3,8 @@ const path = require('path');
 const log = require('./log');
 
 function getPreloadPath() {
-  // electron-vite copies main process to dist/main/ before running (both dev and prod)
-  // __dirname is dist/main/components/, preload is at dist/main/preload/
-  return path.join(__dirname, '../preload/summaryPreload.js');
+  // __dirname is dist/main/components/, preload is at dist/preload/
+  return path.join(__dirname, '../../preload/summary.js');
 }
 
 function openPrintableSummaryWindow(payload) {
