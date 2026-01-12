@@ -1,4 +1,3 @@
-const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer');
 const log = require('./log');
 
 const loadDevTools = () => {
@@ -9,6 +8,10 @@ const loadDevTools = () => {
   }
 
   console.log('  install extensions');
+
+  // Only require electron-devtools-installer in development mode
+  // This module is a devDependency and not available in production builds
+  const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer');
 
   return Promise.all([
     installExtension(REACT_DEVELOPER_TOOLS),
