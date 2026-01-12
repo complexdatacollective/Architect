@@ -1,30 +1,49 @@
 /**
- * Preview functionality is disabled pending modernization of the network-canvas submodule.
- * The submodule requires its own security updates (context isolation, preload scripts)
- * before preview can be safely re-enabled.
+ * Preview driver for Network Canvas Architect.
+ *
+ * This module provides the interface for controlling the preview window,
+ * which displays the Network Canvas interview in a separate window for
+ * testing protocols during design.
  */
 
-const PREVIEW_DISABLED_MESSAGE = 'Preview is currently unavailable. The network-canvas submodule requires modernization to support Electron security features.';
+import { electronAPI } from '@utils/electronBridge';
 
-const preview = () => {
-  // eslint-disable-next-line no-console
-  console.warn(PREVIEW_DISABLED_MESSAGE);
+/**
+ * Opens the preview window and sends protocol data to display a specific stage.
+ * @param {Object} protocol - The protocol to preview
+ * @param {number} stageIndex - The index of the stage to preview
+ */
+const preview = (protocol, stageIndex) => {
+  electronAPI.ipc.send('preview:preview', protocol, stageIndex);
 };
 
+/**
+ * Closes/hides the preview window.
+ */
 const close = () => {
-  // No-op: preview is disabled
+  electronAPI.ipc.send('preview:close');
 };
 
+/**
+ * Clears the preview state without closing the window.
+ */
 const clear = () => {
-  // No-op: preview is disabled
+  electronAPI.ipc.send('preview:clear');
+};
+
+/**
+ * Resets the preview window to its initial state.
+ */
+const reset = () => {
+  electronAPI.ipc.send('preview:reset');
 };
 
 const driver = {
   preview,
   close,
   clear,
-  isDisabled: true,
-  disabledMessage: PREVIEW_DISABLED_MESSAGE,
+  reset,
+  isDisabled: false,
 };
 
 export default driver;

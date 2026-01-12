@@ -52,8 +52,7 @@ const stageEditorProps = withProps(({
       key="preview"
       onClick={handlePreview}
       color="paradise-pink"
-      // disabled={invalid}
-      disabled // TODO: re-enable for schema 8 when available
+      disabled={invalid}
       tooltip={invalid ? invalidStageMessage(invalid) : null}
     >
       Preview

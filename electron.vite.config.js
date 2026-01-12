@@ -80,6 +80,11 @@ export default defineConfig({
   },
   renderer: {
     root: '.',
+    define: {
+      // Provide module shim for libraries that check module.hot (like redux-form)
+      // This prevents "module is not defined" errors when nodeIntegration is disabled
+      'module.hot': 'undefined',
+    },
     build: {
       outDir: 'dist/renderer',
       rollupOptions: {
@@ -124,7 +129,17 @@ export default defineConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          includePaths: [resolve(__dirname, 'src/styles')],
+          api: 'modern-compiler',
+          silenceDeprecations: [
+            'import',
+            'global-builtin',
+            'legacy-js-api',
+            'color-functions',
+            'mixed-decls',
+            'slash-div',
+            'if-function',
+          ],
+          loadPaths: [resolve(__dirname, 'src/styles')],
         },
       },
     },

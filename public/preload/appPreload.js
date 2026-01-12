@@ -157,6 +157,16 @@ contextBridge.exposeInMainWorld('electronAPI', {
   // Platform Info
   // ===================
   platform: process.platform,
+
+  // ===================
+  // Environment Info
+  // ===================
+  env: {
+    isDevelopment: process.env.NODE_ENV === 'development',
+    isProduction: process.env.NODE_ENV === 'production',
+    isPreview: false, // Main app window is not preview
+    platform: process.platform,
+  },
 });
 
 // Log that preload script has loaded (for debugging)

@@ -133,6 +133,12 @@
         "vite": "^7.3.1",
         "vitest": "^4.0.16"
     },
+    "dependencies": {
+        "archiver": "^3.1.1",
+        "decompress": "^4.2.1",
+        "electron-log": "^4.2.2",
+        "fs-extra": "^8.1.0"
+    },
     "homepage": ".",
     "main": "dist/main/index.js"
 }

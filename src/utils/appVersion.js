@@ -34,4 +34,5 @@ export {
   getAppVersion,
   getAppVersionSync,
   getCodenameSync,
+  getAppVersionSync as appVersion,
 };

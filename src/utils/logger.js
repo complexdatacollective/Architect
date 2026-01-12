@@ -6,6 +6,7 @@
  * This provides a console-based fallback for renderer logging.
  */
 
+/* eslint-disable no-console */
 const logger = {
   info: (...args) => console.log('[INFO]', ...args),
   warn: (...args) => console.warn('[WARN]', ...args),

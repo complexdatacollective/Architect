@@ -173,6 +173,21 @@ const registerIpcHandlers = () => {
     return fse.outputFile(filePath, data);
   });
 
+  ipcMain.handle('fs:mkdir', async (_, dirPath, options) => {
+    log.info('fs:mkdir', dirPath);
+    return fse.mkdir(dirPath, options);
+  });
+
+  ipcMain.handle('fs:rmdir', async (_, dirPath) => {
+    log.info('fs:rmdir', dirPath);
+    return fse.rmdir(dirPath, { recursive: true });
+  });
+
+  ipcMain.handle('fs:existsSync', async (_, filePath) => {
+    log.info('fs:existsSync', filePath);
+    return fse.existsSync(filePath);
+  });
+
   // ===================
   // Path Handlers
   // ===================
@@ -280,6 +295,33 @@ const registerIpcHandlers = () => {
     }
   });
 
+  ipcMain.handle('window:setFullScreen', async (event, flag) => {
+    const window = BrowserWindow.fromWebContents(event.sender);
+    if (window) {
+      window.setFullScreen(flag);
+    }
+  });
+
+  ipcMain.handle('window:isFullScreen', async (event) => {
+    const window = BrowserWindow.fromWebContents(event.sender);
+    if (window) {
+      return window.isFullScreen();
+    }
+    return false;
+  });
+
+  // ===================
+  // WebFrame Handlers
+  // ===================
+
+  ipcMain.handle('webFrame:setVisualZoomLevelLimits', async (event, min, max) => {
+    // This needs to be handled via the webContents
+    const webContents = event.sender;
+    if (webContents) {
+      webContents.setVisualZoomLevelLimits(min, max);
+    }
+  });
+
   // ===================
   // WebContents Handlers
   // ===================
@@ -319,6 +361,9 @@ const removeIpcHandlers = () => {
     'fs:pathExists',
     'fs:readdir',
     'fs:outputFile',
+    'fs:mkdir',
+    'fs:rmdir',
+    'fs:existsSync',
     'path:join',
     'path:basename',
     'path:dirname',
@@ -334,6 +379,9 @@ const removeIpcHandlers = () => {
     'window:hide',
     'window:show',
     'window:close',
+    'window:setFullScreen',
+    'window:isFullScreen',
+    'webFrame:setVisualZoomLevelLimits',
     'webContents:printToPDF',
   ];
 
