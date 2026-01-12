@@ -83,7 +83,9 @@ export default defineConfig({
     define: {
       // Provide module shim for libraries that check module.hot (like redux-form)
       // This prevents "module is not defined" errors when nodeIntegration is disabled
-      'module.hot': 'undefined',
+      // We need to define 'module' as an object because some code checks `module` before `.hot`
+      'module.hot': 'false',
+      'module': JSON.stringify({ hot: false }),
     },
     build: {
       outDir: 'dist/renderer',
