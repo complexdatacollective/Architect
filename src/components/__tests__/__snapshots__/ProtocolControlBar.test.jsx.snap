@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`<ProtocolControlBar /> > can render 1`] = `"<div class="control-bar"><div class="control-bar__secondary-buttons"><div><button type="button" color="platinum" icon="[object Object]">Return to start screen</button></div></div><div class="control-bar__primary-buttons"></div></div>"`;
