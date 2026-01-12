@@ -217,6 +217,13 @@
       </div>
     </div>
     <div id="root"></div>
+    <!-- Shim for libraries that check module.hot (like redux-form) -->
+    <!-- Must run before any modules load to prevent ReferenceError -->
+    <script>
+      if (typeof module === 'undefined') {
+        window.module = { hot: false };
+      }
+    </script>
     <script type="module" src="/src/index.jsx"></script>
   </body>
 </html>
