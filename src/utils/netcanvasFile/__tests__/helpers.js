@@ -1,4 +1,4 @@
-/* eslint-env jest */
+import { vi } from 'vitest';
 import path from 'path';
 import { APP_SCHEMA_VERSION } from '@app/config';
 
@@ -6,7 +6,7 @@ const mockProtocolPath = path.join(__dirname, '..', '..', 'network-canvas', 'int
 const mockProtocol = { description: 'test protocol', schemaVersion: APP_SCHEMA_VERSION };
 
 const mockAndLog = (targets) => {
-  const logger = jest.fn();
+  const logger = vi.fn();
 
   Object.keys(targets).forEach((name) => {
     const [target, result] = targets[name];

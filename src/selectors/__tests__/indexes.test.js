@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import { getMockState } from '@app/__tests__/helpers';
+import { getMockState } from '@app/__tests__/testHelpers';
 
 import {
   getVariableIndex,

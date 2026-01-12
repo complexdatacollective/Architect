@@ -1,5 +1,4 @@
-/* eslint-env jest */
-
+import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { actionTypes as sessionActionTypes } from '../session';
@@ -16,6 +15,11 @@ describe('recentProtocols', () => {
 
     beforeEach(() => {
       store = createStore(reducer, applyMiddleware(thunk));
+      vi.useFakeTimers();
+    });
+
+    afterEach(() => {
+      vi.useRealTimers();
     });
 
     it('Removes protocol on open error', () => {
@@ -48,7 +52,7 @@ describe('recentProtocols', () => {
       expect(state[0]).toMatchObject({ filePath: '/dev/null/mock/recent/path/7' });
     });
 
-    it('Updates existing protocol meta on open', (done) => {
+    it('Updates existing protocol meta on open', () => {
       store.dispatch({
         type: sessionActionTypes.OPEN_NETCANVAS_SUCCESS,
         payload: { filePath: '/dev/null/mock/recent/path/1', protocol },
@@ -66,26 +70,24 @@ describe('recentProtocols', () => {
 
       expect(stateBefore[0]).toMatchObject({ filePath: '/dev/null/mock/recent/path/3' });
 
-      setTimeout(() => {
-        store.dispatch({
-          type: sessionActionTypes.OPEN_NETCANVAS_SUCCESS,
-          payload: { filePath: '/dev/null/mock/recent/path/2', protocol },
-        });
+      vi.advanceTimersByTime(1);
 
-        const stateAfter = store.getState();
+      store.dispatch({
+        type: sessionActionTypes.OPEN_NETCANVAS_SUCCESS,
+        payload: { filePath: '/dev/null/mock/recent/path/2', protocol },
+      });
 
-        expect(stateAfter[0]).toMatchObject({
-          filePath: '/dev/null/mock/recent/path/2',
-          name: '2',
-          description: 'test description',
-          schemaVersion: 4,
-        });
+      const stateAfter = store.getState();
 
-        done();
-      }, 1);
+      expect(stateAfter[0]).toMatchObject({
+        filePath: '/dev/null/mock/recent/path/2',
+        name: '2',
+        description: 'test description',
+        schemaVersion: 4,
+      });
     });
 
-    it('Updates protocol meta on save success', (done) => {
+    it('Updates protocol meta on save success', () => {
       store.dispatch({
         type: sessionActionTypes.SAVE_NETCANVAS_SUCCESS,
         payload: { savePath: '/dev/null/mock/recent/path/1', protocol },
@@ -103,23 +105,21 @@ describe('recentProtocols', () => {
 
       expect(stateBefore[0]).toMatchObject({ filePath: '/dev/null/mock/recent/path/3' });
 
-      setTimeout(() => {
-        store.dispatch({
-          type: sessionActionTypes.SAVE_NETCANVAS_SUCCESS,
-          payload: { savePath: '/dev/null/mock/recent/path/2', protocol },
-        });
+      vi.advanceTimersByTime(1);
 
-        const stateAfter = store.getState();
+      store.dispatch({
+        type: sessionActionTypes.SAVE_NETCANVAS_SUCCESS,
+        payload: { savePath: '/dev/null/mock/recent/path/2', protocol },
+      });
 
-        expect(stateAfter[0]).toMatchObject({
-          filePath: '/dev/null/mock/recent/path/2',
-          name: '2',
-          description: 'test description',
-          schemaVersion: 4,
-        });
+      const stateAfter = store.getState();
 
-        done();
-      }, 1);
+      expect(stateAfter[0]).toMatchObject({
+        filePath: '/dev/null/mock/recent/path/2',
+        name: '2',
+        description: 'test description',
+        schemaVersion: 4,
+      });
     });
   });
 });

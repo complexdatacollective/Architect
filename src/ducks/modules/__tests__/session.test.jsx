@@ -1,15 +1,21 @@
-/* eslint-disable no-unused-vars */
-/* eslint-env jest */
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import {
-  importNetcanvas,
-  readProtocol,
-  saveNetcanvas,
-} from '@app/utils/netcanvasFile';
-import reducer, { actionCreators } from '../session';
 
-jest.mock('@app/utils/netcanvasFile');
+// Create mock functions with vi.hoisted for proper hoisting
+const { mockImportNetcanvas, mockReadProtocol, mockSaveNetcanvas } = vi.hoisted(() => ({
+  mockImportNetcanvas: vi.fn(),
+  mockReadProtocol: vi.fn(),
+  mockSaveNetcanvas: vi.fn(),
+}));
+
+vi.mock('@app/utils/netcanvasFile', () => ({
+  importNetcanvas: mockImportNetcanvas,
+  readProtocol: mockReadProtocol,
+  saveNetcanvas: mockSaveNetcanvas,
+}));
+
+import reducer, { actionCreators } from '../session';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -97,24 +103,24 @@ describe('session module', () => {
 
   describe('actions', () => {
     beforeEach(() => {
-      importNetcanvas.mockReset();
-      readProtocol.mockReset();
-      saveNetcanvas.mockReset();
+      mockImportNetcanvas.mockReset();
+      mockReadProtocol.mockReset();
+      mockSaveNetcanvas.mockReset();
     });
 
     it('open netcanvas dispatches the correct actions and side-effects', async () => {
       const store = mockStore();
-      importNetcanvas.mockResolvedValueOnce('/dev/null/working/path');
-      readProtocol.mockResolvedValueOnce({});
+      mockImportNetcanvas.mockResolvedValueOnce('/dev/null/working/path');
+      mockReadProtocol.mockResolvedValueOnce({});
 
       await store.dispatch(actionCreators.openNetcanvas('/dev/null/mock.netcanvas'));
       const actions = store.getActions();
 
-      expect(importNetcanvas.mock.calls).toEqual([
+      expect(mockImportNetcanvas.mock.calls).toEqual([
         ['/dev/null/mock.netcanvas'],
       ]);
 
-      expect(readProtocol.mock.calls).toEqual([
+      expect(mockReadProtocol.mock.calls).toEqual([
         ['/dev/null/working/path'],
       ]);
 
@@ -154,7 +160,7 @@ describe('session module', () => {
       const store = getStore();
 
       beforeEach(() => {
-        saveNetcanvas.mockImplementation((
+        mockSaveNetcanvas.mockImplementation((
           workingPath,
           protocol,
           savePath,
@@ -167,7 +173,7 @@ describe('session module', () => {
         await store.dispatch(actionCreators.saveNetcanvas());
         const actions = store.getActions();
 
-        expect(saveNetcanvas.mock.calls).toEqual([
+        expect(mockSaveNetcanvas.mock.calls).toEqual([
           [
             '/dev/null/working/path',
             { schemaVersion: 4 },
@@ -200,7 +206,7 @@ describe('session module', () => {
         );
         const actions = store.getActions();
 
-        expect(saveNetcanvas.mock.calls).toEqual([
+        expect(mockSaveNetcanvas.mock.calls).toEqual([
           [
             '/dev/null/working/path',
             { schemaVersion: 4 },

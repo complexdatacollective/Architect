@@ -6,14 +6,30 @@ import Adapter from 'enzyme-adapter-react-16';
 // Configure Enzyme
 configure({ adapter: new Adapter() });
 
-// Polyfills
-global.requestAnimationFrame = function (callback) {
-  setTimeout(callback, 0);
-};
+// Handle uncaught exceptions from framesync during test cleanup
+// framesync (used by framer-motion 5.x) schedules timers that may fire after
+// jsdom tears down the window object, causing "window is not defined" errors.
+// This is a known issue with framer-motion 5.x - upgrading to v6+ would fix it
+// but requires significant migration work. This handler suppresses only this
+// specific error during test cleanup.
+process.on('uncaughtException', (error) => {
+  if (error.message === 'window is not defined'
+      && error.stack?.includes('framesync')) {
+    // Suppress framesync cleanup errors - these don't affect test results
+    return;
+  }
+  // Re-throw all other errors
+  throw error;
+});
 
-global.cancelAnimationFrame = function (callback) {
-  setTimeout(callback, 0);
-};
+// Polyfills for animation APIs
+const rafPolyfill = (callback) => setTimeout(callback, 16);
+const cafPolyfill = (id) => clearTimeout(id);
+
+global.requestAnimationFrame = rafPolyfill;
+global.cancelAnimationFrame = cafPolyfill;
+globalThis.requestAnimationFrame = rafPolyfill;
+globalThis.cancelAnimationFrame = cafPolyfill;
 
 global.SVGElement = global.Element;
 
@@ -88,3 +104,18 @@ global.jest = vi;
 vi.mock('@codaco/ui/lib/utils/CSSVariables');
 vi.mock('mapbox-gl/dist/mapbox-gl-unminified');
 vi.mock('mapbox-gl/dist/mapbox-gl.css', () => ({}));
+
+// Mock @codaco/ui to avoid ESM resolution issues with the package's internal imports
+vi.mock('@codaco/ui', async () => {
+  const React = await import('react');
+  return {
+    Button: ({ children, ...props }) => React.createElement('button', { type: 'button', ...props }, children),
+    Icon: ({ name, className, ...props }) => React.createElement('span', { className: `icon ${className || ''}`, 'data-icon': name, ...props }),
+    GraphicButton: ({ children, ...props }) => React.createElement('button', { type: 'button', ...props }, children),
+    Node: ({ children, ...props }) => React.createElement('div', { className: 'node', ...props }, children),
+    Spinner: () => React.createElement('div', { className: 'spinner' }),
+    ProgressBar: ({ percentProgress }) => React.createElement('div', { className: 'progress-bar', style: { width: `${percentProgress}%` } }),
+    Scroller: ({ children }) => React.createElement('div', { className: 'scroller' }, children),
+    ToastManager: ({ children }) => React.createElement('div', { className: 'toast-manager' }, children),
+  };
+});

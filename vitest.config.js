@@ -9,8 +9,19 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./config/vitest/setup.js'],
     include: ['src/**/*.test.{js,jsx}', 'src/**/__tests__/**/*.{js,jsx}'],
-    exclude: ['node_modules', 'network-canvas', 'dist'],
+    exclude: [
+      'node_modules',
+      'network-canvas',
+      'dist',
+      'src/__tests__/testHelpers.js',
+      'src/utils/netcanvasFile/__tests__/helpers.js',
+    ],
     css: true,
+    server: {
+      deps: {
+        inline: [/@codaco\/ui/],
+      },
+    },
   },
   resolve: {
     alias: {
@@ -21,5 +32,6 @@ export default defineConfig({
       '@modules': path.resolve(__dirname, 'src/ducks/modules'),
       '@utils': path.resolve(__dirname, 'src/utils'),
     },
+    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
   },
 });

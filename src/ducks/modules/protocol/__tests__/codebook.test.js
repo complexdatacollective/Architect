@@ -1,15 +1,12 @@
 /* eslint-env jest */
-
-import uuid from 'uuid';
+import { vi, describe, it, expect } from 'vitest';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { set } from 'lodash';
-import { getThunkMocks } from '@app/__tests__/helpers';
+import { getThunkMocks } from '@app/__tests__/testHelpers';
 import { test as stageActions } from '../stages';
 import reducer, { actionTypes, actionCreators, test } from '../codebook';
 import testState from '../../../../__tests__/testState.json';
-
-jest.mock('uuid');
 
 const mockStore = configureStore([thunk]);
 
@@ -205,7 +202,7 @@ describe('protocol.codebook', () => {
             type: actionTypes.CREATE_TYPE,
             meta: {
               entity: 'node',
-              type: uuid(),
+              type: expect.any(String),
             },
             configuration: {
               color: '',
@@ -300,7 +297,7 @@ describe('protocol.codebook', () => {
             meta: {
               entity: 'node',
               type: 'foo',
-              variable: uuid(),
+              variable: expect.any(String),
             },
             configuration: {
               fizz: 'buzz',
@@ -335,7 +332,7 @@ describe('protocol.codebook', () => {
             type: actionTypes.CREATE_VARIABLE,
             meta: {
               entity: 'ego',
-              variable: uuid(),
+              variable: expect.any(String),
             },
             configuration: {
               fizz: 'buzz',

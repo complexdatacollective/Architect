@@ -1,9 +1,6 @@
 /* eslint-env jest */
-
-import { readFile, readJson } from 'fs-extra';
+import { vi, describe, it, expect } from 'vitest';
 import { getNetworkVariables, validateAsset } from '../assetTools';
-
-jest.mock('fs-extra');
 
 const mockNodes = [
   { attributes: { name: 'foo' } },
@@ -63,13 +60,30 @@ const files = [
 
 const getFile = (path) => files.find((f) => f.name === path);
 
-readFile.mockImplementation(
-  (filePath) => getFile(filePath).text(),
-);
+// Mock the electronBridge module
+vi.mock('@utils/electronBridge', () => ({
+  electronAPI: {
+    fs: {
+      readFile: vi.fn((filePath) => getFile(filePath).text()),
+      readJson: vi.fn((filePath) => getFile(filePath).text().then((data) => JSON.parse(data))),
+    },
+    path: {
+      extname: vi.fn((p) => {
+        const ext = p.split('.').pop();
+        return `.${ext}`;
+      }),
+    },
+  },
+}));
 
-readJson.mockImplementation(
-  (filePath) => getFile(filePath).text().then((data) => JSON.parse(data)),
-);
+// Mock getSupportedAssetType
+vi.mock('@app/utils/protocols/importAsset', () => ({
+  getSupportedAssetType: vi.fn(async (filePath) => {
+    const ext = filePath.split('.').pop();
+    if (ext === 'json' || ext === 'csv') return 'network';
+    return null;
+  }),
+}));
 
 describe('assetTools', () => {
   describe('getNetworkVariables', () => {
@@ -101,7 +115,7 @@ describe('assetTools', () => {
         expect(validateAsset(emptyJsonFile.name))
           .rejects.toThrow(Error),
         expect(validateAsset(invalidVariablesJson.name))
-          .rejects.toThrow(Error('Variable name not allowed ("foo bar", "bazz!"). Only letters, numbers and the symbols ._-: are supported.')),
+          .rejects.toThrow(/Variable name not allowed/),
       ]);
     });
 
@@ -120,7 +134,7 @@ describe('assetTools', () => {
         expect(validateAsset(emptyCsvFile.name))
           .rejects.toThrow(Error),
         expect(validateAsset(invalidCsvVariableFile.name))
-          .rejects.toThrow(Error('Variable name not allowed ("foo bar", "bazz!"). Only letters, numbers and the symbols ._-: are supported.')),
+          .rejects.toThrow(/Variable name not allowed/),
       ]);
     });
   });

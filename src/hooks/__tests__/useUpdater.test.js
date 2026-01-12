@@ -1,8 +1,19 @@
-/* eslint-env jest */
-import * as Env from '@app/utils/platform';
+import { vi, describe, it, expect, beforeEach, beforeAll, afterAll } from 'vitest';
+
+// Mock the platform module
+const mockIsWindows = vi.fn(() => false);
+const mockIsMacOS = vi.fn(() => false);
+const mockIsLinux = vi.fn(() => false);
+
+vi.mock('@app/utils/platform', () => ({
+  isWindows: () => mockIsWindows(),
+  isMacOS: () => mockIsMacOS(),
+  isLinux: () => mockIsLinux(),
+}));
+
 import { checkEndpoint, getPlatformSpecificContent } from '../useUpdater';
 
-jest.useFakeTimers();
+vi.useFakeTimers();
 
 const mockAssets = [
   {
@@ -51,48 +62,44 @@ const mockAssets = [
   },
 ];
 
-const mockJson = jest.fn(() => ({
+const mockJson = vi.fn(() => ({
   name: '1.0.0',
   body: 'This is a newer version probably',
-  assets: mockAssets, // eslint-disable-line
+  assets: mockAssets,
 }));
 
-describe('getPlatformSpecificContent()', () => {
-  beforeEach(() => {
-    Env.isWindows = jest.fn().mockReturnValue(false);
-    Env.isMacOS = jest.fn().mockReturnValue(false);
-    Env.isLinux = jest.fn().mockReturnValue(false);
-  });
+// Reset platform mocks for all tests
+beforeEach(() => {
+  mockIsWindows.mockReturnValue(false);
+  mockIsMacOS.mockReturnValue(false);
+  mockIsLinux.mockReturnValue(false);
+});
 
-  afterEach(() => {
-    Env.isWindows = jest.fn().mockReturnValue(false);
-    Env.isMacOS = jest.fn().mockReturnValue(false);
-    Env.isLinux = jest.fn().mockReturnValue(false);
-  });
+describe('getPlatformSpecificContent()', () => {
 
   it('gets EXE asset for Windows platform', () => {
-    Env.isWindows = jest.fn().mockReturnValue(true);
+    mockIsWindows.mockReturnValue(true);
 
     const content = getPlatformSpecificContent(mockAssets);
     expect(content.buttonLink).toBe('https://website.com/installer.exe');
   });
 
   it('gets DMG asset for macoS platform', () => {
-    Env.isMacOS = jest.fn().mockReturnValue(true);
+    mockIsMacOS.mockReturnValue(true);
 
     const content = getPlatformSpecificContent(mockAssets);
     expect(content.buttonLink).toBe('https://website.com/installer.dmg');
   });
 
   it('links to GitHub for Linux platform', () => {
-    Env.isLinux = jest.fn().mockReturnValue(true);
+    mockIsLinux.mockReturnValue(true);
 
     const content = getPlatformSpecificContent(mockAssets);
     expect(content.buttonLink).toBe('https://github.com/complexdatacollective/Architect/releases/latest');
   });
 
   it('links to download page if asset not available', () => {
-    Env.isLinux = jest.fn().mockReturnValue(true);
+    mockIsLinux.mockReturnValue(true);
 
     const content = getPlatformSpecificContent([]);
     expect(content.buttonLink).toBe('https://networkcanvas.com/download.html');
@@ -104,7 +111,7 @@ describe('checkEndpoint()', () => {
 
   beforeAll(() => {
     originalFetch = global.fetch;
-    global.fetch = jest.fn(() => Promise.resolve({ json: mockJson }));
+    global.fetch = vi.fn(() => Promise.resolve({ json: mockJson }));
   });
 
   afterAll(() => {
@@ -134,7 +141,7 @@ describe('checkEndpoint()', () => {
   });
 
   it('fails silently', async () => {
-    global.fetch = jest.fn(() => Promise.reject(new Error('bad url')));
+    global.fetch = vi.fn(() => Promise.reject(new Error('bad url')));
 
     const subject = await checkEndpoint('foo', '0.5.0');
 

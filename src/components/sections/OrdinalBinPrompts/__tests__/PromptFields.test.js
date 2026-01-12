@@ -1,7 +1,6 @@
 /* eslint-env jest */
-import { testPromptFields } from '../../CategoricalBinPrompts/__tests__/PromptFields.test';
+import { vi } from 'vitest';
+import { testPromptFields } from '../../CategoricalBinPrompts/__tests__/PromptFields.test.jsx';
 import PromptFields from '../PromptFields';
 
-// jest.mock('@components/NewVariableWindow');
-
-testPromptFields(PromptFields);
+testPromptFields(PromptFields, 'OrdinalBinPrompts');

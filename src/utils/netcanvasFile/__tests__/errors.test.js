@@ -1,9 +1,16 @@
-/* eslint-env jest */
-
-import log from '@utils/logger';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { errors, handleError } from '../errors';
 
-jest.mock('electron-log');
+vi.mock('@utils/logger', () => ({
+  default: {
+    error: vi.fn(),
+    info: vi.fn(),
+    warn: vi.fn(),
+    debug: vi.fn(),
+  },
+}));
+
+import log from '@utils/logger';
 
 describe('netcanvasFile/errors', () => {
   describe('handleError(defaultError)', () => {

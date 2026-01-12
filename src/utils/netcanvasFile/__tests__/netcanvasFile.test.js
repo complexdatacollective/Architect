@@ -1,7 +1,104 @@
-/* eslint-env jest */
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
-import fse from 'fs-extra';
-import uuid from 'uuid';
+// Mock uuid before everything else
+vi.mock('uuid', () => ({
+  default: vi.fn(() => '809895df-bbd7-4c76-ac58-e6ada2625f9b'),
+  v4: vi.fn(() => '809895df-bbd7-4c76-ac58-e6ada2625f9b'),
+}));
+
+// Mock electronBridge
+vi.mock('@utils/electronBridge', () => {
+  const mockFs = {
+    access: vi.fn(),
+    pathExists: vi.fn(),
+    readJson: vi.fn(),
+    rename: vi.fn(),
+    writeFile: vi.fn(),
+    writeJson: vi.fn(),
+    unlink: vi.fn(),
+    mkdirp: vi.fn(),
+    stat: vi.fn(),
+    copy: vi.fn(),
+  };
+
+  const mockPath = {
+    join: vi.fn((...args) => args.join('/')),
+    parse: vi.fn((p) => {
+      const parts = p.split('/');
+      const base = parts[parts.length - 1] || '';
+      const extIndex = base.lastIndexOf('.');
+      const ext = extIndex > 0 ? base.slice(extIndex) : '';
+      const name = ext ? base.slice(0, -ext.length) : base;
+      return {
+        root: p.startsWith('/') ? '/' : '',
+        dir: parts.slice(0, -1).join('/'),
+        base,
+        ext,
+        name,
+      };
+    }),
+  };
+
+  const mockApp = {
+    getPath: vi.fn(() => '/dev/null/get/electron/path'),
+  };
+
+  return {
+    electronAPI: {
+      fs: mockFs,
+      path: mockPath,
+      app: mockApp,
+    },
+    pathSync: {
+      join: (...args) => args.filter(Boolean).join('/'),
+      basename: (p, ext) => {
+        const parts = p.split('/');
+        let base = parts[parts.length - 1] || '';
+        if (ext && base.endsWith(ext)) {
+          base = base.slice(0, -ext.length);
+        }
+        return base;
+      },
+    },
+  };
+});
+
+vi.mock('@app/utils/protocols/lib/archive', () => ({
+  archive: vi.fn(),
+  extract: vi.fn(),
+}));
+
+vi.mock('@codaco/protocol-validation', () => ({
+  default: vi.fn(),
+  canUpgrade: vi.fn(),
+  migrateProtocol: vi.fn(),
+  validateProtocol: vi.fn(() => Promise.resolve({ isValid: true })),
+}));
+
+vi.mock('@app/utils/pruneProtocolAssets', () => ({
+  default: vi.fn(() => Promise.resolve()),
+}));
+
+vi.mock('@app/utils/prune', () => ({
+  pruneProtocol: vi.fn((protocol) => protocol),
+}));
+
+vi.mock('../lib', () => ({
+  commitNetcanvas: vi.fn(),
+  deployNetcanvas: vi.fn(),
+  getTempDir: vi.fn(),
+  readProtocol: vi.fn(),
+  revertNetcanvas: vi.fn(),
+  writeProtocol: vi.fn(),
+  createNetcanvasExport: vi.fn(),
+  importNetcanvas: vi.fn(),
+}));
+
+vi.mock('@app/utils/validateProtocol', () => ({
+  default: vi.fn(() => Promise.resolve()),
+}));
+
+import { electronAPI } from '@utils/electronBridge';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import { extract, archive } from '@app/utils/protocols/lib/archive';
 import { canUpgrade, migrateProtocol } from '@codaco/protocol-validation';
@@ -23,8 +120,8 @@ import {
   getTempDir,
   readProtocol,
   revertNetcanvas,
-  writeProtocol,
   createNetcanvasExport,
+  importNetcanvas as importNetcanvasFromLib,
 } from '../lib';
 import { errors } from '../errors';
 import {
@@ -32,25 +129,16 @@ import {
   mockProtocol,
 } from './helpers';
 
-jest.mock('fs-extra');
-jest.mock('@app/utils/protocols/lib/archive');
-jest.mock('@codaco/protocol-validation');
-jest.mock('@app/utils/pruneProtocolAssets');
-jest.mock('@app/utils/prune');
-jest.mock('../lib');
-jest.mock('@app/utils/validateProtocol');
-
 const {
   verifyNetcanvas,
 } = utils;
 
 describe('netcanvasFile/netcanvasFile', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
 
-    uuid.mockImplementation(jest.fn(() => '809895df-bbd7-4c76-ac58-e6ada2625f9b'));
-
-    fse.access.mockResolvedValue(Promise.resolve());
+    electronAPI.fs.access.mockResolvedValue(Promise.resolve());
+    electronAPI.fs.mkdirp.mockResolvedValue(Promise.resolve());
     archive.mockImplementation(() => Promise.resolve());
     extract.mockImplementation(() => Promise.resolve());
     pruneProtocol.mockImplementation((protocol = {}) => Promise.resolve(protocol));
@@ -59,7 +147,6 @@ describe('netcanvasFile/netcanvasFile', () => {
       count += 1;
       return Promise.resolve(`/dev/null/working/path/${count}`);
     });
-    writeProtocol.mockResolvedValue();
     deployNetcanvas.mockImplementation((sourcePath, savePath) => Promise.resolve({
       savePath,
       backupPath: `${savePath}.backup`,
@@ -68,8 +155,7 @@ describe('netcanvasFile/netcanvasFile', () => {
     commitNetcanvas.mockImplementation(({ savePath }) => Promise.resolve(savePath));
     readProtocol.mockResolvedValue(mockProtocol);
     createNetcanvasExport.mockImplementation(() => Promise.resolve('/dev/null/export/working/path'));
-    importNetcanvas.mockImplementation((netcanvasPath) => Promise.resolve(netcanvasPath));
-    fse.mkdirp.mockResolvedValue();
+    importNetcanvasFromLib.mockImplementation((netcanvasPath) => Promise.resolve(netcanvasPath));
   });
 
   it.todo('schemaVersionStates');
@@ -78,7 +164,7 @@ describe('netcanvasFile/netcanvasFile', () => {
     it('creates an assetPath and workingPath', async () => {
       await createNetcanvas('/dev/null/new/user/netcanvas/path');
 
-      expect(fse.mkdirp.mock.calls).toEqual([[
+      expect(electronAPI.fs.mkdirp.mock.calls).toEqual([[
         '/dev/null/working/path/1/809895df-bbd7-4c76-ac58-e6ada2625f9b/assets',
       ]]);
     });
@@ -116,11 +202,11 @@ describe('netcanvasFile/netcanvasFile', () => {
     it('imports and validates protocol then resolves to filePath', async () => {
       const testProtocol = { test: 'protocol' };
       readProtocol.mockResolvedValue(testProtocol);
-      importNetcanvas.mockResolvedValue('/dev/null/netcanvas/file');
+      importNetcanvasFromLib.mockResolvedValue('/dev/null/netcanvas/file');
       await expect(validateNetcanvas('/dev/null/netcanvas/file'))
         .resolves.toEqual('/dev/null/netcanvas/file');
 
-      expect(importNetcanvas.mock.calls).toEqual([['/dev/null/netcanvas/file']]);
+      expect(importNetcanvasFromLib.mock.calls).toEqual([['/dev/null/netcanvas/file']]);
       expect(readProtocol.mock.calls).toEqual([['/dev/null/netcanvas/file']]);
       expect(validateProtocol.mock.calls).toEqual([[testProtocol]]);
     });
