@@ -17,6 +17,7 @@ module.exports = {
   files: [
     'dist/**/*',
     '!dist/main/_dummy.js',
+    'network-canvas/dist/**/*',
     'node_modules/**/*',
     '!node_modules/**/node_modules/**',
     '!**/*.{map,ts,md}',
