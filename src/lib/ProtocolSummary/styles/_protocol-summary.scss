@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 @page {
   margin: 2cm;
@@ -25,7 +25,6 @@
     #preload {
       display: none;
     }
-
   }
 
   @media screen {
@@ -56,8 +55,6 @@
     margin-bottom: units.unit(1);
   }
 }
-
-
 
 .section {
   border: 2px solid var(--color-platinum);
@@ -113,27 +110,29 @@
     color: #000;
   }
 
-  [data-print="no"] {
+  [data-print='no'] {
     @media print {
       display: none;
     }
   }
 
-  [data-print="only"] {
+  [data-print='only'] {
     @media screen {
       display: none;
     }
   }
 
   @media print {
-    font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-family:
+      -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif,
+      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     font-size: 10pt;
   }
 
   .variable-pill {
-    zoom: .8;
+    zoom: 0.8;
     max-width: 24rem;
-    margin: .5rem;
+    margin: 0.5rem;
   }
 }
 

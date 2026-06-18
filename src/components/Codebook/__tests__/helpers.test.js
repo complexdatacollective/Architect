@@ -55,12 +55,20 @@ const index = {
 
 it('getUsage() ', () => {
   const value = 'fizz';
-  const expectedResult = ['stages[0].foo.bar', 'stages[0].foo.bar.bazz', 'stages[1].foo.bar.bazz'];
+  const expectedResult = [
+    'stages[0].foo.bar',
+    'stages[0].foo.bar.bazz',
+    'stages[1].foo.bar.bazz',
+  ];
   expect(getUsage(index, value)).toEqual(expectedResult);
 });
 
 it('getUsageAsStageMeta()', () => {
-  const usage = ['stages[0].foo.bar', 'stages[0].foo.bar.bazz', 'stages[1].foo.bar.bazz'];
+  const usage = [
+    'stages[0].foo.bar',
+    'stages[0].foo.bar.bazz',
+    'stages[1].foo.bar.bazz',
+  ];
 
   const mockStageMetaByIndex = [
     { label: 'foo', id: 'abcd' },
@@ -68,15 +76,15 @@ it('getUsageAsStageMeta()', () => {
     { label: 'bazz', id: 'ijkl' },
   ];
 
-  const mockVariableMetaByIndex = getAllVariablesByUUID(state.protocol.present.codebook);
+  const mockVariableMetaByIndex = getAllVariablesByUUID(
+    state.protocol.present.codebook,
+  );
 
   const expectedResult = [
     { label: 'foo', id: 'abcd' },
     { label: 'bar', id: 'efgh' },
   ];
-  expect(getUsageAsStageMeta(
-    mockStageMetaByIndex,
-    mockVariableMetaByIndex,
-    usage,
-  )).toEqual(expectedResult);
+  expect(
+    getUsageAsStageMeta(mockStageMetaByIndex, mockVariableMetaByIndex, usage),
+  ).toEqual(expectedResult);
 });

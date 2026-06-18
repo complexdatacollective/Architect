@@ -1,5 +1,6 @@
 div.form-fields-select, // sass-lint:disable-line no-qualifying-elements, force-element-nesting
-img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force-element-nesting
+img.form-fields-select {
+  // sass-lint:disable-line no-qualifying-elements, force-element-nesting
   @include form-field;
 
   width: 100%;
@@ -86,7 +87,7 @@ img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force
       .icon {
         height: units.unit(2);
         line-height: units.unit(2);
-        padding: .3rem;
+        padding: 0.3rem;
         margin-right: units.unit(1);
         background: var(--color-sea-green);
         border-radius: units.unit(2);
@@ -131,7 +132,7 @@ img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force
   &__error {
     opacity: 0;
     background: var(--error);
-    padding: .5rem .25rem;
+    padding: 0.5rem 0.25rem;
     display: flex;
     align-items: center;
 
@@ -146,7 +147,7 @@ img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force
     }
 
     .form-fields-select__control {
-      border: .1rem solid var(--error);
+      border: 0.1rem solid var(--error);
     }
   }
 

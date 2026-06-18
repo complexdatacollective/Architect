@@ -4,7 +4,9 @@ import { makeScreenMessageListener } from '../ui';
 
 jest.mock('fs-extra');
 
-const getStateWithMessage = (message = {}) => ({ ui: { screens: { message } } });
+const getStateWithMessage = (message = {}) => ({
+  ui: { screens: { message } },
+});
 
 describe('ui', () => {
   describe('makeScreenMessageListener()', () => {
@@ -31,7 +33,9 @@ describe('ui', () => {
     });
 
     it('when message is for our screen it returns params the first time it changes', () => {
-      expect(screenMessageListener(messageForListenedToScreen)).toEqual({ fizz: 'pop' });
+      expect(screenMessageListener(messageForListenedToScreen)).toEqual({
+        fizz: 'pop',
+      });
     });
 
     it('when message is for our screen it returns null for following calls', () => {

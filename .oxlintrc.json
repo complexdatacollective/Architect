@@ -1,0 +1,17 @@
+{
+  "extends": ["../../.oxlintrc.json", "../../tooling/oxlint/react.json"],
+  "rules": {
+    "react/exhaustive-deps": "warn",
+    "no-process-env": "off"
+  },
+  "overrides": [
+    {
+      "files": ["development-protocol/**"],
+      "rules": { "no-unused-vars": "off" }
+    },
+    {
+      "files": ["src/utils/webShims/**"],
+      "rules": { "no-unused-expressions": "off" }
+    }
+  ]
+}

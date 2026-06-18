@@ -1,93 +1,178 @@
-const { BrowserWindow } = require('electron');
-const url = require('url');
-const path = require('path');
-const log = require('./log');
+/**
+ * Creates the preview window for Network Canvas.
+ *
+ * The preview window renders the Interviewer app, consumed as the
+ * `network-canvas-interviewer` workspace package. The Interviewer's preload
+ * bridges Architect's `remote:preview`/`remote:reset` IPC into the interview;
+ * Architect's main process hosts the renderer's IPC (fs, dialog, asset://, …).
+ *
+ *  - Development: load the Interviewer's Vite dev server (live reload) and its
+ *    preload source (plain CommonJS, no build step needed).
+ *  - Packaged: load the Interviewer's built renderer + preload, bundled into
+ *    resources/interviewer at pack time (see electron-builder.config.js
+ *    `extraResources`).
+ */
+const { BrowserWindow, Menu, app, net } = require("electron");
+const path = require("node:path");
+const log = require("./log");
+const getPreviewMenu = require("./previewMenu");
 
-const windowParameters = {
-  center: true,
-  enableLargerThanScreen: true,
-  height: 768,
-  // resizeable:
-  // This doesn't work as expected. It stops the user from
-  // manually resizing the window, but also seems to prevent
-  // setSize from *reducing* the window size. Currently
-  // setContentSize doesn't seem to have this limitation and
-  // is a better fit for purpose.
-  resizable: false,
-  show: false,
-  useContentSize: true,
-  webPreferences: { nodeIntegration: true },
-  width: 1024,
-};
+// The Interviewer's renderer dev server (apps/interviewer electron.vite.config).
+const INTERVIEWER_DEV_URL = "http://localhost:3000";
 
-function getAppUrl() {
-  if (process.env.NODE_ENV === 'development' && process.env.WEBPACK_NC_DEV_SERVER_PORT) {
-    const appUrl = url.format({
-      host: `localhost:${process.env.WEBPACK_NC_DEV_SERVER_PORT}/`,
-      protocol: 'http',
-    });
+// Resolve the Interviewer's preload script and renderer URL for the current
+// environment.
+function getInterviewerSources() {
+	if (app.isPackaged) {
+		const base = path.join(process.resourcesPath, "interviewer");
+		return {
+			preload: path.join(base, "preload", "index.js"),
+			url: `file://${path.join(base, "renderer", "index.html")}`,
+		};
+	}
 
-    log.info('previewUrl [host]', appUrl);
-
-    return appUrl;
-  }
-
-  const appUrl = url.format({
-    pathname: path.join(__dirname, '../network-canvas/', 'index.html'),
-    protocol: 'file:',
-  });
-
-  log.info('previewUrl [path]', appUrl);
-
-  return appUrl;
+	// Dev: resolve the workspace package, load its source preload + dev server.
+	const interviewerRoot = path.dirname(
+		require.resolve("network-canvas-interviewer/package.json"),
+	);
+	return {
+		preload: path.join(interviewerRoot, "src", "preload", "index.js"),
+		url: INTERVIEWER_DEV_URL,
+	};
 }
 
+// Probe a URL once: resolve true if the server responds at all (any status),
+// false on connection error.
+function probe(url) {
+	return new Promise((resolve) => {
+		const request = net.request(url);
+		request.on("response", (response) => {
+			response.on("data", () => {});
+			response.on("end", () => {});
+			resolve(true);
+		});
+		request.on("error", () => resolve(false));
+		request.end();
+	});
+}
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const PROBE_MAX_ATTEMPTS = 60;
+const PROBE_RETRY_DELAY_MS = 500;
+
+// Poll until the dev server accepts connections (or attempts are exhausted).
+function waitForServer(window, url, attempt = 0) {
+	if (window.isDestroyed() || attempt >= PROBE_MAX_ATTEMPTS) {
+		return Promise.resolve();
+	}
+
+	return probe(url).then((reachable) => {
+		if (reachable || window.isDestroyed()) {
+			return undefined;
+		}
+		return sleep(PROBE_RETRY_DELAY_MS).then(() =>
+			waitForServer(window, url, attempt + 1),
+		);
+	});
+}
+
+/**
+ * Load the preview URL. In development the Interviewer's dev server may not be
+ * listening yet at Architect startup; wait for it to accept connections before
+ * loading, otherwise the window lands on Chromium's error page whose auto-reload
+ * is then blocked as an unsafe cross-origin navigation. Packaged builds load a
+ * local file directly.
+ */
+function loadPreviewUrl(window, url) {
+	const ready = app.isPackaged
+		? Promise.resolve()
+		: waitForServer(window, url);
+
+	return ready.then(() => {
+		if (window.isDestroyed()) {
+			return undefined;
+		}
+		return window
+			.loadURL(url)
+			.catch((err) => log.error("Failed to load preview URL:", err));
+	});
+}
+
+/**
+ * Creates and returns a promise that resolves with the preview BrowserWindow.
+ */
 function createPreviewWindow() {
-  return new Promise((resolve) => {
-    if (global.previewWindow) {
-      return resolve(global.previewWindow);
-    }
+	return new Promise((resolve) => {
+		const { preload: preloadPath, url: previewUrl } = getInterviewerSources();
 
-    // Create the browser window.
-    global.previewWindow = new BrowserWindow(windowParameters);
+		log.info("Creating preview window");
+		log.info(`Preview preload: ${preloadPath}`);
+		log.info(`Preview URL: ${previewUrl}`);
 
-    global.previewWindow.webContents.on('new-window', (evt) => {
-      // A user may have tried to open a new window (shift|cmd-click); ignore action
-      evt.preventDefault();
-    });
+		global.previewWindow = new BrowserWindow({
+			width: 1024,
+			height: 768,
+			show: false,
+			title: "Network Canvas Preview",
+			webPreferences: {
+				nodeIntegration: false,
+				contextIsolation: true,
+				preload: preloadPath,
+				webSecurity: true,
+				allowRunningInsecureContent: false,
+			},
+		});
 
-    // For now, any navigation off the SPA is unneeded
-    global.previewWindow.webContents.on('will-navigate', (evt) => {
-      evt.preventDefault();
-    });
+		// Set up the preview menu
+		try {
+			const previewMenu = Menu.buildFromTemplate(getPreviewMenu(global.previewWindow));
+			global.previewWindow.setMenu(previewMenu);
+		} catch (err) {
+			log.error("Failed to set preview menu:", err);
+		}
 
-    global.previewWindow.on('close', (e) => {
-      if (!global.quit) {
-        e.preventDefault();
+		// Handle window close - hide instead of destroy to allow reuse
+		global.previewWindow.on("close", (event) => {
+			event.preventDefault();
+			global.previewWindow.hide();
+		});
 
-        global.previewWindow.hide();
+		// Log when window is ready
+		global.previewWindow.webContents.on("did-finish-load", () => {
+			log.info("Preview window loaded");
+		});
 
-        return false;
-      }
+		// Log any errors
+		global.previewWindow.webContents.on("did-fail-load", (_event, errorCode, errorDescription) => {
+			log.error(`Preview window failed to load: ${errorDescription} (${errorCode})`);
+		});
 
-      return true;
-    });
+		// Handle console messages from preview window
+		global.previewWindow.webContents.on("console-message", (_event, level, message) => {
+			if (level >= 2) {
+				// warning or error
+				log.warn(`[Preview] ${message}`);
+			}
+		});
 
-    if (process.env.SHOW_PREVIEW_DEV_TOOLS) {
-      global.previewWindow.openDevTools();
-    }
+		// Set window open handler to prevent opening new windows
+		global.previewWindow.webContents.setWindowOpenHandler(() => {
+			return { action: "deny" };
+		});
 
-    global.previewWindow.showIndex = () => {
-      global.previewWindow.loadURL(getAppUrl());
-    };
-
-    global.previewWindow.webContents.on(
-      'did-finish-load',
-      () => resolve(global.previewWindow),
-    );
-
-    global.previewWindow.loadURL(getAppUrl());
-  });
+		// Resolve as soon as the window exists so app startup is never blocked by
+		// the dev server's readiness; the URL loads (and retries) in the background.
+		loadPreviewUrl(global.previewWindow, previewUrl);
+		resolve(global.previewWindow);
+	});
 }
+
+// Helper to show the index page
+createPreviewWindow.showIndex = () => {
+	if (global.previewWindow && !global.previewWindow.isDestroyed()) {
+		loadPreviewUrl(global.previewWindow, getInterviewerSources().url);
+	}
+};
 
 module.exports = createPreviewWindow;

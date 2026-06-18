@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 const useTimer = (callback, delay, props) => {
   const f = useRef(callback);

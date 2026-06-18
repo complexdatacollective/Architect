@@ -1,46 +1,53 @@
-import { ipcRenderer } from 'electron';
-import { isDirty } from 'redux-form';
 import { store } from '@app/ducks/store';
-import { getHasUnsavedChanges } from '@selectors/session';
-import { actionCreators as userActions } from '@modules/userActions';
-import { actionCreators as dialogActions } from '@modules/dialogs';
-import { formName } from '@components/StageEditor/StageEditor';
 import { UnsavedChanges } from '@components/Dialogs';
+import { formName } from '@components/StageEditor/StageEditor';
+import { actionCreators as dialogActions } from '@modules/dialogs';
+import { actionCreators as userActions } from '@modules/userActions';
+import { getHasUnsavedChanges } from '@selectors/session';
+import { electronAPI } from '@utils/electronBridge';
+import { isDirty } from 'redux-form';
 
 const initIPCListeners = () => {
-  ipcRenderer.on('SAVE_COPY', () => {
+  electronAPI.ipc.on('SAVE_COPY', () => {
     store.dispatch(userActions.saveAsNetcanvas());
   });
 
-  ipcRenderer.on('OPEN', () => {
+  electronAPI.ipc.on('OPEN', () => {
     store.dispatch(userActions.openNetcanvas());
   });
 
-  ipcRenderer.on('SAVE', () => {
+  electronAPI.ipc.on('SAVE', () => {
     store.dispatch(userActions.saveNetcanvas());
   });
 
-  ipcRenderer.on('PRINT_SUMMARY', () => {
+  electronAPI.ipc.on('PRINT_SUMMARY', () => {
     store.dispatch(userActions.printOverview());
   });
 
-  ipcRenderer.on('CONFIRM_CLOSE', () => {
+  electronAPI.ipc.on('CONFIRM_CLOSE', () => {
     const state = store.getState();
     const hasUnsavedChanges = getHasUnsavedChanges(state);
     const hasDraftChanges = isDirty(formName)(state);
 
-    ipcRenderer.send('CONFIRM_CLOSE_ACK');
+    electronAPI.ipc.send('CONFIRM_CLOSE_ACK');
 
     if (!hasUnsavedChanges && !hasDraftChanges) {
-      ipcRenderer.send('QUIT');
+      electronAPI.ipc.send('QUIT');
       return;
     }
 
-    store.dispatch(dialogActions.openDialog(UnsavedChanges({
-      confirmLabel: 'Exit application',
-    })))
+    store
+      .dispatch(
+        dialogActions.openDialog(
+          UnsavedChanges({
+            confirmLabel: 'Exit application',
+          }),
+        ),
+      )
       .then((confirm) => {
-        if (confirm) { ipcRenderer.send('QUIT'); }
+        if (confirm) {
+          electronAPI.ipc.send('QUIT');
+        }
       });
   });
 };

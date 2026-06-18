@@ -1,4 +1,4 @@
-import { get, reduce, isArray } from 'lodash';
+import { get, isArray, reduce } from 'lodash';
 
 /**
  * Collect _values_ that match path from `obj`. We are using this
@@ -38,9 +38,7 @@ import { get, reduce, isArray } from 'lodash';
 const collectPath = (objPath, obj, memoPath) => {
   // We expect a string notation for objPath, but it's actually converted to array automatically:
   // 'stages[].prompts[].subject.type' => ['stages', 'prompts', 'subject.type']
-  const parsedPath = isArray(objPath)
-    ? objPath
-    : objPath.split('[].');
+  const parsedPath = isArray(objPath) ? objPath : objPath.split('[].');
   const [, ...rest] = parsedPath;
   let [next] = parsedPath;
   let scanArray = false;
@@ -51,8 +49,7 @@ const collectPath = (objPath, obj, memoPath) => {
     scanArray = true;
   }
 
-  const path = memoPath
-    ? `${memoPath}.${next}` : `${next}`;
+  const path = memoPath ? `${memoPath}.${next}` : `${next}`;
 
   const nextObj = get(obj, next);
 
@@ -122,26 +119,31 @@ const collectPath = (objPath, obj, memoPath) => {
 export const collectMappedPath = (paths, obj, mapFunc) => {
   const collectedPaths = collectPath(paths, obj);
 
-  return reduce(collectedPaths, (acc, value, path) => {
-    const result = mapFunc(value, path);
+  return reduce(
+    collectedPaths,
+    (acc, value, path) => {
+      const result = mapFunc(value, path);
 
-    if (result === undefined) { return acc; }
-    return {
-      ...acc,
-      [result[1]]: result[0],
-    };
-  }, {});
+      if (result === undefined) {
+        return acc;
+      }
+      return {
+        ...acc,
+        [result[1]]: result[0],
+      };
+    },
+    {},
+  );
 };
 
-export const collectPaths = (objPaths, object) => objPaths.reduce((acc, objPath) => {
-  const next = Array.isArray(objPath)
-    ? collectMappedPath(objPath[0], object, objPath[1])
-    : collectPath(objPath, object);
+export const collectPaths = (objPaths, object) =>
+  objPaths.reduce((acc, objPath) => {
+    const next = Array.isArray(objPath)
+      ? collectMappedPath(objPath[0], object, objPath[1])
+      : collectPath(objPath, object);
 
-  return {
-    ...acc,
-    ...next,
-  };
-}, {});
+    Object.assign(acc, next);
+    return acc;
+  }, {});
 
 export default collectPath;

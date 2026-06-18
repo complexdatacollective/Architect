@@ -1,6 +1,11 @@
 import { omit } from 'lodash';
 import { withHandlers } from 'recompose';
-import { isValidationWithListValue, isValidationWithNumberValue, isValidationWithoutValue } from './options';
+
+import {
+  isValidationWithListValue,
+  isValidationWithNumberValue,
+  isValidationWithoutValue,
+} from './options';
 
 /**
  * Function called when a validation is added or updated. Returns a value
@@ -18,7 +23,10 @@ const getAutoValue = (type, oldType, value) => {
   }
 
   // If the new type and the old type are both numbers, keep the value
-  if (isValidationWithNumberValue(type) && isValidationWithNumberValue(oldType)) {
+  if (
+    isValidationWithNumberValue(type) &&
+    isValidationWithNumberValue(oldType)
+  ) {
     return value;
   }
 
@@ -34,7 +42,9 @@ const getAutoValue = (type, oldType, value) => {
 const getUpdatedValue = (previousValue, key, value, oldKey = null) => {
   const autoValue = getAutoValue(key, oldKey, value);
 
-  if (!oldKey) { return { ...previousValue, [key]: autoValue }; }
+  if (!oldKey) {
+    return { ...previousValue, [key]: autoValue };
+  }
 
   return {
     ...omit(previousValue, oldKey),
@@ -43,19 +53,25 @@ const getUpdatedValue = (previousValue, key, value, oldKey = null) => {
 };
 
 const withUpdateHandlers = withHandlers({
-  handleDelete: ({ update, value: previousValue }) => (key) => {
-    const newValue = omit(previousValue, key);
-    update(newValue);
-  },
-  handleChange: ({ update, value: previousValue }) => (key, value, oldKey) => {
-    const newValue = getUpdatedValue(previousValue, key, value, oldKey);
-    update(newValue);
-  },
-  handleAddNew: ({ update, value: previousValue, setAddNew }) => (key, value) => {
-    const newValue = getUpdatedValue(previousValue, key, value);
-    update(newValue);
-    setAddNew(false);
-  },
+  handleDelete:
+    ({ update, value: previousValue }) =>
+    (key) => {
+      const newValue = omit(previousValue, key);
+      update(newValue);
+    },
+  handleChange:
+    ({ update, value: previousValue }) =>
+    (key, value, oldKey) => {
+      const newValue = getUpdatedValue(previousValue, key, value, oldKey);
+      update(newValue);
+    },
+  handleAddNew:
+    ({ update, value: previousValue, setAddNew }) =>
+    (key, value) => {
+      const newValue = getUpdatedValue(previousValue, key, value);
+      update(newValue);
+      setAddNew(false);
+    },
 });
 
 export default withUpdateHandlers;

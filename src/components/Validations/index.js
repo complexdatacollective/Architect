@@ -1,4 +1,5 @@
-import { withState, compose } from 'recompose';
+import { compose, withState } from 'recompose';
+
 import Validations from './Validations';
 import withStoreState from './withStoreState';
 import withUpdateHandlers from './withUpdateHandlers';

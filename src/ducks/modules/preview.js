@@ -1,7 +1,7 @@
-import { getFormValues } from 'redux-form';
-import { getWorkingPath } from '@selectors/session';
-import { getProtocol } from '@selectors/protocol';
 import previewDriver from '@app/utils/previewDriver';
+import { getProtocol } from '@selectors/protocol';
+import { getWorkingPath } from '@selectors/session';
+import { getFormValues } from 'redux-form';
 
 const getStageIndex = (protocol, stageMeta) => {
   if (stageMeta.id) {
@@ -20,7 +20,9 @@ const getDraftStages = (protocol, stageMeta, draftStage) => {
 
   if (stageMeta.id) {
     return stages.map((stage) => {
-      if (stage.id === draftStage.id) { return draftStage; }
+      if (stage.id === draftStage.id) {
+        return draftStage;
+      }
 
       return stage;
     });
@@ -71,13 +73,13 @@ const previewDraft = (draft, stageIndex) => (dispatch, getState) => {
   const draftProtocol = {
     ...draft,
     /**
-       * This allows assets to work correctly in the Network Canvas preview.
-       *
-       * Network canvas uses relative paths for the assets:// protocol, whereas
-       * Architect uses full paths. Since Network Canvas prepares urls as:
-       * `assets://${protocolUID}/assets/${asset}` this allows us to load files
-       * from the correct location.
-       */
+     * This allows assets to work correctly in the Network Canvas preview.
+     *
+     * Network canvas uses relative paths for the assets:// protocol, whereas
+     * Architect uses full paths. Since Network Canvas prepares urls as:
+     * `assets://${protocolUID}/assets/${asset}` this allows us to load files
+     * from the correct location.
+     */
     uid: workingPath,
   };
 
@@ -102,13 +104,6 @@ const previewStageFromForm = (stageMeta, formName) => (dispatch, getState) => {
   dispatch(previewDraft(draftProtocol, stageIndex));
 };
 
-const actionTypes = {
-  PREVIEW_DRAFT,
-  SET_ZOOM,
-  REFRESH_PREVIEW,
-  CLEAR_PREVIEW,
-};
-
 const actionCreators = {
   closePreview,
   clearPreview,
@@ -118,7 +113,4 @@ const actionCreators = {
   refresh,
 };
 
-export {
-  actionTypes,
-  actionCreators,
-};
+export { actionCreators };

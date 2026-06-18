@@ -23,9 +23,10 @@
   &__error {
     opacity: 0;
     color: var(--error);
-    transition: opacity var(--animation-easing) var(--animation-duration-standard),
-    max-height var(--animation-easing) var(--animation-duration-standard);
-    padding: units.unit(1) units.unit(.5);
+    transition:
+      opacity var(--animation-easing) var(--animation-duration-standard),
+      max-height var(--animation-easing) var(--animation-duration-standard);
+    padding: units.unit(1) units.unit(0.5);
     display: flex;
     align-items: center;
 

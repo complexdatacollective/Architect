@@ -1,11 +1,12 @@
-import { connect } from 'react-redux';
 import { get } from 'lodash';
-import { compose, withProps, withHandlers } from 'recompose';
-import Editor from '../Editor';
-import { getProtocol } from '../../selectors/protocol';
+import { connect } from 'react-redux';
+import { compose, withHandlers, withProps } from 'recompose';
+
 import { actionCreators as codebookActions } from '../../ducks/modules/protocol/codebook';
+import { getProtocol } from '../../selectors/protocol';
+import Editor from '../Editor';
+import { format, parse } from './convert';
 import getNewTypeTemplate from './getNewTypeTemplate';
-import { parse, format } from './convert';
 import TypeEditor from './TypeEditor';
 
 const formName = 'TYPE_EDITOR';
@@ -33,10 +34,10 @@ function mapStateToProps(state, props) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  updateType: (
-    entity, type, form,
-  ) => dispatch(codebookActions.updateType(entity, type, parse(form))),
-  createType: (entity, form) => dispatch(codebookActions.createType(entity, parse(form))),
+  updateType: (entity, type, form) =>
+    dispatch(codebookActions.updateType(entity, type, parse(form))),
+  createType: (entity, form) =>
+    dispatch(codebookActions.createType(entity, parse(form))),
 });
 
 const withTypeProps = withProps({
@@ -47,26 +48,16 @@ const withTypeProps = withProps({
 const withTypeState = connect(mapStateToProps, mapDispatchToProps);
 
 const withTypeHandlers = withHandlers({
-  onSubmit: ({
-    createType,
-    updateType,
-    onComplete,
-    entity,
-    type,
-  }) => async (values) => {
-    if (!type) {
-      return createType(entity, values)
-        .then(onComplete);
-    }
-    return updateType(entity, type, values)
-      .then(onComplete);
-  },
+  onSubmit:
+    ({ createType, updateType, onComplete, entity, type }) =>
+    async (values) => {
+      if (!type) {
+        return createType(entity, values).then(onComplete);
+      }
+      return updateType(entity, type, values).then(onComplete);
+    },
 });
 
 export { formName };
 
-export default compose(
-  withTypeState,
-  withTypeProps,
-  withTypeHandlers,
-)(Editor);
+export default compose(withTypeState, withTypeProps, withTypeHandlers)(Editor);

@@ -8,7 +8,4 @@ const parse = (configuration) => ({
   ...configuration,
 });
 
-export {
-  format,
-  parse,
-};
+export { format, parse };

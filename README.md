@@ -12,10 +12,10 @@ For questions and support, please visit the [Network Canvas User Community](http
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/en/) (v14.21.3)
-- [npm](https://www.npmjs.com/) (v8.19.4)
+- [Node.js](https://nodejs.org/en/) (v22.x LTS) - Use [fnm](https://github.com/Schniz/fnm) or [nvm](https://github.com/nvm-sh/nvm) for version management
+- [pnpm](https://pnpm.io/) (v9.x) - Install via `corepack enable` or `npm install -g pnpm`
 - [Git](https://git-scm.com/)
-- [Python](https://www.python.org/) (v3.10.12)
+- [Python](https://www.python.org/) (v3.10+) - For native module compilation
 
 ### Installation
 
@@ -31,35 +31,32 @@ git clone https://github.com/complexdatacollective/Architect.git
 git submodule update --init --recursive -f
 ```
 
-3. Install NPM packages
+3. Install packages with pnpm
 
 ```sh
-npm install
+pnpm install
 ```
 
-Note: for Apple Silicon users, you need to install the `electron` package manually:
-
-```sh
-  npm install electron --arch=x86
-```
+Note: The `.npmrc` file configures x64 architecture for Electron (required until Electron upgrade is complete).
 
 # Operation
 
-| `npm run <script>`              | Description                                                                                                                                  |
-| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `start:architect:electron`      | Serves your app for consumption by electron.                                                                                                 |
-| `start:network-canvas:electron` | Serves network canvas for consumption by previewer.                                                                                          |
-| `preelectron:dev`               | Copies the electron source to `./electron-dev` (must be run only when setting up the repo for the first time, or bumping the version number) |
-| `dev:electron`                  | Runs electron window with contents of `start:architect:electron` and `start:network-canvas:electron`(must be run concurrently)               |
-| `build`                         | Compiles assets and prepares app for production in the /build directory.                                                                     |
-| `lint`                          | Lints js/scss                                                                                                                                |
-| `test`                          | Runs testing suite                                                                                                                           |
-| `preflight`                     | Runs linting & testing. Useful as a prepush/build hook                                                                                       |
-| `dist:mac`                      | Build and publish OS X verison                                                                                                               |
-| `dist:linux`                    | Build and publish Linux version                                                                                                              |
-| `dist:win`                      | Build and publish Windows version                                                                                                            |
-| `dist:all`                      | Build and publish all platforms                                                                                                              |
-| `update-submodules`             | Update git submodules                                                                                                                        |
+| `pnpm run <script>`        | Description                                                                                                                                  |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `start:architect:electron` | Serves your app for consumption by electron.                                                                                                 |
+| `preelectron:dev`          | Copies the electron source to `./electron-dev` (must be run only when setting up the repo for the first time, or bumping the version number) |
+| `dev:electron`             | Runs electron window with contents of `start:architect:electron` (must be run concurrently)                                                  |
+| `build`                    | Compiles assets and prepares app for production in the /build directory.                                                                     |
+| `lint`                     | Lints js/scss                                                                                                                                |
+| `test`                     | Runs testing suite                                                                                                                           |
+| `preflight`                | Runs linting & testing. Useful as a prepush/build hook                                                                                       |
+| `dist:mac`                 | Build and publish macOS version                                                                                                              |
+| `dist:linux`               | Build and publish Linux version                                                                                                              |
+| `dist:win`                 | Build and publish Windows version                                                                                                            |
+| `dist:all`                 | Build and publish all platforms                                                                                                              |
+| `update-submodules`        | Update git submodules                                                                                                                        |
+
+> **Note:** Preview functionality is temporarily disabled pending security modernization of the network-canvas submodule.
 
 ### Bump version
 
@@ -73,21 +70,13 @@ e.g.
 
 ### Development workflow in Electron
 
-There are two additional tasks to enable development within an electron app natively:
+To run the app in development mode:
 
-1. `npm run start:architect:electron`: to start the webpack dev server
+1. `pnpm run start:architect:electron` - Start the webpack dev server (runs on port 3003)
 
-- Note: must be running on port 3003.
+2. `pnpm run preelectron:dev` - Copy electron source to `./electron-dev` (only needed on first setup or after version bump)
 
-1. `npm run start:network-canvas:electron`: to start the webpack dev server
-
-- Note: must be running on port 3000.
-
-2. `npm run preelectron:dev` Copies the electron source to `./electron-dev` (in another terminal session)
-
-- Note: This step only needs to be taken when setting up the repo for the first time, or when bumping the version number.
-
-3. `npm run dev:electron` Runs the electron app from there
+3. `pnpm run dev:electron` - Run the Electron app (in another terminal)
 
 ## Application Structure
 

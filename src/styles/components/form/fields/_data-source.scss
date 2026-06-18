@@ -8,8 +8,9 @@
   &-file {
     max-height: 500px;
     opacity: 1;
-    transition: opacity var(--animation-easing) var(--animation-duration-standard),
-    max-height var(--animation-easing) var(--animation-duration-standard);
+    transition:
+      opacity var(--animation-easing) var(--animation-duration-standard),
+      max-height var(--animation-easing) var(--animation-duration-standard);
 
     &--hide {
       max-height: 0;

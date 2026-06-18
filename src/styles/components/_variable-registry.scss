@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .variable-registry {
   .simple-list {
@@ -20,8 +20,8 @@
       @include typography('copy-small');
 
       display: inline-block;
-      border-radius: units.unit(.5);
-      padding: units.unit(.3) units.unit(.5);
+      border-radius: units.unit(0.5);
+      padding: units.unit(0.3) units.unit(0.5);
       margin-left: units.unit(1);
       color: var(--text-light);
       background-color: var(--architect-warning);

@@ -1,6 +1,7 @@
 /* eslint-env jest */
-import { getThunkMocks, toHaveDispatched } from '@app/__tests__/helpers';
+import { getThunkMocks, toHaveDispatched } from '@app/__tests__/testHelpers';
 import testState from '@app/__tests__/testState.json';
+
 import reducer, { actionCreators, test } from '../stages';
 
 expect.extend({
@@ -13,11 +14,7 @@ const mockStages = [
     id: 9,
     type: 'NameGenerator',
     label: 'Bar',
-    prompts: [
-      { id: 7 },
-      { id: 3 },
-      { id: 5 },
-    ],
+    prompts: [{ id: 7 }, { id: 3 }, { id: 5 }],
   },
   { id: 5, type: 'OrdinalBin', label: 'Baz' },
 ];
@@ -54,9 +51,10 @@ describe('protocol.stages', () => {
           test.updateStage(9, updatedStage),
         );
 
-        expect(
-          updatedStages[1],
-        ).toMatchObject({ label: 'Hello world', type: 'NameGenerator' });
+        expect(updatedStages[1]).toMatchObject({
+          label: 'Hello world',
+          type: 'NameGenerator',
+        });
       });
 
       it('Replaces stage object if overwrite is `true`', () => {
@@ -67,22 +65,15 @@ describe('protocol.stages', () => {
           test.updateStage(9, updatedStage, true),
         );
 
-        expect(
-          updatedStages[1],
-        ).toEqual({ id: 9, something: 'different' });
+        expect(updatedStages[1]).toEqual({ id: 9, something: 'different' });
       });
     });
 
     describe('DELETE_STAGE', () => {
       it('Deletes the stage with stageId', () => {
-        const updatedStages = reducer(
-          mockStages,
-          test.deleteStage(9),
-        );
+        const updatedStages = reducer(mockStages, test.deleteStage(9));
 
-        expect(
-          updatedStages,
-        ).toEqual([
+        expect(updatedStages).toEqual([
           { id: 3, type: 'Information', label: 'Foo' },
           { id: 5, type: 'OrdinalBin', label: 'Baz' },
         ]);
@@ -91,23 +82,15 @@ describe('protocol.stages', () => {
 
     describe('DELETE_PROMPT', () => {
       it('Deletes the stage with stageId', () => {
-        const updatedStages = reducer(
-          mockStages,
-          test.deletePrompt(9, 3),
-        );
+        const updatedStages = reducer(mockStages, test.deletePrompt(9, 3));
 
-        expect(
-          updatedStages,
-        ).toEqual([
+        expect(updatedStages).toEqual([
           { id: 3, type: 'Information', label: 'Foo' },
           {
             id: 9,
             type: 'NameGenerator',
             label: 'Bar',
-            prompts: [
-              { id: 7 },
-              { id: 5 },
-            ],
+            prompts: [{ id: 7 }, { id: 5 }],
           },
           { id: 5, type: 'OrdinalBin', label: 'Baz' },
         ]);
@@ -139,9 +122,9 @@ describe('protocol.stages', () => {
     });
 
     it('deleteStage', async () => {
-      const [dispatch] = getThunkMocks();
+      const [dispatch, getState] = getThunkMocks(mockState);
 
-      await actionCreators.deleteStage(9)(dispatch);
+      await actionCreators.deleteStage(9)(dispatch, getState);
 
       expect(dispatch).toHaveDispatched([
         { type: 'PROTOCOL/DELETE_STAGE', id: 9 },

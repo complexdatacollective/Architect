@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .inline-edit-screen {
   position: absolute;
@@ -20,7 +20,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 units.unit(1) .2rem 0 var(--architect-panel-shadow);
+    box-shadow: 0 units.unit(1) 0.2rem 0 var(--architect-panel-shadow);
     z-index: var(--z-panel);
   }
 

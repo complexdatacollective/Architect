@@ -1,25 +1,13 @@
 import { connect } from 'react-redux';
-import uuid from 'uuid';
-import {
-  compose,
-  defaultProps,
-  withHandlers,
-} from 'recompose';
-import {
-  formValueSelector,
-  change,
-} from 'redux-form';
+import { compose, defaultProps, withHandlers } from 'recompose';
+import { change, formValueSelector } from 'redux-form';
+import { v4 as uuid } from 'uuid';
+
 import { getRemainingSpace } from './helpers';
 
 const mapStateToProps = (
-  state, {
-    capacity,
-    form,
-    fieldName,
-    itemSelector,
-    editField,
-    template,
-  },
+  state,
+  { capacity, form, fieldName, itemSelector, editField, template },
 ) => {
   const items = formValueSelector(form)(state, fieldName) || [];
   const itemCount = items ? items.length : 0;
@@ -40,36 +28,39 @@ const mapDispatchToProps = (dispatch, { form }) => ({
 });
 
 const handlers = withHandlers({
-  handleEditField: ({ setEditField }) => (fieldId) => setEditField(fieldId),
-  handleResetEditField: ({ setEditField }) => () => setEditField(),
-  handleAddNew: ({
-    setEditField,
-    itemCount,
-    fieldName,
-  }) => () => {
-    const newItemFieldName = `${fieldName}[${itemCount}]`;
-    setEditField(newItemFieldName);
-  },
-  handleUpdate: ({
-    upsert,
-    setEditField,
-    editField,
-    normalize,
-    onChange,
-  }) => (value) => {
-    upsert(editField, normalize(value));
-    if (onChange) { onChange(value); }
-    setImmediate(() => {
-      setEditField();
-    });
-  },
+  handleEditField:
+    ({ setEditField }) =>
+    (fieldId) =>
+      setEditField(fieldId),
+  handleResetEditField:
+    ({ setEditField }) =>
+    () =>
+      setEditField(),
+  handleAddNew:
+    ({ setEditField, itemCount, fieldName }) =>
+    () => {
+      const newItemFieldName = `${fieldName}[${itemCount}]`;
+      setEditField(newItemFieldName);
+    },
+  handleUpdate:
+    ({ upsert, setEditField, editField, normalize, onChange }) =>
+    (value) => {
+      upsert(editField, normalize(value));
+      if (onChange) {
+        onChange(value);
+      }
+      setImmediate(() => {
+        setEditField();
+      });
+    },
 });
 
 const withEditHandlers = compose(
   defaultProps({
     normalize: (value) => value,
     template: () => ({ size: 'SMALL' }),
-    itemSelector: (state, { form, editField }) => formValueSelector(form)(state, editField),
+    itemSelector: (state, { form, editField }) =>
+      formValueSelector(form)(state, editField),
   }),
   connect(mapStateToProps, mapDispatchToProps),
   handlers,

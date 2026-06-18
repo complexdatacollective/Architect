@@ -1,18 +1,16 @@
-import {
-  reduce,
-  omit,
-} from 'lodash';
+import { omit, reduce } from 'lodash';
 
-const getNextIndexForGroup = (indexes, group) => reduce(
-  indexes,
-  (memo, stackable) => {
-    if (group === stackable.group && stackable.index >= memo) {
-      return stackable.index + 1;
-    }
-    return memo;
-  },
-  0,
-);
+const getNextIndexForGroup = (indexes, group) =>
+  reduce(
+    indexes,
+    (memo, stackable) => {
+      if (group === stackable.group && stackable.index >= memo) {
+        return stackable.index + 1;
+      }
+      return memo;
+    },
+    0,
+  );
 
 const defaultGroup = 'GLOBAL';
 
@@ -54,7 +52,9 @@ export default (state = initialState, action) => {
     }
     case MOVE_TO_TOP: {
       const item = state[action.id];
-      if (!item) { return state; }
+      if (!item) {
+        return state;
+      }
       const nextIndex = getNextIndexForGroup(state, item.group);
       return {
         ...state,
@@ -69,12 +69,6 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
-
-export const actionTypes = {
-  REGISTER_STACKABLE,
-  UNREGISTER_STACKABLE,
-  MOVE_TO_TOP,
 };
 
 export const actionCreators = {

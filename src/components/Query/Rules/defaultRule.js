@@ -20,13 +20,16 @@ export const getDefaultOptions = (attributes, variableType) => {
     value: getDefaultValue(variableType),
   };
 
-  if (!attributes) { return defaultOptions; }
+  if (!attributes) {
+    return defaultOptions;
+  }
 
   // return attributes which match this options object
   return pick(defaultOptions, attributes);
 };
 
-export const makeGetOptionsWithDefaults = (attributes, variableType) => (options) => ({
-  ...getDefaultOptions(attributes, variableType),
-  ...options,
-});
+export const makeGetOptionsWithDefaults =
+  (attributes, variableType) => (options) => ({
+    ...getDefaultOptions(attributes, variableType),
+    ...options,
+  });

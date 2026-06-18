@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .codebook {
   --variable-pill-width: 25rem;
@@ -18,8 +18,8 @@
   &__tag {
     display: inline-block;
     border-radius: units.unit(1);
-    padding: units.unit(.5) units.unit(.75);
-    font-size: .9em;
+    padding: units.unit(0.5) units.unit(0.75);
+    font-size: 0.9em;
     color: var(--color-white);
     background-color: var(--color-mustard--dark);
     word-break: break-word;
@@ -33,7 +33,7 @@
     margin-top: units.unit(4);
 
     &-items {
-      border-top: units.unit(.25) solid var(--architect-divider);
+      border-top: units.unit(0.25) solid var(--architect-divider);
       margin-top: units.unit(2);
     }
   }
@@ -92,7 +92,7 @@
       padding-left: units.unit(4);
 
       .link {
-        margin-right: .75rem;
+        margin-right: 0.75rem;
       }
     }
 
@@ -114,7 +114,7 @@
 
     &-row {
       &--heading {
-        border-bottom: units.unit(.25) solid var(--architect-divider);
+        border-bottom: units.unit(0.25) solid var(--architect-divider);
       }
 
       &--even {
@@ -126,7 +126,7 @@
     &-heading {
       margin-right: 0;
       height: 4rem;
-      padding: .75rem .5rem;
+      padding: 0.75rem 0.5rem;
       font-size: 1rem;
     }
 
@@ -135,7 +135,7 @@
       text-transform: none;
 
       .sort-direction {
-        margin-left: .5rem;
+        margin-left: 0.5rem;
         position: relative;
         display: inline-block;
         height: 1rem;
@@ -145,7 +145,7 @@
           display: block;
           position: absolute;
           font-size: 1.5rem;
-          top: -.15rem;
+          top: -0.15rem;
           color: var(--primary);
           content: 'dir';
         }
@@ -174,12 +174,12 @@
       align-items: flex-start;
 
       > * {
-        margin: .25rem;
+        margin: 0.25rem;
       }
-    };
+    }
   }
 
   .screen-link {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
 }

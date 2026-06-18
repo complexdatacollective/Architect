@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .control-bar {
   flex: 0 0 auto;
@@ -15,7 +15,7 @@
       position: relative;
 
       .spinner {
-        --circle-size: .5rem;
+        --circle-size: 0.5rem;
       }
     }
   }
@@ -26,7 +26,7 @@
     justify-content: flex-end;
     flex: 1 auto;
 
-    >:not(:last-child) {
+    > :not(:last-child) {
       margin-right: units.unit(2);
     }
   }
@@ -37,7 +37,7 @@
     justify-content: flex-start;
     flex: 1 auto;
 
-    >:not(:last-child) {
+    > :not(:last-child) {
       margin-right: units.unit(2);
     }
   }

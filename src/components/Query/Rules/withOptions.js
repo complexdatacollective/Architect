@@ -1,12 +1,15 @@
-import { map, get, reduce } from 'lodash';
+import { get, map, reduce } from 'lodash';
 import { withProps } from 'recompose';
-import { validTypes, operatorsAsOptions, operatorsByType } from './options';
+
+import { operatorsAsOptions, operatorsByType, validTypes } from './options';
 
 const getVariablesAsOptions = (variables) => {
   const variablesAsOptions = reduce(
     variables,
     (acc, variable, variableId) => {
-      if (!validTypes.has(variable.type)) { return acc; }
+      if (!validTypes.has(variable.type)) {
+        return acc;
+      }
       return [
         ...acc,
         {
@@ -53,7 +56,9 @@ const withOptions = withProps((props) => {
     color: entity.color,
   }));
 
-  const variablesAsOptions = getVariablesAsOptions(get(props.codebook, variablesRoot(), {}));
+  const variablesAsOptions = getVariablesAsOptions(
+    get(props.codebook, variablesRoot(), {}),
+  );
 
   const variableType = get(
     props.codebook,

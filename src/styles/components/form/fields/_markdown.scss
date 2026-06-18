@@ -45,8 +45,9 @@
     max-height: 0;
     color: var(--error);
     margin: units.unit(1) 0 0;
-    transition: opacity var(--animation-easing) var(--animation-duration-standard),
-    max-height var(--animation-easing) var(--animation-duration-standard);
+    transition:
+      opacity var(--animation-easing) var(--animation-duration-standard),
+      max-height var(--animation-easing) var(--animation-duration-standard);
   }
 
   &--has-error {

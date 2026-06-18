@@ -1,8 +1,9 @@
 import { pick } from 'lodash';
-import stages from './stages';
-import codebook from './codebook';
-import assetManifest from './assetManifest';
+
 import { saveableChange } from '../session';
+import assetManifest from './assetManifest';
+import codebook from './codebook';
+import stages from './stages';
 
 const initialState = {};
 
@@ -45,31 +46,20 @@ const actionCreators = {
   setProtocol,
 };
 
-const actionTypes = {
-  UPDATE_OPTIONS,
-  SET_PROTOCOL,
-};
-
 const test = {
   updateOptions,
 };
 
-const reduceReducers = (...reducers) => (
-  previousState, action,
-) => reducers.reduce((state, reducer) => reducer(state, action), previousState);
+const reduceReducers =
+  (...reducers) =>
+  (previousState, action) =>
+    reducers.reduce((state, reducer) => reducer(state, action), previousState);
 
-export default reduceReducers(
-  protocolReducer,
-  (state, action) => ({
-    ...state,
-    stages: stages(state.stages, action),
-    codebook: codebook(state.codebook, action),
-    assetManifest: assetManifest(state.assetManifest, action),
-  }),
-);
+export default reduceReducers(protocolReducer, (state, action) => ({
+  ...state,
+  stages: stages(state.stages, action),
+  codebook: codebook(state.codebook, action),
+  assetManifest: assetManifest(state.assetManifest, action),
+}));
 
-export {
-  actionCreators,
-  actionTypes,
-  test,
-};
+export { actionCreators, test };

@@ -1,4 +1,4 @@
-export const getSession = (state) => state.session;
+const getSession = (state) => state.session;
 
 export const getActiveProtocol = (state) => {
   const session = getSession(state);
@@ -22,5 +22,5 @@ export const getHasUnsavedChanges = (state) => {
   const session = getSession(state);
   const activeProtocol = getActiveProtocol(state);
 
-  return activeProtocol && (session.lastChanged > session.lastSaved);
+  return activeProtocol && session.lastChanged > session.lastSaved;
 };

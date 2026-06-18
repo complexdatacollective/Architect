@@ -1,20 +1,20 @@
-import { remote } from 'electron';
-import fse from 'fs-extra';
-import path from 'path';
-import uuid from 'uuid';
+import { archive, extract } from '@app/utils/protocols/lib/archive';
 import { pruneProtocol } from '@app/utils/prune';
 import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
-import { archive, extract } from '@app/utils/protocols/lib/archive';
+import { electronAPI } from '@utils/electronBridge';
+import { v4 as uuid } from 'uuid';
+
 import { errors, handleError } from './errors';
 
 /**
  * Essentially the same as path.join, but also creates the directory.
  * @returns {Promise} Resolves to path as a string
  */
-const getTempDir = (...args) => {
-  const dirPath = path.join(remote.app.getPath('temp'), 'architect', ...args);
-  return fse.mkdirp(dirPath)
-    .then(() => dirPath);
+const getTempDir = async (...args) => {
+  const tempPath = await electronAPI.app.getPath('temp');
+  const dirPath = await electronAPI.path.join(tempPath, 'architect', ...args);
+  await electronAPI.fs.mkdirp(dirPath);
+  return dirPath;
 };
 
 /**
@@ -23,11 +23,17 @@ const getTempDir = (...args) => {
  * @param {string} workingPath The protocol directory.
  * @returns {object} The protocol as an object
  */
-const readProtocol = (workingPath) => {
-  const protocolJsonPath = path.join(workingPath, 'protocol.json');
+const readProtocol = async (workingPath) => {
+  const protocolJsonPath = await electronAPI.path.join(
+    workingPath,
+    'protocol.json',
+  );
 
-  return fse.readJson(protocolJsonPath)
-    .catch(handleError(errors.ReadError));
+  try {
+    return await electronAPI.fs.readJson(protocolJsonPath);
+  } catch (error) {
+    throw handleError(errors.ReadError)(error);
+  }
 };
 
 /**
@@ -38,20 +44,27 @@ const readProtocol = (workingPath) => {
  * @param {object} protocol the protocol data to write
  * @returns {Promise}
  */
-const writeProtocol = (workingPath, protocol) => {
-  const protocolJsonPath = path.join(workingPath, 'protocol.json');
+const writeProtocol = async (workingPath, protocol) => {
+  const protocolJsonPath = await electronAPI.path.join(
+    workingPath,
+    'protocol.json',
+  );
 
   const protocolWithDate = {
     ...protocol,
     lastModified: new Date().toISOString(),
   };
 
-  return Promise.resolve()
-    .then(() => pruneProtocol(protocolWithDate))
-    .then((prunedProtocol) => fse.writeJson(protocolJsonPath, prunedProtocol, { spaces: 2 })
-      .catch(handleError(errors.WriteError))
-      .then(() => pruneProtocolAssets(workingPath))
-      .then(() => prunedProtocol));
+  try {
+    const prunedProtocol = await pruneProtocol(protocolWithDate);
+    await electronAPI.fs.writeJson(protocolJsonPath, prunedProtocol, {
+      spaces: 2,
+    });
+    await pruneProtocolAssets(workingPath);
+    return prunedProtocol;
+  } catch (error) {
+    throw handleError(errors.WriteError)(error);
+  }
 };
 
 /**
@@ -62,46 +75,55 @@ const writeProtocol = (workingPath, protocol) => {
  * @param destinationUserPath Destination path
  * @returns {Promise} Resolves to { savePath, backupPath } if successful
  */
-const deployNetcanvas = (netcanvasExportPath, destinationUserPath) => {
+const deployNetcanvas = async (netcanvasExportPath, destinationUserPath) => {
   const createBackup = true;
-  const f = path.parse(destinationUserPath);
-  const backupPath = path.join(f.dir, `${f.name}.backup-${new Date().getTime()}${f.ext}`);
+  const f = await electronAPI.path.parse(destinationUserPath);
+  const backupPath = await electronAPI.path.join(
+    f.dir,
+    `${f.name}.backup-${Date.now()}${f.ext}`,
+  );
 
-  return fse.pathExists(destinationUserPath)
-    .then((exists) => {
-      if (!exists || !createBackup) { return false; }
+  const exists = await electronAPI.fs.pathExists(destinationUserPath);
 
-      return fse.rename(destinationUserPath, backupPath)
-        .then(() => true);
-    })
-    .then((createdBackup) => fse.copy(netcanvasExportPath, destinationUserPath)
-      .then(() => ({
-        savePath: destinationUserPath,
-        backupPath: createdBackup ? backupPath : null,
-      })));
+  let createdBackup = false;
+  if (exists && createBackup) {
+    await electronAPI.fs.rename(destinationUserPath, backupPath);
+    createdBackup = true;
+  }
+
+  await electronAPI.fs.copy(netcanvasExportPath, destinationUserPath);
+
+  return {
+    savePath: destinationUserPath,
+    backupPath: createdBackup ? backupPath : null,
+  };
 };
 
-const commitNetcanvas = ({ savePath, backupPath }) => {
-  if (!backupPath) { return Promise.resolve(savePath); }
+const commitNetcanvas = async ({ savePath, backupPath }) => {
+  if (!backupPath) {
+    return savePath;
+  }
   // Check the new file definitely exists before deleting backup
-  return fse.stat(savePath)
-    .then((stat) => {
-      if (!stat.isFile()) { throw new Error(`"${savePath}" (savePath) does not exist`); }
-      return fse.unlink(backupPath)
-        .then(() => savePath);
-    });
+  const stat = await electronAPI.fs.stat(savePath);
+  if (!stat.isFile) {
+    throw new Error(`"${savePath}" (savePath) does not exist`);
+  }
+  await electronAPI.fs.unlink(backupPath);
+  return savePath;
 };
 
-const revertNetcanvas = ({ savePath, backupPath }) => {
-  if (!backupPath) { return Promise.resolve(savePath); } // Nothing to revert
+const revertNetcanvas = async ({ savePath, backupPath }) => {
+  if (!backupPath) {
+    return savePath;
+  } // Nothing to revert
   // Check the backup definitely exists before deleting other file
-  return fse.stat(backupPath)
-    .then((stat) => {
-      if (!stat.isFile()) { throw new Error(`"${backupPath}" (backupPath) does not exist`); }
-      return fse.unlink(savePath)
-        .then(() => fse.rename(backupPath, savePath))
-        .then(() => savePath);
-    });
+  const stat = await electronAPI.fs.stat(backupPath);
+  if (!stat.isFile) {
+    throw new Error(`"${backupPath}" (backupPath) does not exist`);
+  }
+  await electronAPI.fs.unlink(savePath);
+  await electronAPI.fs.rename(backupPath, savePath);
+  return savePath;
 };
 
 /**
@@ -109,17 +131,17 @@ const revertNetcanvas = ({ savePath, backupPath }) => {
  * @param {object} protocol - The protocol object (optional)
  * @returns {Promise} Resolves to a path in temp (random)
  */
-const createNetcanvasExport = (workingPath, protocol) => {
-  if (!protocol) { return Promise.reject(); }
+const createNetcanvasExport = async (workingPath, protocol) => {
+  if (!protocol) {
+    throw new Error('Protocol is required');
+  }
 
-  return writeProtocol(workingPath, protocol)
-    .then(() => getTempDir('exports'))
-    .then((exportDir) => {
-      const exportPath = path.join(exportDir, uuid());
+  await writeProtocol(workingPath, protocol);
+  const exportDir = await getTempDir('exports');
+  const exportPath = await electronAPI.path.join(exportDir, uuid());
 
-      return archive(workingPath, exportPath)
-        .then(() => exportPath);
-    });
+  await archive(workingPath, exportPath);
+  return exportPath;
 };
 
 /**
@@ -129,15 +151,22 @@ const createNetcanvasExport = (workingPath, protocol) => {
  * @param filePath .netcanvas file path
  * @returns {Promise} Resolves to a path in temp (random)
  */
-const importNetcanvas = (filePath) => getTempDir('protocols')
-  .then((protocolsDir) => {
-    const destinationPath = path.join(protocolsDir, uuid());
+const importNetcanvas = async (filePath) => {
+  try {
+    const protocolsDir = await getTempDir('protocols');
+    const destinationPath = await electronAPI.path.join(protocolsDir, uuid());
 
-    return fse.access(filePath, fse.constants.W_OK)
-      .then(() => extract(filePath, destinationPath))
-      .then(() => destinationPath)
-      .catch(handleError(errors.OpenFailed));
-  });
+    const canAccess = await electronAPI.fs.access(filePath);
+    if (!canAccess) {
+      throw new Error(`Cannot access file: ${filePath}`);
+    }
+
+    await extract(filePath, destinationPath);
+    return destinationPath;
+  } catch (error) {
+    throw handleError(errors.OpenFailed)(error);
+  }
+};
 
 export {
   commitNetcanvas,

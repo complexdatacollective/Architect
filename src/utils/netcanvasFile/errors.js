@@ -1,4 +1,4 @@
-import log from 'electron-log';
+import log from '@utils/logger';
 
 const errors = {
   CreateFailed: 'CreateFailed', // Netcanvas file could not be generated
@@ -42,7 +42,4 @@ const handleError = (defaultError) => (e) => {
   }
 };
 
-export {
-  handleError,
-  errors,
-};
+export { handleError, errors };

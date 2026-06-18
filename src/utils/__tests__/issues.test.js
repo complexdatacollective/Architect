@@ -7,10 +7,7 @@ const issueObject = {
   baz: [
     {
       buzz: 'foo',
-      deeper: [
-        { fizz: 'pop' },
-        { buzz: 'pow' },
-      ],
+      deeper: [{ fizz: 'pop' }, { buzz: 'pow' }],
       beep: {
         boop: 'bop',
       },
@@ -21,9 +18,7 @@ const issueObject = {
 describe('utils/issues', () => {
   describe('flattenIssues()', () => {
     it('Converts a nested object into a flattened version with paths', () => {
-      expect(
-        issues.flattenIssues(issueObject),
-      ).toEqual([
+      expect(issues.flattenIssues(issueObject)).toEqual([
         { issue: 'bar', field: 'foo' },
         { issue: 'foo', field: 'baz[0].buzz' },
         { issue: 'pop', field: 'baz[0].deeper[0].fizz' },

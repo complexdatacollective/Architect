@@ -1,11 +1,11 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .tip {
   background-color: var(--color-mid-grey);
   border-radius: var(--border-radius);
-  padding: units.unit(.5) units.unit(4);
+  padding: units.unit(0.5) units.unit(4);
   margin: units.unit(2) 0;
-  font-size: .9rem;
+  font-size: 0.9rem;
   display: flex;
   align-items: center;
 
@@ -32,4 +32,3 @@
     color: var(--color-white);
   }
 }
-

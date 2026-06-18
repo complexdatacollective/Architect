@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 $field-color: #c7ced0;
 
@@ -25,7 +25,6 @@ $field-color: #c7ced0;
   padding: units.unit(2);
   border-radius: var(--border-radius);
   background: var(--section-background-color);
-
 
   .form-field {
     background: var(--architect-panel-grey);

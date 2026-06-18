@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .variable-spotlight {
   position: relative;
@@ -35,7 +35,6 @@
           fill: var(--color-platinum--dark);
         }
       }
-
     }
   }
 
@@ -90,7 +89,7 @@
   kbd {
     margin-left: units.unit(2);
     background: var(--color-platinum);
-    padding: units.unit(.5) units.unit(1);
+    padding: units.unit(0.5) units.unit(1);
     border: 1px solid var(--color-charcoal);
     border-radius: 5px;
     display: flex;
@@ -124,7 +123,6 @@
     .icon {
       height: units.unit(3);
       margin-right: units.unit(2);
-
 
       .cls-1,
       .cls-2 {

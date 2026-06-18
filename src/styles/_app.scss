@@ -1,7 +1,6 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 $component-name: app;
-
 
 .electron-titlebar {
   display: block;

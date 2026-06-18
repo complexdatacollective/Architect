@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .list-controls {
   display: flex;
@@ -13,7 +13,9 @@
     .form-field {
       margin: 0;
 
-      h4 { display: none; }
+      h4 {
+        display: none;
+      }
     }
 
     &--search {

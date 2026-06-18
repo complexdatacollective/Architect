@@ -33,7 +33,11 @@ describe('getSortOrderOptionGetter', () => {
 
     const mockAllValues = [{ property: '1234-1234-1234-2', direction: 'asc' }];
 
-    const subject = sortOrderOptionGetter('direction', undefined, mockAllValues);
+    const subject = sortOrderOptionGetter(
+      'direction',
+      undefined,
+      mockAllValues,
+    );
 
     expect(subject).toEqual([
       { label: 'Descending', value: 'desc' },

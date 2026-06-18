@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 $component-name: list-item;
 
@@ -14,8 +14,6 @@ $component-name: list-item;
   align-items: stretch;
   border-radius: var(--border-radius);
   margin-bottom: units.unit(1);
-
-
 
   &__control {
     padding: units.unit(2);
@@ -34,12 +32,22 @@ $component-name: list-item;
   &__content {
     padding: units.unit(2);
     flex-grow: 1;
+    display: flex;
+    align-items: center;
 
     > .stage-editor-section {
-      --section-background-color: var(--color-slate-blue--dark) !important; // sass-lint:disable-line no-important
-      --architect-panel-shadow: rgb(58 58 117 / 76%) !important; // sass-lint:disable-line no-color-literals no-important
-      --input-background: var(--color-white) !important; // sass-lint:disable-line no-important
-      --variable-pill-background: var(--color-platinum) !important; // sass-lint:disable-line no-important
+      --section-background-color: var(
+        --color-slate-blue--dark
+      ) !important; // sass-lint:disable-line no-important
+      --architect-panel-shadow: rgb(
+        58 58 117 / 76%
+      ) !important; // sass-lint:disable-line no-color-literals no-important
+      --input-background: var(
+        --color-white
+      ) !important; // sass-lint:disable-line no-important
+      --variable-pill-background: var(
+        --color-platinum
+      ) !important; // sass-lint:disable-line no-important
     }
   }
 
@@ -51,17 +59,17 @@ $component-name: list-item;
   }
 
   &--clickable {
-    box-shadow: 0 .2rem rgb(17 21 27 / 66.4%); // sass-lint:disable-line no-color-literals
+    box-shadow: 0 0.2rem rgb(17 21 27 / 66.4%); // sass-lint:disable-line no-color-literals
     cursor: pointer;
-    transition: box-shadow var(--animation-duration-very-fast) var(--animation-easing);
+    transition: box-shadow var(--animation-duration-very-fast)
+      var(--animation-easing);
 
     &:hover {
-      box-shadow: 0 .4rem .2rem 0 rgb(17 21 27 / 35%); // sass-lint:disable-line no-color-literals
+      box-shadow: 0 0.4rem 0.2rem 0 rgb(17 21 27 / 35%); // sass-lint:disable-line no-color-literals
     }
 
     &:active {
       box-shadow: unset;
     }
-
   }
 }

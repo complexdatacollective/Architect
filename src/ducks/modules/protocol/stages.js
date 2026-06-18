@@ -1,7 +1,10 @@
-import uuid from 'uuid/v1';
-import { get, compact } from 'lodash';
-import { arrayMove } from 'react-sortable-hoc';
 import prune from '@app/utils/prune';
+import { getStage } from '@selectors/protocol';
+import { compact, get, omit } from 'lodash';
+import { arrayMove } from 'react-sortable-hoc';
+import { v1 as uuid } from 'uuid';
+
+import { getNodeTypes } from '../../../selectors/codebook';
 import { saveableChange } from '../session';
 
 const CREATE_STAGE = 'PROTOCOL/CREATE_STAGE';
@@ -28,7 +31,9 @@ export default function reducer(state = initialState, action = {}) {
     }
     case UPDATE_STAGE:
       return state.map((stage) => {
-        if (stage.id !== action.id) { return stage; }
+        if (stage.id !== action.id) {
+          return stage;
+        }
 
         const previousStage = !action.overwrite ? stage : {};
 
@@ -43,16 +48,22 @@ export default function reducer(state = initialState, action = {}) {
     case MOVE_STAGE:
       return arrayMove(state, action.oldIndex, action.newIndex);
     case DELETE_STAGE:
-      return state.filter((stage) => (stage.id !== action.id));
+      return state.filter((stage) => stage.id !== action.id);
     case DELETE_PROMPT:
       return compact(
         state.map((stage) => {
-          if (stage.id !== action.stageId) { return stage; }
+          if (stage.id !== action.stageId) {
+            return stage;
+          }
 
-          const prompts = stage.prompts.filter(({ id }) => id !== action.promptId);
+          const prompts = stage.prompts.filter(
+            ({ id }) => id !== action.promptId,
+          );
 
           // If prompt is empty, we can delete the stage too
-          if (action.deleteEmptyStage && prompts.length === 0) { return null; }
+          if (action.deleteEmptyStage && prompts.length === 0) {
+            return null;
+          }
 
           return {
             ...stage,
@@ -99,13 +110,47 @@ const deletePrompt = (stageId, promptId, deleteEmptyStage = false) => ({
 const createStageThunk = (options, index) => (dispatch) => {
   const stageId = uuid();
   const stage = { ...initialStage, ...options, id: stageId };
-  return dispatch(saveableChange(createStage)(stage, index))
-    .then(() => stage);
+  return dispatch(saveableChange(createStage)(stage, index)).then(() => stage);
 };
 
 const moveStageThunk = saveableChange(moveStage);
 const updateStageThunk = saveableChange(updateStage);
-const deleteStageThunk = saveableChange(deleteStage);
+const deleteStageThunk = (stageId) => (dispatch, getState) => {
+  const state = getState();
+  const stage = getStage(state, stageId);
+  if (stage.type === 'Anonymisation') {
+    // Remove encrypted from all variables
+    const nodeTypes = getNodeTypes(state);
+    const encryptedVariables = Object.values(nodeTypes).reduce(
+      (acc, nodeType) => {
+        const nodeTypeVariables = Object.entries(nodeType.variables)
+          .filter(([, variable]) => variable.encrypted)
+          .map(([variableId, variable]) => ({ ...variable, id: variableId }));
+
+        acc.push(...nodeTypeVariables);
+        return acc;
+      },
+      [],
+    );
+    encryptedVariables.forEach((variable) => {
+      const properties = omit(variable, 'encrypted');
+
+      dispatch({
+        type: 'PROTOCOL/UPDATE_VARIABLE',
+        meta: {
+          variable: variable.id,
+        },
+        configuration: properties,
+        merge: false,
+      });
+    });
+    return dispatch(saveableChange(deleteStage)(stageId));
+  }
+
+  // Delete stage
+  return dispatch(saveableChange(deleteStage)(stageId));
+};
+
 const deletePromptThunk = saveableChange(deletePrompt);
 
 const actionCreators = {
@@ -116,14 +161,6 @@ const actionCreators = {
   deletePrompt: deletePromptThunk,
 };
 
-const actionTypes = {
-  CREATE_STAGE,
-  UPDATE_STAGE,
-  DELETE_STAGE,
-  MOVE_STAGE,
-  DELETE_PROMPT,
-};
-
 const test = {
   createStage,
   updateStage,
@@ -132,8 +169,4 @@ const test = {
   deletePrompt,
 };
 
-export {
-  actionCreators,
-  actionTypes,
-  test,
-};
+export { actionCreators, test };

@@ -1,8 +1,6 @@
 /* eslint-env jest */
 
-import {
-  getSortOrderOptionGetter,
-} from '../optionGetters';
+import { getSortOrderOptionGetter } from '../optionGetters';
 
 const mockVariableOptions = [
   { label: 'Name', type: 'text', value: '1234-1234-1234-1' },
@@ -13,16 +11,21 @@ const mockVariableOptions = [
 describe('CategoricalBin optionGetters', () => {
   describe('getSortOrderOptionGetter', () => {
     it('options for `property`', () => {
-      const sortOrderOptionGetter = getSortOrderOptionGetter(
-        mockVariableOptions,
+      const sortOrderOptionGetter =
+        getSortOrderOptionGetter(mockVariableOptions);
+
+      const mockAllValues = [
+        {
+          property: '1234-1234-1234-2',
+          direction: 'asc',
+        },
+      ];
+
+      const subject = sortOrderOptionGetter(
+        'property',
+        undefined,
+        mockAllValues,
       );
-
-      const mockAllValues = [{
-        property: '1234-1234-1234-2',
-        direction: 'asc',
-      }];
-
-      const subject = sortOrderOptionGetter('property', undefined, mockAllValues);
 
       expect(subject).toEqual([
         { label: '*', value: '*' },
@@ -32,13 +35,18 @@ describe('CategoricalBin optionGetters', () => {
     });
 
     it('options for `direction`', () => {
-      const sortOrderOptionGetter = getSortOrderOptionGetter(
-        mockVariableOptions,
+      const sortOrderOptionGetter =
+        getSortOrderOptionGetter(mockVariableOptions);
+
+      const mockAllValues = [
+        { property: '1234-1234-1234-2', direction: 'asc' },
+      ];
+
+      const subject = sortOrderOptionGetter(
+        'direction',
+        undefined,
+        mockAllValues,
       );
-
-      const mockAllValues = [{ property: '1234-1234-1234-2', direction: 'asc' }];
-
-      const subject = sortOrderOptionGetter('direction', undefined, mockAllValues);
 
       expect(subject).toEqual([
         { label: 'Descending', value: 'desc' },

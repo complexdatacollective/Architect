@@ -1,9 +1,17 @@
-/* eslint-env jest */
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import log from 'electron-log';
 import { errors, handleError } from '../errors';
 
-jest.mock('electron-log');
+vi.mock('@utils/logger', () => ({
+  default: {
+    error: vi.fn(),
+    info: vi.fn(),
+    warn: vi.fn(),
+    debug: vi.fn(),
+  },
+}));
+
+import log from '@utils/logger';
 
 describe('netcanvasFile/errors', () => {
   describe('handleError(defaultError)', () => {
@@ -20,8 +28,7 @@ describe('netcanvasFile/errors', () => {
     it('if error is undefined, it throws an error!', () => {
       const errorHandler = handleError();
 
-      expect(() => errorHandler(undefined))
-        .toThrow('No error to handle');
+      expect(() => errorHandler(undefined)).toThrow('No error to handle');
     });
 
     it('if error code is EACCES it returns error with friendlyCode IncorrectPermissions', () => {
@@ -61,7 +68,7 @@ describe('netcanvasFile/errors', () => {
       const mockError = new Error();
       try {
         errorHandler(mockError);
-      } catch (e) {
+      } catch (_e) {
         expect(log.error.mock.calls).toEqual([[mockError]]);
       }
     });

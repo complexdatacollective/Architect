@@ -1,39 +1,37 @@
-const { protocol, app } = require('electron');
-const fs = require('fs-extra');
-const path = require('path');
-const log = require('./log');
+const { protocol, app, net } = require("electron");
+const path = require("node:path");
+const log = require("./log");
 
-const protocolName = 'asset'; // e.g. `asset://`
+const protocolName = "asset"; // e.g. `asset://`
 
-const validPaths = [
-  app.getPath('userData'),
-  app.getPath('temp'),
-];
+const validPaths = [app.getPath("userData"), app.getPath("temp")];
 
-const isValidPath = filePath =>
-  validPaths.reduce((memo, validPath) => memo || filePath.includes(validPath), false);
+const isValidPath = (filePath) => validPaths.some((validPath) => filePath.includes(validPath));
 
-const registerProtocol = () =>
-  protocol.registerFileProtocol(protocolName, (request, callback) => {
-    const urlPath = request.url.substr(protocolName.length + 3);
-    const decodedPath = decodeURIComponent(urlPath);
-    const filePath = path.normalize(decodedPath);
+const registerProtocol = () => {
+	try {
+		protocol.handle(protocolName, async (request) => {
+			const urlPath = request.url.substring(protocolName.length + 3);
+			const decodedPath = decodeURIComponent(urlPath);
+			const filePath = path.normalize(decodedPath);
 
-    if (!isValidPath(filePath)) {
-      log.error(`path outside of valid directories: "${filePath}"`);
-      return;
-    }
+			if (!isValidPath(filePath)) {
+				log.error(`path outside of valid directories: "${filePath}"`);
+				return new Response("Forbidden", { status: 403 });
+			}
 
-    fs.access(filePath, fs.constants.R_OK)
-      .then(() => {
-        log.info(`open ${protocolName}://`, filePath);
-        callback({ path: filePath });
-      })
-      .catch(error => log.error(error));
-  }, (error) => {
-    if (error) {
-      log.error(`Failed to register ${protocolName}:// protocol`);
-    }
-  });
+			try {
+				log.info(`open ${protocolName}://`, filePath);
+				return net.fetch(`file://${filePath}`);
+			} catch (error) {
+				log.error(error);
+				return new Response("Not Found", { status: 404 });
+			}
+		});
+		log.info(`${protocolName}:// protocol registered successfully`);
+	} catch (error) {
+		log.error(`Failed to register ${protocolName}:// protocol:`, error.message);
+	}
+};
 
 exports.registerProtocol = registerProtocol;

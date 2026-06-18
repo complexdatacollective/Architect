@@ -13,7 +13,7 @@ const NOOP = 'STATUS/NOOP';
 const busy = (type = '', meta) => ({
   type: BUSY,
   payload: type,
-  ...(meta || {}),
+  ...meta,
 });
 
 const ready = (type = '') => ({
@@ -41,21 +41,26 @@ const anotherThrottledThunk = myLock(anotherThunk);
 </code></pre>
  */
 export const createLock = (type) => {
-  const fn = (nextAction) => (...args) => (dispatch, getState) => {
-    // If this type is already running, dispatch a noop and don't run action.
-    const isBusy = getIsBusy(getState(), type);
-    if (isBusy) { dispatch(noop(type)); return Promise.resolve(); }
+  const fn =
+    (nextAction) =>
+    (...args) =>
+    (dispatch, getState) => {
+      // If this type is already running, dispatch a noop and don't run action.
+      const isBusy = getIsBusy(getState(), type);
+      if (isBusy) {
+        dispatch(noop(type));
+        return Promise.resolve();
+      }
 
-    // Mark this type as busy
-    dispatch(busy(type));
+      // Mark this type as busy
+      dispatch(busy(type));
 
-    // Run the action as normal
-    return dispatch(nextAction(...args))
-      .finally(() => {
+      // Run the action as normal
+      return dispatch(nextAction(...args)).finally(() => {
         // Once it's complete, mark this type as ready
         dispatch(ready(type));
       });
-  };
+    };
 
   fn.toString = function toString() {
     return type;
@@ -75,7 +80,10 @@ export default function reducer(state = initialState, action = {}) {
     case BUSY:
       return {
         ...state,
-        busy: [...filterType(state.busy, action.payload), { type: action.payload }],
+        busy: [
+          ...filterType(state.busy, action.payload),
+          { type: action.payload },
+        ],
       };
     case READY:
       return {
@@ -87,24 +95,9 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-const actionCreators = {
-  busy,
-  ready,
-};
-
-const actionTypes = {
-  BUSY,
-  READY,
-  NOOP,
-};
-
 const selectors = {
   getStatus,
   getIsBusy,
 };
 
-export {
-  actionCreators,
-  actionTypes,
-  selectors,
-};
+export { selectors };

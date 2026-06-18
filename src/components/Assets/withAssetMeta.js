@@ -1,10 +1,8 @@
-import { connect } from 'react-redux';
-import { compose, setPropTypes } from 'recompose';
+import { getAssetManifest } from '@selectors/protocol';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
-import {
-  getAssetManifest,
-} from '@selectors/protocol';
+import { connect } from 'react-redux';
+import { compose, setPropTypes } from 'recompose';
 
 const existingMeta = {
   name: 'Interview network',

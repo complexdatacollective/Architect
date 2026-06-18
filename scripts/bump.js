@@ -16,20 +16,28 @@ const currentVersion = fs.readJsonSync('./package.json').version;
 const getNewVersion = (version, versionMask) => {
   const versionMaskParts = versionMask.split('.');
 
-  return version.split('.')
+  return version
+    .split('.')
     .map((value, index) => {
-      if (versionMaskParts[index] === 'x') { return value; }
+      if (versionMaskParts[index] === 'x') {
+        return value;
+      }
       return versionMaskParts[index];
-    }).join('.');
+    })
+    .join('.');
 };
 
 const updatePackageVersion = (file, version) => {
   const packageJson = fs.readJsonSync(file);
 
-  fs.writeJsonSync(file, {
-    ...packageJson,
-    version,
-  }, { spaces: 4 });
+  fs.writeJsonSync(
+    file,
+    {
+      ...packageJson,
+      version,
+    },
+    { spaces: 4 },
+  );
 };
 
 const newVersion = getNewVersion(currentVersion, userVersion);
@@ -42,8 +50,12 @@ updatePackageVersion('./public/package.json', newVersion);
 
 if (userCodename.length > 0) {
   const codenameObj = fs.readJsonSync('./src/codenames.json');
-  fs.writeJsonSync('./src/codenames.json', {
-    ...codenameObj,
-    [newVersion]: userCodename,
-  }, { spaces: 2 });
+  fs.writeJsonSync(
+    './src/codenames.json',
+    {
+      ...codenameObj,
+      [newVersion]: userCodename,
+    },
+    { spaces: 2 },
+  );
 }

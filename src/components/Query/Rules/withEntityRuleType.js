@@ -1,6 +1,7 @@
-import { compose, withState, withHandlers } from 'recompose';
-import { templates } from './options';
+import { compose, withHandlers, withState } from 'recompose';
+
 import { makeGetOptionsWithDefaults } from './defaultRule';
+import { templates } from './options';
 
 const VARIABLE_RULE = 'ALTER/VARIABLE';
 const TYPE_RULE = 'ALTER/TYPE';
@@ -10,9 +11,15 @@ const entityRuleTypes = {
   TYPE_RULE,
 };
 
-const entityRuleTypeOptions = [
-  { label: 'Attribute - rule based on the value of this alter type\'s attributes.', value: VARIABLE_RULE },
-  { label: 'Presence - based on the presence or absence of this alter type in the interview network.', value: TYPE_RULE },
+const entityRuleTypeOptions = (entityType) => [
+  {
+    label: `Attribute - rule based on the value of this ${entityType} type's attributes.`,
+    value: VARIABLE_RULE,
+  },
+  {
+    label: `Presence - based on the presence or absence of this ${entityType} type in the interview network.`,
+    value: TYPE_RULE,
+  },
 ];
 
 const withEntityRuleType = compose(
@@ -21,25 +28,29 @@ const withEntityRuleType = compose(
     'setEntityRuleType',
     // If an existing rule, we need to determine the type
     ({ rule }) => {
-      const { options: { attribute, type } } = rule;
+      const {
+        options: { attribute, type },
+      } = rule;
 
-      if (!type) { return null; }
+      if (!type) {
+        return null;
+      }
 
-      const entityRuleType = attribute
-        ? VARIABLE_RULE
-        : TYPE_RULE;
+      const entityRuleType = attribute ? VARIABLE_RULE : TYPE_RULE;
 
       return entityRuleType;
     },
   ),
   withHandlers({
     handleChangeEntityRuleType:
-      ({ setEntityRuleType, onChange, rule }) => (entityRuleType) => {
+      ({ setEntityRuleType, onChange, rule }) =>
+      (entityRuleType) => {
         setEntityRuleType(entityRuleType);
 
-        const ruleTemplate = entityRuleType === TYPE_RULE
-          ? templates.entityTypeRule
-          : templates.entityVariableRule;
+        const ruleTemplate =
+          entityRuleType === TYPE_RULE
+            ? templates.entityTypeRule
+            : templates.entityVariableRule;
 
         // 'reset' rule options, but keep type
         const options = makeGetOptionsWithDefaults(ruleTemplate)({
@@ -55,5 +66,3 @@ const withEntityRuleType = compose(
 );
 
 export { withEntityRuleType, entityRuleTypes, entityRuleTypeOptions };
-
-export default withEntityRuleType;

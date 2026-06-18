@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .screen {
   &.new-stage {
@@ -9,7 +9,6 @@
         flex: 1;
       }
     }
-
   }
 }
 
@@ -50,7 +49,6 @@
     flex-direction: column;
   }
 
-
   &__interfaces {
     display: flex;
     flex-direction: column;
@@ -68,7 +66,6 @@
       justify-content: center;
     }
   }
-
 
   &__interface {
     flex: 1 0 100%;
@@ -94,7 +91,7 @@
 
     &-preview {
       width: 100%;
-      border-radius: .5rem;
+      border-radius: 0.5rem;
     }
 
     &-info {

@@ -1,5 +1,5 @@
-@use '~@codaco/ui/src/styles/global/core/units';
-@use "sass:math";
+@use '@codaco/ui/src/styles/global/core/units';
+@use 'sass:math';
 
 $stage-height: math.div(9, 16) * 15vw;
 $stage-padding: units.unit(5);
@@ -24,7 +24,7 @@ $bottom-spacing: units.unit(12);
     font-family: var(--heading-font-family);
     font-size: 1.25rem;
     font-weight: 600;
-    letter-spacing: .05rem;
+    letter-spacing: 0.05rem;
     line-height: 1.1;
     color: transparent;
     transition-property: color, opacity;
@@ -45,7 +45,7 @@ $bottom-spacing: units.unit(12);
       align-items: center;
       color: var(--color-white);
       transform-origin: center center;
-      transform: translateX(-50%) scale(.4);
+      transform: translateX(-50%) scale(0.4);
       transition-property: transform, background-color;
       transition-timing-function: var(--animation-easing);
       transition-duration: var(--animation-duration-fast);
@@ -53,9 +53,9 @@ $bottom-spacing: units.unit(12);
 
     &::after {
       position: absolute;
-      top: .05rem;
+      top: 0.05rem;
       left: 0;
-      transform: translateX(-50%) scale(.4);
+      transform: translateX(-50%) scale(0.4);
       font-weight: 500;
       font-size: 2.5rem;
       line-height: 2.5rem;
@@ -101,7 +101,7 @@ $bottom-spacing: units.unit(12);
     left: 50%;
     width: 0;
     height: calc(100% - #{units.unit(5)});
-    border-left: units.unit(.6) solid var(--architect-timeline-line);
+    border-left: units.unit(0.6) solid var(--architect-timeline-line);
   }
 
   &__stages {

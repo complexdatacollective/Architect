@@ -1,11 +1,11 @@
 /* eslint-env jest */
 
-import testState from '../../../__tests__/testState.json';
 import {
-  getVariableOptionsForSubject,
   getAllVariablesByUUID,
+  getVariableOptionsForSubject,
   makeGetVariable,
 } from '..';
+import testState from '../../../__tests__/testState.json';
 
 describe('codebook selectors', () => {
   describe('getVariableOptionsForSubject()', () => {
@@ -15,10 +15,7 @@ describe('codebook selectors', () => {
         entity: 'node',
       };
 
-      const result = getVariableOptionsForSubject(
-        testState,
-        subject,
-      );
+      const result = getVariableOptionsForSubject(testState, subject);
 
       expect(result).toMatchSnapshot();
     });
@@ -29,10 +26,7 @@ describe('codebook selectors', () => {
         entity: 'ego',
       };
 
-      const result = getVariableOptionsForSubject(
-        testState,
-        subject,
-      );
+      const result = getVariableOptionsForSubject(testState, subject);
 
       expect(result).toMatchSnapshot();
     });

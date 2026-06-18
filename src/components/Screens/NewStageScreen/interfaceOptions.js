@@ -1,6 +1,6 @@
 import StandardPropTypes from 'prop-types';
 
-export const CATEGORIES = {
+const CATEGORIES = {
   GENERATORS: 'Name and Edge Generators',
   SOCIOGRAMS: 'Sociograms',
   INTERPRETERS: 'Name and Edge Interpreters',
@@ -36,23 +36,28 @@ export const INTERFACE_TYPES = [
     keywords: 'namegenerator name generator form attributes nodes node roster',
     type: 'NameGenerator',
     title: 'Name Generator (using forms)',
-    description: 'A name generator interface which provides a form that participants complete when creating an alter.',
+    description:
+      'A name generator interface which provides a form that participants complete when creating an alter.',
   },
   {
     category: CATEGORIES.GENERATORS,
     tags: [TAGS.CREATE_NODES, TAGS.ROSTER_DATA],
-    keywords: 'namegenerator name generator quick add simple easy nodes node create roster',
+    keywords:
+      'namegenerator name generator quick add simple easy nodes node create roster',
     type: 'NameGeneratorQuickAdd',
     title: 'Name Generator (quick add)',
-    description: 'A name generator interface designed for low response-burden. Only requires a label in order to create an alter.',
+    description:
+      'A name generator interface designed for low response-burden. Only requires a label in order to create an alter.',
   },
   {
     category: CATEGORIES.GENERATORS,
     tags: [TAGS.CREATE_NODES, TAGS.ROSTER_DATA],
-    keywords: 'namegenerator name generator search add import list filter roster nodes node csv create',
+    keywords:
+      'namegenerator name generator search add import list filter roster nodes node csv create',
     type: 'NameGeneratorRoster',
     title: 'Name Generator for Roster Data',
-    description: 'A name generator specifically for roster data, allowing sorting and filtering of the roster.',
+    description:
+      'A name generator specifically for roster data, allowing sorting and filtering of the roster.',
   },
   {
     category: CATEGORIES.GENERATORS,
@@ -60,7 +65,17 @@ export const INTERFACE_TYPES = [
     keywords: 'edge tie generator edges create add',
     type: 'DyadCensus',
     title: 'Dyad Census',
-    description: 'A name interpreter interface that creates edges by systematically surveying all alters in the interview network.',
+    description:
+      'A name interpreter interface that creates edges by systematically surveying all alters in the interview network.',
+  },
+  {
+    category: CATEGORIES.GENERATORS,
+    tags: [TAGS.CREATE_EDGES],
+    keywords: 'edge tie generator edges create add',
+    type: 'OneToManyDyadCensus',
+    title: 'One to Many Dyad Census',
+    description:
+      'A name interpreter interface that creates edges by systematically surveying one alter against many others in the interview network.',
   },
   {
     category: CATEGORIES.GENERATORS,
@@ -68,7 +83,8 @@ export const INTERFACE_TYPES = [
     keywords: 'edge tie generator census dyad edges create strength ordinal',
     type: 'TieStrengthCensus',
     title: 'Tie-Strength Census',
-    description: 'Combines a dyad census with an ordinal variable to simultaneously capture the strength of ties between alters. ',
+    description:
+      'Combines a dyad census with an ordinal variable to simultaneously capture the strength of ties between alters.',
   },
   {
     category: CATEGORIES.SOCIOGRAMS,
@@ -76,15 +92,18 @@ export const INTERFACE_TYPES = [
     keywords: 'sociogram visual edges highlight visualize visualise',
     type: 'Sociogram',
     title: 'Sociogram',
-    description: 'Designed for spatially arranging alters (either manually or automatically), creating edges between them, and highlighting the presence of alter attributes.',
+    description:
+      'Designed for spatially arranging alters (either manually or automatically), creating edges between them, and highlighting the presence of alter attributes.',
   },
   {
     category: CATEGORIES.SOCIOGRAMS,
     tags: [TAGS.PROVIDE_INFORMATION, TAGS.SHOW_MEDIA],
-    keywords: 'sociogram narrative visual visualize highlight community qualitative',
+    keywords:
+      'sociogram narrative visual visualize highlight community qualitative',
     type: 'Narrative',
     title: 'Narrative',
-    description: 'A qualitative interface that uses "presets" to switch between different views of the data in the network.',
+    description:
+      'A qualitative interface that uses "presets" to switch between different views of the data in the network.',
   },
   {
     category: CATEGORIES.INTERPRETERS,
@@ -92,7 +111,8 @@ export const INTERFACE_TYPES = [
     keywords: 'ordinal bin node attributes categorical name interpreter',
     type: 'OrdinalBin',
     title: 'Ordinal Bin',
-    description: 'A name interpreter interface that captures ordinal data by allowing the participant to drag and drop alters into bins.',
+    description:
+      'A name interpreter interface that captures ordinal data by allowing the participant to drag and drop alters into bins.',
   },
   {
     category: CATEGORIES.INTERPRETERS,
@@ -100,7 +120,8 @@ export const INTERFACE_TYPES = [
     keywords: 'categorical bin node attributes name interpreter',
     type: 'CategoricalBin',
     title: 'Categorical Bin',
-    description: 'A name interpreter interface that collects nominal data by allowing the participant to drag and drop alters into circles representing a category.',
+    description:
+      'A name interpreter interface that collects nominal data by allowing the participant to drag and drop alters into circles representing a category.',
   },
   {
     category: CATEGORIES.INTERPRETERS,
@@ -108,7 +129,8 @@ export const INTERFACE_TYPES = [
     keywords: 'alter attributes node interpreter form forms',
     type: 'AlterForm',
     title: 'Per Alter Form',
-    description: 'An interface that allows the participant to fill out a form for each alter in the interview network.',
+    description:
+      'An interface that allows the participant to fill out a form for each alter in the interview network.',
   },
   {
     category: CATEGORIES.INTERPRETERS,
@@ -116,7 +138,8 @@ export const INTERFACE_TYPES = [
     keywords: 'edge attributes form forms edge interpreter',
     type: 'AlterEdgeForm',
     title: 'Per Alter Edge Form',
-    description: 'An edge interpreter interface that captures attribute data via a form.',
+    description:
+      'An edge interpreter interface that captures attribute data via a form.',
   },
   {
     category: CATEGORIES.INTERPRETERS,
@@ -129,10 +152,22 @@ export const INTERFACE_TYPES = [
   {
     category: CATEGORIES.UTILITIES,
     tags: [TAGS.SHOW_MEDIA, TAGS.PROVIDE_INFORMATION],
-    keywords: 'instruction text participant guide intro image video audio media resource',
+    keywords:
+      'instruction text participant guide intro image video audio media resource',
     type: 'Information',
     title: 'Information',
-    description: 'A general purpose screen that can be used to present information to participants using a variety of text and media resources.',
+    description:
+      'A general purpose screen that can be used to present information to participants using a variety of text and media resources.',
+  },
+  {
+    category: CATEGORIES.UTILITIES,
+    tags: [TAGS.NODE_ATTRIBUTES],
+    keywords:
+      'instruction text participant guide intro image video audio media resource',
+    type: 'Anonymisation',
+    title: 'Anonymisation Interface',
+    description:
+      'An interface that allows the participant to set a passphrase for node anonymisation.',
   },
 ];
 
@@ -144,5 +179,3 @@ export const PropTypes = {
     title: StandardPropTypes.string,
   }),
 };
-
-export default INTERFACE_TYPES;

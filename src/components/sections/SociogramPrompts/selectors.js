@@ -1,6 +1,7 @@
-import { getCodebook } from '@selectors/protocol';
 import { getVariableOptionsForSubject } from '@selectors/codebook';
+import { getCodebook } from '@selectors/protocol';
 import { asOptions } from '@selectors/utils';
+import { formValueSelector } from 'redux-form';
 
 export const getLayoutVariablesForSubject = (state, { entity, type }) => {
   const variableOptions = getVariableOptionsForSubject(state, { entity, type });
@@ -11,10 +12,7 @@ export const getLayoutVariablesForSubject = (state, { entity, type }) => {
   return layoutOptions;
 };
 
-export const getHighlightVariablesForSubject = (
-  state,
-  { type, entity },
-) => {
+export const getHighlightVariablesForSubject = (state, { type, entity }) => {
   // All defined variables that match nodeType
   const variableOptions = getVariableOptionsForSubject(state, { entity, type });
 
@@ -31,4 +29,18 @@ export const getEdgesForSubject = (state) => {
   const codebookOptions = asOptions(codebook.edge);
 
   return codebookOptions;
+};
+
+export const getEdgeFilters = (state) => {
+  const getStageValue = formValueSelector('edit-stage');
+  const currentFilters = getStageValue(state, 'filter');
+
+  if (!currentFilters || !currentFilters.rules) {
+    return [];
+  }
+  const edgeFilters = currentFilters.rules.filter(
+    (rule) => rule.type === 'edge',
+  );
+
+  return edgeFilters;
 };

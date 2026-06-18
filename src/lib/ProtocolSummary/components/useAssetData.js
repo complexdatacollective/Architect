@@ -1,6 +1,7 @@
-import { useContext, useState, useEffect } from 'react';
+import { getAssetPath, makeGetNetworkAssetVariables } from '@selectors/assets';
 import { get } from 'lodash';
-import { makeGetNetworkAssetVariables, getAssetPath } from '@selectors/assets';
+import { useContext, useEffect, useState } from 'react';
+
 import SummaryContext from './SummaryContext';
 
 const stubState = (assetManifest, workingPath) => ({
@@ -15,25 +16,28 @@ const useAssetData = (id) => {
   } = useContext(SummaryContext);
 
   const data = get(assetManifest, id);
-
-  if (!data) { return {}; }
-
   const [variables, setVariables] = useState(null);
 
   const stubbedState = stubState(assetManifest, workingPath);
-
   const getNetworkAssetVariables = makeGetNetworkAssetVariables(stubbedState);
-  const assetPath = getAssetPath(stubbedState, id);
+  const assetPath = data ? getAssetPath(stubbedState, id) : null;
 
   useEffect(() => {
-    if (data.type !== 'network') { return; }
+    if (!data || data.type !== 'network') {
+      return;
+    }
 
-    getNetworkAssetVariables(id)
-      .then((v) => {
-        if (!v) { return; }
-        setVariables(v.join(', '));
-      });
+    getNetworkAssetVariables(id).then((v) => {
+      if (!v) {
+        return;
+      }
+      setVariables(v.join(', '));
+    });
   }, []);
+
+  if (!data) {
+    return {};
+  }
 
   const encodedURI = encodeURIComponent(assetPath);
   const url = `asset://${encodedURI}`;

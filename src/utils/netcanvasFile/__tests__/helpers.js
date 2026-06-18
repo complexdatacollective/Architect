@@ -1,12 +1,24 @@
-/* eslint-env jest */
-import path from 'path';
-import { APP_SCHEMA_VERSION } from '@app/config';
+import path from 'node:path';
 
-const mockProtocolPath = path.join(__dirname, '..', '..', 'network-canvas', 'integration-tests', 'data', 'mock.netcanvas');
-const mockProtocol = { description: 'test protocol', schemaVersion: APP_SCHEMA_VERSION };
+import { APP_SCHEMA_VERSION } from '@app/config';
+import { vi } from 'vitest';
+
+const mockProtocolPath = path.join(
+  __dirname,
+  '..',
+  '..',
+  'network-canvas',
+  'integration-tests',
+  'data',
+  'mock.netcanvas',
+);
+const mockProtocol = {
+  description: 'test protocol',
+  schemaVersion: APP_SCHEMA_VERSION,
+};
 
 const mockAndLog = (targets) => {
-  const logger = jest.fn();
+  const logger = vi.fn();
 
   Object.keys(targets).forEach((name) => {
     const [target, result] = targets[name];
@@ -25,8 +37,4 @@ const mockAndLog = (targets) => {
   return logger;
 };
 
-export {
-  mockProtocolPath,
-  mockProtocol,
-  mockAndLog,
-};
+export { mockProtocolPath, mockProtocol, mockAndLog };

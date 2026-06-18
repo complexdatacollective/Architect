@@ -1,8 +1,5 @@
 /* eslint-env jest */
-import {
-  getNarrativeVariables,
-  getEdgesForSubject,
-} from '../selectors';
+import { getEdgesForSubject, getNarrativeVariables } from '../selectors';
 
 const subject = {
   entity: 'node',
@@ -55,19 +52,23 @@ describe('NarrativePresets', () => {
         groupVariablesForSubject,
       } = getNarrativeVariables(mockState, subject);
 
-      expect(layoutVariablesForSubject).toEqual([{
-        value: '1234-1234-1',
-        label: 'my layout',
-        type: 'layout',
-        isUsed: false,
-      }]);
+      expect(layoutVariablesForSubject).toEqual([
+        {
+          value: '1234-1234-1',
+          label: 'my layout',
+          type: 'layout',
+          isUsed: false,
+        },
+      ]);
 
-      expect(highlightVariablesForSubject).toEqual([{
-        value: '1234-1234-3',
-        label: 'my boolean',
-        type: 'boolean',
-        isUsed: false,
-      }]);
+      expect(highlightVariablesForSubject).toEqual([
+        {
+          value: '1234-1234-3',
+          label: 'my boolean',
+          type: 'boolean',
+          isUsed: false,
+        },
+      ]);
 
       expect(groupVariablesForSubject).toEqual([
         {
@@ -82,11 +83,13 @@ describe('NarrativePresets', () => {
     it('get edges for node type', () => {
       const result = getEdgesForSubject(mockState, subject);
 
-      expect(result).toEqual([{
-        value: '1234-5',
-        label: 'an edge',
-        color: 'blue',
-      }]);
+      expect(result).toEqual([
+        {
+          value: '1234-5',
+          label: 'an edge',
+          color: 'blue',
+        },
+      ]);
     });
   });
 });

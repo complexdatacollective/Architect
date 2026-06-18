@@ -1,22 +1,21 @@
 /* eslint-env jest */
 
-import { getThunkMocks } from '@app/__tests__/helpers';
+import { getThunkMocks } from '@app/__tests__/testHelpers';
+
 import reducer, { actionCreators, test } from '../index';
 
 describe('protocol', () => {
   describe('reducer', () => {
     it('initial state', () => {
       const initialState = reducer();
-      expect(initialState).toEqual(
-        {
-          assetManifest: {},
-          stages: [],
-          codebook: {
-            node: {},
-            edge: {},
-          },
+      expect(initialState).toEqual({
+        assetManifest: {},
+        stages: [],
+        codebook: {
+          node: {},
+          edge: {},
         },
-      );
+      });
     });
 
     it('PROTOCOL/UPDATE_OPTIONS', () => {
@@ -35,14 +34,13 @@ describe('protocol', () => {
         }),
       );
 
-      expect(newStateFromFileAction)
-        .toEqual({
-          name: 'bar',
-          assetManifest: { nodes: [{ foo: 'bar' }] },
-          forms: { fooForm: { bar: 'baz' } },
-          stages: [{ type: 'foobar' }],
-          codebook: { fooVar: { baz: 'buzz' } },
-        });
+      expect(newStateFromFileAction).toEqual({
+        name: 'bar',
+        assetManifest: { nodes: [{ foo: 'bar' }] },
+        forms: { fooForm: { bar: 'baz' } },
+        stages: [{ type: 'foobar' }],
+        codebook: { fooVar: { baz: 'buzz' } },
+      });
     });
 
     it('SESSION/OPEN_NETCANVAS_SUCCESS', () => {
@@ -62,22 +60,18 @@ describe('protocol', () => {
         codebook: { fooVar: { baz: 'buzz' } },
       };
 
-      const newStateFromFileAction = reducer(
-        currentProtocol,
-        {
-          type: 'SESSION/OPEN_NETCANVAS_SUCCESS',
-          payload: { protocol: newProtocol },
-        },
-      );
+      const newStateFromFileAction = reducer(currentProtocol, {
+        type: 'SESSION/OPEN_NETCANVAS_SUCCESS',
+        payload: { protocol: newProtocol },
+      });
 
-      expect(newStateFromFileAction)
-        .toEqual({
-          name: 'bar',
-          assetManifest: { nodes: [{ foo: 'bar' }] },
-          forms: { fooForm: { bar: 'baz' } },
-          stages: [{ type: 'foobar' }],
-          codebook: { fooVar: { baz: 'buzz' } },
-        });
+      expect(newStateFromFileAction).toEqual({
+        name: 'bar',
+        assetManifest: { nodes: [{ foo: 'bar' }] },
+        forms: { fooForm: { bar: 'baz' } },
+        stages: [{ type: 'foobar' }],
+        codebook: { fooVar: { baz: 'buzz' } },
+      });
     });
   });
 
@@ -89,24 +83,18 @@ describe('protocol', () => {
         name: 'bar',
       })(dispatch);
 
-      expect(dispatch).toHaveBeenNthCalledWith(
-        1,
-        {
-          options: {
-            name: 'bar',
-          },
-          type: 'PROTOCOL/UPDATE_OPTIONS',
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        options: {
+          name: 'bar',
         },
-      );
+        type: 'PROTOCOL/UPDATE_OPTIONS',
+      });
 
-      expect(dispatch).toHaveBeenNthCalledWith(
-        3,
-        {
-          type: 'SESSION/PROTOCOL_CHANGED',
-          ipc: true,
-          protocolIsValid: true,
-        },
-      );
+      expect(dispatch).toHaveBeenNthCalledWith(3, {
+        type: 'SESSION/PROTOCOL_CHANGED',
+        ipc: true,
+        protocolIsValid: true,
+      });
     });
   });
 });

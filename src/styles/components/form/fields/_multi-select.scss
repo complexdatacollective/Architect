@@ -29,7 +29,8 @@ $component-name: 'form-fields-multi-select';
     color: var(--architect-sortable-text);
     border-radius: units.unit(1);
     z-index: var(--z-fx);
-    transition: background-color var(--animation-easing) var(--animation-duration-standard);
+    transition: background-color var(--animation-easing)
+      var(--animation-duration-standard);
 
     &:not(:last-of-type) {
       margin-bottom: units.unit(1);
@@ -61,7 +62,8 @@ $component-name: 'form-fields-multi-select';
 
       &-label {
         margin-right: units.unit(1);
-        transition: color var(--animation-easing) var(--animation-duration-standard);
+        transition: color var(--animation-easing)
+          var(--animation-duration-standard);
       }
 
       .form-field-container,
@@ -75,7 +77,7 @@ $component-name: 'form-fields-multi-select';
         }
 
         .form-field-text__error,
-        .form-fields-select__error  {
+        .form-fields-select__error {
           z-index: 1;
           opacity: 1;
           width: 100%;
@@ -152,5 +154,4 @@ $component-name: 'form-fields-multi-select';
       filter: brightness(100);
     }
   }
-
 }

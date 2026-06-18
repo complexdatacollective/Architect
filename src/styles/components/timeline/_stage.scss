@@ -1,5 +1,5 @@
-@use "sass:math";
-@use '~@codaco/ui/src/styles/global/core/units';
+@use 'sass:math';
+@use '@codaco/ui/src/styles/global/core/units';
 
 $preview-offset: units.unit(12);
 $preview-width: units.unit(26);
@@ -41,8 +41,9 @@ $component-name: timeline-stage;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    transition: opacity var(--animation-duration-fast) var(--animation-easing),
-    transform var(--animation-duration-fast) var(--animation-easing);
+    transition:
+      opacity var(--animation-duration-fast) var(--animation-easing),
+      transform var(--animation-duration-fast) var(--animation-easing);
     opacity: 0;
     transform: translateZ(0) translateX(units.unit(-10));
   }
@@ -68,12 +69,11 @@ $component-name: timeline-stage;
     padding: 1rem;
     width: $preview-width;
     position: relative;
-    left: -.6rem; // To counter box shadow
+    left: -0.6rem; // To counter box shadow
     z-index: var(--z-default);
     text-align: center;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     overflow: hidden;
-
 
     &-preview {
       width: 100%;
@@ -114,12 +114,14 @@ $component-name: timeline-stage;
   }
 
   &:hover {
-
     .#{$component-name}__controls {
       opacity: 1;
       transform: translateX(0);
-      transition: opacity var(--animation-duration-fast) var(--animation-duration-fast) var(--animation-easing),
-      transform var(--animation-duration-fast) var(--animation-duration-fast) var(--animation-easing);
+      transition:
+        opacity var(--animation-duration-fast) var(--animation-duration-fast)
+          var(--animation-easing),
+        transform var(--animation-duration-fast) var(--animation-duration-fast)
+          var(--animation-easing);
       transition-delay: 1s;
     }
   }

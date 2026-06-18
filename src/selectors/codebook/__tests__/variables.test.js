@@ -124,7 +124,7 @@ describe('makeGetIsUsed', () => {
       ...mockStateWithoutUse,
       form: {
         ...mockReduxFormsWithoutUse,
-        formName: {
+        'formName': {
           values: {
             [variable1]: 'foo',
           },
@@ -158,7 +158,9 @@ describe('makeGetIsUsed', () => {
 
       it('allows the redux form name to be specified to return specific form', () => {
         // Also check we can set form name
-        const result = makeGetIsUsed({ formNames: ['formName'] })(stateWithFormUse);
+        const result = makeGetIsUsed({ formNames: ['formName'] })(
+          stateWithFormUse,
+        );
 
         expect(result).toEqual({
           [variable1]: true,
@@ -241,7 +243,10 @@ describe('makeGetIsUsed', () => {
       ];
 
       // Also check we can set form name
-      const result = makeOptionsWithIsUsed({ formNames: ['formName'] })(state, mockOptions);
+      const result = makeOptionsWithIsUsed({ formNames: ['formName'] })(
+        state,
+        mockOptions,
+      );
 
       expect(result).toEqual([
         { value: variable1, label: '1', isUsed: true },

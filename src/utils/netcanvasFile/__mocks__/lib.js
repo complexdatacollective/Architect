@@ -1,15 +1,18 @@
-/* eslint-env jest */
+import { vi } from 'vitest';
 
-const defaultImplementation = (name) => () => Promise.reject(new Error(`lib mock ${name}`));
+const defaultImplementation = (name) => () =>
+  Promise.reject(new Error(`lib mock ${name}`));
 
-const getTempDir = jest.fn(defaultImplementation('getTempDir'));
-const readProtocol = jest.fn(defaultImplementation('readProtocol'));
-const writeProtocol = jest.fn(defaultImplementation('writeProtocol'));
-const deployNetcanvas = jest.fn(defaultImplementation('deployNetcanvas'));
-const commitNetcanvas = jest.fn(defaultImplementation('commitNetcanvas'));
-const revertNetcanvas = jest.fn(defaultImplementation('revertNetcanvas'));
-const createNetcanvasExport = jest.fn(defaultImplementation('createNetcanvasExport'));
-const importNetcanvas = jest.fn(defaultImplementation('importNetcanvas'));
+const getTempDir = vi.fn(defaultImplementation('getTempDir'));
+const readProtocol = vi.fn(defaultImplementation('readProtocol'));
+const writeProtocol = vi.fn(defaultImplementation('writeProtocol'));
+const deployNetcanvas = vi.fn(defaultImplementation('deployNetcanvas'));
+const commitNetcanvas = vi.fn(defaultImplementation('commitNetcanvas'));
+const revertNetcanvas = vi.fn(defaultImplementation('revertNetcanvas'));
+const createNetcanvasExport = vi.fn(
+  defaultImplementation('createNetcanvasExport'),
+);
+const importNetcanvas = vi.fn(defaultImplementation('importNetcanvas'));
 
 export {
   getTempDir,

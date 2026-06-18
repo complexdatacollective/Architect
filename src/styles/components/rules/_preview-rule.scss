@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .rules-preview-rule {
   padding: units.unit(1) units.unit(2);
@@ -22,7 +22,7 @@
     .preview-node,
     .preview-edge,
     .variable-pill {
-      zoom: .8;
+      zoom: 0.8;
       margin: 0;
       max-width: 24rem;
       color: var(--text-dark);
@@ -30,7 +30,7 @@
 
     .preview-edge,
     .variable-pill {
-      margin: 0 .8rem;
+      margin: 0 0.8rem;
     }
   }
 
@@ -79,7 +79,9 @@
 
 .stage-editor-section {
   --variable-pill-background: var(--color-platinum);
-  --variable-pill-shadow-color: rgb(212 212 212); // sass-lint:disable-line no-color-literals
+  --variable-pill-shadow-color: rgb(
+    212 212 212
+  ); // sass-lint:disable-line no-color-literals
 
   .preview-edge {
     background: var(--variable-pill-background);

@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .rules-preview-text {
   &__join {
@@ -19,7 +19,7 @@
 
   &__value {
     border-bottom: 3px dotted var(--architect-rules-assert);
-    margin: 0 .4rem -3px;
+    margin: 0 0.4rem -3px;
     font-weight: 600;
   }
 }

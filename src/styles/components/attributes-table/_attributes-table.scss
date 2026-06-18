@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .attributes-table {
   margin: 0 0 units.unit(4);
@@ -25,7 +25,7 @@
       color: var(--text-light);
       display: block;
       position: relative;
-      top: units.unit(-.2);
+      top: units.unit(-0.2);
     }
   }
 }

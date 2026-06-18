@@ -1,7 +1,7 @@
-import { connect } from 'react-redux';
-import { change, getFormValues } from 'redux-form';
-import { compose, withHandlers } from 'recompose';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
+import { connect } from 'react-redux';
+import { compose, withHandlers } from 'recompose';
+import { change, getFormValues } from 'redux-form';
 
 const mapStateToProps = (state, props) => ({
   formValues: getFormValues(props.form)(state),
@@ -16,27 +16,23 @@ const mapDispatchToProps = {
 const deleteVariableState = connect(mapStateToProps, mapDispatchToProps);
 
 const variableHandlers = withHandlers({
-  onCreateOtherVariable: ({
-    createVariable,
-    entity,
-    type,
-    form,
-    changeForm,
-  }) => async (name, field) => {
-    const { variable } = await createVariable(entity, type, { type: 'text', name });
+  onCreateOtherVariable:
+    ({ createVariable, entity, type, form, changeForm }) =>
+    async (name, field) => {
+      const { variable } = await createVariable(entity, type, {
+        type: 'text',
+        name,
+      });
 
-    // If we supplied a field, update it with the result of the variable creation
-    if (field) {
-      changeForm(form, field, variable);
-    }
+      // If we supplied a field, update it with the result of the variable creation
+      if (field) {
+        changeForm(form, field, variable);
+      }
 
-    return variable;
-  },
+      return variable;
+    },
 });
 
-const withVariableHandlers = compose(
-  deleteVariableState,
-  variableHandlers,
-);
+const withVariableHandlers = compose(deleteVariableState, variableHandlers);
 
 export default withVariableHandlers;

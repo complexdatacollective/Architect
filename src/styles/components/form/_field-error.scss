@@ -2,8 +2,9 @@
   opacity: 0;
   background: var(--error);
   color: var(--form-error-text);
-  transition: opacity var(--animation-easing) var(--animation-duration-standard),
-  max-height var(--animation-easing) var(--animation-duration-standard);
+  transition:
+    opacity var(--animation-easing) var(--animation-duration-standard),
+    max-height var(--animation-easing) var(--animation-duration-standard);
   max-height: 0;
   display: flex;
   align-items: center;
@@ -16,6 +17,6 @@
   &--show {
     opacity: 1;
     max-height: 50px;
-    padding: .5rem .25rem;
+    padding: 0.5rem 0.25rem;
   }
 }

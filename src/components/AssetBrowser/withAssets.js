@@ -1,31 +1,24 @@
+import { filter, map } from 'lodash';
 import { connect } from 'react-redux';
-import {
-  filter,
-  map,
-} from 'lodash';
-import {
-  compose,
-  withState,
-  withHandlers,
-} from 'recompose';
-import { getAssetManifest } from '../../selectors/protocol';
+import { compose, withHandlers, withState } from 'recompose';
+
 import { getAssetIndex, utils as indexUtils } from '../../selectors/indexes';
+import { getAssetManifest } from '../../selectors/protocol';
 
-const filterByAssetType = (assetType, assets) => (
-  assetType
-    ? filter(assets, ({ type }) => type === assetType)
-    : assets
-);
+const filterByAssetType = (assetType, assets) =>
+  assetType ? filter(assets, ({ type }) => type === assetType) : assets;
 
-const withKeysAsIds = (assets) => map(assets, (asset, id) => ({ ...asset, id }));
+const withKeysAsIds = (assets) =>
+  map(assets, (asset, id) => ({ ...asset, id }));
 
-const filterAssets = (assetType, assets) => filterByAssetType(
-  assetType,
-  withKeysAsIds(assets),
-);
+const filterAssets = (assetType, assets) =>
+  filterByAssetType(assetType, withKeysAsIds(assets));
 
 const filterHandlers = withHandlers({
-  onUpdateAssetFilter: ({ setAssetType }) => (assetType) => setAssetType(assetType),
+  onUpdateAssetFilter:
+    ({ setAssetType }) =>
+    (assetType) =>
+      setAssetType(assetType),
 });
 
 const mapStateToProps = (state, { assetType, selected }) => {

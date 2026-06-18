@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const icongen = require('icon-gen');
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 const svg2png = require('svg2png');
 
 const jobList = [
@@ -36,17 +36,22 @@ const jobList = [
 ];
 
 const icongenTask = (specification) => {
-  icongen(specification.inputFile, specification.outputPath, specification.options)
-    .catch((err) => {
-      throw err;
-    });
+  icongen(
+    specification.inputFile,
+    specification.outputPath,
+    specification.options,
+  ).catch((err) => {
+    throw err;
+  });
 };
 
 const svg2pngTask = (specification) => {
   const buffer = fs.readFileSync(specification.inputFile);
 
   if (!buffer) {
-    throw Error(`Failed to write the image ${specification.size} x ${specification.size}`);
+    throw Error(
+      `Failed to write the image ${specification.size} x ${specification.size}`,
+    );
   }
 
   specification.sizes.forEach((size) => {
@@ -74,7 +79,11 @@ const parseJobs = (jobs) => {
 parseJobs(jobList);
 
 // TODO: remove once underlying issue fixed: https://github.com/akabekobeko/npm-icon-gen/issues/86
-const warn = (msg) => { console.warn(require('chalk').yellow(msg)); }; // eslint-disable-line
+const warn = (msg) => {
+  console.warn(require('chalk').yellow(msg));
+}; // eslint-disable-line
 warn('Warning: *.ico output for Windows may be corrupted.');
 warn('You should re-export from another editor.');
-warn('Issue: https://github.com/complexdatacollective/Network-Canvas/issues/602');
+warn(
+  'Issue: https://github.com/complexdatacollective/Network-Canvas/issues/602',
+);

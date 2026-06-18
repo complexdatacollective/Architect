@@ -1,15 +1,22 @@
 import { isArray, values } from 'lodash';
 import { createSelector } from 'reselect';
-import { getProtocol } from './protocol';
-import collectPath, { collectPaths } from '../utils/collectPaths';
 
-const mapSubject = (entityType) => ({ type, entity }, path) => {
-  if (entity !== entityType) { return undefined; }
-  return [type, `${path}.type`];
-};
+import collectPath, { collectPaths } from '../utils/collectPaths';
+import { getProtocol } from './protocol';
+
+const mapSubject =
+  (entityType) =>
+  ({ type, entity }, path) => {
+    if (entity !== entityType) {
+      return undefined;
+    }
+    return [type, `${path}.type`];
+  };
 
 const mapAssetItems = ({ type, content }, path) => {
-  if (type === 'text') { return undefined; }
+  if (type === 'text') {
+    return undefined;
+  }
   return [content, `${path}.content`];
 };
 
@@ -30,9 +37,7 @@ export const paths = {
     'stages[].prompts[].createEdge',
     ['stages[].subject', mapSubject('edge')],
   ],
-  nodes: [
-    ['stages[].subject', mapSubject('node')],
-  ],
+  nodes: [['stages[].subject', mapSubject('node')]],
   variables: [
     'stages[].quickAdd',
     'stages[].form.fields[].variable',
@@ -77,41 +82,36 @@ export const paths = {
  * Returns index of used edges (entities)
  * @returns {object} in format: { [path]: variable }
  */
-const getEdgeIndex = createSelector(
-  getProtocol,
-  (protocol) => collectPaths(paths.edges, protocol),
+const getEdgeIndex = createSelector(getProtocol, (protocol) =>
+  collectPaths(paths.edges, protocol),
 );
 
 /**
  * Returns index of used nodes (entities)
  * @returns {object} in format: { [path]: variable }
  */
-const getNodeIndex = createSelector(
-  getProtocol,
-  (protocol) => collectPaths(paths.nodes, protocol),
+const getNodeIndex = createSelector(getProtocol, (protocol) =>
+  collectPaths(paths.nodes, protocol),
 );
 
 /**
  * Returns index of used variables
  * @returns {object} in format: { [path]: variable }
  */
-const getVariableIndex = createSelector(
-  getProtocol,
-  (protocol) => collectPaths(paths.variables, protocol),
+const getVariableIndex = createSelector(getProtocol, (protocol) =>
+  collectPaths(paths.variables, protocol),
 );
 
 /**
  * Returns index of used assets
  * @returns {object} in format: { [path]: variable }
  */
-const getAssetIndex = createSelector(
-  getProtocol,
-  (protocol) => collectPaths(paths.assets, protocol),
+const getAssetIndex = createSelector(getProtocol, (protocol) =>
+  collectPaths(paths.assets, protocol),
 );
 
-const combineLists = (lists) => lists
-  .map((list) => (!isArray(list) ? values(list) : list))
-  .reduce((acc, list) => [...acc, ...list], []);
+const combineLists = (lists) =>
+  lists.flatMap((list) => (!isArray(list) ? values(list) : list));
 
 /**
  * Creates a Set of items from arrays or path objects
@@ -137,10 +137,4 @@ const utils = {
   collectPaths,
 };
 
-export {
-  getVariableIndex,
-  getAssetIndex,
-  getNodeIndex,
-  getEdgeIndex,
-  utils,
-};
+export { getVariableIndex, getAssetIndex, getNodeIndex, getEdgeIndex, utils };

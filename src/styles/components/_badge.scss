@@ -1,12 +1,12 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 %badge {
   display: inline-block;
   background-color: var(--color-mid-grey);
-  border-radius: .75rem;
-  padding: .2rem .5rem;
+  border-radius: 0.75rem;
+  padding: 0.2rem 0.5rem;
   margin: 0 units.unit(1);
-  font-size: .7rem;
+  font-size: 0.7rem;
   color: var(--text-light);
 }
 

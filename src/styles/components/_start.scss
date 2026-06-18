@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .start {
   margin: 0 auto;
@@ -12,7 +12,8 @@
 
   #create-new-protocol-button,
   #open-existing-protocol-button {
-    transition: transform var(--animation-duration-standard) var(--animation-easing);
+    transition: transform var(--animation-duration-standard)
+      var(--animation-easing);
   }
 
   &__welcome {
@@ -41,7 +42,6 @@
       font-size: 2.5vmin;
       font-weight: 400;
     }
-
   }
 
   &__call-to-action {

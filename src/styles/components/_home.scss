@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 $panel-color: var(--color-platinum);
 $panel-color-alt: var(--color-platinum--dark);
@@ -10,7 +10,13 @@ $scrollbar-padding: units.unit(2);
   $opaque: rgb(0 0 0 / 100%);
 
   // sass-lint:disable no-vendor-prefixes
-  mask-image: linear-gradient(180deg, transparent, $opaque $top-height, $opaque calc(100% - #{$bottom-height}), transparent 100%);
+  mask-image: linear-gradient(
+    180deg,
+    transparent,
+    $opaque $top-height,
+    $opaque calc(100% - #{$bottom-height}),
+    transparent 100%
+  );
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -27,7 +33,7 @@ $font-sizes: (
   2: 1.563rem,
   1: 1.25rem,
   body: 1rem,
-  small: .8rem,
+  small: 0.8rem,
 );
 
 @function type-scale($name) {
@@ -68,7 +74,7 @@ $font-sizes: (
 .home-section {
   position: relative;
   border-radius: var(--border-radius);
-  box-shadow: 0 units.unit(1) .2rem 0 var(--architect-panel-shadow);
+  box-shadow: 0 units.unit(1) 0.2rem 0 var(--architect-panel-shadow);
   background: var(--color-platinum--dark);
   margin: units.unit(4) auto;
   max-width: 70rem;
@@ -102,9 +108,11 @@ $font-sizes: (
       position: absolute;
       top: 1rem;
       height: calc(100% - 2rem);
-      border-radius: .33rem;
-      width: .33rem;
-      background-color: rgb(0 0 0 / 5%); // sass-lint:disable-line no-color-literals
+      border-radius: 0.33rem;
+      width: 0.33rem;
+      background-color: rgb(
+        0 0 0 / 5%
+      ); // sass-lint:disable-line no-color-literals
     }
   }
 
@@ -145,22 +153,17 @@ $font-sizes: (
         }
       }
     }
-
   }
 
   &__actions {
     display: flex;
     width: 100%;
-
   }
 
   &__action {
     flex-grow: 1;
   }
-
-
 }
-
 
 .recently-edited {
   &__protocols {
@@ -222,9 +225,10 @@ $font-sizes: (
       content: '';
       border-radius: $size;
       background-color: var(--color-rich-black);
-      transition: background var(--animation-duration-fast) var(--animation-easing);
+      transition: background var(--animation-duration-fast)
+        var(--animation-easing);
       width: $size * 2;
-      height: $size * .67;
+      height: $size * 0.67;
     }
 
     &::after {
@@ -235,7 +239,8 @@ $font-sizes: (
       width: $size;
       background-color: var(--color-white);
       transform: translateX(-1px);
-      transition: transform var(--animation-duration-fast) var(--animation-easing);
+      transition: transform var(--animation-duration-fast)
+        var(--animation-easing);
     }
   }
 
@@ -270,7 +275,7 @@ $font-sizes: (
 
   &--is-open {
     background: var(--color-slate-blue);
-    box-shadow: 0 units.unit(1) .2rem 0 var(--architect-panel-shadow);
+    box-shadow: 0 units.unit(1) 0.2rem 0 var(--architect-panel-shadow);
     color: var(--color-white);
   }
 
@@ -287,14 +292,16 @@ $font-sizes: (
         display: inline-block;
         font-family: var(--heading-font-family);
         font-weight: 900;
-        letter-spacing: .15em;
+        letter-spacing: 0.15em;
         margin: 0;
       }
     }
 
     .logo {
       height: 8rem;
-      filter: drop-shadow(0 units.unit(1) units.unit(1) rgb(0 0 0 / 35%)); // sass-lint:disable-line no-color-literals
+      filter: drop-shadow(
+        0 units.unit(1) units.unit(1) rgb(0 0 0 / 35%)
+      ); // sass-lint:disable-line no-color-literals
     }
 
     .version {
@@ -304,7 +311,7 @@ $font-sizes: (
       z-index: 2;
 
       h4 {
-        font-size: .8rem;
+        font-size: 0.8rem;
       }
     }
 
@@ -326,7 +333,7 @@ $font-sizes: (
 
     h1 {
       font-size: type-scale(5);
-      letter-spacing: .15em;
+      letter-spacing: 0.15em;
       margin: 0;
     }
 
@@ -340,7 +347,6 @@ $font-sizes: (
   &__panel {
     overflow: hidden;
   }
-
 }
 
 .home-welcome {
@@ -380,9 +386,9 @@ $font-sizes: (
           left: -5px;
           background-color: var(--color-white);
           color: var(--color-rich-black);
-          font-size: .6rem;
+          font-size: 0.6rem;
           font-weight: 900;
-          padding: units.unit(.5) units.unit(1);
+          padding: units.unit(0.5) units.unit(1);
           border-radius: var(--border-radius);
           margin-right: units.unit(1);
         }
@@ -392,14 +398,13 @@ $font-sizes: (
         flex: 1;
         margin-right: units.unit(2);
 
-
         &:last-child {
           margin-right: 0;
         }
 
         .button__content {
           padding: 0;
-          font-size: .75rem;
+          font-size: 0.75rem;
         }
       }
     }
@@ -413,6 +418,10 @@ $font-sizes: (
 .home-tips {
   color: var(--color-white);
 
-  h3 { margin: 0 0 1rem; }
-  p { margin: 0; }
+  h3 {
+    margin: 0 0 1rem;
+  }
+  p {
+    margin: 0;
+  }
 }

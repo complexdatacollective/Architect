@@ -1,8 +1,9 @@
-import path from 'path';
-import { get } from 'lodash';
 import { getNetworkVariables } from '@app/utils/protocols/assetTools';
-import { getWorkingPath } from './session';
+import { pathSync } from '@utils/electronBridge';
+import { get } from 'lodash';
+
 import { getAssetManifest } from './protocol';
+import { getWorkingPath } from './session';
 
 /**
  * Generate asset path using the assetManifest and protocol meta
@@ -15,9 +16,11 @@ export const getAssetPath = (state, dataSource) => {
   const assetManifest = getAssetManifest(state);
   const asset = get(assetManifest, dataSource);
 
-  if (!asset) { return null; }
+  if (!asset) {
+    return null;
+  }
 
-  const assetPath = path.join(workingPath, 'assets', asset.source);
+  const assetPath = pathSync.join(workingPath, 'assets', asset.source);
   return assetPath;
 };
 
@@ -27,18 +30,24 @@ export const getAssetPath = (state, dataSource) => {
  * @param {Object} dataSource id of entry in assetManifest
  * @param {boolean} asOptions return variables as a label/value list
  */
-export const makeGetNetworkAssetVariables = (state) => async (dataSource, asOptions = false) => {
-  const assetPath = getAssetPath(state, dataSource);
+export const makeGetNetworkAssetVariables =
+  (state) =>
+  async (dataSource, asOptions = false) => {
+    const assetPath = getAssetPath(state, dataSource);
 
-  if (!assetPath) { return null; }
+    if (!assetPath) {
+      return null;
+    }
 
-  const variables = await getNetworkVariables(assetPath);
+    const variables = await getNetworkVariables(assetPath);
 
-  if (asOptions) {
-    const variableOptions = variables
-      .map((attribute) => ({ label: attribute, value: attribute }));
-    return variableOptions;
-  }
+    if (asOptions) {
+      const variableOptions = variables.map((attribute) => ({
+        label: attribute,
+        value: attribute,
+      }));
+      return variableOptions;
+    }
 
-  return variables;
-};
+    return variables;
+  };

@@ -1,10 +1,9 @@
-import { omit, get } from 'lodash';
+import { get, omit } from 'lodash';
 
 const SET_PROPERTY = 'APP/SET_PROPERTY';
 const CLEAR_PROPERTY = 'APP/CLEAR_PROPERTY';
 
-const initialState = {
-};
+const initialState = {};
 
 const setProperty = (key, value) => ({
   type: SET_PROPERTY,
@@ -21,7 +20,10 @@ const clearProperty = (key) => ({
   },
 });
 
-export default (state = initialState, { type, payload } = { type: null, payload: null }) => {
+export default (
+  state = initialState,
+  { type, payload } = { type: null, payload: null },
+) => {
   switch (type) {
     case SET_PROPERTY:
       return {
@@ -40,11 +42,6 @@ const getProperty = (key) => (state) => get(state, ['app', key]);
 
 export const selectors = {
   getProperty,
-};
-
-export const actionTypes = {
-  SET_PROPERTY,
-  CLEAR_PROPERTY,
 };
 
 export const actionCreators = {
