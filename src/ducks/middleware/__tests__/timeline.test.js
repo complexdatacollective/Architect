@@ -1,22 +1,25 @@
 /* eslint-env jest */
 
+import crypto from 'node:crypto';
+
 import { times } from 'lodash';
-import uuid from 'uuid';
-import crypto from 'crypto';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import createTimeline, { actionCreators } from '../timeline';
 
-jest.mock('uuid');
+// Mock uuid to generate random IDs
+vi.mock('uuid', () => ({
+  default: () => crypto.randomBytes(20).toString('hex'),
+  v4: () => crypto.randomBytes(20).toString('hex'),
+}));
 
-uuid.mockImplementation(() => crypto.randomBytes(20).toString('hex'));
-
-const defaultReducer = jest.fn(() => ({
+const defaultReducer = vi.fn(() => ({
   dummyState: true,
   randomProperty: crypto.randomBytes(20).toString('hex'),
 }));
 
-const getRewindableReducer = (
-  reducer = defaultReducer, options = {},
-) => createTimeline(reducer, options);
+const getRewindableReducer = (reducer = defaultReducer, options = {}) =>
+  createTimeline(reducer, options);
 
 describe('timeline middleware', () => {
   let rewindableReducer;
@@ -41,11 +44,10 @@ describe('timeline middleware', () => {
     });
 
     it('each subsequent call adds an event to the timeline', () => {
-      const nextState = times(3)
-        .reduce(
-          (state) => rewindableReducer(state, {}),
-          undefined,
-        );
+      const nextState = times(3).reduce(
+        (state) => rewindableReducer(state, {}),
+        undefined,
+      );
 
       expect(nextState.past.length).toBe(2);
       expect(nextState.timeline.length).toBe(3); // +1 includes name for present
@@ -56,11 +58,10 @@ describe('timeline middleware', () => {
       const reducer = (state = initialState) => state;
       const timelineReducer = createTimeline(reducer);
 
-      const nextState = times(3)
-        .reduce(
-          (state) => timelineReducer(state, {}),
-          undefined,
-        );
+      const nextState = times(3).reduce(
+        (state) => timelineReducer(state, {}),
+        undefined,
+      );
 
       expect(nextState.past.length).toBe(0);
       expect(nextState.timeline.length).toBe(1);
@@ -69,11 +70,10 @@ describe('timeline middleware', () => {
 
   describe('jump() action', () => {
     it('can revert to a specific point on the timeline', () => {
-      const nextState = times(10)
-        .reduce(
-          (state) => rewindableReducer(state, {}),
-          undefined,
-        );
+      const nextState = times(10).reduce(
+        (state) => rewindableReducer(state, {}),
+        undefined,
+      );
 
       const rollbackState = rewindableReducer(
         nextState,
@@ -86,11 +86,10 @@ describe('timeline middleware', () => {
     });
 
     it('if point does not exist it ignores action', () => {
-      const nextState = times(10)
-        .reduce(
-          (state) => rewindableReducer(state, {}),
-          undefined,
-        );
+      const nextState = times(10).reduce(
+        (state) => rewindableReducer(state, {}),
+        undefined,
+      );
 
       const rollbackState = rewindableReducer(
         nextState,
@@ -105,16 +104,12 @@ describe('timeline middleware', () => {
 
   describe('reset() action', () => {
     it('can revert to an unused state', () => {
-      const nextState = times(10)
-        .reduce(
-          (state) => rewindableReducer(state, {}),
-          undefined,
-        );
-
-      const resetState = rewindableReducer(
-        nextState,
-        actionCreators.reset(),
+      const nextState = times(10).reduce(
+        (state) => rewindableReducer(state, {}),
+        undefined,
       );
+
+      const resetState = rewindableReducer(nextState, actionCreators.reset());
 
       expect(resetState).toEqual(
         expect.objectContaining({
@@ -141,11 +136,10 @@ describe('timeline middleware', () => {
       });
 
       it('timeline is limited to 3 items', () => {
-        const nextState = times(10)
-          .reduce(
-            (state) => rewindableReducer(state, {}),
-            undefined,
-          );
+        const nextState = times(10).reduce(
+          (state) => rewindableReducer(state, {}),
+          undefined,
+        );
 
         expect(nextState.past.length).toBe(3);
         expect(nextState.timeline.length).toBe(4); // +1 includes name for present
@@ -164,18 +158,16 @@ describe('timeline middleware', () => {
 
       it('actions that are excluded do not create points on the timeline', () => {
         // Add some regular actions
-        const nextState = times(3)
-          .reduce(
-            (state) => rewindableReducer(state, {}),
-            undefined,
-          );
+        const nextState = times(3).reduce(
+          (state) => rewindableReducer(state, {}),
+          undefined,
+        );
 
         // Add some ignored actions
-        const filteredState = times(3)
-          .reduce(
-            (state) => rewindableReducer(state, { type: ignoredType }),
-            nextState,
-          );
+        const filteredState = times(3).reduce(
+          (state) => rewindableReducer(state, { type: ignoredType }),
+          nextState,
+        );
 
         expect(filteredState.past.length).toBe(2);
         expect(filteredState.timeline.length).toBe(3); // +1 includes name for present

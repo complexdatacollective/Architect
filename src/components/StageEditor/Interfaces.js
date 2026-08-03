@@ -1,34 +1,38 @@
-/* eslint-disable import/prefer-default-export */
-import { get } from 'lodash';
 import {
+  AnonymisationExplanation,
+  AnonymisationValidation,
+  AutomaticLayout,
   Background,
   CardDisplayOptions,
   CategoricalBinPrompts,
   ContentGrid,
   DyadCensusPrompts,
+  EncryptedVariables,
   ExternalDataSource,
-  AutomaticLayout,
   FilteredEdgeType,
   Form,
   InterviewScript,
   IntroductionPanel,
-  NameGeneratorRosterPrompts,
+  MinMaxAlterLimits,
   NameGeneratorPrompts,
+  NameGeneratorRosterPrompts,
   NarrativeBehaviours,
   NarrativePresets,
   NodePanels,
   NodeType,
-  MinMaxAlterLimits,
+  OneToManyDyadCensusBehaviours,
+  OneToManyDyadCensusPrompts,
   OrdinalBinPrompts,
   QuickAdd,
   SearchOptionsForExternalData,
+  SkipLogic,
   SociogramPrompts,
   SortOptionsForExternalData,
-  SkipLogic,
   TieStrengthCensusPrompts,
   Title,
 } from '@components/sections';
 import { FilteredNodeType } from '@components/sections/NodeType';
+import { get } from 'lodash';
 
 const AlterEdgeForm = {
   sections: [
@@ -38,7 +42,8 @@ const AlterEdgeForm = {
     SkipLogic,
     InterviewScript,
   ],
-  documentation: 'https://documentation.networkcanvas.com/interface-documentation/per-alter-edge-form/',
+  documentation:
+    'https://documentation.networkcanvas.com/interface-documentation/per-alter-edge-form/',
   template: {},
 };
 
@@ -50,7 +55,8 @@ const AlterForm = {
     SkipLogic,
     InterviewScript,
   ],
-  documentation: 'https://documentation.networkcanvas.com/interface-documentation/per-alter-form/',
+  documentation:
+    'https://documentation.networkcanvas.com/interface-documentation/per-alter-form/',
 };
 
 const CategoricalBin = {
@@ -60,7 +66,8 @@ const CategoricalBin = {
     SkipLogic,
     InterviewScript,
   ],
-  documentation: 'https://documentation.networkcanvas.com/interface-documentation/categorical-bin/',
+  documentation:
+    'https://documentation.networkcanvas.com/interface-documentation/categorical-bin/',
 };
 
 const DyadCensus = {
@@ -71,28 +78,38 @@ const DyadCensus = {
     SkipLogic,
     InterviewScript,
   ],
-  documentation: 'https://documentation.networkcanvas.com/interface-documentation/dyad-census/',
+  documentation:
+    'https://documentation.networkcanvas.com/interface-documentation/dyad-census/',
 };
 
-const EgoForm = {
+const OneToManyDyadCensus = {
   sections: [
-    IntroductionPanel,
-    Form,
+    FilteredNodeType,
+    OneToManyDyadCensusBehaviours,
+    OneToManyDyadCensusPrompts,
     SkipLogic,
     InterviewScript,
   ],
-  documentation: 'https://documentation.networkcanvas.com/interface-documentation/ego-form/',
+  documentation:
+    'https://documentation.networkcanvas.com/interface-documentation/one-to-many-dyad-census/',
+  template: {
+    behaviours: {
+      removeAfterConsideration: true,
+    },
+  },
+};
+
+const EgoForm = {
+  sections: [IntroductionPanel, Form, SkipLogic, InterviewScript],
+  documentation:
+    'https://documentation.networkcanvas.com/interface-documentation/ego-form/',
   template: {},
 };
 
 const Information = {
-  sections: [
-    Title,
-    ContentGrid,
-    SkipLogic,
-    InterviewScript,
-  ],
-  documentation: 'https://documentation.networkcanvas.com/interface-documentation/information/',
+  sections: [Title, ContentGrid, SkipLogic, InterviewScript],
+  documentation:
+    'https://documentation.networkcanvas.com/interface-documentation/information/',
 };
 
 const NameGenerator = {
@@ -105,7 +122,8 @@ const NameGenerator = {
     MinMaxAlterLimits,
     InterviewScript,
   ],
-  documentation: 'https://documentation.networkcanvas.com/interface-documentation/name-generator-using-forms/',
+  documentation:
+    'https://documentation.networkcanvas.com/interface-documentation/name-generator-using-forms/',
   name: 'Name Generator (using forms)',
 };
 
@@ -121,7 +139,8 @@ const NameGeneratorRoster = {
     MinMaxAlterLimits,
     InterviewScript,
   ],
-  documentation: 'https://documentation.networkcanvas.com/interface-documentation/name-generator-roster/',
+  documentation:
+    'https://documentation.networkcanvas.com/interface-documentation/name-generator-roster/',
   name: 'Name Generator for Roster Data',
 };
 
@@ -136,7 +155,8 @@ const NameGeneratorQuickAdd = {
     InterviewScript,
   ],
   name: 'Name Generator (quick add)',
-  documentation: 'https://documentation.networkcanvas.com/interface-documentation/name-generator-using-quick-add/',
+  documentation:
+    'https://documentation.networkcanvas.com/interface-documentation/name-generator-using-quick-add/',
 };
 
 const Narrative = {
@@ -148,7 +168,8 @@ const Narrative = {
     SkipLogic,
     InterviewScript,
   ],
-  documentation: 'https://documentation.networkcanvas.com/interface-documentation/narrative/',
+  documentation:
+    'https://documentation.networkcanvas.com/interface-documentation/narrative/',
   template: {
     behaviours: {
       allowRepositioning: true,
@@ -157,13 +178,9 @@ const Narrative = {
 };
 
 const OrdinalBin = {
-  sections: [
-    FilteredNodeType,
-    OrdinalBinPrompts,
-    SkipLogic,
-    InterviewScript,
-  ],
-  documentation: 'https://documentation.networkcanvas.com/interface-documentation/ordinal-bin/',
+  sections: [FilteredNodeType, OrdinalBinPrompts, SkipLogic, InterviewScript],
+  documentation:
+    'https://documentation.networkcanvas.com/interface-documentation/ordinal-bin/',
 };
 
 const Sociogram = {
@@ -175,7 +192,8 @@ const Sociogram = {
     SkipLogic,
     InterviewScript,
   ],
-  documentation: 'https://documentation.networkcanvas.com/interface-documentation/sociogram/',
+  documentation:
+    'https://documentation.networkcanvas.com/interface-documentation/sociogram/',
 };
 
 const TieStrengthCensus = {
@@ -186,7 +204,19 @@ const TieStrengthCensus = {
     SkipLogic,
     InterviewScript,
   ],
-  documentation: 'https://documentation.networkcanvas.com/interface-documentation/tie-strength-census/',
+  documentation:
+    'https://documentation.networkcanvas.com/interface-documentation/tie-strength-census/',
+};
+
+const Anonymisation = {
+  sections: [
+    AnonymisationExplanation,
+    AnonymisationValidation,
+    EncryptedVariables,
+    InterviewScript,
+  ],
+  documentation:
+    'https://documentation.networkcanvas.com/interface-documentation/anonymisation/',
 };
 
 const interfaces = {
@@ -194,6 +224,7 @@ const interfaces = {
   AlterForm,
   CategoricalBin,
   DyadCensus,
+  OneToManyDyadCensus,
   EgoForm,
   Information,
   NameGenerator,
@@ -203,6 +234,7 @@ const interfaces = {
   OrdinalBin,
   Sociogram,
   TieStrengthCensus,
+  Anonymisation,
 };
 
 const emptyInterface = {
@@ -210,4 +242,5 @@ const emptyInterface = {
   template: {},
 };
 
-export const getInterface = (interfaceType) => get(interfaces, interfaceType, emptyInterface);
+export const getInterface = (interfaceType) =>
+  get(interfaces, interfaceType, emptyInterface);

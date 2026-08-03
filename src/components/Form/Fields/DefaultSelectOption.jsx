@@ -1,0 +1,65 @@
+import cx from 'classnames';
+import PropTypes from 'prop-types';
+import { components as ReactSelectComponents } from 'react-select';
+
+import Icon from '@codaco/ui/lib/components/Icon';
+
+const DefaultSelectOption = (props) => {
+  const { data, onDeleteOption } = props;
+  const isWarning = !!data.__isWarning__;
+  const showNew = !!data.__createNewOption__ || !!data.__isNew__;
+  const showDelete =
+    !isWarning && !data.__isNew__ && !!onDeleteOption && !data.isUsed;
+  const label = data.__createNewOption__
+    ? data.__createNewOption__
+    : data.label;
+  const handleClickDelete = (e) => {
+    e.stopPropagation();
+    props.onDeleteOption(data.value);
+  };
+
+  const classes = cx('form-fields-select__item', {
+    'form-fields-select__item--warning': isWarning,
+  });
+
+  return (
+    <ReactSelectComponents.Option
+      {...props}
+      className={classes}
+      classNamePrefix="form-fields-select__item"
+    >
+      {isWarning && (
+        <div className="form-fields-select__item-warning">
+          <Icon name="warning" />
+        </div>
+      )}
+      {showNew && (
+        <div className="form-fields-select__item-add">
+          <Icon name="add" />
+        </div>
+      )}
+
+      <div className="form-fields-select__item-label">{label}</div>
+
+      {showDelete && (
+        <div
+          className="form-fields-select__item-delete"
+          onClick={handleClickDelete}
+        >
+          <Icon name="delete" />
+        </div>
+      )}
+    </ReactSelectComponents.Option>
+  );
+};
+
+DefaultSelectOption.propTypes = {
+  data: PropTypes.object.isRequired,
+  onDeleteOption: PropTypes.func,
+};
+
+DefaultSelectOption.defaultProps = {
+  onDeleteOption: null,
+};
+
+export default DefaultSelectOption;

@@ -1,17 +1,15 @@
 import { connect } from 'react-redux';
-import { formValueSelector } from 'redux-form';
 import { compose, withState } from 'recompose';
+import { formValueSelector } from 'redux-form';
 
-const edgesState = connect(
-  (state, props) => {
-    const getFormValues = formValueSelector(props.form);
-    const createEdge = getFormValues(state, 'edges.create');
+const edgesState = connect((state, props) => {
+  const getFormValues = formValueSelector(props.form);
+  const createEdge = getFormValues(state, 'edges.create');
 
-    return {
-      createEdge,
-    };
-  },
-);
+  return {
+    createEdge,
+  };
+});
 
 const edgesToggleState = withState(
   'canCreateEdge',
@@ -19,9 +17,6 @@ const edgesToggleState = withState(
   ({ createEdge }) => !!createEdge,
 );
 
-const withCreateEdgesState = compose(
-  edgesState,
-  edgesToggleState,
-);
+const withCreateEdgesState = compose(edgesState, edgesToggleState);
 
 export default withCreateEdgesState;

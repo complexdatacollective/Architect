@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
+import { compose, withHandlers } from 'recompose';
 import { change } from 'redux-form';
-import { withHandlers, compose } from 'recompose';
+
 import { getEdgesForSubject } from '../SociogramPrompts/selectors';
 
 const mapDispatchToProps = {
@@ -18,10 +19,12 @@ const mapStateToProps = (state) => {
 const handlers = withHandlers({
   // createEdge select has changed value, so we must reset rest
   // of the dependent fields.
-  handleChangeCreateEdge: ({ changeForm, form }) => (value) => {
-    if (!value) return;
-    changeForm(form, 'createEdge', value);
-  },
+  handleChangeCreateEdge:
+    ({ changeForm, form }) =>
+    (value) => {
+      if (!value) return;
+      changeForm(form, 'createEdge', value);
+    },
 });
 
 const withEdgesOptions = compose(

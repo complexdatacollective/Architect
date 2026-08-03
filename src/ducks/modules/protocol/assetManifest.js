@@ -1,19 +1,24 @@
-import uuid from 'uuid';
-import { omit } from 'lodash';
-import path from 'path';
-import log from 'electron-log';
 import { importAsset as fsImportAsset } from '@app/utils/protocols';
-import { getWorkingPath } from '@selectors/session';
 import { validateAsset } from '@app/utils/protocols/assetTools';
-import { invalidAssetErrorDialog, importAssetErrorDialog } from '@modules/protocol/utils/dialogs';
+import {
+  importAssetErrorDialog,
+  invalidAssetErrorDialog,
+} from '@modules/protocol/utils/dialogs';
+import { getWorkingPath } from '@selectors/session';
+import { pathSync } from '@utils/electronBridge';
+import log from '@utils/logger';
+import { omit } from 'lodash';
+import { v4 as uuid } from 'uuid';
+
 import { saveableChange } from '../session';
 
 const IMPORT_ASSET = 'PROTOCOL/IMPORT_ASSET';
 const IMPORT_ASSET_COMPLETE = 'PROTOCOL/IMPORT_ASSET_COMPLETE';
 const IMPORT_ASSET_FAILED = 'PROTOCOL/IMPORT_ASSET_FAILED';
 const DELETE_ASSET = 'PROTOCOL/DELETE_ASSET';
+const ADD_API_KEY_ASSET = 'PROTOCOL/ADD_API_KEY_ASSET';
 
-const getNameFromFilename = (filename) => path.parse(filename).base;
+const getNameFromFilename = (filename) => pathSync.parse(filename).base;
 
 const deleteAsset = (id) => ({
   type: DELETE_ASSET,
@@ -61,31 +66,52 @@ const importAssetThunk = (filePath) => (dispatch, getState) => {
   log.info('Import asset', filePath);
 
   if (!workingPath) {
-    const error = new Error('No working path found, possibly no active protocol.');
+    const error = new Error(
+      'No working path found, possibly no active protocol.',
+    );
     dispatch(importAssetFailed(filePath, error));
     dispatch(importAssetErrorDialog(error, filePath));
     return Promise.reject(error);
   }
 
   return Promise.resolve()
-    .then(() => validateAsset(filePath)
-      .catch((error) => {
+    .then(() =>
+      validateAsset(filePath).catch((error) => {
         dispatch(invalidAssetErrorDialog(error, filePath));
         log.error('Validation error', error);
         throw error;
-      }))
-    .then(() => fsImportAsset(workingPath, filePath)
-      .catch((error) => {
+      }),
+    )
+    .then(() =>
+      fsImportAsset(workingPath, filePath).catch((error) => {
         log.error('Import error', error);
         dispatch(importAssetErrorDialog(error, filePath));
         throw error;
-      }))
+      }),
+    )
     .then((result) => {
       log.info('  OK');
-      return dispatch(saveableChange(importAssetComplete)(result.filePath, name, result.assetType));
+      return dispatch(
+        saveableChange(importAssetComplete)(
+          result.filePath,
+          name,
+          result.assetType,
+        ),
+      );
     })
     .catch((error) => dispatch(importAssetFailed(filePath, error)));
 };
+
+/**
+ * @param {string} name - The name of the API key
+ * @param {string} value - The value of the API key
+ */
+const addApiKeyAsset = (name, value) => ({
+  type: ADD_API_KEY_ASSET,
+  id: uuid(),
+  name,
+  value,
+});
 
 const initialState = {};
 
@@ -105,6 +131,17 @@ export default function reducer(state = initialState, action = {}) {
       // Don't delete from disk, this allows us to rollback the protocol.
       // Disk changes should be commited on save.
       return omit(state, action.id);
+    case ADD_API_KEY_ASSET:
+      return {
+        ...state,
+        [action.id]: {
+          id: action.id,
+          type: 'apikey',
+          name: action.name,
+          value: action.value,
+        },
+      };
+
     default:
       return state;
   }
@@ -113,13 +150,7 @@ export default function reducer(state = initialState, action = {}) {
 const actionCreators = {
   importAsset: importAssetThunk,
   deleteAsset: saveableChange(deleteAsset),
-};
-
-const actionTypes = {
-  IMPORT_ASSET,
-  IMPORT_ASSET_COMPLETE,
-  IMPORT_ASSET_FAILED,
-  DELETE_ASSET,
+  addApiKeyAsset: saveableChange(addApiKeyAsset),
 };
 
 const test = {
@@ -127,8 +158,4 @@ const test = {
   deleteAsset,
 };
 
-export {
-  actionCreators,
-  actionTypes,
-  test,
-};
+export { actionCreators, test };

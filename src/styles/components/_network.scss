@@ -1,7 +1,9 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .network {
-  --table-color: rgb(58 106 117 / 5%); // sass-lint:disable-line no-color-literals
+  --table-color: rgb(
+    58 106 117 / 5%
+  ); // sass-lint:disable-line no-color-literals
   --alternate-row-color: var(--table-color);
 
   border-radius: var(--border-radius);
@@ -19,7 +21,7 @@
       height: units.unit(4);
       width: units.unit(4);
       position: relative;
-      top: -.1rem;
+      top: -0.1rem;
       vertical-align: middle;
       color: var(--primary);
     }

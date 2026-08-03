@@ -1,6 +1,7 @@
-import { get, omit, cloneDeep } from 'lodash';
-import { getForms } from '../reduxForm';
+import { cloneDeep, get, omit } from 'lodash';
+
 import { getCodebook, getProtocol } from '../protocol';
+import { getForms } from '../reduxForm';
 import { getIdsFromCodebook } from './helpers';
 
 /**
@@ -22,70 +23,83 @@ import { getIdsFromCodebook } from './helpers';
  * @returns {function} - selector function that returns a key value object
  * describing variables are in use
  */
-export const makeGetIsUsed = (options = {}) => (state) => {
-  const {
-    formNames = ['edit-stage', 'editable-list-form'],
-    excludePaths = [],
-  } = options;
+export const makeGetIsUsed =
+  (options = {}) =>
+  (state) => {
+    const {
+      formNames = ['edit-stage', 'editable-list-form'],
+      excludePaths = [],
+    } = options;
 
-  const protocol = getProtocol(state);
-  const forms = getForms(formNames)(state);
-  const variableIds = getIdsFromCodebook(protocol.codebook);
-  const codebook = getCodebook(state);
+    const protocol = getProtocol(state);
+    const forms = getForms(formNames)(state);
+    const variableIds = getIdsFromCodebook(protocol.codebook);
+    const codebook = getCodebook(state);
 
-  // Get all codebook[entityType][entityId].variables.validation references
-  const variableValidations = () => {
-    const validations = [];
-    const getEntityVariableValidations = (entityDefinition) => {
-      if (!entityDefinition.variables) {
-        return [];
-      }
-
-      return Object.values(entityDefinition.variables).reduce((memo, variable) => {
-        if (variable.validation) {
-          memo.push(variable.validation);
+    // Get all codebook[entityType][entityId].variables.validation references
+    const variableValidations = () => {
+      const validations = [];
+      const getEntityVariableValidations = (entityDefinition) => {
+        if (!entityDefinition.variables) {
+          return [];
         }
-        return memo;
-      }, []);
+
+        return Object.values(entityDefinition.variables).reduce(
+          (memo, variable) => {
+            if (variable.validation) {
+              memo.push(variable.validation);
+            }
+            return memo;
+          },
+          [],
+        );
+      };
+
+      Object.keys(codebook).forEach((entityType) => {
+        if (entityType === 'ego') {
+          validations.push(
+            ...getEntityVariableValidations(codebook[entityType]),
+          );
+        }
+
+        Object.keys(codebook[entityType]).forEach((entityId) => {
+          validations.push(
+            ...getEntityVariableValidations(codebook[entityType][entityId]),
+          );
+        });
+      });
+
+      return validations;
     };
 
-    Object.keys(codebook).forEach((entityType) => {
-      if (entityType === 'ego') {
-        validations.push(...getEntityVariableValidations(codebook[entityType]));
-      }
+    const searchLocations = {
+      stages: protocol.stages,
+      forms,
+      validations: variableValidations(),
+    };
 
-      Object.keys(codebook[entityType]).forEach((entityId) => {
-        validations.push(...getEntityVariableValidations(codebook[entityType][entityId]));
-      });
-    });
+    const data =
+      excludePaths.length > 0
+        ? omit(cloneDeep(searchLocations), excludePaths)
+        : searchLocations;
 
-    return validations;
+    const flattenedData = JSON.stringify(data);
+
+    const isUsed = variableIds.reduce((memo, variableId) => {
+      memo[variableId] = flattenedData.includes(`"${variableId}"`);
+      return memo;
+    }, {});
+
+    return isUsed;
   };
 
-  const searchLocations = { stages: protocol.stages, forms, validations: variableValidations() };
-
-  const data = excludePaths.length > 0
-    ? omit(cloneDeep(
-      searchLocations,
-    ), excludePaths)
-    : searchLocations;
-
-  const flattenedData = JSON.stringify(data);
-
-  const isUsed = variableIds.reduce(
-    (memo, variableId) => ({
-      ...memo,
-      [variableId]: flattenedData.includes(`"${variableId}"`),
-    }),
-    {},
-  );
-
-  return isUsed;
-};
-
-export const makeOptionsWithIsUsed = (isUsedOptions = {}) => (state, options) => {
-  const isUsed = makeGetIsUsed(isUsedOptions)(state);
-  return options.map(
-    ({ value, ...rest }) => ({ ...rest, value, isUsed: get(isUsed, value) }),
-  );
-};
+export const makeOptionsWithIsUsed =
+  (isUsedOptions = {}) =>
+  (state, options) => {
+    const isUsed = makeGetIsUsed(isUsedOptions)(state);
+    return options.map(({ value, ...rest }) => ({
+      ...rest,
+      value,
+      isUsed: get(isUsed, value),
+    }));
+  };

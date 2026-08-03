@@ -3,9 +3,11 @@
   &__data {
     width: 100%;
 
-    & > thead, > tbody {
+    & > thead,
+    > tbody {
       & > tr {
-        & > th, > td {
+        & > th,
+        > td {
           max-width: 7cm;
         }
       }
@@ -14,7 +16,7 @@
     & > thead {
       & > tr {
         & > th {
-          padding: .75rem;
+          padding: 0.75rem;
           vertical-align: top;
           padding-right: 1rem;
           background: var(--color-platinum);
@@ -25,7 +27,7 @@
     & > tbody {
       & > tr {
         & > td {
-          padding: .75rem;
+          padding: 0.75rem;
           vertical-align: top;
           border-top: var(--color-platinum--dark) 1px solid;
 
@@ -34,7 +36,6 @@
             word-break: break-word;
             hyphens: auto;
           }
-
         }
       }
     }
@@ -51,14 +52,16 @@
   &__details {
     & > tbody {
       & > tr {
-        & > th, & > td {
+        & > th,
+        & > td {
           vertical-align: top;
           padding: 1rem 1rem 0 0;
         }
       }
 
       & > tr:first-child {
-        & > th, & > td {
+        & > th,
+        & > td {
           padding: 0 1rem 0 0;
         }
       }
@@ -70,7 +73,7 @@
       & > tr {
         & > td {
           vertical-align: top;
-          padding: .25rem 1rem;
+          padding: 0.25rem 1rem;
           background-color: var(--color-platinum);
         }
       }

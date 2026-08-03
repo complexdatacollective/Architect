@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { makeGetNetworkAssetVariables } from '@selectors/assets';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const initialState = {
   isVariablesLoading: false,
@@ -14,9 +14,11 @@ const useVariablesFromExternalData = (dataSource, asOptions = false) => {
   const getNetworkAssetVariables = useSelector(makeGetNetworkAssetVariables);
 
   useEffect(() => {
-    if (!dataSource) { return; }
+    if (!dataSource) {
+      return;
+    }
 
-    setState({ isVariableLoading: true, variables: [], variablesError: null });
+    setState({ isVariablesLoading: true, variables: [], variablesError: null });
 
     getNetworkAssetVariables(dataSource, asOptions)
       .then((variables) => {

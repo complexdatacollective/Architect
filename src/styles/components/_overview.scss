@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .overview-summary {
   position: fixed;
@@ -9,7 +9,7 @@
   padding: units.unit(1) units.unit(4);
   width: 100%;
   background-color: var(--color-slate-blue--dark);
-  box-shadow: 0 units.unit(1) .2rem 0 var(--architect-panel-shadow);
+  box-shadow: 0 units.unit(1) 0.2rem 0 var(--architect-panel-shadow);
   z-index: var(--z-panel);
 
   &__header {
@@ -44,7 +44,7 @@
   background: var(--color-white);
   border-radius: var(--border-radius);
   overflow: hidden;
-  box-shadow: 0 units.unit(1) .2rem 0 var(--architect-panel-shadow);
+  box-shadow: 0 units.unit(1) 0.2rem 0 var(--architect-panel-shadow);
   display: flex;
   flex-direction: column;
 
@@ -63,7 +63,6 @@
         margin-bottom: 0;
       }
     }
-
   }
 
   &__footer {
@@ -86,7 +85,5 @@
       height: 100%;
       width: 3rem;
     }
-
-
   }
 }

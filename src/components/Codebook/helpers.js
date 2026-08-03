@@ -1,10 +1,8 @@
-import {
-  reduce, get, compact, uniq, map,
-} from 'lodash';
-import { getType, getAllVariablesByUUID } from '@selectors/codebook';
+import { getAllVariablesByUUID, getType } from '@selectors/codebook';
 import { makeGetIsUsed } from '@selectors/codebook/isUsed';
 import { getVariableIndex } from '@selectors/indexes';
-import { getProtocol, getCodebook } from '@selectors/protocol';
+import { getCodebook, getProtocol } from '@selectors/protocol';
+import { compact, get, map, reduce, uniq } from 'lodash';
 
 const getIsUsed = makeGetIsUsed({ formNames: [] });
 
@@ -15,8 +13,7 @@ const getIsUsed = makeGetIsUsed({ formNames: [] });
  */
 export const getStageMetaByIndex = (state) => {
   const protocol = getProtocol(state);
-  return protocol.stages
-    .map(({ label, id }) => ({ label, id }));
+  return protocol.stages.map(({ label, id }) => ({ label, id }));
 };
 
 export const getVariableMetaByIndex = (state) => {
@@ -35,9 +32,10 @@ const getStageIndexFromPath = (path) => {
   return get(matches, 1, null);
 };
 
-const codebookVariableReferenceRegex = /codebook\.(ego|node\[([^\]]+)\]|edge\[([^\]]+)\])\.variables\[(.*?)\].validation\.(sameAs|differentFrom)/;
+const codebookVariableReferenceRegex =
+  /codebook\.(ego|node\[([^\]]+)\]|edge\[([^\]]+)\])\.variables\[(.*?)\].validation\.(sameAs|differentFrom)/;
 
-export const getCodebookVariableIndexFromValidationPath = (path) => {
+const getCodebookVariableIndexFromValidationPath = (path) => {
   const match = path.match(codebookVariableReferenceRegex);
 
   return get(match, 4, null);
@@ -51,10 +49,17 @@ export const getCodebookVariableIndexFromValidationPath = (path) => {
  * @param {any} value Value to match in usage index
  * @returns {string[]} List of paths ("usage array")
  */
-export const getUsage = (index, value) => reduce(index, (acc, indexValue, path) => {
-  if (indexValue !== value) { return acc; }
-  return [...acc, path];
-}, []);
+export const getUsage = (index, value) =>
+  reduce(
+    index,
+    (acc, indexValue, path) => {
+      if (indexValue !== value) {
+        return acc;
+      }
+      return [...acc, path];
+    },
+    [],
+  );
 
 /**
  * Get stage meta (wtf is stage meta, Steve? 🤦) that matches "usage array"
@@ -70,9 +75,15 @@ export const getUsage = (index, value) => reduce(index, (acc, indexValue, path) 
  * @param {string[]} usageArray "Usage array" as created by `getUsage()`
  * @returns {Object[]} List of stage meta `{ label, id }`.
  */
-export const getUsageAsStageMeta = (stageMetaByIndex, variableMetaByIndex, usageArray) => {
+export const getUsageAsStageMeta = (
+  stageMetaByIndex,
+  variableMetaByIndex,
+  usageArray,
+) => {
   // Filter codebook variables from usage array
-  const codebookVariablePaths = usageArray.filter(getCodebookVariableIndexFromValidationPath);
+  const codebookVariablePaths = usageArray.filter(
+    getCodebookVariableIndexFromValidationPath,
+  );
   const codebookVariablesWithMeta = codebookVariablePaths.map((path) => {
     const variableId = getCodebookVariableIndexFromValidationPath(path);
     const { name } = variableMetaByIndex[variableId];
@@ -82,14 +93,11 @@ export const getUsageAsStageMeta = (stageMetaByIndex, variableMetaByIndex, usage
   });
 
   const stageIndexes = compact(uniq(usageArray.map(getStageIndexFromPath)));
-  const stageVariablesWithMeta = stageIndexes.map(
-    (stageIndex) => get(stageMetaByIndex, stageIndex),
+  const stageVariablesWithMeta = stageIndexes.map((stageIndex) =>
+    get(stageMetaByIndex, stageIndex),
   );
 
-  return [
-    ...stageVariablesWithMeta,
-    ...codebookVariablesWithMeta,
-  ];
+  return [...stageVariablesWithMeta, ...codebookVariablesWithMeta];
 };
 
 /**
@@ -101,8 +109,12 @@ export const getUsageAsStageMeta = (stageMetaByIndex, variableMetaByIndex, usage
  * @returns {number} -1 if a < b, 1 if a > b, 0 if a === b
  */
 export const sortByLabel = (a, b) => {
-  if (a.label < b.label) { return -1; }
-  if (a.label > b.label) { return 1; }
+  if (a.label < b.label) {
+    return -1;
+  }
+  if (a.label > b.label) {
+    return 1;
+  }
   return 0;
 };
 
@@ -113,46 +125,42 @@ export const sortByLabel = (a, b) => {
  * @returns
  */
 export const getEntityProperties = (state, { entity, type }) => {
-  const {
-    name,
-    color,
-    variables,
-  } = getType(state, { entity, type });
+  const { name, color, variables } = getType(state, { entity, type });
 
   const variableIndex = getVariableIndex(state);
   const variableMeta = getVariableMetaByIndex(state);
   const stageMetaByIndex = getStageMetaByIndex(state);
   const isUsedIndex = getIsUsed(state);
 
-  const variablesWithUsage = map(
-    variables,
-    (variable, id) => {
-      const inUse = get(isUsedIndex, id, false);
+  const variablesWithUsage = map(variables, (variable, id) => {
+    const inUse = get(isUsedIndex, id, false);
 
-      const baseProperties = {
-        ...variable,
-        id,
-        inUse,
-      };
+    const baseProperties = {
+      ...variable,
+      id,
+      inUse,
+    };
 
-      if (!inUse) {
-        return (baseProperties);
-      }
+    if (!inUse) {
+      return baseProperties;
+    }
 
-      const usage = getUsageAsStageMeta(
-        stageMetaByIndex,
-        variableMeta,
-        getUsage(variableIndex, id),
-      ).sort(sortByLabel);
+    const usage = getUsageAsStageMeta(
+      stageMetaByIndex,
+      variableMeta,
+      getUsage(variableIndex, id),
+    ).toSorted(sortByLabel);
 
-      const usageString = usage.map(({ label }) => label).join(', ').toUpperCase();
-      return ({
-        ...baseProperties,
-        usage,
-        usageString,
-      });
-    },
-  );
+    const usageString = usage
+      .map(({ label }) => label)
+      .join(', ')
+      .toUpperCase();
+    return {
+      ...baseProperties,
+      usage,
+      usageString,
+    };
+  });
 
   return {
     name,

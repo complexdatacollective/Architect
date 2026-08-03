@@ -1,8 +1,5 @@
-import {
-  compact,
-  flatMap,
-  isPlainObject,
-} from 'lodash';
+import { compact, flatMap, isPlainObject } from 'lodash';
+
 import scrollTo from './scrollTo';
 
 /**
@@ -34,13 +31,14 @@ import scrollTo from './scrollTo';
  * //   { issue: 'bop', field: 'baz[0].beep.boop' },
  * // ]"
  */
-const flattenIssues = (issues, path = '') => compact(
-  flatMap(
-    issues,
-    (issue, field) => {
+const flattenIssues = (issues, path = '') =>
+  compact(
+    flatMap(issues, (issue, field) => {
       // field array
       if (Array.isArray(issue)) {
-        return flatMap(issue, (item, index) => flattenIssues(item, `${path}${field}[${index}].`));
+        return flatMap(issue, (item, index) =>
+          flattenIssues(item, `${path}${field}[${index}].`),
+        );
       }
       // nested field
       if (isPlainObject(issue)) {
@@ -53,9 +51,8 @@ const flattenIssues = (issues, path = '') => compact(
 
       // we've found the issue node!
       return { issue, field: `${path}${field}` };
-    },
-  ),
-);
+    }),
+  );
 
 const getFieldId = (field) => {
   // Needs to be safe for urls and ids
@@ -66,7 +63,9 @@ const getFieldId = (field) => {
 const getTopOffsetById = (fieldId) => {
   const target = document.getElementById(fieldId);
 
-  if (!target) { return null; }
+  if (!target) {
+    return null;
+  }
 
   const { top } = target.getBoundingClientRect();
 
@@ -79,28 +78,25 @@ const asOffsetIdPair = ({ field }) => {
   return [top, fieldId];
 };
 
-const scrollToFirstIssue = (issues) => {
-  const issueOffsets = flattenIssues(issues)
-    .map(asOffsetIdPair);
+const scrollToFirstIssue = (issues, container = document) => {
+  const issueOffsets = flattenIssues(issues).map(asOffsetIdPair);
 
-  const [, firstIssueField] = issueOffsets
-    .reduce((memo, issue) => {
-      if (issue[0] === null) return memo;
-      if (issue[0] > memo[0]) return memo;
-      return issue;
-    }, []);
+  const [, firstIssueField] = issueOffsets.reduce((memo, issue) => {
+    if (issue[0] === null) return memo;
+    if (issue[0] > memo[0]) return memo;
+    return issue;
+  }, []);
 
-  if (!firstIssueField) { return; }
+  if (!firstIssueField) {
+    return;
+  }
+  const target = container.querySelector(`#${firstIssueField}`);
 
-  const target = document.getElementById(firstIssueField);
-
-  if (!target) { return; }
+  if (!target) {
+    return;
+  }
 
   scrollTo(target);
 };
 
-export {
-  getFieldId,
-  flattenIssues,
-  scrollToFirstIssue,
-};
+export { getFieldId, flattenIssues, scrollToFirstIssue };

@@ -1,18 +1,24 @@
 /* eslint-env jest */
+import { describe, expect, it, vi } from 'vitest';
 
-import { readFile, readJson } from 'fs-extra';
-import * as assets from '../assets';
 import mockState from '../../__tests__/testState.json';
+import * as assets from '../assets';
 
-jest.mock('fs-extra');
+// Mock electronBridge
+vi.mock('@utils/electronBridge', () => ({
+  pathSync: {
+    join: (...args) => args.join('/'),
+  },
+}));
 
-const fs = {
-  fileData: '',
-};
+// Mock assetTools with vi.hoisted
+const { mockGetNetworkVariables } = vi.hoisted(() => ({
+  mockGetNetworkVariables: vi.fn(() => Promise.resolve([])),
+}));
 
-readFile.mockImplementation(() => fs.fileData);
-
-readJson.mockImplementation(() => fs.fileData);
+vi.mock('@app/utils/protocols/assetTools', () => ({
+  getNetworkVariables: mockGetNetworkVariables,
+}));
 
 describe('assets', () => {
   describe('getAssetPath()', () => {
@@ -20,24 +26,26 @@ describe('assets', () => {
       const assetId = '1234-asset-1';
       const path = assets.getAssetPath(mockState, assetId);
 
-      expect(path).toEqual('/dev/null/1234-active-protocol/assets/1234-4567-asset-1');
+      expect(path).toEqual(
+        '/dev/null/1234-active-protocol/assets/1234-4567-asset-1',
+      );
     });
   });
 
   describe('makeGetNetworkAssetVariables', () => {
     it('converts list of objects into list of { label, value } objects from unique attributes', async () => {
       const assetId = '1234-asset-6';
-      fs.fileData = {
-        nodes: [
-          { attributes: { foo: 'bar', bazz: 'buzz' } },
-          { attributes: { foo: 'bar', fizz: 'pop' } },
-        ],
-      };
 
-      const expectedOptions = ['foo', 'bazz', 'fizz']
-        .map((attribute) => ({ label: attribute, value: attribute }));
+      // Mock getNetworkVariables to return the expected variables
+      mockGetNetworkVariables.mockResolvedValueOnce(['foo', 'bazz', 'fizz']);
 
-      const getNetworkAssetVariables = assets.makeGetNetworkAssetVariables(mockState);
+      const expectedOptions = ['foo', 'bazz', 'fizz'].map((attribute) => ({
+        label: attribute,
+        value: attribute,
+      }));
+
+      const getNetworkAssetVariables =
+        assets.makeGetNetworkAssetVariables(mockState);
 
       const result = await getNetworkAssetVariables(assetId, true);
 

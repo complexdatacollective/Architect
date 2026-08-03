@@ -11,8 +11,6 @@ const mapStateToProps = (state, { form, fields }) => {
   };
 };
 
-const withItems = connect(
-  mapStateToProps,
-);
+const withItems = connect(mapStateToProps);
 
 export default withItems;

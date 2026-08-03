@@ -1,4 +1,5 @@
-import { get, find, isObject } from 'lodash';
+import { find, get, isObject } from 'lodash';
+
 import { getCodebook } from '../protocol';
 import { asOptions } from '../utils';
 import { makeOptionsWithIsUsed } from './isUsed';
@@ -8,7 +9,9 @@ const getNodeTypes = (state) => get(getCodebook(state), 'node', {});
 const getEdgeTypes = (state) => get(getCodebook(state), 'edge', {});
 
 const getType = (state, subject) => {
-  if (!subject) { return {}; }
+  if (!subject) {
+    return {};
+  }
   const path = subject.type ? [subject.entity, subject.type] : [subject.entity];
 
   return get(getCodebook(state), path, {});
@@ -21,17 +24,28 @@ const getType = (state, subject) => {
  * @param {object} state redux state
  * @param {object} subject subject object in format `{ entity, type }`
  */
-const getVariablesForSubject = (state, subject) => get(getType(state, subject), 'variables', {});
+const getVariablesForSubject = (state, subject) =>
+  get(getType(state, subject), 'variables', {});
 
 const getAllVariablesByUUID = (codebook) => {
-  if (!codebook) { throw new Error('Codebook not found'); }
+  if (!codebook) {
+    throw new Error('Codebook not found');
+  }
 
-  const { node: nodeTypes = null, edge: edgeTypes = null, ego = null } = codebook;
+  const {
+    node: nodeTypes = null,
+    edge: edgeTypes = null,
+    ego = null,
+  } = codebook;
   const flattenedVariables = {};
 
   const addVariables = (variables) => {
-    if (!variables) { return; }
-    if (!isObject(variables)) { throw new Error('Variables must be an object'); }
+    if (!variables) {
+      return;
+    }
+    if (!isObject(variables)) {
+      throw new Error('Variables must be an object');
+    }
 
     Object.keys(variables).forEach((variable) => {
       flattenedVariables[variable] = variables[variable];
@@ -50,14 +64,18 @@ const getAllVariablesByUUID = (codebook) => {
     });
   }
 
-  if (ego && ego.variables) {
+  if (ego?.variables) {
     addVariables(ego.variables);
   }
   return flattenedVariables;
 };
 
 // Get all variables for all subjects in the codebook, adding the entity and type
-const getAllVariableUUIDsByEntity = ({ node: nodeTypes = {}, edge: edgeTypes = {}, ego = {} }) => {
+const getAllVariableUUIDsByEntity = ({
+  node: nodeTypes = {},
+  edge: edgeTypes = {},
+  ego = {},
+}) => {
   const variables = new Set();
 
   // Nodes
@@ -118,16 +136,19 @@ const makeGetVariable = (uuid) => (state) => {
 };
 
 /**
-   * Given `subject` return a list of options (`{ label, value, ...}`)
-   * for matching entity
-   *
-   * @param {object} state redux state
-   * @param {object} subject subject object in format `{ entity, type }`
-   */
+ * Given `subject` return a list of options (`{ label, value, ...}`)
+ * for matching entity
+ *
+ * @param {object} state redux state
+ * @param {object} subject subject object in format `{ entity, type }`
+ */
 const getVariableOptionsForSubject = (state, subject, isUsedOptions = {}) => {
   const variables = getVariablesForSubject(state, subject);
   const options = asOptions(variables);
-  const optionsWithIsUsed = makeOptionsWithIsUsed(isUsedOptions)(state, options);
+  const optionsWithIsUsed = makeOptionsWithIsUsed(isUsedOptions)(
+    state,
+    options,
+  );
 
   return optionsWithIsUsed;
 };

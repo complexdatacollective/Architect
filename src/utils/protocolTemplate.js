@@ -1,0 +1,9 @@
+export default {
+  codebook: {
+    node: {},
+    edge: {},
+    ego: {},
+  },
+  assetManifest: {},
+  stages: [],
+};

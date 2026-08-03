@@ -1,4 +1,3 @@
-/*eslint-disable*/
 /**
 https://gist.github.com/rgrove/5463265
 
@@ -20,16 +19,18 @@ canvas, regardless of scrolling.
 **/
 
 export default function getAbsoluteBoundingRect(el) {
-  var doc  = document,
-    win  = window,
+  var doc = document,
+    win = window,
     body = doc.body,
-
     // pageXOffset and pageYOffset work everywhere except IE <9.
-    offsetX = win.pageXOffset !== undefined ? win.pageXOffset :
-        (doc.documentElement || body.parentNode || body).scrollLeft,
-    offsetY = win.pageYOffset !== undefined ? win.pageYOffset :
-        (doc.documentElement || body.parentNode || body).scrollTop,
-
+    offsetX =
+      win.pageXOffset !== undefined
+        ? win.pageXOffset
+        : (doc.documentElement || body.parentNode || body).scrollLeft,
+    offsetY =
+      win.pageYOffset !== undefined
+        ? win.pageYOffset
+        : (doc.documentElement || body.parentNode || body).scrollTop,
     rect = el.getBoundingClientRect();
 
   if (el !== body) {
@@ -41,16 +42,16 @@ export default function getAbsoluteBoundingRect(el) {
     while (parent && parent !== body) {
       offsetX += parent.scrollLeft;
       offsetY += parent.scrollTop;
-      parent   = parent.parentNode;
+      parent = parent.parentNode;
     }
   }
 
   return {
     bottom: rect.bottom + offsetY,
     height: rect.height,
-    left  : rect.left + offsetX,
-    right : rect.right + offsetX,
-    top   : rect.top + offsetY,
-    width : rect.width
+    left: rect.left + offsetX,
+    right: rect.right + offsetX,
+    top: rect.top + offsetY,
+    width: rect.width,
   };
 }

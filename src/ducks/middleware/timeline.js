@@ -1,5 +1,5 @@
-import uuid from 'uuid';
 import { get } from 'lodash';
+import { v4 as uuid } from 'uuid';
 
 const defaultOptions = {
   limit: 1000,
@@ -34,7 +34,9 @@ const createTimelineReducer = (reducer, customOptions) => {
     const { past, present, timeline } = state;
 
     if (get(action, 'type') === JUMP) {
-      if (!action.payload.locus) { return state; }
+      if (!action.payload.locus) {
+        return state;
+      }
       const locusIndex = timeline.indexOf(action.payload.locus);
 
       // If point in timeline cannot be found do nothing
@@ -99,10 +101,6 @@ const createTimelineReducer = (reducer, customOptions) => {
   };
 
   return timelineReducer;
-};
-
-export const actionTypes = {
-  RESET,
 };
 
 export const actionCreators = {

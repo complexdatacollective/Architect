@@ -1,47 +1,51 @@
-/* eslint-env jest */
-import fs from 'fs-extra';
-import getAssetData from '../getAssetData';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const mockData = {
   nodes: [],
   edges: [],
 };
 
-fs.readFile = jest.fn(
-  (path, format, resolve) => resolve(null, JSON.stringify(mockData)),
-);
+vi.mock('@utils/electronBridge', () => ({
+  electronAPI: {
+    fs: {
+      readFile: vi.fn(() => JSON.stringify(mockData)),
+    },
+  },
+}));
+
+// Need to import fresh each test to avoid memoization issues
+let getAssetData;
 
 describe('getAssetData', () => {
-  it('can load a json network', (done) => {
-    const source = '/dev/null/myMockSource.json';
-    const type = 'network';
-
-    getAssetData(source, type).then(
-      (data) => {
-        expect(data).toEqual(mockData);
-
-        done();
-      },
-    );
+  beforeEach(async () => {
+    vi.clearAllMocks();
+    // Reset module to clear memoization
+    vi.resetModules();
+    const module = await import('../getAssetData');
+    getAssetData = module.default;
   });
 
-  it('it caches responses', (done) => {
+  it('can load a json network', async () => {
     const source = '/dev/null/myMockSource.json';
     const type = 'network';
 
-    Promise.all([
+    const data = await getAssetData(source, type);
+    expect(data).toEqual(mockData);
+  });
+
+  it('it caches responses', async () => {
+    const source = '/dev/null/myMockSource.json';
+    const type = 'network';
+
+    const results = await Promise.all([
       getAssetData(source, type),
       getAssetData(source, type),
-    ]).then(
-      (results) => {
-        const isSameObject = results.every(
-          (result, index, all) => result === all[0],
-        );
+    ]);
 
-        expect(isSameObject).toBe(true);
-
-        done();
-      },
+    const isSameObject = results.every(
+      (result, _index, all) => result === all[0],
     );
+
+    expect(isSameObject).toBe(true);
   });
 });

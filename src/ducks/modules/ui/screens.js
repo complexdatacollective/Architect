@@ -21,23 +21,26 @@ const initialState = {
   message: {},
 };
 
-const openScreen = (screen, params = {}, root = false) => (dispatch, getState) => {
-  const state = getState();
-  const latestLocus = state.protocol.timeline[state.protocol.timeline.length - 1];
-  const locus = params.locus || latestLocus;
+const openScreen =
+  (screen, params = {}, root = false) =>
+  (dispatch, getState) => {
+    const state = getState();
+    const latestLocus =
+      state.protocol.timeline[state.protocol.timeline.length - 1];
+    const locus = params.locus || latestLocus;
 
-  dispatch({
-    type: OPEN_SCREEN,
-    payload: {
-      screen,
-      params: {
-        ...params,
-        locus,
+    dispatch({
+      type: OPEN_SCREEN,
+      payload: {
+        screen,
+        params: {
+          ...params,
+          locus,
+        },
+        root,
       },
-      root,
-    },
-  });
-};
+    });
+  };
 
 const closeScreen = (screen, params = null) => ({
   type: CLOSE_SCREEN,
@@ -63,7 +66,10 @@ const getUpdatedScreen = (screen, params) => ({
   },
 });
 
-export default (state = initialState, { type, payload } = { type: null, payload: null }) => {
+export default (
+  state = initialState,
+  { type, payload } = { type: null, payload: null },
+) => {
   switch (type) {
     case sessionActionTypes.OPEN_PROTOCOL_SUCCESS:
     case sessionActionTypes.RESET_SESSION:
@@ -86,30 +92,33 @@ export default (state = initialState, { type, payload } = { type: null, payload:
     case CLOSE_SCREEN: {
       const message = payload.params
         ? {
-          ...state.message,
-          screen: payload.screen,
-          params: payload.params,
-        }
+            ...state.message,
+            screen: payload.screen,
+            params: payload.params,
+          }
         : state.message;
 
       return {
         ...state,
-        screens: state.screens
-          .filter(({ screen }) => screen !== payload.screen),
+        screens: state.screens.filter(
+          ({ screen }) => screen !== payload.screen,
+        ),
         message,
       };
     }
     case UPDATE_SCREEN:
       return {
         ...state,
-        root: state.root.screen === payload.screen
-          ? getUpdatedScreen(state.root, payload.params)
-          : state.root,
-        screens: state.screens
-          .map((screen) => {
-            if (screen.screen !== payload.screen) { return screen; }
-            return getUpdatedScreen(screen, payload.params);
-          }),
+        root:
+          state.root.screen === payload.screen
+            ? getUpdatedScreen(state.root, payload.params)
+            : state.root,
+        screens: state.screens.map((screen) => {
+          if (screen.screen !== payload.screen) {
+            return screen;
+          }
+          return getUpdatedScreen(screen, payload.params);
+        }),
       };
     default:
       return state;

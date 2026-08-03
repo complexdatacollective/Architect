@@ -1,5 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
-
+@use '@codaco/ui/src/styles/global/core/units';
 
 .form-dropzone {
   @include preset('copy-standard');
@@ -70,7 +69,7 @@
     cursor: initial;
 
     .form-dropzone__label {
-      opacity: .5;
+      opacity: 0.5;
     }
   }
 

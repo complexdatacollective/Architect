@@ -1,5 +1,5 @@
 /* stylelint-disable no-descending-specificity */
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .small-heading {
   text-transform: uppercase;
@@ -28,10 +28,13 @@
     }
   }
 
-  & > tbody, thead {
+  & > tbody,
+  thead {
     tr {
-      & > td, & > th {
-        & > ul, > ol {
+      & > td,
+      & > th {
+        & > ul,
+        > ol {
           padding: inherit;
         }
 
@@ -49,7 +52,6 @@
           &:last-child {
             margin-bottom: 0;
           }
-
         }
       }
     }
@@ -66,7 +68,8 @@
   }
 
   &--rotated {
-    & > tbody, thead {
+    & > tbody,
+    thead {
       & > tr {
         &:not(:last-child) {
           border-bottom: 3px solid var(--color-white);
@@ -94,7 +97,6 @@
             white-space: nowrap;
             word-break: break-word;
           }
-
         }
       }
     }

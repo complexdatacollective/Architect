@@ -1,13 +1,19 @@
-import { map } from 'lodash';
-import { getCodebook } from '@selectors/protocol';
 import { getVariableOptionsForSubject } from '@selectors/codebook';
+import { getCodebook } from '@selectors/protocol';
+import { map } from 'lodash';
 
 export const getNarrativeVariables = (state, subject) => {
   const variables = getVariableOptionsForSubject(state, subject);
 
-  const layoutVariablesForSubject = variables.filter(({ type }) => type === 'layout');
-  const highlightVariablesForSubject = variables.filter(({ type }) => type === 'boolean');
-  const categoricalOptions = variables.filter(({ type }) => type === 'categorical');
+  const layoutVariablesForSubject = variables.filter(
+    ({ type }) => type === 'layout',
+  );
+  const highlightVariablesForSubject = variables.filter(
+    ({ type }) => type === 'boolean',
+  );
+  const categoricalOptions = variables.filter(
+    ({ type }) => type === 'categorical',
+  );
 
   return {
     layoutVariablesForSubject,

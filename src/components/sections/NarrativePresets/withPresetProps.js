@@ -1,11 +1,9 @@
+import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 import { change, formValueSelector } from 'redux-form';
-import { actionCreators as codebookActions } from '@modules/protocol/codebook';
-import {
-  getNarrativeVariables,
-  getEdgesForSubject,
-} from './selectors';
+
+import { getEdgesForSubject, getNarrativeVariables } from './selectors';
 
 const mapStateToProps = (state, { entity, type, form }) => {
   const narrativeVariables = getNarrativeVariables(state, { entity, type });
@@ -28,20 +26,20 @@ const mapDispatchToProps = {
 };
 
 const variableHandlers = withHandlers({
-  handleCreateLayoutVariable: ({
-    form,
-    changeForm,
-    createVariable,
-    entity,
-    type,
-  }) => async (name) => {
-    const { variable } = await createVariable(entity, type, { type: 'layout', name });
-    changeForm(form, 'layoutVariable', variable);
-    return variable;
-  },
-  handleDeleteVariable: (
-    { entity, type, deleteVariable },
-  ) => (variable) => deleteVariable(entity, type, variable),
+  handleCreateLayoutVariable:
+    ({ form, changeForm, createVariable, entity, type }) =>
+    async (name) => {
+      const { variable } = await createVariable(entity, type, {
+        type: 'layout',
+        name,
+      });
+      changeForm(form, 'layoutVariable', variable);
+      return variable;
+    },
+  handleDeleteVariable:
+    ({ entity, type, deleteVariable }) =>
+    (variable) =>
+      deleteVariable(entity, type, variable),
 });
 
 const withPresetProps = compose(

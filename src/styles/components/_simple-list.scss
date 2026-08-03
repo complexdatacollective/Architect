@@ -1,8 +1,8 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .simple-list {
   &:first-child {
-    border-top: units.unit(.25) solid var(--architect-divider);
+    border-top: units.unit(0.25) solid var(--architect-divider);
   }
 
   &__item {

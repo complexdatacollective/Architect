@@ -1,10 +1,10 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 :root {
   --text: var(--color-charcoal);
   --input-label: var(--color-charcoal);
   /* stylelint-disable-next-line color-function-notation */
-  --input-placeholder: rgba(0, 0, 0, 65%)
+  --input-placeholder: rgba(0, 0, 0, 65%);
 }
 
 .node__label-text {
@@ -20,7 +20,7 @@ a {
 
   &:disabled,
   &[disabled] {
-    opacity: .5;
+    opacity: 0.5;
     cursor: default;
   }
 
@@ -46,7 +46,7 @@ a {
 
 .form-field-checkbox--disabled {
   font-style: italic;
-  opacity: .75;
+  opacity: 0.75;
   cursor: not-allowed;
 }
 
@@ -69,14 +69,14 @@ a {
   .migration-panel {
     background: var(--color-navy-taupe);
     padding: 0 units.unit(2);
-    border-radius: .75rem;
+    border-radius: 0.75rem;
     overflow-y: auto;
     max-height: 18rem;
 
     code {
       background: var(--color-paradise-pink);
-      padding: .1rem .25rem;
-      border-radius: .2rem;
+      padding: 0.1rem 0.25rem;
+      border-radius: 0.2rem;
     }
 
     li {
@@ -120,7 +120,8 @@ a {
 // Matierial-UI icon doesn't resize according to input font-size
 .form-field-text {
   &--adornment {
-    .MuiSvgIcon-root { // sass-lint:disable-line class-name-format
+    .MuiSvgIcon-root {
+      // sass-lint:disable-line class-name-format
       font-size: 1.5em;
     }
   }

@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .panel {
   background-color: var(--architect-panel-background);
@@ -24,7 +24,7 @@
     margin: 0 0 units.unit(2);
     border: 1px solid var(--architect-panel-divider);
     padding: units.unit(2);
-    border-radius:  units.unit(1);
+    border-radius: units.unit(1);
     min-height: 200px;
   }
 

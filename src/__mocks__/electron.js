@@ -1,35 +1,35 @@
-/* eslint-env jest */
+import { vi } from 'vitest';
 
 const dialog = {
-  showMessageBox: jest.fn(
-    () => Promise.resolve(),
-  ),
-  showOpenDialog: jest.fn(
-    () => Promise.resolve(),
-  ),
+  showMessageBox: vi.fn(() => Promise.resolve()),
+  showOpenDialog: vi.fn(() => Promise.resolve()),
 };
 
 const remote = {
   dialog: {
-    showSaveDialog: jest.fn(() => Promise.resolve({
-      canceled: false,
-      filePath: 'filename.canvas',
-    })),
-    showOpenDialog: jest.fn(() => Promise.resolve({
-      canceled: false,
-      filePaths: ['/dev/null/fake/explore/path'],
-    })),
+    showSaveDialog: vi.fn(() =>
+      Promise.resolve({
+        canceled: false,
+        filePath: 'filename.canvas',
+      }),
+    ),
+    showOpenDialog: vi.fn(() =>
+      Promise.resolve({
+        canceled: false,
+        filePaths: ['/dev/null/fake/explore/path'],
+      }),
+    ),
   },
   app: {
-    getVersion: jest.fn(() => '0.0.0'),
-    getPath: jest.fn(() => '/dev/null/get/electron/path'),
+    getVersion: vi.fn(() => '0.0.0'),
+    getPath: vi.fn(() => '/dev/null/get/electron/path'),
   },
-  getCurrentWindow: jest.fn(),
+  getCurrentWindow: vi.fn(),
 };
 
 const ipcRenderer = {
-  send: jest.fn(() => {}),
-  on: jest.fn(() => {}),
+  send: vi.fn(() => {}),
+  on: vi.fn(() => {}),
 };
 
 module.exports = {

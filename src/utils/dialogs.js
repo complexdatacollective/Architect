@@ -1,4 +1,4 @@
-import { remote } from 'electron';
+import { electronAPI } from '@utils/electronBridge';
 
 const defaultOpenDialogOptions = {
   buttonLabel: 'Open',
@@ -39,10 +39,7 @@ const openDialog = (openDialogOptions = {}) => {
     ...openDialogOptions,
   };
 
-  return remote.dialog.showOpenDialog(
-    remote.getCurrentWindow(),
-    options,
-  );
+  return electronAPI.dialog.showOpenDialog(options);
 };
 
 /**
@@ -55,10 +52,7 @@ const saveDialog = (saveDialogOptions = {}) => {
     ...saveDialogOptions,
   };
 
-  return remote.dialog.showSaveDialog(
-    remote.getCurrentWindow(),
-    options,
-  );
+  return electronAPI.dialog.showSaveDialog(options);
 };
 
 const saveCopyDialog = (saveCopyOptions = {}) => {
@@ -66,9 +60,4 @@ const saveCopyDialog = (saveCopyOptions = {}) => {
   return saveDialog(options);
 };
 
-export {
-  saveDialog,
-  saveCopyDialog,
-  openDialog,
-  createDialogOptions,
-};
+export { saveDialog, saveCopyDialog, openDialog, createDialogOptions };

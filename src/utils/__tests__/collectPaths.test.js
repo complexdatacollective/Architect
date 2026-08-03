@@ -6,20 +6,12 @@ const testObject = {
   stages: [
     {
       subject: { entity: 'node', type: 'node1' },
-      prompts: [
-        { variable: 'foo' },
-        { variable: 'bar' },
-      ],
+      prompts: [{ variable: 'foo' }, { variable: 'bar' }],
     },
     {
       subject: { entity: 'edge', type: 'edge1' },
-      prompts: [
-        { variable: 'bazz' },
-      ],
-      list: [
-        'fizz',
-        'buzz',
-      ],
+      prompts: [{ variable: 'bazz' }],
+      list: ['fizz', 'buzz'],
     },
   ],
 };
@@ -56,7 +48,11 @@ describe('collectMappedPath', () => {
 
     const mappingFunction = (value, path) => [value, path];
 
-    const paths = collectMappedPath('stages[].subject', testObject, mappingFunction);
+    const paths = collectMappedPath(
+      'stages[].subject',
+      testObject,
+      mappingFunction,
+    );
 
     expect(paths).toEqual(expectedResult);
   });
@@ -67,11 +63,17 @@ describe('collectMappedPath', () => {
     };
 
     const mappingFunction = (value, path) => {
-      if (value.entity === 'edge') { return undefined; }
+      if (value.entity === 'edge') {
+        return undefined;
+      }
       return [value, path];
     };
 
-    const paths = collectMappedPath('stages[].subject', testObject, mappingFunction);
+    const paths = collectMappedPath(
+      'stages[].subject',
+      testObject,
+      mappingFunction,
+    );
 
     expect(paths).toEqual(expectedResult);
   });
@@ -82,11 +84,17 @@ describe('collectMappedPath', () => {
     };
 
     const mappingFunction = (value, path) => {
-      if (value.entity === 'edge') { return undefined; }
+      if (value.entity === 'edge') {
+        return undefined;
+      }
       return [value.type, path];
     };
 
-    const paths = collectMappedPath('stages[].subject', testObject, mappingFunction);
+    const paths = collectMappedPath(
+      'stages[].subject',
+      testObject,
+      mappingFunction,
+    );
 
     expect(paths).toEqual(expectedResult);
   });
@@ -97,11 +105,17 @@ describe('collectMappedPath', () => {
     };
 
     const mappingFunction = (value, path) => {
-      if (value.entity === 'edge') { return undefined; }
+      if (value.entity === 'edge') {
+        return undefined;
+      }
       return [value.type, `${path}.fictional.path`];
     };
 
-    const paths = collectMappedPath('stages[].subject', testObject, mappingFunction);
+    const paths = collectMappedPath(
+      'stages[].subject',
+      testObject,
+      mappingFunction,
+    );
 
     expect(paths).toEqual(expectedResult);
   });

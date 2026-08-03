@@ -1,3 +1,3 @@
-/* eslint-env jest */
+import { vi } from 'vitest';
 
-export default jest.fn(() => Promise.resolve());
+export default vi.fn(() => Promise.resolve());

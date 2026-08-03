@@ -38,12 +38,7 @@ const VALIDATIONS = {
     // 'lessThanVariable',
     // 'greaterThanVariable',
   ],
-  boolean: [
-    'required',
-    'unique',
-    'differentFrom',
-    'sameAs',
-  ],
+  boolean: ['required', 'unique', 'differentFrom', 'sameAs'],
   ordinal: [
     'required',
     'unique',
@@ -60,6 +55,7 @@ const VALIDATIONS = {
     'differentFrom',
     'sameAs',
   ],
+  passphrase: ['minLength', 'maxLength'],
 };
 
 const VALIDATIONS_WITH_NUMBER_VALUES = [
@@ -78,34 +74,34 @@ const VALIDATIONS_WITH_LIST_VALUES = [
   // 'greaterThanVariable',
 ];
 
-const VALIDATIONS_WITHOUT_VALUES = [
-  'required',
-  'unique',
-];
+const VALIDATIONS_WITHOUT_VALUES = ['required', 'unique'];
 
-const isValidationWithoutValue = (validation) => VALIDATIONS_WITHOUT_VALUES.includes(validation);
+const isValidationWithoutValue = (validation) =>
+  VALIDATIONS_WITHOUT_VALUES.includes(validation);
 
-const isValidationWithNumberValue = (validation) => (
-  VALIDATIONS_WITH_NUMBER_VALUES.includes(validation));
-const isValidationWithListValue = (validation) => VALIDATIONS_WITH_LIST_VALUES.includes(validation);
+const isValidationWithNumberValue = (validation) =>
+  VALIDATIONS_WITH_NUMBER_VALUES.includes(validation);
+const isValidationWithListValue = (validation) =>
+  VALIDATIONS_WITH_LIST_VALUES.includes(validation);
 
-const getValidationsForVariableType = (variableType) => get(VALIDATIONS, variableType, []);
+const getValidationsForVariableType = (variableType) =>
+  get(VALIDATIONS, variableType, []);
 
-const getValidationsForEntity = (validations, entity) => (entity === 'ego' ? without(validations, 'unique') : validations);
+const getValidationsForEntity = (validations, entity) =>
+  entity === 'ego' ? without(validations, 'unique') : validations;
 
-const getValidationOptionsForVariableType = (
-  variableType,
-  entity,
-) => getValidationsForEntity(getValidationsForVariableType(variableType), entity)
-  .map((validation) => ({ label: validation, value: validation }));
+const getValidationOptionsForVariableType = (variableType, entity) =>
+  getValidationsForEntity(
+    getValidationsForVariableType(variableType),
+    entity,
+  ).map((validation) => ({
+    label: validation,
+    value: validation,
+  }));
 
 export {
-  getValidationsForVariableType,
   getValidationOptionsForVariableType,
   isValidationWithNumberValue,
   isValidationWithListValue,
   isValidationWithoutValue,
-  VALIDATIONS,
 };
-
-export default VALIDATIONS;

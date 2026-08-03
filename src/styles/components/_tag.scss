@@ -1,11 +1,11 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .tag {
   display: inline-flex;
   padding: 3px;
   border-radius: units.unit(5);
   width: auto;
-  margin: units.unit(.5);
+  margin: units.unit(0.5);
   cursor: pointer;
   align-items: center;
   justify-content: flex-start;
@@ -19,11 +19,11 @@
   }
 
   &--clickable {
-    @include clickable(.5);
+    @include clickable(0.5);
   }
 
   &--disabled {
-    opacity: .5;
+    opacity: 0.5;
     cursor: not-allowed;
   }
 
@@ -36,10 +36,10 @@
   }
 
   &__label {
-    font-size: .8rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: .15em;
-    padding: 0 .75rem;
+    letter-spacing: 0.15em;
+    padding: 0 0.75rem;
   }
 
   &__reset {

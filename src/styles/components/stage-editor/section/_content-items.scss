@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .stage-editor-section-content-items {
   &__controls {
@@ -20,9 +20,8 @@
       font-size: 1.75rem;
       line-height: 100%;
       position: relative;
-      top: units.unit(-.25);
+      top: units.unit(-0.25);
       margin-right: units.unit(1);
-
     }
 
     &--text {
@@ -40,7 +39,5 @@
     &--video {
       @include button-background(var(--architect-variant--4));
     }
-
-
   }
 }

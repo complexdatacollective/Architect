@@ -1,23 +1,26 @@
-import path from 'path';
-import { uniqBy } from 'lodash';
 import { actionTypes as sessionActionTypes } from '@modules/session';
+import { pathSync } from '@utils/electronBridge';
+import { uniqBy } from 'lodash';
 
 const initialState = [];
 
-const addProtocol = (state, protocol) => uniqBy([protocol, ...state], 'filePath')
-  .sort((a, b) => b.lastModified - a.lastModified)
-  .slice(0, 50);
+const addProtocol = (state, protocol) =>
+  uniqBy([protocol, ...state], 'filePath')
+    .toSorted((a, b) => b.lastModified - a.lastModified)
+    .slice(0, 50);
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case sessionActionTypes.OPEN_NETCANVAS_ERROR:
-      return state.filter((protocol) => protocol.filePath !== action.payload.filePath);
+      return state.filter(
+        (protocol) => protocol.filePath !== action.payload.filePath,
+      );
     case sessionActionTypes.OPEN_NETCANVAS_SUCCESS: {
       const { filePath, protocol } = action.payload;
       return addProtocol(state, {
         filePath,
         lastModified: protocol.lastModified,
-        name: path.basename(filePath, '.netcanvas'),
+        name: pathSync.basename(filePath, '.netcanvas'),
         description: protocol.description,
         schemaVersion: protocol.schemaVersion,
       });
@@ -28,8 +31,8 @@ export default function reducer(state = initialState, action = {}) {
 
       return addProtocol(state, {
         filePath,
-        lastModified: new Date().getTime(),
-        name: path.basename(filePath, '.netcanvas'),
+        lastModified: Date.now(),
+        name: pathSync.basename(filePath, '.netcanvas'),
         description: protocol.description,
         schemaVersion: protocol.schemaVersion,
       });
@@ -38,14 +41,3 @@ export default function reducer(state = initialState, action = {}) {
       return state;
   }
 }
-
-const actionCreators = {
-};
-
-const actionTypes = {
-};
-
-export {
-  actionCreators,
-  actionTypes,
-};

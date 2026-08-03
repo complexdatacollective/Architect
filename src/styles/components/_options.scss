@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 $component-name: 'options';
 
@@ -14,7 +14,8 @@ $component-name: 'options';
     background-color: var(--form-control);
     color: var(--architect-sortable-text);
     z-index: var(--z-fx);
-    transition: background-color var(--animation-easing) var(--animation-duration-standard);
+    transition: background-color var(--animation-easing)
+      var(--animation-duration-standard);
     border-radius: 1rem;
 
     &:not(:last-of-type) {
@@ -47,7 +48,8 @@ $component-name: 'options';
 
     &-label {
       margin: 0 0 1rem;
-      transition: color var(--animation-easing) var(--animation-duration-standard);
+      transition: color var(--animation-easing)
+        var(--animation-duration-standard);
     }
 
     &-delete,
@@ -100,5 +102,4 @@ $component-name: 'options';
       filter: brightness(100);
     }
   }
-
 }

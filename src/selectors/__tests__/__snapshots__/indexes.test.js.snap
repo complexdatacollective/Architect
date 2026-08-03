@@ -1,7 +1,7 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`indexes selectors getAssetIndex() extracts asset references into index 1`] = `
-Object {
+exports[`indexes selectors > getAssetIndex() > extracts asset references into index 1`] = `
+{
   "stages[12].background.image": "quadrant-1",
   "stages[13].dataSource": "previousInterview-json",
   "stages[14].dataSource": "HIVServices",
@@ -18,8 +18,8 @@ Object {
 }
 `;
 
-exports[`indexes selectors getEdgeIndex() extracts subject references into type index 1`] = `
-Object {
+exports[`indexes selectors > getEdgeIndex() > extracts subject references into type index 1`] = `
+{
   "stages[11].prompts[0].edges.create": "77199445-9d50-4646-b0bc-6d6b0c0e06bd",
   "stages[11].prompts[0].edges.display[0]": "867127d9-086b-403a-a3e7-2c7d32126546",
   "stages[11].prompts[0].edges.display[1]": "77199445-9d50-4646-b0bc-6d6b0c0e06bd",
@@ -43,8 +43,8 @@ Object {
 }
 `;
 
-exports[`indexes selectors getNodeIndex() extracts subject references into type index 1`] = `
-Object {
+exports[`indexes selectors > getNodeIndex() > extracts subject references into type index 1`] = `
+{
   "stages[10].subject.type": "c93af3fe-9f84-4e85-acb5-5b15f30788c7",
   "stages[11].subject.type": "4aebf73e-95e3-4fd1-95e7-237dcc4a4466",
   "stages[12].subject.type": "eda5e3bb-8e1c-4216-9e06-adc0ff6b7f73",
@@ -65,8 +65,8 @@ Object {
 }
 `;
 
-exports[`indexes selectors getVariableIndex() extracts variables into index 1`] = `
-Object {
+exports[`indexes selectors > getVariableIndex() > extracts variables into index 1`] = `
+{
   "codebook.edge[77199445-9d50-4646-b0bc-6d6b0c0e06bd].variables[e343a91f-628d-4175-870c-957beffa0003].validation.sameAs": "e343a91f-628d-4175-870c-957beffa0002",
   "codebook.ego.variables[9c47f32e-b72f-4b1b-93a2-e29766dc3012].validation.differentFrom": "23a10bcb-bd71-46a1-a36d-4ab80cb5a1d1",
   "codebook.node[4aebf73e-95e3-4fd1-95e7-237dcc4a4466].variables[0e75ec18-2cb1-4606-9f18-034d28b07c19].validation.differentFrom": "6be95f85-c2d9-4daf-9de1-3939418af888",

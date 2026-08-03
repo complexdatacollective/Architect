@@ -14,7 +14,11 @@ $grid-num-columns: 12 !default;
 // can specify whether or not it will be contained by a max-width.
 // by default, it will not take on
 // contained behavior (centered with a max-width)
-@mixin grid-container($contain: false, $width: 100%, $max-width: $grid-container-max-width) {
+@mixin grid-container(
+  $contain: false,
+  $width: 100%,
+  $max-width: $grid-container-max-width
+) {
   display: flex;
   flex-flow: row wrap;
   width: $width;
@@ -46,17 +50,27 @@ $grid-num-columns: 12 !default;
   min-width: 0;
 }
 
-@mixin grid-item($columns: $grid-num-columns, $total-columns: $grid-num-columns, $shrink: null) {
+@mixin grid-item(
+  $columns: $grid-num-columns,
+  $total-columns: $grid-num-columns,
+  $shrink: null
+) {
   @include grid-item-base;
 
   @if $shrink {
     flex: 0 auto;
   } @else {
-    @include grid-item-percent(math.percentage(math.div($columns, $total-columns)));
+    @include grid-item-percent(
+      math.percentage(math.div($columns, $total-columns))
+    );
   }
 }
 
-@mixin grid-item-margin($offset: 0, $columns: $grid-num-columns, $direction: left) {
+@mixin grid-item-margin(
+  $offset: 0,
+  $columns: $grid-num-columns,
+  $direction: left
+) {
   margin-#{$direction}: math.percentage(math.div($offset, $columns));
 }
 
@@ -86,9 +100,31 @@ $grid-num-columns: 12 !default;
 
 // Flex Modifiers: Horizontal & Vertical Alignments, Order
 // =============================================================================
-$flex-align-x: (center: center, left: flex-start, right: flex-end, bookend: space-between, spaced: space-around) !default;
-$flex-align-y: (middle: center, top: flex-start, bottom: flex-end, stretch: stretch, baseline: baseline) !default;
-$flex-align-self: (auto: auto, stretch: stretch, center: center, middle: center, top: flex-start, start: flex-start, bottom: flex-end, end: flex-end, baseline: baseline) !default;
+$flex-align-x: (
+  center: center,
+  left: flex-start,
+  right: flex-end,
+  bookend: space-between,
+  spaced: space-around,
+) !default;
+$flex-align-y: (
+  middle: center,
+  top: flex-start,
+  bottom: flex-end,
+  stretch: stretch,
+  baseline: baseline,
+) !default;
+$flex-align-self: (
+  auto: auto,
+  stretch: stretch,
+  center: center,
+  middle: center,
+  top: flex-start,
+  start: flex-start,
+  bottom: flex-end,
+  end: flex-end,
+  baseline: baseline,
+) !default;
 
 @mixin flex-align($x: null, $y: null, $self: null, $flow: 'row') {
   @if $x {
@@ -130,7 +166,7 @@ $flex-align-stack: (
   top: flex-start,
   bottom: flex-end,
   bookend: space-between,
-  spaced: space-around
+  spaced: space-around,
 ) !default;
 
 @mixin flex-align-stack($align-name: null) {
@@ -162,7 +198,21 @@ $flex-align-stack: (
 }
 
 // Allows for separate class names, uses the previously defined alignment maps to create the alignments
-@mixin grid-classes($grid-class: 'grid', $section-class: 'section', $container-class: 'container', $block-class: 'block', $item-class: 'item', $columns: $grid-num-columns, $container-max-width: $grid-container-max-width, $container-width: percentage(1), $alignments: ('x', 'y', 'self')) {
+@mixin grid-classes(
+  $grid-class: 'grid',
+  $section-class: 'section',
+  $container-class: 'container',
+  $block-class: 'block',
+  $item-class: 'item',
+  $columns: $grid-num-columns,
+  $container-max-width: $grid-container-max-width,
+  $container-width: percentage(1),
+  $alignments: (
+    'x',
+    'y',
+    'self',
+  )
+) {
   .#{$grid-class} {
     // Section: meant to take up the full height of something,
     // 100% width
@@ -191,7 +241,7 @@ $flex-align-stack: (
       @include grid-item;
     }
 
- @each $breakpoint-name, $min-width in $-breakpoint-map {
+    @each $breakpoint-name, $min-width in $-breakpoint-map {
       @include breakpoint($breakpoint-name) {
         $breakpoint-class: '--#{$breakpoint-name}';
 

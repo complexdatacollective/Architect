@@ -1,6 +1,6 @@
+import { actionCreators, selectors } from '@modules/app';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators, selectors } from '@modules/app';
 
 const useAppState = (key, defaultValue) => {
   const value = useSelector(selectors.getProperty(key));

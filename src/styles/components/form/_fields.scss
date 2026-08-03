@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 @import './fields/native-select';
 @import './fields/variable-select';
 @import './fields/entity-select';
@@ -28,8 +28,9 @@
   &__error {
     opacity: 0;
     color: var(--form-error-text);
-    transition: opacity var(--animation-easing) var(--animation-duration-standard),
-    max-height var(--animation-easing) var(--animation-duration-standard);
+    transition:
+      opacity var(--animation-easing) var(--animation-duration-standard),
+      max-height var(--animation-easing) var(--animation-duration-standard);
   }
 }
 

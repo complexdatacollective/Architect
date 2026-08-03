@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .issues {
   position: sticky;
@@ -23,7 +23,7 @@
     &-icon {
       .icon {
         position: relative;
-        top: units.unit(.25);
+        top: units.unit(0.25);
         height: units.unit(4);
         width: units.unit(4);
       }

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { formValueSelector, change } from 'redux-form';
-import { compose, withState, withHandlers } from 'recompose';
+import { compose, withHandlers, withState } from 'recompose';
+import { change, formValueSelector } from 'redux-form';
 
 const withBackgroundChangeHandlerState = connect(
   (state, { form }) => ({
@@ -16,21 +16,18 @@ const withBackgroundChangeHandlerEnabled = withState(
 );
 
 const withBackgroundChangeHandlers = withHandlers({
-  handleChooseBackgroundType: ({
-    setUseImage,
-    useImage,
-    form,
-    changeForm,
-  }) => () => {
-    if (useImage) {
-      changeForm(form, 'background.image', null);
-    } else {
-      changeForm(form, 'background.concentricCircles', null);
-      changeForm(form, 'background.skewedTowardCenter', null);
-    }
+  handleChooseBackgroundType:
+    ({ setUseImage, useImage, form, changeForm }) =>
+    () => {
+      if (useImage) {
+        changeForm(form, 'background.image', null);
+      } else {
+        changeForm(form, 'background.concentricCircles', null);
+        changeForm(form, 'background.skewedTowardCenter', null);
+      }
 
-    setUseImage(!useImage);
-  },
+      setUseImage(!useImage);
+    },
 });
 
 const withBackgroundChangeHandler = compose(

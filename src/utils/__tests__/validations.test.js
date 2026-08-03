@@ -1,13 +1,13 @@
 /* eslint-env jest */
 
 import {
-  required,
-  minLength,
   maxLength,
-  minValue,
-  maxValue,
-  minSelected,
   maxSelected,
+  maxValue,
+  minLength,
+  minSelected,
+  minValue,
+  required,
 } from '../validations';
 
 describe('Validations', () => {

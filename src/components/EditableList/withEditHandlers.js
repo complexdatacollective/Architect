@@ -1,15 +1,15 @@
+import { actionCreators as timelineActions } from '@app/ducks/middleware/timeline';
+import { getLocus } from '@selectors/timeline';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import uuid from 'uuid';
 import {
   compose,
   defaultProps,
-  withStateHandlers,
   withHandlers,
+  withStateHandlers,
 } from 'recompose';
-import { formValueSelector, change } from 'redux-form';
-import { getLocus } from '@selectors/timeline';
-import { actionCreators as timelineActions } from '@app/ducks/middleware/timeline';
+import { bindActionCreators } from 'redux';
+import { change, formValueSelector } from 'redux-form';
+import { v4 as uuid } from 'uuid';
 
 const mapStateToProps = (state, { form, fieldName }) => {
   const items = formValueSelector(form)(state, fieldName);
@@ -27,9 +27,10 @@ const mapDispatchToProps = (dispatch, { form }) => ({
   jump: bindActionCreators(timelineActions.jump, dispatch),
 });
 
-const mapItemStateToProps = (state, {
-  form, itemSelector, editField, template,
-}) => {
+const mapItemStateToProps = (
+  state,
+  { form, itemSelector, editField, template },
+) => {
   const item = itemSelector(state, { form, editField });
   const initialValues = item || { ...template(), id: uuid() };
 
@@ -42,36 +43,41 @@ const stateHandlers = withStateHandlers(
     locus: null,
   },
   {
-    setEditField: (_, { locus }) => (fieldId) => ({
-      editField: fieldId,
-      locus,
-    }),
+    setEditField:
+      (_, { locus }) =>
+      (fieldId) => ({
+        editField: fieldId,
+        locus,
+      }),
     clearEditField: () => () => ({
       editField: null,
       locus: null,
     }),
-    resetEditField: ({ locus }, { jump }) => () => {
-      jump(locus);
+    resetEditField:
+      ({ locus }, { jump }) =>
+      () => {
+        jump(locus);
 
-      return {
-        editField: null,
-        locus: null,
-      };
-    },
+        return {
+          editField: null,
+          locus: null,
+        };
+      },
   },
 );
 
-const handlers = withHandlers(
-  {
-    handleEditField: ({ setEditField }) => setEditField,
-    handleCancelEditField: ({ resetEditField }) => resetEditField,
-    handleAddNew: ({ itemCount, fieldName, setEditField }) => () => {
+const handlers = withHandlers({
+  handleEditField: ({ setEditField }) => setEditField,
+  handleCancelEditField: ({ resetEditField }) => resetEditField,
+  handleAddNew:
+    ({ itemCount, fieldName, setEditField }) =>
+    () => {
       const newItemFieldName = `${fieldName}[${itemCount}]`;
       setEditField(newItemFieldName);
     },
-    handleUpdate: ({
-      editField, upsert, normalize, onChange, clearEditField,
-    }) => (value) => {
+  handleUpdate:
+    ({ editField, upsert, normalize, onChange, clearEditField }) =>
+    (value) => {
       // Using onChange allows us to do some intermediate processing if necessary
       const newValue = onChange ? onChange(value) : Promise.resolve(value);
 
@@ -80,14 +86,14 @@ const handlers = withHandlers(
         .then((fieldValue) => upsert(editField, fieldValue))
         .then(clearEditField);
     },
-  },
-);
+});
 
 const withEditHandlers = compose(
   defaultProps({
     normalize: (value) => value,
     template: () => {},
-    itemSelector: (state, { form, editField }) => formValueSelector(form)(state, editField),
+    itemSelector: (state, { form, editField }) =>
+      formValueSelector(form)(state, editField),
   }),
   connect(mapStateToProps, mapDispatchToProps),
   stateHandlers,

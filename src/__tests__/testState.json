@@ -216,7 +216,7 @@
           "background": {
             "image": "1234-asset-5"
           },
-          "dataSource" : "1234-asset-3"
+          "dataSource": "1234-asset-3"
         }
       ]
     }

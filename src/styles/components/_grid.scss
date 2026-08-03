@@ -1,4 +1,4 @@
-@use '~@codaco/ui/src/styles/global/core/units';
+@use '@codaco/ui/src/styles/global/core/units';
 
 .grid {
   .layout {
@@ -19,7 +19,7 @@
         bottom: 0;
         width: 1rem;
         height: 1rem;
-        border-bottom-right-radius: .5rem;
+        border-bottom-right-radius: 0.5rem;
         border-bottom: 2px solid var(--architect-active);
         border-right: 2px solid var(--architect-active);
       }
@@ -30,12 +30,13 @@
     opacity: 0;
     background-color: var(--error);
     color: var(--text-light);
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     max-height: 0;
     margin-top: units.unit(2);
-    padding: .5rem;
-    transition: opacity var(--animation-easing) var(--animation-duration-standard),
-    max-height var(--animation-easing) var(--animation-duration-standard);
+    padding: 0.5rem;
+    transition:
+      opacity var(--animation-easing) var(--animation-duration-standard),
+      max-height var(--animation-easing) var(--animation-duration-standard);
 
     .icon {
       height: units.unit(2);
@@ -69,7 +70,7 @@
   justify-content: flex-start;
   background-color: var(--architect-sortable-background);
   color: var(--architect-sortable-text);
-  border-radius: .5rem;
+  border-radius: 0.5rem;
 
   &__controls {
     flex: 0 1 auto;
@@ -80,7 +81,7 @@
   &__edit,
   &__delete {
     cursor: pointer;
-    padding: .5rem;
+    padding: 0.5rem;
 
     .icon {
       height: units.unit(2);

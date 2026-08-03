@@ -1,0 +1,611 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`preview > previewStageFromForm() > dispatches previewDraft() for end of stages 1`] = `
+[
+  {
+    "form": {
+      "fields": [
+        {
+          "prompt": "message",
+          "variable": "alpha",
+        },
+        {
+          "prompt": "message",
+          "variable": "1234-1234-4",
+        },
+      ],
+    },
+    "id": "bazz",
+    "label": "bazz",
+    "prompts": [
+      {
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "node",
+      "type": "bar",
+    },
+    "type": "NameGenerator",
+  },
+  {
+    "form": {
+      "fields": [
+        {
+          "prompt": "message",
+          "variable": "bravo",
+        },
+        {
+          "prompt": "message",
+          "variable": "1234-1234-5",
+        },
+      ],
+    },
+    "id": "pip",
+    "label": "pip",
+    "prompts": [
+      {
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "node",
+      "type": "bar",
+    },
+    "type": "NameGenerator",
+  },
+  {
+    "id": "buzz",
+    "label": "buzz",
+    "prompts": [
+      {
+        "id": "fizz",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "node",
+      "type": "foo",
+    },
+    "type": "NameGenerator",
+  },
+  {
+    "id": "foxtrot",
+    "label": "foxtrot",
+    "prompts": [
+      {
+        "id": "golf",
+        "text": "not a prompt",
+      },
+      {
+        "id": "hotel",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "node",
+      "type": "pop",
+    },
+    "type": "NameGenerator",
+  },
+  {
+    "id": "alpha",
+    "label": "alpha",
+    "prompts": [
+      {
+        "edges": {
+          "create": "1234-5",
+          "display": [
+            "1234-5",
+            "delta",
+            "echo",
+          ],
+        },
+        "id": "bravo",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "edge",
+      "type": "1234-5",
+    },
+    "type": "Sociogram",
+  },
+  {
+    "id": "mike",
+    "label": "mike",
+    "prompts": [
+      {
+        "id": "oscar",
+        "text": "not a prompt",
+      },
+    ],
+    "type": "Sociogram",
+  },
+  {
+    "background": {
+      "image": "1234-asset-5",
+    },
+    "dataSource": "1234-asset-3",
+    "id": "assets",
+    "items": [
+      {
+        "content": "1234-asset-4",
+        "id": "itemId",
+        "type": "asset",
+      },
+    ],
+    "label": "assets",
+    "panels": [
+      {
+        "dataSource": "1234-asset-2",
+        "id": "panelId",
+        "title": "",
+      },
+    ],
+    "prompts": [
+      {
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "type": "Information",
+  },
+  {
+    "fizz": "pop",
+  },
+]
+`;
+
+exports[`preview > previewStageFromForm() > dispatches previewDraft() for insert at index 0 1`] = `
+[
+  {
+    "bazz": "buzz",
+  },
+  {
+    "form": {
+      "fields": [
+        {
+          "prompt": "message",
+          "variable": "alpha",
+        },
+        {
+          "prompt": "message",
+          "variable": "1234-1234-4",
+        },
+      ],
+    },
+    "id": "bazz",
+    "label": "bazz",
+    "prompts": [
+      {
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "node",
+      "type": "bar",
+    },
+    "type": "NameGenerator",
+  },
+  {
+    "form": {
+      "fields": [
+        {
+          "prompt": "message",
+          "variable": "bravo",
+        },
+        {
+          "prompt": "message",
+          "variable": "1234-1234-5",
+        },
+      ],
+    },
+    "id": "pip",
+    "label": "pip",
+    "prompts": [
+      {
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "node",
+      "type": "bar",
+    },
+    "type": "NameGenerator",
+  },
+  {
+    "id": "buzz",
+    "label": "buzz",
+    "prompts": [
+      {
+        "id": "fizz",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "node",
+      "type": "foo",
+    },
+    "type": "NameGenerator",
+  },
+  {
+    "id": "foxtrot",
+    "label": "foxtrot",
+    "prompts": [
+      {
+        "id": "golf",
+        "text": "not a prompt",
+      },
+      {
+        "id": "hotel",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "node",
+      "type": "pop",
+    },
+    "type": "NameGenerator",
+  },
+  {
+    "id": "alpha",
+    "label": "alpha",
+    "prompts": [
+      {
+        "edges": {
+          "create": "1234-5",
+          "display": [
+            "1234-5",
+            "delta",
+            "echo",
+          ],
+        },
+        "id": "bravo",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "edge",
+      "type": "1234-5",
+    },
+    "type": "Sociogram",
+  },
+  {
+    "id": "mike",
+    "label": "mike",
+    "prompts": [
+      {
+        "id": "oscar",
+        "text": "not a prompt",
+      },
+    ],
+    "type": "Sociogram",
+  },
+  {
+    "background": {
+      "image": "1234-asset-5",
+    },
+    "dataSource": "1234-asset-3",
+    "id": "assets",
+    "items": [
+      {
+        "content": "1234-asset-4",
+        "id": "itemId",
+        "type": "asset",
+      },
+    ],
+    "label": "assets",
+    "panels": [
+      {
+        "dataSource": "1234-asset-2",
+        "id": "panelId",
+        "title": "",
+      },
+    ],
+    "prompts": [
+      {
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "type": "Information",
+  },
+]
+`;
+
+exports[`preview > previewStageFromForm() > dispatches previewDraft() for insert at index 1`] = `
+[
+  {
+    "form": {
+      "fields": [
+        {
+          "prompt": "message",
+          "variable": "alpha",
+        },
+        {
+          "prompt": "message",
+          "variable": "1234-1234-4",
+        },
+      ],
+    },
+    "id": "bazz",
+    "label": "bazz",
+    "prompts": [
+      {
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "node",
+      "type": "bar",
+    },
+    "type": "NameGenerator",
+  },
+  {
+    "form": {
+      "fields": [
+        {
+          "prompt": "message",
+          "variable": "bravo",
+        },
+        {
+          "prompt": "message",
+          "variable": "1234-1234-5",
+        },
+      ],
+    },
+    "id": "pip",
+    "label": "pip",
+    "prompts": [
+      {
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "node",
+      "type": "bar",
+    },
+    "type": "NameGenerator",
+  },
+  {
+    "bazz": "buzz",
+  },
+  {
+    "id": "buzz",
+    "label": "buzz",
+    "prompts": [
+      {
+        "id": "fizz",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "node",
+      "type": "foo",
+    },
+    "type": "NameGenerator",
+  },
+  {
+    "id": "foxtrot",
+    "label": "foxtrot",
+    "prompts": [
+      {
+        "id": "golf",
+        "text": "not a prompt",
+      },
+      {
+        "id": "hotel",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "node",
+      "type": "pop",
+    },
+    "type": "NameGenerator",
+  },
+  {
+    "id": "alpha",
+    "label": "alpha",
+    "prompts": [
+      {
+        "edges": {
+          "create": "1234-5",
+          "display": [
+            "1234-5",
+            "delta",
+            "echo",
+          ],
+        },
+        "id": "bravo",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "edge",
+      "type": "1234-5",
+    },
+    "type": "Sociogram",
+  },
+  {
+    "id": "mike",
+    "label": "mike",
+    "prompts": [
+      {
+        "id": "oscar",
+        "text": "not a prompt",
+      },
+    ],
+    "type": "Sociogram",
+  },
+  {
+    "background": {
+      "image": "1234-asset-5",
+    },
+    "dataSource": "1234-asset-3",
+    "id": "assets",
+    "items": [
+      {
+        "content": "1234-asset-4",
+        "id": "itemId",
+        "type": "asset",
+      },
+    ],
+    "label": "assets",
+    "panels": [
+      {
+        "dataSource": "1234-asset-2",
+        "id": "panelId",
+        "title": "",
+      },
+    ],
+    "prompts": [
+      {
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "type": "Information",
+  },
+]
+`;
+
+exports[`preview > previewStageFromForm() > dispatches previewDraft() for stage id 1`] = `
+[
+  {
+    "form": {
+      "fields": [
+        {
+          "prompt": "message",
+          "variable": "alpha",
+        },
+        {
+          "prompt": "message",
+          "variable": "1234-1234-4",
+        },
+      ],
+    },
+    "id": "bazz",
+    "label": "bazz",
+    "prompts": [
+      {
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "node",
+      "type": "bar",
+    },
+    "type": "NameGenerator",
+  },
+  {
+    "foo": "bar",
+    "id": "pip",
+  },
+  {
+    "id": "buzz",
+    "label": "buzz",
+    "prompts": [
+      {
+        "id": "fizz",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "node",
+      "type": "foo",
+    },
+    "type": "NameGenerator",
+  },
+  {
+    "id": "foxtrot",
+    "label": "foxtrot",
+    "prompts": [
+      {
+        "id": "golf",
+        "text": "not a prompt",
+      },
+      {
+        "id": "hotel",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "node",
+      "type": "pop",
+    },
+    "type": "NameGenerator",
+  },
+  {
+    "id": "alpha",
+    "label": "alpha",
+    "prompts": [
+      {
+        "edges": {
+          "create": "1234-5",
+          "display": [
+            "1234-5",
+            "delta",
+            "echo",
+          ],
+        },
+        "id": "bravo",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": {
+      "entity": "edge",
+      "type": "1234-5",
+    },
+    "type": "Sociogram",
+  },
+  {
+    "id": "mike",
+    "label": "mike",
+    "prompts": [
+      {
+        "id": "oscar",
+        "text": "not a prompt",
+      },
+    ],
+    "type": "Sociogram",
+  },
+  {
+    "background": {
+      "image": "1234-asset-5",
+    },
+    "dataSource": "1234-asset-3",
+    "id": "assets",
+    "items": [
+      {
+        "content": "1234-asset-4",
+        "id": "itemId",
+        "type": "asset",
+      },
+    ],
+    "label": "assets",
+    "panels": [
+      {
+        "dataSource": "1234-asset-2",
+        "id": "panelId",
+        "title": "",
+      },
+    ],
+    "prompts": [
+      {
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "type": "Information",
+  },
+]
+`;

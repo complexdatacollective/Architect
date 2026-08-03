@@ -1,9 +1,10 @@
 /* eslint-env jest */
 
-import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import reducer, { actionCreators, actionTypes } from '../screens';
+import thunk from 'redux-thunk';
+
 import { actionTypes as sessionActionTypes } from '../../session';
+import reducer, { actionCreators, actionTypes } from '../screens';
 
 const mockStore = configureStore([thunk]);
 
@@ -18,11 +19,7 @@ const initialState = {
 
 describe('ui', () => {
   it('initialState', () => {
-    expect(
-      reducer(),
-    ).toEqual(
-      initialState,
-    );
+    expect(reducer()).toEqual(initialState);
   });
 
   describe('LOAD_PROTOCOL_SUCCESS', () => {
@@ -48,9 +45,7 @@ describe('ui', () => {
 
       const subject = reducer(stateWithScreens, loadAction);
 
-      expect(
-        subject.screens,
-      ).toEqual([]);
+      expect(subject.screens).toEqual([]);
     });
   });
 
@@ -71,18 +66,16 @@ describe('ui', () => {
 
       const subject = store.getActions();
 
-      expect(subject).toEqual(
-        [
-          {
-            payload: {
-              params: { foo: 'bar', locus: 'locus1' },
-              root: false,
-              screen: 'edit-stage',
-            },
-            type: 'UI/OPEN_SCREEN',
+      expect(subject).toEqual([
+        {
+          payload: {
+            params: { foo: 'bar', locus: 'locus1' },
+            root: false,
+            screen: 'edit-stage',
           },
-        ],
-      );
+          type: 'UI/OPEN_SCREEN',
+        },
+      ]);
     });
   });
 
@@ -99,19 +92,17 @@ describe('ui', () => {
         },
       };
 
-      const openAction = ({
+      const openAction = {
         type: actionTypes.OPEN_SCREEN,
         payload: {
           screen: screenName,
           params,
         },
-      });
+      };
       const subject = reducer(initialStateWithMessage, openAction);
 
       it('adds screen to the list (with params)', () => {
-        expect(
-          subject.screens,
-        ).toEqual([
+        expect(subject.screens).toEqual([
           {
             screen: screenName,
             params: { ...params },
@@ -129,10 +120,10 @@ describe('ui', () => {
     const screenName = 'edit-stage';
     const params = { foo: 'bar' };
 
-    const openAction = ({
+    const openAction = {
       type: actionTypes.OPEN_SCREEN,
       payload: { screen: screenName },
-    });
+    };
     const closeAction = actionCreators.closeScreen(screenName, params);
 
     const openState = reducer(undefined, openAction);
@@ -141,18 +132,14 @@ describe('ui', () => {
     expect(openState.screens.length).toBe(1);
 
     it('sets message', () => {
-      expect(
-        closeState.message,
-      ).toEqual({
+      expect(closeState.message).toEqual({
         screen: screenName,
         params,
       });
     });
 
     it('removes screen from the list', () => {
-      expect(
-        closeState.screens.length,
-      ).toBe(0);
+      expect(closeState.screens.length).toBe(0);
     });
 
     describe('if params not set', () => {
@@ -160,11 +147,7 @@ describe('ui', () => {
       const closeStateNoParams = reducer(openState, closeActionNoParams);
 
       it("doesn't set message", () => {
-        expect(
-          closeStateNoParams.params,
-        ).toEqual(
-          openState.params,
-        );
+        expect(closeStateNoParams.params).toEqual(openState.params);
       });
     });
   });
@@ -175,10 +158,10 @@ describe('ui', () => {
     const params2 = { bazz: 'buzz' };
 
     describe('not root', () => {
-      const openAction = ({
+      const openAction = {
         type: actionTypes.OPEN_SCREEN,
         payload: { screen: screenName },
-      });
+      };
       const updateAction1 = actionCreators.updateScreen(screenName, params1);
       const updateAction2 = actionCreators.updateScreen(screenName, params2);
 
@@ -189,21 +172,19 @@ describe('ui', () => {
       expect(openState.screens.length).toBe(1);
 
       it('merges screen params', () => {
-        const screenFirstUpdate = updateState1.screens
-          .find(({ screen }) => screen === screenName);
+        const screenFirstUpdate = updateState1.screens.find(
+          ({ screen }) => screen === screenName,
+        );
 
-        expect(
-          screenFirstUpdate.params,
-        ).toEqual({
+        expect(screenFirstUpdate.params).toEqual({
           ...params1,
         });
 
-        const screenSecondUpdate = updateState2.screens
-          .find(({ screen }) => screen === screenName);
+        const screenSecondUpdate = updateState2.screens.find(
+          ({ screen }) => screen === screenName,
+        );
 
-        expect(
-          screenSecondUpdate.params,
-        ).toEqual({
+        expect(screenSecondUpdate.params).toEqual({
           ...params1,
           ...params2,
         });

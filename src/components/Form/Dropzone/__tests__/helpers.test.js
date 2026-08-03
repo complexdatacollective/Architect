@@ -1,6 +1,10 @@
 /* eslint-env jest */
 
-import { acceptsPaths, getRejectedExtensions, getAcceptsExtensions } from '../helpers';
+import {
+  acceptsPaths,
+  getAcceptsExtensions,
+  getRejectedExtensions,
+} from '../helpers';
 
 // acceptsPaths = (accepts, paths) =>
 // getRejectedExtensions = (accepts, paths) =>
@@ -22,11 +26,19 @@ describe('acceptsPaths(accepts, paths)', () => {
 describe('getRejectedExtensions(accepts, paths)', () => {
   it('given a list of file extensions, and a list of paths it returns those that do not match', () => {
     const accepts = ['.foo', '.bar', '.baz4', '.b3uzz'];
-    const passingPaths = ['/tmp/file.foo', '/tmp/file.bar', '/tmp/file.baz4', '/tmp/file.b3uzz'];
+    const passingPaths = [
+      '/tmp/file.foo',
+      '/tmp/file.bar',
+      '/tmp/file.baz4',
+      '/tmp/file.b3uzz',
+    ];
     const failingPaths = ['/tmp/file.foo', '/tmp/file.FIZZ', '/tmp/file.pop'];
 
     expect(getRejectedExtensions(accepts, passingPaths)).toEqual([]);
-    expect(getRejectedExtensions(accepts, failingPaths)).toEqual(['.FIZZ', '.pop']);
+    expect(getRejectedExtensions(accepts, failingPaths)).toEqual([
+      '.FIZZ',
+      '.pop',
+    ]);
   });
 });
 
@@ -34,6 +46,11 @@ describe('getAcceptsExtensions(accepts)', () => {
   it('given a list of file extensions, it returns them without the "." (for the electron open file dialog)', () => {
     const accepts = ['.foo', '.bar', '.baz4', '.b3uzz'];
 
-    expect(getAcceptsExtensions(accepts)).toEqual(['foo', 'bar', 'baz4', 'b3uzz']);
+    expect(getAcceptsExtensions(accepts)).toEqual([
+      'foo',
+      'bar',
+      'baz4',
+      'b3uzz',
+    ]);
   });
 });
