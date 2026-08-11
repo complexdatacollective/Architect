@@ -141,6 +141,11 @@ module.exports = {
 
   // Linux configuration
   linux: {
+    // Without this, electron-builder derives the Linux executable name from
+    // package.json's name — since the monorepo rename that is the scoped
+    // "@codaco/architect-classic", which AppImage rejects as unsafe for file
+    // paths. Keep the pre-monorepo executable name that 6.6.0 shipped.
+    executableName: 'network-canvas-architect',
     icon: 'build-resources',
     category: 'Education',
     maintainer: 'Complex Data Collective <info@networkcanvas.com>',
