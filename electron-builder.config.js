@@ -169,6 +169,19 @@ module.exports = {
     ],
   },
 
+  // Linux package identity. Without these, electron-builder derives the deb
+  // and rpm package name from package.json's name; since the monorepo rename
+  // that is scoped ("@codaco/architect-classic"), so it falls back to the
+  // sanitized productName — "Network Canvas Architect", which rpmbuild
+  // rejects because a Name may not contain spaces. Keep the pre-monorepo
+  // package name that 6.6.0 shipped, so existing installs upgrade in place.
+  deb: {
+    packageName: 'network-canvas-architect',
+  },
+  rpm: {
+    packageName: 'network-canvas-architect',
+  },
+
   // AppImage configuration
   appImage: {
     artifactName: '${productName}-${version}-${arch}.${ext}',
