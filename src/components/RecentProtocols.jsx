@@ -20,10 +20,10 @@ class RecentProtocols extends Component {
     <div className="recent-protocols__welcome">
       <h1>Getting Started</h1>
       <p>
-        Welcome to Network Canvas Architect! To get started, use the buttons
-        above to create a new interview protocol, or open an existing one from
-        elsewhere. When you return to this screen later, recent protocols you
-        have opened will be shown here.
+        Welcome to Network Canvas Architect Classic! To get started, use the
+        buttons above to create a new interview protocol, or open an existing
+        one from elsewhere. When you return to this screen later, recent
+        protocols you have opened will be shown here.
       </p>
     </div>
   );

@@ -18,7 +18,12 @@ module.exports = {
     'dist/**/*',
     '!dist/main/_dummy.js',
     'node_modules/**/*',
-    '!node_modules/**/node_modules/**',
+    // Nested node_modules MUST be included: electron-builder resolves version
+    // conflicts by nesting the losing version under its dependent (e.g.
+    // lazystream needs readable-stream@2 for its `readable-stream/passthrough`
+    // require, while archiver hoists readable-stream@4 to the root). Excluding
+    // `node_modules/**/node_modules/**` strips those copies and crashes the
+    // packaged app at launch with "Cannot find module".
     '!**/*.{map,ts,md}',
     '!**/test/**',
     '!**/tests/**',
@@ -33,10 +38,13 @@ module.exports = {
       to: 'icons',
     },
     // The preview window renders the Interviewer app. Bundle its built renderer
-    // and preload (produced by `network-canvas-interviewer#build`, on which
-    // Architect's build depends via the workspace dependency) into
+    // and preload (produced by `@codaco/interviewer-classic#build`) into
     // resources/interviewer; createPreviewWindow.js loads them from
-    // process.resourcesPath in packaged builds.
+    // process.resourcesPath in packaged builds. This consumes interviewer-
+    // classic's BUILD OUTPUT, not its source, so turbo.json gives
+    // `@codaco/architect-classic#build` an explicit dependsOn entry for
+    // `@codaco/interviewer-classic#build` — the source-first `^topo` edge
+    // alone would not build it.
     {
       from: 'interviewer-preview/renderer',
       to: 'interviewer/renderer',

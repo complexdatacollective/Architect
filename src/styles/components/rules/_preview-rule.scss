@@ -79,9 +79,7 @@
 
 .stage-editor-section {
   --variable-pill-background: var(--color-platinum);
-  --variable-pill-shadow-color: rgb(
-    212 212 212
-  ); // sass-lint:disable-line no-color-literals
+  --variable-pill-shadow-color: rgb(212 212 212); // sass-lint:disable-line no-color-literals
 
   .preview-edge {
     background: var(--variable-pill-background);

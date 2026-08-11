@@ -2,7 +2,7 @@
  * Creates the preview window for Network Canvas.
  *
  * The preview window renders the Interviewer app, consumed as the
- * `network-canvas-interviewer` workspace package. The Interviewer's preload
+ * `@codaco/interviewer-classic` workspace package. The Interviewer's preload
  * bridges Architect's `remote:preview`/`remote:reset` IPC into the interview;
  * Architect's main process hosts the renderer's IPC (fs, dialog, asset://, …).
  *
@@ -17,7 +17,7 @@ const path = require("node:path");
 const log = require("./log");
 const getPreviewMenu = require("./previewMenu");
 
-// The Interviewer's renderer dev server (apps/interviewer electron.vite.config).
+// The Interviewer's renderer dev server (apps/interviewer-classic electron.vite.config).
 const INTERVIEWER_DEV_URL = "http://localhost:3000";
 
 // Resolve the Interviewer's preload script and renderer URL for the current
@@ -33,7 +33,7 @@ function getInterviewerSources() {
 
 	// Dev: resolve the workspace package, load its source preload + dev server.
 	const interviewerRoot = path.dirname(
-		require.resolve("network-canvas-interviewer/package.json"),
+		require.resolve("@codaco/interviewer-classic/package.json"),
 	);
 	return {
 		preload: path.join(interviewerRoot, "src", "preload", "index.js"),

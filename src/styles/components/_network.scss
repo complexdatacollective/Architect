@@ -1,9 +1,7 @@
 @use '@codaco/ui/src/styles/global/core/units';
 
 .network {
-  --table-color: rgb(
-    58 106 117 / 5%
-  ); // sass-lint:disable-line no-color-literals
+  --table-color: rgb(58 106 117 / 5%); // sass-lint:disable-line no-color-literals
   --alternate-row-color: var(--table-color);
 
   border-radius: var(--border-radius);

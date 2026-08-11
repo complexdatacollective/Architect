@@ -42,7 +42,7 @@ const PromptFields = () => (
         className="stage-editor-section-prompt__textarea"
         label="Prompt Text"
         placeholder="Enter text for the prompt here..."
-        validation={{ required: true, maxLength: 220 }}
+        validation={{ required: true }}
       />
     </Row>
     <Row>

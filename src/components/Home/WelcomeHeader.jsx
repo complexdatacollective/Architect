@@ -49,7 +49,7 @@ const WelcomeHeader = () => {
         <img
           className="logo"
           src={headerGraphic}
-          alt="Network Canvas Architect"
+          alt="Network Canvas Architect Classic"
         />
         <div className="welcome-header__title">
           <div className="project-tag">

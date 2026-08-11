@@ -110,10 +110,6 @@ export default defineConfig({
         '@utils': resolve(__dirname, 'src/utils'),
       },
     },
-    esbuild: {
-      jsx: 'automatic',
-      jsxImportSource: 'react',
-    },
     optimizeDeps: {
       // Pre-bundle the CommonJS protocol-validation sub-paths used by the
       // renderer so Vite resolves their CJS->ESM interop without a mid-session
@@ -122,8 +118,8 @@ export default defineConfig({
         'protocol-validation/migrations/getMigrationNotes',
         'protocol-validation/validation/validateExternalData',
       ],
-      esbuildOptions: {
-        loader: {
+      rolldownOptions: {
+        moduleTypes: {
           '.js': 'jsx',
         },
       },
@@ -137,7 +133,6 @@ export default defineConfig({
             'global-builtin',
             'legacy-js-api',
             'color-functions',
-            'mixed-decls',
             'slash-div',
             'if-function',
           ],

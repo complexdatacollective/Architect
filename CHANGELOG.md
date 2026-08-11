@@ -1,5 +1,12 @@
 # network-canvas-architect
 
+## 6.6.1
+
+- **Fixed a crash on launch.** Version 6.6.0 could fail to start with a "Cannot find module
+  'readable-stream/passthrough'" error, caused by required dependency files being left out of
+  the packaged app. The app now starts correctly, and protocol import/export functionality
+  affected by the same packaging issue has been restored.
+
 ## 6.6.0
 
 - **Updated core dependencies.** The technology the app is built on has been brought up to

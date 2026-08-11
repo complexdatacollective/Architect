@@ -27,7 +27,7 @@ function createAppWindow() {
 				minWidth: 1280,
 				minHeight: 800,
 				center: true,
-				title: "Network Canvas Architect",
+				title: "Network Canvas Architect Classic",
 				show: true,
 				webPreferences: {
 					nodeIntegration: false,

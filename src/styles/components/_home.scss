@@ -110,9 +110,7 @@ $font-sizes: (
       height: calc(100% - 2rem);
       border-radius: 0.33rem;
       width: 0.33rem;
-      background-color: rgb(
-        0 0 0 / 5%
-      ); // sass-lint:disable-line no-color-literals
+      background-color: rgb(0 0 0 / 5%); // sass-lint:disable-line no-color-literals
     }
   }
 
@@ -299,9 +297,7 @@ $font-sizes: (
 
     .logo {
       height: 8rem;
-      filter: drop-shadow(
-        0 units.unit(1) units.unit(1) rgb(0 0 0 / 35%)
-      ); // sass-lint:disable-line no-color-literals
+      filter: drop-shadow(0 units.unit(1) units.unit(1) rgb(0 0 0 / 35%)); // sass-lint:disable-line no-color-literals
     }
 
     .version {

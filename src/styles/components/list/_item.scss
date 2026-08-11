@@ -36,18 +36,10 @@ $component-name: list-item;
     align-items: center;
 
     > .stage-editor-section {
-      --section-background-color: var(
-        --color-slate-blue--dark
-      ) !important; // sass-lint:disable-line no-important
-      --architect-panel-shadow: rgb(
-        58 58 117 / 76%
-      ) !important; // sass-lint:disable-line no-color-literals no-important
-      --input-background: var(
-        --color-white
-      ) !important; // sass-lint:disable-line no-important
-      --variable-pill-background: var(
-        --color-platinum
-      ) !important; // sass-lint:disable-line no-important
+      --section-background-color: var(--color-slate-blue--dark) !important; // sass-lint:disable-line no-important
+      --architect-panel-shadow: rgb(58 58 117 / 76%) !important; // sass-lint:disable-line no-color-literals no-important
+      --input-background: var(--color-white) !important; // sass-lint:disable-line no-important
+      --variable-pill-background: var(--color-platinum) !important; // sass-lint:disable-line no-important
     }
   }
 

@@ -54,7 +54,7 @@ const PromptFields = ({ form, variableOptions }) => {
             className="stage-editor-section-prompt__textarea"
             label="Prompt Text"
             placeholder="Enter text for the prompt here..."
-            validation={{ required: true, maxLength: 220 }}
+            validation={{ required: true }}
             issueDescription="text"
           />
         </Row>
@@ -104,6 +104,7 @@ const selectOptionProps = PropTypes.shape({
   label: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([
     PropTypes.string,
+    PropTypes.number,
     PropTypes.array,
     PropTypes.bool,
   ]),

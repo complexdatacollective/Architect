@@ -1,5 +1,5 @@
 /**
- * Preview driver for Network Canvas Architect.
+ * Preview driver for Network Canvas Architect Classic.
  *
  * This module provides the interface for controlling the preview window,
  * which displays the Network Canvas interview in a separate window for

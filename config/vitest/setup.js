@@ -6,6 +6,11 @@ import { vi } from 'vitest';
 // Configure Enzyme
 configure({ adapter: new Adapter() });
 
+// jsdom 30 brand-checks CSS.escape's receiver, while legacy JSS 10 captures
+// and invokes the method unbound. Bind the test-environment implementation to
+// match the receiver-independent browser behavior JSS expects.
+CSS.escape = CSS.escape.bind(CSS);
+
 // Handle uncaught exceptions from framesync during test cleanup
 // framesync (used by framer-motion 5.x) schedules timers that may fire after
 // jsdom tears down the window object, causing "window is not defined" errors.

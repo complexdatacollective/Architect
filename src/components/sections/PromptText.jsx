@@ -23,7 +23,7 @@ const PromptText = ({ name }) => (
         className="stage-editor-section-prompt__textarea"
         label=""
         placeholder="Enter text for the prompt here..."
-        validation={{ required: true, maxLength: 220 }}
+        validation={{ required: true }}
       />
     </Row>
   </Section>

@@ -207,11 +207,7 @@ $flex-align-stack: (
   $columns: $grid-num-columns,
   $container-max-width: $grid-container-max-width,
   $container-width: percentage(1),
-  $alignments: (
-    'x',
-    'y',
-    'self',
-  )
+  $alignments: ('x', 'y', 'self')
 ) {
   .#{$grid-class} {
     // Section: meant to take up the full height of something,
