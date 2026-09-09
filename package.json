@@ -55,7 +55,7 @@
     "compare-versions": "^3.6.0",
     "csvtojson": "^2.0.14",
     "electron": "^43.0.0",
-    "electron-builder": "^26.15.2",
+    "electron-builder": "^26.16.1",
     "electron-devtools-installer": "^3.2.1",
     "electron-vite": "^6.0.0-beta.1",
     "enzyme": "^3.11.0",
