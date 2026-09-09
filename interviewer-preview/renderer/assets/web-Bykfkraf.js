@@ -1,5 +1,5 @@
-import { n as WebPlugin } from "./index-DZJPtDnl.js";
-//#region ../../node_modules/.pnpm/@capacitor+browser@8.0.3_@capacitor+core@8.4.0/node_modules/@capacitor/browser/dist/esm/web.js
+import { n as WebPlugin } from "./index-Dt4XBSmX.js";
+//#region ../../node_modules/.pnpm/@capacitor+browser@8.0.3_@capacitor+core@8.5.1/node_modules/@capacitor/browser/dist/esm/web.js
 var BrowserWeb = class extends WebPlugin {
 	constructor() {
 		super();

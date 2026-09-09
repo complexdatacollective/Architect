@@ -1,5 +1,5 @@
-import { n as WebPlugin } from "./index-DZJPtDnl.js";
-//#region ../../node_modules/.pnpm/@capacitor+share@8.0.1_@capacitor+core@8.4.0/node_modules/@capacitor/share/dist/esm/web.js
+import { n as WebPlugin } from "./index-Dt4XBSmX.js";
+//#region ../../node_modules/.pnpm/@capacitor+share@8.0.1_@capacitor+core@8.5.1/node_modules/@capacitor/share/dist/esm/web.js
 var ShareWeb = class extends WebPlugin {
 	async canShare() {
 		if (typeof navigator === "undefined" || !navigator.share) return { value: false };

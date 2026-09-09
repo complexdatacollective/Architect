@@ -179723,7 +179723,7 @@ var DEVELOPMENT_PROTOCOL_URL_V5 = "https://github.com/complexdatacollective/deve
 var DEVELOPMENT_PROTOCOL_URL_V6 = "https://github.com/complexdatacollective/development-protocol/releases/download/20220130211710-1908698/Development.netcanvas";
 var DEVELOPMENT_PROTOCOL_URL_V7 = "https://github.com/complexdatacollective/development-protocol/releases/download/20220311112556-19d1939/Development.netcanvas";
 //#endregion
-//#region ../../node_modules/.pnpm/@capacitor+core@8.4.0/node_modules/@capacitor/core/dist/index.js
+//#region ../../node_modules/.pnpm/@capacitor+core@8.5.1/node_modules/@capacitor/core/dist/index.js
 /*! Capacitor: https://capacitorjs.com/ - MIT License */
 var ExceptionCode;
 (function(ExceptionCode) {
@@ -179936,7 +179936,7 @@ var WebPlugin = class {
 		const listeners = this.listeners[eventName];
 		if (!listeners) return;
 		const index = listeners.indexOf(listenerFunc);
-		this.listeners[eventName].splice(index, 1);
+		if (index !== -1) this.listeners[eventName].splice(index, 1);
 		if (!this.listeners[eventName].length) this.removeWindowListener(this.windowListeners[eventName]);
 	}
 	addWindowListener(handle) {
@@ -180302,8 +180302,8 @@ var __vitePreload = function preload(baseModule, deps, importerUrl) {
 	});
 };
 //#endregion
-//#region ../../node_modules/.pnpm/@capacitor+device@8.0.2_@capacitor+core@8.4.0/node_modules/@capacitor/device/dist/esm/index.js
-var Device = registerPlugin("Device", { web: () => __vitePreload(() => import("./web-B-vIlKIC.js").then((m) => new m.DeviceWeb()), [], import.meta.url) });
+//#region ../../node_modules/.pnpm/@capacitor+device@8.0.2_@capacitor+core@8.5.1/node_modules/@capacitor/device/dist/esm/index.js
+var Device = registerPlugin("Device", { web: () => __vitePreload(() => import("./web-BR_Jygxf.js").then((m) => new m.DeviceWeb()), [], import.meta.url) });
 var environments_default = {
 	CAPACITOR: Symbol("ENVIRONMENT/CAPACITOR"),
 	ELECTRON: Symbol("ENVIRONMENT/ELECTRON"),
@@ -353560,7 +353560,7 @@ function f$2(t = !1) {
 	typeof window > "u" || (window.CapacitorUtils = window.CapacitorUtils || {}, window.Capacitor !== void 0 && !t ? s$4(window) : window.cordova !== void 0 && u$3(window));
 }
 //#endregion
-//#region ../../node_modules/.pnpm/@capacitor+filesystem@8.1.2_@capacitor+core@8.4.0/node_modules/@capacitor/filesystem/dist/esm/definitions.js
+//#region ../../node_modules/.pnpm/@capacitor+filesystem@8.1.2_@capacitor+core@8.5.1/node_modules/@capacitor/filesystem/dist/esm/definitions.js
 var Directory;
 (function(Directory) {
 	/**
@@ -353675,8 +353675,8 @@ var Encoding;
 	Encoding["UTF16"] = "utf16";
 })(Encoding || (Encoding = {}));
 //#endregion
-//#region ../../node_modules/.pnpm/@capacitor+filesystem@8.1.2_@capacitor+core@8.4.0/node_modules/@capacitor/filesystem/dist/esm/index.js
-var Filesystem = registerPlugin("Filesystem", { web: () => __vitePreload(() => import("./web-CJbL1BHW.js").then((m) => new m.FilesystemWeb()), [], import.meta.url) });
+//#region ../../node_modules/.pnpm/@capacitor+filesystem@8.1.2_@capacitor+core@8.5.1/node_modules/@capacitor/filesystem/dist/esm/index.js
+var Filesystem = registerPlugin("Filesystem", { web: () => __vitePreload(() => import("./web-BzfjCZMF.js").then((m) => new m.FilesystemWeb()), [], import.meta.url) });
 f$2();
 //#endregion
 //#region src/utils/capacitorPath.js
@@ -354965,7 +354965,7 @@ var actionCreators$9 = {
 	generateMockSessions
 };
 //#endregion
-//#region ../../node_modules/.pnpm/@capawesome+capacitor-file-picker@8.0.2_@capacitor+core@8.4.0/node_modules/@capawesome/capacitor-file-picker/dist/esm/web.js
+//#region ../../node_modules/.pnpm/@capawesome+capacitor-file-picker@8.0.2_@capacitor+core@8.5.1/node_modules/@capawesome/capacitor-file-picker/dist/esm/web.js
 var FilePickerWeb = class extends WebPlugin {
 	constructor() {
 		super(...arguments);
@@ -355076,7 +355076,7 @@ var FilePickerWeb = class extends WebPlugin {
 	}
 };
 //#endregion
-//#region ../../node_modules/.pnpm/@capawesome+capacitor-file-picker@8.0.2_@capacitor+core@8.4.0/node_modules/@capawesome/capacitor-file-picker/dist/esm/index.js
+//#region ../../node_modules/.pnpm/@capawesome+capacitor-file-picker@8.0.2_@capacitor+core@8.5.1/node_modules/@capawesome/capacitor-file-picker/dist/esm/index.js
 var FilePicker = registerPlugin("FilePicker", { web: () => new FilePickerWeb() });
 //#endregion
 //#region src/ducks/modules/toasts.jsx
@@ -373528,7 +373528,7 @@ var mapStateToProps$18 = (state) => ({ toasts: state.toasts });
 var mapDispatchToProps$16 = (dispatch) => ({ removeToast: bindActionCreators(actionCreators$8.removeToast, dispatch) });
 var ToastManager_default = compose$3(connect_default(mapStateToProps$18, mapDispatchToProps$16))(ToastManager_default$1);
 //#endregion
-//#region ../../node_modules/.pnpm/@capacitor+browser@8.0.3_@capacitor+core@8.4.0/node_modules/@capacitor/browser/dist/esm/index.js
+//#region ../../node_modules/.pnpm/@capacitor+browser@8.0.3_@capacitor+core@8.5.1/node_modules/@capacitor/browser/dist/esm/index.js
 var import_compare_versions = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((exports, module) => {
 	(function(root, factory) {
 		/* istanbul ignore next */
@@ -373607,7 +373607,7 @@ var import_compare_versions = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJ
 		return compareVersions;
 	});
 })))());
-var Browser = registerPlugin("Browser", { web: () => __vitePreload(() => import("./web-DqPY3xEo.js").then((m) => new m.BrowserWeb()), [], import.meta.url) });
+var Browser = registerPlugin("Browser", { web: () => __vitePreload(() => import("./web-Bykfkraf.js").then((m) => new m.BrowserWeb()), [], import.meta.url) });
 //#endregion
 //#region src/components/ExternalLink.jsx
 /**
@@ -373717,8 +373717,8 @@ MarkdownLabel.defaultProps = {
 	inline: false
 };
 //#endregion
-//#region ../../node_modules/.pnpm/@capacitor+app@8.1.0_@capacitor+core@8.4.0/node_modules/@capacitor/app/dist/esm/index.js
-var App$1 = registerPlugin("App", { web: () => __vitePreload(() => import("./web-CQh3tbS6.js").then((m) => new m.AppWeb()), [], import.meta.url) });
+//#region ../../node_modules/.pnpm/@capacitor+app@8.1.0_@capacitor+core@8.5.1/node_modules/@capacitor/app/dist/esm/index.js
+var App$1 = registerPlugin("App", { web: () => __vitePreload(() => import("./web-Clg-ZNuQ.js").then((m) => new m.AppWeb()), [], import.meta.url) });
 //#endregion
 //#region src/utils/getVersion.js
 var getVersion = async () => {
@@ -427564,7 +427564,7 @@ record(string(), union([
 	$$1
 ]));
 //#endregion
-//#region ../../node_modules/.pnpm/@xmldom+xmldom@0.9.10/node_modules/@xmldom/xmldom/lib/conventions.js
+//#region ../../node_modules/.pnpm/@xmldom+xmldom@0.9.12/node_modules/@xmldom/xmldom/lib/conventions.js
 var require_conventions = /* @__PURE__ */ __commonJSMin(((exports) => {
 	/**
 	* Ponyfill for `Array.prototype.find` which is only available in ES6 runtimes.
@@ -427958,7 +427958,7 @@ var require_conventions = /* @__PURE__ */ __commonJSMin(((exports) => {
 	exports.NAMESPACE = NAMESPACE;
 }));
 //#endregion
-//#region ../../node_modules/.pnpm/@xmldom+xmldom@0.9.10/node_modules/@xmldom/xmldom/lib/errors.js
+//#region ../../node_modules/.pnpm/@xmldom+xmldom@0.9.12/node_modules/@xmldom/xmldom/lib/errors.js
 var require_errors = /* @__PURE__ */ __commonJSMin(((exports) => {
 	var conventions = require_conventions();
 	function extendError(constructor, writableName) {
@@ -428143,10 +428143,13 @@ var require_errors = /* @__PURE__ */ __commonJSMin(((exports) => {
 	* @class
 	* @param {string} message
 	* @param {any} [locator]
+	* @param {Error} [cause]
+	* The error that caused this one, e.g. a `DOMException` thrown while building the DOM.
 	*/
-	function ParseError(message, locator) {
+	function ParseError(message, locator, cause) {
 		this.message = message;
 		this.locator = locator;
+		this.cause = cause;
 		if (Error.captureStackTrace) Error.captureStackTrace(this, ParseError);
 	}
 	extendError(ParseError);
@@ -428156,7 +428159,7 @@ var require_errors = /* @__PURE__ */ __commonJSMin(((exports) => {
 	exports.ParseError = ParseError;
 }));
 //#endregion
-//#region ../../node_modules/.pnpm/@xmldom+xmldom@0.9.10/node_modules/@xmldom/xmldom/lib/grammar.js
+//#region ../../node_modules/.pnpm/@xmldom+xmldom@0.9.12/node_modules/@xmldom/xmldom/lib/grammar.js
 var require_grammar = /* @__PURE__ */ __commonJSMin(((exports) => {
 	/**
 	* Detects relevant unicode support for regular expressions in the runtime.
@@ -428214,7 +428217,7 @@ var require_grammar = /* @__PURE__ */ __commonJSMin(((exports) => {
 			var isStr = typeof part === "string";
 			if (isStr && self === void 0 && part === "|") throw new Error("use regg instead of reg to wrap expressions with `|`!");
 			return isStr ? part : part.source;
-		}).join(""), UNICODE_SUPPORT ? "mu" : "m");
+		}).join(""), UNICODE_SUPPORT ? "u" : "");
 	}
 	/**
 	* Like `reg` but wraps the expression in `(?:`,`)` to create a non tracking group.
@@ -428247,12 +428250,14 @@ var require_grammar = /* @__PURE__ */ __commonJSMin(((exports) => {
 	if (UNICODE_SUPPORT) NameStartChar = reg("[", chars(NameStartChar), "\\u{10000}-\\u{10FFFF}", "]");
 	var NameChar = reg("[", chars(NameStartChar), chars(/[-.0-9\xB7]/), chars(/[\u0300-\u036F\u203F-\u2040]/), "]");
 	var Name = reg(NameStartChar, NameChar, "*");
+	var Name_exact = reg("^", Name, "$");
 	var Nmtoken = reg(NameChar, "+");
 	var Reference = regg(reg("&", Name, ";"), "|", regg(/&#[0-9]+;|&#x[0-9a-fA-F]+;/));
 	var PEReference = reg("%", Name, ";");
 	var EntityValue = regg(reg("\"", regg(/[^%&"]/, "|", PEReference, "|", Reference), "*", "\""), "|", reg("'", regg(/[^%&']/, "|", PEReference, "|", Reference), "*", "'"));
 	var AttValue = regg("\"", regg(/[^<&"]/, "|", Reference), "*", "\"", "|", "'", regg(/[^<&']/, "|", Reference), "*", "'");
 	var NCName = reg(chars_without(NameStartChar, ":"), chars_without(NameChar, ":"), "*");
+	var NCName_exact = reg("^", NCName, "$");
 	/**
 	https://www.w3.org/TR/xml-names/#ns-qualnames
 	
@@ -428272,7 +428277,7 @@ var require_grammar = /* @__PURE__ */ __commonJSMin(((exports) => {
 	var QName_exact = reg("^", QName, "$");
 	var QName_group = reg("(", QName, ")");
 	var SystemLiteral = regg(/"[^"]*"|'[^']*'/);
-	var PI = reg(/^<\?/, "(", Name, ")", regg(S, "(", Char, "*?)"), "?", /\?>/);
+	var PI = reg(/^<\?/, "(", Name, ")", regg(S, "(?!", _SChar, ")(", Char, "*?)"), "?", /\?>/);
 	var PubidChar = /[\x20\x0D\x0Aa-zA-Z0-9-'()+,./:=?;!*#@$_%]/;
 	var PubidLiteral = regg("\"", PubidChar, "*\"", "|", "'", chars_without(PubidChar, "'"), "*'");
 	var COMMENT_START = "<!--";
@@ -428325,6 +428330,8 @@ var require_grammar = /* @__PURE__ */ __commonJSMin(((exports) => {
 	exports.ExternalID = ExternalID;
 	exports.ExternalID_match = ExternalID_match;
 	exports.Name = Name;
+	exports.Name_exact = Name_exact;
+	exports.NCName_exact = NCName_exact;
 	exports.NotationDecl = NotationDecl;
 	exports.Reference = Reference;
 	exports.PEReference = PEReference;
@@ -428347,7 +428354,7 @@ var require_grammar = /* @__PURE__ */ __commonJSMin(((exports) => {
 	exports.XMLDecl = XMLDecl;
 }));
 //#endregion
-//#region ../../node_modules/.pnpm/@xmldom+xmldom@0.9.10/node_modules/@xmldom/xmldom/lib/dom.js
+//#region ../../node_modules/.pnpm/@xmldom+xmldom@0.9.12/node_modules/@xmldom/xmldom/lib/dom.js
 var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 	var conventions = require_conventions();
 	var find = conventions.find;
@@ -428779,7 +428786,20 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 	* @see https://webidl.spec.whatwg.org/#dfn-supported-property-names
 	* @constructs NamedNodeMap
 	*/
-	function NamedNodeMap() {}
+	/**
+	* A live collection of an element's attributes, keyed by name.
+	*
+	* The numbered entries and `length` are the sole authority for attribute order.
+	* A separate two-level null-prototype membership index (`namespaceURI` ->
+	* `localName` -> `Attr`, with the null/empty namespace held in its own bucket)
+	* lets the parse-time de-duplication in `setNamedItem` resolve an existing
+	* attribute in O(1) instead of scanning the list, so building an element with M
+	* attributes costs O(M) rather than O(M^2). The index never reorders attributes.
+	*/
+	function NamedNodeMap() {
+		this._nsIndex = Object.create(null);
+		this._noNsIndex = Object.create(null);
+	}
 	/**
 	* Returns the index of a node within the list.
 	*
@@ -428797,6 +428817,64 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 			if (list[i] === node) return i;
 			i++;
 		}
+	}
+	/**
+	* Returns the second-level index bucket (`localName` -> `Attr`) for a namespace,
+	* replicating `getNamedItemNS`'s falsy-namespace normalization: `null`,
+	* `undefined` and `''` all resolve to the dedicated null-namespace bucket, kept separate from
+	* any real URI (so a namespace URI equal to the string `"null"`
+	* cannot collide with the null namespace). Both levels are null-prototype objects, so an
+	* attribute named `__proto__` or `constructor` is an ordinary key.
+	*
+	* @param {NamedNodeMap} map
+	* @param {string | null | undefined} namespaceURI
+	* @param {boolean} create
+	* Create the bucket if it does not exist yet.
+	* @returns {Object | undefined}
+	* @private
+	*/
+	function _nnmBucket(map, namespaceURI, create) {
+		if (!namespaceURI) return map._noNsIndex;
+		var bucket = map._nsIndex[namespaceURI];
+		if (!bucket && create) bucket = map._nsIndex[namespaceURI] = Object.create(null);
+		return bucket;
+	}
+	/**
+	* Looks up an attribute by namespace and local name through the membership index.
+	*
+	* @param {NamedNodeMap} map
+	* @param {string | null | undefined} namespaceURI
+	* @param {string} localName
+	* @returns {Attr | null}
+	* The matching attribute, or `null` when absent.
+	* @private
+	*/
+	function _nnmIndexFind(map, namespaceURI, localName) {
+		var bucket = _nnmBucket(map, namespaceURI, false);
+		var found = bucket && bucket[localName];
+		return found ? found : null;
+	}
+	/**
+	* Records `attr` in the membership index under its namespace and local name,
+	* replacing any previous attribute with the same key.
+	*
+	* @param {NamedNodeMap} map
+	* @param {Attr} attr
+	* @private
+	*/
+	function _nnmIndexAdd(map, attr) {
+		_nnmBucket(map, attr.namespaceURI, true)[attr.localName] = attr;
+	}
+	/**
+	* Removes `attr` from the membership index.
+	*
+	* @param {NamedNodeMap} map
+	* @param {Attr} attr
+	* @private
+	*/
+	function _nnmIndexRemove(map, attr) {
+		var bucket = _nnmBucket(map, attr.namespaceURI, false);
+		if (bucket) delete bucket[attr.localName];
 	}
 	/**
 	* Adds a new attribute to the list and updates the owner element of the attribute.
@@ -428818,6 +428896,7 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 			list[list.length] = newAttr;
 			list.length++;
 		}
+		_nnmIndexAdd(list, newAttr);
 		if (el) {
 			newAttr.ownerElement = el;
 			var doc = el.ownerDocument;
@@ -428845,6 +428924,7 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 			var lastIndex = list.length - 1;
 			while (i <= lastIndex) list[i] = list[++i];
 			list.length = lastIndex;
+			_nnmIndexRemove(list, attr);
 			if (el) {
 				var doc = el.ownerDocument;
 				if (doc) _onRemoveAttribute(doc, el, attr);
@@ -428892,7 +428972,7 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 		setNamedItem: function(attr) {
 			var el = attr.ownerElement;
 			if (el && el !== this._ownerElement) throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR);
-			var oldAttr = this.getNamedItemNS(attr.namespaceURI, attr.localName);
+			var oldAttr = _nnmIndexFind(this, attr.namespaceURI, attr.localName);
 			if (oldAttr === attr) return attr;
 			_addNamedNode(this._ownerElement, this, attr, oldAttr);
 			return oldAttr;
@@ -429578,8 +429658,26 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 				while (child) {
 					var next = child.nextSibling;
 					if (next !== null && next.nodeType === TEXT_NODE && child.nodeType === TEXT_NODE) {
-						node.removeChild(next);
-						child.appendData(next.data);
+						var tail = [];
+						var sibling = next;
+						while (sibling !== null && sibling.nodeType === TEXT_NODE) {
+							tail.push(sibling.data);
+							sibling = sibling.nextSibling;
+						}
+						var removed = child.nextSibling;
+						while (removed !== sibling) {
+							var following = removed.nextSibling;
+							removed.parentNode = null;
+							removed.previousSibling = null;
+							removed.nextSibling = null;
+							removed = following;
+						}
+						child.nextSibling = sibling;
+						if (sibling !== null) sibling.previousSibling = child;
+						else node.lastChild = child;
+						child.appendData(tail.join(""));
+						_onUpdateChild(node.ownerDocument, node);
+						child = sibling;
 					} else child = next;
 				}
 				return true;
@@ -430419,10 +430517,10 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 		* "InvalidCharacterError".
 		*
 		* Note: When the resulting document is serialized with `requireWellFormed: true`, the
-		* serializer throws `InvalidStateError` if `.target` contains `:` or is an ASCII
-		* case-insensitive match for `"xml"`, or if `.data` contains `?>` or characters outside the
-		* XML Char production (W3C DOM Parsing §3.2.1.7). Without that option the data is emitted
-		* verbatim.
+		* serializer throws `InvalidStateError` if `.target` is not a valid XML `NCName` (a `Name`
+		* with no colon) or is an ASCII case-insensitive match for `"xml"`, or if `.data` contains
+		* `?>` or characters outside the XML Char production (W3C DOM Parsing §3.2.1.7). Without that
+		* option the target and data are emitted verbatim.
 		*
 		* @param {string} target
 		* @param {string} data
@@ -430473,19 +430571,29 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 		* The current implementation does not fill the `childNodes` with those of the corresponding
 		* `Entity`
 		*
+		* The `name` is validated against the XML `Name` production at creation time; an invalid name
+		* throws `InvalidCharacterError`. When the resulting node is serialized with
+		* `requireWellFormed: true`, the serializer re-validates `nodeName` against the XML `Name`
+		* production and throws `InvalidStateError` if a later `nodeName` mutation made it invalid;
+		* without that option the name is emitted verbatim.
+		*
+		* __This implementation differs from the specification:__ xmldom does not expand entities —
+		* the parser resolves entity references inline and never constructs `EntityReference` nodes,
+		* so this method is the only producer.
+		*
 		* @deprecated
 		* In DOM Level 4.
 		* @param {string} name
 		* The name of the entity to reference. No namespace well-formedness checks are performed.
 		* @returns {EntityReference}
 		* @throws {DOMException}
-		* With code `INVALID_CHARACTER_ERR` when `name` is not valid.
+		* With code `INVALID_CHARACTER_ERR` when `name` is not a valid XML `Name`.
 		* @throws {DOMException}
 		* with code `NOT_SUPPORTED_ERR` when the document is of type `html`
 		* @see https://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-392B75AE
 		*/
 		createEntityReference: function(name) {
-			if (!g.Name.test(name)) throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "not a valid xml name \"" + name + "\"");
+			if (!g.Name_exact.test(name)) throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "not a valid xml name \"" + name + "\"");
 			if (this.type === "html") throw new DOMException("document is an html document", DOMExceptionName.NotSupportedError);
 			var node = new EntityReference(PDC);
 			node.ownerDocument = this;
@@ -430811,6 +430919,12 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 	/**
 	* @class DocumentType
 	* @augments Node
+	* @property {string} name
+	* The doctype name, stored verbatim. Declared `readonly` by the WHATWG DOM spec; xmldom does
+	* not enforce this constraint — direct property writes succeed and the written value is
+	* serialized verbatim. When serialized with `requireWellFormed: true`, the serializer
+	* validates the value against the XML `Name` production and throws `InvalidStateError` if it
+	* does not match.
 	* @property {string} publicId
 	* The external subset public identifier, stored verbatim (including surrounding quotes).
 	* Declared `readonly` by the WHATWG DOM spec; xmldom does not enforce this constraint —
@@ -430829,7 +430943,7 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 	* direct property writes succeed and the written value is serialized verbatim.
 	* When serialized with `requireWellFormed: true`, the serializer throws `InvalidStateError`
 	* if the value contains `"]>"`.
-	* @see https://developer.mozilla.org/en-US/docs/Web/API/DocumentType MDN
+	* @see https://developer.mozilla.org/docs/Web/API/DocumentType MDN
 	* @see https://dom.spec.whatwg.org/#interface-documenttype WHATWG DOM
 	* @prettierignore
 	*/
@@ -430848,6 +430962,21 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 	}
 	Entity.prototype.nodeType = ENTITY_NODE;
 	_extends(Entity, Node);
+	/**
+	* Represents an EntityReference node, serialized as `&nodeName;`.
+	*
+	* `nodeName` is the referenced entity's name, stored verbatim. When serialized with
+	* `requireWellFormed: true`, the serializer validates `nodeName` against the XML `Name`
+	* production and throws `InvalidStateError` if it does not match; without that option the name
+	* is emitted verbatim between `&` and `;`.
+	*
+	* __This implementation differs from the specification:__ xmldom does not expand entities —
+	* the parser resolves entity references inline and never constructs `EntityReference` nodes,
+	* so the only producer is {@link Document#createEntityReference}.
+	*
+	* @class
+	* @see https://www.w3.org/TR/xml/#NT-Name
+	*/
 	function EntityReference(symbol) {
 		checkSymbol(symbol);
 	}
@@ -430889,8 +431018,11 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 	* - W3C DOM Parsing §3.2.1.1 requires well-formedness checks on Element `localName`s,
 	* prefixes,
 	* and attribute serialization (duplicate attributes, namespace declarations, attribute value
-	* characters) when `requireWellFormed` is `true`. These checks are **not implemented** in this
-	* release — see the tracking issue filed against the next breaking milestone.
+	* characters) when `requireWellFormed` is `true`. Element and attribute qualified names (which
+	* cover the namespace prefix) are validated against the XML `QName` production; the remaining
+	* §3.2.1.1 checks (duplicate attributes, namespace-declaration consistency) and creation-time
+	* name validation are **not implemented** in this release — see the tracking issue filed
+	* against the next breaking milestone.
 	*
 	* @param {Node} node
 	* @param {Object | function} [options]
@@ -430906,16 +431038,22 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 	* @throws {DOMException}
 	* With name `InvalidStateError` when `requireWellFormed` is `true` and any of the following
 	* conditions hold:
+	* - an Element's qualified name (including any namespace prefix) is not a valid XML QName
+	* - an attribute's qualified name (including a synthesized `xmlns:` namespace declaration) is
+	* not a valid XML QName
 	* - CDATASection data contains `"]]>"`
 	* - Text data contains characters outside the XML Char production
 	* - a Comment node's data contains `--` anywhere or ends with `-`
-	* - a ProcessingInstruction's target contains `:` or is an ASCII case-insensitive match for
-	* `"xml"`, or its data contains `?>` or characters outside the XML Char production
+	* - a ProcessingInstruction's target is not a valid XML `NCName` (a `Name` with no colon) or is
+	* an ASCII case-insensitive match for `"xml"`, or its data contains `?>` or characters outside
+	* the XML Char production
+	* - a DocumentType's `name` is not a valid XML `Name` (XML 1.0 production [5])
 	* - a DocumentType's `publicId` is non-empty and does not match the XML `PubidLiteral`
 	* production (W3C DOM Parsing §3.2.1.3; XML 1.0 production [12])
 	* - a DocumentType's `systemId` is non-empty and does not match the XML `SystemLiteral`
 	* production (W3C DOM Parsing §3.2.1.3; XML 1.0 production [11])
 	* - a DocumentType's `internalSubset` contains `"]>"`
+	* - an EntityReference's `nodeName` is not a valid XML `Name` (XML 1.0 production [5])
 	* - the Document has no `documentElement`
 	* @see https://developer.mozilla.org/docs/Web/API/XMLSerializer/serializeToString
 	* @see https://html.spec.whatwg.org/#dom-xmlserializer-serializetostring
@@ -430984,7 +431122,8 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 	* @see https://w3c.github.io/DOM-Parsing/#serializing-an-element-s-attributes
 	* @prettierignore
 	*/
-	function addSerializedAttribute(buf, qualifiedName, value) {
+	function addSerializedAttribute(buf, qualifiedName, value, requireWellFormed) {
+		if (requireWellFormed && !g.QName_exact.test(qualifiedName)) throw new DOMException("The attribute name \"" + qualifiedName + "\" is not a valid XML QName", DOMExceptionName.InvalidStateError);
 		buf.push(" ", qualifiedName, "=\"", value.replace(/[<>&"\t\n\r]/g, _xmlEncoder), "\"");
 	}
 	function serializeToString(node, buf, visibleNamespaces, opts) {
@@ -431032,6 +431171,7 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 								}
 							}
 						}
+						if (requireWellFormed && !g.QName_exact.test(prefixedNodeName)) throw new DOMException("The element name \"" + prefixedNodeName + "\" is not a valid XML QName", DOMExceptionName.InvalidStateError);
 						buf.push("<", prefixedNodeName);
 						var childNamespaces = namespaces.slice();
 						for (var i = 0; i < len; i++) {
@@ -431050,7 +431190,7 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 							if (needNamespaceDefine(attr, isHTML, childNamespaces)) {
 								var attrPrefix = attr.prefix || "";
 								var uri = attr.namespaceURI;
-								addSerializedAttribute(buf, attrPrefix ? "xmlns:" + attrPrefix : "xmlns", uri);
+								addSerializedAttribute(buf, attrPrefix ? "xmlns:" + attrPrefix : "xmlns", uri, requireWellFormed);
 								childNamespaces.push({
 									prefix: attrPrefix,
 									namespace: uri
@@ -431058,12 +431198,12 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 							}
 							var filteredAttr = nodeFilter ? nodeFilter(attr) : attr;
 							if (filteredAttr) if (typeof filteredAttr === "string") buf.push(filteredAttr);
-							else addSerializedAttribute(buf, filteredAttr.name, filteredAttr.value);
+							else addSerializedAttribute(buf, filteredAttr.name, filteredAttr.value, requireWellFormed);
 						}
 						if (nodeName === prefixedNodeName && needNamespaceDefine(n, isHTML, childNamespaces)) {
 							var nodePrefix = n.prefix || "";
 							var uri = n.namespaceURI;
-							addSerializedAttribute(buf, nodePrefix ? "xmlns:" + nodePrefix : "xmlns", uri);
+							addSerializedAttribute(buf, nodePrefix ? "xmlns:" + nodePrefix : "xmlns", uri, requireWellFormed);
 							childNamespaces.push({
 								prefix: nodePrefix,
 								namespace: uri
@@ -431095,7 +431235,7 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 						if (requireWellFormed && n.nodeType === DOCUMENT_NODE && n.documentElement == null) throw new DOMException("The Document has no documentElement", DOMExceptionName.InvalidStateError);
 						return { ns: namespaces };
 					case ATTRIBUTE_NODE:
-						addSerializedAttribute(buf, n.name, n.value);
+						addSerializedAttribute(buf, n.name, n.value, requireWellFormed);
 						return null;
 					case TEXT_NODE:
 						if (requireWellFormed && g.InvalidChar.test(n.data)) throw new DOMException("The Text node data contains characters outside the XML Char production", DOMExceptionName.InvalidStateError);
@@ -431117,6 +431257,7 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 						var pubid = n.publicId;
 						var sysid = n.systemId;
 						if (requireWellFormed) {
+							if (!g.Name_exact.test(n.name)) throw new DOMException("The doctype name \"" + n.name + "\" is not a valid XML Name", DOMExceptionName.InvalidStateError);
 							if (pubid && !g.PubidLiteral_match.test(pubid)) throw new DOMException("DocumentType publicId is not a valid PubidLiteral", DOMExceptionName.InvalidStateError);
 							if (sysid && sysid !== "." && !g.SystemLiteral_match.test(sysid)) throw new DOMException("DocumentType systemId is not a valid SystemLiteral", DOMExceptionName.InvalidStateError);
 							if (n.internalSubset && n.internalSubset.indexOf("]>") !== -1) throw new DOMException("DocumentType internalSubset contains \"]>\"", DOMExceptionName.InvalidStateError);
@@ -431131,13 +431272,14 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 						return null;
 					case PROCESSING_INSTRUCTION_NODE:
 						if (requireWellFormed) {
-							if (n.target.indexOf(":") !== -1 || n.target.toLowerCase() === "xml") throw new DOMException("The ProcessingInstruction target is not well-formed", DOMExceptionName.InvalidStateError);
+							if (!g.NCName_exact.test(n.target) || n.target.toLowerCase() === "xml") throw new DOMException("The processing instruction target \"" + n.target + "\" is not a valid XML NCName or is reserved", DOMExceptionName.InvalidStateError);
 							if (g.InvalidChar.test(n.data)) throw new DOMException("The ProcessingInstruction data contains characters outside the XML Char production", DOMExceptionName.InvalidStateError);
 							if (n.data.indexOf("?>") !== -1) throw new DOMException("The ProcessingInstruction data contains \"?>\"", DOMExceptionName.InvalidStateError);
 						}
 						buf.push("<?", n.target, " ", n.data, "?>");
 						return null;
 					case ENTITY_REFERENCE_NODE:
+						if (requireWellFormed && !g.Name_exact.test(n.nodeName)) throw new DOMException("The entity reference name \"" + n.nodeName + "\" is not a valid XML Name", DOMExceptionName.InvalidStateError);
 						buf.push("&", n.nodeName, ";");
 						return null;
 					default:
@@ -431282,6 +431424,25 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 					}
 				}
 			});
+			Object.defineProperty(CharacterData.prototype, "data", {
+				get: function() {
+					return this._data != null ? this._data : "";
+				},
+				set: function(v) {
+					this._data = v;
+					this.length = typeof v === "string" ? v.length : 0;
+				}
+			});
+			Object.defineProperty(CharacterData.prototype, "nodeValue", {
+				get: function() {
+					return this.data;
+				},
+				set: function(v) {
+					this.data = v;
+				},
+				enumerable: true,
+				configurable: true
+			});
 			Object.defineProperty(Element.prototype, "children", { get: function() {
 				return new LiveNodeList(this, childrenRefresh);
 			} });
@@ -431319,7 +431480,7 @@ var require_dom = /* @__PURE__ */ __commonJSMin(((exports) => {
 	exports.XMLSerializer = XMLSerializer;
 }));
 //#endregion
-//#region ../../node_modules/.pnpm/@xmldom+xmldom@0.9.10/node_modules/@xmldom/xmldom/lib/entities.js
+//#region ../../node_modules/.pnpm/@xmldom+xmldom@0.9.12/node_modules/@xmldom/xmldom/lib/entities.js
 var require_entities = /* @__PURE__ */ __commonJSMin(((exports) => {
 	var freeze = require_conventions().freeze;
 	/**
@@ -433489,7 +433650,7 @@ var require_entities = /* @__PURE__ */ __commonJSMin(((exports) => {
 	exports.entityMap = exports.HTML_ENTITIES;
 }));
 //#endregion
-//#region ../../node_modules/.pnpm/@xmldom+xmldom@0.9.10/node_modules/@xmldom/xmldom/lib/sax.js
+//#region ../../node_modules/.pnpm/@xmldom+xmldom@0.9.12/node_modules/@xmldom/xmldom/lib/sax.js
 var require_sax = /* @__PURE__ */ __commonJSMin(((exports) => {
 	var conventions = require_conventions();
 	var g = require_grammar();
@@ -433604,8 +433765,18 @@ var require_sax = /* @__PURE__ */ __commonJSMin(((exports) => {
 						var end = source.indexOf(">", tagStart + 2);
 						var tagNameRaw = source.substring(tagStart + 2, end > 0 ? end : void 0);
 						if (!tagNameRaw) return errorHandler.fatalError("end tag name missing");
-						var tagNameMatch = end > 0 && g.reg("^", g.QName_group, g.S_OPT, "$").exec(tagNameRaw);
-						if (!tagNameMatch) return errorHandler.fatalError("end tag name contains invalid characters: \"" + tagNameRaw + "\"");
+						var endTagNameStrict = g.reg("^", g.QName_group, g.S_OPT, "$");
+						var tagNameMatch = end > 0 && endTagNameStrict.exec(tagNameRaw);
+						if (!tagNameMatch) {
+							var leadingTagNameMatch = end > 0 && g.reg("^", g.QName_group).exec(tagNameRaw);
+							if (isHTML && leadingTagNameMatch) {
+								errorHandler.warning("end tag name contains invalid trailing characters: \"" + tagNameRaw + "\"");
+								tagNameMatch = leadingTagNameMatch;
+							} else if (leadingTagNameMatch && new RegExp(endTagNameStrict.source, endTagNameStrict.flags + "m").test(tagNameRaw)) {
+								errorHandler.error("end tag name is followed by a line break and trailing content: \"" + tagNameRaw + "\"");
+								tagNameMatch = leadingTagNameMatch;
+							} else return errorHandler.fatalError("end tag name contains invalid characters: \"" + tagNameRaw + "\"");
+						}
 						if (!domBuilder.currentElement && !domBuilder.doc.documentElement) return;
 						var currentTagName = unclosedTags[unclosedTags.length - 1] || domBuilder.currentElement.tagName || domBuilder.doc.documentElement.tagName || "";
 						if (currentTagName !== tagNameMatch[1]) {
@@ -433653,7 +433824,7 @@ var require_sax = /* @__PURE__ */ __commonJSMin(((exports) => {
 				}
 			} catch (e) {
 				if (e instanceof ParseError) throw e;
-				else if (e instanceof DOMException) throw new ParseError(e.name + ": " + e.message, domBuilder.locator, e);
+				else if (e instanceof DOMException) return errorHandler.fatalError("Error constructing the DOM: " + e.name + ": " + e.message, e);
 				errorHandler.error("element parse error: " + e);
 				end = -1;
 			}
@@ -433688,6 +433859,7 @@ var require_sax = /* @__PURE__ */ __commonJSMin(((exports) => {
 		var s = S_TAG;
 		while (true) {
 			var c = source.charAt(p);
+			if (s === S_TAG && c === "<") throw new Error("unexpected < in tag name: " + source.slice(start, p));
 			switch (c) {
 				case "=":
 					if (s === S_ATTR) {
@@ -433830,7 +434002,7 @@ var require_sax = /* @__PURE__ */ __commonJSMin(((exports) => {
 			if (nsPrefix !== false) {
 				if (localNSMap == null) {
 					localNSMap = Object.create(null);
-					_copy(currentNSMap, currentNSMap = Object.create(null));
+					currentNSMap = Object.create(currentNSMap);
 				}
 				currentNSMap[nsPrefix] = localNSMap[nsPrefix] = value;
 				a.uri = NAMESPACE.XMLNS;
@@ -433869,7 +434041,11 @@ var require_sax = /* @__PURE__ */ __commonJSMin(((exports) => {
 	function parseHtmlSpecialContent(source, elStartEnd, tagName, entityReplacer, domBuilder) {
 		var isEscapableRaw = isHTMLEscapableRawTextElement(tagName);
 		if (isEscapableRaw || isHTMLRawTextElement(tagName)) {
-			var elEndStart = source.indexOf("</" + tagName + ">", elStartEnd);
+			var closeTag = new RegExp("</" + tagName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ">", "ig");
+			closeTag.lastIndex = elStartEnd;
+			var match = closeTag.exec(source);
+			var elEndStart = match ? match.index : -1;
+			if (elEndStart < 0) return elStartEnd + 1;
 			var text = source.substring(elStartEnd + 1, elEndStart);
 			if (isEscapableRaw) text = text.replace(ENTITY_REG, entityReplacer);
 			domBuilder.characters(text, 0, text.length);
@@ -434150,7 +434326,7 @@ var require_sax = /* @__PURE__ */ __commonJSMin(((exports) => {
 	exports.parseDoctypeCommentOrCData = parseDoctypeCommentOrCData;
 }));
 //#endregion
-//#region ../../node_modules/.pnpm/@xmldom+xmldom@0.9.10/node_modules/@xmldom/xmldom/lib/dom-parser.js
+//#region ../../node_modules/.pnpm/@xmldom+xmldom@0.9.12/node_modules/@xmldom/xmldom/lib/dom-parser.js
 var require_dom_parser = /* @__PURE__ */ __commonJSMin(((exports) => {
 	var conventions = require_conventions();
 	var dom = require_dom();
@@ -434333,6 +434509,9 @@ var require_dom_parser = /* @__PURE__ */ __commonJSMin(((exports) => {
 	* - Any `fatalError` throws a `ParseError` which prevents further processing.
 	* - Any error thrown by `onError` is converted to a `ParseError` which prevents further
 	* processing - If no `Document` was created during parsing it is reported as a `fatalError`.
+	* - A `DOMException` raised while building the DOM (e.g. an unbound namespace prefix) is
+	* reported as a `fatalError` and rethrown as a `ParseError` with the `DOMException` as its
+	* `cause`.
 	* *****Warning: By configuring a faulty DOMHandler implementation,
 	* the specified behavior can completely be broken*****.
 	*
@@ -434574,14 +434753,16 @@ var require_dom_parser = /* @__PURE__ */ __commonJSMin(((exports) => {
 		*
 		* @param {string} message
 		* - The message to be used for reporting and throwing the error.
+		* @param {Error} [cause]
+		* The error that caused this fatal error, preserved as the thrown `ParseError`'s `cause`.
 		* @returns {never}
 		* This function always throws an error and never returns a value.
 		* @throws {ParseError}
 		* Always throws a ParseError with the provided message.
 		*/
-		fatalError: function(message) {
+		fatalError: function(message, cause) {
 			this.reportError("fatalError", message);
-			throw new ParseError(message, this.locator);
+			throw new ParseError(message, this.locator, cause);
 		}
 	};
 	function _locator(l) {
@@ -434629,7 +434810,7 @@ var require_dom_parser = /* @__PURE__ */ __commonJSMin(((exports) => {
 	exports.onWarningStopParsing = onWarningStopParsing;
 }));
 //#endregion
-//#region ../../node_modules/.pnpm/@xmldom+xmldom@0.9.10/node_modules/@xmldom/xmldom/lib/index.js
+//#region ../../node_modules/.pnpm/@xmldom+xmldom@0.9.12/node_modules/@xmldom/xmldom/lib/index.js
 var require_lib = /* @__PURE__ */ __commonJSMin(((exports) => {
 	var conventions = require_conventions();
 	exports.assign = conventions.assign;
@@ -435765,8 +435946,8 @@ function runExport({ options, sessionIds, interviews, protocols, onEvent }) {
 	};
 }
 //#endregion
-//#region ../../node_modules/.pnpm/@capacitor+share@8.0.1_@capacitor+core@8.4.0/node_modules/@capacitor/share/dist/esm/index.js
-var Share = registerPlugin("Share", { web: () => __vitePreload(() => import("./web-BqJBwqTf.js").then((m) => new m.ShareWeb()), [], import.meta.url) });
+//#region ../../node_modules/.pnpm/@capacitor+share@8.0.1_@capacitor+core@8.5.1/node_modules/@capacitor/share/dist/esm/index.js
+var Share = registerPlugin("Share", { web: () => __vitePreload(() => import("./web-Cz4RYs6f.js").then((m) => new m.ShareWeb()), [], import.meta.url) });
 //#endregion
 //#region src/utils/export/saveExport.js
 /**

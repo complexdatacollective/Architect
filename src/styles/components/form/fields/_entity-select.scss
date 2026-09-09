@@ -37,6 +37,8 @@ $component-name: 'form-fields-entity-select';
   }
 
   &--nodes {
+    --base-node-size: 7rem;
+
     .preview-node {
       &--clickable {
         &:not(.preview-node--selected) {

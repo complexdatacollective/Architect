@@ -1,5 +1,15 @@
 # network-canvas-architect
 
+## 6.6.2
+
+- **Fixed the variable picker opening behind the field editor.** Clicking "Select Variable" or
+  "Change Variable" in a form field editor appeared to do nothing because the variable picker
+  was being drawn underneath the field editor. It now opens above it, as it did in earlier
+  versions.
+- **Fixed oversized node previews in the entity select field.** Node previews in the entity
+  select field editor were rendered at full interview size instead of the smaller preview size.
+  They are now shown at the intended size again.
+
 ## 6.6.1
 
 - **Fixed a crash on launch.** Version 6.6.0 could fail to start with a "Cannot find module

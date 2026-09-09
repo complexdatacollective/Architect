@@ -1,5 +1,5 @@
-import { n as WebPlugin } from "./index-DZJPtDnl.js";
-//#region ../../node_modules/.pnpm/@capacitor+device@8.0.2_@capacitor+core@8.4.0/node_modules/@capacitor/device/dist/esm/web.js
+import { n as WebPlugin } from "./index-Dt4XBSmX.js";
+//#region ../../node_modules/.pnpm/@capacitor+device@8.0.2_@capacitor+core@8.5.1/node_modules/@capacitor/device/dist/esm/web.js
 var DeviceWeb = class extends WebPlugin {
 	async getId() {
 		return { identifier: this.getUid() };

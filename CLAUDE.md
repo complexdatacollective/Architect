@@ -25,9 +25,9 @@ pnpm test:watch                     # Watch mode
 pnpm test:coverage                  # Run with coverage
 pnpm test:update-snapshots          # Update snapshots
 
-# Linting
-pnpm run lint                       # Run Biome linting
-pnpm run lint:fix                   # Auto-fix linting and formatting issues
+# Linting and formatting (from the repository root — this app has no lint scripts of its own)
+pnpm lint                           # oxlint, then oxfmt --check
+pnpm lint:fix                       # Auto-fix lint issues, then reformat
 
 # Distribution
 pnpm run dist:mac                   # macOS build (x64 + arm64)
@@ -68,7 +68,7 @@ Reselect-based selectors in `src/selectors/`:
 
 ### Import Aliases
 
-Configured in `electron.vite.config.js` and `vitest.config.js`:
+Configured in `electron.vite.config.js` and `vitest.config.mjs`:
 
 - `@app` → `src/`
 - `@components` → `src/components/`
@@ -121,7 +121,8 @@ pnpm test:update-snapshots
 
 ## Code Style
 
-- Biome for linting and formatting (tabs, double quotes, 120 char width)
+- oxlint for linting (`.oxlintrc.json` extends the root config) and oxfmt for
+  formatting: 2-space indentation, single quotes, 80-character width
 - React 16 with class components and hooks
 - Redux-form for form state
 
