@@ -65,9 +65,7 @@ function cover_default(x, y) {
 				case 2:
 					x1 = x0 + z, y0 = y1 - z;
 					break;
-				case 3:
-					x0 = x1 - z, y0 = y1 - z;
-					break;
+				case 3: x0 = x1 - z, y0 = y1 - z;
 			}
 		}
 		if (this._root && this._root.length) this._root = node;
@@ -156,8 +154,10 @@ function remove_default(d) {
 	if (previous) return next ? previous.next = next : delete previous.next, this;
 	if (!parent) return this._root = next, this;
 	next ? parent[i] = next : delete parent[i];
-	if ((node = parent[0] || parent[1] || parent[2] || parent[3]) && node === (parent[3] || parent[2] || parent[1] || parent[0]) && !node.length) if (retainer) retainer[j] = node;
-	else this._root = node;
+	if ((node = parent[0] || parent[1] || parent[2] || parent[3]) && node === (parent[3] || parent[2] || parent[1] || parent[0]) && !node.length) {
+		if (retainer) retainer[j] = node;
+		else this._root = node;
+	}
 	return this;
 }
 function removeAll(data) {
@@ -258,11 +258,13 @@ treeProto.copy = function() {
 		source: node,
 		target: copy._root = new Array(4)
 	}];
-	while (node = nodes.pop()) for (var i = 0; i < 4; ++i) if (child = node.source[i]) if (child.length) nodes.push({
-		source: child,
-		target: node.target[i] = new Array(4)
-	});
-	else node.target[i] = leaf_copy(child);
+	while (node = nodes.pop()) for (var i = 0; i < 4; ++i) if (child = node.source[i]) {
+		if (child.length) nodes.push({
+			source: child,
+			target: node.target[i] = new Array(4)
+		});
+		else node.target[i] = leaf_copy(child);
+	}
 	return copy;
 };
 treeProto.add = add_default;
@@ -801,10 +803,7 @@ const updateOptions = (newOptions) => {
 				simulation.force("x", x_default().strength(value));
 				simulation.force("y", y_default().strength(value));
 				break;
-			case "linkDistance":
-				simulation.force("links", link_default(cloneLinks(links)).distance(value));
-				break;
-			default:
+			case "linkDistance": simulation.force("links", link_default(cloneLinks(links)).distance(value));
 		}
 	});
 	options = {
@@ -881,7 +880,6 @@ onmessage = ({ data }) => {
 			simulation.alpha(.3).restart();
 			break;
 		}
-		default:
 	}
 };
 //#endregion

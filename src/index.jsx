@@ -10,7 +10,15 @@ import initPreventFileDrop from './utils/initPreventFileDrop';
 
 import './styles/main.scss';
 
-initIPCListeners();
+// The printable summary window loads this bundle at #summary (the router
+// later normalises it to #/summary). Menu commands, file opening and the READY
+// handshake belong to the main window only (the summary preload does not
+// expose them).
+const isSummaryWindow = /^#\/?summary/.test(window.location.hash);
+
+if (!isSummaryWindow) {
+  initIPCListeners();
+}
 initPreventFileDrop();
 
 const startApp = () => {
@@ -26,5 +34,7 @@ const startApp = () => {
 
 window.addEventListener('load', () => {
   startApp();
-  initFileOpener();
+  if (!isSummaryWindow) {
+    initFileOpener();
+  }
 });

@@ -16,7 +16,7 @@ var __copyProps = (to, from, except, desc) => {
 	}
 	return to;
 };
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", {
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule || !__hasOwnProp.call(mod, "default") ? __defProp(target, "default", {
 	value: mod,
 	enumerable: true
 }) : target, mod));
@@ -686,7 +686,7 @@ var import_browser = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((ex
 				}
 				function F(e, t) {
 					var r;
-					t = t || Infinity;
+					t = t || 1 / 0;
 					for (var n = e.length, i = null, o = [], s = 0; s < n; ++s) {
 						if ((r = e.charCodeAt(s)) > 55295 && r < 57344) {
 							if (!i) {
@@ -2177,13 +2177,13 @@ var import_browser = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((ex
 				for (s = o & (1 << -c) - 1, o >>= -c, c += n; c > 0; s = 256 * s + e[t + l], l += h, c -= 8);
 				if (0 === o) o = 1 - f;
 				else {
-					if (o === u) return s ? NaN : Infinity * (p ? -1 : 1);
+					if (o === u) return s ? NaN : 1 / 0 * (p ? -1 : 1);
 					s += Math.pow(2, n), o -= f;
 				}
 				return (p ? -1 : 1) * s * Math.pow(2, o - n);
 			}, t.write = function(e, t, r, n, i, o) {
 				var s, a, u, f = 8 * o - i - 1, c = (1 << f) - 1, l = c >> 1, h = 23 === i ? Math.pow(2, -24) - Math.pow(2, -77) : 0, p = n ? 0 : o - 1, d = n ? 1 : -1, m = t < 0 || 0 === t && 1 / t < 0 ? 1 : 0;
-				for (t = Math.abs(t), isNaN(t) || t === Infinity ? (a = isNaN(t) ? 1 : 0, s = c) : (s = Math.floor(Math.log(t) / Math.LN2), t * (u = Math.pow(2, -s)) < 1 && (s--, u *= 2), (t += s + l >= 1 ? h / u : h * Math.pow(2, 1 - l)) * u >= 2 && (s++, u /= 2), s + l >= c ? (a = 0, s = c) : s + l >= 1 ? (a = (t * u - 1) * Math.pow(2, i), s += l) : (a = t * Math.pow(2, l - 1) * Math.pow(2, i), s = 0)); i >= 8; e[r + p] = 255 & a, p += d, a /= 256, i -= 8);
+				for (t = Math.abs(t), isNaN(t) || t === 1 / 0 ? (a = isNaN(t) ? 1 : 0, s = c) : (s = Math.floor(Math.log(t) / Math.LN2), t * (u = Math.pow(2, -s)) < 1 && (s--, u *= 2), (t += s + l >= 1 ? h / u : h * Math.pow(2, 1 - l)) * u >= 2 && (s++, u /= 2), s + l >= c ? (a = 0, s = c) : s + l >= 1 ? (a = (t * u - 1) * Math.pow(2, i), s += l) : (a = t * Math.pow(2, l - 1) * Math.pow(2, i), s = 0)); i >= 8; e[r + p] = 255 & a, p += d, a /= 256, i -= 8);
 				for (s = s << i | a, f += i; f > 0; e[r + p] = 255 & s, p += d, s /= 256, f -= 8);
 				e[r + p - d] |= 128 * m;
 			};
@@ -3066,7 +3066,7 @@ var import_browser = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((ex
 				if (o(t)) return i(t, e) + "";
 				if (s(t)) return u ? u.call(t) : "";
 				var r = t + "";
-				return "0" == r && 1 / t == -Infinity ? "-0" : r;
+				return "0" == r && 1 / t == -1 / 0 ? "-0" : r;
 			};
 		},
 		function(e, t) {
@@ -3087,7 +3087,7 @@ var import_browser = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((ex
 			e.exports = function(e) {
 				if ("string" == typeof e || n(e)) return e;
 				var t = e + "";
-				return "0" == t && 1 / e == -Infinity ? "-0" : t;
+				return "0" == t && 1 / e == -1 / 0 ? "-0" : t;
 			};
 		},
 		function(e, t, r) {

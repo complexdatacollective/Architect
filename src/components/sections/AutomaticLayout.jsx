@@ -10,6 +10,20 @@ import DetachedField from '../DetachedField';
 
 const FORM_PROPERTY = 'behaviours.automaticLayout.enabled';
 
+const ManualModeLabel = () => (
+  <div>
+    <h4>Manual mode</h4>
+    <p>Participants must position their alters manually.</p>
+  </div>
+);
+
+const AutomaticModeLabel = () => (
+  <div>
+    <h4>Automatic mode</h4>
+    <p>A force-directed layout positions nodes automatically.</p>
+  </div>
+);
+
 const AutomaticLayout = ({ form }) => {
   const dispatch = useDispatch();
   const formValue = useSelector(
@@ -64,21 +78,11 @@ const AutomaticLayout = ({ form }) => {
           options={[
             {
               value: false,
-              label: () => (
-                <div>
-                  <h4>Manual mode</h4>
-                  <p>Participants must position their alters manually.</p>
-                </div>
-              ),
+              label: ManualModeLabel,
             },
             {
               value: true,
-              label: () => (
-                <div>
-                  <h4>Automatic mode</h4>
-                  <p>A force-directed layout positions nodes automatically.</p>
-                </div>
-              ),
+              label: AutomaticModeLabel,
             },
           ]}
           noReset

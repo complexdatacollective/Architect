@@ -228,20 +228,25 @@ const VariableSpotlight = (props) => {
     </Scroller>
   );
 
-  // Reset cursor position when list is filtered
-  useEffect(() => {
-    // Set cursor to create if there are no other options
-    if (!hasFilterResults) {
+  // Keep the cursor inside the filtered list. Done during render rather than
+  // in an effect, so it applies in the same commit as the change that moved
+  // it. It is deliberately not gated on the list changing: the effect this
+  // replaces listed `cursor` among its dependencies, so it also pulled the
+  // cursor back when something else moved it out of range — which the
+  // "create a new variable" row does on mouse leave (`removeSelected`). Each
+  // branch is guarded by an inequality, so a re-render converges.
+  if (!hasFilterResults) {
+    // Point at "create" when there is nothing else to point at.
+    if (cursor !== -1) {
       setCursor(-1);
+    }
+    if (!showCursor) {
       setShowCursor(true);
-      return;
     }
-
+  } else if (cursor > sortedAndFilteredItems.length - 1) {
     // If we are beyond the end, wrap to the end of the list
-    if (cursor > sortedAndFilteredItems.length - 1) {
-      setCursor(sortedAndFilteredItems.length - 1);
-    }
-  }, [sortedAndFilteredItems, filterTerm, cursor, hasFilterResults]);
+    setCursor(sortedAndFilteredItems.length - 1);
+  }
 
   const handleFilter = (e) => {
     // throw new Error();

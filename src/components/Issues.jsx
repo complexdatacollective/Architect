@@ -67,13 +67,17 @@ const Issues = ({ show, form, hideIssues }) => {
     updateFieldNames();
   });
 
-  // when panel hidden by parent reset collapsed state
+  // when panel hidden by parent reset collapsed state. Adjusted during
+  // render (comparing against the previously seen show/noIssues) rather
+  // than in an effect, so the reset applies in the same commit.
   const noIssues = isEmpty(issues);
-  useEffect(() => {
+  const [prevResetKey, setPrevResetKey] = useState({ show, noIssues });
+  if (prevResetKey.show !== show || prevResetKey.noIssues !== noIssues) {
+    setPrevResetKey({ show, noIssues });
     if (noIssues || !show) {
       setOpen(true);
     }
-  }, [show, noIssues]);
+  }
 
   const handleClickTitleBar = () => setOpen((toggle) => !toggle);
 

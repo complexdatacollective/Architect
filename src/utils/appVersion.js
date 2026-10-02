@@ -21,7 +21,4 @@ const getCodename = async () => {
   return cachedCodename;
 };
 
-// Initialize on module load (async)
-getAppVersion();
-
 export { getCodename, getAppVersion };

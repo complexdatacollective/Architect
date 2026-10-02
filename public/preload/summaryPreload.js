@@ -40,6 +40,9 @@ contextBridge.exposeInMainWorld("electronAPI", {
 	// ===================
 	fs: {
 		writeFile: (filePath, data) => ipcRenderer.invoke("fs:writeFile", filePath, data),
+		// Read external data assets for the summary's variable listings.
+		readFile: (filePath, encoding) => ipcRenderer.invoke("fs:readFile", filePath, encoding),
+		readJson: (filePath) => ipcRenderer.invoke("fs:readJson", filePath),
 	},
 
 	// ===================
@@ -48,6 +51,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
 	path: {
 		basename: (filePath, ext) => ipcRenderer.invoke("path:basename", filePath, ext),
 		dirname: (filePath) => ipcRenderer.invoke("path:dirname", filePath),
+		extname: (filePath) => ipcRenderer.invoke("path:extname", filePath),
 		join: (...args) => ipcRenderer.invoke("path:join", ...args),
 	},
 

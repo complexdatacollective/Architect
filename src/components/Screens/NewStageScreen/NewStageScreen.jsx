@@ -109,9 +109,17 @@ const NewStageScreen = ({ insertAtIndex, onComplete, experiments }) => {
   const handleUpdateQuery = useCallback(
     (eventOrValue) => {
       const newQuery = get(eventOrValue, ['target', 'value'], eventOrValue);
+
+      // Once we get a search string, show the cursor at index 0
+      if (newQuery !== '' && query === '') {
+        setCursor(0);
+        setCursorActive(true);
+        setMouseMoved(false);
+      }
+
       setQuery(newQuery);
     },
-    [setQuery],
+    [query],
   );
 
   const handleSelectInterface = useCallback(
@@ -191,16 +199,6 @@ const NewStageScreen = ({ insertAtIndex, onComplete, experiments }) => {
   }, []);
 
   const hasQuery = query !== '';
-
-  // Once we get a search string, show the cursor at index 0
-  useEffect(() => {
-    if (!hasQuery) {
-      return;
-    }
-    setCursor(0);
-    setCursorActive(true);
-    setMouseMoved(false);
-  }, [hasQuery]);
 
   useEffect(() => {
     window.addEventListener('mousemove', handleMouseMove);

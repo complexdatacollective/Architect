@@ -160,10 +160,10 @@ const PromptFields = ({
                   <Tip type="error">
                     <p>
                       The ordinal bin interface is designed to use{' '}
-                      <strong>up to 5 option values</strong>
-                      including the negative label. Using more will create a
-                      sub-optimal experience for participants, and might reduce
-                      data quality.
+                      <strong>up to 5 option values</strong> including the
+                      negative label. Using more will create a sub-optimal
+                      experience for participants, and might reduce data
+                      quality.
                     </p>
                   </Tip>
                 )}

@@ -9,7 +9,8 @@ const { ipcMain, dialog, app, shell, BrowserWindow } = require("electron");
 const fse = require("fs-extra");
 const path = require("node:path");
 const archiver = require("archiver");
-const decompress = require("decompress");
+// ESM-only package: Node 24's require(esm) returns the module namespace.
+const { default: decompress } = require("@xhmikosr/decompress");
 const log = require("./log");
 
 /**
@@ -185,7 +186,10 @@ const registerIpcHandlers = () => {
 
 	ipcMain.handle("fs:rmdir", async (_, dirPath) => {
 		log.info("fs:rmdir", dirPath);
-		return fse.rmdir(dirPath, { recursive: true });
+		// Used by the Interviewer preview, which clears its protocols folder on
+		// start before one exists; `remove` is idempotent where `rmdir` rejects
+		// with ENOENT (Interviewer's own handler uses `remove` too).
+		return fse.remove(dirPath);
 	});
 
 	ipcMain.handle("fs:existsSync", async (_, filePath) => {

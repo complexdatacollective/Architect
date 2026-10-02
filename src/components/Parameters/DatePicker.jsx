@@ -26,11 +26,22 @@ const DateTimeParameters = ({
   const dateFormat = type ? DATE_FORMATS[type] : DATE_FORMATS.full;
   const [useDateFormat, setUseDateFormat] = useState(type);
 
+  // Sync the local echo of the selected date type when the `type` prop
+  // changes from outside the onChange handler below (e.g. on mount, or
+  // when the form value is reset elsewhere). Adjusted during render rather
+  // than in an effect so it applies in the same commit as the prop change.
+  const [prevType, setPrevType] = useState(type);
+  if (type !== prevType) {
+    setPrevType(type);
+    setUseDateFormat(type);
+  }
+
+  // If no type is set, default the underlying redux-form field to 'full'.
+  // This synchronises with redux-form state, which lives outside React.
   useEffect(() => {
     if (!type) {
       setSelectDefault();
     }
-    setUseDateFormat(type);
   }, [type, setSelectDefault]);
 
   return (

@@ -300,7 +300,12 @@ const importSampleProtocol = () => async (dispatch) => {
       'architect',
       importUUID,
     );
-    await electronAPI.fs.outputFile(tempFilePath, Buffer.from(response.data));
+    // The renderer is sandboxed, so Node's Buffer is not defined here. A
+    // Uint8Array crosses the IPC boundary intact and fs.outputFile accepts it.
+    await electronAPI.fs.outputFile(
+      tempFilePath,
+      new Uint8Array(response.data),
+    );
 
     checkIfUserCancelled();
 

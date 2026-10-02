@@ -1,5 +1,5 @@
-import { n as WebPlugin, r as buildRequestInit, t as Encoding } from "./index-Dt4XBSmX.js";
-//#region ../../node_modules/.pnpm/@capacitor+filesystem@8.1.2_@capacitor+core@8.5.1/node_modules/@capacitor/filesystem/dist/esm/web.js
+import { n as WebPlugin, r as buildRequestInit, t as Encoding } from "./index-DaCeVxyH.js";
+//#region ../../node_modules/.pnpm/@capacitor+filesystem@8.1.3_@capacitor+core@8.5.2/node_modules/@capacitor/filesystem/dist/esm/web.js
 function resolve(path) {
 	const posix = path.split("/").filter((item) => item !== ".");
 	const newPosix = [];

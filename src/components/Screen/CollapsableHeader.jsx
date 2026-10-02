@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 
 import { ScreenContext } from './Screen';
 
@@ -23,15 +23,7 @@ const CollapsableHeader = (props) => {
   const { children, threshold = 115, collapsedState } = props;
 
   const { scrollY: currentOffset } = useContext(ScreenContext);
-  const [isCollapsed, setIsCollapsed] = useState(false);
-
-  useEffect(() => {
-    if (currentOffset > threshold) {
-      setIsCollapsed(true);
-    } else {
-      setIsCollapsed(false);
-    }
-  }, [currentOffset]);
+  const isCollapsed = currentOffset > threshold;
 
   return (
     <>

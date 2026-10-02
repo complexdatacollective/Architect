@@ -23,16 +23,24 @@ const getColumns = (network) =>
   }));
 
 const Network = ({ assetPath }) => {
-  const [content, setContent] = useState({ ...initialContent });
+  // Keyed by the assetPath it was fetched for, so a response for a stale
+  // assetPath can never be shown after a newer assetPath has been requested.
+  const [fetchedContent, setFetchedContent] = useState(null);
 
   useEffect(() => {
     if (!assetPath) {
-      setContent({ ...initialContent });
       return;
     }
 
-    networkReader(assetPath).then(setContent);
+    networkReader(assetPath).then((result) =>
+      setFetchedContent({ assetPath, content: result }),
+    );
   }, [assetPath]);
+
+  const content =
+    assetPath && fetchedContent && fetchedContent.assetPath === assetPath
+      ? fetchedContent.content
+      : initialContent;
 
   const data = useMemo(() => getRows(content), [content]);
   const columns = useMemo(() => getColumns(content), [content]);

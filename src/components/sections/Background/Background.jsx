@@ -12,6 +12,20 @@ import ValidatedField from '../../Form/ValidatedField';
 import IssueAnchor from '../../IssueAnchor';
 import withBackgroundChangeHandler from './withBackgroundChangeHandler';
 
+const ConcentricCirclesLabel = () => (
+  <div>
+    <h4>Concentric Circles</h4>
+    <p>Use the conventional concentric circles sociogram background.</p>
+  </div>
+);
+
+const ImageBackgroundLabel = () => (
+  <div>
+    <h4>Image</h4>
+    <p>Use a custom image of your choosing as the background.</p>
+  </div>
+);
+
 class Background extends PureComponent {
   render() {
     const { handleChooseBackgroundType, useImage } = this.props;
@@ -35,26 +49,11 @@ class Background extends PureComponent {
             options={[
               {
                 value: false,
-                label: () => (
-                  <div>
-                    <h4>Concentric Circles</h4>
-                    <p>
-                      Use the conventional concentric circles sociogram
-                      background.
-                    </p>
-                  </div>
-                ),
+                label: ConcentricCirclesLabel,
               },
               {
                 value: true,
-                label: () => (
-                  <div>
-                    <h4>Image</h4>
-                    <p>
-                      Use a custom image of your choosing as the background.
-                    </p>
-                  </div>
-                ),
+                label: ImageBackgroundLabel,
               },
             ]}
             onChange={handleChooseBackgroundType}

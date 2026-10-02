@@ -109,6 +109,12 @@ export default defineConfig({
         '@modules': resolve(__dirname, 'src/ducks/modules'),
         '@utils': resolve(__dirname, 'src/utils'),
       },
+      // Some old dependencies (react-grid-layout 0.16) import React without
+      // declaring it, so under pnpm they resolve the workspace's hoisted React
+      // 19 instead of this app's React 16. Elements from one copy are invalid
+      // children in the other, which crashed the stage editor ("Objects are
+      // not valid as a React child"). Resolve every import from the app.
+      dedupe: ['react', 'react-dom'],
     },
     optimizeDeps: {
       // Pre-bundle the CommonJS protocol-validation sub-paths used by the

@@ -313,8 +313,8 @@
   --modal-window-box-shadow: rgba(22, 21, 43, 0.75);
   --panel-selected-node-bg-color: rgba(255, 255, 255, 0.05);
   --panel-bg-muted: #36315f;
-  --menu-item-hover: rgb(0, 175.5, 141.447761194);
-  --menu-item-hover-settings: rgb(84.4011976048, 92.4700598802, 233.0988023952);
+  --menu-item-hover: rgb(0%, 68.8235294118%, 55.4697102722%);
+  --menu-item-hover-settings: rgb(33.0985088646%, 36.2627685805%, 91.4112950569%);
 }
 
 :export:not(#\#):not(#\#) {
@@ -17340,6 +17340,7 @@ article article article article article h1, article article article article asid
 
 .stage-preview:not(#\#):not(#\#) {
   display: flex;
+  flex: 1 1 auto;
   align-items: center;
   padding: 0 2.4rem;
   height: 8rem;

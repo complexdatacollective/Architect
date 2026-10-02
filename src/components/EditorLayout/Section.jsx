@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { forwardRef, useCallback, useEffect, useState } from 'react';
+import { forwardRef, useCallback, useState } from 'react';
 
 import { Toggle } from '@codaco/ui/lib/components/Fields';
 
@@ -39,10 +39,14 @@ const Section = forwardRef(
     const [isOpen, setIsOpen] = useState(startExpanded);
 
     // If the startExpanded prop changes, update the state.
-    // This happens when a stage is reset
-    useEffect(() => {
+    // This happens when a stage is reset. Adjust during render (comparing
+    // against the previous prop value) rather than in an effect, so the
+    // reset is applied before paint instead of in a follow-up commit.
+    const [prevStartExpanded, setPrevStartExpanded] = useState(startExpanded);
+    if (startExpanded !== prevStartExpanded) {
+      setPrevStartExpanded(startExpanded);
       setIsOpen(startExpanded);
-    }, [startExpanded]);
+    }
 
     const changeToggleState = useCallback(async () => {
       // Save the intended state here, so that if startExpanded changes

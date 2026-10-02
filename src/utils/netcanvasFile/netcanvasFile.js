@@ -173,7 +173,11 @@ const migrateNetcanvas = (
   importNetcanvas(filePath)
     .then((workingPath) =>
       readProtocol(workingPath)
-        .then((protocol) => migrateProtocol(protocol, targetVersion))
+        .then((protocol) => {
+          // migrateProtocol returns [migratedProtocol, migrationsApplied].
+          const [migratedProtocol] = migrateProtocol(protocol, targetVersion);
+          return migratedProtocol;
+        })
         .then((updatedProtocol) => {
           log.info('Migrated protocol', { updatedProtocol });
 

@@ -46,6 +46,25 @@ const TAP_BEHAVIOURS = {
   HIGHLIGHT_ATTRIBUTES: 'highlight attributes',
 };
 
+const EdgeCreationLabel = () => (
+  <div>
+    <h4>Edge Creation</h4>
+    <p>
+      Clicking or tapping a node will allow the participant to create an edge.
+    </p>
+  </div>
+);
+
+const AttributeTogglingLabel = () => (
+  <div>
+    <h4>Attribute Toggling</h4>
+    <p>
+      Clicking or tapping a node will toggle a boolean variable to true or
+      false.
+    </p>
+  </div>
+);
+
 const TapBehaviour = ({ form, type, entity }) => {
   const dispatch = useDispatch();
   const getFormValue = formValueSelector(form);
@@ -150,27 +169,11 @@ const TapBehaviour = ({ form, type, entity }) => {
           options={[
             {
               value: TAP_BEHAVIOURS.CREATE_EDGES,
-              label: () => (
-                <div>
-                  <h4>Edge Creation</h4>
-                  <p>
-                    Clicking or tapping a node will allow the participant to
-                    create an edge.
-                  </p>
-                </div>
-              ),
+              label: EdgeCreationLabel,
             },
             {
               value: TAP_BEHAVIOURS.HIGHLIGHT_ATTRIBUTES,
-              label: () => (
-                <div>
-                  <h4>Attribute Toggling</h4>
-                  <p>
-                    Clicking or tapping a node will toggle a boolean variable to
-                    true or false.
-                  </p>
-                </div>
-              ),
+              label: AttributeTogglingLabel,
             },
           ]}
           noReset

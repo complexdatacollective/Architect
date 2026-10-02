@@ -233,10 +233,11 @@ describe('netcanvasFile/netcanvasFile', () => {
         .mockResolvedValueOnce({ ...mockProtocol, schemaVersion: 2 })
         .mockResolvedValueOnce({ ...mockProtocol, schemaVersion: 4 });
 
-      migrateProtocol.mockResolvedValueOnce({
-        ...mockProtocol,
-        schemaVersion: 4,
-      });
+      // migrateProtocol returns [migratedProtocol, migrationsApplied].
+      migrateProtocol.mockReturnValueOnce([
+        { ...mockProtocol, schemaVersion: 4 },
+        [[2, 4]],
+      ]);
 
       const result = await migrateNetcanvas(
         '/dev/null/original/path',
@@ -244,6 +245,40 @@ describe('netcanvasFile/netcanvasFile', () => {
       );
 
       expect(result).toBe('/dev/null/destination/path2');
+    });
+
+    // 6.6.0–6.6.2 saved migrateProtocol's [protocol, migrations] tuple as the
+    // protocol, so every "Create upgraded copy" crashed in pruneProtocol.
+    it('saves the migrated protocol from the real migration', async () => {
+      const { default: realMigrateProtocol } = await vi.importActual(
+        'protocol-validation/migrations/migrateProtocol',
+      );
+      migrateProtocol.mockImplementation(realMigrateProtocol);
+      const schema6 = {
+        schemaVersion: 6,
+        codebook: { node: {}, edge: {}, ego: {} },
+        stages: [{ id: 'stage-1', type: 'Information', label: 'Welcome' }],
+        assetManifest: {},
+      };
+      let exported;
+      createNetcanvasExport.mockImplementation((_workingPath, protocol) => {
+        exported = protocol;
+        return Promise.resolve('/dev/null/export/working/path');
+      });
+      readProtocol.mockImplementation(() =>
+        Promise.resolve(exported ?? schema6),
+      );
+
+      await migrateNetcanvas(
+        '/dev/null/original/path',
+        '/dev/null/upgraded',
+        7,
+      );
+
+      expect(exported).toMatchObject({
+        schemaVersion: 7,
+        stages: [{ id: 'stage-1', type: 'Information', label: 'Welcome' }],
+      });
     });
   });
 
